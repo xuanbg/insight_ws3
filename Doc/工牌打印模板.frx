@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="05/07/2014 11:19:01" ReportInfo.Modified="04/30/2015 11:02:26" ReportInfo.CreatorVersion="1.8.46.1">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Drawing;
+using System.Data;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+
+ }
+}
+</ScriptText>
+  <Dictionary>
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqaESRgLeIFJ7fsIdOTEgQuJ4RNUho/Io2FbyhKm6qwCcmuBcita1Q1+Z/T0wMz1ZVGfKHy6TK8dBSXN9ASVs16AooACOsfxwp63vUgg+MedYQpoVVxhtr3P34zNJY1ZI9x/NG935golyQl4H2xRtnWQ95rizZe1GeUIy3AFRfv/eycRrxj40Py+uOAlQy9rt/1yUPgvLXV0/wgk1zKwlhHQ==">
+      <TableDataSource Name="Table" DataType="System.Int32" Enabled="true" SelectCommand="select P.Name, E.Photo, E.姓名, E.工号 from Employee E&#13;&#10;join SYS_Organization P on P.ID = E.DeptId&#13;&#10;where E.ID = @BusinessId">
+        <Column Name="姓名" DataType="System.String"/>
+        <Column Name="工号" DataType="System.String"/>
+        <Column Name="Name" DataType="System.String"/>
+        <Column Name="Photo" DataType="System.Byte[]" BindableControl="Picture"/>
+        <CommandParameter Name="BusinessId" DataType="22" Expression="[BusinessId]"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+    <Parameter Name="BusinessId" DataType="System.String"/>
+  </Dictionary>
+  <ReportPage Name="Page1" PaperWidth="52" PaperHeight="78.2" LeftMargin="0" TopMargin="0" RightMargin="0" BottomMargin="0" FirstPageSource="15" OtherPagesSource="15">
+    <DataBand Name="Data1" Width="196.56" DataSource="Table"/>
+    <OverlayBand Name="Overlay1" Top="4" Width="196.56" Height="295.6">
+      <PictureObject Name="Picture1" Left="52.92" Top="84.29" Width="90.72" Height="120.96" DataColumn="Table.Photo"/>
+      <TextObject Name="Text8" Left="68.04" Top="258.93" Width="86.94" Height="18.9" CanBreak="false" Text="[Table.Name]" VertAlign="Bottom" WordWrap="false" Font="微软雅黑, 10pt"/>
+      <TextObject Name="Text5" Left="68.04" Top="239.27" Width="86.94" Height="18.9" CanBreak="false" Text="[Table.姓名]" VertAlign="Center" WordWrap="false" Font="微软雅黑, 10pt"/>
+      <TextObject Name="Text7" Left="68.04" Top="219.24" Width="86.94" Height="18.9" CanBreak="false" Text="[Table.工号]" VertAlign="Center" WordWrap="false" Font="微软雅黑, 10pt"/>
+    </OverlayBand>
+  </ReportPage>
+</Report>

@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Storage" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="CustomBinding_IStorage_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1">
+        </msb:BinaryEncoding>
+        <msf:Streamed xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+        </msf:Streamed>
+        <wsaw:UsingAddressing>
+        </wsaw:UsingAddressing>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/System.Data" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IStorage_GetDeliveryDate_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDeliveryDate" />
+  </wsdl:message>
+  <wsdl:message name="IStorage_GetDeliveryDate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDeliveryDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStorage_GetDeliveryForDate_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDeliveryForDate" />
+  </wsdl:message>
+  <wsdl:message name="IStorage_GetDeliveryForDate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDeliveryForDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStorage_GetDeliveryForName_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDeliveryForName" />
+  </wsdl:message>
+  <wsdl:message name="IStorage_GetDeliveryForName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDeliveryForNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStorage_Get_GoodsPlan_InputMessage">
+    <wsdl:part name="parameters" element="tns:Get_GoodsPlan" />
+  </wsdl:message>
+  <wsdl:message name="IStorage_Get_GoodsPlan_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Get_GoodsPlanResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStorage_GetDeliveryItem_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDeliveryItem" />
+  </wsdl:message>
+  <wsdl:message name="IStorage_GetDeliveryItem_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDeliveryItemResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStorage_GetDeliveryAttach_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDeliveryAttach" />
+  </wsdl:message>
+  <wsdl:message name="IStorage_GetDeliveryAttach_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDeliveryAttachResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStorage_GetDelivery_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDelivery" />
+  </wsdl:message>
+  <wsdl:message name="IStorage_GetDelivery_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDeliveryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStorage_AddDelivery_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddDelivery" />
+  </wsdl:message>
+  <wsdl:message name="IStorage_AddDelivery_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddDeliveryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStorage_GetDeliveryCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDeliveryCode" />
+  </wsdl:message>
+  <wsdl:message name="IStorage_GetDeliveryCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDeliveryCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStorage_DelDelivery_InputMessage">
+    <wsdl:part name="parameters" element="tns:DelDelivery" />
+  </wsdl:message>
+  <wsdl:message name="IStorage_DelDelivery_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DelDeliveryResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IStorage">
+    <wsdl:operation name="GetDeliveryDate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStorage/GetDeliveryDate" message="tns:IStorage_GetDeliveryDate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStorage/GetDeliveryDateResponse" message="tns:IStorage_GetDeliveryDate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDeliveryForDate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStorage/GetDeliveryForDate" message="tns:IStorage_GetDeliveryForDate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStorage/GetDeliveryForDateResponse" message="tns:IStorage_GetDeliveryForDate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDeliveryForName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStorage/GetDeliveryForName" message="tns:IStorage_GetDeliveryForName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStorage/GetDeliveryForNameResponse" message="tns:IStorage_GetDeliveryForName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_GoodsPlan">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStorage/Get_GoodsPlan" message="tns:IStorage_Get_GoodsPlan_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStorage/Get_GoodsPlanResponse" message="tns:IStorage_Get_GoodsPlan_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDeliveryItem">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStorage/GetDeliveryItem" message="tns:IStorage_GetDeliveryItem_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStorage/GetDeliveryItemResponse" message="tns:IStorage_GetDeliveryItem_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDeliveryAttach">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStorage/GetDeliveryAttach" message="tns:IStorage_GetDeliveryAttach_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStorage/GetDeliveryAttachResponse" message="tns:IStorage_GetDeliveryAttach_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDelivery">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStorage/GetDelivery" message="tns:IStorage_GetDelivery_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStorage/GetDeliveryResponse" message="tns:IStorage_GetDelivery_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddDelivery">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStorage/AddDelivery" message="tns:IStorage_AddDelivery_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStorage/AddDeliveryResponse" message="tns:IStorage_AddDelivery_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDeliveryCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStorage/GetDeliveryCode" message="tns:IStorage_GetDeliveryCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStorage/GetDeliveryCodeResponse" message="tns:IStorage_GetDeliveryCode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DelDelivery">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStorage/DelDelivery" message="tns:IStorage_DelDelivery_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStorage/DelDeliveryResponse" message="tns:IStorage_DelDelivery_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CustomBinding_IStorage" type="tns:IStorage">
+    <wsp:PolicyReference URI="#CustomBinding_IStorage_policy">
+    </wsp:PolicyReference>
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="GetDeliveryDate">
+      <soap12:operation soapAction="http://tempuri.org/IStorage/GetDeliveryDate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDeliveryForDate">
+      <soap12:operation soapAction="http://tempuri.org/IStorage/GetDeliveryForDate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDeliveryForName">
+      <soap12:operation soapAction="http://tempuri.org/IStorage/GetDeliveryForName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_GoodsPlan">
+      <soap12:operation soapAction="http://tempuri.org/IStorage/Get_GoodsPlan" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDeliveryItem">
+      <soap12:operation soapAction="http://tempuri.org/IStorage/GetDeliveryItem" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDeliveryAttach">
+      <soap12:operation soapAction="http://tempuri.org/IStorage/GetDeliveryAttach" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDelivery">
+      <soap12:operation soapAction="http://tempuri.org/IStorage/GetDelivery" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddDelivery">
+      <soap12:operation soapAction="http://tempuri.org/IStorage/AddDelivery" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDeliveryCode">
+      <soap12:operation soapAction="http://tempuri.org/IStorage/GetDeliveryCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DelDelivery">
+      <soap12:operation soapAction="http://tempuri.org/IStorage/DelDelivery" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Storage">
+    <wsdl:port name="CustomBinding_IStorage" binding="tns:CustomBinding_IStorage">
+      <soap12:address location="net.tcp://localhost:7210/Storage" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:7210/Storage</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

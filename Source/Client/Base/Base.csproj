@@ -1,0 +1,286 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7654C71F-3E13-49DA-A9B9-85EE3E40D589}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Insight.WS.Client.Platform.Base</RootNamespace>
+    <AssemblyName>Base</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <PublishUrl>发布\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\Debug\Client\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\Release\Client\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Data.v14.1, Version=14.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Images.v14.1, Version=14.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Utils.v14.1, Version=14.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraBars.v14.1, Version=14.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraEditors.v14.1, Version=14.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraGrid.v14.1, Version=14.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraNavBar.v14.1, Version=14.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraTreeList.v14.1, Version=14.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraWizard.v14.1, Version=14.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UserManage\AddMember.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserManage\AddMember.Designer.cs">
+      <DependentUpon>AddMember.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CodingScheme\CodeScheme.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CodingScheme\CodeScheme.Designer.cs">
+      <DependentUpon>CodeScheme.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Organization\OrgNode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Organization\OrgNode.Designer.cs">
+      <DependentUpon>OrgNode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Organization\NodeMerge.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Organization\NodeMerge.Designer.cs">
+      <DependentUpon>NodeMerge.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Organization\NodeMove.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Organization\NodeMove.Designer.cs">
+      <DependentUpon>NodeMove.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RoleManage\RoleWizard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RoleManage\RoleWizard.Designer.cs">
+      <DependentUpon>RoleWizard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserManage\OnlineUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserManage\OnlineUser.designer.cs">
+      <DependentUpon>OnlineUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserManage\User.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserManage\User.Designer.cs">
+      <DependentUpon>User.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserManage\Group.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserManage\Group.Designer.cs">
+      <DependentUpon>Group.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CodingScheme\CodingScheme.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CodingScheme\CodingScheme.Designer.cs">
+      <DependentUpon>CodingScheme.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyDesktop\MyDesktop.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyDesktop\MyDesktop.Designer.cs">
+      <DependentUpon>MyDesktop.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Organization\Organization.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Organization\Organization.designer.cs">
+      <DependentUpon>Organization.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RoleManage\RoleManage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RoleManage\RoleManage.Designer.cs">
+      <DependentUpon>RoleManage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserManage\UserManage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserManage\UserManage.designer.cs">
+      <DependentUpon>UserManage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\Service\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="UserManage\AddMember.resx">
+      <DependentUpon>AddMember.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CodingScheme\CodeScheme.resx">
+      <DependentUpon>CodeScheme.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Organization\OrgNode.resx">
+      <DependentUpon>OrgNode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Organization\NodeMerge.resx">
+      <DependentUpon>NodeMerge.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Organization\NodeMove.resx">
+      <DependentUpon>NodeMove.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RoleManage\RoleWizard.resx">
+      <DependentUpon>RoleWizard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserManage\OnlineUser.resx">
+      <DependentUpon>OnlineUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserManage\User.resx">
+      <DependentUpon>User.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserManage\Group.resx">
+      <DependentUpon>Group.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CodingScheme\CodingScheme.resx">
+      <DependentUpon>CodingScheme.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyDesktop\MyDesktop.resx">
+      <DependentUpon>MyDesktop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Organization\Organization.resx">
+      <DependentUpon>Organization.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RoleManage\RoleManage.resx">
+      <DependentUpon>RoleManage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserManage\UserManage.resx">
+      <DependentUpon>UserManage.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{7c8ac27e-e640-4403-af4d-5b62c6c55826}</Project>
+      <Name>Common</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\DataSources\Insight.WS.Client.Common.MainService.SYS_Code_Scheme.datasource" />
+    <None Include="Properties\DataSources\Insight.WS.Client.Common.MainService.SYS_Organization.datasource" />
+    <None Include="Properties\DataSources\Insight.WS.Client.Common.MainService.SYS_Role.datasource" />
+    <None Include="Properties\DataSources\Insight.WS.Client.Common.MainService.SYS_User.datasource" />
+    <None Include="Properties\DataSources\Insight.WS.Client.Common.MainService.SYS_UserGroup.datasource" />
+    <None Include="Properties\DataSources\Insight.WS.Client.Common.Service.Session.datasource" />
+    <None Include="Properties\DataSources\System.Data.DataTable.datasource" />
+    <None Include="Service References\Service\Arrays1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Service\Insight.WS.Server.Common.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Service\SERP.Server.Common.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Service\service1.wsdl" />
+    <None Include="Service References\Service\service2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Service\service21.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Service\System.Data1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 和 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\Service\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Service\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Service\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Service\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

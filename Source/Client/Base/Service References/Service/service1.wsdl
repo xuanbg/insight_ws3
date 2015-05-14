@@ -1,0 +1,1065 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Base" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="CustomBinding_IBase_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1">
+        </msb:BinaryEncoding>
+        <msf:Streamed xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+        </msf:Streamed>
+        <wsaw:UsingAddressing>
+        </wsaw:UsingAddressing>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/System.Data" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IBase_GetOnlineUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOnlineUser" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetOnlineUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOnlineUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_DelOnlineUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:DelOnlineUser" />
+  </wsdl:message>
+  <wsdl:message name="IBase_DelOnlineUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DelOnlineUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetOrgs_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrgs" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetOrgs_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrgsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetOrg_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrg" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetOrg_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrgResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetOrgMembers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrgMembers" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetOrgMembers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrgMembersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetOrgMemberBeSides_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrgMemberBeSides" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetOrgMemberBeSides_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrgMemberBeSidesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_AddOrg_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddOrg" />
+  </wsdl:message>
+  <wsdl:message name="IBase_AddOrg_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddOrgResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_AddOrgMerger_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddOrgMerger" />
+  </wsdl:message>
+  <wsdl:message name="IBase_AddOrgMerger_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddOrgMergerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_AddOrgMember_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddOrgMember" />
+  </wsdl:message>
+  <wsdl:message name="IBase_AddOrgMember_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddOrgMemberResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_UpdateOrg_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateOrg" />
+  </wsdl:message>
+  <wsdl:message name="IBase_UpdateOrg_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateOrgResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_UpdateOrgParentId_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateOrgParentId" />
+  </wsdl:message>
+  <wsdl:message name="IBase_UpdateOrgParentId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateOrgParentIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_DeleteOrg_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteOrg" />
+  </wsdl:message>
+  <wsdl:message name="IBase_DeleteOrg_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteOrgResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_DeleteOrgMember_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteOrgMember" />
+  </wsdl:message>
+  <wsdl:message name="IBase_DeleteOrgMember_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteOrgMemberResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetGroups_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetGroups" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetGroups_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetGroupsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetGroup" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetUsers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUsers" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetUsers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUsersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUser" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetGroupMembers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetGroupMembers" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetGroupMembers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetGroupMembersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetGroupMemberBeSides_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetGroupMemberBeSides" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetGroupMemberBeSides_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetGroupMemberBeSidesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_AddGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddGroup" />
+  </wsdl:message>
+  <wsdl:message name="IBase_AddGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_AddUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddUser" />
+  </wsdl:message>
+  <wsdl:message name="IBase_AddUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_AddGroupMember_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddGroupMember" />
+  </wsdl:message>
+  <wsdl:message name="IBase_AddGroupMember_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddGroupMemberResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_UpdateGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateGroup" />
+  </wsdl:message>
+  <wsdl:message name="IBase_UpdateGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_UpdateUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUser" />
+  </wsdl:message>
+  <wsdl:message name="IBase_UpdateUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_UpdateUserStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUserStatus" />
+  </wsdl:message>
+  <wsdl:message name="IBase_UpdateUserStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUserStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_DeleteGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteGroup" />
+  </wsdl:message>
+  <wsdl:message name="IBase_DeleteGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_DeleteUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteUser" />
+  </wsdl:message>
+  <wsdl:message name="IBase_DeleteUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_DeleteMember_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteMember" />
+  </wsdl:message>
+  <wsdl:message name="IBase_DeleteMember_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteMemberResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetAllRole_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllRole" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetAllRole_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllRoleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetRole_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRole" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetRole_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRoleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetRoleMember_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRoleMember" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetRoleMember_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRoleMemberResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetRoleUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRoleUser" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetRoleUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRoleUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetRoleModulePermit_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRoleModulePermit" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetRoleModulePermit_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRoleModulePermitResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetRoleActionPermit_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRoleActionPermit" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetRoleActionPermit_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRoleActionPermitResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetRoleDataPermit_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRoleDataPermit" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetRoleDataPermit_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRoleDataPermitResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetMemberOfTitle_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMemberOfTitle" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetMemberOfTitle_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMemberOfTitleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetMemberOfGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMemberOfGroup" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetMemberOfGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMemberOfGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetMemberOfUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMemberOfUser" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetMemberOfUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMemberOfUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetRoleActions_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRoleActions" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetRoleActions_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRoleActionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetRoleRelData_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRoleRelData" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetRoleRelData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRoleRelDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_AddRole_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddRole" />
+  </wsdl:message>
+  <wsdl:message name="IBase_AddRole_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddRoleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_AddRoleMember_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddRoleMember" />
+  </wsdl:message>
+  <wsdl:message name="IBase_AddRoleMember_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddRoleMemberResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_EditRole_InputMessage">
+    <wsdl:part name="parameters" element="tns:EditRole" />
+  </wsdl:message>
+  <wsdl:message name="IBase_EditRole_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EditRoleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_DeleteRole_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteRole" />
+  </wsdl:message>
+  <wsdl:message name="IBase_DeleteRole_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteRoleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_DeleteRoleMember_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteRoleMember" />
+  </wsdl:message>
+  <wsdl:message name="IBase_DeleteRoleMember_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteRoleMemberResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetSchemes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSchemes" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetSchemes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSchemesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetSerialRecord_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSerialRecord" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetSerialRecord_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSerialRecordResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetAllotRecord_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllotRecord" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetAllotRecord_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllotRecordResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetScheme_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetScheme" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetScheme_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSchemeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetCodePreview_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCodePreview" />
+  </wsdl:message>
+  <wsdl:message name="IBase_GetCodePreview_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCodePreviewResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_AddScheme_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddScheme" />
+  </wsdl:message>
+  <wsdl:message name="IBase_AddScheme_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddSchemeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_UpdateScheme_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateScheme" />
+  </wsdl:message>
+  <wsdl:message name="IBase_UpdateScheme_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateSchemeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_EnableScheme_InputMessage">
+    <wsdl:part name="parameters" element="tns:EnableScheme" />
+  </wsdl:message>
+  <wsdl:message name="IBase_EnableScheme_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EnableSchemeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBase_DeleteScheme_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteScheme" />
+  </wsdl:message>
+  <wsdl:message name="IBase_DeleteScheme_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteSchemeResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IBase">
+    <wsdl:operation name="GetOnlineUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/GetOnlineUser" message="tns:IBase_GetOnlineUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/GetOnlineUserResponse" message="tns:IBase_GetOnlineUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DelOnlineUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/DelOnlineUser" message="tns:IBase_DelOnlineUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/DelOnlineUserResponse" message="tns:IBase_DelOnlineUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgs">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/GetOrgs" message="tns:IBase_GetOrgs_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/GetOrgsResponse" message="tns:IBase_GetOrgs_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrg">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/GetOrg" message="tns:IBase_GetOrg_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/GetOrgResponse" message="tns:IBase_GetOrg_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgMembers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/GetOrgMembers" message="tns:IBase_GetOrgMembers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/GetOrgMembersResponse" message="tns:IBase_GetOrgMembers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgMemberBeSides">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/GetOrgMemberBeSides" message="tns:IBase_GetOrgMemberBeSides_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/GetOrgMemberBeSidesResponse" message="tns:IBase_GetOrgMemberBeSides_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddOrg">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/AddOrg" message="tns:IBase_AddOrg_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/AddOrgResponse" message="tns:IBase_AddOrg_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddOrgMerger">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/AddOrgMerger" message="tns:IBase_AddOrgMerger_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/AddOrgMergerResponse" message="tns:IBase_AddOrgMerger_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddOrgMember">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/AddOrgMember" message="tns:IBase_AddOrgMember_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/AddOrgMemberResponse" message="tns:IBase_AddOrgMember_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOrg">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/UpdateOrg" message="tns:IBase_UpdateOrg_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/UpdateOrgResponse" message="tns:IBase_UpdateOrg_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOrgParentId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/UpdateOrgParentId" message="tns:IBase_UpdateOrgParentId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/UpdateOrgParentIdResponse" message="tns:IBase_UpdateOrgParentId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteOrg">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/DeleteOrg" message="tns:IBase_DeleteOrg_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/DeleteOrgResponse" message="tns:IBase_DeleteOrg_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteOrgMember">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/DeleteOrgMember" message="tns:IBase_DeleteOrgMember_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/DeleteOrgMemberResponse" message="tns:IBase_DeleteOrgMember_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGroups">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/GetGroups" message="tns:IBase_GetGroups_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/GetGroupsResponse" message="tns:IBase_GetGroups_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/GetGroup" message="tns:IBase_GetGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/GetGroupResponse" message="tns:IBase_GetGroup_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUsers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/GetUsers" message="tns:IBase_GetUsers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/GetUsersResponse" message="tns:IBase_GetUsers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/GetUser" message="tns:IBase_GetUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/GetUserResponse" message="tns:IBase_GetUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGroupMembers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/GetGroupMembers" message="tns:IBase_GetGroupMembers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/GetGroupMembersResponse" message="tns:IBase_GetGroupMembers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGroupMemberBeSides">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/GetGroupMemberBeSides" message="tns:IBase_GetGroupMemberBeSides_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/GetGroupMemberBeSidesResponse" message="tns:IBase_GetGroupMemberBeSides_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/AddGroup" message="tns:IBase_AddGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/AddGroupResponse" message="tns:IBase_AddGroup_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/AddUser" message="tns:IBase_AddUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/AddUserResponse" message="tns:IBase_AddUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddGroupMember">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/AddGroupMember" message="tns:IBase_AddGroupMember_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/AddGroupMemberResponse" message="tns:IBase_AddGroupMember_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/UpdateGroup" message="tns:IBase_UpdateGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/UpdateGroupResponse" message="tns:IBase_UpdateGroup_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/UpdateUser" message="tns:IBase_UpdateUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/UpdateUserResponse" message="tns:IBase_UpdateUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/UpdateUserStatus" message="tns:IBase_UpdateUserStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/UpdateUserStatusResponse" message="tns:IBase_UpdateUserStatus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/DeleteGroup" message="tns:IBase_DeleteGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/DeleteGroupResponse" message="tns:IBase_DeleteGroup_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/DeleteUser" message="tns:IBase_DeleteUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/DeleteUserResponse" message="tns:IBase_DeleteUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteMember">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/DeleteMember" message="tns:IBase_DeleteMember_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/DeleteMemberResponse" message="tns:IBase_DeleteMember_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRole">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/GetAllRole" message="tns:IBase_GetAllRole_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/GetAllRoleResponse" message="tns:IBase_GetAllRole_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRole">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/GetRole" message="tns:IBase_GetRole_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/GetRoleResponse" message="tns:IBase_GetRole_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRoleMember">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/GetRoleMember" message="tns:IBase_GetRoleMember_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/GetRoleMemberResponse" message="tns:IBase_GetRoleMember_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRoleUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/GetRoleUser" message="tns:IBase_GetRoleUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/GetRoleUserResponse" message="tns:IBase_GetRoleUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRoleModulePermit">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/GetRoleModulePermit" message="tns:IBase_GetRoleModulePermit_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/GetRoleModulePermitResponse" message="tns:IBase_GetRoleModulePermit_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRoleActionPermit">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/GetRoleActionPermit" message="tns:IBase_GetRoleActionPermit_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/GetRoleActionPermitResponse" message="tns:IBase_GetRoleActionPermit_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRoleDataPermit">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/GetRoleDataPermit" message="tns:IBase_GetRoleDataPermit_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/GetRoleDataPermitResponse" message="tns:IBase_GetRoleDataPermit_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberOfTitle">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/GetMemberOfTitle" message="tns:IBase_GetMemberOfTitle_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/GetMemberOfTitleResponse" message="tns:IBase_GetMemberOfTitle_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberOfGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/GetMemberOfGroup" message="tns:IBase_GetMemberOfGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/GetMemberOfGroupResponse" message="tns:IBase_GetMemberOfGroup_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberOfUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/GetMemberOfUser" message="tns:IBase_GetMemberOfUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/GetMemberOfUserResponse" message="tns:IBase_GetMemberOfUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRoleActions">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/GetRoleActions" message="tns:IBase_GetRoleActions_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/GetRoleActionsResponse" message="tns:IBase_GetRoleActions_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRoleRelData">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/GetRoleRelData" message="tns:IBase_GetRoleRelData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/GetRoleRelDataResponse" message="tns:IBase_GetRoleRelData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddRole">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/AddRole" message="tns:IBase_AddRole_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/AddRoleResponse" message="tns:IBase_AddRole_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddRoleMember">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/AddRoleMember" message="tns:IBase_AddRoleMember_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/AddRoleMemberResponse" message="tns:IBase_AddRoleMember_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EditRole">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/EditRole" message="tns:IBase_EditRole_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/EditRoleResponse" message="tns:IBase_EditRole_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRole">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/DeleteRole" message="tns:IBase_DeleteRole_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/DeleteRoleResponse" message="tns:IBase_DeleteRole_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRoleMember">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/DeleteRoleMember" message="tns:IBase_DeleteRoleMember_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/DeleteRoleMemberResponse" message="tns:IBase_DeleteRoleMember_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSchemes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/GetSchemes" message="tns:IBase_GetSchemes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/GetSchemesResponse" message="tns:IBase_GetSchemes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSerialRecord">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/GetSerialRecord" message="tns:IBase_GetSerialRecord_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/GetSerialRecordResponse" message="tns:IBase_GetSerialRecord_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllotRecord">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/GetAllotRecord" message="tns:IBase_GetAllotRecord_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/GetAllotRecordResponse" message="tns:IBase_GetAllotRecord_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetScheme">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/GetScheme" message="tns:IBase_GetScheme_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/GetSchemeResponse" message="tns:IBase_GetScheme_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCodePreview">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/GetCodePreview" message="tns:IBase_GetCodePreview_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/GetCodePreviewResponse" message="tns:IBase_GetCodePreview_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddScheme">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/AddScheme" message="tns:IBase_AddScheme_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/AddSchemeResponse" message="tns:IBase_AddScheme_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateScheme">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/UpdateScheme" message="tns:IBase_UpdateScheme_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/UpdateSchemeResponse" message="tns:IBase_UpdateScheme_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EnableScheme">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/EnableScheme" message="tns:IBase_EnableScheme_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/EnableSchemeResponse" message="tns:IBase_EnableScheme_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteScheme">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/DeleteScheme" message="tns:IBase_DeleteScheme_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/DeleteSchemeResponse" message="tns:IBase_DeleteScheme_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CustomBinding_IBase" type="tns:IBase">
+    <wsp:PolicyReference URI="#CustomBinding_IBase_policy">
+    </wsp:PolicyReference>
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="GetOnlineUser">
+      <soap12:operation soapAction="http://tempuri.org/IBase/GetOnlineUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DelOnlineUser">
+      <soap12:operation soapAction="http://tempuri.org/IBase/DelOnlineUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgs">
+      <soap12:operation soapAction="http://tempuri.org/IBase/GetOrgs" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrg">
+      <soap12:operation soapAction="http://tempuri.org/IBase/GetOrg" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgMembers">
+      <soap12:operation soapAction="http://tempuri.org/IBase/GetOrgMembers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgMemberBeSides">
+      <soap12:operation soapAction="http://tempuri.org/IBase/GetOrgMemberBeSides" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddOrg">
+      <soap12:operation soapAction="http://tempuri.org/IBase/AddOrg" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddOrgMerger">
+      <soap12:operation soapAction="http://tempuri.org/IBase/AddOrgMerger" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddOrgMember">
+      <soap12:operation soapAction="http://tempuri.org/IBase/AddOrgMember" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOrg">
+      <soap12:operation soapAction="http://tempuri.org/IBase/UpdateOrg" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOrgParentId">
+      <soap12:operation soapAction="http://tempuri.org/IBase/UpdateOrgParentId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteOrg">
+      <soap12:operation soapAction="http://tempuri.org/IBase/DeleteOrg" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteOrgMember">
+      <soap12:operation soapAction="http://tempuri.org/IBase/DeleteOrgMember" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGroups">
+      <soap12:operation soapAction="http://tempuri.org/IBase/GetGroups" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGroup">
+      <soap12:operation soapAction="http://tempuri.org/IBase/GetGroup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUsers">
+      <soap12:operation soapAction="http://tempuri.org/IBase/GetUsers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUser">
+      <soap12:operation soapAction="http://tempuri.org/IBase/GetUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGroupMembers">
+      <soap12:operation soapAction="http://tempuri.org/IBase/GetGroupMembers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGroupMemberBeSides">
+      <soap12:operation soapAction="http://tempuri.org/IBase/GetGroupMemberBeSides" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddGroup">
+      <soap12:operation soapAction="http://tempuri.org/IBase/AddGroup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUser">
+      <soap12:operation soapAction="http://tempuri.org/IBase/AddUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddGroupMember">
+      <soap12:operation soapAction="http://tempuri.org/IBase/AddGroupMember" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateGroup">
+      <soap12:operation soapAction="http://tempuri.org/IBase/UpdateGroup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUser">
+      <soap12:operation soapAction="http://tempuri.org/IBase/UpdateUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserStatus">
+      <soap12:operation soapAction="http://tempuri.org/IBase/UpdateUserStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteGroup">
+      <soap12:operation soapAction="http://tempuri.org/IBase/DeleteGroup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUser">
+      <soap12:operation soapAction="http://tempuri.org/IBase/DeleteUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteMember">
+      <soap12:operation soapAction="http://tempuri.org/IBase/DeleteMember" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRole">
+      <soap12:operation soapAction="http://tempuri.org/IBase/GetAllRole" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRole">
+      <soap12:operation soapAction="http://tempuri.org/IBase/GetRole" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRoleMember">
+      <soap12:operation soapAction="http://tempuri.org/IBase/GetRoleMember" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRoleUser">
+      <soap12:operation soapAction="http://tempuri.org/IBase/GetRoleUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRoleModulePermit">
+      <soap12:operation soapAction="http://tempuri.org/IBase/GetRoleModulePermit" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRoleActionPermit">
+      <soap12:operation soapAction="http://tempuri.org/IBase/GetRoleActionPermit" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRoleDataPermit">
+      <soap12:operation soapAction="http://tempuri.org/IBase/GetRoleDataPermit" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberOfTitle">
+      <soap12:operation soapAction="http://tempuri.org/IBase/GetMemberOfTitle" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberOfGroup">
+      <soap12:operation soapAction="http://tempuri.org/IBase/GetMemberOfGroup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberOfUser">
+      <soap12:operation soapAction="http://tempuri.org/IBase/GetMemberOfUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRoleActions">
+      <soap12:operation soapAction="http://tempuri.org/IBase/GetRoleActions" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRoleRelData">
+      <soap12:operation soapAction="http://tempuri.org/IBase/GetRoleRelData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddRole">
+      <soap12:operation soapAction="http://tempuri.org/IBase/AddRole" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddRoleMember">
+      <soap12:operation soapAction="http://tempuri.org/IBase/AddRoleMember" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditRole">
+      <soap12:operation soapAction="http://tempuri.org/IBase/EditRole" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRole">
+      <soap12:operation soapAction="http://tempuri.org/IBase/DeleteRole" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRoleMember">
+      <soap12:operation soapAction="http://tempuri.org/IBase/DeleteRoleMember" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSchemes">
+      <soap12:operation soapAction="http://tempuri.org/IBase/GetSchemes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSerialRecord">
+      <soap12:operation soapAction="http://tempuri.org/IBase/GetSerialRecord" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllotRecord">
+      <soap12:operation soapAction="http://tempuri.org/IBase/GetAllotRecord" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetScheme">
+      <soap12:operation soapAction="http://tempuri.org/IBase/GetScheme" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCodePreview">
+      <soap12:operation soapAction="http://tempuri.org/IBase/GetCodePreview" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddScheme">
+      <soap12:operation soapAction="http://tempuri.org/IBase/AddScheme" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateScheme">
+      <soap12:operation soapAction="http://tempuri.org/IBase/UpdateScheme" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EnableScheme">
+      <soap12:operation soapAction="http://tempuri.org/IBase/EnableScheme" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteScheme">
+      <soap12:operation soapAction="http://tempuri.org/IBase/DeleteScheme" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Base">
+    <wsdl:port name="CustomBinding_IBase" binding="tns:CustomBinding_IBase">
+      <soap12:address location="net.tcp://localhost:7210/Base" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:7210/Base</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

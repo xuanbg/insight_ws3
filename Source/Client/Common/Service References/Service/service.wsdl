@@ -1,0 +1,894 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Commons" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="CustomBinding_ICommons_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1">
+        </msb:BinaryEncoding>
+        <msf:Streamed xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+        </msf:Streamed>
+        <wsaw:UsingAddressing>
+        </wsaw:UsingAddressing>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/System.Data" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ICommons_GetReportTemplet_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetReportTemplet" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetReportTemplet_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetReportTempletResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_BuildImageData_InputMessage">
+    <wsdl:part name="parameters" element="tns:BuildImageData" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_BuildImageData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BuildImageDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetImageData_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetImageData" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetImageData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetImageDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_SaveImages_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveImages" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_SaveImages_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveImagesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_DelImageData_InputMessage">
+    <wsdl:part name="parameters" element="tns:DelImageData" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_DelImageData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DelImageDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_NameIsExist_InputMessage">
+    <wsdl:part name="parameters" element="tns:NameIsExist" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_NameIsExist_OutputMessage">
+    <wsdl:part name="parameters" element="tns:NameIsExistResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_NameIsExisting_InputMessage">
+    <wsdl:part name="parameters" element="tns:NameIsExisting" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_NameIsExisting_OutputMessage">
+    <wsdl:part name="parameters" element="tns:NameIsExistingResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetObjectCount_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetObjectCount" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetObjectCount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetObjectCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetOrgTree_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrgTree" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetOrgTree_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrgTreeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetCodeSchemes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCodeSchemes" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetCodeSchemes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCodeSchemesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetMasterDatas_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMasterDatas" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetMasterDatas_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMasterDatasResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetExpense_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetExpense" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetExpense_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetExpenseResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetMaterials_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMaterials" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetMaterials_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMaterialsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetStore_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetStore" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetStore_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetStoreResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetCategorys_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCategorys" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetCategorys_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCategorysResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetCategory_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCategory" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetCategory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCategoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_AddCategory_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddCategory" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_AddCategory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddCategoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_UpdateCategory_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCategory" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_UpdateCategory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCategoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_DelCategory_InputMessage">
+    <wsdl:part name="parameters" element="tns:DelCategory" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_DelCategory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DelCategoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GlobalNameIsExisting_InputMessage">
+    <wsdl:part name="parameters" element="tns:GlobalNameIsExisting" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GlobalNameIsExisting_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GlobalNameIsExistingResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_LocalNameIsExisting_InputMessage">
+    <wsdl:part name="parameters" element="tns:LocalNameIsExisting" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_LocalNameIsExisting_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LocalNameIsExistingResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetModuleParam_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetModuleParam" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetModuleParam_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetModuleParamResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetModuleUserParam_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetModuleUserParam" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetModuleUserParam_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetModuleUserParamResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetModuleDeptParam_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetModuleDeptParam" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetModuleDeptParam_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetModuleDeptParamResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_SaveModuleParam_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveModuleParam" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_SaveModuleParam_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveModuleParamResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_EnableMasterData_InputMessage">
+    <wsdl:part name="parameters" element="tns:EnableMasterData" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_EnableMasterData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EnableMasterDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_DelMasterData_InputMessage">
+    <wsdl:part name="parameters" element="tns:DelMasterData" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_DelMasterData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DelMasterDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetMasterData_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMasterData" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetMasterData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMasterDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_Transfer_InputMessage">
+    <wsdl:part name="parameters" element="tns:Transfer" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_Transfer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TransferResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_UnShare_InputMessage">
+    <wsdl:part name="parameters" element="tns:UnShare" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_UnShare_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UnShareResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetDictionary_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDictionary" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetDictionary_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDictionaryResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetContacts_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetContacts" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetContacts_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetContactsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetContactInfos_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetContactInfos" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetContactInfos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetContactInfosResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetContact_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetContact" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetContact_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetContactResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetContactInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetContactInfo" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetContactInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetContactInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetAllEmployees_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllEmployees" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetAllEmployees_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllEmployeesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetSharing_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSharing" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetSharing_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSharingResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_AddContact_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddContact" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_AddContact_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddContactResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_UpdateContact_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateContact" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_UpdateContact_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateContactResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetModuleGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetModuleGroup" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetModuleGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetModuleGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetUserModule_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserModule" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetUserModule_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserModuleResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetModuleInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetModuleInfo" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetModuleInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetModuleInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetAction_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAction" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetAction_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetActionResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_UpdataPassWord_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdataPassWord" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_UpdataPassWord_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdataPassWordResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_Exit_InputMessage">
+    <wsdl:part name="parameters" element="tns:Exit" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_Exit_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ExitResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ICommons">
+    <wsdl:operation name="GetReportTemplet">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/GetReportTemplet" message="tns:ICommons_GetReportTemplet_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/GetReportTempletResponse" message="tns:ICommons_GetReportTemplet_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BuildImageData">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/BuildImageData" message="tns:ICommons_BuildImageData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/BuildImageDataResponse" message="tns:ICommons_BuildImageData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetImageData">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/GetImageData" message="tns:ICommons_GetImageData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/GetImageDataResponse" message="tns:ICommons_GetImageData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveImages">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/SaveImages" message="tns:ICommons_SaveImages_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/SaveImagesResponse" message="tns:ICommons_SaveImages_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DelImageData">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/DelImageData" message="tns:ICommons_DelImageData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/DelImageDataResponse" message="tns:ICommons_DelImageData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NameIsExist">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/NameIsExist" message="tns:ICommons_NameIsExist_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/NameIsExistResponse" message="tns:ICommons_NameIsExist_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NameIsExisting">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/NameIsExisting" message="tns:ICommons_NameIsExisting_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/NameIsExistingResponse" message="tns:ICommons_NameIsExisting_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetObjectCount">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/GetObjectCount" message="tns:ICommons_GetObjectCount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/GetObjectCountResponse" message="tns:ICommons_GetObjectCount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgTree">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/GetOrgTree" message="tns:ICommons_GetOrgTree_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/GetOrgTreeResponse" message="tns:ICommons_GetOrgTree_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCodeSchemes">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/GetCodeSchemes" message="tns:ICommons_GetCodeSchemes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/GetCodeSchemesResponse" message="tns:ICommons_GetCodeSchemes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMasterDatas">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/GetMasterDatas" message="tns:ICommons_GetMasterDatas_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/GetMasterDatasResponse" message="tns:ICommons_GetMasterDatas_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetExpense">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/GetExpense" message="tns:ICommons_GetExpense_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/GetExpenseResponse" message="tns:ICommons_GetExpense_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMaterials">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/GetMaterials" message="tns:ICommons_GetMaterials_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/GetMaterialsResponse" message="tns:ICommons_GetMaterials_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStore">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/GetStore" message="tns:ICommons_GetStore_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/GetStoreResponse" message="tns:ICommons_GetStore_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCategorys">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/GetCategorys" message="tns:ICommons_GetCategorys_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/GetCategorysResponse" message="tns:ICommons_GetCategorys_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCategory">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/GetCategory" message="tns:ICommons_GetCategory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/GetCategoryResponse" message="tns:ICommons_GetCategory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddCategory">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/AddCategory" message="tns:ICommons_AddCategory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/AddCategoryResponse" message="tns:ICommons_AddCategory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCategory">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/UpdateCategory" message="tns:ICommons_UpdateCategory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/UpdateCategoryResponse" message="tns:ICommons_UpdateCategory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DelCategory">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/DelCategory" message="tns:ICommons_DelCategory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/DelCategoryResponse" message="tns:ICommons_DelCategory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GlobalNameIsExisting">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/GlobalNameIsExisting" message="tns:ICommons_GlobalNameIsExisting_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/GlobalNameIsExistingResponse" message="tns:ICommons_GlobalNameIsExisting_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LocalNameIsExisting">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/LocalNameIsExisting" message="tns:ICommons_LocalNameIsExisting_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/LocalNameIsExistingResponse" message="tns:ICommons_LocalNameIsExisting_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetModuleParam">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/GetModuleParam" message="tns:ICommons_GetModuleParam_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/GetModuleParamResponse" message="tns:ICommons_GetModuleParam_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetModuleUserParam">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/GetModuleUserParam" message="tns:ICommons_GetModuleUserParam_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/GetModuleUserParamResponse" message="tns:ICommons_GetModuleUserParam_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetModuleDeptParam">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/GetModuleDeptParam" message="tns:ICommons_GetModuleDeptParam_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/GetModuleDeptParamResponse" message="tns:ICommons_GetModuleDeptParam_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveModuleParam">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/SaveModuleParam" message="tns:ICommons_SaveModuleParam_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/SaveModuleParamResponse" message="tns:ICommons_SaveModuleParam_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EnableMasterData">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/EnableMasterData" message="tns:ICommons_EnableMasterData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/EnableMasterDataResponse" message="tns:ICommons_EnableMasterData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DelMasterData">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/DelMasterData" message="tns:ICommons_DelMasterData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/DelMasterDataResponse" message="tns:ICommons_DelMasterData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMasterData">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/GetMasterData" message="tns:ICommons_GetMasterData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/GetMasterDataResponse" message="tns:ICommons_GetMasterData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Transfer">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/Transfer" message="tns:ICommons_Transfer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/TransferResponse" message="tns:ICommons_Transfer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UnShare">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/UnShare" message="tns:ICommons_UnShare_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/UnShareResponse" message="tns:ICommons_UnShare_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDictionary">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/GetDictionary" message="tns:ICommons_GetDictionary_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/GetDictionaryResponse" message="tns:ICommons_GetDictionary_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetContacts">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/GetContacts" message="tns:ICommons_GetContacts_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/GetContactsResponse" message="tns:ICommons_GetContacts_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetContactInfos">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/GetContactInfos" message="tns:ICommons_GetContactInfos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/GetContactInfosResponse" message="tns:ICommons_GetContactInfos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetContact">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/GetContact" message="tns:ICommons_GetContact_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/GetContactResponse" message="tns:ICommons_GetContact_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetContactInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/GetContactInfo" message="tns:ICommons_GetContactInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/GetContactInfoResponse" message="tns:ICommons_GetContactInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllEmployees">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/GetAllEmployees" message="tns:ICommons_GetAllEmployees_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/GetAllEmployeesResponse" message="tns:ICommons_GetAllEmployees_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSharing">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/GetSharing" message="tns:ICommons_GetSharing_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/GetSharingResponse" message="tns:ICommons_GetSharing_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddContact">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/AddContact" message="tns:ICommons_AddContact_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/AddContactResponse" message="tns:ICommons_AddContact_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateContact">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/UpdateContact" message="tns:ICommons_UpdateContact_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/UpdateContactResponse" message="tns:ICommons_UpdateContact_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetModuleGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/GetModuleGroup" message="tns:ICommons_GetModuleGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/GetModuleGroupResponse" message="tns:ICommons_GetModuleGroup_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserModule">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/GetUserModule" message="tns:ICommons_GetUserModule_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/GetUserModuleResponse" message="tns:ICommons_GetUserModule_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetModuleInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/GetModuleInfo" message="tns:ICommons_GetModuleInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/GetModuleInfoResponse" message="tns:ICommons_GetModuleInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAction">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/GetAction" message="tns:ICommons_GetAction_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/GetActionResponse" message="tns:ICommons_GetAction_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdataPassWord">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/UpdataPassWord" message="tns:ICommons_UpdataPassWord_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/UpdataPassWordResponse" message="tns:ICommons_UpdataPassWord_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Exit">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/Exit" message="tns:ICommons_Exit_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/ExitResponse" message="tns:ICommons_Exit_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CustomBinding_ICommons" type="tns:ICommons">
+    <wsp:PolicyReference URI="#CustomBinding_ICommons_policy">
+    </wsp:PolicyReference>
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="GetReportTemplet">
+      <soap12:operation soapAction="http://tempuri.org/ICommons/GetReportTemplet" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuildImageData">
+      <soap12:operation soapAction="http://tempuri.org/ICommons/BuildImageData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetImageData">
+      <soap12:operation soapAction="http://tempuri.org/ICommons/GetImageData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveImages">
+      <soap12:operation soapAction="http://tempuri.org/ICommons/SaveImages" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DelImageData">
+      <soap12:operation soapAction="http://tempuri.org/ICommons/DelImageData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NameIsExist">
+      <soap12:operation soapAction="http://tempuri.org/ICommons/NameIsExist" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NameIsExisting">
+      <soap12:operation soapAction="http://tempuri.org/ICommons/NameIsExisting" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetObjectCount">
+      <soap12:operation soapAction="http://tempuri.org/ICommons/GetObjectCount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgTree">
+      <soap12:operation soapAction="http://tempuri.org/ICommons/GetOrgTree" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCodeSchemes">
+      <soap12:operation soapAction="http://tempuri.org/ICommons/GetCodeSchemes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMasterDatas">
+      <soap12:operation soapAction="http://tempuri.org/ICommons/GetMasterDatas" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetExpense">
+      <soap12:operation soapAction="http://tempuri.org/ICommons/GetExpense" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMaterials">
+      <soap12:operation soapAction="http://tempuri.org/ICommons/GetMaterials" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStore">
+      <soap12:operation soapAction="http://tempuri.org/ICommons/GetStore" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCategorys">
+      <soap12:operation soapAction="http://tempuri.org/ICommons/GetCategorys" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCategory">
+      <soap12:operation soapAction="http://tempuri.org/ICommons/GetCategory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddCategory">
+      <soap12:operation soapAction="http://tempuri.org/ICommons/AddCategory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCategory">
+      <soap12:operation soapAction="http://tempuri.org/ICommons/UpdateCategory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DelCategory">
+      <soap12:operation soapAction="http://tempuri.org/ICommons/DelCategory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GlobalNameIsExisting">
+      <soap12:operation soapAction="http://tempuri.org/ICommons/GlobalNameIsExisting" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LocalNameIsExisting">
+      <soap12:operation soapAction="http://tempuri.org/ICommons/LocalNameIsExisting" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetModuleParam">
+      <soap12:operation soapAction="http://tempuri.org/ICommons/GetModuleParam" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetModuleUserParam">
+      <soap12:operation soapAction="http://tempuri.org/ICommons/GetModuleUserParam" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetModuleDeptParam">
+      <soap12:operation soapAction="http://tempuri.org/ICommons/GetModuleDeptParam" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveModuleParam">
+      <soap12:operation soapAction="http://tempuri.org/ICommons/SaveModuleParam" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EnableMasterData">
+      <soap12:operation soapAction="http://tempuri.org/ICommons/EnableMasterData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DelMasterData">
+      <soap12:operation soapAction="http://tempuri.org/ICommons/DelMasterData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMasterData">
+      <soap12:operation soapAction="http://tempuri.org/ICommons/GetMasterData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Transfer">
+      <soap12:operation soapAction="http://tempuri.org/ICommons/Transfer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UnShare">
+      <soap12:operation soapAction="http://tempuri.org/ICommons/UnShare" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDictionary">
+      <soap12:operation soapAction="http://tempuri.org/ICommons/GetDictionary" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetContacts">
+      <soap12:operation soapAction="http://tempuri.org/ICommons/GetContacts" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetContactInfos">
+      <soap12:operation soapAction="http://tempuri.org/ICommons/GetContactInfos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetContact">
+      <soap12:operation soapAction="http://tempuri.org/ICommons/GetContact" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetContactInfo">
+      <soap12:operation soapAction="http://tempuri.org/ICommons/GetContactInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllEmployees">
+      <soap12:operation soapAction="http://tempuri.org/ICommons/GetAllEmployees" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSharing">
+      <soap12:operation soapAction="http://tempuri.org/ICommons/GetSharing" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddContact">
+      <soap12:operation soapAction="http://tempuri.org/ICommons/AddContact" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateContact">
+      <soap12:operation soapAction="http://tempuri.org/ICommons/UpdateContact" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetModuleGroup">
+      <soap12:operation soapAction="http://tempuri.org/ICommons/GetModuleGroup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserModule">
+      <soap12:operation soapAction="http://tempuri.org/ICommons/GetUserModule" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetModuleInfo">
+      <soap12:operation soapAction="http://tempuri.org/ICommons/GetModuleInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAction">
+      <soap12:operation soapAction="http://tempuri.org/ICommons/GetAction" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdataPassWord">
+      <soap12:operation soapAction="http://tempuri.org/ICommons/UpdataPassWord" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Exit">
+      <soap12:operation soapAction="http://tempuri.org/ICommons/Exit" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Commons">
+    <wsdl:port name="CustomBinding_ICommons" binding="tns:CustomBinding_ICommons">
+      <soap12:address location="net.tcp://localhost:7210/Commons" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:7210/Commons</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

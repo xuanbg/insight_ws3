@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="05/21/2014 13:19:46" ReportInfo.Modified="04/30/2015 11:02:10" ReportInfo.CreatorVersion="1.8.46.1">
+  <Dictionary>
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqaESRgLeIFJ7fsIdOTEgQuJ4RNUho/Io2FbyhKm6qwCcmuBcita1Q1+Z/T0wMz1ZVGfKHy6TK8dBSXN9ASVs16I+8otTVtq7Bu4s/YpJoKw1ElgvT38/GA3JIzmSn4hmXUIYgQBnkrw2rpazPCYfIW9VNWNmw2ZDaB4Cp7H+hAaM4AYHULjyqttcAF2mC7O9e6wojp7SDKQkGqpjDadMgOg==">
+      <TableDataSource Name="Table1" Alias="Channel" DataType="System.Int32" Enabled="true" SelectCommand="with&#13;&#10;OrderInfo as (&#13;&#10;  select convert(varchar(7), O.财务审核时间, 120) as 销售日期, O.订单分类, U.人员分类, case when U.人员分类 = 2 then O.结算金额合计 else O.销售金额合计 end as 销售金额, SD.出库金额&#13;&#10;  from 订单_订单 O&#13;&#10;  left join 人事_人员 U on U.编号 = O.业务人员&#13;&#10;  left join (&#13;&#10;    select 订单单号, sum(销售金额小计) as 出库金额&#13;&#10;    from 出库单_出库单明细&#13;&#10;    group by 订单单号) SD on SD.订单单号 = O.单号&#13;&#10;  where O.财务审核 != ''&#13;&#10;    and O.订单分类 in(1, 2, 6, 7)&#13;&#10;    and O.订单状态 &gt; 0&#13;&#10;    and O.财务审核时间 between @StartDate and dateadd(day, 1, @EndDate)&#13;&#10;)&#13;&#10;select 销售日期,&#13;&#10;       sum(isnull(出库金额, 0))/10000 as 出库总金额,&#13;&#10;       sum(销售金额)/10000 as 销售总金额,&#13;&#10;	   sum(case when 订单分类 = 1 and 人员分类 = 2 then 销售金额/10000 else 0 end) as 渠道,&#13;&#10;	   sum(case when 订单分类 in (1, 6, 7) and 人员分类 != 2 then 销售金额/10000 else 0 end) as 网销,&#13;&#10;	   sum(case when 订单分类 = 2 then 销售金额/10000 else 0 end) as 工程&#13;&#10;from OrderInfo&#13;&#10;group by 销售日期&#13;&#10;order by 销售日期">
+        <Column Name="销售日期" DataType="System.String"/>
+        <Column Name="出库总金额" DataType="System.Decimal"/>
+        <Column Name="销售总金额" DataType="System.Decimal"/>
+        <Column Name="渠道" DataType="System.Decimal"/>
+        <Column Name="网销" DataType="System.Decimal"/>
+        <Column Name="工程" DataType="System.Decimal"/>
+        <CommandParameter Name="StartDate" DataType="22" Expression="[StartDate]"/>
+        <CommandParameter Name="EndDate" DataType="22" Expression="[EndDate]"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+    <Parameter Name="StartDate" DataType="System.DateTime"/>
+    <Parameter Name="EndDate" DataType="System.DateTime"/>
+    <Parameter Name="DeptName" DataType="System.String"/>
+    <Parameter Name="UserName" DataType="System.String"/>
+    <Parameter Name="DeptId" DataType="System.String"/>
+    <Parameter Name="UserId" DataType="System.String"/>
+  </Dictionary>
+  <ReportPage Name="Page1" Landscape="true" PaperWidth="297" PaperHeight="210" RawPaperSize="9" LeftMargin="0" TopMargin="0" RightMargin="0" BottomMargin="0">
+    <PageHeaderBand Name="PageHeader1" Width="1122.66" Height="151.2">
+      <TextObject Name="Text1" Left="75.6" Top="75.6" Width="971.46" Height="37.8" CanBreak="false" Text="月销量分析图" HorzAlign="Center" VertAlign="Center" WordWrap="false" Font="微软雅黑, 18pt"/>
+      <LineObject Name="Line2" Left="378" Top="115.29" Width="366.66"/>
+      <LineObject Name="Line1" Left="378" Top="113.4" Width="366.66"/>
+      <TextObject Name="Text2" Left="75.6" Top="132.3" Width="283.5" Height="18.9" CanBreak="false" Text="机构/部门：[DeptName]" VertAlign="Center" WordWrap="false" Font="微软雅黑, 9pt"/>
+      <TextObject Name="Text4" Left="895.86" Top="132.3" Width="151.2" Height="18.9" CanBreak="false" Text="货币单位：人民币万元" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="微软雅黑, 9pt"/>
+      <TextObject Name="Text28" Left="555.66" Top="132.3" Width="94.5" Height="18.9" CanBreak="false" Text="[EndDate]" VertAlign="Center" WordWrap="false" Font="微软雅黑, 9pt">
+        <Formats>
+          <DateFormat Format="yyyy-MM-dd"/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text29" Left="536.76" Top="132.3" Width="18.9" Height="18.9" Text="至" HorzAlign="Center" VertAlign="Center" Font="微软雅黑, 9pt"/>
+      <TextObject Name="Text3" Left="442.26" Top="132.3" Width="94.5" Height="18.9" CanBreak="false" Text="[StartDate]" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="微软雅黑, 9pt">
+        <Formats>
+          <DateFormat Format="yyyy-MM-dd"/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+    </PageHeaderBand>
+    <PageFooterBand Name="PageFooter1" Top="155.2" Width="1122.66" Height="68.04">
+      <TextObject Name="Text7" Left="858.06" Top="3.78" Width="189" Height="18.9" CanBreak="false" Text="第 [Page#] 页 / 共 [TotalPages#] 页" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="微软雅黑, 9pt"/>
+      <TextObject Name="Text5" Left="75.6" Top="3.78" Width="189" Height="18.9" CanBreak="false" Text="制表人：[UserName]" VertAlign="Center" WordWrap="false" Font="微软雅黑, 9pt"/>
+      <TextObject Name="Text6" Left="442.26" Top="3.78" Width="189" Height="18.9" CanBreak="false" Text="制表日期：[Date]" Format="Date" Format.Format="yyyy-MM-dd" VertAlign="Center" WordWrap="false" Font="微软雅黑, 9pt"/>
+    </PageFooterBand>
+    <OverlayBand Name="Overlay1" Top="227.24" Width="1122.66" Height="793.8">
+      <MSChartObject Name="MSChart1" Left="75.6" Top="151.2" Width="971.46" Height="283.5" DataSource="Table1" ChartData="PENoYXJ0IFBhbGV0dGU9Ik5vbmUiIFNpemU9IjI4OCwgMjMyIiBCYWNrSGF0Y2hTdHlsZT0iQmFja3dhcmREaWFnb25hbCIgQmFja0dyYWRpZW50U3R5bGU9IkRpYWdvbmFsTGVmdCIgQmFja1NlY29uZGFyeUNvbG9yPSJXaGl0ZSIgQm9yZGVybGluZUNvbG9yPSJMaWdodFNsYXRlR3JheSIgQm9yZGVybGluZURhc2hTdHlsZT0iU29saWQiPg0KICA8U2VyaWVzPg0KICAgIDxTZXJpZXMgTmFtZT0i6ZSA5ZSu5oC76YeR6aKdIiBMZWdlbmQ9IkRlZmF1bHQiIFhWYWx1ZVR5cGU9IlN0cmluZyIgWVZhbHVlVHlwZT0iRG91YmxlIiBDaGFydEFyZWE9IkRlZmF1bHQiIE1hcmtlclNpemU9IjMiIE1hcmtlckNvbG9yPSJSZWQiIEN1c3RvbVByb3BlcnRpZXM9IkRyYXdpbmdTdHlsZT1DeWxpbmRlciI+DQogICAgICA8UG9pbnRzPg0KICAgICAgICA8RGF0YVBvaW50IFlWYWx1ZXM9IjEiIEF4aXNMYWJlbD0iQSIgLz4NCiAgICAgICAgPERhdGFQb2ludCBZVmFsdWVzPSIyIiBBeGlzTGFiZWw9IkIiIC8+DQogICAgICAgIDxEYXRhUG9pbnQgWVZhbHVlcz0iNSIgQXhpc0xhYmVsPSJDIiAvPg0KICAgICAgPC9Qb2ludHM+DQogICAgPC9TZXJpZXM+DQogICAgPFNlcmllcyBOYW1lPSLlh7rlupPmgLvph5Hpop0iIExlZ2VuZD0iRGVmYXVsdCIgWFZhbHVlVHlwZT0iU3RyaW5nIiBZVmFsdWVUeXBlPSJEb3VibGUiIENoYXJ0QXJlYT0iRGVmYXVsdCIgQ3VzdG9tUHJvcGVydGllcz0iRHJhd2luZ1N0eWxlPUN5bGluZGVyIj4NCiAgICAgIDxQb2ludHM+DQogICAgICAgIDxEYXRhUG9pbnQgWVZhbHVlcz0iMSIgQXhpc0xhYmVsPSJBIiAvPg0KICAgICAgICA8RGF0YVBvaW50IFlWYWx1ZXM9IjIiIEF4aXNMYWJlbD0iQiIgLz4NCiAgICAgIDwvUG9pbnRzPg0KICAgIDwvU2VyaWVzPg0KICA8L1Nlcmllcz4NCiAgPExlZ2VuZHM+DQogICAgPExlZ2VuZCBOYW1lPSJEZWZhdWx0IiBCYWNrQ29sb3I9IjUwLCAyNTUsIDI1NSwgMjU1IiBCb3JkZXJDb2xvcj0iTGlnaHRTbGF0ZUdyYXkiIERvY2tpbmc9IkJvdHRvbSI+DQogICAgPC9MZWdlbmQ+DQogIDwvTGVnZW5kcz4NCiAgPFRpdGxlcz4NCiAgICA8VGl0bGUgTmFtZT0iVGl0bGUxIiBUZXh0PSLmnIjplIDph4/kuI7lrp7pmYXlh7rlupPlr7nmr5Tlm74iIEZvbnQ9IuW+rui9r+mbhem7kSwgMTJwdCwgR2RpQ2hhclNldD0xMzQiIEFsaWdubWVudD0iVG9wQ2VudGVyIiBJc0RvY2tlZEluc2lkZUNoYXJ0QXJlYT0iRmFsc2UiPg0KICAgIDwvVGl0bGU+DQogIDwvVGl0bGVzPg0KICA8Q2hhcnRBcmVhcz4NCiAgICA8Q2hhcnRBcmVhIE5hbWU9IkRlZmF1bHQiIEJhY2tDb2xvcj0iV2hpdGUiIEJhY2tTZWNvbmRhcnlDb2xvcj0iV2hpdGUiIEJvcmRlckNvbG9yPSJMaWdodFNsYXRlR3JheSIgQm9yZGVyRGFzaFN0eWxlPSJTb2xpZCI+DQogICAgICA8QXhpc1kgSXNMYWJlbEF1dG9GaXQ9IkZhbHNlIiBUaXRsZT0i6ZSA6YeP77yI5LiH5YWD77yJIj4NCiAgICAgICAgPE1ham9yR3JpZCBMaW5lQ29sb3I9IjY1LCAwLCAwLCAwIiAvPg0KICAgICAgICA8TWlub3JHcmlkIExpbmVDb2xvcj0iMzAsIDAsIDAsIDAiIC8+DQogICAgICAgIDxMYWJlbFN0eWxlIEZvbnQ9IlRhaG9tYSwgOHB0IiAvPg0KICAgICAgPC9BeGlzWT4NCiAgICAgIDxBeGlzWCBJc0xhYmVsQXV0b0ZpdD0iRmFsc2UiIFRpdGxlPSLmnIjku73vvIjmnIjvvIkiIEludGVydmFsPSIxIj4NCiAgICAgICAgPE1ham9yR3JpZCBMaW5lQ29sb3I9IjY1LCAwLCAwLCAwIiAvPg0KICAgICAgICA8TWlub3JHcmlkIExpbmVDb2xvcj0iMzAsIDAsIDAsIDAiIC8+DQogICAgICAgIDxMYWJlbFN0eWxlIEZvbnQ9IlRhaG9tYSwgOHB0IiAvPg0KICAgICAgPC9BeGlzWD4NCiAgICAgIDxBeGlzWDIgSXNMYWJlbEF1dG9GaXQ9IkZhbHNlIj4NCiAgICAgIDwvQXhpc1gyPg0KICAgICAgPEF4aXNZMiBJc0xhYmVsQXV0b0ZpdD0iRmFsc2UiPg0KICAgICAgPC9BeGlzWTI+DQogICAgPC9DaGFydEFyZWE+DQogIDwvQ2hhcnRBcmVhcz4NCjwvQ2hhcnQ+">
+        <MSChartSeries Name="Series1" XValue="[Channel.销售日期]" YValue1="[Channel.销售总金额]"/>
+        <MSChartSeries Name="Series3" XValue="[Channel.销售日期]" YValue1="[Channel.出库总金额]"/>
+      </MSChartObject>
+      <MSChartObject Name="MSChart2" Left="75.6" Top="442.26" Width="971.46" Height="283.5" DataSource="Table1" AutoSeriesColumn="" ChartData="PENoYXJ0IFBhbGV0dGU9Ik5vbmUiIFNpemU9IjI4OCwgMjMyIiBCYWNrSGF0Y2hTdHlsZT0iQmFja3dhcmREaWFnb25hbCIgQmFja0dyYWRpZW50U3R5bGU9IkRpYWdvbmFsTGVmdCIgQmFja1NlY29uZGFyeUNvbG9yPSJXaGl0ZSIgQm9yZGVybGluZUNvbG9yPSJMaWdodFNsYXRlR3JheSIgQm9yZGVybGluZURhc2hTdHlsZT0iU29saWQiPg0KICA8U2VyaWVzPg0KICAgIDxTZXJpZXMgTmFtZT0i5Luj55CGIiBMZWdlbmQ9IkRlZmF1bHQiIFhWYWx1ZVR5cGU9IlN0cmluZyIgWVZhbHVlVHlwZT0iRG91YmxlIiBDaGFydEFyZWE9IkRlZmF1bHQiIE1hcmtlclNpemU9IjMiIE1hcmtlckNvbG9yPSJSZWQiIEN1c3RvbVByb3BlcnRpZXM9IkRyYXdpbmdTdHlsZT1DeWxpbmRlciI+DQogICAgICA8UG9pbnRzPg0KICAgICAgICA8RGF0YVBvaW50IFlWYWx1ZXM9IjEiIEF4aXNMYWJlbD0iQSIgLz4NCiAgICAgICAgPERhdGFQb2ludCBZVmFsdWVzPSIyIiBBeGlzTGFiZWw9IkIiIC8+DQogICAgICAgIDxEYXRhUG9pbnQgWVZhbHVlcz0iNSIgQXhpc0xhYmVsPSJDIiAvPg0KICAgICAgPC9Qb2ludHM+DQogICAgPC9TZXJpZXM+DQogICAgPFNlcmllcyBOYW1lPSLnvZHplIAiIExlZ2VuZD0iRGVmYXVsdCIgWFZhbHVlVHlwZT0iU3RyaW5nIiBZVmFsdWVUeXBlPSJEb3VibGUiIENoYXJ0QXJlYT0iRGVmYXVsdCIgQ3VzdG9tUHJvcGVydGllcz0iRHJhd2luZ1N0eWxlPUN5bGluZGVyIj4NCiAgICAgIDxQb2ludHM+DQogICAgICAgIDxEYXRhUG9pbnQgWVZhbHVlcz0iMSIgQXhpc0xhYmVsPSJBIiAvPg0KICAgICAgICA8RGF0YVBvaW50IFlWYWx1ZXM9IjIiIEF4aXNMYWJlbD0iQiIgLz4NCiAgICAgIDwvUG9pbnRzPg0KICAgIDwvU2VyaWVzPg0KICAgIDxTZXJpZXMgTmFtZT0i5bel56iLIiBMZWdlbmQ9IkRlZmF1bHQiIFhWYWx1ZVR5cGU9IlN0cmluZyIgWVZhbHVlVHlwZT0iRG91YmxlIiBDaGFydEFyZWE9IkRlZmF1bHQiIEN1c3RvbVByb3BlcnRpZXM9IkRyYXdpbmdTdHlsZT1DeWxpbmRlciI+DQogICAgICA8UG9pbnRzPg0KICAgICAgICA8RGF0YVBvaW50IFlWYWx1ZXM9IjEiIEF4aXNMYWJlbD0iQSIgLz4NCiAgICAgICAgPERhdGFQb2ludCBZVmFsdWVzPSIyIiBBeGlzTGFiZWw9IkIiIC8+DQogICAgICA8L1BvaW50cz4NCiAgICA8L1Nlcmllcz4NCiAgPC9TZXJpZXM+DQogIDxMZWdlbmRzPg0KICAgIDxMZWdlbmQgTmFtZT0iRGVmYXVsdCIgQmFja0NvbG9yPSI1MCwgMjU1LCAyNTUsIDI1NSIgQm9yZGVyQ29sb3I9IkxpZ2h0U2xhdGVHcmF5IiBEb2NraW5nPSJCb3R0b20iIElzRG9ja2VkSW5zaWRlQ2hhcnRBcmVhPSJGYWxzZSI+DQogICAgPC9MZWdlbmQ+DQogIDwvTGVnZW5kcz4NCiAgPFRpdGxlcz4NCiAgICA8VGl0bGUgTmFtZT0iVGl0bGUxIiBUZXh0PSLlkITmuKDpgZPmnIjplIDph4/lr7nmr5Tlm74iIEZvbnQ9IuW+rui9r+mbhem7kSwgMTJwdCwgR2RpQ2hhclNldD0xMzQiIEFsaWdubWVudD0iVG9wQ2VudGVyIiBJc0RvY2tlZEluc2lkZUNoYXJ0QXJlYT0iRmFsc2UiPg0KICAgIDwvVGl0bGU+DQogIDwvVGl0bGVzPg0KICA8Q2hhcnRBcmVhcz4NCiAgICA8Q2hhcnRBcmVhIE5hbWU9IkRlZmF1bHQiIEJhY2tDb2xvcj0iV2hpdGUiIEJhY2tTZWNvbmRhcnlDb2xvcj0iV2hpdGUiIEJvcmRlckNvbG9yPSJMaWdodFNsYXRlR3JheSIgQm9yZGVyRGFzaFN0eWxlPSJTb2xpZCI+DQogICAgICA8QXhpc1kgSXNMYWJlbEF1dG9GaXQ9IkZhbHNlIiBUaXRsZT0i6ZSA6YeP77yI5LiH5YWD77yJIj4NCiAgICAgICAgPE1ham9yR3JpZCBMaW5lQ29sb3I9IjY1LCAwLCAwLCAwIiAvPg0KICAgICAgICA8TWlub3JHcmlkIExpbmVDb2xvcj0iMzAsIDAsIDAsIDAiIC8+DQogICAgICAgIDxMYWJlbFN0eWxlIEZvbnQ9IlRhaG9tYSwgOHB0IiAvPg0KICAgICAgPC9BeGlzWT4NCiAgICAgIDxBeGlzWCBJc0xhYmVsQXV0b0ZpdD0iRmFsc2UiIFRpdGxlPSLmnIjku73vvIjmnIjvvIkiIEludGVydmFsPSIxIj4NCiAgICAgICAgPE1ham9yR3JpZCBMaW5lQ29sb3I9IjY1LCAwLCAwLCAwIiAvPg0KICAgICAgICA8TWlub3JHcmlkIExpbmVDb2xvcj0iMzAsIDAsIDAsIDAiIC8+DQogICAgICAgIDxMYWJlbFN0eWxlIEZvbnQ9IlRhaG9tYSwgOHB0IiAvPg0KICAgICAgPC9BeGlzWD4NCiAgICAgIDxBeGlzWDIgSXNMYWJlbEF1dG9GaXQ9IkZhbHNlIj4NCiAgICAgIDwvQXhpc1gyPg0KICAgICAgPEF4aXNZMiBJc0xhYmVsQXV0b0ZpdD0iRmFsc2UiPg0KICAgICAgPC9BeGlzWTI+DQogICAgPC9DaGFydEFyZWE+DQogIDwvQ2hhcnRBcmVhcz4NCjwvQ2hhcnQ+">
+        <MSChartSeries Name="Series2" XValue="[Channel.销售日期]" YValue1="[Channel.渠道]"/>
+        <MSChartSeries Name="Series5" XValue="[Channel.销售日期]" YValue1="[Channel.网销]"/>
+        <MSChartSeries Name="Series5" XValue="[Channel.销售日期]" YValue1="[Channel.工程]"/>
+      </MSChartObject>
+    </OverlayBand>
+  </ReportPage>
+</Report>

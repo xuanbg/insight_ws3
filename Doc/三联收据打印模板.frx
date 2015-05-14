@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="05/07/2014 11:19:01" ReportInfo.Modified="04/30/2015 11:00:49" ReportInfo.CreatorVersion="1.8.46.1" PrintSettings.Printer="pdfFactory Pro" PrintSettings.SavePrinterWithReport="true" PrintSettings.PrintMode="Scale" PrintSettings.PrintOnSheetWidth="210.058" PrintSettings.PrintOnSheetHeight="296.926" PrintSettings.PrintOnSheetRawPaperSize="9" PrintSettings.PagesOnSheet="Three" PrintSettings.CopyNames="      预      览&#13;&#10;①   客   户   联&#13;&#10;②   记   账   联&#13;&#10;③   存   根   联">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Drawing;
+using System.Data;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+    int pageRowCount = 5;
+    
+    private void Fixed_PageRows1(object sender, EventArgs e)
+    {
+      int rowCount = Report.GetDataSource(&quot;Detail&quot;).RowCount;
+      int rows = rowCount + ((pageRowCount + ((0 - rowCount) % pageRowCount)) % pageRowCount);
+      Child1.CompleteToNRows = rows;
+    }
+    
+    private void Fixed_PageRows2(object sender, EventArgs e)
+    {
+      int rowCount = Report.GetDataSource(&quot;Detail&quot;).RowCount;
+      int rows = rowCount + ((pageRowCount + ((0 - rowCount) % pageRowCount)) % pageRowCount);
+      Child2.CompleteToNRows = rows;
+    }
+    
+    private void Fixed_PageRows3(object sender, EventArgs e)
+    {
+      int rowCount = Report.GetDataSource(&quot;Detail&quot;).RowCount;
+      int rows = rowCount + ((pageRowCount + ((0 - rowCount) % pageRowCount)) % pageRowCount);
+      Child3.CompleteToNRows = rows;
+    }
+    
+  }
+}
+</ScriptText>
+  <Dictionary>
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqNFYA90Fpimh9i6tBIMYT52NfA0tX0pwQh899WRWJ1gOZfYVexDqSuKRygN70zBaa+CYhW7Y7CQGSUhx8/pWrtu+08Ji4KQYEIsRxYX10cVnop7seKCVAHHzcdi/1mm4mbjZEFQ3eq9js3+oq1BneLvevZJdS5XlreLqDauFZ1C18zNNbwGva9MuFcnQhTXP4">
+      <TableDataSource Name="Table" Alias="BaseInfo" DataType="System.Int32" Enabled="true" SelectCommand="select C.ReceiptCode, C.HashCode, C.ObjectName, C.Description, U.Name as UserName, C.CreateTime, dbo.Get_CnAmount(I.Amount, 1) as Amount&#13;&#10;from ABS_Clearing C&#13;&#10;join SYS_User U on U.ID = C.CreatorUserId&#13;&#10;join (&#13;&#10;  select ClearingId, sum(Amount) as Amount&#13;&#10;  from ABS_Clearing_Item&#13;&#10;  group by ClearingId) I on I.ClearingId = C.ID&#13;&#10;where C.ID = @BusinessId">
+        <Column Name="ReceiptCode" DataType="System.String"/>
+        <Column Name="HashCode" DataType="System.String"/>
+        <Column Name="ObjectName" DataType="System.String"/>
+        <Column Name="Description" DataType="System.String"/>
+        <Column Name="UserName" DataType="System.String"/>
+        <Column Name="CreateTime" DataType="System.DateTime"/>
+        <Column Name="Amount" DataType="System.String"/>
+        <CommandParameter Name="BusinessId" DataType="22" Expression="[BusinessId]"/>
+      </TableDataSource>
+      <TableDataSource Name="Table1" Alias="Detail" DataType="System.Int32" Enabled="true" SelectCommand="select I.Summary, I.ObjectName, I.Units, convert(float, I.Price) as Price, convert(float, I.Counts) as Counts, I.Amount&#13;&#10;from ABS_Clearing_Item I&#13;&#10;where I.ClearingId = @BusinessId">
+        <Column Name="Summary" DataType="System.String"/>
+        <Column Name="ObjectName" DataType="System.String"/>
+        <Column Name="Units" DataType="System.String"/>
+        <Column Name="Amount" DataType="System.Decimal"/>
+        <Column Name="Price" DataType="System.Double"/>
+        <Column Name="Counts" DataType="System.Double"/>
+        <CommandParameter Name="BusinessId" DataType="22" Expression="[BusinessId]"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+    <Parameter Name="BusinessId" DataType="System.String" Expression="&quot;E0B9B692-C6BF-E411-A5DB-00F1F30FE498&quot;"/>
+    <Total Name="Total1" Expression="[Detail.Amount]" Evaluator="Data1" PrintOn="DataFooter1" ResetOnReprint="true"/>
+    <Total Name="Total2" Expression="[Detail.Amount]" Evaluator="Data2" PrintOn="DataFooter2" ResetOnReprint="true"/>
+    <Total Name="Total3" Expression="[Detail.Amount]" Evaluator="Data3" PrintOn="DataFooter3" ResetOnReprint="true"/>
+  </Dictionary>
+  <ReportPage Name="Page1" PaperHeight="99" LeftMargin="0" TopMargin="0" RightMargin="0" BottomMargin="0">
+    <PageHeaderBand Name="PageHeader2" Width="793.8" Height="124.74">
+      <TextObject Name="Text1" Left="113.4" Top="37.8" Width="567" Height="37.8" CanBreak="false" Text="慧眼软件收款专用收据" HorzAlign="Center" VertAlign="Center" WordWrap="false" Font="微软雅黑, 24pt"/>
+      <LineObject Name="Line2" Left="226.8" Top="77.49" Width="340.2"/>
+      <LineObject Name="Line1" Left="226.8" Top="75.6" Width="340.2"/>
+      <TextObject Name="Text4" Left="585.9" Top="86.94" Width="151.2" Height="18.9" CanBreak="false" Text="[BaseInfo.ReceiptCode]" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="微软雅黑, 9pt"/>
+      <TextObject Name="Text3" Left="56.7" Top="86.94" Width="302.4" Height="18.9" CanBreak="false" Text="收款单位：北京慧眼软件有限公司" VertAlign="Center" WordWrap="false" Font="微软雅黑, 9pt"/>
+      <TextObject Name="Text2" Left="56.7" Top="105.84" Width="302.4" Height="18.9" CanBreak="false" Text="付款单位：[BaseInfo.ObjectName]" VertAlign="Center" WordWrap="false" Font="微软雅黑, 9pt"/>
+      <TextObject Name="Text5" Left="585.9" Top="105.84" Width="151.2" Height="18.9" CanBreak="false" Text="收款日期：[BaseInfo.CreateTime]" Format="Date" Format.Format="yyyy-MM-dd" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="微软雅黑, 9pt"/>
+      <BarcodeObject Name="Barcode1" Left="706.86" Top="15.12" Width="56.7" Height="56.7" AutoSize="false" DataColumn="BaseInfo.HashCode" ShowText="false" Barcode="QR Code" Barcode.ErrorCorrection="L" Barcode.Encoding="UTF8" Barcode.QuietZone="true"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="155.42" Width="793.8" Height="22.68" AfterDataEvent="Fixed_PageRows1" DataSource="Table1">
+      <TextObject Name="Text17" Left="56.7" Width="207.9" Height="22.68" CanBreak="false" Text="[Detail.Summary]" VertAlign="Center" WordWrap="false" Font="微软雅黑, 9pt"/>
+      <TextObject Name="Text18" Left="264.6" Width="151.2" Height="22.68" CanBreak="false" Text="[Detail.ObjectName]" VertAlign="Center" WordWrap="false" Font="微软雅黑, 9pt"/>
+      <TextObject Name="Text19" Left="415.8" Width="75.6" Height="22.68" CanBreak="false" Text="[Detail.Units]" HorzAlign="Center" VertAlign="Center" WordWrap="false" Font="微软雅黑, 9pt"/>
+      <TextObject Name="Text20" Left="491.4" Width="75.6" Height="22.68" CanBreak="false" Text="[Detail.Price]" HideZeros="true" HorzAlign="Center" VertAlign="Center" WordWrap="false" Font="微软雅黑, 9pt"/>
+      <TextObject Name="Text21" Left="567" Width="56.7" Height="22.68" CanBreak="false" Text="[Detail.Counts]" HideZeros="true" HorzAlign="Center" VertAlign="Center" WordWrap="false" Font="微软雅黑, 9pt"/>
+      <TextObject Name="Text22" Left="623.7" Width="113.4" Height="22.68" CanBreak="false" Text="[Detail.Amount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="微软雅黑, 9pt"/>
+      <ChildBand Name="Child1" Top="182.1" Width="793.8" Height="22.68" CompleteToNRows="1"/>
+      <DataHeaderBand Name="DataHeader1" Top="128.74" Width="793.8" Height="22.68" RepeatOnEveryPage="true">
+        <TextObject Name="Text10" Left="56.7" Width="207.9" Height="22.68" CanBreak="false" Text="摘要" HorzAlign="Center" VertAlign="Center" WordWrap="false" Font="微软雅黑, 10pt"/>
+        <TextObject Name="Text11" Left="264.6" Width="151.2" Height="22.68" CanBreak="false" Text="项目" HorzAlign="Center" VertAlign="Center" WordWrap="false" Font="微软雅黑, 10pt"/>
+        <TextObject Name="Text12" Left="415.8" Width="75.6" Height="22.68" CanBreak="false" Text="单位" HorzAlign="Center" VertAlign="Center" WordWrap="false" Font="微软雅黑, 10pt"/>
+        <TextObject Name="Text13" Left="491.4" Width="75.6" Height="22.68" CanBreak="false" Text="单价" HorzAlign="Center" VertAlign="Center" WordWrap="false" Font="微软雅黑, 10pt"/>
+        <TextObject Name="Text14" Left="567" Width="56.7" Height="22.68" CanBreak="false" Text="数量" HorzAlign="Center" VertAlign="Center" WordWrap="false" Font="微软雅黑, 10pt"/>
+        <TextObject Name="Text15" Left="623.7" Width="113.4" Height="22.68" CanBreak="false" Text="金额" HorzAlign="Center" VertAlign="Center" WordWrap="false" Font="微软雅黑, 10pt"/>
+      </DataHeaderBand>
+      <DataFooterBand Name="DataFooter1" Top="208.78" Width="793.8" Height="22.68" RepeatOnEveryPage="true">
+        <TextObject Name="Text23" Left="56.7" Width="567" Height="22.68" CanBreak="false" Text="合计金额（大写）：[BaseInfo.Amount]" VertAlign="Center" WordWrap="false" Font="微软雅黑, 10pt"/>
+        <TextObject Name="Text24" Left="623.7" Width="113.4" Height="22.68" CanBreak="false" Text="[Total1]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="￥" Format.PositivePattern="0" Format.NegativePattern="2" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="微软雅黑, 10pt"/>
+      </DataFooterBand>
+    </DataBand>
+    <PageFooterBand Name="PageFooter2" Top="235.46" Width="793.8" Height="90.72">
+      <TextObject Name="Text6" Left="56.7" Top="37.8" Width="170.1" Height="22.68" CanBreak="false" Text="收款人：[BaseInfo.UserName]" VertAlign="Bottom" WordWrap="false" Font="微软雅黑, 9pt"/>
+      <TextObject Name="Text7" Left="226.8" Top="37.8" Width="189" Height="22.68" CanBreak="false" Text="付款人：（签章）" VertAlign="Bottom" WordWrap="false" Font="微软雅黑, 9pt"/>
+      <TextObject Name="Text8" Left="415.8" Top="37.8" Width="189" Height="22.68" CanBreak="false" Text="复核人：（签章）" VertAlign="Bottom" WordWrap="false" Font="微软雅黑, 9pt"/>
+      <TextObject Name="Text9" Left="604.8" Top="37.8" Width="132.3" Height="22.68" CanBreak="false" Text="第 [Page#] 页/共 [TotalPages#] 页" HorzAlign="Right" VertAlign="Bottom" WordWrap="false" Font="微软雅黑, 9pt"/>
+      <TextObject Name="Text16" Left="56.7" Top="3.78" Width="680.4" Height="34.02" CanBreak="false" Text="备注：[BaseInfo.Description]" Font="微软雅黑, 9pt"/>
+    </PageFooterBand>
+    <OverlayBand Name="Overlay1" Top="330.18" Width="793.8" Height="374.22">
+      <TextObject Name="Text31" Left="56.7" Top="124.74" Width="680.4" Height="196.56" Border.Lines="All" Border.Style="Double" HorzAlign="Right" VertAlign="Bottom" Font="宋体, 9pt"/>
+      <LineObject Name="Line3" Left="264.6" Top="126.63" Height="134.19" Border.Style="Double"/>
+      <LineObject Name="Line4" Left="58.59" Top="147.42" Width="676.62" Border.Style="Double"/>
+      <LineObject Name="Line5" Left="58.59" Top="260.82" Width="676.62" Border.Style="Double"/>
+      <LineObject Name="Line6" Left="415.8" Top="126.63" Height="134.19" Border.Style="Double"/>
+      <LineObject Name="Line7" Left="491.4" Top="126.63" Height="134.19" Border.Style="Double"/>
+      <LineObject Name="Line8" Left="567" Top="126.63" Height="134.19" Border.Style="Double"/>
+      <LineObject Name="Line9" Left="623.7" Top="126.63" Height="156.87" Border.Style="Double"/>
+      <TextObject Name="Text25" Left="37.8" Top="124.74" Width="18.9" Height="158.76" CanBreak="false" Text="http://www.insight.com" HorzAlign="Center" VertAlign="Bottom" Angle="270" WordWrap="false"/>
+      <TextObject Name="Text32" Left="737.1" Top="124.74" Width="18.9" Height="158.76" CanBreak="false" Text="①   客   户   联" HorzAlign="Center" VertAlign="Bottom" Angle="90" WordWrap="false" Font="微软雅黑, 8pt"/>
+      <LineObject Name="Line10" Left="58.59" Top="283.5" Width="676.62"/>
+    </OverlayBand>
+  </ReportPage>
+  <ReportPage Name="Page2" PaperHeight="99" LeftMargin="0" TopMargin="0" RightMargin="0" BottomMargin="0">
+    <PageHeaderBand Name="PageHeader1" Width="793.8" Height="124.74">
+      <TextObject Name="Text87" Left="56.7" Top="105.84" Width="302.4" Height="18.9" CanBreak="false" Text="付款单位：[BaseInfo.ObjectName]" VertAlign="Center" WordWrap="false" Font="微软雅黑, 9pt"/>
+      <TextObject Name="Text88" Left="585.9" Top="105.84" Width="151.2" Height="18.9" CanBreak="false" Text="收款日期：[BaseInfo.CreateTime]" Format="Date" Format.Format="yyyy-MM-dd" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="微软雅黑, 9pt"/>
+      <TextObject Name="Text89" Left="585.9" Top="86.94" Width="151.2" Height="18.9" CanBreak="false" Text="[BaseInfo.ReceiptCode]" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="微软雅黑, 9pt"/>
+      <TextObject Name="Text90" Left="56.7" Top="86.94" Width="302.4" Height="18.9" CanBreak="false" Text="收款单位：北京慧眼软件有限公司" VertAlign="Center" WordWrap="false" Font="微软雅黑, 9pt"/>
+      <LineObject Name="Line33" Left="226.8" Top="77.49" Width="340.2"/>
+      <LineObject Name="Line34" Left="226.8" Top="75.6" Width="340.2"/>
+      <TextObject Name="Text91" Left="113.4" Top="37.8" Width="567" Height="37.8" CanBreak="false" Text="慧眼软件收款专用收据" HorzAlign="Center" VertAlign="Center" WordWrap="false" Font="微软雅黑, 24pt"/>
+      <BarcodeObject Name="Barcode2" Left="706.86" Top="15.12" Width="56.7" Height="56.7" AutoSize="false" DataColumn="BaseInfo.HashCode" ShowText="false" Barcode="QR Code" Barcode.ErrorCorrection="L" Barcode.Encoding="UTF8" Barcode.QuietZone="true"/>
+    </PageHeaderBand>
+    <DataBand Name="Data2" Top="155.42" Width="793.8" Height="22.68" AfterDataEvent="Fixed_PageRows2" DataSource="Table1">
+      <TextObject Name="Text97" Left="623.7" Width="113.4" Height="22.68" CanBreak="false" Text="[Detail.Amount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="微软雅黑, 9pt"/>
+      <TextObject Name="Text92" Left="56.7" Width="207.9" Height="22.68" CanBreak="false" Text="[Detail.Summary]" VertAlign="Center" WordWrap="false" Font="微软雅黑, 9pt"/>
+      <TextObject Name="Text93" Left="264.6" Width="151.2" Height="22.68" CanBreak="false" Text="[Detail.ObjectName]" VertAlign="Center" WordWrap="false" Font="微软雅黑, 9pt"/>
+      <TextObject Name="Text94" Left="415.8" Width="75.6" Height="22.68" CanBreak="false" Text="[Detail.Units]" HorzAlign="Center" VertAlign="Center" WordWrap="false" Font="微软雅黑, 9pt"/>
+      <TextObject Name="Text95" Left="491.4" Width="75.6" Height="22.68" CanBreak="false" Text="[Detail.Price]" HideZeros="true" HorzAlign="Center" VertAlign="Center" WordWrap="false" Font="微软雅黑, 9pt"/>
+      <TextObject Name="Text96" Left="567" Width="56.7" Height="22.68" CanBreak="false" Text="[Detail.Counts]" HideZeros="true" HorzAlign="Center" VertAlign="Center" WordWrap="false" Font="微软雅黑, 9pt"/>
+      <ChildBand Name="Child2" Top="182.1" Width="793.8" Height="22.68" CompleteToNRows="1"/>
+      <DataHeaderBand Name="DataHeader2" Top="128.74" Width="793.8" Height="22.68" RepeatOnEveryPage="true">
+        <TextObject Name="Text103" Left="623.7" Width="113.4" Height="22.68" CanBreak="false" Text="金额" HorzAlign="Center" VertAlign="Center" WordWrap="false" Font="微软雅黑, 10pt"/>
+        <TextObject Name="Text98" Left="56.7" Width="207.9" Height="22.68" CanBreak="false" Text="摘要" HorzAlign="Center" VertAlign="Center" WordWrap="false" Font="微软雅黑, 10pt"/>
+        <TextObject Name="Text99" Left="264.6" Width="151.2" Height="22.68" CanBreak="false" Text="项目" HorzAlign="Center" VertAlign="Center" WordWrap="false" Font="微软雅黑, 10pt"/>
+        <TextObject Name="Text100" Left="415.8" Width="75.6" Height="22.68" CanBreak="false" Text="单位" HorzAlign="Center" VertAlign="Center" WordWrap="false" Font="微软雅黑, 10pt"/>
+        <TextObject Name="Text101" Left="491.4" Width="75.6" Height="22.68" CanBreak="false" Text="单价" HorzAlign="Center" VertAlign="Center" WordWrap="false" Font="微软雅黑, 10pt"/>
+        <TextObject Name="Text102" Left="567" Width="56.7" Height="22.68" CanBreak="false" Text="数量" HorzAlign="Center" VertAlign="Center" WordWrap="false" Font="微软雅黑, 10pt"/>
+      </DataHeaderBand>
+      <DataFooterBand Name="DataFooter2" Top="208.78" Width="793.8" Height="22.68" RepeatOnEveryPage="true">
+        <TextObject Name="Text105" Left="623.7" Width="113.4" Height="22.68" CanBreak="false" Text="[Total2]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="￥" Format.PositivePattern="0" Format.NegativePattern="2" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="微软雅黑, 10pt"/>
+        <TextObject Name="Text104" Left="56.7" Width="567" Height="22.68" CanBreak="false" Text="合计金额（大写）：[BaseInfo.Amount]" VertAlign="Center" WordWrap="false" Font="微软雅黑, 10pt"/>
+      </DataFooterBand>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="235.46" Width="793.8" Height="90.72">
+      <TextObject Name="Text106" Left="56.7" Top="3.78" Width="680.4" Height="34.02" CanBreak="false" Text="备注：[BaseInfo.Description]" Font="微软雅黑, 9pt"/>
+      <TextObject Name="Text110" Left="604.8" Top="37.8" Width="132.3" Height="22.68" CanBreak="false" Text="第 [Page#] 页/共 [TotalPages#] 页" HorzAlign="Right" VertAlign="Bottom" WordWrap="false" Font="微软雅黑, 9pt"/>
+      <TextObject Name="Text107" Left="56.7" Top="37.8" Width="170.1" Height="22.68" CanBreak="false" Text="收款人：[BaseInfo.UserName]" VertAlign="Bottom" WordWrap="false" Font="微软雅黑, 9pt"/>
+      <TextObject Name="Text108" Left="226.8" Top="37.8" Width="189" Height="22.68" CanBreak="false" Text="付款人：（签章）" VertAlign="Bottom" WordWrap="false" Font="微软雅黑, 9pt"/>
+      <TextObject Name="Text109" Left="415.8" Top="37.8" Width="189" Height="22.68" CanBreak="false" Text="复核人：（签章）" VertAlign="Bottom" WordWrap="false" Font="微软雅黑, 9pt"/>
+    </PageFooterBand>
+    <OverlayBand Name="Overlay2" Top="330.18" Width="793.8" Height="374.22">
+      <TextObject Name="Text81" Left="56.7" Top="124.74" Width="680.4" Height="196.56" Border.Lines="All" Border.Style="Double" HorzAlign="Right" VertAlign="Bottom" Font="宋体, 9pt"/>
+      <LineObject Name="Line15" Left="264.6" Top="126.63" Height="134.19" Border.Style="Double"/>
+      <LineObject Name="Line16" Left="58.59" Top="147.42" Width="676.62" Border.Style="Double"/>
+      <LineObject Name="Line17" Left="58.59" Top="260.82" Width="676.62" Border.Style="Double"/>
+      <LineObject Name="Line18" Left="415.8" Top="126.63" Height="134.19" Border.Style="Double"/>
+      <LineObject Name="Line19" Left="491.4" Top="126.63" Height="134.19" Border.Style="Double"/>
+      <LineObject Name="Line20" Left="567" Top="126.63" Height="134.19" Border.Style="Double"/>
+      <LineObject Name="Line21" Left="623.7" Top="126.63" Height="156.87" Border.Style="Double"/>
+      <TextObject Name="Text82" Left="37.8" Top="124.74" Width="18.9" Height="158.76" CanBreak="false" Text="http://www.insight.com" HorzAlign="Center" VertAlign="Bottom" Angle="270" WordWrap="false"/>
+      <TextObject Name="Text83" Left="737.1" Top="124.74" Width="18.9" Height="158.76" CanBreak="false" Text="②   记   账   联" HorzAlign="Center" VertAlign="Bottom" Angle="90" WordWrap="false" Font="微软雅黑, 8pt"/>
+      <LineObject Name="Line22" Left="58.59" Top="283.5" Width="676.62"/>
+    </OverlayBand>
+  </ReportPage>
+  <ReportPage Name="Page3" PaperHeight="99" LeftMargin="0" TopMargin="0" RightMargin="0" BottomMargin="0">
+    <PageHeaderBand Name="PageHeader3" Width="793.8" Height="124.74">
+      <TextObject Name="Text111" Left="113.4" Top="37.8" Width="567" Height="37.8" CanBreak="false" Text="慧眼软件收款专用收据" HorzAlign="Center" VertAlign="Center" WordWrap="false" Font="微软雅黑, 24pt"/>
+      <LineObject Name="Line35" Left="226.8" Top="77.49" Width="340.2"/>
+      <LineObject Name="Line36" Left="226.8" Top="75.6" Width="340.2"/>
+      <TextObject Name="Text112" Left="585.9" Top="86.94" Width="151.2" Height="18.9" CanBreak="false" Text="[BaseInfo.ReceiptCode]" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="微软雅黑, 9pt"/>
+      <TextObject Name="Text113" Left="56.7" Top="86.94" Width="302.4" Height="18.9" CanBreak="false" Text="收款单位：北京慧眼软件有限公司" VertAlign="Center" WordWrap="false" Font="微软雅黑, 9pt"/>
+      <TextObject Name="Text114" Left="56.7" Top="105.84" Width="302.4" Height="18.9" CanBreak="false" Text="付款单位：[BaseInfo.ObjectName]" VertAlign="Center" WordWrap="false" Font="微软雅黑, 9pt"/>
+      <TextObject Name="Text115" Left="585.9" Top="105.84" Width="151.2" Height="18.9" CanBreak="false" Text="收款日期：[BaseInfo.CreateTime]" Format="Date" Format.Format="yyyy-MM-dd" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="微软雅黑, 9pt"/>
+      <BarcodeObject Name="Barcode4" Left="706.86" Top="15.12" Width="56.7" Height="56.7" AutoSize="false" DataColumn="BaseInfo.HashCode" ShowText="false" Barcode="QR Code" Barcode.ErrorCorrection="L" Barcode.Encoding="UTF8" Barcode.QuietZone="true"/>
+    </PageHeaderBand>
+    <DataBand Name="Data3" Top="155.42" Width="793.8" Height="22.68" AfterDataEvent="Fixed_PageRows3" DataSource="Table1">
+      <TextObject Name="Text122" Left="56.7" Width="207.9" Height="22.68" CanBreak="false" Text="[Detail.Summary]" VertAlign="Center" WordWrap="false" Font="微软雅黑, 9pt"/>
+      <TextObject Name="Text123" Left="264.6" Width="151.2" Height="22.68" CanBreak="false" Text="[Detail.ObjectName]" VertAlign="Center" WordWrap="false" Font="微软雅黑, 9pt"/>
+      <TextObject Name="Text124" Left="415.8" Width="75.6" Height="22.68" CanBreak="false" Text="[Detail.Units]" HorzAlign="Center" VertAlign="Center" WordWrap="false" Font="微软雅黑, 9pt"/>
+      <TextObject Name="Text125" Left="491.4" Width="75.6" Height="22.68" CanBreak="false" Text="[Detail.Price]" HideZeros="true" HorzAlign="Center" VertAlign="Center" WordWrap="false" Font="微软雅黑, 9pt"/>
+      <TextObject Name="Text126" Left="567" Width="56.7" Height="22.68" CanBreak="false" Text="[Detail.Counts]" HideZeros="true" HorzAlign="Center" VertAlign="Center" WordWrap="false" Font="微软雅黑, 9pt"/>
+      <TextObject Name="Text127" Left="623.7" Width="113.4" Height="22.68" CanBreak="false" Text="[Detail.Amount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="微软雅黑, 9pt"/>
+      <ChildBand Name="Child3" Top="182.1" Width="793.8" Height="22.68" CompleteToNRows="1"/>
+      <DataHeaderBand Name="DataHeader3" Top="128.74" Width="793.8" Height="22.68" RepeatOnEveryPage="true">
+        <TextObject Name="Text116" Left="56.7" Width="207.9" Height="22.68" CanBreak="false" Text="摘要" HorzAlign="Center" VertAlign="Center" WordWrap="false" Font="微软雅黑, 10pt"/>
+        <TextObject Name="Text117" Left="264.6" Width="151.2" Height="22.68" CanBreak="false" Text="项目" HorzAlign="Center" VertAlign="Center" WordWrap="false" Font="微软雅黑, 10pt"/>
+        <TextObject Name="Text118" Left="415.8" Width="75.6" Height="22.68" CanBreak="false" Text="单位" HorzAlign="Center" VertAlign="Center" WordWrap="false" Font="微软雅黑, 10pt"/>
+        <TextObject Name="Text119" Left="491.4" Width="75.6" Height="22.68" CanBreak="false" Text="单价" HorzAlign="Center" VertAlign="Center" WordWrap="false" Font="微软雅黑, 10pt"/>
+        <TextObject Name="Text120" Left="567" Width="56.7" Height="22.68" CanBreak="false" Text="数量" HorzAlign="Center" VertAlign="Center" WordWrap="false" Font="微软雅黑, 10pt"/>
+        <TextObject Name="Text121" Left="623.7" Width="113.4" Height="22.68" CanBreak="false" Text="金额" HorzAlign="Center" VertAlign="Center" WordWrap="false" Font="微软雅黑, 10pt"/>
+      </DataHeaderBand>
+      <DataFooterBand Name="DataFooter3" Top="208.78" Width="793.8" Height="22.68" RepeatOnEveryPage="true">
+        <TextObject Name="Text128" Left="56.7" Width="567" Height="22.68" CanBreak="false" Text="合计金额（大写）：[BaseInfo.Amount]" VertAlign="Center" WordWrap="false" Font="微软雅黑, 10pt"/>
+        <TextObject Name="Text129" Left="623.7" Width="113.4" Height="22.68" CanBreak="false" Text="[Total3]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="￥" Format.PositivePattern="0" Format.NegativePattern="2" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="微软雅黑, 10pt"/>
+      </DataFooterBand>
+    </DataBand>
+    <PageFooterBand Name="PageFooter3" Top="235.46" Width="793.8" Height="90.72">
+      <TextObject Name="Text130" Left="56.7" Top="37.8" Width="170.1" Height="22.68" CanBreak="false" Text="收款人：[BaseInfo.UserName]" VertAlign="Bottom" WordWrap="false" Font="微软雅黑, 9pt"/>
+      <TextObject Name="Text131" Left="226.8" Top="37.8" Width="189" Height="22.68" CanBreak="false" Text="付款人：（签章）" VertAlign="Bottom" WordWrap="false" Font="微软雅黑, 9pt"/>
+      <TextObject Name="Text132" Left="415.8" Top="37.8" Width="189" Height="22.68" CanBreak="false" Text="复核人：（签章）" VertAlign="Bottom" WordWrap="false" Font="微软雅黑, 9pt"/>
+      <TextObject Name="Text133" Left="604.8" Top="37.8" Width="132.3" Height="22.68" CanBreak="false" Text="第 [Page#] 页/共 [TotalPages#] 页" HorzAlign="Right" VertAlign="Bottom" WordWrap="false" Font="微软雅黑, 9pt"/>
+      <TextObject Name="Text134" Left="56.7" Top="3.78" Width="680.4" Height="34.02" CanBreak="false" Text="备注：[BaseInfo.Description]" Font="微软雅黑, 9pt"/>
+    </PageFooterBand>
+    <OverlayBand Name="Overlay3" Top="330.18" Width="793.8" Height="374.22">
+      <TextObject Name="Text84" Left="56.7" Top="124.74" Width="680.4" Height="196.56" Border.Lines="All" Border.Style="Double" HorzAlign="Right" VertAlign="Bottom" Font="宋体, 9pt"/>
+      <LineObject Name="Line23" Left="264.6" Top="126.63" Height="134.19" Border.Style="Double"/>
+      <LineObject Name="Line24" Left="58.59" Top="147.42" Width="676.62" Border.Style="Double"/>
+      <LineObject Name="Line25" Left="58.59" Top="260.82" Width="676.62" Border.Style="Double"/>
+      <LineObject Name="Line26" Left="415.8" Top="126.63" Height="134.19" Border.Style="Double"/>
+      <LineObject Name="Line27" Left="491.4" Top="126.63" Height="134.19" Border.Style="Double"/>
+      <LineObject Name="Line28" Left="567" Top="126.63" Height="134.19" Border.Style="Double"/>
+      <LineObject Name="Line29" Left="623.7" Top="126.63" Height="156.87" Border.Style="Double"/>
+      <TextObject Name="Text85" Left="37.8" Top="124.74" Width="18.9" Height="158.76" CanBreak="false" Text="http://www.insight.com" HorzAlign="Center" VertAlign="Bottom" Angle="270" WordWrap="false"/>
+      <TextObject Name="Text86" Left="737.1" Top="124.74" Width="18.9" Height="158.76" CanBreak="false" Text="③   存   根   联" HorzAlign="Center" VertAlign="Bottom" Angle="90" WordWrap="false" Font="微软雅黑, 8pt"/>
+      <LineObject Name="Line30" Left="58.59" Top="283.5" Width="676.62"/>
+    </OverlayBand>
+  </ReportPage>
+</Report>

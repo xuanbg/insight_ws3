@@ -1,0 +1,395 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{132CE7B2-A22C-430E-947C-DB629960AE7A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Insight.WS.Server.Common</RootNamespace>
+    <AssemblyName>Common</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Release\EntityFramework.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Release\EntityFramework.SqlServer.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ABS_Advance.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ABS_Advance_Detail.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ABS_Advance_Record.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ABS_Clearing.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ABS_Clearing_Attachs.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ABS_Clearing_Check.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ABS_Clearing_Item.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ABS_Clearing_Pay.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ABS_Contract.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ABS_Contract_Attachs.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ABS_Contract_FundPerform.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ABS_Contract_FundPlan.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ABS_Contract_GoodsPerform.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ABS_Contract_GoodsPlan.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ABS_Contract_Subjects.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ABS_Delivery.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ABS_Delivery_Attachs.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ABS_Delivery_Item.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ABS_StockCapital.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ABS_StockDetail.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ABS_Storage_Detail.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ABS_Storage_Location.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ABS_Storage_Summary.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Advance.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BASE_Category.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BIZ_Borrowing_Apply.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BIZ_Refund_Apply.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BIZ_Refund_Detail.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BIZ_Reimburse_Apply.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BIZ_Reimburse_Detail.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BIZ_Travel_Apply.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BIZ_Travel_Plan.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ExtendClass\BuildReport.cs" />
+    <Compile Include="ExtendClass\Services.cs" />
+    <Compile Include="Function\ContractDAL.cs" />
+    <Compile Include="Function\ReportDAL.cs" />
+    <Compile Include="Function\CommonDAL.cs" />
+    <Compile Include="Function\MasterDataDAL.cs" />
+    <Compile Include="ExtendClass\OnlineManage.cs" />
+    <Compile Include="ImageData.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterData.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterData_Merger.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterData_Property.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MDD_Binary.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MDD_Character.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MDD_Date.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MDD_Numeric.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MDG_Contact.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MDG_Customer.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MDG_Dictionary.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MDG_Employee.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MDG_Expense.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MDG_Material.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MDG_Supplier.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MDR_ET.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MDR_MU.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MDS_Contact_Info.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ExtendClass\Session.cs" />
+    <Compile Include="Function\SqlHelper.cs" />
+    <Compile Include="ExtendClass\UpdateFile.cs" />
+    <Compile Include="ReportSchedular.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SYS_Alert_Message.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SYS_Alert_Rules.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SYS_Alert_Send.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SYS_Alert_Target.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SYS_Allot_Record.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SYS_Code_Allot.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SYS_Code_Record.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SYS_Code_Scheme.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SYS_Interface.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SYS_Module.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SYS_ModuleAction.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SYS_ModuleGroup.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SYS_ModuleParam.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SYS_Organization.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SYS_OrgMember.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SYS_OrgMerger.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SYS_Report_Definition.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SYS_Report_Entity.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SYS_Report_Instances.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SYS_Report_IU.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SYS_Report_Member.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SYS_Report_Period.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SYS_Report_Rules.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SYS_Report_Schedular.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SYS_Report_Templates.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SYS_Role.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SYS_RolePerm_Action.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SYS_RolePerm_Data.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SYS_RolePerm_DataAbs.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SYS_Role_Title.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SYS_Role_User.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SYS_Role_UserGroup.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SYS_User.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SYS_UserGroup.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SYS_UserGroupMember.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WSModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WSModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WSModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WSModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WSModel.edmx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="WSModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>WSModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="WSModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>WSModel.edmx</DependentUpon>
+      <LastGenOutput>WSModel.Context.cs</LastGenOutput>
+    </None>
+    <None Include="WSModel.edmx.diagram">
+      <DependentUpon>WSModel.edmx</DependentUpon>
+    </None>
+    <None Include="WSModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>WSModel.edmx</DependentUpon>
+      <LastGenOutput>WSModel.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Tools\FastReport\FastReport.csproj">
+      <Project>{7c64fbdc-25e5-47ff-b6f8-443256745e2d}</Project>
+      <Name>FastReport</Name>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Tools\GZipEncoder\GZipEncoder.csproj">
+      <Project>{3eb736c4-62ea-4887-b040-948b13ef29b9}</Project>
+      <Name>GZipEncoder</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

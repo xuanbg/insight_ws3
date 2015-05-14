@@ -1,0 +1,609 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Report" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="CustomBinding_IReport_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1">
+        </msb:BinaryEncoding>
+        <msf:Streamed xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+        </msf:Streamed>
+        <wsaw:UsingAddressing>
+        </wsaw:UsingAddressing>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/System.Data" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IReport_BulidReport_InputMessage">
+    <wsdl:part name="parameters" element="tns:BulidReport" />
+  </wsdl:message>
+  <wsdl:message name="IReport_BulidReport_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BulidReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="IReport_GetMyReports_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMyReports" />
+  </wsdl:message>
+  <wsdl:message name="IReport_GetMyReports_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMyReportsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IReport_GetInstances_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetInstances" />
+  </wsdl:message>
+  <wsdl:message name="IReport_GetInstances_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetInstancesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IReport_GetMyReportEntitys_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMyReportEntitys" />
+  </wsdl:message>
+  <wsdl:message name="IReport_GetMyReportEntitys_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMyReportEntitysResponse" />
+  </wsdl:message>
+  <wsdl:message name="IReport_GetDefinition_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDefinition" />
+  </wsdl:message>
+  <wsdl:message name="IReport_GetDefinition_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDefinitionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IReport_GetReportInstance_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetReportInstance" />
+  </wsdl:message>
+  <wsdl:message name="IReport_GetReportInstance_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetReportInstanceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IReport_AddInstance_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddInstance" />
+  </wsdl:message>
+  <wsdl:message name="IReport_AddInstance_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddInstanceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IReport_DeleteReportIU_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteReportIU" />
+  </wsdl:message>
+  <wsdl:message name="IReport_DeleteReportIU_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteReportIUResponse" />
+  </wsdl:message>
+  <wsdl:message name="IReport_GetReports_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetReports" />
+  </wsdl:message>
+  <wsdl:message name="IReport_GetReports_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetReportsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IReport_GetReportRules_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetReportRules" />
+  </wsdl:message>
+  <wsdl:message name="IReport_GetReportRules_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetReportRulesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IReport_GetReportEntitys_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetReportEntitys" />
+  </wsdl:message>
+  <wsdl:message name="IReport_GetReportEntitys_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetReportEntitysResponse" />
+  </wsdl:message>
+  <wsdl:message name="IReport_GetReportMembers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetReportMembers" />
+  </wsdl:message>
+  <wsdl:message name="IReport_GetReportMembers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetReportMembersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IReport_GetReportRule_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetReportRule" />
+  </wsdl:message>
+  <wsdl:message name="IReport_GetReportRule_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetReportRuleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IReport_GetReportEntity_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetReportEntity" />
+  </wsdl:message>
+  <wsdl:message name="IReport_GetReportEntity_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetReportEntityResponse" />
+  </wsdl:message>
+  <wsdl:message name="IReport_GetReportMember_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetReportMember" />
+  </wsdl:message>
+  <wsdl:message name="IReport_GetReportMember_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetReportMemberResponse" />
+  </wsdl:message>
+  <wsdl:message name="IReport_AddDefinition_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddDefinition" />
+  </wsdl:message>
+  <wsdl:message name="IReport_AddDefinition_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddDefinitionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IReport_EditDefinition_InputMessage">
+    <wsdl:part name="parameters" element="tns:EditDefinition" />
+  </wsdl:message>
+  <wsdl:message name="IReport_EditDefinition_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EditDefinitionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IReport_DelReport_InputMessage">
+    <wsdl:part name="parameters" element="tns:DelReport" />
+  </wsdl:message>
+  <wsdl:message name="IReport_DelReport_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DelReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="IReport_GetTemplates_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTemplates" />
+  </wsdl:message>
+  <wsdl:message name="IReport_GetTemplates_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTemplatesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IReport_GetTemplate_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTemplate" />
+  </wsdl:message>
+  <wsdl:message name="IReport_GetTemplate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTemplateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IReport_CopyTemplet_InputMessage">
+    <wsdl:part name="parameters" element="tns:CopyTemplet" />
+  </wsdl:message>
+  <wsdl:message name="IReport_CopyTemplet_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CopyTempletResponse" />
+  </wsdl:message>
+  <wsdl:message name="IReport_AddTemplet_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddTemplet" />
+  </wsdl:message>
+  <wsdl:message name="IReport_AddTemplet_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddTempletResponse" />
+  </wsdl:message>
+  <wsdl:message name="IReport_EditTemplets_InputMessage">
+    <wsdl:part name="parameters" element="tns:EditTemplets" />
+  </wsdl:message>
+  <wsdl:message name="IReport_EditTemplets_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EditTempletsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IReport_UpdateContent_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateContent" />
+  </wsdl:message>
+  <wsdl:message name="IReport_UpdateContent_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateContentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IReport_DelTemplets_InputMessage">
+    <wsdl:part name="parameters" element="tns:DelTemplets" />
+  </wsdl:message>
+  <wsdl:message name="IReport_DelTemplets_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DelTempletsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IReport_GetRules_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRules" />
+  </wsdl:message>
+  <wsdl:message name="IReport_GetRules_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRulesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IReport_GetRule_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRule" />
+  </wsdl:message>
+  <wsdl:message name="IReport_GetRule_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRuleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IReport_AddRule_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddRule" />
+  </wsdl:message>
+  <wsdl:message name="IReport_AddRule_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddRuleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IReport_EditRule_InputMessage">
+    <wsdl:part name="parameters" element="tns:EditRule" />
+  </wsdl:message>
+  <wsdl:message name="IReport_EditRule_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EditRuleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IReport_DelRule_InputMessage">
+    <wsdl:part name="parameters" element="tns:DelRule" />
+  </wsdl:message>
+  <wsdl:message name="IReport_DelRule_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DelRuleResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IReport">
+    <wsdl:operation name="BulidReport">
+      <wsdl:input wsaw:Action="http://tempuri.org/IReport/BulidReport" message="tns:IReport_BulidReport_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IReport/BulidReportResponse" message="tns:IReport_BulidReport_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMyReports">
+      <wsdl:input wsaw:Action="http://tempuri.org/IReport/GetMyReports" message="tns:IReport_GetMyReports_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IReport/GetMyReportsResponse" message="tns:IReport_GetMyReports_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInstances">
+      <wsdl:input wsaw:Action="http://tempuri.org/IReport/GetInstances" message="tns:IReport_GetInstances_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IReport/GetInstancesResponse" message="tns:IReport_GetInstances_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMyReportEntitys">
+      <wsdl:input wsaw:Action="http://tempuri.org/IReport/GetMyReportEntitys" message="tns:IReport_GetMyReportEntitys_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IReport/GetMyReportEntitysResponse" message="tns:IReport_GetMyReportEntitys_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDefinition">
+      <wsdl:input wsaw:Action="http://tempuri.org/IReport/GetDefinition" message="tns:IReport_GetDefinition_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IReport/GetDefinitionResponse" message="tns:IReport_GetDefinition_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReportInstance">
+      <wsdl:input wsaw:Action="http://tempuri.org/IReport/GetReportInstance" message="tns:IReport_GetReportInstance_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IReport/GetReportInstanceResponse" message="tns:IReport_GetReportInstance_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddInstance">
+      <wsdl:input wsaw:Action="http://tempuri.org/IReport/AddInstance" message="tns:IReport_AddInstance_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IReport/AddInstanceResponse" message="tns:IReport_AddInstance_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteReportIU">
+      <wsdl:input wsaw:Action="http://tempuri.org/IReport/DeleteReportIU" message="tns:IReport_DeleteReportIU_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IReport/DeleteReportIUResponse" message="tns:IReport_DeleteReportIU_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReports">
+      <wsdl:input wsaw:Action="http://tempuri.org/IReport/GetReports" message="tns:IReport_GetReports_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IReport/GetReportsResponse" message="tns:IReport_GetReports_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReportRules">
+      <wsdl:input wsaw:Action="http://tempuri.org/IReport/GetReportRules" message="tns:IReport_GetReportRules_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IReport/GetReportRulesResponse" message="tns:IReport_GetReportRules_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReportEntitys">
+      <wsdl:input wsaw:Action="http://tempuri.org/IReport/GetReportEntitys" message="tns:IReport_GetReportEntitys_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IReport/GetReportEntitysResponse" message="tns:IReport_GetReportEntitys_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReportMembers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IReport/GetReportMembers" message="tns:IReport_GetReportMembers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IReport/GetReportMembersResponse" message="tns:IReport_GetReportMembers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReportRule">
+      <wsdl:input wsaw:Action="http://tempuri.org/IReport/GetReportRule" message="tns:IReport_GetReportRule_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IReport/GetReportRuleResponse" message="tns:IReport_GetReportRule_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReportEntity">
+      <wsdl:input wsaw:Action="http://tempuri.org/IReport/GetReportEntity" message="tns:IReport_GetReportEntity_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IReport/GetReportEntityResponse" message="tns:IReport_GetReportEntity_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReportMember">
+      <wsdl:input wsaw:Action="http://tempuri.org/IReport/GetReportMember" message="tns:IReport_GetReportMember_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IReport/GetReportMemberResponse" message="tns:IReport_GetReportMember_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddDefinition">
+      <wsdl:input wsaw:Action="http://tempuri.org/IReport/AddDefinition" message="tns:IReport_AddDefinition_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IReport/AddDefinitionResponse" message="tns:IReport_AddDefinition_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EditDefinition">
+      <wsdl:input wsaw:Action="http://tempuri.org/IReport/EditDefinition" message="tns:IReport_EditDefinition_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IReport/EditDefinitionResponse" message="tns:IReport_EditDefinition_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DelReport">
+      <wsdl:input wsaw:Action="http://tempuri.org/IReport/DelReport" message="tns:IReport_DelReport_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IReport/DelReportResponse" message="tns:IReport_DelReport_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTemplates">
+      <wsdl:input wsaw:Action="http://tempuri.org/IReport/GetTemplates" message="tns:IReport_GetTemplates_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IReport/GetTemplatesResponse" message="tns:IReport_GetTemplates_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTemplate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IReport/GetTemplate" message="tns:IReport_GetTemplate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IReport/GetTemplateResponse" message="tns:IReport_GetTemplate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CopyTemplet">
+      <wsdl:input wsaw:Action="http://tempuri.org/IReport/CopyTemplet" message="tns:IReport_CopyTemplet_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IReport/CopyTempletResponse" message="tns:IReport_CopyTemplet_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddTemplet">
+      <wsdl:input wsaw:Action="http://tempuri.org/IReport/AddTemplet" message="tns:IReport_AddTemplet_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IReport/AddTempletResponse" message="tns:IReport_AddTemplet_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EditTemplets">
+      <wsdl:input wsaw:Action="http://tempuri.org/IReport/EditTemplets" message="tns:IReport_EditTemplets_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IReport/EditTempletsResponse" message="tns:IReport_EditTemplets_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateContent">
+      <wsdl:input wsaw:Action="http://tempuri.org/IReport/UpdateContent" message="tns:IReport_UpdateContent_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IReport/UpdateContentResponse" message="tns:IReport_UpdateContent_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DelTemplets">
+      <wsdl:input wsaw:Action="http://tempuri.org/IReport/DelTemplets" message="tns:IReport_DelTemplets_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IReport/DelTempletsResponse" message="tns:IReport_DelTemplets_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRules">
+      <wsdl:input wsaw:Action="http://tempuri.org/IReport/GetRules" message="tns:IReport_GetRules_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IReport/GetRulesResponse" message="tns:IReport_GetRules_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRule">
+      <wsdl:input wsaw:Action="http://tempuri.org/IReport/GetRule" message="tns:IReport_GetRule_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IReport/GetRuleResponse" message="tns:IReport_GetRule_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddRule">
+      <wsdl:input wsaw:Action="http://tempuri.org/IReport/AddRule" message="tns:IReport_AddRule_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IReport/AddRuleResponse" message="tns:IReport_AddRule_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EditRule">
+      <wsdl:input wsaw:Action="http://tempuri.org/IReport/EditRule" message="tns:IReport_EditRule_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IReport/EditRuleResponse" message="tns:IReport_EditRule_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DelRule">
+      <wsdl:input wsaw:Action="http://tempuri.org/IReport/DelRule" message="tns:IReport_DelRule_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IReport/DelRuleResponse" message="tns:IReport_DelRule_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CustomBinding_IReport" type="tns:IReport">
+    <wsp:PolicyReference URI="#CustomBinding_IReport_policy">
+    </wsp:PolicyReference>
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="BulidReport">
+      <soap12:operation soapAction="http://tempuri.org/IReport/BulidReport" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMyReports">
+      <soap12:operation soapAction="http://tempuri.org/IReport/GetMyReports" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInstances">
+      <soap12:operation soapAction="http://tempuri.org/IReport/GetInstances" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMyReportEntitys">
+      <soap12:operation soapAction="http://tempuri.org/IReport/GetMyReportEntitys" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDefinition">
+      <soap12:operation soapAction="http://tempuri.org/IReport/GetDefinition" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReportInstance">
+      <soap12:operation soapAction="http://tempuri.org/IReport/GetReportInstance" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddInstance">
+      <soap12:operation soapAction="http://tempuri.org/IReport/AddInstance" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteReportIU">
+      <soap12:operation soapAction="http://tempuri.org/IReport/DeleteReportIU" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReports">
+      <soap12:operation soapAction="http://tempuri.org/IReport/GetReports" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReportRules">
+      <soap12:operation soapAction="http://tempuri.org/IReport/GetReportRules" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReportEntitys">
+      <soap12:operation soapAction="http://tempuri.org/IReport/GetReportEntitys" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReportMembers">
+      <soap12:operation soapAction="http://tempuri.org/IReport/GetReportMembers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReportRule">
+      <soap12:operation soapAction="http://tempuri.org/IReport/GetReportRule" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReportEntity">
+      <soap12:operation soapAction="http://tempuri.org/IReport/GetReportEntity" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReportMember">
+      <soap12:operation soapAction="http://tempuri.org/IReport/GetReportMember" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddDefinition">
+      <soap12:operation soapAction="http://tempuri.org/IReport/AddDefinition" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditDefinition">
+      <soap12:operation soapAction="http://tempuri.org/IReport/EditDefinition" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DelReport">
+      <soap12:operation soapAction="http://tempuri.org/IReport/DelReport" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTemplates">
+      <soap12:operation soapAction="http://tempuri.org/IReport/GetTemplates" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTemplate">
+      <soap12:operation soapAction="http://tempuri.org/IReport/GetTemplate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CopyTemplet">
+      <soap12:operation soapAction="http://tempuri.org/IReport/CopyTemplet" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddTemplet">
+      <soap12:operation soapAction="http://tempuri.org/IReport/AddTemplet" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditTemplets">
+      <soap12:operation soapAction="http://tempuri.org/IReport/EditTemplets" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateContent">
+      <soap12:operation soapAction="http://tempuri.org/IReport/UpdateContent" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DelTemplets">
+      <soap12:operation soapAction="http://tempuri.org/IReport/DelTemplets" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRules">
+      <soap12:operation soapAction="http://tempuri.org/IReport/GetRules" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRule">
+      <soap12:operation soapAction="http://tempuri.org/IReport/GetRule" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddRule">
+      <soap12:operation soapAction="http://tempuri.org/IReport/AddRule" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditRule">
+      <soap12:operation soapAction="http://tempuri.org/IReport/EditRule" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DelRule">
+      <soap12:operation soapAction="http://tempuri.org/IReport/DelRule" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Report">
+    <wsdl:port name="CustomBinding_IReport" binding="tns:CustomBinding_IReport">
+      <soap12:address location="net.tcp://localhost:7210/Report" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:7210/Report</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

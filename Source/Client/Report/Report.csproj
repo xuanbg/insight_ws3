@@ -1,0 +1,224 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A30C7ADF-33CD-4208-AFE6-ACB1B62594D4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Insight.WS.Client.Platform.Report</RootNamespace>
+    <AssemblyName>Report</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\Debug\Client\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\Release\Client\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Data.v14.1, Version=14.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Utils.v14.1, Version=14.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraBars.v14.1, Version=14.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraEditors.v14.1, Version=14.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraGrid.v14.1, Version=14.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraNavBar.v14.1, Version=14.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraTreeList.v14.1, Version=14.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraWizard.v14.1, Version=14.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Dialog\InstantReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog\InstantReport.Designer.cs">
+      <DependentUpon>InstantReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\CopyTemplet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog\CopyTemplet.designer.cs">
+      <DependentUpon>CopyTemplet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\EditTemplet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog\EditTemplet.Designer.cs">
+      <DependentUpon>EditTemplet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\EditRule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog\EditRule.Designer.cs">
+      <DependentUpon>EditRule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\AlarmRules.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\AlarmRules.Designer.cs">
+      <DependentUpon>AlarmRules.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\RulesManage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\RulesManage.Designer.cs">
+      <DependentUpon>RulesManage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\ReportWizard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog\ReportWizard.Designer.cs">
+      <DependentUpon>ReportWizard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\MyReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\MyReport.Designer.cs">
+      <DependentUpon>MyReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Form\ReportManage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\ReportManage.designer.cs">
+      <DependentUpon>ReportManage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\TempletManage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\TempletManage.Designer.cs">
+      <DependentUpon>TempletManage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\Service\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Dialog\InstantReport.resx">
+      <DependentUpon>InstantReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialog\CopyTemplet.resx">
+      <DependentUpon>CopyTemplet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialog\EditTemplet.resx">
+      <DependentUpon>EditTemplet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialog\EditRule.resx">
+      <DependentUpon>EditRule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\AlarmRules.resx">
+      <DependentUpon>AlarmRules.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\RulesManage.resx">
+      <DependentUpon>RulesManage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialog\ReportWizard.resx">
+      <DependentUpon>ReportWizard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\MyReport.resx">
+      <DependentUpon>MyReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\ReportManage.resx">
+      <DependentUpon>ReportManage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\TempletManage.resx">
+      <DependentUpon>TempletManage.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\DataSources\Insight.WS.Client.Common.MainService.SYS_Report_Definition.datasource" />
+    <None Include="Properties\DataSources\Insight.WS.Client.Common.MainService.SYS_Report_Instances.datasource" />
+    <None Include="Properties\DataSources\Insight.WS.Client.Common.MainService.SYS_Report_Rules.datasource" />
+    <None Include="Properties\DataSources\Insight.WS.Client.Common.MainService.SYS_Report_Templates.datasource" />
+    <None Include="Properties\DataSources\Insight.WS.Client.Common.Service.SYS_Report_IU.datasource" />
+    <None Include="Properties\DataSources\System.Data.DataTable.datasource" />
+    <None Include="Service References\Service\Arrays1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Service\Insight.WS.Server.Common1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Service\SERP.Server.Common1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Service\service.wsdl" />
+    <None Include="Service References\Service\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Service\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Service\System.Data.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\Service\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Service\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Service\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Service\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Tools\FastReport\FastReport.csproj">
+      <Project>{7c64fbdc-25e5-47ff-b6f8-443256745e2d}</Project>
+      <Name>FastReport</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{7c8ac27e-e640-4403-af4d-5b62c6c55826}</Project>
+      <Name>Common</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
