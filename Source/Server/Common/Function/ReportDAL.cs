@@ -12,6 +12,31 @@ namespace Insight.WS.Server.Common
     {
 
         /// <summary>
+        /// 获取任务、生成报表并保存
+        /// </summary>
+        /// <returns>bool 是否完成当前任务</returns>
+        public static bool Build()
+        {
+            var task = GetTask();
+            var obj = new List<SYS_Report_Instances>();
+            string temp = null;
+            var i = 0;
+
+            foreach (var s in task)
+            {
+                temp = temp ?? GetTemplate(s.TemplateId).Content;
+                obj.Add(BulidReport(s.ReportId, s.StartDate, s.EndDate, s.DeptName, "Insight WS", s.DeptId, s.UserId, temp));
+                i++;
+                if (i < task.Count && s.SchedularId == task[i].SchedularId) continue;
+
+                SaveInstances(obj, s.NextDate, s.SchedularId);
+                obj.Clear();
+                temp = null;
+            }
+            return true;
+        }
+
+        /// <summary>
         /// 获取报表生成任务
         /// </summary>
         /// <returns></returns>

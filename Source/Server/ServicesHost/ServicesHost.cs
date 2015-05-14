@@ -40,7 +40,7 @@ namespace Insight.WS.Server
             var om = new OnlineManage();
 
             // 生成自动报表
-            var td = new System.Threading.Thread(delegate() { _Finish = BuildReport.Build(); });
+            var td = new System.Threading.Thread(delegate() { _Finish = ReportDAL.Build(); });
             td.Start();
 
             // 启动WCF服务主机
@@ -70,7 +70,7 @@ namespace Insight.WS.Server
             if (!_Finish) return;
 
             _Finish = false;
-            _Finish = BuildReport.Build();
+            _Finish = ReportDAL.Build();
         }
 
         #endregion
