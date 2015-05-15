@@ -48,7 +48,7 @@ namespace Insight.WS.Client.Common
         /// </summary>
         /// <param name="mpl"></param>
         /// <param name="mps"></param>
-        protected List<SYS_ModuleParam> UpdateParameter(List<SYS_ModuleParam> mpl, string[][] mps)
+        protected List<SYS_ModuleParam> UpdateParameter(List<SYS_ModuleParam> mpl, IEnumerable<string[]> mps)
         {
             foreach (var mp in mps)
             {
