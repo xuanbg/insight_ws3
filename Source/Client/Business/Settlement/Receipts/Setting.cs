@@ -121,17 +121,20 @@ namespace Insight.WS.Client.Business.Settlement.Receipt
         /// </summary>
         protected override void Confirm_Click(object sender, EventArgs e)
         {
-            string[][] mps = { new[]{ "EEE681A7-BCCF-4AFF-909A-161CFFC184D4", "抹零模式", cmbWipeLevel.SelectedIndex.ToString()},
-                               new[]{ "2BFABFD1-4B70-4DFC-9DC0-8CBAE8422545", "抹零方式", cmbWipeType.SelectedIndex.ToString()},
-                               new[]{ "3773961E-30A3-400C-9497-C616E0AD38E3", "涉密等级", lokSecrecy.EditValue == null ? null : lokSecrecy.EditValue.ToString()},
-                               new[]{ "212864FE-71CF-4838-AE55-1991D117B061", "默认结算方式", lokDefault.EditValue == null ? null : lokDefault.EditValue.ToString()},
-                               new[]{ "247F6E2B-8AD3-43C3-AA32-7748507102E0", "结账流程", grlCheckWF.EditValue == null ? null : grlCheckWF.EditValue.ToString()},
-                               new[]{ "8BC6C0B7-EEE5-4AD2-B1D7-086CFA92C54F", "收据打印模板", grlReceiptT.EditValue == null ? null : grlReceiptT.EditValue.ToString()},
-                               new[]{ "29A890C9-0E08-4471-99CF-358011B9A94C", "付款单打印模板", grlPaymentT.EditValue == null ? null : grlPaymentT.EditValue.ToString()},
-                               new[]{ "4D897D4C-8982-429D-8810-0EFD396A4A02", "结账单打印模板", grlCheckT.EditValue == null ? null : grlCheckT.EditValue.ToString()},
-                               new[]{ "DD68AA9B-9893-4774-93A3-06082A436E55", "收据编码方案", grlReceiptS.EditValue == null ? null : grlReceiptS.EditValue.ToString()},
-                               new[]{ "1B03C4EA-61CA-4910-AC7F-5443FB43D816", "付款单编码方案", grlPaymentS.EditValue == null ? null : grlPaymentS.EditValue.ToString()},
-                               new[]{ "C8C8AA66-41A6-4D25-AF9D-787AAF60DA0F", "结账单编码方案", grlCheckS.EditValue == null ? null : grlCheckS.EditValue.ToString()}};
+            var mps = new[]
+            {
+                new[] {"EEE681A7-BCCF-4AFF-909A-161CFFC184D4", "抹零模式", cmbWipeLevel.SelectedIndex.ToString()},
+                new[] {"2BFABFD1-4B70-4DFC-9DC0-8CBAE8422545", "抹零方式", cmbWipeType.SelectedIndex.ToString()},
+                new[] {"3773961E-30A3-400C-9497-C616E0AD38E3", "涉密等级", lokSecrecy.EditValue == null ? null : lokSecrecy.EditValue.ToString()},
+                new[] {"212864FE-71CF-4838-AE55-1991D117B061", "默认结算方式", lokDefault.EditValue == null ? null : lokDefault.EditValue.ToString()},
+                new[] {"247F6E2B-8AD3-43C3-AA32-7748507102E0", "结账流程", grlCheckWF.EditValue == null ? null : grlCheckWF.EditValue.ToString()},
+                new[] {"8BC6C0B7-EEE5-4AD2-B1D7-086CFA92C54F", "收据打印模板", grlReceiptT.EditValue == null ? null : grlReceiptT.EditValue.ToString()},
+                new[] {"29A890C9-0E08-4471-99CF-358011B9A94C", "付款单打印模板", grlPaymentT.EditValue == null ? null : grlPaymentT.EditValue.ToString()},
+                new[] {"4D897D4C-8982-429D-8810-0EFD396A4A02", "结账单打印模板", grlCheckT.EditValue == null ? null : grlCheckT.EditValue.ToString()},
+                new[] {"DD68AA9B-9893-4774-93A3-06082A436E55", "收据编码方案", grlReceiptS.EditValue == null ? null : grlReceiptS.EditValue.ToString()},
+                new[] {"1B03C4EA-61CA-4910-AC7F-5443FB43D816", "付款单编码方案", grlPaymentS.EditValue == null ? null : grlPaymentS.EditValue.ToString()},
+                new[] {"C8C8AA66-41A6-4D25-AF9D-787AAF60DA0F", "结账单编码方案", grlCheckS.EditValue == null ? null : grlCheckS.EditValue.ToString()}
+            };
             Parameters = UpdateParameter(Parameters, mps);
             DialogResult = DialogResult.OK;
         }
