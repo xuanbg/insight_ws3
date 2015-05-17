@@ -119,6 +119,12 @@
     <Compile Include="MainForm\Locked.Designer.cs">
       <DependentUpon>Locked.cs</DependentUpon>
     </Compile>
+    <Compile Include="MainForm\Waiting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm\Waiting.Designer.cs">
+      <DependentUpon>Waiting.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm\PrintSet.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -206,6 +212,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm\Locked.resx">
       <DependentUpon>Locked.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm\Waiting.resx">
+      <DependentUpon>Waiting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm\PrintSet.resx">
       <DependentUpon>PrintSet.cs</DependentUpon>

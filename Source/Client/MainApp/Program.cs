@@ -27,36 +27,21 @@ namespace Insight.WS.Client.MainApp
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            // 初始化WCF参数
-            _Binding = new CustomBinding
-            {
-                SendTimeout = TimeSpan.FromSeconds(600),
-                ReceiveTimeout = TimeSpan.FromSeconds(600)
-            };
-            var encoder = new BinaryMessageEncodingBindingElement
-            {
-                ReaderQuotas =
-                {
-                    MaxArrayLength = 65536,
-                    MaxStringContentLength = 67108864
-                }
-            };
+            // 初始化CustomBinding参数
+            var encoder = new BinaryMessageEncodingBindingElement { ReaderQuotas = { MaxArrayLength = 67108864, MaxStringContentLength = 67108864 } };
+            var transport = new TcpTransportBindingElement { MaxReceivedMessageSize = 1073741824, TransferMode = TransferMode.Streamed };
+            _Binding = new CustomBinding { SendTimeout = TimeSpan.FromSeconds(600), ReceiveTimeout = TimeSpan.FromSeconds(600) };
             if (Config.IsCompres())
             {
                 var gZipEncode = new GZipMessageEncodingBindingElement(encoder);
-                _Binding.Elements.Add(gZipEncode);
+                _Binding.Elements.AddRange(gZipEncode, transport);
             }
             else
             {
-                _Binding.Elements.Add(encoder);
+                _Binding.Elements.AddRange(encoder, transport);
             }
-            var transport = new TcpTransportBindingElement
-            {
-                MaxReceivedMessageSize = 2147483647,
-                TransferMode = TransferMode.Streamed
-            };
-            _Binding.Elements.Add(transport);
 
+            // 打开登录对话框
             var login = new Login { Binding = _Binding };
             if (login.ShowDialog() == DialogResult.OK)
             {

@@ -68,7 +68,7 @@ namespace Insight.WS.Client.MainApp
                 MachineId = General.GetHash(General.GetCpuId() + General.GetMbId())
             };
 
-            // 初始化WCF参数
+            // 初始化EndpointAddress参数
             _Address = new EndpointAddress(Session.BaseAddress + "Login");
 
             if (CheckUpdate())

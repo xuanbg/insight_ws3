@@ -73,7 +73,7 @@ namespace Insight.WS.Server.Common
         /// <param name="MaxStringContent">最大字符串长度（默认64M）</param>
         /// <param name="Send">发送超时（默认600秒）</param>
         /// <param name="Receive">接收超时（默认600秒）</param>
-        public Services(bool IsCompres, int MaxReceivedMessage = 2147483647, int MaxArray = 65536, int MaxStringContent = 67108864, int Send = 600, int Receive = 600)
+        public Services(bool IsCompres, int MaxReceivedMessage = 1073741824, int MaxArray = 67108864, int MaxStringContent = 67108864, int Send = 600, int Receive = 600)
         {
             MaxReceivedMessageSize = MaxReceivedMessage;
             MaxArrayLength = MaxArray;
@@ -81,7 +81,7 @@ namespace Insight.WS.Server.Common
             SendTimeout = Send;
             ReceiveTimeout = Receive;
 
-            InitBinding(IsCompres);
+            InitCustomBinding(IsCompres);
         }
 
         #endregion
@@ -130,37 +130,21 @@ namespace Insight.WS.Server.Common
         /// 初始化自定义服务绑定
         /// </summary>
         /// <param name="IsCompres">是否压缩传输</param>
-        private void InitBinding(bool IsCompres)
+        private void InitCustomBinding(bool IsCompres)
         {
             // 初始化WCF参数
-            Binding = new CustomBinding
-            {
-                SendTimeout = TimeSpan.FromSeconds(SendTimeout),
-                ReceiveTimeout = TimeSpan.FromSeconds(ReceiveTimeout)
-            };
-            var encoder = new BinaryMessageEncodingBindingElement
-            {
-                ReaderQuotas =
-                {
-                    MaxArrayLength = MaxArrayLength,
-                    MaxStringContentLength = MaxStringContentLength
-                }
-            };
+            var encoder = new BinaryMessageEncodingBindingElement { ReaderQuotas = { MaxArrayLength = MaxArrayLength, MaxStringContentLength = MaxStringContentLength } };
+            var transport = new TcpTransportBindingElement { MaxReceivedMessageSize = MaxReceivedMessageSize, TransferMode = TransferMode.Streamed };
+            Binding = new CustomBinding { SendTimeout = TimeSpan.FromSeconds(SendTimeout), ReceiveTimeout = TimeSpan.FromSeconds(ReceiveTimeout) };
             if (IsCompres)
             {
                 var gZipEncode = new GZipMessageEncodingBindingElement(encoder);
-                Binding.Elements.Add(gZipEncode);
+                Binding.Elements.AddRange(gZipEncode, transport);
             }
             else
             {
-                Binding.Elements.Add(encoder);
+                Binding.Elements.AddRange(encoder, transport);
             }
-            var transport = new TcpTransportBindingElement
-            {
-                MaxReceivedMessageSize = MaxReceivedMessageSize,
-                TransferMode = TransferMode.Streamed
-            };
-            Binding.Elements.Add(transport);
         }
         
         /// <summary>

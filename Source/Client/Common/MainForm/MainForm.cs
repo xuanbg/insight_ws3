@@ -7,6 +7,7 @@ using System.IO;
 using System.Reflection;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
+using System.Threading;
 using System.Windows.Forms;
 using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
@@ -28,6 +29,7 @@ namespace Insight.WS.Client.Common
 
         private DataTable _NavGroup;
         private DataTable _NavItem;
+        private Waiting _Waiting = new Waiting();
         private List<object> _OpenModules = new List<object>();
         private string _ShotTime = DateTime.Now.ToLongTimeString();
         private string _LongTime = DateTime.Now.ToString(CultureInfo.CurrentCulture);
@@ -45,6 +47,10 @@ namespace Insight.WS.Client.Common
         /// <param name="Binding"></param>
         public MainForm(Session UserSession, CustomBinding Binding)
         {
+            _Waiting.Show();
+            _Waiting.Refresh();
+            Thread.Sleep(500);
+
             InitializeComponent();
 
             _Session = UserSession;
@@ -86,6 +92,7 @@ namespace Insight.WS.Client.Common
         private void MainForm_Shown(object sender, EventArgs e)
         {
             _OpenModules.ForEach(AddPageMdi);
+            _Waiting.Close();
             if (_Session.Signature == General.GetHash("123456")) ChangPassWord(null, null);
         }
 

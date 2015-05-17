@@ -366,7 +366,6 @@
 		<row><td>DevExpress.XtraNavBar.v14.1.dll</td><td>{5ED65CBC-3809-4730-BF1A-DF7D0C3BCBEA}</td><td>COMPONENTS</td><td>2</td><td/><td>devexpress.xtranavbar.v14.1.</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>DevExpress.XtraNavBar.v14.1.resources.dll</td><td>{F3F56F67-EB0E-4D8C-A203-8A6BD52A4BD6}</td><td>ZH_HANS</td><td>2</td><td/><td>devexpress.xtranavbar.v14.1.1</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>DevExpress.XtraPrinting.v14.1.dll</td><td>{DF097292-225A-474D-87A2-A72A403A7A47}</td><td>COMPONENTS</td><td>2</td><td/><td>devexpress.xtraprinting.v14.</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>DevExpress.XtraPrinting.v14.1.dll1</td><td>{B7885319-D8FC-4EBD-A85F-40C8CF2084E9}</td><td>ZH_HANS</td><td>2</td><td/><td>devexpress.xtraprinting.v14.1</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>DevExpress.XtraTreeList.v14.1.dll</td><td>{20849E31-515E-4DCA-9E9D-9B01AA16CF9A}</td><td>COMPONENTS</td><td>2</td><td/><td>devexpress.xtratreelist.v14.</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>DevExpress.XtraTreeList.v14.1.resources.dll</td><td>{F356C035-0566-4FA0-A107-4CCB787C7BA2}</td><td>ZH_HANS</td><td>2</td><td/><td>devexpress.xtratreelist.v14.1</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>DevExpress.XtraVerticalGrid.v14.1.dll</td><td>{25968FCD-9DA1-40FA-93F3-E8580B3B05BE}</td><td>COMPONENTS</td><td>2</td><td/><td>devexpress.xtraverticalgrid.</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
@@ -1945,7 +1944,6 @@
 		<row><td>AlwaysInstall</td><td>DevExpress.XtraNavBar.v14.1.dll</td></row>
 		<row><td>AlwaysInstall</td><td>DevExpress.XtraNavBar.v14.1.resources.dll</td></row>
 		<row><td>AlwaysInstall</td><td>DevExpress.XtraPrinting.v14.1.dll</td></row>
-		<row><td>AlwaysInstall</td><td>DevExpress.XtraPrinting.v14.1.dll1</td></row>
 		<row><td>AlwaysInstall</td><td>DevExpress.XtraTreeList.v14.1.dll</td></row>
 		<row><td>AlwaysInstall</td><td>DevExpress.XtraTreeList.v14.1.resources.dll</td></row>
 		<row><td>AlwaysInstall</td><td>DevExpress.XtraVerticalGrid.v14.1.dll</td></row>
@@ -2011,7 +2009,6 @@
 		<row><td>devexpress.xtranavbar.v14.1.</td><td>DevExpress.XtraNavBar.v14.1.dll</td><td>DEVEXP~1.DLL|DevExpress.XtraNavBar.v14.1.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\Components\DevExpress.XtraNavBar.v14.1.dll</td><td>1</td><td/></row>
 		<row><td>devexpress.xtranavbar.v14.1.1</td><td>DevExpress.XtraNavBar.v14.1.resources.dll</td><td>DEVEXP~1.DLL|DevExpress.XtraNavBar.v14.1.resources.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\Components\zh-Hans\DevExpress.XtraNavBar.v14.1.resources.dll</td><td>1</td><td/></row>
 		<row><td>devexpress.xtraprinting.v14.</td><td>DevExpress.XtraPrinting.v14.1.dll</td><td>DEVEXP~1.DLL|DevExpress.XtraPrinting.v14.1.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\Components\DevExpress.XtraPrinting.v14.1.dll</td><td>1</td><td/></row>
-		<row><td>devexpress.xtraprinting.v14.1</td><td>DevExpress.XtraPrinting.v14.1.dll1</td><td>DEVEXP~1.DLL|DevExpress.XtraPrinting.v14.1.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\Components\zh-Hans\DevExpress.XtraPrinting.v14.1.dll</td><td>1</td><td/></row>
 		<row><td>devexpress.xtratreelist.v14.</td><td>DevExpress.XtraTreeList.v14.1.dll</td><td>DEVEXP~1.DLL|DevExpress.XtraTreeList.v14.1.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\Components\DevExpress.XtraTreeList.v14.1.dll</td><td>1</td><td/></row>
 		<row><td>devexpress.xtratreelist.v14.1</td><td>DevExpress.XtraTreeList.v14.1.resources.dll</td><td>DEVEXP~1.DLL|DevExpress.XtraTreeList.v14.1.resources.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\Components\zh-Hans\DevExpress.XtraTreeList.v14.1.resources.dll</td><td>1</td><td/></row>
 		<row><td>devexpress.xtraverticalgrid.</td><td>DevExpress.XtraVerticalGrid.v14.1.dll</td><td>DEVEXP~1.DLL|DevExpress.XtraVerticalGrid.v14.1.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\Components\DevExpress.XtraVerticalGrid.v14.1.dll</td><td>1</td><td/></row>
@@ -2199,7 +2196,6 @@
 		<row><td>DevExpress.XtraNavBar.v14.1.dll</td><td/><td/><td>_800658A8_E02E_4A3C_997F_6E86290C4E3B_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>DevExpress.XtraNavBar.v14.1.resources.dll</td><td/><td/><td>_7D325A77_0495_488B_A813_BDA76A840E2E_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>DevExpress.XtraPrinting.v14.1.dll</td><td/><td/><td>_39A8F4C9_CDDA_4FB6_A5EA_24F61ED596B6_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>DevExpress.XtraPrinting.v14.1.dll1</td><td/><td/><td>_524F0038_1A25_490E_8CE4_7B2FB8FADCF3_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>DevExpress.XtraTreeList.v14.1.dll</td><td/><td/><td>_A59F525F_C1B1_46BA_9600_3C964EB3C605_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>DevExpress.XtraTreeList.v14.1.resources.dll</td><td/><td/><td>_86FDF446_5D26_4F2E_AAF8_109A978C8C3D_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>DevExpress.XtraVerticalGrid.v14.1.dll</td><td/><td/><td>_63444813_31A7_4A39_A124_8B53522970A1_FILTER</td><td/><td/><td/><td/></row>
@@ -3967,7 +3963,7 @@
 		<row><td>ID_STRING11</td><td>1033</td><td/><td>0</td><td/><td>1621295796</td></row>
 		<row><td>ID_STRING11</td><td>2052</td><td/><td>0</td><td/><td>1621295796</td></row>
 		<row><td>ID_STRING12</td><td>1033</td><td>http://www.</td><td>0</td><td/><td>1621326516</td></row>
-		<row><td>ID_STRING12</td><td>2052</td><td>http://www.InsightSoftwareLtd..com</td><td>0</td><td/><td>-123502026</td></row>
+		<row><td>ID_STRING12</td><td>2052</td><td>http://www.Insight.com</td><td>0</td><td/><td>-1969023603</td></row>
 		<row><td>ID_STRING13</td><td>1033</td><td>NEWSHO~1|NewShortcut1</td><td>0</td><td/><td>967033360</td></row>
 		<row><td>ID_STRING13</td><td>2052</td><td>INSIGH~1|Insight WS3</td><td>0</td><td/><td>966990384</td></row>
 		<row><td>ID_STRING14</td><td>1033</td><td>INSIGH~1|Insight WS3</td><td>0</td><td/><td>967025200</td></row>
@@ -4094,7 +4090,7 @@
 		<col def="V0">Data</col>
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I2">ISIconIndex</col>
-		<row><td>ARPPRODUCTICON.exe</td><td/><td>D:\Insight_WS3\Images\Logo.ico</td><td>0</td></row>
+		<row><td>ARPPRODUCTICON.exe</td><td/><td>D:\Insight_WS3\Source\Client\MainApp\Logo.ico</td><td>0</td></row>
 		<row><td>NewShortcut11_D77E2608387A4D69927692AEA4630449.exe</td><td/><td>D:\Insight_WS3\Release\Client\Insight WS.exe</td><td>0</td></row>
 		<row><td>NewShortcut1_B21260782A104ED8A2457E20E8482D40.exe</td><td/><td>D:\Insight_WS3\Release\Client\Insight WS.exe</td><td>0</td></row>
 		<row><td>UNINST_Uninstall_I_C1980934217D4849A7338E2963937516.exe</td><td/><td>C:\Program Files (x86)\InstallShield\2013LE\Redist\Language Independent\OS Independent\uninstall.ico</td><td>0</td></row>
@@ -4604,7 +4600,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>PROGMSG_IIS_ROLLBACKAPPPOOLS</td><td>##IDS_PROGMSG_IIS_ROLLBACKAPPPOOLS##</td><td/></row>
 		<row><td>PROGMSG_IIS_ROLLBACKVROOTS</td><td>##IDS_PROGMSG_IIS_ROLLBACKVROOTS##</td><td/></row>
 		<row><td>PROGMSG_IIS_ROLLBACKWEBSERVICEEXTENSIONS</td><td>##IDS_PROGMSG_IIS_ROLLBACKWEBSERVICEEXTENSIONS##</td><td/></row>
-		<row><td>ProductCode</td><td>{211007C3-F1D2-473B-878A-B57239DF2264}</td><td/></row>
+		<row><td>ProductCode</td><td>{CDA37F94-3FCC-4E7F-9B75-506A204CACF2}</td><td/></row>
 		<row><td>ProductName</td><td>Insight WS3</td><td/></row>
 		<row><td>ProductVersion</td><td>3.08.12</td><td/></row>
 		<row><td>ProgressType0</td><td>install</td><td/></row>
@@ -4622,7 +4618,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>SecureCustomProperties</td><td>ISFOUNDNEWERPRODUCTVERSION;USERNAME;COMPANYNAME;ISX_SERIALNUM;SUPPORTDIR;DOTNETVERSION40FULL</td><td/></row>
 		<row><td>SelectedSetupType</td><td>##IDS__DisplayName_Typical##</td><td/></row>
 		<row><td>SetupType</td><td>Typical</td><td/></row>
-		<row><td>UpgradeCode</td><td>{39E96772-6727-4CAC-AA03-8260D8F12114}</td><td/></row>
+		<row><td>UpgradeCode</td><td>{9C61A3CE-EC6D-4E62-A8A3-07F8272BAC7C}</td><td/></row>
 		<row><td>_IsMaintenance</td><td>Change</td><td/></row>
 		<row><td>_IsSetupTypeMin</td><td>Typical</td><td/></row>
 	</table>

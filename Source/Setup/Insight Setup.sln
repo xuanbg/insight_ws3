@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "Insight Setup", "Insight Setup.isproj", "{CB9A36E1-E894-4BB2-90F2-163CC7BB5196}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		CD_ROM|Default = CD_ROM|Default
+		DVD-5|Default = DVD-5|Default
+		SingleImage|Default = SingleImage|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CB9A36E1-E894-4BB2-90F2-163CC7BB5196}.CD_ROM|Default.ActiveCfg = CD_ROM
+		{CB9A36E1-E894-4BB2-90F2-163CC7BB5196}.CD_ROM|Default.Build.0 = CD_ROM
+		{CB9A36E1-E894-4BB2-90F2-163CC7BB5196}.DVD-5|Default.ActiveCfg = DVD-5
+		{CB9A36E1-E894-4BB2-90F2-163CC7BB5196}.DVD-5|Default.Build.0 = DVD-5
+		{CB9A36E1-E894-4BB2-90F2-163CC7BB5196}.SingleImage|Default.ActiveCfg = SingleImage
+		{CB9A36E1-E894-4BB2-90F2-163CC7BB5196}.SingleImage|Default.Build.0 = SingleImage
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
