@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.Windows.Forms;
@@ -104,7 +105,7 @@ namespace Insight.WS.Client.Common
             var pvl = new List<string>();
             if (ModuleParams.Exists(obj => obj.ParamId == pid))
             {
-                ModuleParams.FindAll(p => p.ParamId == pid).ForEach(p => pvl.Add(p.Value));
+                pvl.AddRange(ModuleParams.FindAll(p => p.ParamId == pid).Select(p => p.Value));
             }
             return pvl;
         }
@@ -165,7 +166,7 @@ namespace Insight.WS.Client.Common
         protected void DeleteCatalog(TreeList tree)
         {
             var fn = tree.FocusedNode;
-            if (General.ShowConfirm(String.Format("您确定要删除分类【{0}】吗?", fn.GetValue("Name"))) != DialogResult.OK)
+            if (General.ShowConfirm(string.Format("您确定要删除分类【{0}】吗?", fn.GetValue("Name"))) != DialogResult.OK)
                 return;
 
             using (var cli = new CommonsClient(MainForm._Binding, MainForm._Address))
@@ -182,18 +183,18 @@ namespace Insight.WS.Client.Common
         /// </summary>
         /// <param name="oid">数据对象ID</param>
         /// <param name="tid">模板ID</param>
-        /// <param name="printer"></param>
-        /// <param name="obj"></param>
-        /// <param name="mp"></param>
-        protected string PrintImage(Guid oid, Guid? tid, string printer = null, ImageData obj = null, bool mp = false)
+        /// <param name="printer">打印机名称</param>
+        /// <param name="obj">ImageData对象实体</param>
+        /// <param name="onSheet">合并打印模式</param>
+        protected string PrintImage(Guid oid, Guid? tid, string printer = null, ImageData obj = null, PagesOnSheet onSheet = PagesOnSheet.One)
         {
             var print = BuildReport(oid, tid, obj);
             if (print == null) return null;
 
-            if (mp)
+            if (onSheet != PagesOnSheet.One)
             {
                 print.PrintSettings.PrintMode = PrintMode.Scale;
-                print.PrintSettings.PagesOnSheet = PagesOnSheet.Three;
+                print.PrintSettings.PagesOnSheet = onSheet;
             }
 
             if (!string.IsNullOrEmpty(printer))
@@ -238,7 +239,7 @@ namespace Insight.WS.Client.Common
         /// <param name="e"></param>
         protected virtual void item_ItemClick(object sender, ItemClickEventArgs e)
         {
-            MessageBox.Show("对不起，该功能尚未实现！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            General.ShowError("对不起，该功能尚未实现！");
         }
 
         #endregion
@@ -264,9 +265,9 @@ namespace Insight.WS.Client.Common
                 img = Commons.BuildImageData(oid, (Guid)tid, obj);
             }
 
-            var print = new Report();
+            var print = new Report {FileName = img.ID.ToString()};
             print.LoadPrepared(new MemoryStream(img.Image));
-            print.FileName = img.ID.ToString();
+
             if (isCopy) General.AddWatermark(print, "副 本");
             return print;
         }

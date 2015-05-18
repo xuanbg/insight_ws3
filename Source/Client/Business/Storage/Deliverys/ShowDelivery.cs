@@ -3,6 +3,8 @@ using System.Data;
 using System.IO;
 using System.Windows.Forms;
 using DevExpress.Utils;
+using DevExpress.XtraGrid.Views.Base;
+using DevExpress.XtraTab;
 using Insight.WS.Client.Business.Storage.Service;
 using Insight.WS.Client.Common;
 using Insight.WS.Client.Common.Service;
@@ -76,7 +78,7 @@ namespace Insight.WS.Client.Business.Storage
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void tabInfo_SelectedPageChanged(object sender, DevExpress.XtraTab.TabPageChangedEventArgs e)
+        private void tabInfo_SelectedPageChanged(object sender, TabPageChangedEventArgs e)
         {
             btnOpen.Visible = e.Page.Name == "tapAttachs";
             btnOpen.Enabled = _HasAttach;
@@ -84,7 +86,7 @@ namespace Insight.WS.Client.Business.Storage
             btnDelete.Enabled = CanEdit && _CanDel && _HasAttach;
         }
 
-        private void gdvAttach_FocusedRowObjectChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowObjectChangedEventArgs e)
+        private void gdvAttach_FocusedRowObjectChanged(object sender, FocusedRowObjectChangedEventArgs e)
         {
             _AttachId = (Guid)gdvAttach.GetFocusedDataRow()["ID"];
             _CanDel = gdvAttach.GetFocusedDataRow()["扩展名"].ToString() != "fpx";

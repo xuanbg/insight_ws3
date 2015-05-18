@@ -46,6 +46,10 @@
     <Reference Include="DevExpress.XtraNavBar.v14.1, Version=14.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraTreeList.v14.1, Version=14.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraWizard.v14.1, Version=14.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="FastReport">
+      <HintPath>..\..\..\Release\Client\Components\FastReport.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -202,11 +206,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Tools\FastReport\FastReport.csproj">
-      <Project>{7c64fbdc-25e5-47ff-b6f8-443256745e2d}</Project>
-      <Name>FastReport</Name>
-      <Private>False</Private>
-    </ProjectReference>
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{7c8ac27e-e640-4403-af4d-5b62c6c55826}</Project>
       <Name>Common</Name>

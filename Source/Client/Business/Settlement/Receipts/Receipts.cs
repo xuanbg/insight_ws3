@@ -7,6 +7,7 @@ using DevExpress.XtraBars;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraTreeList;
+using FastReport;
 using Insight.WS.Client.Business.Settlement.Receipt;
 using Insight.WS.Client.Business.Settlement.Service;
 using Insight.WS.Client.Common;
@@ -312,7 +313,9 @@ namespace Insight.WS.Client.Business.Settlement
                 _Image.CreatorDeptId = UserSession.DeptId;
                 _Image.CreatorUserId = UserSession.UserId;
             }
-            return PrintImage((Guid)bid, tid, printer, _Image, Config.IsMergerPrint());
+
+            var onSheet = Config.IsMergerPrint() ? PagesOnSheet.Three : PagesOnSheet.One;
+            return PrintImage((Guid)bid, tid, printer, _Image, onSheet);
         }
 
         #endregion

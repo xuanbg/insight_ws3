@@ -50,6 +50,15 @@
       <HintPath>..\..\..\Release\EntityFramework.SqlServer.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="FastReport, Version=1.8.46.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Release\Client\Components\FastReport.dll</HintPath>
+    </Reference>
+    <Reference Include="GZipEncoder, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Release\GZipEncoder.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -371,17 +380,6 @@
       <DependentUpon>WSModel.edmx</DependentUpon>
       <LastGenOutput>WSModel.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Tools\FastReport\FastReport.csproj">
-      <Project>{7c64fbdc-25e5-47ff-b6f8-443256745e2d}</Project>
-      <Name>FastReport</Name>
-      <Private>True</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Tools\GZipEncoder\GZipEncoder.csproj">
-      <Project>{3eb736c4-62ea-4887-b040-948b13ef29b9}</Project>
-      <Name>GZipEncoder</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

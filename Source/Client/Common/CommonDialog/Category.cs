@@ -74,7 +74,7 @@ namespace Insight.WS.Client.Common
             SetIndexValue(id);
 
             var dv = _Categorys.Copy().DefaultView;
-            dv.RowFilter = (id == null) ? String.Format("ParentId is null and Name = '{0}'", txtName.Text) : String.Format("ParentId = '{0}' and Name = '{1}'", id, txtName.Text);
+            dv.RowFilter = (id == null) ? string.Format("ParentId is null and Name = '{0}'", txtName.Text) : string.Format("ParentId = '{0}' and Name = '{1}'", id, txtName.Text);
             if (dv.Count > 0)
             {
                 General.ShowMessage("您所选择的父分类下已经存在同名分类！请修改分类名称或重新选择父分类。");
@@ -162,7 +162,7 @@ namespace Insight.WS.Client.Common
         private void SetIndexValue(Guid? id)
         {
             var dv = _Categorys.Copy().DefaultView;
-            dv.RowFilter = (id == null) ? "ParentId is null" : String.Format("ParentId = '{0}'", id);
+            dv.RowFilter = (id == null) ? "ParentId is null" : string.Format("ParentId = '{0}'", id);
             var maxValue = dv.Count + 1;
             _IndexValue = IsEdit ? _IndexValue : maxValue;
             _Index = id == _ParentId ? _IndexValue : maxValue;

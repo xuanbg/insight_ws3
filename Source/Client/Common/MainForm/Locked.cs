@@ -27,7 +27,7 @@ namespace Insight.WS.Client.Common.Dialog
             if (General.GetHash(txtUnlockPw.Text.Trim()) != MainForm._Session.Signature)
             {
                 General.ShowError("请输入正确的密码，否则无法为您解除锁定！");
-                txtUnlockPw.Text = String.Empty;
+                txtUnlockPw.Text = string.Empty;
                 txtUnlockPw.Focus();
             }
             else
