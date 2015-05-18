@@ -170,8 +170,6 @@ namespace Insight.WS.Client.Platform.Base
             gdvAllot.Columns["单据类型"].Width = 160;
             gdvAllot.Columns["编码区段"].Width = 126;
             gdvAllot.Columns["编码区段"].AppearanceCell.TextOptions.HAlignment = HorzAlignment.Center;
-            gdvAllot.Columns["分配日期"].Width = 80;
-            gdvAllot.Columns["分配日期"].AppearanceCell.TextOptions.HAlignment = HorzAlignment.Center;
         }
 
         #endregion

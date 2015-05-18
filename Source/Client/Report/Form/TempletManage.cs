@@ -147,8 +147,8 @@ namespace Insight.WS.Client.Platform.Report
 
             grdTemplet.DataSource = dv;
             Format.GridFormat(gdvTemplet);
-            gdvTemplet.Columns[2].Width = 240;
-            gdvTemplet.Columns[3].Width = 415;
+            gdvTemplet.Columns["名称"].Width = 240;
+            gdvTemplet.Columns["描述"].Width = 415;
 
             var hasTemp = dv.Count > 0;
             SwitchItemStatus(new Context("CopyTemplet", hasTemp), new Context("EditTemplet", hasTemp), new Context("DeleteTemplet", hasTemp), new Context("Design", hasTemp), new Context("Export", hasTemp));

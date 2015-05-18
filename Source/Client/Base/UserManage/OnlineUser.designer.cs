@@ -160,8 +160,6 @@ namespace Insight.WS.Client.Platform.Base
             this.colLastConnect.AppearanceCell.Options.UseTextOptions = true;
             this.colLastConnect.AppearanceCell.TextOptions.HAlignment = HorzAlignment.Center;
             this.colLastConnect.Caption = "最后在线时间";
-            this.colLastConnect.DisplayFormat.FormatString = "yyyy-MM-dd HH:mm:ss";
-            this.colLastConnect.DisplayFormat.FormatType = FormatType.DateTime;
             this.colLastConnect.FieldName = "LastConnect";
             this.colLastConnect.Name = "colLastConnect";
             this.colLastConnect.Visible = true;

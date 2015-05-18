@@ -17,7 +17,7 @@ namespace Insight.WS.Client.Common
     public class Format
     {
         private const string Ignores = "SN;Index;Type;Class;Permission;Selected;Status;CheckState;BuiltIn;IsMaster;Enable;Visible;NodeType;IsData;Action;Alias;Code;PrintTimes;Unit";
-        private const string AlignCenters = "类型;状态;创建人;规格;单位;数量;币种;汇率";
+        private const string AlignCenters = "类型;状态;创建人;规格;单位;单价;数量;币种;汇率";
         private const string ColumnW40S = "类型;状态;内置;预置";
         private const string ColumnW80S = "创建人;简称;编码;规格;单位;单价;数量;币种;汇率";
         private const string Numerics = "汇率;单价;数量";
@@ -58,12 +58,13 @@ namespace Insight.WS.Client.Common
                 if (ColumnW40S.IndexOf(name) >= 0) col.Width = 40;
                 if (ColumnW80S.IndexOf(name) >= 0) col.Width = 80;
                 if (AlignCenters.IndexOf(name) >= 0) col.AppearanceCell.TextOptions.HAlignment = HorzAlignment.Center;
+                if (name == "Index") col.SortOrder = ColumnSortOrder.Ascending;
                 if (Numerics.IndexOf(name) >= 0)
                 {
                     col.DisplayFormat.FormatType = FormatType.Numeric;
                     col.DisplayFormat.FormatString = "#,##0.######";
                 }
-                if (name == "金额")
+                if (name.EndsWith("金额"))
                 {
                     col.DisplayFormat.FormatType = FormatType.Numeric;
                     col.DisplayFormat.FormatString = "n";
@@ -83,7 +84,6 @@ namespace Insight.WS.Client.Common
                     col.DisplayFormat.FormatString = "yyyy-MM-dd";
                     col.Width = 80;
                 }
-                if (name == "Index") col.SortOrder = ColumnSortOrder.Ascending;
             }
 
             // 格式化GridView属性

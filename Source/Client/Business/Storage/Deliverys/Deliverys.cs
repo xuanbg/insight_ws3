@@ -216,10 +216,6 @@ namespace Insight.WS.Client.Business.Storage
             gdvReceipts.Columns["单据号"].Width = 140;
             gdvReceipts.Columns["客户/供应商"].Width = 200;
             gdvReceipts.Columns["备注"].Width = 266;
-            gdvReceipts.Columns["出入库时间"].Width = 110;
-            gdvReceipts.Columns["出入库时间"].AppearanceCell.TextOptions.HAlignment = HorzAlignment.Center;
-            gdvReceipts.Columns["出入库时间"].DisplayFormat.FormatType = FormatType.DateTime;
-            gdvReceipts.Columns["出入库时间"].DisplayFormat.FormatString = "yyyy-MM-dd HH:mm";
             gdvReceipts.Columns["经办人"].Width = 60;
             gdvReceipts.Columns["经办人"].AppearanceCell.TextOptions.HAlignment = HorzAlignment.Center;
         }

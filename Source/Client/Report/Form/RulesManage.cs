@@ -66,11 +66,11 @@ namespace Insight.WS.Client.Platform.Report
 
             grdRule.DataSource = _Rules;
             Format.GridFormat(gdvRule);
-            gdvRule.Columns[2].Width = 240;
-            gdvRule.Columns[3].Width = 80;
-            gdvRule.Columns[3].AppearanceCell.TextOptions.HAlignment = HorzAlignment.Center;
-            gdvRule.Columns[4].Width = 80;
-            gdvRule.Columns[5].Width = 482;
+            gdvRule.Columns["名称"].Width = 240;
+            gdvRule.Columns["周期"].Width = 80;
+            gdvRule.Columns["周期"].AppearanceCell.TextOptions.HAlignment = HorzAlignment.Center;
+            gdvRule.Columns["分期起始"].Width = 80;
+            gdvRule.Columns["备注"].Width = 482;
         }
 
         #endregion
