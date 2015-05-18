@@ -600,7 +600,7 @@
 		<row><td>LicenseAgreement</td><td>DlgLine</td><td>Line</td><td>48</td><td>234</td><td>326</td><td>0</td><td>1</td><td/><td/><td/><td/><td>0</td><td/><td/><td/></row>
 		<row><td>LicenseAgreement</td><td>DlgTitle</td><td>Text</td><td>13</td><td>6</td><td>292</td><td>25</td><td>65539</td><td/><td>##IDS__IsLicenseDlg_LicenseAgreement##</td><td/><td/><td>0</td><td/><td/><td/></row>
 		<row><td>LicenseAgreement</td><td>ISPrintButton</td><td>PushButton</td><td>301</td><td>188</td><td>65</td><td>17</td><td>3</td><td/><td>##IDS_PRINT_BUTTON##</td><td>Agree</td><td/><td>0</td><td/><td/><td/></row>
-		<row><td>LicenseAgreement</td><td>Memo</td><td>ScrollableText</td><td>8</td><td>55</td><td>358</td><td>130</td><td>7</td><td/><td/><td/><td/><td>0</td><td/><td>D:\Insight_WS3\EULA.rtf</td><td/></row>
+		<row><td>LicenseAgreement</td><td>Memo</td><td>ScrollableText</td><td>8</td><td>55</td><td>358</td><td>130</td><td>7</td><td/><td/><td/><td/><td>0</td><td/><td>D:\Insight_WS3\Release\Client\EULA.rtf</td><td/></row>
 		<row><td>LicenseAgreement</td><td>Next</td><td>PushButton</td><td>230</td><td>243</td><td>66</td><td>17</td><td>3</td><td/><td>##IDS_NEXT##</td><td>Cancel</td><td/><td>0</td><td/><td/><td/></row>
 		<row><td>MaintenanceType</td><td>Back</td><td>PushButton</td><td>164</td><td>243</td><td>66</td><td>17</td><td>3</td><td/><td>##IDS_BACK##</td><td>Next</td><td/><td>0</td><td/><td/><td/></row>
 		<row><td>MaintenanceType</td><td>Banner</td><td>Bitmap</td><td>0</td><td>0</td><td>374</td><td>44</td><td>1</td><td/><td/><td/><td/><td>0</td><td/><td/><td>NewBinary1</td></row>
@@ -2849,7 +2849,7 @@
 		<col def="I2">Encoded</col>
 		<col def="S0">Comment</col>
 		<col def="I4">TimeStamp</col>
-		<row><td>COMPANY_NAME</td><td>2052</td><td>Insight Software Ltd.</td><td>0</td><td/><td>-123502026</td></row>
+		<row><td>COMPANY_NAME</td><td>2052</td><td>Insight Software Ltd.</td><td>0</td><td/><td>-1834763023</td></row>
 		<row><td>DN_AlwaysInstall</td><td>2052</td><td>始终安装</td><td>0</td><td/><td>1621341999</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_COLOR</td><td>2052</td><td>系统颜色设置不足以运行 [ProductName]。</td><td>0</td><td/><td>1621341999</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION40CLIENT</td><td>1033</td><td>Microsoft .NET Framework 4.0 Client Package or greater needs to be installed for this installation to continue.</td><td>0</td><td/><td>1621334096</td></row>
@@ -3963,14 +3963,14 @@
 		<row><td>ID_STRING11</td><td>1033</td><td/><td>0</td><td/><td>1621295796</td></row>
 		<row><td>ID_STRING11</td><td>2052</td><td/><td>0</td><td/><td>1621295796</td></row>
 		<row><td>ID_STRING12</td><td>1033</td><td>http://www.</td><td>0</td><td/><td>1621326516</td></row>
-		<row><td>ID_STRING12</td><td>2052</td><td>http://www.Insight.com</td><td>0</td><td/><td>-1969023603</td></row>
+		<row><td>ID_STRING12</td><td>2052</td><td>http://www.InsightSoftwareLtd..com</td><td>0</td><td/><td>-1834763023</td></row>
 		<row><td>ID_STRING13</td><td>1033</td><td>NEWSHO~1|NewShortcut1</td><td>0</td><td/><td>967033360</td></row>
 		<row><td>ID_STRING13</td><td>2052</td><td>INSIGH~1|Insight WS3</td><td>0</td><td/><td>966990384</td></row>
 		<row><td>ID_STRING14</td><td>1033</td><td>INSIGH~1|Insight WS3</td><td>0</td><td/><td>967025200</td></row>
 		<row><td>ID_STRING14</td><td>2052</td><td>INSIGH~1|Insight WS3</td><td>0</td><td/><td>967025200</td></row>
 		<row><td>ID_STRING2</td><td>1033</td><td/><td>0</td><td/><td>1621296595</td></row>
 		<row><td>ID_STRING2</td><td>2052</td><td/><td>0</td><td/><td>1621296595</td></row>
-		<row><td>ID_STRING3</td><td>2052</td><td>Insight Software Ltd.</td><td>0</td><td/><td>-123502026</td></row>
+		<row><td>ID_STRING3</td><td>2052</td><td>Insight Software Ltd.</td><td>0</td><td/><td>-1834763023</td></row>
 		<row><td>ID_STRING4</td><td>1033</td><td>Launch |Built</td><td>0</td><td/><td>1621339856</td></row>
 		<row><td>ID_STRING4</td><td>2052</td><td>Launch |Built</td><td>0</td><td/><td>1621339856</td></row>
 		<row><td>ID_STRING5</td><td>1033</td><td>INSIGH~1|Insight WS 3</td><td>0</td><td/><td>967023024</td></row>
@@ -4090,7 +4090,7 @@
 		<col def="V0">Data</col>
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I2">ISIconIndex</col>
-		<row><td>ARPPRODUCTICON.exe</td><td/><td>D:\Insight_WS3\Source\Client\MainApp\Logo.ico</td><td>0</td></row>
+		<row><td>ARPPRODUCTICON.exe</td><td/><td>D:\Insight_WS3\Release\Client\Insight WS.exe</td><td>0</td></row>
 		<row><td>NewShortcut11_D77E2608387A4D69927692AEA4630449.exe</td><td/><td>D:\Insight_WS3\Release\Client\Insight WS.exe</td><td>0</td></row>
 		<row><td>NewShortcut1_B21260782A104ED8A2457E20E8482D40.exe</td><td/><td>D:\Insight_WS3\Release\Client\Insight WS.exe</td><td>0</td></row>
 		<row><td>UNINST_Uninstall_I_C1980934217D4849A7338E2963937516.exe</td><td/><td>C:\Program Files (x86)\InstallShield\2013LE\Redist\Language Independent\OS Independent\uninstall.ico</td><td>0</td></row>
