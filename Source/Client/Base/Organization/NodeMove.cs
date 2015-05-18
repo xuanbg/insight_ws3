@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 using Insight.WS.Client.Common;
 using Insight.WS.Client.Common.Service;
@@ -118,12 +119,9 @@ namespace Insight.WS.Client.Platform.Base
                 }
             }
             SubNodes(_Org.ID);
-            foreach (DataRow row in _OrgList.Rows)
+            foreach (var row in _OrgList.Rows.Cast<DataRow>().Where(row => row.RowState != DataRowState.Modified))
             {
-                if (row.RowState != DataRowState.Modified)
-                {
-                    row.Delete();
-                }
+                row.Delete();
             }
             _OrgList.AcceptChanges();
         }
@@ -134,14 +132,19 @@ namespace Insight.WS.Client.Platform.Base
         /// <param name="id"></param>
         private void LoopTree(Guid id)
         {
-            var row = _OrgList.Rows.Find(id);
-            if (row.RowState != DataRowState.Modified && (Guid)row["ID"] != _Org.ID)
+            while (true)
             {
-                row.SetModified();
-            }
-            if (!string.IsNullOrEmpty(row["ParentId"].ToString()))
-            {
-                LoopTree((Guid)row["ParentId"]);
+                var row = _OrgList.Rows.Find(id);
+                if (row.RowState != DataRowState.Modified && (Guid) row["ID"] != _Org.ID)
+                {
+                    row.SetModified();
+                }
+                if (!string.IsNullOrEmpty(row["ParentId"].ToString()))
+                {
+                    id = (Guid) row["ParentId"];
+                    continue;
+                }
+                break;
             }
         }
 

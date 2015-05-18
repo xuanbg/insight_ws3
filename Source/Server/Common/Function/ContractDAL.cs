@@ -13,8 +13,8 @@ namespace Insight.WS.Server.Common
         /// </summary>
         /// <param name="pid">计划ID</param>
         /// <param name="amount">履约金额</param>
-        /// <returns>SqlCommand</returns>
-        public static List<SqlCommand> FundPerform(object pid, object amount)
+        /// <returns>SqlCommand List</returns>
+        public static IEnumerable<SqlCommand> FundPerform(object pid, object amount)
         {
             var pids = SqlHelper.SqlQuery(string.Format("select * from dbo.Get_FundPlanId('{0}')", pid));
             const string sql = "insert ABS_Contract_FundPerform (PlanId, ClearingId, Amount) select @PlanId, @ClearingId, @Amount";
@@ -37,7 +37,7 @@ namespace Insight.WS.Server.Common
         /// <returns>SqlCommand</returns>
         public static List<SqlCommand> GoodsPerform(object pid, object count)
         {
-            var pids = SqlHelper.SqlQuery(String.Format("select * from dbo.Get_GoodsPlanId('{0}')", pid));
+            var pids = SqlHelper.SqlQuery(string.Format("select * from dbo.Get_GoodsPlanId('{0}')", pid));
             const string sql = "insert ABS_Contract_GoodsPerform (PlanId, DeliveryId, Counts) select @PlanId, @DeliveryId, @Counts";
             return (from DataRow row in pids.Rows
                 select new[]

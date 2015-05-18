@@ -364,13 +364,10 @@ namespace Insight.WS.Client.MasterDatas
 
             _Title.TitleId = (Guid)trlTitle.EditValue;
 
-            foreach (DataRow row in _ContactInfo.Rows)
+            foreach (var row in _ContactInfo.Rows.Cast<DataRow>().Where(row => row.RowState == DataRowState.Unchanged))
             {
-                if (row.RowState == DataRowState.Unchanged)
-                {
-                    _OldContacts.Remove(row["ID"]);
-                    row.Delete();
-                }
+                _OldContacts.Remove(row["ID"]);
+                row.Delete();
             }
             _ContactInfo.AcceptChanges();
 

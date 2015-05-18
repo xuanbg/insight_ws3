@@ -37,8 +37,8 @@ namespace Insight.WS.Client.Business.CRM
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Customer));
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            var resources = new System.ComponentModel.ComponentResourceManager(typeof(Customer));
+            var serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
             this.txtAlias = new DevExpress.XtraEditors.TextEdit();
             this.datRegisterDate = new DevExpress.XtraEditors.DateEdit();
             this.txtName = new DevExpress.XtraEditors.TextEdit();

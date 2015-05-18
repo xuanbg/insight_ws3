@@ -50,7 +50,7 @@ namespace Insight.WS.Service
             else if (tab != null)
             {
                 cmds.Clear();
-                cmds.Add(SqlHelper.MakeCommand(String.Format("update {0} set [Enable] = 0 where MID = '{1}'", tab, id)));
+                cmds.Add(SqlHelper.MakeCommand(string.Format("update {0} set [Enable] = 0 where MID = '{1}'", tab, id)));
                 rest = SqlHelper.SqlExecute(cmds) ? 2 : 0;
             }
             return rest;

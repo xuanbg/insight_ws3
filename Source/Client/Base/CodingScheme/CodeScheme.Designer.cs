@@ -31,8 +31,8 @@ namespace Insight.WS.Client.Platform.Base
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CodeScheme));
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            var resources = new System.ComponentModel.ComponentResourceManager(typeof(CodeScheme));
+            var serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
             this.labName = new DevExpress.XtraEditors.LabelControl();
             this.labFormat = new DevExpress.XtraEditors.LabelControl();
             this.txtName = new DevExpress.XtraEditors.TextEdit();

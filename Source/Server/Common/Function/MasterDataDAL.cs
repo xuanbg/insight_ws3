@@ -111,7 +111,7 @@ namespace Insight.WS.Server.Common
         /// </summary>
         /// <param name="cdl">联系方式删除列表</param>
         /// <returns>SqlCommand List SqlCommand集合</returns>
-        public static List<SqlCommand> DeleteContactInfo(List<object> cdl)
+        public static IEnumerable<SqlCommand> DeleteContactInfo(IEnumerable<object> cdl)
         {
             return cdl.Select(id => SqlHelper.MakeCommand(string.Format("delete MDS_Contact_Info where ID = '{0}'", id))).ToList();
         }

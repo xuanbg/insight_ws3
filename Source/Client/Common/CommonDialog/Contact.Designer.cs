@@ -40,8 +40,8 @@ namespace Insight.WS.Client.Common
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Contact));
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            var resources = new System.ComponentModel.ComponentResourceManager(typeof(Contact));
+            var serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
             this.datBirthday = new DevExpress.XtraEditors.DateEdit();
             this.txtTitle = new DevExpress.XtraEditors.TextEdit();
             this.labTitle = new DevExpress.XtraEditors.LabelControl();

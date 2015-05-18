@@ -84,7 +84,7 @@ namespace Insight.WS.Client.Platform.Base
         /// </summary>
         private void RemoveNode()
         {
-            foreach (var row in _OrgList.Select("NodeType = " + _Org.NodeType.ToString()))
+            foreach (var row in _OrgList.Select("NodeType = " + _Org.NodeType))
             {
                 if (row.RowState != DataRowState.Modified && (Guid)row["ID"] != _Org.ID)
                 {
@@ -109,14 +109,19 @@ namespace Insight.WS.Client.Platform.Base
         /// <param name="id"></param>
         private void LoopTree(Guid id)
         {
-            var row = _OrgList.Rows.Find(id);
-            if (row.RowState != DataRowState.Modified && (Guid)row["ID"] != _Org.ID)
+            while (true)
             {
-                row.SetModified();
-            }
-            if (!string.IsNullOrEmpty(row["ParentId"].ToString()))
-            {
-                LoopTree((Guid)row["ParentId"]);
+                var row = _OrgList.Rows.Find(id);
+                if (row.RowState != DataRowState.Modified && (Guid) row["ID"] != _Org.ID)
+                {
+                    row.SetModified();
+                }
+                if (!string.IsNullOrEmpty(row["ParentId"].ToString()))
+                {
+                    id = (Guid) row["ParentId"];
+                    continue;
+                }
+                break;
             }
         }
 

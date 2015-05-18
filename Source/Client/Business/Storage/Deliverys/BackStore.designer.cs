@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BackStore));
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            var resources = new System.ComponentModel.ComponentResourceManager(typeof(BackStore));
+            var serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
             this.grdItem = new DevExpress.XtraGrid.GridControl();
             this.gdvItem = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.labCustomer = new DevExpress.XtraEditors.LabelControl();

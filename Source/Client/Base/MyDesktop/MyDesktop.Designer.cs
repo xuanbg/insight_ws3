@@ -40,9 +40,9 @@ namespace Insight.WS.Client.Platform.Base
         /// </summary>
         private void InitializeComponent()
         {
-            ComponentResourceManager resources = new ComponentResourceManager(typeof(MyDesktop));
-            SerializableAppearanceObject serializableAppearanceObject1 = new SerializableAppearanceObject();
-            SerializableAppearanceObject serializableAppearanceObject2 = new SerializableAppearanceObject();
+            var resources = new ComponentResourceManager(typeof(MyDesktop));
+            var serializableAppearanceObject1 = new SerializableAppearanceObject();
+            var serializableAppearanceObject2 = new SerializableAppearanceObject();
             this.splMain = new SplitContainerControl();
             this.panMain = new PanelControl();
             this.grdApply = new GridControl();

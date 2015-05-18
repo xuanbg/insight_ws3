@@ -31,8 +31,8 @@ namespace Insight.WS.Client.MainApp
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            var resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
+            var serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
             this.panel = new DevExpress.XtraEditors.PanelControl();
             this.lokDepartment = new DevExpress.XtraEditors.LookUpEdit();
             this.btnLogin = new DevExpress.XtraEditors.SimpleButton();

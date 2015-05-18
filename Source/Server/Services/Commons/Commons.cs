@@ -135,7 +135,7 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return false;
 
-            var sql = String.Format("select count(*) from {0} where {1} = '{2}'", tab, col, str);
+            var sql = string.Format("select count(*) from {0} where {1} = '{2}'", tab, col, str);
             return (int)SqlHelper.SqlScalar(sql) > 0;
         }
 

@@ -38,7 +38,7 @@ namespace Insight.WS.Client.Platform.Base
         /// </summary>
         private void InitializeComponent()
         {
-            ComponentResourceManager resources = new ComponentResourceManager(typeof(CodingScheme));
+            var resources = new ComponentResourceManager(typeof(CodingScheme));
             this.splMain = new SplitContainerControl();
             this.grdScheme = new GridControl();
             this.gdvScheme = new GridView();

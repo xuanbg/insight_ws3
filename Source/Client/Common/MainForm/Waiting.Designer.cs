@@ -31,7 +31,7 @@ namespace Insight.WS.Client.Common
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Waiting));
+            var resources = new System.ComponentModel.ComponentResourceManager(typeof(Waiting));
             this.pbcLogin = new DevExpress.XtraEditors.MarqueeProgressBarControl();
             ((System.ComponentModel.ISupportInitialize)(this.pbcLogin.Properties)).BeginInit();
             this.SuspendLayout();
