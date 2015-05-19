@@ -27,7 +27,6 @@ namespace Insight.WS.Client.Business.Storage
 
         #region 变量声明
 
-        private StorageClient _Client;
         private ABS_Delivery _Delivery;
         private ImageData _Snapshot;
         private DataTable _Items;
@@ -58,11 +57,12 @@ namespace Insight.WS.Client.Business.Storage
         {
             _Snapshot = SnapshotId.HasValue ? Commons.ImageData((Guid)SnapshotId) : null;
 
-            _Client = new StorageClient(OpenForm.Binding, OpenForm.Address);
-            _Delivery = _Client.GetDelivery(OpenForm.UserSession, ObjectId);
-            _Items = _Client.GetDeliveryItem(OpenForm.UserSession, ObjectId);
-            _Attachs = _Client.GetDeliveryAttach(OpenForm.UserSession, ObjectId);
-            _Client.Close();
+            using (var cli = new StorageClient(OpenForm.Binding, OpenForm.Address))
+            {
+                _Delivery = cli.GetDelivery(OpenForm.UserSession, ObjectId);
+                _Items = cli.GetDeliveryItem(OpenForm.UserSession, ObjectId);
+                _Attachs = cli.GetDeliveryAttach(OpenForm.UserSession, ObjectId);
+            }
 
             _HasAttach = _Attachs.Rows.Count > 0;
             tapSnapshot.PageEnabled = SnapshotId.HasValue;

@@ -55,7 +55,6 @@ namespace Insight.WS.Client.Business.Settlement
 
         #region 变量声明
 
-        private SettlementClient _Client;
         private ABS_Clearing _Receipt;
         private DataTable _PayList;
         private DataTable _ItemList;
@@ -79,11 +78,13 @@ namespace Insight.WS.Client.Business.Settlement
 
             _Amount = new GridColumnSummaryItem(SummaryItemType.Sum) {DisplayFormat = _Total.ToString("n")};
             _PayList = new DataTable("Table");
-            _PayList.Columns.AddRange(new[]{ 
-                new DataColumn("ID", typeof(Guid)),
-                new DataColumn("票号", typeof(string)),
-                new DataColumn("结算方式", typeof(Guid)),
-                new DataColumn("金额", typeof(decimal)) });
+            _PayList.Columns.AddRange(new[]
+            {
+                new DataColumn("ID", typeof (Guid)),
+                new DataColumn("票号", typeof (string)),
+                new DataColumn("结算方式", typeof (Guid)),
+                new DataColumn("金额", typeof (decimal))
+            });
         }
 
         #endregion
@@ -211,21 +212,20 @@ namespace Insight.WS.Client.Business.Settlement
         /// <param name="e"></param>
         private void gdvPay_CellValueChanged(object sender, CellValueChangedEventArgs e)
         {
-            if (e.Column.FieldName == "金额")
+            if (e.Column.FieldName != "金额") return;
+
+            var maxVal = _Total;
+            var count = gdvPay.RowCount;
+            for (var i = 0; i < count; i++)
             {
-                var maxVal = _Total;
-                var count = gdvPay.RowCount;
-                for (var i = 0; i < count; i++)
-                {
-                    if (i > e.RowHandle) _PayList.Rows.RemoveAt(e.RowHandle + 1);
-                    if (i < e.RowHandle) maxVal -= (decimal)_PayList.Rows[i]["金额"];
-                }
-
-                if ((decimal)e.Value > maxVal) _PayList.Rows[e.RowHandle]["金额"] = maxVal;
-
-                var amount = _Total - _PayList.Select().ToList().Sum(r => (decimal)r["金额"]);
-                if (amount != 0) _PayList.Rows.Add(Guid.NewGuid(), null, DefaultPay, amount);
+                if (i > e.RowHandle) _PayList.Rows.RemoveAt(e.RowHandle + 1);
+                if (i < e.RowHandle) maxVal -= (decimal)_PayList.Rows[i]["金额"];
             }
+
+            if ((decimal)e.Value > maxVal) _PayList.Rows[e.RowHandle]["金额"] = maxVal;
+
+            var amount = _Total - _PayList.Select().ToList().Sum(r => (decimal)r["金额"]);
+            if (amount != 0) _PayList.Rows.Add(Guid.NewGuid(), null, DefaultPay, amount);
         }
 
         /// <summary>
@@ -280,12 +280,9 @@ namespace Insight.WS.Client.Business.Settlement
         /// <param name="e"></param>
         private void trlUnit_EditValueChanged(object sender, EventArgs e)
         {
-            if (trlUnit.EditValue == null) return;
+            if (trlUnit.EditValue == null || (bool)Units.Rows.Find(trlUnit.EditValue)["IsData"]) return;
 
-            if (!(bool)Units.Rows.Find(trlUnit.EditValue)["IsData"])
-            {
-                trlUnit.EditValue = null;
-            }
+            trlUnit.EditValue = null;
         }
 
         /// <summary>
@@ -385,9 +382,10 @@ namespace Insight.WS.Client.Business.Settlement
         /// <param name="id"></param>
         private void InitItemList(Guid id)
         {
-            _Client = new SettlementClient(OpenForm.Binding, OpenForm.Address);
-            _ItemList = _Client.GetFundPlans(OpenForm.UserSession, id, -1);
-            _Client.Close();
+            using (var cli = new SettlementClient(OpenForm.Binding, OpenForm.Address))
+            {
+                _ItemList = cli.GetFundPlans(OpenForm.UserSession, id, -1);
+            }
 
             btnEdit.Enabled = _ItemList.Rows.Count > 0;
             grdItem.DataSource = _ItemList;
@@ -516,9 +514,10 @@ namespace Insight.WS.Client.Business.Settlement
             var dv = _ItemList.Copy().DefaultView;
             dv.RowFilter = "Selected = 1";
 
-            _Client = new SettlementClient(OpenForm.Binding, OpenForm.Address);
-            ReceiptId = _Client.AddClearing(OpenForm.UserSession, _Receipt, dv.ToTable(), _PayList);
-            _Client.Close();
+            using (var cli = new SettlementClient(OpenForm.Binding, OpenForm.Address))
+            {
+                ReceiptId = cli.AddClearing(OpenForm.UserSession, _Receipt, dv.ToTable(), _PayList);
+            }
 
             if (ReceiptId == null)
             {

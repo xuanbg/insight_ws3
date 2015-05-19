@@ -68,7 +68,6 @@ namespace Insight.WS.Client.Business.Settlement
 
         #region 变量声明
 
-        private SettlementClient _Client;
         private ABS_Clearing _Receipt;
         private List<Advance> _AdvanceList;
         private DataTable _PayList;
@@ -447,9 +446,10 @@ namespace Insight.WS.Client.Business.Settlement
         /// <param name="id"></param>
         private void InitAdvanceInfo(Guid id)
         {
-            _Client = new SettlementClient(OpenForm.Binding, OpenForm.Address);
-            _AdvanceList = _Client.GetAdvance(OpenForm.UserSession, id);
-            _Client.Close();
+            using (var cli = new SettlementClient(OpenForm.Binding, OpenForm.Address))
+            {
+                _AdvanceList = cli.GetAdvance(OpenForm.UserSession, id);
+            }
 
             _General = _AdvanceList.Where(a => a.ObjectId == null).Sum(a => a.Amount);
             _Specific = _AdvanceList.Where(a => a.ObjectId != null).Sum(a => a.Amount);
@@ -461,9 +461,10 @@ namespace Insight.WS.Client.Business.Settlement
         /// <param name="id"></param>
         private void InitItemList(Guid id)
         {
-            _Client = new SettlementClient(OpenForm.Binding, OpenForm.Address);
-            _ItemList = _Client.GetFundPlans(OpenForm.UserSession, id, 1);
-            _Client.Close();
+            using (var cli = new SettlementClient(OpenForm.Binding, OpenForm.Address))
+            {
+                _ItemList = cli.GetFundPlans(OpenForm.UserSession, id, 1);
+            }
 
             btnEdit.Enabled = _ItemList.Rows.Count > 0;
             grdItem.DataSource = _ItemList;
@@ -702,9 +703,10 @@ namespace Insight.WS.Client.Business.Settlement
             var dv = _ItemList.Copy().DefaultView;
             dv.RowFilter = "Selected = 1";
 
-            _Client = new SettlementClient(OpenForm.Binding, OpenForm.Address);
-            ReceiptId = _Client.AddClearing(OpenForm.UserSession, _Receipt, dv.ToTable(), _PayList);
-            _Client.Close();
+            using (var cli = new SettlementClient(OpenForm.Binding, OpenForm.Address))
+            {
+                ReceiptId = cli.AddClearing(OpenForm.UserSession, _Receipt, dv.ToTable(), _PayList);
+            }
 
             if (ReceiptId == null)
             {

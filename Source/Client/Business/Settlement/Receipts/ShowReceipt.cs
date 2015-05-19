@@ -28,7 +28,6 @@ namespace Insight.WS.Client.Business.Settlement
 
         #region 变量声明
 
-        private SettlementClient _Client;
         private ABS_Clearing _Receipt;
         private ImageData _Snapshot;
         private DataTable _Items;
@@ -61,12 +60,13 @@ namespace Insight.WS.Client.Business.Settlement
         {
             _Snapshot = SnapshotId.HasValue ? Commons.ImageData((Guid)SnapshotId) : null;
 
-            _Client = new SettlementClient(OpenForm.Binding, OpenForm.Address);
-            _Receipt = _Client.GetReceipt(OpenForm.UserSession, ObjectId);
-            _Items = _Client.GetReceiptItem(OpenForm.UserSession, ObjectId);
-            _Pays = _Client.GetReceiptPay(OpenForm.UserSession, ObjectId);
-            _Attachs = _Client.GetReceiptAttach(OpenForm.UserSession, ObjectId);
-            _Client.Close();
+            using (var cli = new SettlementClient(OpenForm.Binding, OpenForm.Address))
+            {
+                _Receipt = cli.GetReceipt(OpenForm.UserSession, ObjectId);
+                _Items = cli.GetReceiptItem(OpenForm.UserSession, ObjectId);
+                _Pays = cli.GetReceiptPay(OpenForm.UserSession, ObjectId);
+                _Attachs = cli.GetReceiptAttach(OpenForm.UserSession, ObjectId);
+            }
 
             _HasAttach = _Attachs.Rows.Count > 0;
             tapSnapshot.PageEnabled = SnapshotId.HasValue;

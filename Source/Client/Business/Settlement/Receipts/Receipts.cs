@@ -20,7 +20,6 @@ namespace Insight.WS.Client.Business.Settlement
 
         #region 变量声明
 
-        private SettlementClient _Client;
         private ImageData _Image;
         private DataTable _Cashiers;
         private DataTable _Payments;
@@ -180,9 +179,10 @@ namespace Insight.WS.Client.Business.Settlement
         /// </summary>
         private void InitDateTree()
         {
-            _Client = new SettlementClient(Binding, Address);
-            _DateTree = _Client.GetClearingDate(UserSession);
-            _Client.Close();
+            using (var cli = new SettlementClient(Binding, Address))
+            {
+                _DateTree = cli.GetClearingDate(UserSession);
+            }
 
             treDate.DataSource = _DateTree;
             Format.TreeFormat(treDate);
@@ -213,9 +213,10 @@ namespace Insight.WS.Client.Business.Settlement
         {
             if ((int) treDate.FocusedNode.GetValue("Type") != 2) return;
 
-            _Client = new SettlementClient(Binding, Address);
-            _FilterReceipts = _Client.GetReceiptsForDate(UserSession, ModuleId, treDate.FocusedNode.GetValue("ID").ToString());
-            _Client.Close();
+            using (var cli = new SettlementClient(Binding, Address))
+            {
+                _FilterReceipts = cli.GetReceiptsForDate(UserSession, ModuleId, treDate.FocusedNode.GetValue("ID").ToString());
+            }
 
             bteSearch.EditValue = null;
             _Receipts = _FilterReceipts.DefaultView;
@@ -227,9 +228,10 @@ namespace Insight.WS.Client.Business.Settlement
         /// </summary>
         private void Search()
         {
-            _Client = new SettlementClient(Binding, Address);
-            _SearchReceipts = _Client.GetReceiptsForName(UserSession, ModuleId, bteSearch.Text.Trim());
-            _Client.Close();
+            using (var cli = new SettlementClient(Binding, Address))
+            {
+                _SearchReceipts = cli.GetReceiptsForName(UserSession, ModuleId, bteSearch.Text.Trim());
+            }
 
             _Receipts = _SearchReceipts.DefaultView;
             InitReceipts();
@@ -295,27 +297,33 @@ namespace Insight.WS.Client.Business.Settlement
         /// <returns></returns>
         private object DoPrint(object bid, bool isPrinted = false)
         {
+            if (!_SchemeId.HasValue)
+            {
+                General.ShowError("当前尚未设定编码方案！请使用设置功能设定编码方案。");
+                return null;
+            }
+
             var tid = isPrinted ? null : _TempletId;
             var printer = Config.Printer("BilPrint");
             if (!isPrinted)
             {
-                _Client = new SettlementClient(Binding, Address);
-                if (_SchemeId != null)
+                using (var cli = new SettlementClient(Binding, Address))
                 {
-                    var code = _Client.GetReceiptCode(UserSession, (Guid)_SchemeId, (Guid)bid, ModuleId);
-                    _Client.Close();
-
+                    var code = cli.GetReceiptCode(UserSession, (Guid) _SchemeId, (Guid) bid, ModuleId);
                     _Receipts.Table.Rows.Find(bid)["单据号"] = code;
-                    _Image = new ImageData {Code = code.ToString()};
+                    _Image = new ImageData
+                    {
+                        Code = code.ToString(),
+                        ImageType = 1,
+                        SecrecyDegree = _SecrecyLevel,
+                        CreatorDeptId = UserSession.DeptId,
+                        CreatorUserId = UserSession.UserId
+                    };
                 }
-                _Image.ImageType = 1;
-                _Image.SecrecyDegree = _SecrecyLevel;
-                _Image.CreatorDeptId = UserSession.DeptId;
-                _Image.CreatorUserId = UserSession.UserId;
             }
 
             var onSheet = Config.IsMergerPrint() ? PagesOnSheet.Three : PagesOnSheet.One;
-            return PrintImage((Guid)bid, tid, printer, _Image, onSheet);
+            return PrintImage((Guid) bid, tid, printer, _Image, onSheet);
         }
 
         #endregion
@@ -553,25 +561,25 @@ namespace Insight.WS.Client.Business.Settlement
             var row = _Receipts.Table.Rows.Find(_ReceiptId);
             if (General.ShowConfirm(string.Format("您确定要{0}结算记录吗？", barManager.Items["Delete"].Caption)) != DialogResult.OK) return;
 
-            _Client = new SettlementClient(Binding, Address);
-            var result = _Client.DelReceipt(UserSession, _ReceiptId, _Status);
-            _Client.Close();
-
-            if (result)
+            using (var cli = new SettlementClient(Binding, Address))
             {
-                if (_Status == 1)
+                var result = cli.DelReceipt(UserSession, _ReceiptId, _Status);
+                if (result)
                 {
-                    row.Delete();
+                    if (_Status == 1)
+                    {
+                        row.Delete();
+                    }
+                    else
+                    {
+                        row["状态"] = "作废";
+                        SwitchItemStatus(new Context("Attachment", false), new Context("Delete", false));
+                    }
                 }
                 else
                 {
-                    row["状态"] = "作废";
-                    SwitchItemStatus(new Context("Attachment", false), new Context("Delete", false));
+                    General.ShowError(string.Format("{0}结算记录失败！如多次失败，请联系管理员。", barManager.Items["Delete"].Caption));
                 }
-            }
-            else
-            {
-                General.ShowError(string.Format("{0}结算记录失败！如多次失败，请联系管理员。", barManager.Items["Delete"].Caption));
             }
         }
 

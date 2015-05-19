@@ -16,7 +16,6 @@ namespace Insight.WS.Client.Business.Storage
 
         #region 变量声明
 
-        private StorageClient _Client;
         private ImageData _Image;
         private DataTable _Customers;
         private DataTable _Suppliers;
@@ -81,9 +80,10 @@ namespace Insight.WS.Client.Business.Storage
         {
             if ((int) e.Node.GetValue("Type") != 2) return;
 
-            _Client = new StorageClient(Binding, Address);
-            _FilterDeliverys = _Client.GetDeliveryForDate(UserSession, ModuleId, e.Node.GetValue("ID").ToString());
-            _Client.Close();
+            using (var cli = new StorageClient(Binding, Address))
+            {
+                _FilterDeliverys = cli.GetDeliveryForDate(UserSession, ModuleId, e.Node.GetValue("ID").ToString());
+            }
 
             _Deliverys = _FilterDeliverys.DefaultView;
             InitReceipts();
@@ -194,9 +194,10 @@ namespace Insight.WS.Client.Business.Storage
         /// </summary>
         private void InitDateTree()
         {
-            _Client = new StorageClient(Binding, Address);
-            _DateTree = _Client.GetDeliveryDate(UserSession);
-            _Client.Close();
+            using (var cli = new StorageClient(Binding, Address))
+            {
+                _DateTree = cli.GetDeliveryDate(UserSession);
+            }
 
             treDate.DataSource = _DateTree;
             Format.TreeFormat(treDate);
@@ -225,9 +226,10 @@ namespace Insight.WS.Client.Business.Storage
         /// </summary>
         private void Search()
         {
-            _Client = new StorageClient(Binding, Address);
-            _SearchDeliverys = _Client.GetDeliveryForName(UserSession, ModuleId, bteSearch.Text.Trim());
-            _Client.Close();
+            using (var cli = new StorageClient(Binding, Address))
+            {
+                _SearchDeliverys = cli.GetDeliveryForName(UserSession, ModuleId, bteSearch.Text.Trim());
+            }
 
             _Deliverys = _SearchDeliverys.DefaultView;
             InitReceipts();
@@ -288,19 +290,19 @@ namespace Insight.WS.Client.Business.Storage
             var printer = Config.Printer("BilPrint");
             if (!isPrinted)
             {
-                _Client = new StorageClient(Binding, Address);
-                var code = _Client.GetDeliveryCode(UserSession, (Guid)_SchemeId, (Guid)bid, ModuleId, null);
-                _Client.Close();
-
-                _Deliverys.Table.Rows.Find(bid)["单据号"] = code;
-                _Image = new ImageData
+                using (var cli = new StorageClient(Binding, Address))
                 {
-                    Code = code.ToString(),
-                    ImageType = type,
-                    SecrecyDegree = _SecrecyLevel,
-                    CreatorDeptId = UserSession.DeptId,
-                    CreatorUserId = UserSession.UserId
-                };
+                    var code = cli.GetDeliveryCode(UserSession, (Guid)_SchemeId, (Guid)bid, ModuleId, null);
+                    _Deliverys.Table.Rows.Find(bid)["单据号"] = code;
+                    _Image = new ImageData
+                    {
+                        Code = code.ToString(),
+                        ImageType = type,
+                        SecrecyDegree = _SecrecyLevel,
+                        CreatorDeptId = UserSession.DeptId,
+                        CreatorUserId = UserSession.UserId
+                    };
+                }
             }
             return PrintImage((Guid)bid, tid, printer, _Image);
         }
@@ -480,18 +482,25 @@ namespace Insight.WS.Client.Business.Storage
             var row = _Deliverys.Table.Rows.Find(_DeliveryId);
             if (General.ShowConfirm(string.Format("您确定要{0}收费记录吗？", barManager.Items["Delete"].Caption)) != DialogResult.OK) return;
 
-            _Client = new StorageClient(Binding, Address);
-            var result = _Client.DelDelivery(UserSession, _DeliveryId);
-            _Client.Close();
-
-            if (result)
+            using (var cli = new StorageClient(Binding, Address))
             {
-                if (_Status == 1) row.Delete();
-                else row["状态"] = "作废";
-            }
-            else
-            {
-                General.ShowError(string.Format("{0}收款记录失败！如多次失败，请联系管理员。", barManager.Items["Delete"].Caption));
+                var result = cli.DelDelivery(UserSession, _DeliveryId);
+                if (result)
+                {
+                    if (_Status == 1)
+                    {
+                        row.Delete();
+                    }
+                    else
+                    {
+                        row["状态"] = "作废";
+                        SwitchItemStatus(new Context("Attachment", false), new Context("Delete", false));
+                    }
+                }
+                else
+                {
+                    General.ShowError(string.Format("{0}收款记录失败！如多次失败，请联系管理员。", barManager.Items["Delete"].Caption));
+                }
             }
         }
 

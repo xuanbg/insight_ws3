@@ -41,7 +41,6 @@ namespace Insight.WS.Client.Business.Storage
 
         #region 变量声明
 
-        private StorageClient _Client;
         private ABS_Delivery _Delivery;
         private DataTable _ItemList;
         private Guid? _CustomerId;
@@ -353,9 +352,10 @@ namespace Insight.WS.Client.Business.Storage
         /// <param name="code"></param>
         private void InitItemList(object code)
         {
-            _Client = new StorageClient(OpenForm.Binding, OpenForm.Address);
-            _ItemList = _Client.Get_GoodsPlan(OpenForm.UserSession, code);
-            _Client.Close();
+            using (var cli = new StorageClient(OpenForm.Binding, OpenForm.Address))
+            {
+                _ItemList = cli.Get_GoodsPlan(OpenForm.UserSession, code);
+            }
 
             if (code != null && _ItemList.Rows.Count == 0)
             {
@@ -455,9 +455,10 @@ namespace Insight.WS.Client.Business.Storage
             var dv = _ItemList.Copy().DefaultView;
             dv.RowFilter = "Selected = 1";
 
-            _Client = new StorageClient(OpenForm.Binding, OpenForm.Address);
-            ReceiptId = _Client.AddDelivery(OpenForm.UserSession, _Delivery, dv.ToTable());
-            _Client.Close();
+            using (var cli = new StorageClient(OpenForm.Binding, OpenForm.Address))
+            {
+                ReceiptId = cli.AddDelivery(OpenForm.UserSession, _Delivery, dv.ToTable());
+            }
 
             if (ReceiptId == null)
             {
