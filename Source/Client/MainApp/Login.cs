@@ -84,8 +84,8 @@ namespace Insight.WS.Client.MainApp
 
             if (_Restart)
             {
-                General.ShowMessage("由于本次更新包含了关键文件，应用程序必须退出以完成更新！\r\n如需进入ERP系统，请您重新启动客户端程序。");
-                DialogResult = DialogResult.Cancel;
+                General.ShowMessage("由于本次更新包含了关键文件，应用程序必须重启以完成更新！");
+                DialogResult = DialogResult.Retry;
                 Close();
             }
             else

@@ -43,13 +43,20 @@ namespace Insight.WS.Client.MainApp
 
             // 打开登录对话框
             var login = new Login { Binding = _Binding };
-            if (login.ShowDialog() == DialogResult.OK)
+            var result = login.ShowDialog();
+            switch (result)
             {
-                Application.Run(new MainForm(login.Session, _Binding));
-            }
-            else
-            {
-                Application.Exit();
+                case DialogResult.OK:
+                    Application.Run(new MainForm(login.Session, _Binding));
+                    break;
+
+                case DialogResult.Cancel:
+                    Application.Exit();
+                    break;
+
+                case DialogResult.Retry:
+                    Application.Restart();
+                    break;
             }
 
         }

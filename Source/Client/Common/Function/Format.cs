@@ -87,6 +87,7 @@ namespace Insight.WS.Client.Common
             }
 
             // 格式化GridView属性
+            view.FocusRectStyle = editable ? DrawFocusRectStyle.CellFocus : DrawFocusRectStyle.RowFullFocus;
             view.OptionsBehavior.Editable = editable;
             view.OptionsBehavior.EditorShowMode = EditorShowMode.MouseDown;
             view.OptionsCustomization.AllowFilter = false;
@@ -96,7 +97,6 @@ namespace Insight.WS.Client.Common
             view.OptionsView.ShowGroupPanel = false;
             view.OptionsView.EnableAppearanceOddRow = true;
             view.RowHeight = 21;
-            view.FocusRectStyle = editable ? DrawFocusRectStyle.CellFocus : DrawFocusRectStyle.RowFullFocus;
             view.VertScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always;
         }
 
@@ -109,13 +109,14 @@ namespace Insight.WS.Client.Common
             // 根据忽略列表隐藏列且使列标题文字居中显示
             foreach (TreeListColumn column in tree.Columns)
             {
-                column.AppearanceHeader.TextOptions.HAlignment = HorzAlignment.Center;
                 var name = column.FieldName;
+                column.AppearanceHeader.TextOptions.HAlignment = HorzAlignment.Center;
                 column.Visible = Ignores.IndexOf(name) < 0 && name.Substring(name.Length - 2).ToUpper() != "ID";
                 if (name == "Index") column.SortOrder = SortOrder.Ascending;
             }
 
             // 格式化TreeList属性
+            tree.BorderStyle = BorderStyles.NoBorder;
             tree.OptionsBehavior.Editable = false;
             tree.OptionsView.ShowIndicator = false;
             tree.OptionsView.ShowHorzLines = false;
@@ -123,7 +124,6 @@ namespace Insight.WS.Client.Common
             tree.OptionsView.ShowColumns = false;
             tree.RowHeight = 23;
             tree.VertScrollVisibility = ScrollVisibility.Always;
-            tree.BorderStyle = BorderStyles.NoBorder;
         }
 
         /// <summary>
