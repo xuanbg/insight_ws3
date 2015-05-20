@@ -285,9 +285,6 @@ namespace Insight.WS.Client.MainApp
             switch (Session.LoginStatus)
             {
                 case LoginResult.Success:
-                    panel.Visible = false;
-                    ShowProgress("正在加载主窗体，请稍候…");
-
                     Config.SaveUserName(Session.LoginName);
                     DialogResult = DialogResult.OK;
                     break;
@@ -318,6 +315,11 @@ namespace Insight.WS.Client.MainApp
             }
         }
 
+        /// <summary>
+        /// 打开登录设置窗口
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSetting_Click(object sender, EventArgs e)
         {
             var loginSet = new LoginSet();
@@ -328,6 +330,11 @@ namespace Insight.WS.Client.MainApp
             Login_Shown(null, null);
         }
 
+        /// <summary>
+        /// 关闭登录窗口
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCancel_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;

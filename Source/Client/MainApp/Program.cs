@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.IO;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.Windows.Forms;
@@ -55,7 +57,18 @@ namespace Insight.WS.Client.MainApp
                     break;
 
                 case DialogResult.Retry:
-                    Application.Restart();
+                    Application.Exit();
+
+                    using (var bat = File.CreateText("restart.bat"))
+                    {
+                        bat.WriteLine(@"start """" ""{0}""", Application.ExecutablePath);
+                        bat.WriteLine("del /f /s /q /a *.bak");
+                        bat.WriteLine("del %0%");
+                    }
+
+                    // 运行restart.bat重启应用程序
+                    var ps = new Process { StartInfo = { FileName = "restart.bat", WindowStyle = ProcessWindowStyle.Hidden } };
+                    ps.Start();
                     break;
             }
 
