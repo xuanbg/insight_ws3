@@ -23,6 +23,9 @@ namespace Insight.WS.Client.MainApp.Service {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private byte[] FileBytesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string FullPathField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -41,6 +44,19 @@ namespace Insight.WS.Client.MainApp.Service {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        internal byte[] FileBytes {
+            get {
+                return this.FileBytesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FileBytesField, value) != true)) {
+                    this.FileBytesField = value;
+                    this.RaisePropertyChanged("FileBytes");
+                }
             }
         }
         
@@ -99,7 +115,7 @@ namespace Insight.WS.Client.MainApp.Service {
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {
-            var propertyChanged = this.PropertyChanged;
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
                 propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
@@ -120,7 +136,7 @@ namespace Insight.WS.Client.MainApp.Service {
         System.Collections.Generic.List<Insight.WS.Client.MainApp.Service.UpdateFile> GetServerList();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILogin/GetFile", ReplyAction="http://tempuri.org/ILogin/GetFileResponse")]
-        byte[] GetFile(Insight.WS.Client.MainApp.Service.UpdateFile file);
+        Insight.WS.Client.MainApp.Service.UpdateFile GetFile(Insight.WS.Client.MainApp.Service.UpdateFile file);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -162,7 +178,7 @@ namespace Insight.WS.Client.MainApp.Service {
             return base.Channel.GetServerList();
         }
         
-        public byte[] GetFile(Insight.WS.Client.MainApp.Service.UpdateFile file) {
+        public Insight.WS.Client.MainApp.Service.UpdateFile GetFile(Insight.WS.Client.MainApp.Service.UpdateFile file) {
             return base.Channel.GetFile(file);
         }
     }

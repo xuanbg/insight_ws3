@@ -11,5 +11,7 @@ namespace Insight.WS.Server.Common
 
         public string Version { get; set; }
 
+        public byte[] FileBytes { get; set; }
+
     }
 }

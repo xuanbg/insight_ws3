@@ -46,13 +46,14 @@ namespace Insight.WS.Client.Common
         }
 
         /// <summary>
-        /// 显示提问对话框
+        /// 显示确认对话框
         /// </summary>
         /// <param name="msg"></param>
+        /// <param name="button"></param>
         /// <returns></returns>
-        public static DialogResult ShowConfirm(string msg)
+        public static DialogResult ShowConfirm(string msg, MessageBoxDefaultButton button = MessageBoxDefaultButton.Button2)
         {
-            return MessageBox.Show(msg, "请确认", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+            return MessageBox.Show(msg, "请确认", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, button);
         }
 
         /// <summary>

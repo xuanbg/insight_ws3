@@ -93,7 +93,9 @@ namespace Insight.WS.Client.Common
         {
             _OpenModules.ForEach(AddPageMdi);
             _Waiting.Close();
-            if (_Session.Signature == General.GetHash("123456")) ChangPassWord(null, null);
+
+            if (_Session.Signature == General.GetHash("123456"))
+                ChangPassWord(null, null);
         }
 
         /// <summary>
@@ -163,7 +165,6 @@ namespace Insight.WS.Client.Common
                 };
 
                 CreateNavItem(groupId, navGroup);
-
                 navGroup.Expanded = ((_NavGroup.Rows.Count * 55 + _ItemCount * 32) < navMain.Height || _Expand);
                 navMain.Groups.Add(navGroup);
             }

@@ -90,20 +90,15 @@ namespace Insight.WS.Service
         /// 根据更新信息获取更新文件
         /// </summary>
         /// <param name="file">更新信息对象实体</param>
-        /// <returns>byte[] 更新文件</returns>
-        public byte[] GetFile(UpdateFile file)
+        /// <returns>UpdateFile 更新信息对象实体</returns>
+        public UpdateFile GetFile(UpdateFile file)
         {
-            var webReq = WebRequest.Create(file.FullPath);
-            var webRes = webReq.GetResponse();
+            var webRes = WebRequest.Create(file.FullPath).GetResponse();
             var stream = webRes.GetResponseStream();
-            // ReSharper disable once AssignNullToNotNullAttribute
-            var reader = new StreamReader(stream);
-
-            var buffer = new byte[webRes.ContentLength];
-            stream.Read(buffer, 0, buffer.Length);
+            file.FileBytes = new byte[webRes.ContentLength];
+            stream.Read(file.FileBytes, 0, file.FileBytes.Length);
             stream.Close();
-            reader.Close();
-            return buffer;
+            return file;
         }
 
         /// <summary>

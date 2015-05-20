@@ -106,7 +106,7 @@ namespace Insight.WS.Client.MainApp
             this.btnSetting.Size = new System.Drawing.Size(80, 23);
             this.btnSetting.TabIndex = 4;
             this.btnSetting.Text = "设  置";
-            this.btnSetting.Click += new System.EventHandler(this.btnSetting_Click);
+            this.btnSetting.Click += new System.EventHandler(this.Setting_Click);
             // 
             // btnCancel
             // 
@@ -118,7 +118,7 @@ namespace Insight.WS.Client.MainApp
             this.btnCancel.Size = new System.Drawing.Size(80, 23);
             this.btnCancel.TabIndex = 5;
             this.btnCancel.Text = "取  消";
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.btnCancel.Click += new System.EventHandler(this.Cancel_Click);
             // 
             // txtPassWord
             // 

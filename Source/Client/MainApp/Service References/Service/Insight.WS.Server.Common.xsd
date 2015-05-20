@@ -36,6 +36,7 @@
   <xs:element name="ArrayOfUpdateFile" nillable="true" type="tns:ArrayOfUpdateFile" />
   <xs:complexType name="UpdateFile">
     <xs:sequence>
+      <xs:element minOccurs="0" name="FileBytes" nillable="true" type="xs:base64Binary" />
       <xs:element minOccurs="0" name="FullPath" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Path" nillable="true" type="xs:string" />

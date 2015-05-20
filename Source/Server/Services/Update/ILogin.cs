@@ -36,9 +36,9 @@ namespace Insight.WS.Service
         /// 根据更新信息获取更新文件
         /// </summary>
         /// <param name="file">更新信息对象实体</param>
-        /// <returns>byte[] 更新文件</returns>
+        /// <returns>UpdateFile 更新信息对象实体</returns>
         [OperationContract]
-        byte[] GetFile(UpdateFile file);
+        UpdateFile GetFile(UpdateFile file);
 
     }
 }
