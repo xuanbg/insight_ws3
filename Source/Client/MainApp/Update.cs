@@ -73,11 +73,10 @@ namespace Insight.WS.Client.MainApp
             }
             catch
             {
-                File.Move(file.Name, file.Name + ".bak");
+                File.Move(path + file.Name, path + file.Name + ".bak");
                 restart = true;
                 goto Start;
             }
-
             fs.Write(file.FileBytes, 0, file.FileBytes.Length);
             return restart;
         }
@@ -92,6 +91,12 @@ namespace Insight.WS.Client.MainApp
         /// <param name="dir"></param>
         private void GetLocalFiles(string dir)
         {
+            // 删除上次更新产生的bak文件
+            foreach (var file in Directory.GetFiles(dir, "*.bak"))
+            {
+                File.Delete(file);
+            }
+
             // 读取目录下文件信息
             var dirInfo = new DirectoryInfo(dir);
             _LocalFiles.AddRange(from file in dirInfo.GetFiles()

@@ -65,22 +65,7 @@ namespace Insight.WS.Client.MainApp
                 goto Start;
             }
 
-            if (_Restart)
-            {
-                General.ShowMessage("由于本次更新包含了关键文件，应用程序必须重启以完成更新！");
-                DialogResult = DialogResult.Retry;
-                Close();
-            }
-            else
-            {
-                pbcLogin.Visible = false;
-                panel.Visible = true;
-                txtUserName.Focus();
-
-                // 自动输入配置文件中保存的用户名
-                txtUserName.EditValue = Config.IsSaveUserInfo() ? Config.UserName() : null;
-                if (!string.IsNullOrEmpty(txtUserName.Text)) txtPassWord.Focus();
-            }
+            EntryLogin();
         }
 
         /// <summary>
@@ -139,12 +124,36 @@ namespace Insight.WS.Client.MainApp
                         restart = restart || update.UpdateFile(cli.GetFile(file));
                     }
                 }
+
                 _CanConnect = true;
                 return restart;
             }
             catch
             {
                 return false;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void EntryLogin()
+        {
+            if (_Restart)
+            {
+                General.ShowMessage("由于本次更新包含了关键文件，应用程序必须重启以完成更新！");
+                DialogResult = DialogResult.Retry;
+                Close();
+            }
+            else
+            {
+                pbcLogin.Visible = false;
+                panel.Visible = true;
+                txtUserName.Focus();
+
+                // 自动输入配置文件中保存的用户名
+                txtUserName.EditValue = Config.IsSaveUserInfo() ? Config.UserName() : null;
+                if (!string.IsNullOrEmpty(txtUserName.Text)) txtPassWord.Focus();
             }
         }
 
@@ -252,6 +261,7 @@ namespace Insight.WS.Client.MainApp
 
             InitParameter();
             _Restart = CheckUpdate();
+            EntryLogin();
         }
 
         /// <summary>
