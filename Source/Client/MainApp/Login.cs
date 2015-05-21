@@ -60,9 +60,7 @@ namespace Insight.WS.Client.MainApp
             if (!_CanConnect && General.ShowConfirm("无法连接服务器！是否检查服务器地址和端口配置？\n\r如果您不知道如何配置，请联系管理员。", MessageBoxDefaultButton.Button1) == DialogResult.OK)
             {
                 var loginSet = new LoginSet();
-                if (loginSet.ShowDialog() != DialogResult.OK) return;
-
-                goto Start;
+                if (loginSet.ShowDialog() == DialogResult.OK) goto Start;
             }
 
             EntryLogin();
@@ -145,6 +143,11 @@ namespace Insight.WS.Client.MainApp
                 DialogResult = DialogResult.Retry;
                 Close();
                 return;
+            }
+
+            if (!_CanConnect)
+            {
+                General.ShowError("仍然无法连接服务器！请重新检查服务器地址和端口配置。");
             }
 
             // 显示登录控件
@@ -260,10 +263,11 @@ namespace Insight.WS.Client.MainApp
         private void Setting_Click(object sender, EventArgs e)
         {
             var loginSet = new LoginSet();
-            if (loginSet.ShowDialog() != DialogResult.OK) return;
-
-            InitParameter();
-            _Restart = CheckUpdate();
+            if (loginSet.ShowDialog() == DialogResult.OK)
+            {
+                InitParameter();
+                _Restart = CheckUpdate();
+            }
             EntryLogin();
         }
 
