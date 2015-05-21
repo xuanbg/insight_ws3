@@ -51,6 +51,11 @@ namespace Insight.WS.Server.Common
         public string Signature { get; set; }
 
         /// <summary>
+        /// 用户状态
+        /// </summary>
+        public bool Validity { get; set; }
+
+        /// <summary>
         /// 用户机器码
         /// </summary>
         public string MachineId { get; set; }
@@ -71,8 +76,8 @@ namespace Insight.WS.Server.Common
     {
         Success,
         Multiple,
-        Failure,
         Online,
+        Failure,
         Banned,
         NotExist,
         Unauthorized

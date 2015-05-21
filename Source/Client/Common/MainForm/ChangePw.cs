@@ -68,9 +68,11 @@ namespace Insight.WS.Client.Common.Dialog
 
             using (var cli = new CommonsClient(MainForm._Binding, MainForm._Address))
             {
-                if (cli.UpdataPassWord(MainForm._Session, General.GetHash(txtNewPw.Text)))
+                var pw = General.GetHash(txtNewPw.Text);
+                if (cli.UpdataPassWord(MainForm._Session, pw))
                 {
                     General.ShowMessage("更换密码成功！请牢记新密码并使用新密码登录系统。");
+                    MainForm._Session.Signature = pw;
                     DialogResult = DialogResult.OK;
                 }
                 else

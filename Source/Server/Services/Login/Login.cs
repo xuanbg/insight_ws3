@@ -42,56 +42,55 @@ namespace Insight.WS.Service
                 return obj;
             }
 
-            var user = CommonDAL.GetUser(obj.LoginName);
-
-            // 用户不存在
-            if (user == null)
+            var pw = obj.Signature;
+            var us = OnlineManage.Sessions.Find(s => s.LoginName == obj.LoginName);
+            if (us == null)
             {
-                obj.LoginStatus = LoginResult.NotExist;
-                return obj;
+                var user = CommonDAL.GetUser(obj.LoginName);
+
+                // 用户不存在
+                if (user == null)
+                {
+                    obj.LoginStatus = LoginResult.NotExist;
+                    return obj;
+                }
+
+                // 首次登录初始化Session并加入List
+                obj.ID = OnlineManage.Sessions.Count;
+                obj.UserId = user.ID;
+                obj.UserName = user.Name;
+                obj.Signature = user.Password;
+                obj.Validity = user.Validity;
+
+                OnlineManage.Sessions.Add(obj);
+                us = OnlineManage.Sessions[obj.ID];
+            }
+            else if (us.SessionId != Guid.Empty)
+            {
+                us.LoginStatus = us.MachineId != obj.MachineId ? LoginResult.Online : LoginResult.Multiple;
+            }
+            else
+            {
+                us.SessionId = obj.SessionId;
+                us.LoginStatus = LoginResult.Success;
             }
 
             // 用户被封禁
-            if (!user.Validity)
+            if (!us.Validity)
             {
                 obj.LoginStatus = LoginResult.Banned;
                 return obj;
             }
 
             // 密码不正确
-            if (user.Password.ToUpper() != obj.Signature)
+            if (us.Signature != pw)
             {
                 obj.LoginStatus = LoginResult.Failure;
                 return obj;
             }
 
-            var us = OnlineManage.Sessions.Find(s => s.UserId == user.ID);
-
-            // 已经在其他设备登录
-            if (us != null && us.MachineId != obj.MachineId)
-            {
-                obj.LoginStatus = LoginResult.Online;
-                return obj;
-            }
-
-            obj.UserId = user.ID;
-            obj.UserName = user.Name;
-            obj.LastConnect = DateTime.Now;
-
-            // 是否第一次登录
-            if (us == null)
-            {
-                obj.ID = OnlineManage.Sessions.Count;
-                obj.LoginStatus = LoginResult.Success;
-                OnlineManage.Sessions.Add(obj);
-            }
-            else
-            {
-                obj.ID = us.ID;
-                obj.LoginStatus = us.SessionId == Guid.Empty ? LoginResult.Success : LoginResult.Multiple;
-                OnlineManage.Sessions[obj.ID] = obj;
-            }
-            return obj;
+            us.LastConnect = DateTime.Now;
+            return us;
         }
 
         /// <summary>

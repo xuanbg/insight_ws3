@@ -224,7 +224,12 @@ namespace Insight.WS.Service
             if (!OnlineManage.Verification(us)) return false;
 
             var sql = string.Format("update SYS_User set Validity = '{0}' where ID = '{1}'", validity, id);
-            return SqlHelper.SqlNonQuery(sql) > 0;
+            if (SqlHelper.SqlNonQuery(sql) > 0)
+            {
+                OnlineManage.Sessions.Find(s => s.UserId == id).Validity = validity;
+                return true;
+            }
+            return false;
         }
 
         #endregion

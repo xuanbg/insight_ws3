@@ -108,7 +108,12 @@ namespace Insight.WS.Service
             if (!OnlineManage.Verification(us)) return false;
 
             var sql = string.Format("update SYS_User set Password = '{0}' where ID = '{1}' ", pw, us.UserId);
-            return SqlHelper.SqlNonQuery(sql) > 0;
+            if (SqlHelper.SqlNonQuery(sql) > 0)
+            {
+                OnlineManage.Sessions[us.ID].Signature = pw;
+                return true;
+            }
+            return false;
         }
 
         #endregion
