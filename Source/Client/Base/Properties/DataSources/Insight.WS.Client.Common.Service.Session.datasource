@@ -6,5 +6,5 @@
     cause the file to be unrecognizable by the program.
 -->
 <GenericObjectDataSource DisplayName="Session" Version="1.0" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
-   <TypeInfo>Insight.WS.Client.Common.Service.Session, Common, Version=1.0.5504.37204, Culture=neutral, PublicKeyToken=null</TypeInfo>
+   <TypeInfo>Insight.WS.Client.Common.Service.Session, Common, Version=3.0.5619.23873, Culture=neutral, PublicKeyToken=null</TypeInfo>
 </GenericObjectDataSource>

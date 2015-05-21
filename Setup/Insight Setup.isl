@@ -4602,9 +4602,9 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>PROGMSG_IIS_ROLLBACKAPPPOOLS</td><td>##IDS_PROGMSG_IIS_ROLLBACKAPPPOOLS##</td><td/></row>
 		<row><td>PROGMSG_IIS_ROLLBACKVROOTS</td><td>##IDS_PROGMSG_IIS_ROLLBACKVROOTS##</td><td/></row>
 		<row><td>PROGMSG_IIS_ROLLBACKWEBSERVICEEXTENSIONS</td><td>##IDS_PROGMSG_IIS_ROLLBACKWEBSERVICEEXTENSIONS##</td><td/></row>
-		<row><td>ProductCode</td><td>{530CC2FE-5881-4543-B253-F02E82FC2C78}</td><td/></row>
+		<row><td>ProductCode</td><td>{24AA9E7F-40E0-478F-B65C-185ABCFD905D}</td><td/></row>
 		<row><td>ProductName</td><td>Insight WS3</td><td/></row>
-		<row><td>ProductVersion</td><td>3.08.14</td><td/></row>
+		<row><td>ProductVersion</td><td>3.08.15</td><td/></row>
 		<row><td>ProgressType0</td><td>install</td><td/></row>
 		<row><td>ProgressType1</td><td>Installing</td><td/></row>
 		<row><td>ProgressType2</td><td>installed</td><td/></row>

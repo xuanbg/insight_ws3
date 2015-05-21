@@ -86,6 +86,19 @@ namespace Insight.WS.Client.Common
             }
         }
 
+        /// <summary>
+        /// 删除在线用户会话
+        /// </summary>
+        /// <param name="sid">要删除Session的ID</param>
+        /// <returns>bool 是否删除成功</returns>
+        public static bool DelOnlineUser(int? sid = null)
+        {
+            using (var cli = new CommonsClient(MainForm._Binding, MainForm._Address))
+            {
+                return cli.DelOnlineUser(MainForm._Session, sid);
+            }
+        }
+
         #endregion
 
         #region 验证公共方法

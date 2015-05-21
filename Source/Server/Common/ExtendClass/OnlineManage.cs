@@ -33,10 +33,10 @@ namespace Insight.WS.Server.Common
         /// <returns></returns>
         public static bool Verification(Session obj)
         {
-            if (obj == null) return false;
+            if (obj == null || obj.ID == Sessions.Count) return false;
 
-            var us = Sessions.Find(s => s.UserId == obj.UserId);
-            if (us == null || us.Signature != obj.Signature) return false;
+            var us = Sessions[obj.ID];
+            if (us.SessionId == Guid.Empty || us.Signature != obj.Signature) return false;
 
             us.LastConnect = DateTime.Now;
             return true;

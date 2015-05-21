@@ -59,17 +59,5 @@ namespace Insight.WS.Service
 
         #endregion
 
-        #region 业务逻辑
-
-        /// <summary>
-        /// 删除在线用户会话
-        /// </summary>
-        /// <param name="us">Session对象实体</param>
-        /// <returns>bool 是否删除成功</returns>
-        [OperationContract]
-        bool Exit(Session us);
-
-        #endregion
-
     }
 }

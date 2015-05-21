@@ -113,23 +113,5 @@ namespace Insight.WS.Service
 
         #endregion
 
-        #region 业务逻辑
-
-        /// <summary>
-        /// 删除在线用户会话
-        /// </summary>
-        /// <param name="us">Session对象实体</param>
-        /// <returns>bool 是否删除成功</returns>
-        public bool Exit(Session us)
-        {
-            if (us == null) return false;
-            if (!OnlineManage.Verification(us)) return false;
-
-            var ls = OnlineManage.Sessions.Find(s => s.SessionId == us.SessionId);
-            return OnlineManage.Sessions.Remove(ls);
-        }
-
-        #endregion
-
     }
 }

@@ -32,8 +32,10 @@ namespace Insight.WS.Service
         /// <returns>Session对象实体</returns>
         public Session UserLogin(Session obj)
         {
+            // 空参数
             if (obj == null) return null;
 
+            // 在线数超限
             if (OnlineManage.Sessions.Count >= OnlineManage.MaxAuthorized)
             {
                 obj.LoginStatus = LoginResult.Unauthorized;
@@ -41,36 +43,53 @@ namespace Insight.WS.Service
             }
 
             var user = CommonDAL.GetUser(obj.LoginName);
+
+            // 用户不存在
             if (user == null)
             {
                 obj.LoginStatus = LoginResult.NotExist;
                 return obj;
             }
 
-            var us = OnlineManage.Sessions.Find(s => s.UserId == user.ID);
+            // 用户被封禁
+            if (!user.Validity)
+            {
+                obj.LoginStatus = LoginResult.Banned;
+                return obj;
+            }
+
+            // 密码不正确
             if (user.Password.ToUpper() != obj.Signature)
             {
                 obj.LoginStatus = LoginResult.Failure;
+                return obj;
             }
-            else if (!user.Validity)
+
+            var us = OnlineManage.Sessions.Find(s => s.UserId == user.ID);
+
+            // 已经在其他设备登录
+            if (us != null && us.MachineId != obj.MachineId)
             {
-                obj.LoginStatus = LoginResult.Banned;
+                obj.LoginStatus = LoginResult.Online;
+                return obj;
+            }
+
+            obj.UserId = user.ID;
+            obj.UserName = user.Name;
+            obj.LastConnect = DateTime.Now;
+
+            // 是否第一次登录
+            if (us == null)
+            {
+                obj.ID = OnlineManage.Sessions.Count;
+                obj.LoginStatus = LoginResult.Success;
+                OnlineManage.Sessions.Add(obj);
             }
             else
             {
-                obj.UserId = user.ID;
-                obj.UserName = user.Name;
-                obj.LastConnect = DateTime.Now;
-                if (us != null && us.MachineId != obj.MachineId)
-                {
-                    obj.LoginStatus = LoginResult.Online;
-                }
-                else
-                {
-                    obj.LoginStatus = LoginResult.Success;
-                    OnlineManage.Sessions.Add(obj);
-                    OnlineManage.Sessions.Remove(us);
-                }
+                obj.ID = us.ID;
+                obj.LoginStatus = us.SessionId == Guid.Empty ? LoginResult.Success : LoginResult.Multiple;
+                OnlineManage.Sessions[obj.ID] = obj;
             }
             return obj;
         }

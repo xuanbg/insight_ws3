@@ -19,21 +19,7 @@ namespace Insight.WS.Service
         /// <returns>Session List 在线用户列表</returns>
         public List<Session> GetOnlineUser(Session us)
         {
-            return !OnlineManage.Verification(us) ? null : OnlineManage.Sessions;
-        }
-
-        /// <summary>
-        /// 删除在线用户
-        /// </summary>
-        /// <param name="us">用户会话对象实体</param>
-        /// <param name="sid">会话ID</param>
-        /// <returns>bool 是否删除成功</returns>
-        public bool DelOnlineUser(Session us, Guid sid)
-        {
-            if (!OnlineManage.Verification(us)) return false;
-
-            var ls = OnlineManage.Sessions.Find(s => s.SessionId == sid);
-            return ls != null && OnlineManage.Sessions.Remove(ls);
+            return !OnlineManage.Verification(us) ? null : OnlineManage.Sessions.FindAll(s => s.SessionId != Guid.Empty);
         }
 
         #endregion

@@ -17,14 +17,5 @@ namespace Insight.WS.Service
         [OperationContract]
         List<Session> GetOnlineUser(Session us);
 
-        /// <summary>
-        /// 删除在线用户
-        /// </summary>
-        /// <param name="us">用户会话对象实体</param>
-        /// <param name="sid">会话ID</param>
-        /// <returns>bool 是否删除成功</returns>
-        [OperationContract]
-        bool DelOnlineUser(Session us, Guid sid);
-
     }
 }

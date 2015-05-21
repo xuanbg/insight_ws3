@@ -27,12 +27,6 @@
   <wsdl:message name="IBase_GetOnlineUser_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetOnlineUserResponse" />
   </wsdl:message>
-  <wsdl:message name="IBase_DelOnlineUser_InputMessage">
-    <wsdl:part name="parameters" element="tns:DelOnlineUser" />
-  </wsdl:message>
-  <wsdl:message name="IBase_DelOnlineUser_OutputMessage">
-    <wsdl:part name="parameters" element="tns:DelOnlineUserResponse" />
-  </wsdl:message>
   <wsdl:message name="IBase_GetOrgs_InputMessage">
     <wsdl:part name="parameters" element="tns:GetOrgs" />
   </wsdl:message>
@@ -350,10 +344,6 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IBase/GetOnlineUser" message="tns:IBase_GetOnlineUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBase/GetOnlineUserResponse" message="tns:IBase_GetOnlineUser_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="DelOnlineUser">
-      <wsdl:input wsaw:Action="http://tempuri.org/IBase/DelOnlineUser" message="tns:IBase_DelOnlineUser_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IBase/DelOnlineUserResponse" message="tns:IBase_DelOnlineUser_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="GetOrgs">
       <wsdl:input wsaw:Action="http://tempuri.org/IBase/GetOrgs" message="tns:IBase_GetOrgs_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBase/GetOrgsResponse" message="tns:IBase_GetOrgs_OutputMessage" />
@@ -569,15 +559,6 @@
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
     <wsdl:operation name="GetOnlineUser">
       <soap12:operation soapAction="http://tempuri.org/IBase/GetOnlineUser" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="DelOnlineUser">
-      <soap12:operation soapAction="http://tempuri.org/IBase/DelOnlineUser" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

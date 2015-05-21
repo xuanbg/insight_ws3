@@ -111,6 +111,15 @@ namespace Insight.WS.Service
         #region 其它接口
 
         /// <summary>
+        /// 删除在线用户会话
+        /// </summary>
+        /// <param name="us">Session对象实体</param>
+        /// <param name="sid">要删除Session的ID</param>
+        /// <returns>bool 是否删除成功</returns>
+        [OperationContract]
+        bool DelOnlineUser(Session us, int? sid);
+
+        /// <summary>
         /// 获取组织机构列表
         /// </summary>
         /// <param name="us">用户会话对象实体</param>

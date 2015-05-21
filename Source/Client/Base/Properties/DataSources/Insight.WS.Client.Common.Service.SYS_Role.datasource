@@ -5,6 +5,6 @@
     Renaming the file extension or editing the content of this file may   
     cause the file to be unrecognizable by the program.
 -->
-<GenericObjectDataSource DisplayName="SYS_Code_Scheme" Version="1.0" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
-   <TypeInfo>Insight.WS.Client.Common.Service.SYS_Code_Scheme, Common, Version=1.0.5482.36887, Culture=neutral, PublicKeyToken=null</TypeInfo>
+<GenericObjectDataSource DisplayName="SYS_Role" Version="1.0" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+   <TypeInfo>Insight.WS.Client.Common.Service.SYS_Role, Common, Version=3.0.5619.23873, Culture=neutral, PublicKeyToken=null</TypeInfo>
 </GenericObjectDataSource>

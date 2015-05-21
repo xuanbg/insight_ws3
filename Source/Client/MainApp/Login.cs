@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.Threading;
@@ -229,6 +230,11 @@ namespace Insight.WS.Client.MainApp
                     DialogResult = DialogResult.OK;
                     break;
 
+                case LoginResult.Multiple:
+                    var proc = Process.GetProcessesByName(Process.GetCurrentProcess().ProcessName);
+                    DialogResult = proc.Length > 1 ? DialogResult.Cancel : DialogResult.OK;
+                    break;
+
                 case LoginResult.Failure:
                     General.ShowWarning("对不起，您输入的密码不正确！\r\n如果您不知道或遗忘自己的密码，请联系管理员。");
                     txtPassWord.EditValue = null;
@@ -247,6 +253,8 @@ namespace Insight.WS.Client.MainApp
 
                 case LoginResult.Banned:
                     General.ShowWarning("该账户已封禁！在解封前您不能登录系统。\r\n如果您需要使用该账号登录系统，请联系管理员。");
+                    txtUserName.EditValue = null;
+                    txtUserName.Focus();
                     break;
 
                 case LoginResult.Unauthorized:

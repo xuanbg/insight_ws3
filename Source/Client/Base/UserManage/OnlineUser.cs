@@ -56,10 +56,7 @@ namespace Insight.WS.Client.Platform.Base
                 return;
             }
 
-            _Client = new BaseClient(OpenForm.Binding, OpenForm.Address);
-            var result = _Client.DelOnlineUser(OpenForm.UserSession, cs.SessionId);
-            _Client.Close();
-            if (result)
+            if (Commons.DelOnlineUser(cs.ID))
             {
                 gdvOnline.DeleteRow(gdvOnline.FocusedRowHandle);
             }
@@ -78,10 +75,10 @@ namespace Insight.WS.Client.Platform.Base
             Format.GridFormat(gdvOnline);
             gdvOnline.Columns["UserName"].Width = 80;
             gdvOnline.Columns["LoginName"].Width = 120;
-            gdvOnline.Columns["DeptName"].Width = 140;
+            gdvOnline.Columns["DeptName"].Width = 160;
             gdvOnline.Columns["MachineId"].Visible = true;
             gdvOnline.Columns["MachineId"].Width = 240;
-            gdvOnline.Columns["LastConnect"].Width = 130;
+            gdvOnline.Columns["LastConnect"].Width = 110;
         }
 
         #endregion

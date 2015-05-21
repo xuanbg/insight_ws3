@@ -6,6 +6,11 @@ namespace Insight.WS.Server.Common
     {
 
         /// <summary>
+        /// 自增ID
+        /// </summary>
+        public int ID { get; set; }
+
+        /// <summary>
         /// 会话ID
         /// </summary>
         public Guid SessionId { get; set; }
@@ -65,6 +70,7 @@ namespace Insight.WS.Server.Common
     public enum LoginResult
     {
         Success,
+        Multiple,
         Failure,
         Online,
         Banned,

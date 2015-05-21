@@ -93,6 +93,11 @@ namespace Insight.WS.Client.Common
             Close();
         }
 
+        /// <summary>
+        /// 对话框关闭时弹出确认信息
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected virtual void DialogClosing(object sender, FormClosingEventArgs e)
         {
             if (DialogResult == DialogResult.OK) return;
