@@ -135,7 +135,7 @@ namespace Insight.WS.Client.MainApp
         }
 
         /// <summary>
-        /// 
+        /// 显示登录控件
         /// </summary>
         private void EntryLogin()
         {
@@ -144,16 +144,18 @@ namespace Insight.WS.Client.MainApp
                 General.ShowMessage("由于本次更新包含了关键文件，应用程序必须重启以完成更新！");
                 DialogResult = DialogResult.Retry;
                 Close();
+                return;
             }
-            else
-            {
-                pbcLogin.Visible = false;
-                panel.Visible = true;
-                txtUserName.Focus();
 
-                // 自动输入配置文件中保存的用户名
-                txtUserName.EditValue = Config.IsSaveUserInfo() ? Config.UserName() : null;
-                if (!string.IsNullOrEmpty(txtUserName.Text)) txtPassWord.Focus();
+            // 显示登录控件
+            pbcLogin.Visible = false;
+            panel.Visible = true;
+            txtUserName.Focus();
+            txtUserName.EditValue = Config.IsSaveUserInfo() ? Config.UserName() : null;
+
+            if (!string.IsNullOrEmpty(txtUserName.Text))
+            {
+                txtPassWord.Focus();
             }
         }
 
@@ -193,8 +195,7 @@ namespace Insight.WS.Client.MainApp
         /// <param name="e"></param>
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            Session.LoginName = txtUserName.Text.Trim();
-            if (string.IsNullOrEmpty(Session.LoginName))
+            if (string.IsNullOrEmpty(txtUserName.Text.Trim()))
             {
                 General.ShowMessage("请输入用户名！");
                 txtUserName.Focus();
@@ -208,6 +209,8 @@ namespace Insight.WS.Client.MainApp
                 return;
             }
 
+            // 初始化Session并登录系统
+            Session.LoginName = txtUserName.Text.Trim();
             Session.Signature = General.GetHash(txtPassWord.Text.Trim());
             Session.DeptId = (Guid?)lokDepartment.EditValue;
             Session.DeptName = lokDepartment.EditValue == null ? null : lokDepartment.Text;
