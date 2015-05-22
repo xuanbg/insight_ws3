@@ -32,10 +32,8 @@ namespace Insight.WS.Service
         /// <returns>Session对象实体</returns>
         public Session UserLogin(Session obj)
         {
-            // 空参数
             if (obj == null) return null;
 
-            // 在线数超限
             if (OnlineManage.Sessions.Count >= OnlineManage.MaxAuthorized)
             {
                 obj.LoginStatus = LoginResult.Unauthorized;
@@ -47,15 +45,12 @@ namespace Insight.WS.Service
             if (us == null)
             {
                 var user = CommonDAL.GetUser(obj.LoginName);
-
-                // 用户不存在
                 if (user == null)
                 {
                     obj.LoginStatus = LoginResult.NotExist;
                     return obj;
                 }
 
-                // 首次登录初始化Session并加入List
                 obj.ID = OnlineManage.Sessions.Count;
                 obj.UserId = user.ID;
                 obj.UserName = user.Name;
@@ -78,15 +73,13 @@ namespace Insight.WS.Service
             // 用户被封禁
             if (!us.Validity)
             {
-                obj.LoginStatus = LoginResult.Banned;
-                return obj;
+                us.LoginStatus = LoginResult.Banned;
             }
 
             // 密码不正确
             if (us.Signature != pw)
             {
-                obj.LoginStatus = LoginResult.Failure;
-                return obj;
+                us.LoginStatus = LoginResult.Failure;
             }
 
             us.LastConnect = DateTime.Now;
