@@ -71,16 +71,10 @@ namespace Insight.WS.Service
             }
 
             // 用户被封禁
-            if (!us.Validity)
-            {
-                us.LoginStatus = LoginResult.Banned;
-            }
+            if (!us.Validity) us.LoginStatus = LoginResult.Banned;
 
             // 密码不正确
-            if (us.Signature != pw)
-            {
-                us.LoginStatus = LoginResult.Failure;
-            }
+            if (us.Signature != pw) us.LoginStatus = LoginResult.Failure;
 
             us.LastConnect = DateTime.Now;
             return us;
@@ -122,11 +116,14 @@ namespace Insight.WS.Service
         {
             var dirInfo = new DirectoryInfo(dir);
             list.AddRange(from file in dirInfo.GetFiles()
-                where ".dll.exe.frl".IndexOf(file.Extension) >= 0
-                select new UpdateFile
-                {
-                    Name = file.Name, Path = file.DirectoryName.Replace(_RootPath, ""), FullPath = file.FullName, Version = FileVersionInfo.GetVersionInfo(file.FullName).FileVersion
-                });
+                          where ".dll.exe.frl".IndexOf(file.Extension) >= 0
+                          select new UpdateFile
+                          {
+                              Name = file.Name,
+                              Path = file.DirectoryName.Replace(_RootPath, ""),
+                              FullPath = file.FullName, 
+                              Version = FileVersionInfo.GetVersionInfo(file.FullName).FileVersion
+                          });
 
             var dirs = Directory.GetDirectories(dir);
             foreach (var path in dirs)
