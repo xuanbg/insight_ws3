@@ -124,8 +124,7 @@ namespace Insight.WS.Client.Common
                 Font = new Font("宋体", size, FontStyle.Bold)
             };
 
-            var p = fr.PreparedPages.Count;
-            for (var i = 0; i < p; i++)
+            for (var i = 0; i < fr.PreparedPages.Count; i++)
             {
                 var pag = fr.PreparedPages.GetPage(i);
                 pag.Watermark = wm;
