@@ -18,6 +18,7 @@
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/System.Data" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="ISettlement_GetClearingDate_InputMessage">

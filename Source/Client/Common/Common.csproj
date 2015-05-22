@@ -165,43 +165,6 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\DataSources\System.Data.DataTable.datasource" />
-    <None Include="Service References\Service\Arrays.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\Service\Insight.WS.Client.Common.Service.BASE_Category.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\Service\Insight.WS.Client.Common.Service.ImageData.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\Service\Insight.WS.Client.Common.Service.MasterData.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\Service\Insight.WS.Client.Common.Service.MDG_Contact.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\Service\Insight.WS.Client.Common.Service.SYS_Module.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\Service\Insight.WS.Client.Common.Service.SYS_ModuleParam.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\Service\Insight.WS.Server.Common.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\Service\service.wsdl" />
-    <None Include="Service References\Service\service.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\Service\service1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\Service\System.Data.xsd">
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="CommonDialog\Unshared.resx">
       <DependentUpon>Unshared.cs</DependentUpon>
     </EmbeddedResource>
@@ -246,6 +209,46 @@
     <EmbeddedResource Include="CommonDialog\Handover.resx">
       <DependentUpon>Handover.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\DataSources\System.Data.DataTable.datasource" />
+    <None Include="Service References\Service\Arrays.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Service\Insight.WS.Client.Common.Service.BASE_Category.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Service\Insight.WS.Client.Common.Service.ImageData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Service\Insight.WS.Client.Common.Service.MasterData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Service\Insight.WS.Client.Common.Service.MDG_Contact.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Service\Insight.WS.Client.Common.Service.SYS_Module.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Service\Insight.WS.Client.Common.Service.SYS_ModuleParam.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Service\Insight.WS.Server.Common.ORM.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Service\Insight.WS.Server.Common.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Service\service.wsdl" />
+    <None Include="Service References\Service\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Service\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Service\System.Data.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\Service\" />

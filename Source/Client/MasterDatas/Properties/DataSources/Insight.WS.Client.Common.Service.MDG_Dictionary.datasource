@@ -6,5 +6,5 @@
     cause the file to be unrecognizable by the program.
 -->
 <GenericObjectDataSource DisplayName="MDG_Dictionary" Version="1.0" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
-   <TypeInfo>Insight.WS.Client.Common.Service.MDG_Dictionary, Common, Version=1.0.5506.40830, Culture=neutral, PublicKeyToken=null</TypeInfo>
+   <TypeInfo>Insight.WS.Client.Common.Service.MDG_Dictionary, Common, Version=3.0.5620.28303, Culture=neutral, PublicKeyToken=null</TypeInfo>
 </GenericObjectDataSource>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="b327f1b1-36ae-42df-901d-6ae6e44fc880" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="160e130e-60c6-4de8-b1e4-b7130c0af2ce" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <EnableDataBinding>true</EnableDataBinding>
@@ -23,11 +23,12 @@
     <MetadataSource Address="net.tcp://localhost:7210/Settlement/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="13a22096-8fe8-4788-a4d5-42b36d75c0c5" SourceId="1" SourceUrl="net.tcp://localhost:7210/Settlement/mex" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="07ff1769-39da-4f5e-b531-87fd10e130a8" SourceId="1" SourceUrl="net.tcp://localhost:7210/Settlement/mex" />
-    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="21513a76-3de9-4aa4-9f70-4f35a000bbb0" SourceId="1" SourceUrl="net.tcp://localhost:7210/Settlement/mex" />
-    <MetadataFile FileName="Insight.WS.Server.Common.xsd" MetadataType="Schema" ID="dd153d39-4be5-48c8-86e6-8e06d910f51a" SourceId="1" SourceUrl="net.tcp://localhost:7210/Settlement/mex" />
-    <MetadataFile FileName="System.Data.xsd" MetadataType="Schema" ID="0a64967e-502e-41d1-943b-e10e1396d78e" SourceId="1" SourceUrl="net.tcp://localhost:7210/Settlement/mex" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="fd03f094-75b6-41d4-930a-3d0ad81058c2" SourceId="1" SourceUrl="net.tcp://localhost:7210/Settlement/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="3ff3a763-d364-4e0c-a1bc-6c9e666c951e" SourceId="1" SourceUrl="net.tcp://localhost:7210/Settlement/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="a31ab273-ae1b-496f-b84c-3444eb52acbe" SourceId="1" SourceUrl="net.tcp://localhost:7210/Settlement/mex" />
+    <MetadataFile FileName="Insight.WS.Server.Common.xsd" MetadataType="Schema" ID="aed96380-e2c1-4201-8f4f-2c5617d73d61" SourceId="1" SourceUrl="net.tcp://localhost:7210/Settlement/mex" />
+    <MetadataFile FileName="System.Data.xsd" MetadataType="Schema" ID="ac3f3a6e-2a2b-4b6c-bace-b6941d7e1fd2" SourceId="1" SourceUrl="net.tcp://localhost:7210/Settlement/mex" />
+    <MetadataFile FileName="Insight.WS.Server.Common.ORM.xsd" MetadataType="Schema" ID="0981d885-b612-45bc-ac8a-6b5121bc29ba" SourceId="1" SourceUrl="net.tcp://localhost:7210/Settlement/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

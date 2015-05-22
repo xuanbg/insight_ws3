@@ -2,6 +2,7 @@
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" />
   <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM" />
   <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <xs:element name="GetOnlineUser">
     <xs:complexType>
@@ -55,7 +56,7 @@
   <xs:element name="GetOrgResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="GetOrgResult" nillable="true" type="q6:SYS_Organization" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM" minOccurs="0" name="GetOrgResult" nillable="true" type="q6:SYS_Organization" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -118,7 +119,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q10:Session" />
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="obj" nillable="true" type="q11:SYS_Organization" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM" minOccurs="0" name="obj" nillable="true" type="q11:SYS_Organization" />
         <xs:element minOccurs="0" name="index" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
@@ -134,7 +135,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q12:Session" />
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="obj" nillable="true" type="q13:SYS_OrgMerger" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM" minOccurs="0" name="obj" nillable="true" type="q13:SYS_OrgMerger" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -165,7 +166,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q17:Session" />
-        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="obj" nillable="true" type="q18:SYS_Organization" />
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM" minOccurs="0" name="obj" nillable="true" type="q18:SYS_Organization" />
         <xs:element minOccurs="0" name="index" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
@@ -181,7 +182,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q19:Session" />
-        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="obj" nillable="true" type="q20:SYS_Organization" />
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM" minOccurs="0" name="obj" nillable="true" type="q20:SYS_Organization" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -260,7 +261,7 @@
   <xs:element name="GetGroupResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="GetGroupResult" nillable="true" type="q28:SYS_UserGroup" />
+        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM" minOccurs="0" name="GetGroupResult" nillable="true" type="q28:SYS_UserGroup" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -302,7 +303,7 @@
   <xs:element name="GetUserResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="GetUserResult" nillable="true" type="q32:SYS_User" />
+        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM" minOccurs="0" name="GetUserResult" nillable="true" type="q32:SYS_User" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -365,7 +366,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q36:Session" />
-        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="obj" nillable="true" type="q37:SYS_UserGroup" />
+        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM" minOccurs="0" name="obj" nillable="true" type="q37:SYS_UserGroup" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -380,7 +381,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q38="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q38:Session" />
-        <xs:element xmlns:q39="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="obj" nillable="true" type="q39:SYS_User" />
+        <xs:element xmlns:q39="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM" minOccurs="0" name="obj" nillable="true" type="q39:SYS_User" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -411,7 +412,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q43="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q43:Session" />
-        <xs:element xmlns:q44="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="obj" nillable="true" type="q44:SYS_UserGroup" />
+        <xs:element xmlns:q44="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM" minOccurs="0" name="obj" nillable="true" type="q44:SYS_UserGroup" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -426,7 +427,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q45="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q45:Session" />
-        <xs:element xmlns:q46="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="obj" nillable="true" type="q46:SYS_User" />
+        <xs:element xmlns:q46="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM" minOccurs="0" name="obj" nillable="true" type="q46:SYS_User" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -536,7 +537,7 @@
   <xs:element name="GetRoleResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q58="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="GetRoleResult" nillable="true" type="q58:SYS_Role" />
+        <xs:element xmlns:q58="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM" minOccurs="0" name="GetRoleResult" nillable="true" type="q58:SYS_Role" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -819,7 +820,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q74="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q74:Session" />
-        <xs:element xmlns:q75="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="obj" nillable="true" type="q75:SYS_Role" />
+        <xs:element xmlns:q75="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM" minOccurs="0" name="obj" nillable="true" type="q75:SYS_Role" />
         <xs:element minOccurs="0" name="action" nillable="true">
           <xs:complexType>
             <xs:annotation>
@@ -894,7 +895,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q81="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q81:Session" />
-        <xs:element xmlns:q82="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="obj" nillable="true" type="q82:SYS_Role" />
+        <xs:element xmlns:q82="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM" minOccurs="0" name="obj" nillable="true" type="q82:SYS_Role" />
         <xs:element xmlns:q83="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="adl" nillable="true" type="q83:ArrayOfanyType" />
         <xs:element xmlns:q84="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ddl" nillable="true" type="q84:ArrayOfanyType" />
         <xs:element xmlns:q85="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="cdl" nillable="true" type="q85:ArrayOfanyType" />
@@ -1073,7 +1074,7 @@
   <xs:element name="GetSchemeResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q95="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="GetSchemeResult" nillable="true" type="q95:SYS_Code_Scheme" />
+        <xs:element xmlns:q95="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM" minOccurs="0" name="GetSchemeResult" nillable="true" type="q95:SYS_Code_Scheme" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1098,7 +1099,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q98="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q98:Session" />
-        <xs:element xmlns:q99="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="obj" nillable="true" type="q99:SYS_Code_Scheme" />
+        <xs:element xmlns:q99="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM" minOccurs="0" name="obj" nillable="true" type="q99:SYS_Code_Scheme" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1113,7 +1114,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q100="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q100:Session" />
-        <xs:element xmlns:q101="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="obj" nillable="true" type="q101:SYS_Code_Scheme" />
+        <xs:element xmlns:q101="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM" minOccurs="0" name="obj" nillable="true" type="q101:SYS_Code_Scheme" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using Insight.WS.Server.Common;
+using Insight.WS.Server.Common.ORM;
 
 namespace Insight.WS.Service.Business
 {

@@ -60,7 +60,8 @@ namespace Insight.WS.Service
                 OnlineManage.Sessions.Add(obj);
                 us = OnlineManage.Sessions[obj.ID];
             }
-            else if (us.SessionId != Guid.Empty)
+            
+            if (us.SessionId != Guid.Empty)
             {
                 us.LoginStatus = us.MachineId != obj.MachineId ? LoginResult.Online : LoginResult.Multiple;
             }

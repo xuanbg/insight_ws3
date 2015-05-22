@@ -115,7 +115,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\DataSources\Insight.WS.Client.Common.Service.Session.datasource" />
-    <None Include="Properties\DataSources\Insight.WS.Client.Common.Service.UpdateFile.datasource" />
     <None Include="Properties\DataSources\System.Data.DataTable.datasource" />
     <None Include="Service References\Service\Insight.WS.Client.MainApp.Service.UpdateFile.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>

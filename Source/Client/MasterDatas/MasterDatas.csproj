@@ -124,7 +124,33 @@
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Properties\DataSources\Insight.WS.Client.Common.Service.MDG_Dictionary.datasource" />
+    <None Include="Properties\DataSources\Insight.WS.Client.Common.Service.MDG_Employee.datasource" />
+    <None Include="Properties\DataSources\Insight.WS.Client.Common.Service.MDG_Expense.datasource" />
+    <None Include="Properties\DataSources\Insight.WS.Client.Common.Service.MDG_Material.datasource" />
+    <None Include="Properties\DataSources\Insight.WS.Client.Common.Service.MDR_ET.datasource" />
+    <None Include="Properties\DataSources\System.Data.DataTable.datasource" />
+    <None Include="Service References\Service\Arrays.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Service\Insight.WS.Server.Common.ORM.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Service\Insight.WS.Server.Common.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Service\service.wsdl" />
+    <None Include="Service References\Service\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Service\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Service\System.Data.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Dialog\EditData.resx">
       <DependentUpon>EditData.cs</DependentUpon>
@@ -153,30 +179,6 @@
     <EmbeddedResource Include="Form\Material.resx">
       <DependentUpon>Material.cs</DependentUpon>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\DataSources\Insight.WS.Client.Common.Service.MDG_Dictionary.datasource" />
-    <None Include="Properties\DataSources\Insight.WS.Client.Common.Service.MDG_Employee.datasource" />
-    <None Include="Properties\DataSources\Insight.WS.Client.Common.Service.MDG_Expense.datasource" />
-    <None Include="Properties\DataSources\Insight.WS.Client.Common.Service.MDG_Material.datasource" />
-    <None Include="Properties\DataSources\Insight.WS.Client.Common.Service.MDR_ET.datasource" />
-    <None Include="Properties\DataSources\System.Data.DataTable.datasource" />
-    <None Include="Service References\Service\Arrays.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\Service\Insight.WS.Server.Common.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\Service\service.wsdl" />
-    <None Include="Service References\Service\service.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\Service\service1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\Service\System.Data.xsd">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\Service\" />

@@ -2,6 +2,7 @@
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" />
   <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM" />
   <xs:element name="GetClearingDate">
     <xs:complexType>
       <xs:sequence>
@@ -127,7 +128,7 @@
   <xs:element name="GetAdvanceResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="GetAdvanceResult" nillable="true" type="q10:ArrayOfAdvance" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM" minOccurs="0" name="GetAdvanceResult" nillable="true" type="q10:ArrayOfAdvance" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -142,7 +143,7 @@
   <xs:element name="GetReceiptResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="GetReceiptResult" nillable="true" type="q13:ABS_Clearing" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM" minOccurs="0" name="GetReceiptResult" nillable="true" type="q13:ABS_Clearing" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -267,7 +268,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q26:Session" />
-        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="obj" nillable="true" type="q27:ABS_Clearing" />
+        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM" minOccurs="0" name="obj" nillable="true" type="q27:ABS_Clearing" />
         <xs:element minOccurs="0" name="idt" nillable="true">
           <xs:complexType>
             <xs:annotation>

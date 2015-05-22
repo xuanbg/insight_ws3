@@ -80,12 +80,18 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\DataSources\Insight.WS.Client.Common.MainService.MasterData.datasource" />
-    <None Include="Properties\DataSources\Insight.WS.Client.Common.MainService.MDG_Contact.datasource" />
-    <None Include="Properties\DataSources\Insight.WS.Client.Common.MainService.MDG_Customer.datasource" />
-    <None Include="Properties\DataSources\Insight.WS.Client.Common.MainService.MDG_Customer1.datasource" />
-    <None Include="Properties\DataSources\Insight.WS.Client.Common.MainService.MDG_Customer11.datasource" />
+    <ProjectReference Include="..\..\Common\Common.csproj">
+      <Project>{7c8ac27e-e640-4403-af4d-5b62c6c55826}</Project>
+      <Name>Common</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\DataSources\Insight.WS.Client.Common.Service.MDG_Customer.datasource" />
     <None Include="Properties\DataSources\System.Data.DataTable.datasource" />
+    <None Include="Service References\Service\Insight.WS.Server.Common.ORM.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\Service\Insight.WS.Server.Common.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -99,13 +105,6 @@
     <None Include="Service References\Service\System.Data.xsd">
       <SubType>Designer</SubType>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Common\Common.csproj">
-      <Project>{7c8ac27e-e640-4403-af4d-5b62c6c55826}</Project>
-      <Name>Common</Name>
-      <Private>False</Private>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\Service\" />

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ServiceModel;
 using Insight.WS.Server.Common;
+using Insight.WS.Server.Common.ORM;
 
 namespace Insight.WS.Service
 {

@@ -127,8 +127,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\DataSources\Insight.WS.Client.Common.Service.ABS_Delivery.datasource" />
-    <None Include="Properties\DataSources\Insight.WS.Client.Common.Service.ABS_Delivery1.datasource" />
     <None Include="Properties\DataSources\System.Data.DataTable.datasource" />
+    <None Include="Service References\Service\Insight.WS.Server.Common.ORM.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\Service\Insight.WS.Server.Common.xsd">
       <SubType>Designer</SubType>
     </None>

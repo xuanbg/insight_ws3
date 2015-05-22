@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using FastReport;
+using Insight.WS.Server.Common.ORM;
 
 namespace Insight.WS.Server.Common
 {

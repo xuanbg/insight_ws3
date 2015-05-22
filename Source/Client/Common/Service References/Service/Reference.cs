@@ -58,6 +58,9 @@ namespace Insight.WS.Client.Common.Service {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string UserNameField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool ValidityField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -224,6 +227,19 @@ namespace Insight.WS.Client.Common.Service {
             }
         }
         
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Validity {
+            get {
+                return this.ValidityField;
+            }
+            set {
+                if ((this.ValidityField.Equals(value) != true)) {
+                    this.ValidityField = value;
+                    this.RaisePropertyChanged("Validity");
+                }
+            }
+        }
+        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {
@@ -245,10 +261,10 @@ namespace Insight.WS.Client.Common.Service {
         Multiple = 1,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        Failure = 2,
+        Online = 2,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        Online = 3,
+        Failure = 3,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         Banned = 4,
@@ -262,7 +278,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ImageData", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ImageData", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class ImageData : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -691,7 +707,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="BASE_Category", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="BASE_Category", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class BASE_Category : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -1168,7 +1184,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MDG_Dictionary", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MDG_Dictionary", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class MDG_Dictionary : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -1901,7 +1917,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_Organization", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_Organization", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class SYS_Organization : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -2714,7 +2730,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_User", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_User", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class SYS_User : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -3623,7 +3639,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ABS_Clearing_Attachs", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ABS_Clearing_Attachs", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class ABS_Clearing_Attachs : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -3748,7 +3764,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ABS_Clearing_Check", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ABS_Clearing_Check", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class ABS_Clearing_Check : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -4001,7 +4017,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ABS_Contract_Attachs", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ABS_Contract_Attachs", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class ABS_Contract_Attachs : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -4126,7 +4142,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ABS_Delivery_Attachs", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ABS_Delivery_Attachs", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class ABS_Delivery_Attachs : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -4251,7 +4267,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ABS_Clearing", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ABS_Clearing", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class ABS_Clearing : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -4648,7 +4664,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MasterData", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MasterData", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class MasterData : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -5253,7 +5269,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ABS_Advance_Record", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ABS_Advance_Record", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class ABS_Advance_Record : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -5394,7 +5410,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ABS_Clearing_Item", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ABS_Clearing_Item", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class ABS_Clearing_Item : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -5663,7 +5679,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="BIZ_Refund_Apply", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="BIZ_Refund_Apply", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class BIZ_Refund_Apply : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -5820,7 +5836,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ABS_Advance_Detail", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ABS_Advance_Detail", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class ABS_Advance_Detail : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -6009,7 +6025,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ABS_Advance", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ABS_Advance", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class ABS_Advance : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -6278,7 +6294,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ABS_Clearing_Pay", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ABS_Clearing_Pay", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class ABS_Clearing_Pay : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -6499,7 +6515,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ABS_Contract_FundPlan", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ABS_Contract_FundPlan", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class ABS_Contract_FundPlan : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -6800,7 +6816,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ABS_StockDetail", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ABS_StockDetail", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class ABS_StockDetail : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -6973,7 +6989,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ABS_Storage_Location", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ABS_Storage_Location", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class ABS_Storage_Location : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -7274,7 +7290,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ABS_Storage_Summary", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ABS_Storage_Summary", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class ABS_Storage_Summary : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -7431,7 +7447,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="BIZ_Borrowing_Apply", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="BIZ_Borrowing_Apply", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class BIZ_Borrowing_Apply : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -7556,7 +7572,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="BIZ_Reimburse_Detail", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="BIZ_Reimburse_Detail", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class BIZ_Reimburse_Detail : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -7665,7 +7681,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="BIZ_Travel_Apply", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="BIZ_Travel_Apply", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class BIZ_Travel_Apply : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -7934,7 +7950,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="BIZ_Travel_Plan", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="BIZ_Travel_Plan", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class BIZ_Travel_Plan : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -8187,7 +8203,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MDG_Customer", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MDG_Customer", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class MDG_Customer : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -8824,7 +8840,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MDG_Employee", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MDG_Employee", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class MDG_Employee : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -9269,7 +9285,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MDG_Expense", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MDG_Expense", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class MDG_Expense : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -9538,7 +9554,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MDG_Material", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MDG_Material", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class MDG_Material : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -9887,7 +9903,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MDG_Supplier", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MDG_Supplier", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class MDG_Supplier : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -10460,7 +10476,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MDS_Contact_Info", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MDS_Contact_Info", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class MDS_Contact_Info : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -10617,7 +10633,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ABS_Contract_FundPerform", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ABS_Contract_FundPerform", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class ABS_Contract_FundPerform : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -10774,7 +10790,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="BIZ_Refund_Detail", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="BIZ_Refund_Detail", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class BIZ_Refund_Detail : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -10867,7 +10883,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ABS_Contract", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ABS_Contract", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class ABS_Contract : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -11376,7 +11392,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ABS_Contract_Subjects", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ABS_Contract_Subjects", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class ABS_Contract_Subjects : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -11741,7 +11757,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="BIZ_Reimburse_Apply", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="BIZ_Reimburse_Apply", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class BIZ_Reimburse_Apply : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -11850,7 +11866,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ABS_Contract_GoodsPlan", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ABS_Contract_GoodsPlan", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class ABS_Contract_GoodsPlan : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -12087,7 +12103,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ABS_Contract_GoodsPerform", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ABS_Contract_GoodsPerform", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class ABS_Contract_GoodsPerform : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -12244,7 +12260,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ABS_Delivery_Item", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ABS_Delivery_Item", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class ABS_Delivery_Item : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -12481,7 +12497,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ABS_Delivery", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ABS_Delivery", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class ABS_Delivery : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -12830,7 +12846,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ABS_Storage_Detail", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ABS_Storage_Detail", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class ABS_Storage_Detail : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -13003,7 +13019,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MDG_Contact", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MDG_Contact", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class MDG_Contact : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -13368,7 +13384,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MDD_Binary", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MDD_Binary", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class MDD_Binary : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -13509,7 +13525,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MDD_Character", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MDD_Character", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class MDD_Character : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -13650,7 +13666,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MDD_Date", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MDD_Date", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class MDD_Date : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -13791,7 +13807,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MDD_Numeric", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MDD_Numeric", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class MDD_Numeric : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -13932,7 +13948,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MDR_MU", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MDR_MU", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class MDR_MU : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -14105,7 +14121,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MasterData_Merger", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MasterData_Merger", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class MasterData_Merger : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -14278,7 +14294,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_Alert_Send", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_Alert_Send", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class SYS_Alert_Send : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -14483,7 +14499,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_Alert_Target", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_Alert_Target", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class SYS_Alert_Target : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -14624,7 +14640,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_Module", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_Module", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class SYS_Module : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -15069,7 +15085,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MasterData_Property", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MasterData_Property", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class MasterData_Property : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -15338,7 +15354,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_Alert_Rules", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_Alert_Rules", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class SYS_Alert_Rules : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -15719,7 +15735,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_Report_Definition", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_Report_Definition", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class SYS_Report_Definition : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -16084,7 +16100,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_Report_Templates", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_Report_Templates", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class SYS_Report_Templates : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -16321,7 +16337,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ABS_StockCapital", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ABS_StockCapital", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class ABS_StockCapital : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -16446,7 +16462,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MDR_ET", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MDR_ET", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class MDR_ET : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -16571,7 +16587,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_Allot_Record", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_Allot_Record", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class SYS_Allot_Record : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -16840,7 +16856,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_Code_Allot", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_Code_Allot", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class SYS_Code_Allot : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -17125,7 +17141,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_Code_Scheme", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_Code_Scheme", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class SYS_Code_Scheme : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -17394,7 +17410,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_ModuleParam", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_ModuleParam", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class SYS_ModuleParam : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -17615,7 +17631,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_OrgMember", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_OrgMember", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class SYS_OrgMember : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -17788,7 +17804,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_OrgMerger", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_OrgMerger", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class SYS_OrgMerger : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -17961,7 +17977,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_Report_Entity", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_Report_Entity", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class SYS_Report_Entity : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -18102,7 +18118,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_Report_Rules", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_Report_Rules", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class SYS_Report_Rules : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -18371,7 +18387,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_RolePerm_DataAbs", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_RolePerm_DataAbs", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class SYS_RolePerm_DataAbs : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -18576,7 +18592,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_Role_Title", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_Role_Title", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class SYS_Role_Title : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -18749,7 +18765,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_Report_IU", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_Report_IU", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class SYS_Report_IU : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -18874,7 +18890,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_Report_Instances", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_Report_Instances", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class SYS_Report_Instances : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -19063,7 +19079,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_Role", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_Role", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class SYS_Role : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -19348,7 +19364,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_RolePerm_Action", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_RolePerm_Action", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class SYS_RolePerm_Action : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -19537,7 +19553,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_RolePerm_Data", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_RolePerm_Data", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class SYS_RolePerm_Data : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -19742,7 +19758,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_Role_User", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_Role_User", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class SYS_Role_User : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -19915,7 +19931,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_Role_UserGroup", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_Role_UserGroup", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class SYS_Role_UserGroup : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -20088,7 +20104,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_UserGroup", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_UserGroup", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class SYS_UserGroup : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -20293,7 +20309,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_UserGroupMember", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_UserGroupMember", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class SYS_UserGroupMember : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -20466,7 +20482,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_Alert_Message", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_Alert_Message", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class SYS_Alert_Message : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -20607,7 +20623,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_Code_Record", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_Code_Record", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class SYS_Code_Record : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -20764,7 +20780,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_ModuleGroup", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_ModuleGroup", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class SYS_ModuleGroup : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -20905,7 +20921,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_ModuleAction", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_ModuleAction", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class SYS_ModuleAction : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -21158,7 +21174,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_Report_Member", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_Report_Member", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class SYS_Report_Member : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -21283,7 +21299,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_Report_Period", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_Report_Period", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class SYS_Report_Period : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -21408,7 +21424,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_Report_Schedular", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SYS_Report_Schedular", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class SYS_Report_Schedular : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -21701,7 +21717,6 @@ namespace Insight.WS.Client.Common.Service {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Delivery))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Delivery_Attachs>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Delivery_Attachs))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Material))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MasterData))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Clearing_Item>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Contract_Subjects>))]
@@ -21712,105 +21727,106 @@ namespace Insight.WS.Client.Common.Service {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Contract_GoodsPerform>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Contract_GoodsPerform))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Delivery_Item))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDD_Numeric))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MasterData_Property))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.BIZ_Reimburse_Detail))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Supplier))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.BASE_Category))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ImageData>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDG_Customer>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Customer))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Supplier))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.BIZ_Travel_Apply))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.BIZ_Travel_Plan>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.BIZ_Travel_Plan))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDD_Binary))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDD_Character))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Code_Scheme))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Allot_Record>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Allot_Record))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Module))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.BASE_Category>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MasterData_Property>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Code_Allot>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Code_Allot))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Code_Record))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_OrgMerger))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDD_Date))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_RolePerm_DataAbs))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Role))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_Member>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Member))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Entity))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Definition))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_Entity>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_Instances>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Instances))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_IU>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_IU))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Employee))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDG_Employee>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDR_ET>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDR_ET))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Role_Title))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Storage_Location))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Storage_Detail>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Storage_Detail))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Storage_Summary))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.BIZ_Refund_Apply))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.BIZ_Reimburse_Detail))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MasterData_Merger))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_RolePerm_Action))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_ModuleAction))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_RolePerm_Action>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.BIZ_Refund_Detail))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_StockDetail))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_StockCapital))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_StockDetail>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.BIZ_Borrowing_Apply))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_RolePerm_Data))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Expense))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Role_User))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDS_Contact_Info))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Contact))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Role_UserGroup))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_UserGroup))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Role_UserGroup>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_UserGroupMember>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_UserGroupMember))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.BIZ_Reimburse_Apply))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Templates))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_Definition>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDR_MU))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Period))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Rules))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_Period>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_Schedular>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Schedular))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Alert_Target))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Alert_Rules))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Alert_Message>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Alert_Message))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Alert_Send>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Alert_Send))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Employee))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDG_Employee>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDR_ET>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDR_ET))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.BIZ_Travel_Apply))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.BIZ_Travel_Plan>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.BIZ_Travel_Plan))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Alert_Target))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.BIZ_Borrowing_Apply))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Definition))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_Entity>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Entity))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_Member>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Member))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Role))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_RolePerm_Action>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_RolePerm_Action))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_ModuleAction))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Module))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.BASE_Category>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MasterData_Property>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MasterData_Property))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDD_Binary>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDD_Binary))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.BIZ_Refund_Detail))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Templates))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_Definition>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_StockDetail))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_StockCapital))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_StockDetail>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Period))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Rules))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_Period>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_Schedular>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Schedular))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Instances))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_IU>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_IU))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Role_Title))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_RolePerm_DataAbs))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.BIZ_Refund_Apply))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Storage_Location))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Storage_Detail>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Storage_Detail))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Storage_Summary))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDD_Numeric))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Contact))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDD_Character))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDD_Date))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Code_Allot))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Code_Scheme))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Allot_Record>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Allot_Record))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Code_Record))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_ModuleGroup))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Module>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_OrgMember))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Expense))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_RolePerm_Data))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Material))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_ModuleParam))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Alert_Target>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Role_UserGroup))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_UserGroup))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Role_UserGroup>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_UserGroupMember>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_UserGroupMember))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Role_User))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.BIZ_Reimburse_Apply))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_OrgMerger))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDS_Contact_Info))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_OrgMember))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MasterData_Merger))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDR_MU))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Code_Allot>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Code_Record>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDD_Character>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDD_Date>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDD_Numeric>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_ModuleAction>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_ModuleParam>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_RolePerm_Data>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_RolePerm_DataAbs>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Role_Title>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Role_User>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_ModuleAction>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_ModuleParam>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Code_Record>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_Instances>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Alert_Target>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDG_Supplier>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MasterData>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Alert_Rules>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_Templates>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDD_Binary>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDD_Character>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDD_Date>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDD_Numeric>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Delivery_Item>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Storage_Summary>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDR_MU>))]

@@ -6,6 +6,7 @@
       <xs:element minOccurs="0" name="BaseAddress" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="DeptId" nillable="true" type="ser:guid" />
       <xs:element minOccurs="0" name="DeptName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
       <xs:element minOccurs="0" name="LastConnect" type="xs:dateTime" />
       <xs:element minOccurs="0" name="LoginName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="LoginStatus" type="tns:LoginResult" />
@@ -14,14 +15,16 @@
       <xs:element minOccurs="0" name="Signature" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="UserId" type="ser:guid" />
       <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Validity" type="xs:boolean" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Session" nillable="true" type="tns:Session" />
   <xs:simpleType name="LoginResult">
     <xs:restriction base="xs:string">
       <xs:enumeration value="Success" />
-      <xs:enumeration value="Failure" />
+      <xs:enumeration value="Multiple" />
       <xs:enumeration value="Online" />
+      <xs:enumeration value="Failure" />
       <xs:enumeration value="Banned" />
       <xs:enumeration value="NotExist" />
       <xs:enumeration value="Unauthorized" />

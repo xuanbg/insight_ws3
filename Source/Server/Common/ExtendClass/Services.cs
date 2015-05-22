@@ -8,6 +8,7 @@ using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.Threading;
 using System.Windows.Forms;
+using Insight.WS.Server.Common.ORM;
 using Microsoft.Samples.GZipEncoder;
 
 namespace Insight.WS.Server.Common

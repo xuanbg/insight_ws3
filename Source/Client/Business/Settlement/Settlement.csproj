@@ -127,15 +127,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\DataSources\Insight.WS.Client.Common.Service.ABS_Clearing.datasource" />
-    <None Include="Properties\DataSources\Insight.WS.Client.Common.Service.ABS_Clearing1.datasource" />
-    <None Include="Properties\DataSources\Insight.WS.Client.Common.Service.ABS_Clearing11.datasource" />
-    <None Include="Properties\DataSources\Insight.WS.Client.Common.Service.ABS_Clearing12.datasource" />
-    <None Include="Properties\DataSources\Insight.WS.Client.Common.Service.ImageData.datasource" />
-    <None Include="Properties\DataSources\SERP.Client.Common.MainService.ABS_Clearing.datasource" />
-    <None Include="Properties\DataSources\SERP.Client.Common.MainService.ImageData.datasource" />
     <None Include="Properties\DataSources\System.Data.DataTable.datasource" />
     <None Include="Service References\Service\Insight.WS.Client.Business.Settlement.Service.Advance.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Service\Insight.WS.Server.Common.ORM.xsd">
+      <SubType>Designer</SubType>
     </None>
     <None Include="Service References\Service\Insight.WS.Server.Common.xsd">
       <SubType>Designer</SubType>

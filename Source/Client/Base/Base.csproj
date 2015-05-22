@@ -225,6 +225,9 @@
     <None Include="Service References\Service\Arrays.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\Service\Insight.WS.Server.Common.ORM.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\Service\Insight.WS.Server.Common.xsd">
       <SubType>Designer</SubType>
     </None>

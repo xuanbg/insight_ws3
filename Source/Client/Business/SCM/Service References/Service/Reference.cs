@@ -8,44 +8,36 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-using System.CodeDom.Compiler;
-using System.Data;
-using System.Diagnostics;
-using System.ServiceModel;
-using System.ServiceModel.Channels;
-using Insight.WS.Client.Common.Service;
-
 namespace Insight.WS.Client.Business.SCM.Service {
     
     
-    [GeneratedCode("System.ServiceModel", "4.0.0.0")]
-    [ServiceContract(ConfigurationName="Service.ISCM")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Service.ISCM")]
     internal interface ISCM {
         
-        [OperationContract(Action="http://tempuri.org/ISCM/GetSuppliers", ReplyAction="http://tempuri.org/ISCM/GetSuppliersResponse")]
-        DataTable GetSuppliers(Session us);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISCM/GetSuppliers", ReplyAction="http://tempuri.org/ISCM/GetSuppliersResponse")]
+        System.Data.DataTable GetSuppliers(Insight.WS.Client.Common.Service.Session us);
         
-        [OperationContract(Action="http://tempuri.org/ISCM/GetSupplierInfo", ReplyAction="http://tempuri.org/ISCM/GetSupplierInfoResponse")]
-        DataTable GetSupplierInfo(Session us);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISCM/GetSupplierInfo", ReplyAction="http://tempuri.org/ISCM/GetSupplierInfoResponse")]
+        System.Data.DataTable GetSupplierInfo(Insight.WS.Client.Common.Service.Session us);
         
-        [OperationContract(Action="http://tempuri.org/ISCM/GetSupplier", ReplyAction="http://tempuri.org/ISCM/GetSupplierResponse")]
-        MDG_Supplier GetSupplier(Session us, Guid id);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISCM/GetSupplier", ReplyAction="http://tempuri.org/ISCM/GetSupplierResponse")]
+        Insight.WS.Client.Common.Service.MDG_Supplier GetSupplier(Insight.WS.Client.Common.Service.Session us, System.Guid id);
         
-        [OperationContract(Action="http://tempuri.org/ISCM/AddMasterData", ReplyAction="http://tempuri.org/ISCM/AddMasterDataResponse")]
-        bool AddMasterData(Session us, MasterData m, MDG_Supplier d);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISCM/AddMasterData", ReplyAction="http://tempuri.org/ISCM/AddMasterDataResponse")]
+        bool AddMasterData(Insight.WS.Client.Common.Service.Session us, Insight.WS.Client.Common.Service.MasterData m, Insight.WS.Client.Common.Service.MDG_Supplier d);
         
-        [OperationContract(Action="http://tempuri.org/ISCM/UpdateMasterData", ReplyAction="http://tempuri.org/ISCM/UpdateMasterDataResponse")]
-        bool UpdateMasterData(Session us, MasterData m, MDG_Supplier d);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISCM/UpdateMasterData", ReplyAction="http://tempuri.org/ISCM/UpdateMasterDataResponse")]
+        bool UpdateMasterData(Insight.WS.Client.Common.Service.Session us, Insight.WS.Client.Common.Service.MasterData m, Insight.WS.Client.Common.Service.MDG_Supplier d);
     }
     
-    [GeneratedCode("System.ServiceModel", "4.0.0.0")]
-    internal interface ISCMChannel : ISCM, IClientChannel {
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    internal interface ISCMChannel : Insight.WS.Client.Business.SCM.Service.ISCM, System.ServiceModel.IClientChannel {
     }
     
-    [DebuggerStepThrough()]
-    [GeneratedCode("System.ServiceModel", "4.0.0.0")]
-    internal partial class SCMClient : ClientBase<ISCM>, ISCM {
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    internal partial class SCMClient : System.ServiceModel.ClientBase<Insight.WS.Client.Business.SCM.Service.ISCM>, Insight.WS.Client.Business.SCM.Service.ISCM {
         
         public SCMClient() {
         }
@@ -58,31 +50,31 @@ namespace Insight.WS.Client.Business.SCM.Service {
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public SCMClient(string endpointConfigurationName, EndpointAddress remoteAddress) : 
+        public SCMClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public SCMClient(Binding binding, EndpointAddress remoteAddress) : 
+        public SCMClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         
-        public DataTable GetSuppliers(Session us) {
+        public System.Data.DataTable GetSuppliers(Insight.WS.Client.Common.Service.Session us) {
             return base.Channel.GetSuppliers(us);
         }
         
-        public DataTable GetSupplierInfo(Session us) {
+        public System.Data.DataTable GetSupplierInfo(Insight.WS.Client.Common.Service.Session us) {
             return base.Channel.GetSupplierInfo(us);
         }
         
-        public MDG_Supplier GetSupplier(Session us, Guid id) {
+        public Insight.WS.Client.Common.Service.MDG_Supplier GetSupplier(Insight.WS.Client.Common.Service.Session us, System.Guid id) {
             return base.Channel.GetSupplier(us, id);
         }
         
-        public bool AddMasterData(Session us, MasterData m, MDG_Supplier d) {
+        public bool AddMasterData(Insight.WS.Client.Common.Service.Session us, Insight.WS.Client.Common.Service.MasterData m, Insight.WS.Client.Common.Service.MDG_Supplier d) {
             return base.Channel.AddMasterData(us, m, d);
         }
         
-        public bool UpdateMasterData(Session us, MasterData m, MDG_Supplier d) {
+        public bool UpdateMasterData(Insight.WS.Client.Common.Service.Session us, Insight.WS.Client.Common.Service.MasterData m, Insight.WS.Client.Common.Service.MDG_Supplier d) {
             return base.Channel.UpdateMasterData(us, m, d);
         }
     }
