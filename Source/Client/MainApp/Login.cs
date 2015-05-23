@@ -232,7 +232,15 @@ namespace Insight.WS.Client.MainApp
 
                 case LoginResult.Multiple:
                     var proc = Process.GetProcessesByName(Process.GetCurrentProcess().ProcessName);
-                    DialogResult = proc.Length > 1 ? DialogResult.Cancel : DialogResult.OK;
+                    if (proc.Length > 1)
+                    {
+                        General.ShowWarning("您已经在本机登录系统！请勿重复登录。");
+                        DialogResult = DialogResult.Cancel;
+                    }
+                    else
+                    {
+                        DialogResult = DialogResult.OK;
+                    }
                     break;
 
                 case LoginResult.Failure:
@@ -242,7 +250,7 @@ namespace Insight.WS.Client.MainApp
                     break;
 
                 case LoginResult.Online:
-                    General.ShowWarning("对不起，当前用户已登录！\r\n如果您已经退出系统，请稍后再试。");
+                    General.ShowWarning("对不起，该用户已在其他设备登录！\r\n在该用户退出系统前，您不能登录系统。");
                     break;
 
                 case LoginResult.NotExist:

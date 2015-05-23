@@ -43,9 +43,8 @@ namespace Insight.WS.Client.Common.Dialog
         {
             get
             {
-                const int nc = 0x200;
                 var cp = base.CreateParams;
-                cp.ClassStyle = cp.ClassStyle | nc;
+                cp.ClassStyle = cp.ClassStyle | 0x200;
                 return cp;
             }
         }
