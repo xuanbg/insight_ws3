@@ -13,7 +13,6 @@ using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
 using DevExpress.XtraNavBar;
 using FastReport.Utils;
-using Insight.WS.Client.Common.Dialog;
 using Insight.WS.Client.Common.Service;
 
 namespace Insight.WS.Client.Common
@@ -23,9 +22,9 @@ namespace Insight.WS.Client.Common
 
         #region 变量声明
 
-        public static CustomBinding _Binding;
-        public static EndpointAddress _Address;
-        public static Session _Session;
+        public static CustomBinding Binding;
+        public static EndpointAddress Address;
+        public static Session Session;
 
         private DataTable _NavGroup;
         private DataTable _NavItem;
@@ -43,9 +42,9 @@ namespace Insight.WS.Client.Common
         /// <summary>
         /// 初始化状态栏信息
         /// </summary>
-        /// <param name="UserSession"></param>
-        /// <param name="Binding"></param>
-        public MainForm(Session UserSession, CustomBinding Binding)
+        /// <param name="session"></param>
+        /// <param name="binding"></param>
+        public MainForm(Session session, CustomBinding binding)
         {
             _Waiting.Show();
             _Waiting.Refresh();
@@ -53,17 +52,17 @@ namespace Insight.WS.Client.Common
 
             InitializeComponent();
 
-            _Session = UserSession;
-            _Binding = Binding;
-            _Address = new EndpointAddress(_Session.BaseAddress + "Commons");
+            Session = session;
+            Binding = binding;
+            Address = new EndpointAddress(Session.BaseAddress + "Commons");
 
             // 初始化界面
             Res.LoadLocale("Components\\Chinese (Simplified).frl");
             defaultLookAndFeel.LookAndFeel.SkinName = Config.LookAndFeel();
             btnTime.Caption = _ShotTime;
-            btnDept.Caption = _Session.DeptName;
-            btnDept.Visibility = _Session.DeptName == null ? BarItemVisibility.Never : BarItemVisibility.Always;
-            btnUser.Caption = _Session.UserName;
+            btnDept.Caption = Session.DeptName;
+            btnDept.Visibility = Session.DeptName == null ? BarItemVisibility.Never : BarItemVisibility.Always;
+            btnUser.Caption = Session.UserName;
             btnServer.Caption = string.Format("{0} : {1}", Config.BaseAddress(), Config.Port());
             if (SystemInformation.WorkingArea.Height < 760)
             {
@@ -71,10 +70,10 @@ namespace Insight.WS.Client.Common
             }
 
             // 加载导航栏
-            using (var cli = new CommonsClient(_Binding, _Address))
+            using (var cli = new CommonsClient(Binding, Address))
             {
-                _NavGroup = cli.GetModuleGroup(_Session);
-                _NavItem = cli.GetUserModule(_Session);
+                _NavGroup = cli.GetModuleGroup(Session);
+                _NavItem = cli.GetUserModule(Session);
             }
 
             InitNavBar();
@@ -94,7 +93,7 @@ namespace Insight.WS.Client.Common
             _OpenModules.ForEach(AddPageMdi);
             _Waiting.Close();
 
-            if (_Session.Signature == General.GetHash("123456"))
+            if (Session.Signature == General.GetHash("123456"))
                 ChangPassWord(null, null);
         }
 
@@ -116,7 +115,7 @@ namespace Insight.WS.Client.Common
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             const string str = "注销用户账号失败！是否强制退出系统？\r\n如强制退出，可能会导致在一小时内无法登录系统！";
-            using (var cli = new CommonsClient(_Binding, _Address))
+            using (var cli = new CommonsClient(Binding, Address))
             {
                 if (!Commons.DelOnlineUser() && General.ShowConfirm(str) != DialogResult.OK)
                     e.Cancel = true;
@@ -212,9 +211,9 @@ namespace Insight.WS.Client.Common
             bprMain.Visibility = BarItemVisibility.Always;
             bprMain.Refresh();
 
-            using (var cli = new CommonsClient(_Binding, _Address))
+            using (var cli = new CommonsClient(Binding, Address))
             {
-                var mod = cli.GetModuleInfo(_Session, (Guid)mid);
+                var mod = cli.GetModuleInfo(Session, (Guid)mid);
                 var path = string.Format("{0}\\{1}\\{2}.dll", Application.StartupPath, mod.Location ?? "", mod.ProgramName).Replace("\\\\", "\\");
                 if (File.Exists(path))
                 {
@@ -225,9 +224,9 @@ namespace Insight.WS.Client.Common
                     mdi.Name = mid.ToString();
                     mdi.Text = mod.ApplicationName;
                     mdi.ModuleId = mod.ID;
-                    mdi.UserSession = _Session;
-                    mdi.Binding = _Binding;
-                    mdi.Address = new EndpointAddress(_Session.BaseAddress + mod.ProgramName);
+                    mdi.UserSession = Session;
+                    mdi.Binding = Binding;
+                    mdi.Address = new EndpointAddress(Session.BaseAddress + mod.ProgramName);
                     mdi.Show();
                 }
                 else

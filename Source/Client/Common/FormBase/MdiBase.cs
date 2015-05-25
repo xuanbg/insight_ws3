@@ -69,7 +69,7 @@ namespace Insight.WS.Client.Common
         /// </summary>
         protected void InitToolBar()
         {
-            using (var cli = new CommonsClient(MainForm._Binding, MainForm._Address))
+            using (var cli = new CommonsClient(MainForm.Binding, MainForm.Address))
             {
                 _Actions = cli.GetAction(UserSession, ModuleId);
             }
@@ -169,9 +169,9 @@ namespace Insight.WS.Client.Common
             if (General.ShowConfirm(string.Format("您确定要删除分类【{0}】吗?", fn.GetValue("Name"))) != DialogResult.OK)
                 return;
 
-            using (var cli = new CommonsClient(MainForm._Binding, MainForm._Address))
+            using (var cli = new CommonsClient(MainForm.Binding, MainForm.Address))
             {
-                if (cli.DelCategory(MainForm._Session, (Guid)fn.GetValue("ID")))
+                if (cli.DelCategory(MainForm.Session, (Guid)fn.GetValue("ID")))
                     tree.DeleteNode(tree.FocusedNode);
                 else
                     General.ShowError("对不起，该分类已经被使用，无法删除！");

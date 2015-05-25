@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using Insight.WS.Client.Common.Service;
 
-namespace Insight.WS.Client.Common.Dialog
+namespace Insight.WS.Client.Common
 {
     public partial class ChangePw : DialogBase
     {
@@ -58,7 +58,7 @@ namespace Insight.WS.Client.Common.Dialog
                 return;
             }
 
-            if (General.GetHash(txtOldPw.Text.Trim()) != MainForm._Session.Signature.ToUpper())
+            if (General.GetHash(txtOldPw.Text.Trim()) != MainForm.Session.Signature.ToUpper())
             {
                 General.ShowError("请输入正确的原密码，否则无法为您更换密码！");
                 txtOldPw.EditValue = null;
@@ -66,13 +66,13 @@ namespace Insight.WS.Client.Common.Dialog
                 return;
             }
 
-            using (var cli = new CommonsClient(MainForm._Binding, MainForm._Address))
+            using (var cli = new CommonsClient(MainForm.Binding, MainForm.Address))
             {
                 var pw = General.GetHash(txtNewPw.Text);
-                if (cli.UpdataPassWord(MainForm._Session, pw))
+                if (cli.UpdataPassWord(MainForm.Session, pw))
                 {
                     General.ShowMessage("更换密码成功！请牢记新密码并使用新密码登录系统。");
-                    MainForm._Session.Signature = pw;
+                    MainForm.Session.Signature = pw;
                     DialogResult = DialogResult.OK;
                 }
                 else

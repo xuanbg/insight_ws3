@@ -53,9 +53,9 @@ namespace Insight.WS.Client.Common
         {
             _Categorys = Commons.Categorys(ModuleId);
 
-            using (var cli = new CommonsClient(MainForm._Binding, MainForm._Address))
+            using (var cli = new CommonsClient(MainForm.Binding, MainForm.Address))
             {
-                _Category = IsEdit ? cli.GetCategory(MainForm._Session, ObjectId) : new BASE_Category();
+                _Category = IsEdit ? cli.GetCategory(MainForm.Session, ObjectId) : new BASE_Category();
             }
             _ParentId = IsEdit ? _Category.ParentId : (ObjectId == Guid.Empty) ? null : (Guid?)ObjectId;
             InitInfo();
@@ -236,11 +236,11 @@ namespace Insight.WS.Client.Common
 
             ObjectAssign();
 
-            using (var cli = new CommonsClient(MainForm._Binding, MainForm._Address))
+            using (var cli = new CommonsClient(MainForm.Binding, MainForm.Address))
             {
                 if (IsEdit)
                 {
-                    if (cli.UpdateCategory(MainForm._Session, _Category, _Index, _ParentId, _IndexValue))
+                    if (cli.UpdateCategory(MainForm.Session, _Category, _Index, _ParentId, _IndexValue))
                         DialogResult = DialogResult.OK;
                     else
                         General.ShowError("对不起，因为未知的原因，更新" + _Category.Name + "】失败！\r\n如出现重复失败的情况，请联系管理员。");
@@ -251,7 +251,7 @@ namespace Insight.WS.Client.Common
                     _Category.CreatorDeptId = OpenForm.UserSession.DeptId;
                     _Category.CreatorUserId = OpenForm.UserSession.UserId;
 
-                    if (cli.AddCategory(MainForm._Session, _Category, _IndexValue))
+                    if (cli.AddCategory(MainForm.Session, _Category, _IndexValue))
                         DialogResult = DialogResult.OK;
                     else
                         General.ShowError("对不起，因为未知的原因，新建" + _Category.Name + "】失败！\r\n如出现重复失败的情况，请联系管理员。");

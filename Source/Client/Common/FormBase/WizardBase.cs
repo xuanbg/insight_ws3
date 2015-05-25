@@ -37,6 +37,11 @@ namespace Insight.WS.Client.Common
 
         #region 界面事件
 
+        /// <summary>
+        /// 设置父窗体
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void WizardBase_Load(object sender, EventArgs e)
         {
             OpenForm = (MdiBase)Owner;

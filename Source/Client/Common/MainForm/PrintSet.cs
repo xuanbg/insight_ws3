@@ -2,7 +2,7 @@
 using System.Drawing.Printing;
 using System.Windows.Forms;
 
-namespace Insight.WS.Client.Common.Dialog
+namespace Insight.WS.Client.Common
 {
     public partial class PrintSet : DialogBase
     {

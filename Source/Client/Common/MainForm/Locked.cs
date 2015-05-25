@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace Insight.WS.Client.Common.Dialog
+namespace Insight.WS.Client.Common
 {
     public partial class Unlock : DialogBase
     {
@@ -24,7 +24,7 @@ namespace Insight.WS.Client.Common.Dialog
         /// <param name="e"></param>
         protected override void Confirm_Click(object sender, EventArgs e)
         {
-            if (General.GetHash(txtUnlockPw.Text.Trim()) != MainForm._Session.Signature)
+            if (General.GetHash(txtUnlockPw.Text.Trim()) != MainForm.Session.Signature)
             {
                 General.ShowError("请输入正确的密码，否则无法为您解除锁定！");
                 txtUnlockPw.Text = string.Empty;

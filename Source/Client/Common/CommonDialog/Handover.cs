@@ -81,9 +81,9 @@ namespace Insight.WS.Client.Common
                 EffectiveDate = datDate.DateTime.Date
             };
 
-            using (var cli = new CommonsClient(MainForm._Binding, MainForm._Address))
+            using (var cli = new CommonsClient(MainForm.Binding, MainForm.Address))
             {
-                if (cli.Transfer(MainForm._Session, MUId, owner))
+                if (cli.Transfer(MainForm.Session, MUId, owner))
                 {
                     DialogResult = DialogResult.OK;
                 }

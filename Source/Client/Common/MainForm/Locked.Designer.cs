@@ -1,4 +1,4 @@
-﻿namespace Insight.WS.Client.Common.Dialog
+﻿namespace Insight.WS.Client.Common
 {
     partial class Unlock
     {

@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Windows.Forms;
 
-namespace Insight.WS.Client.Common.Dialog
+namespace Insight.WS.Client.Common
 {
     public partial class About : DialogBase
     {

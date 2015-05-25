@@ -60,23 +60,23 @@ namespace Insight.WS.Client.MainApp
         {
             var path = _RootPath + file.Path + "\\";
             var restart = false;
-            FileStream fs;
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
             }
 
-            Start:
+            path += file.Name;
             try
             {
-                fs = new FileStream(path + file.Name, FileMode.Create, FileAccess.Write);
+                File.Delete(path);
             }
             catch
             {
-                File.Move(path + file.Name, path + file.Name + ".bak");
+                File.Move(path, path + ".bak");
                 restart = true;
-                goto Start;
             }
+
+            var fs = new FileStream(path, FileMode.Create, FileAccess.Write);
             fs.Write(file.FileBytes, 0, file.FileBytes.Length);
             return restart;
         }

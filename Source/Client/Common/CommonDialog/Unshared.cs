@@ -30,9 +30,9 @@ namespace Insight.WS.Client.Common
 
         private void Transfer_Load(object sender, EventArgs e)
         {
-            using (var cli = new CommonsClient(MainForm._Binding, MainForm._Address))
+            using (var cli = new CommonsClient(MainForm.Binding, MainForm.Address))
             {
-                grdSharing.DataSource = cli.GetSharing(MainForm._Session, CustomerId);
+                grdSharing.DataSource = cli.GetSharing(MainForm.Session, CustomerId);
                 Format.GridFormat(gdvSharing);
             }
         }
@@ -56,9 +56,9 @@ namespace Insight.WS.Client.Common
 
             var ids = gdvSharing.GetSelectedRows().Select(h => (Guid) gdvSharing.GetDataRow(h)["ID"]).ToList();
 
-            using (var cli = new CommonsClient(MainForm._Binding, MainForm._Address))
+            using (var cli = new CommonsClient(MainForm.Binding, MainForm.Address))
             {
-                if (cli.UnShare(MainForm._Session, ids))
+                if (cli.UnShare(MainForm.Session, ids))
                     DialogResult = DialogResult.OK;
                 else
                     General.ShowError("数据保存失败！如多次保存失败，请联系管理员。");

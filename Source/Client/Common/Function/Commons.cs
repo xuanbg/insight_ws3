@@ -19,9 +19,9 @@ namespace Insight.WS.Client.Common
         /// <returns>DataTable 分类列表</returns>
         public static DataTable Categorys(Guid mid, bool all = false, bool alias = false)
         {
-            using (var cli = new CommonsClient(MainForm._Binding, MainForm._Address))
+            using (var cli = new CommonsClient(MainForm.Binding, MainForm.Address))
             {
-                return cli.GetCategorys(MainForm._Session, mid, all, alias);
+                return cli.GetCategorys(MainForm.Session, mid, all, alias);
             }
         }
 
@@ -31,9 +31,9 @@ namespace Insight.WS.Client.Common
         /// <returns>DataTable 组织机构列表</returns>
         public static DataTable OrgTree()
         {
-            using (var cli = new CommonsClient(MainForm._Binding, MainForm._Address))
+            using (var cli = new CommonsClient(MainForm.Binding, MainForm.Address))
             {
-                return cli.GetOrgTree(MainForm._Session);
+                return cli.GetOrgTree(MainForm.Session);
             }
         }
 
@@ -43,9 +43,9 @@ namespace Insight.WS.Client.Common
         /// <returns>DataTable 编码方案列表</returns>
         public static DataTable CodeSchemes()
         {
-            using (var cli = new CommonsClient(MainForm._Binding, MainForm._Address))
+            using (var cli = new CommonsClient(MainForm.Binding, MainForm.Address))
             {
-                return cli.GetCodeSchemes(MainForm._Session);
+                return cli.GetCodeSchemes(MainForm.Session);
             }
         }
 
@@ -56,9 +56,9 @@ namespace Insight.WS.Client.Common
         /// <returns>DataTable 主数据列表</returns>
         public static DataTable MasterDatas(int type)
         {
-            using (var cli = new CommonsClient(MainForm._Binding, MainForm._Address))
+            using (var cli = new CommonsClient(MainForm.Binding, MainForm.Address))
             {
-                return cli.GetMasterDatas(MainForm._Session, type);
+                return cli.GetMasterDatas(MainForm.Session, type);
             }
         }
 
@@ -68,9 +68,9 @@ namespace Insight.WS.Client.Common
         /// <returns>DataTable 收支项目</returns>
         public static DataTable Expenses()
         {
-            using (var cli = new CommonsClient(MainForm._Binding, MainForm._Address))
+            using (var cli = new CommonsClient(MainForm.Binding, MainForm.Address))
             {
-                return cli.GetExpense(MainForm._Session);
+                return cli.GetExpense(MainForm.Session);
             }
         }
 
@@ -80,9 +80,9 @@ namespace Insight.WS.Client.Common
         /// <returns>DataTable 物资材料</returns>
         public static DataTable Materials()
         {
-            using (var cli = new CommonsClient(MainForm._Binding, MainForm._Address))
+            using (var cli = new CommonsClient(MainForm.Binding, MainForm.Address))
             {
-                return cli.GetMaterials(MainForm._Session);
+                return cli.GetMaterials(MainForm.Session);
             }
         }
 
@@ -93,9 +93,9 @@ namespace Insight.WS.Client.Common
         /// <returns>bool 是否删除成功</returns>
         public static bool DelOnlineUser(int? sid = null)
         {
-            using (var cli = new CommonsClient(MainForm._Binding, MainForm._Address))
+            using (var cli = new CommonsClient(MainForm.Binding, MainForm.Address))
             {
-                return cli.DelOnlineUser(MainForm._Session, sid);
+                return cli.DelOnlineUser(MainForm.Session, sid);
             }
         }
 
@@ -112,9 +112,9 @@ namespace Insight.WS.Client.Common
         /// <returns>bool 内容是否存在</returns>
         public static bool NameIsExist(string str, string col, string tab = "MasterData")
         {
-            using (var cli = new CommonsClient(MainForm._Binding, MainForm._Address))
+            using (var cli = new CommonsClient(MainForm.Binding, MainForm.Address))
             {
-                return cli.NameIsExist(MainForm._Session, tab, col, str);
+                return cli.NameIsExist(MainForm.Session, tab, col, str);
             }
         }
 
@@ -129,9 +129,9 @@ namespace Insight.WS.Client.Common
         /// <returns>bool 内容是否存在</returns>
         public static bool NameIsExist(Guid? pid, string str, string col, string tab = "MasterData", bool isParent = false)
         {
-            using (var cli = new CommonsClient(MainForm._Binding, MainForm._Address))
+            using (var cli = new CommonsClient(MainForm.Binding, MainForm.Address))
             {
-                return cli.NameIsExisting(MainForm._Session, pid, tab, col, str, isParent);
+                return cli.NameIsExisting(MainForm.Session, pid, tab, col, str, isParent);
             }
         }
 
@@ -144,9 +144,9 @@ namespace Insight.WS.Client.Common
         /// <returns>bool:要比对的名称是否存在</returns>
         public static bool NameIsExist(Guid mid, string col, string str)
         {
-            using (var cli = new CommonsClient(MainForm._Binding, MainForm._Address))
+            using (var cli = new CommonsClient(MainForm.Binding, MainForm.Address))
             {
-                return cli.GlobalNameIsExisting(MainForm._Session, mid, col, str);
+                return cli.GlobalNameIsExisting(MainForm.Session, mid, col, str);
             }
         }
 
@@ -160,9 +160,9 @@ namespace Insight.WS.Client.Common
         /// <returns>bool:要比对的名称是否存在</returns>
         public static bool NameIsExist(Guid mid, Guid? pid, string col, string str)
         {
-            using (var cli = new CommonsClient(MainForm._Binding, MainForm._Address))
+            using (var cli = new CommonsClient(MainForm.Binding, MainForm.Address))
             {
-                return cli.LocalNameIsExisting(MainForm._Session, mid, col, str, pid);
+                return cli.LocalNameIsExisting(MainForm.Session, mid, col, str, pid);
             }
         }
 
@@ -175,9 +175,9 @@ namespace Insight.WS.Client.Common
         /// <returns>int 对象数量</returns>
         public static int GetObjectCount(Guid? id, string type = "CategoryId", string tab = "MasterData")
         {
-            using (var cli = new CommonsClient(MainForm._Binding, MainForm._Address))
+            using (var cli = new CommonsClient(MainForm.Binding, MainForm.Address))
             {
-                return cli.GetObjectCount(MainForm._Session, id, type, tab);
+                return cli.GetObjectCount(MainForm.Session, id, type, tab);
             }
         }
 
@@ -193,9 +193,9 @@ namespace Insight.WS.Client.Common
         /// <returns>DataTable 可用报表模板列表</returns>
         public static DataTable Templets(string type, bool withOutTree = true)
         {
-            using (var cli = new CommonsClient(MainForm._Binding, MainForm._Address))
+            using (var cli = new CommonsClient(MainForm.Binding, MainForm.Address))
             {
-                return cli.GetReportTemplet(MainForm._Session, type, withOutTree);
+                return cli.GetReportTemplet(MainForm.Session, type, withOutTree);
             }
         }
 
@@ -208,9 +208,9 @@ namespace Insight.WS.Client.Common
         /// <returns>ImageData对象实体</returns>
         public static ImageData BuildImageData(Guid oid, Guid tid, ImageData img = null)
         {
-            using (var cli = new CommonsClient(MainForm._Binding, MainForm._Address))
+            using (var cli = new CommonsClient(MainForm.Binding, MainForm.Address))
             {
-                return cli.BuildImageData(MainForm._Session, oid, tid, img);
+                return cli.BuildImageData(MainForm.Session, oid, tid, img);
             }
         }
 
@@ -225,9 +225,9 @@ namespace Insight.WS.Client.Common
         /// <returns>ImageData 电子影像对象实体</returns>
         public static ImageData ImageData(Guid id)
         {
-            using (var cli = new CommonsClient(MainForm._Binding, MainForm._Address))
+            using (var cli = new CommonsClient(MainForm.Binding, MainForm.Address))
             {
-                return cli.GetImageData(MainForm._Session, id);
+                return cli.GetImageData(MainForm.Session, id);
             }
         }
 
@@ -241,9 +241,9 @@ namespace Insight.WS.Client.Common
         /// <returns>bool 是否成功</returns>
         public static bool SaveImages(Guid bid, List<ImageData> imgs, string tab, string col)
         {
-            using (var cli = new CommonsClient(MainForm._Binding, MainForm._Address))
+            using (var cli = new CommonsClient(MainForm.Binding, MainForm.Address))
             {
-                return cli.SaveImages(MainForm._Session, bid, imgs, tab, col);
+                return cli.SaveImages(MainForm.Session, bid, imgs, tab, col);
             }
         }
 
@@ -254,9 +254,9 @@ namespace Insight.WS.Client.Common
         /// <returns>bool 是否成功</returns>
         public static bool DelImageData(Guid id)
         {
-            using (var cli = new CommonsClient(MainForm._Binding, MainForm._Address))
+            using (var cli = new CommonsClient(MainForm.Binding, MainForm.Address))
             {
-                return cli.DelImageData(MainForm._Session, id);
+                return cli.DelImageData(MainForm.Session, id);
             }
         }
 
@@ -271,9 +271,9 @@ namespace Insight.WS.Client.Common
         /// <returns>SYS_ModuleParam List 参数集合</returns>
         public static List<SYS_ModuleParam> ModuleParam(Guid mid)
         {
-            using (var cli = new CommonsClient(MainForm._Binding, MainForm._Address))
+            using (var cli = new CommonsClient(MainForm.Binding, MainForm.Address))
             {
-                return cli.GetModuleParam(MainForm._Session, mid);
+                return cli.GetModuleParam(MainForm.Session, mid);
             }
         }
 
@@ -285,9 +285,9 @@ namespace Insight.WS.Client.Common
         // ReSharper disable once UnusedMember.Global
         public static List<SYS_ModuleParam> UserParam(Guid id)
         {
-            using (var cli = new CommonsClient(MainForm._Binding, MainForm._Address))
+            using (var cli = new CommonsClient(MainForm.Binding, MainForm.Address))
             {
-                return cli.GetModuleUserParam(MainForm._Session, id);
+                return cli.GetModuleUserParam(MainForm.Session, id);
             }
         }
 
@@ -298,9 +298,9 @@ namespace Insight.WS.Client.Common
         /// <returns>SYS_ModuleParam List 参数集合</returns>
         public static List<SYS_ModuleParam> DeptParam(Guid id)
         {
-            using (var cli = new CommonsClient(MainForm._Binding, MainForm._Address))
+            using (var cli = new CommonsClient(MainForm.Binding, MainForm.Address))
             {
-                return cli.GetModuleDeptParam(MainForm._Session, id);
+                return cli.GetModuleDeptParam(MainForm.Session, id);
             }
         }
 
@@ -312,9 +312,9 @@ namespace Insight.WS.Client.Common
         /// <returns></returns>
         public static bool SaveModuleParam(List<SYS_ModuleParam> apl, List<SYS_ModuleParam> upl)
         {
-            using (var cli = new CommonsClient(MainForm._Binding, MainForm._Address))
+            using (var cli = new CommonsClient(MainForm.Binding, MainForm.Address))
             {
-                return cli.SaveModuleParam(MainForm._Session, apl, upl);
+                return cli.SaveModuleParam(MainForm.Session, apl, upl);
             }
         }
 
@@ -330,9 +330,9 @@ namespace Insight.WS.Client.Common
         /// <returns>bool 是否成功</returns>
         public static bool EnableMasterData(Guid id, string tab)
         {
-            using (var cli = new CommonsClient(MainForm._Binding, MainForm._Address))
+            using (var cli = new CommonsClient(MainForm.Binding, MainForm.Address))
             {
-                return cli.EnableMasterData(MainForm._Session, id, tab);
+                return cli.EnableMasterData(MainForm.Session, id, tab);
             }
         }
 
@@ -344,9 +344,9 @@ namespace Insight.WS.Client.Common
         /// <returns>1：删除 2：停用 0：失败</returns>
         public static int DelMasterData(Guid id, string tab = null)
         {
-            using (var cli = new CommonsClient(MainForm._Binding, MainForm._Address))
+            using (var cli = new CommonsClient(MainForm.Binding, MainForm.Address))
             {
-                return cli.DelMasterData(MainForm._Session, id, tab);
+                return cli.DelMasterData(MainForm.Session, id, tab);
             }
         }
 
@@ -357,9 +357,9 @@ namespace Insight.WS.Client.Common
         /// <returns>MasterData 主数据对象实体</returns>
         public static MasterData GetMasterData(Guid id)
         {
-            using (var cli = new CommonsClient(MainForm._Binding, MainForm._Address))
+            using (var cli = new CommonsClient(MainForm.Binding, MainForm.Address))
             {
-                return cli.GetMasterData(MainForm._Session, id);
+                return cli.GetMasterData(MainForm.Session, id);
             }
         }
 
@@ -371,9 +371,9 @@ namespace Insight.WS.Client.Common
         /// <returns>DataTable</returns>
         public static DataTable Dictionary(string type, bool withOutTree = true)
         {
-            using (var cli = new CommonsClient(MainForm._Binding, MainForm._Address))
+            using (var cli = new CommonsClient(MainForm.Binding, MainForm.Address))
             {
-                return cli.GetDictionary(MainForm._Session, type, withOutTree);
+                return cli.GetDictionary(MainForm.Session, type, withOutTree);
             }
         }
 
@@ -383,9 +383,9 @@ namespace Insight.WS.Client.Common
         /// <returns>DataTable 在职员工列表</returns>
         public static DataTable GetAllEmployees()
         {
-            using (var cli = new CommonsClient(MainForm._Binding, MainForm._Address))
+            using (var cli = new CommonsClient(MainForm.Binding, MainForm.Address))
             {
-                return cli.GetAllEmployees(MainForm._Session);
+                return cli.GetAllEmployees(MainForm.Session);
             }
         }
 
@@ -395,9 +395,9 @@ namespace Insight.WS.Client.Common
         /// <returns>DataTable 联系人列表</returns>
         public static DataTable GetContacts()
         {
-            using (var cli = new CommonsClient(MainForm._Binding, MainForm._Address))
+            using (var cli = new CommonsClient(MainForm.Binding, MainForm.Address))
             {
-                return cli.GetContacts(MainForm._Session);
+                return cli.GetContacts(MainForm.Session);
             }
         }
 
@@ -407,9 +407,9 @@ namespace Insight.WS.Client.Common
         /// <returns>DataTable 联系方式列表</returns>
         public static DataTable GetContactInfos()
         {
-            using (var cli = new CommonsClient(MainForm._Binding, MainForm._Address))
+            using (var cli = new CommonsClient(MainForm.Binding, MainForm.Address))
             {
-                return cli.GetContactInfos(MainForm._Session);
+                return cli.GetContactInfos(MainForm.Session);
             }
         }
 
@@ -420,9 +420,9 @@ namespace Insight.WS.Client.Common
         /// <returns>MDG_Customer 联系人对象实体</returns>
         public static MDG_Contact GetContact(Guid id)
         {
-            using (var cli = new CommonsClient(MainForm._Binding, MainForm._Address))
+            using (var cli = new CommonsClient(MainForm.Binding, MainForm.Address))
             {
-                return cli.GetContact(MainForm._Session, id);
+                return cli.GetContact(MainForm.Session, id);
             }
         }
 
@@ -433,9 +433,9 @@ namespace Insight.WS.Client.Common
         /// <returns>DataTable 联系方式列表</returns>
         public static DataTable GetContactInfo(Guid id)
         {
-            using (var cli = new CommonsClient(MainForm._Binding, MainForm._Address))
+            using (var cli = new CommonsClient(MainForm.Binding, MainForm.Address))
             {
-                return cli.GetContactInfo(MainForm._Session, id);
+                return cli.GetContactInfo(MainForm.Session, id);
             }
         }
 
@@ -448,9 +448,9 @@ namespace Insight.WS.Client.Common
         /// <returns>bool 是否成功</returns>
         public static bool AddContact(MasterData m, MDG_Contact d, DataTable cdt)
         {
-            using (var cli = new CommonsClient(MainForm._Binding, MainForm._Address))
+            using (var cli = new CommonsClient(MainForm.Binding, MainForm.Address))
             {
-                return cli.AddContact(MainForm._Session, m, d, cdt);
+                return cli.AddContact(MainForm.Session, m, d, cdt);
             }
         }
 
@@ -464,9 +464,9 @@ namespace Insight.WS.Client.Common
         /// <returns>bool 是否成功</returns>
         public static bool UpdateContact(MasterData m, MDG_Contact d, List<object> cdl, DataTable cdt)
         {
-            using (var cli = new CommonsClient(MainForm._Binding, MainForm._Address))
+            using (var cli = new CommonsClient(MainForm.Binding, MainForm.Address))
             {
-                return cli.UpdateContact(MainForm._Session, m, d, cdl, cdt);
+                return cli.UpdateContact(MainForm.Session, m, d, cdl, cdt);
             }
         }
 

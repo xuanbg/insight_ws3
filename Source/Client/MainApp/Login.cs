@@ -120,7 +120,7 @@ namespace Insight.WS.Client.MainApp
                         ShowProgress(string.Format("正在更新 {0}…", file.Name));
                         Thread.Sleep(500);
 
-                        restart = restart || update.UpdateFile(cli.GetFile(file));
+                        restart = update.UpdateFile(cli.GetFile(file)) || restart;
                     }
                 }
 

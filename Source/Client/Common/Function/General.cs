@@ -198,8 +198,8 @@ namespace Insight.WS.Client.Common
                         SecrecyDegree = slv,
                         Size = bf.LongLength,
                         Image = bf,
-                        CreatorDeptId = MainForm._Session.DeptId,
-                        CreatorUserId = MainForm._Session.UserId
+                        CreatorDeptId = MainForm.Session.DeptId,
+                        CreatorUserId = MainForm.Session.UserId
                     };
                     imgs.Add(img);
                 }
