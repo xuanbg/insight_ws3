@@ -176,10 +176,7 @@ namespace Insight.WS.Client.Platform.Base
         /// </summary>
         private void SetIndexValue()
         {
-            using (var cli = new BaseClient(OpenForm.Binding, OpenForm.Address))
-            {
-                _MaxValue = Commons.GetObjectCount(_ParentId, "ParentId", "SYS_Organization") + (IsEdit ? 0 : 1);
-            }
+            _MaxValue = Commons.GetObjectCount(_ParentId, "ParentId", "SYS_Organization") + (IsEdit ? 0 : 1);
             _Value = IsEdit ? _Org.Index : _MaxValue;
 
             spiIndex.Properties.MinValue = 1;

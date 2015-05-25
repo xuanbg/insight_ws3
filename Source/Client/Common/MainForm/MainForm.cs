@@ -115,11 +115,7 @@ namespace Insight.WS.Client.Common
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             const string str = "注销用户账号失败！是否强制退出系统？\r\n如强制退出，可能会导致在一小时内无法登录系统！";
-            using (var cli = new CommonsClient(Binding, Address))
-            {
-                if (!Commons.DelOnlineUser() && General.ShowConfirm(str) != DialogResult.OK)
-                    e.Cancel = true;
-            }
+            if (!Commons.DelOnlineUser() && General.ShowConfirm(str) != DialogResult.OK) e.Cancel = true;
         }
 
         /// <summary>
