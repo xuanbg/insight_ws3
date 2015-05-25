@@ -26,7 +26,6 @@ namespace Insight.WS.Client.Platform.Base
 
         #region 变量声明
 
-        private BaseClient _Client;
         private SYS_UserGroup _Group;
 
         #endregion
@@ -49,9 +48,10 @@ namespace Insight.WS.Client.Platform.Base
         /// <param name="e"></param>
         private void Group_Load(object sender, EventArgs e)
         {
-            _Client = new BaseClient(OpenForm.Binding, OpenForm.Address);
-            _Group = IsEdit ? _Client.GetGroup(OpenForm.UserSession, ObjectId) : new SYS_UserGroup();
-            _Client.Close();
+            using (var cli = new BaseClient(OpenForm.Binding, OpenForm.Address))
+            {
+                _Group = IsEdit ? cli.GetGroup(OpenForm.UserSession, ObjectId) : new SYS_UserGroup();
+            }
 
             Text = IsEdit ? "编辑用户组" : "新建用户组";
             txtGroupName.Text = _Group.Name;
@@ -106,35 +106,34 @@ namespace Insight.WS.Client.Platform.Base
             _Group.Name = txtGroupName.Text.Trim();
             _Group.Description = memDescription.EditValue == null ? null : memDescription.Text.Trim();
 
-            _Client = new BaseClient(OpenForm.Binding, OpenForm.Address);
-            if (IsEdit)
+            using (var cli = new BaseClient(OpenForm.Binding, OpenForm.Address))
             {
-                if (_Client.UpdateGroup(OpenForm.UserSession, _Group))
+                if (IsEdit)
                 {
-                    SetObjectData(_Group.ID);
-                    DialogResult = DialogResult.OK;
+                    if (cli.UpdateGroup(OpenForm.UserSession, _Group))
+                    {
+                        SetObjectData(_Group.ID);
+                        DialogResult = DialogResult.OK;
+                    }
+                    else
+                    {
+                        General.ShowError(string.Format("没有更新用户组【{0}】的任何信息！", _Group.Name));
+                    }
                 }
                 else
                 {
-                    General.ShowError(string.Format("没有更新用户组【{0}】的任何信息！", _Group.Name));
+                    var id = cli.AddGroup(OpenForm.UserSession, _Group);
+                    if (id != null)
+                    {
+                        SetObjectData((Guid) id);
+                        DialogResult = DialogResult.OK;
+                    }
+                    else
+                    {
+                        General.ShowError("新建用户组【" + _Group.Name + "】失败！");
+                    }
                 }
             }
-            else
-            {
-                _Group.CreatorUserId = OpenForm.UserSession.UserId;
-                var id = _Client.AddGroup(OpenForm.UserSession, _Group);
-                if (id != null)
-                {
-                    SetObjectData((Guid)id);
-                    DialogResult = DialogResult.OK;
-                }
-                else
-                {
-                    General.ShowError("新建用户组【" + _Group.Name + "】失败！");
-                }
-            }
-
-            _Client.Close();
         }
 
         #endregion

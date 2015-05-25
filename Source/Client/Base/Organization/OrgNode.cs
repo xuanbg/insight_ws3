@@ -28,7 +28,6 @@ namespace Insight.WS.Client.Platform.Base
 
         #region 变量声明
 
-        private BaseClient _Client;
         private SYS_Organization _Org;
         private DataTable _Position;
         private Guid? _ParentId;
@@ -57,9 +56,10 @@ namespace Insight.WS.Client.Platform.Base
         {
             _Position = Commons.Dictionary("Position");
 
-            _Client = new BaseClient(OpenForm.Binding, OpenForm.Address);
-            _Org = (ObjectId != Guid.Empty) ? _Client.GetOrg(OpenForm.UserSession, ObjectId) : new SYS_Organization();
-            _Client.Close();
+            using (var cli = new BaseClient(OpenForm.Binding, OpenForm.Address))
+            {
+                _Org = (ObjectId != Guid.Empty) ? cli.GetOrg(OpenForm.UserSession, ObjectId) : new SYS_Organization();
+            }
 
             Format.InitLookUpEdit(lokPosition, _Position);
 
@@ -176,9 +176,10 @@ namespace Insight.WS.Client.Platform.Base
         /// </summary>
         private void SetIndexValue()
         {
-            _Client = new BaseClient(OpenForm.Binding, OpenForm.Address);
-            _MaxValue = Commons.GetObjectCount(_ParentId, "ParentId", "SYS_Organization") + (IsEdit ? 0 : 1);
-            _Client.Close();
+            using (var cli = new BaseClient(OpenForm.Binding, OpenForm.Address))
+            {
+                _MaxValue = Commons.GetObjectCount(_ParentId, "ParentId", "SYS_Organization") + (IsEdit ? 0 : 1);
+            }
             _Value = IsEdit ? _Org.Index : _MaxValue;
 
             spiIndex.Properties.MinValue = 1;
@@ -259,34 +260,35 @@ namespace Insight.WS.Client.Platform.Base
             _Org.Code = (string)txtCode.EditValue;
             _Org.PositionId = (Guid?)lokPosition.EditValue;
 
-            _Client = new BaseClient(OpenForm.Binding, OpenForm.Address);
-            if (IsEdit)
+            using (var cli = new BaseClient(OpenForm.Binding, OpenForm.Address))
             {
-                if (_Client.UpdateOrg(OpenForm.UserSession, _Org, _Value))
+                if (IsEdit)
                 {
-                    DialogResult = DialogResult.OK;
+                    if (cli.UpdateOrg(OpenForm.UserSession, _Org, _Value))
+                    {
+                        DialogResult = DialogResult.OK;
+                    }
+                    else
+                    {
+                        General.ShowError(string.Format("没有更新{0}【{1}】的任何信息！", cmbNodeType.Text, _Org.FullName));
+                    }
                 }
                 else
                 {
-                    General.ShowError(string.Format("没有更新{0}【{1}】的任何信息！", cmbNodeType.Text, _Org.FullName));
+                    _Org.NodeType = cmbNodeType.EditValue.GetHashCode();
+                    _Org.ParentId = _ParentId;
+                    if (cli.AddOrg(OpenForm.UserSession, _Org, _Value))
+                    {
+                        NodeType = _Org.NodeType;
+                        DialogResult = DialogResult.OK;
+                    }
+                    else
+                    {
+                        General.ShowError(string.Format("对不起，因为未知的原因，新建{0}【{1}】失败！\r\n如出现重复失败的情况，请联系管理员。",
+                            cmbNodeType.Text, _Org.FullName));
+                    }
                 }
             }
-            else
-            {
-                _Org.NodeType = cmbNodeType.EditValue.GetHashCode();
-                _Org.ParentId = _ParentId;
-                _Org.CreatorUserId = OpenForm.UserSession.UserId;
-                if (_Client.AddOrg(OpenForm.UserSession, _Org, _Value))
-                {
-                    NodeType = _Org.NodeType;
-                    DialogResult = DialogResult.OK;
-                }
-                else
-                {
-                    General.ShowError(string.Format("对不起，因为未知的原因，新建{0}【{1}】失败！\r\n如出现重复失败的情况，请联系管理员。", cmbNodeType.Text, _Org.FullName));
-                }
-            }
-            _Client.Close();
         }
 
         #endregion

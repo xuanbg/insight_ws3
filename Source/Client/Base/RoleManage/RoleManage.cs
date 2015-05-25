@@ -16,7 +16,6 @@ namespace Insight.WS.Client.Platform.Base
 
         #region 变量声明
 
-        private BaseClient _Client;
         private DataTable _Roles;
         private DataTable _Members;
         private DataTable _RoleUsers;
@@ -137,16 +136,16 @@ namespace Insight.WS.Client.Platform.Base
         /// </summary>
         private void InitRoleList()
         {
-            _Client = new BaseClient(Binding, Address);
-            _Roles = _Client.GetAllRole(UserSession);
-            _RoleModulePermit = _Client.GetRoleModulePermit(UserSession);
-            _RoleActionPermit = _Client.GetRoleActionPermit(UserSession);
-            _RoleDataPermit = _Client.GetRoleDataPermit(UserSession);
-            _Client.Close();
-
-            grdRole.DataSource = _Roles;
+            using (var cli = new BaseClient(Binding, Address))
+            {
+                _Roles = cli.GetAllRole(UserSession);
+                _RoleModulePermit = cli.GetRoleModulePermit(UserSession);
+                _RoleActionPermit = cli.GetRoleActionPermit(UserSession);
+                _RoleDataPermit = cli.GetRoleDataPermit(UserSession);
+            }
 
             // 格式化角色表
+            grdRole.DataSource = _Roles;
             Format.GridFormat(gdvRole);
             gdvRole.Columns["名称"].Width = 200;
             gdvRole.Columns["描述"].Width = 450;
@@ -158,10 +157,11 @@ namespace Insight.WS.Client.Platform.Base
         /// </summary>
         private void InitRoleMember()
         {
-            _Client = new BaseClient(Binding, Address);
-            _Members = _Client.GetRoleMember(UserSession);
-            _RoleUsers = _Client.GetRoleUser(UserSession);
-            _Client.Close();
+            using (var cli = new BaseClient(Binding, Address))
+            {
+                _Members = cli.GetRoleMember(UserSession);
+                _RoleUsers = cli.GetRoleUser(UserSession);
+            }
 
             ShowMember();
             InitRoleUser();
@@ -340,16 +340,17 @@ namespace Insight.WS.Client.Platform.Base
             var row = gdvRole.GetFocusedDataRow();
             if (General.ShowConfirm(string.Format("您确定要删除角色【{0}】吗？\r\n角色删除后将无法恢复！", row["名称"])) == DialogResult.OK)
             {
-                _Client = new BaseClient(Binding, Address);
-                if (_Client.DeleteRole(UserSession, (Guid)row["ID"]))
+                using (var cli = new BaseClient(Binding, Address))
                 {
-                    row.Delete();
+                    if (cli.DeleteRole(UserSession, (Guid) row["ID"]))
+                    {
+                        row.Delete();
+                    }
+                    else
+                    {
+                        General.ShowError(string.Format("对不起，角色【{0}】删除失败！如多次删除失败，请联系管理员。", row["名称"]));
+                    }
                 }
-                else
-                {
-                    General.ShowError(string.Format("对不起，角色【{0}】删除失败！如多次删除失败，请联系管理员。", row["名称"]));
-                }
-                _Client.Close();
             }
         }
 
@@ -382,17 +383,18 @@ namespace Insight.WS.Client.Platform.Base
             var node = treMember.FocusedNode;
             if (General.ShowConfirm(string.Format("您确定要移除角色成员【{0}】吗？\r\n角色成员被移除后相应用户将失去该角色赋予的权限！", node.GetValue("成员"))) == DialogResult.OK)
             {
-                _Client = new BaseClient(Binding, Address);
-                if (_Client.DeleteRoleMember(UserSession, (int)node.GetValue("NodeType"), (Guid)node.GetValue("ID")))
+                using (var cli = new BaseClient(Binding, Address))
                 {
-                    InitRoleMember();
-                    gdvRole.FocusedRowHandle = handle;
+                    if (cli.DeleteRoleMember(UserSession, (int) node.GetValue("NodeType"), (Guid) node.GetValue("ID")))
+                    {
+                        InitRoleMember();
+                        gdvRole.FocusedRowHandle = handle;
+                    }
+                    else
+                    {
+                        General.ShowError(string.Format("对不起，角色成员【{0}】移除失败！如多次移除失败，请联系管理员。", node.GetValue("成员")));
+                    }
                 }
-                else
-                {
-                    General.ShowError(string.Format("对不起，角色成员【{0}】移除失败！如多次移除失败，请联系管理员。", node.GetValue("成员")));
-                }
-                _Client.Close();
             }
         }
 

@@ -26,7 +26,6 @@ namespace Insight.WS.Client.Platform.Base
 
         #region 变量声明
 
-        private BaseClient _Client;
         private SYS_User _User;
 
         #endregion
@@ -49,9 +48,10 @@ namespace Insight.WS.Client.Platform.Base
         /// <param name="e"></param>
         private void User_Load(object sender, EventArgs e)
         {
-            _Client = new BaseClient(OpenForm.Binding, OpenForm.Address);
-            _User = IsEdit ? _Client.GetUser(OpenForm.UserSession, ObjectId) : new SYS_User();
-            _Client.Close();
+            using (var cli = new BaseClient(OpenForm.Binding, OpenForm.Address))
+            {
+                _User = IsEdit ? cli.GetUser(OpenForm.UserSession, ObjectId) : new SYS_User();
+            }
 
             Text = IsEdit ? "编辑用户" : "新建用户";
             txtUserName.EditValue = _User.Name;
@@ -133,34 +133,34 @@ namespace Insight.WS.Client.Platform.Base
             _User.LoginName = txtLoginName.Text.Trim();
             _User.Description = memDescription.EditValue == null ? null : memDescription.Text.Trim();
 
-            _Client = new BaseClient(OpenForm.Binding, OpenForm.Address);
-            if (IsEdit)
+            using (var cli = new BaseClient(OpenForm.Binding, OpenForm.Address))
             {
-                if (_Client.UpdateUser(OpenForm.UserSession, _User))
+                if (IsEdit)
                 {
-                    DialogResult = DialogResult.OK;
-                    SetObjectData(_User.ID);
+                    if (cli.UpdateUser(OpenForm.UserSession, _User))
+                    {
+                        DialogResult = DialogResult.OK;
+                        SetObjectData(_User.ID);
+                    }
+                    else
+                    {
+                        General.ShowError(string.Format("没有更新用户【{0}】的任何信息！", _User.LoginName));
+                    }
                 }
                 else
                 {
-                    General.ShowError(string.Format("没有更新用户【{0}】的任何信息！", _User.LoginName));
+                    _User.ID = Guid.NewGuid();
+                    if (cli.AddUser(OpenForm.UserSession, _User))
+                    {
+                        DialogResult = DialogResult.OK;
+                        SetObjectData(_User.ID);
+                    }
+                    else
+                    {
+                        General.ShowError(string.Format("新建用户【{0}】失败！", _User.LoginName));
+                    }
                 }
             }
-            else
-            {
-                _User.ID = Guid.NewGuid();
-                _User.CreatorUserId = OpenForm.UserSession.UserId;
-                if (_Client.AddUser(OpenForm.UserSession, _User))
-                {
-                    DialogResult = DialogResult.OK;
-                    SetObjectData(_User.ID);
-                }
-                else
-                {
-                    General.ShowError(string.Format("新建用户【{0}】失败！", _User.LoginName));
-                }
-            }
-            _Client.Close();
         }
 
         #endregion

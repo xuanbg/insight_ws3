@@ -21,7 +21,6 @@ namespace Insight.WS.Client.Platform.Base
 
         #region 变量声明
 
-        private BaseClient _Client;
         private SYS_Code_Scheme _Scheme;
 
         #endregion
@@ -39,9 +38,10 @@ namespace Insight.WS.Client.Platform.Base
 
         private void CodeScheme_Load(object sender, EventArgs e)
         {
-            _Client = new BaseClient(OpenForm.Binding, OpenForm.Address);
-            _Scheme = IsEdit ? _Client.GetScheme(OpenForm.UserSession, ObjectId) : new SYS_Code_Scheme();
-            _Client.Close();
+            using (var cli = new BaseClient(OpenForm.Binding, OpenForm.Address))
+            {
+                _Scheme = IsEdit ? cli.GetScheme(OpenForm.UserSession, ObjectId) : new SYS_Code_Scheme();
+            }
 
             Text = IsEdit ? "编辑编码方案" : "新建编码方案";
             txtName.EditValue = _Scheme.Name;
@@ -62,9 +62,10 @@ namespace Insight.WS.Client.Platform.Base
             {
                 var id = IsEdit ? ObjectId : Guid.Empty;
                 var mark = txtMark.Text.Trim();
-                _Client = new BaseClient(OpenForm.Binding, OpenForm.Address);
-                bntPreview.Text = _Client.GetCodePreview(OpenForm.UserSession, id, format, mark);
-                _Client.Close();
+                using (var cli = new BaseClient(OpenForm.Binding, OpenForm.Address))
+                {
+                    bntPreview.Text = cli.GetCodePreview(OpenForm.UserSession, id, format, mark);
+                }
             }
         }
 
@@ -112,33 +113,31 @@ namespace Insight.WS.Client.Platform.Base
             _Scheme.SerialFormat = txtMark.Text.Trim();
             _Scheme.Description = memDescription.EditValue == null ? null : memDescription.Text.Trim();
 
-            _Client = new BaseClient(OpenForm.Binding, OpenForm.Address);
-            if (IsEdit)
+            using (var cli = new BaseClient(OpenForm.Binding, OpenForm.Address))
             {
-                if (_Client.UpdateScheme(OpenForm.UserSession, _Scheme))
+                if (IsEdit)
                 {
-                    DialogResult = DialogResult.OK;
+                    if (cli.UpdateScheme(OpenForm.UserSession, _Scheme))
+                    {
+                        DialogResult = DialogResult.OK;
+                    }
+                    else
+                    {
+                        General.ShowError(string.Format("更新编码方案【{0}】失败！如多次失败，请联系管理员。", _Scheme.Name));
+                    }
                 }
                 else
                 {
-                    General.ShowError(string.Format("更新编码方案【{0}】失败！如多次失败，请联系管理员。", _Scheme.Name));
+                    if (cli.AddScheme(OpenForm.UserSession, _Scheme))
+                    {
+                        DialogResult = DialogResult.OK;
+                    }
+                    else
+                    {
+                        General.ShowError("新建编码方案【" + _Scheme.Name + "】失败！如多次失败，请联系管理员。");
+                    }
                 }
             }
-            else
-            {
-                _Scheme.CreatorDeptId = OpenForm.UserSession.DeptId;
-                _Scheme.CreatorUserId = OpenForm.UserSession.UserId;
-                if (_Client.AddScheme(OpenForm.UserSession, _Scheme))
-                {
-                    DialogResult = DialogResult.OK;
-                }
-                else
-                {
-                    General.ShowError("新建编码方案【" + _Scheme.Name + "】失败！如多次失败，请联系管理员。");
-                }
-            }
-
-            _Client.Close();
         }
 
         #endregion

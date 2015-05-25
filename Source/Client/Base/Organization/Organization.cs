@@ -15,7 +15,6 @@ namespace Insight.WS.Client.Platform.Base
 
         #region 变量声明
 
-        private BaseClient _Client;
         private DataTable _Orgs;
         private DataTable _Members;
         private List<Guid> _SubNodes;
@@ -117,10 +116,11 @@ namespace Insight.WS.Client.Platform.Base
         /// </summary>
         private void InitOrgTree()
         {
-            _Client = new BaseClient(Binding, Address);
-            _Orgs = _Client.GetOrgs(UserSession);
-            _Members = _Client.GetOrgMembers(UserSession);
-            _Client.Close();
+            using (var cli = new BaseClient(Binding, Address))
+            {
+                _Orgs = cli.GetOrgs(UserSession);
+                _Members = cli.GetOrgMembers(UserSession);
+            }
 
             var ids = new List<object>();
             treOrgList.GetNodeList().FindAll(n => n.HasChildren && n.Expanded).ForEach(n => { ids.Add(n.GetValue("ID")); });
@@ -290,20 +290,22 @@ namespace Insight.WS.Client.Platform.Base
         private void NodeRemove()
         {
             var fn = treOrgList.FocusedNode.GetValue("名称");
+            if (General.ShowConfirm(string.Format("您确定要删除节点【{0}】吗？\r\n节点删除后将无法恢复！", fn)) != DialogResult.OK) return;
+
             var pn = treOrgList.FocusedNode.ParentNode;
-            if (General.ShowConfirm(string.Format("您确定要删除节点【{0}】吗？\r\n节点删除后将无法恢复！", fn)) == DialogResult.OK)
+            using (var cli = new BaseClient(Binding, Address))
             {
-                _Client = new BaseClient(Binding, Address);
-                if (_Client.DeleteOrg(UserSession, _ObjectId))
+                if (cli.DeleteOrg(UserSession, _ObjectId))
                 {
                     InitOrgTree();
-                    treOrgList.FocusedNode = pn == null ? treOrgList.Nodes.FirstNode : (pn.Nodes.Count == 1 ? pn : pn.Nodes[pn.Nodes.Count - 2]);
+                    treOrgList.FocusedNode = pn == null
+                        ? treOrgList.Nodes.FirstNode
+                        : (pn.Nodes.Count == 1 ? pn : pn.Nodes[pn.Nodes.Count - 2]);
                 }
                 else
                 {
                     General.ShowError(string.Format("对不起，【{0}】已经被使用，无法删除！", fn));
                 }
-                _Client.Close();
             }
         }
 
@@ -348,9 +350,11 @@ namespace Insight.WS.Client.Platform.Base
         /// </summary>
         private void AddMember()
         {
-            _Client = new BaseClient(Binding, Address);
-            var list = _Client.GetOrgMemberBeSides(UserSession, _ObjectId);
-            _Client.Close();
+            DataTable list;
+            using (var cli = new BaseClient(Binding, Address))
+            {
+                list = cli.GetOrgMemberBeSides(UserSession, _ObjectId);
+            }
 
             var dig = new Member
             {
@@ -359,16 +363,17 @@ namespace Insight.WS.Client.Platform.Base
             };
             if (dig.ShowDialog() == DialogResult.OK)
             {
-                _Client = new BaseClient(Binding, Address);
-                if (_Client.AddOrgMember(UserSession, _ObjectId, dig.IdList))
+                using (var cli = new BaseClient(Binding, Address))
                 {
-                    InitOrgTree();
+                    if (cli.AddOrgMember(UserSession, _ObjectId, dig.IdList))
+                    {
+                        InitOrgTree();
+                    }
+                    else
+                    {
+                        General.ShowError("未能增加任何成员！");
+                    }
                 }
-                else
-                {
-                    General.ShowError("未能增加任何成员！");
-                }
-                _Client.Close();
             }
             dig.Close();
         }
@@ -385,22 +390,23 @@ namespace Insight.WS.Client.Platform.Base
             };
             if (dig.ShowDialog() == DialogResult.OK)
             {
-                _Client = new BaseClient(Binding, Address);
-                if (_Client.DeleteOrgMember(UserSession, dig.IdList))
+                using (var cli = new BaseClient(Binding, Address))
                 {
-                    foreach (var rid in dig.IdList)
+                    if (cli.DeleteOrgMember(UserSession, dig.IdList))
                     {
-                        _Members.Rows.Find(rid).Delete();
+                        foreach (var rid in dig.IdList)
+                        {
+                            _Members.Rows.Find(rid).Delete();
+                        }
+                        _Members.AcceptChanges();
+                        InitMember();
+                        treOrgList_NodesReloaded(null, null);
                     }
-                    _Members.AcceptChanges();
-                    InitMember();
-                    treOrgList_NodesReloaded(null, null);
+                    else
+                    {
+                        General.ShowError("未能移除任何成员！");
+                    }
                 }
-                else
-                {
-                    General.ShowError("未能移除任何成员！");
-                }
-                _Client.Close();
             }
             dig.Close();
         }

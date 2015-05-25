@@ -14,7 +14,6 @@ namespace Insight.WS.Client.Platform.Base
 
         #region 变量声明
 
-        private BaseClient _Client;
         private DataTable _Users;
         private DataTable _Groups;
         private DataTable _Members;
@@ -113,10 +112,11 @@ namespace Insight.WS.Client.Platform.Base
         /// </summary>
         private void InitGroupList()
         {
-            _Client = new BaseClient(Binding, Address);
-            _Groups = _Client.GetGroups(UserSession);
-            _Members = _Client.GetGroupMembers(UserSession);
-            _Client.Close();
+            using (var cli = new BaseClient(Binding, Address))
+            {
+                _Groups = cli.GetGroups(UserSession);
+                _Members = cli.GetGroupMembers(UserSession);
+            }
 
             grdGroup.DataSource = _Groups;
 
@@ -131,9 +131,10 @@ namespace Insight.WS.Client.Platform.Base
         /// </summary>
         private void InitUserList()
         {
-            _Client = new BaseClient(Binding, Address);
-            _Users = _Client.GetUsers(UserSession);
-            _Client.Close();
+            using (var cli = new BaseClient(Binding, Address))
+            {
+                _Users = cli.GetUsers(UserSession);
+            }
 
             grdUser.DataSource = _Users;
 
@@ -262,18 +263,19 @@ namespace Insight.WS.Client.Platform.Base
             var row = gdvGroup.GetFocusedDataRow();
             if (General.ShowConfirm(string.Format("您确定要删除用户组【{0}】吗？\r\n用户组删除后将无法恢复！", row["组名称"])) != DialogResult.OK) return;
 
-            _Client = new BaseClient(Binding, Address);
-            if (_Client.DeleteGroup(UserSession, (Guid)row["ID"]))
+            using (var cli = new BaseClient(Binding, Address))
             {
-                row.Delete();
-                _Groups.AcceptChanges();
-                grdGroup.Refresh();
+                if (cli.DeleteGroup(UserSession, (Guid) row["ID"]))
+                {
+                    row.Delete();
+                    _Groups.AcceptChanges();
+                    grdGroup.Refresh();
+                }
+                else
+                {
+                    General.ShowError(string.Format("对不起，用户组【{0}】已经被使用，无法删除！", row["组名称"]));
+                }
             }
-            else
-            {
-                General.ShowError(string.Format("对不起，用户组【{0}】已经被使用，无法删除！", row["组名称"]));
-            }
-            _Client.Close();
         }
 
         /// <summary>
@@ -283,10 +285,11 @@ namespace Insight.WS.Client.Platform.Base
         {
             var focused = gdvGroup.FocusedRowHandle;
             var id = (Guid)gdvGroup.GetFocusedDataRow()["ID"];
-            _Client = new BaseClient(Binding, Address);
-            var list = _Client.GetGroupMemberBeSides(UserSession, id);
-            _Client.Close();
-
+            DataTable list;
+            using (var cli = new BaseClient(Binding, Address))
+            {
+                list = cli.GetGroupMemberBeSides(UserSession, id);
+            }
             var dig = new Member
             {
                 IsAdd = true,
@@ -294,17 +297,18 @@ namespace Insight.WS.Client.Platform.Base
             };
             if (dig.ShowDialog() == DialogResult.OK)
             {
-                _Client = new BaseClient(Binding, Address);
-                if (_Client.AddGroupMember(UserSession, id, dig.IdList))
+                using (var cli = new BaseClient(Binding, Address))
                 {
-                    InitGroupList();
-                    gdvGroup.FocusedRowHandle = focused;
+                    if (cli.AddGroupMember(UserSession, id, dig.IdList))
+                    {
+                        InitGroupList();
+                        gdvGroup.FocusedRowHandle = focused;
+                    }
+                    else
+                    {
+                        General.ShowError("未能增加任何成员！");
+                    }
                 }
-                else
-                {
-                    General.ShowError("未能增加任何成员！");
-                }
-                _Client.Close();
             }
             dig.Close();
         }
@@ -325,17 +329,18 @@ namespace Insight.WS.Client.Platform.Base
             };
             if (dig.ShowDialog() == DialogResult.OK)
             {
-                _Client = new BaseClient(Binding, Address);
-                if (_Client.DeleteMember(UserSession, dig.IdList))
+                using (var cli = new BaseClient(Binding, Address))
                 {
-                    InitGroupList();
-                    gdvGroup.FocusedRowHandle = focused;
+                    if (cli.DeleteMember(UserSession, dig.IdList))
+                    {
+                        InitGroupList();
+                        gdvGroup.FocusedRowHandle = focused;
+                    }
+                    else
+                    {
+                        General.ShowError("未能移除任何成员！");
+                    }
                 }
-                else
-                {
-                    General.ShowError("未能移除任何成员！");
-                }
-                _Client.Close();
             }
             dig.Close();
         }
@@ -378,25 +383,29 @@ namespace Insight.WS.Client.Platform.Base
             var row = gdvUser.GetFocusedDataRow();
             if (General.ShowConfirm(string.Format("您确定要删除用户【{0}】吗？\r\n用户删除后将无法恢复！", row["登录名"])) != DialogResult.OK) return;
 
-            _Client = new BaseClient(Binding, Address);
-            if (_Client.DeleteUser(UserSession, (Guid)row["ID"]))
+            using (var cli = new BaseClient(Binding, Address))
             {
-                foreach (var memberRow in _Members.Rows.Cast<DataRow>().Where(memberRow => memberRow["UserId"].Equals(row["ID"])))
+                if (cli.DeleteUser(UserSession, (Guid) row["ID"]))
                 {
-                    memberRow.Delete();
-                }
-                _Members.AcceptChanges();
-                InitMemberList();
+                    foreach (
+                        var memberRow in
+                            _Members.Rows.Cast<DataRow>().Where(memberRow => memberRow["UserId"].Equals(row["ID"])))
+                    {
+                        memberRow.Delete();
+                    }
+                    _Members.AcceptChanges();
+                    InitMemberList();
 
-                row.Delete();
-                _Users.AcceptChanges();
-                grdUser.Refresh();
+                    row.Delete();
+                    _Users.AcceptChanges();
+                    grdUser.Refresh();
+                }
+                else
+                {
+                    General.ShowError(string.Format("对不起，用户【{0}】已经在系统中产生了相关业务记录，无法删除！\r\n如果您想禁止该用户登录系统，请使用封禁功能。",
+                        row["登录名"]));
+                }
             }
-            else
-            {
-                General.ShowError(string.Format("对不起，用户【{0}】已经在系统中产生了相关业务记录，无法删除！\r\n如果您想禁止该用户登录系统，请使用封禁功能。", row["登录名"]));
-            }
-            _Client.Close();
         }
 
         /// <summary>
@@ -407,14 +416,15 @@ namespace Insight.WS.Client.Platform.Base
             var row = gdvUser.GetFocusedDataRow();
             if (General.ShowConfirm(string.Format("您确定要封禁用户【{0}】吗？\r\n用户被封禁后将无法登录系统！", row["登录名"])) != DialogResult.OK) return;
 
-            _Client = new BaseClient(Binding, Address);
-            if (_Client.UpdateUserStatus(UserSession, (Guid)row["ID"], false))
+            using (var cli = new BaseClient(Binding, Address))
             {
-                row["状态"] = "封禁";
-                _Users.AcceptChanges();
-                grdUser.Refresh();
+                if (cli.UpdateUserStatus(UserSession, (Guid) row["ID"], false))
+                {
+                    row["状态"] = "封禁";
+                    _Users.AcceptChanges();
+                    grdUser.Refresh();
+                }
             }
-            _Client.Close();
         }
 
         /// <summary>
@@ -425,14 +435,15 @@ namespace Insight.WS.Client.Platform.Base
             var row = gdvUser.GetFocusedDataRow();
             if (General.ShowConfirm(string.Format("您确定要对用户【{0}】解封吗？\r\n用户解封后即可正常登录系统！", row["登录名"])) != DialogResult.OK) return;
 
-            _Client = new BaseClient(Binding, Address);
-            if (_Client.UpdateUserStatus(UserSession, (Guid)row["ID"], true))
+            using (var cli = new BaseClient(Binding, Address))
             {
-                row["状态"] = "正常";
-                _Users.AcceptChanges();
-                grdUser.Refresh();
+                if (cli.UpdateUserStatus(UserSession, (Guid) row["ID"], true))
+                {
+                    row["状态"] = "正常";
+                    _Users.AcceptChanges();
+                    grdUser.Refresh();
+                }
             }
-            _Client.Close();
         }
 
         /// <summary>

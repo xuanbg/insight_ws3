@@ -200,7 +200,7 @@ namespace Insight.WS.Service
             {
                 new SqlParameter("@Name", obj.Name),
                 new SqlParameter("@Description", obj.Description),
-                new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = obj.CreatorUserId},
+                new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = us.UserId},
                 new SqlParameter("@Write", SqlDbType.Int) {Value = 0}
             };
             cmds.Add(SqlHelper.MakeCommand(sql, parm));

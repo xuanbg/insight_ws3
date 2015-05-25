@@ -12,7 +12,6 @@ namespace Insight.WS.Client.Platform.Base
 
         #region 变量声明
 
-        private BaseClient _Client;
         private DataTable _OrgList;
         private DataTable _Groups;
         private DataTable _Users;
@@ -47,11 +46,12 @@ namespace Insight.WS.Client.Platform.Base
         /// </summary>
         private void InitMemberList()
         {
-            _Client = new BaseClient(OpenForm.Binding, OpenForm.Address);
-            _OrgList = _Client.GetMemberOfTitle(OpenForm.UserSession, ObjectId);
-            _Groups = _Client.GetMemberOfGroup(OpenForm.UserSession, ObjectId);
-            _Users = _Client.GetMemberOfUser(OpenForm.UserSession, ObjectId);
-            _Client.Close();
+            using (var cli = new BaseClient(OpenForm.Binding, OpenForm.Address))
+            {
+                _OrgList = cli.GetMemberOfTitle(OpenForm.UserSession, ObjectId);
+                _Groups = cli.GetMemberOfGroup(OpenForm.UserSession, ObjectId);
+                _Users = cli.GetMemberOfUser(OpenForm.UserSession, ObjectId);
+            }
 
             InitOrgList();
             InitGroupList();
@@ -109,19 +109,18 @@ namespace Insight.WS.Client.Platform.Base
                       select (Guid) node.GetValue("ID")).ToList();
             var gs = gdvGroup.GetSelectedRows().Select(i => (Guid) gdvGroup.GetDataRow(i)["ID"]).ToList();
             var us = gdvUser.GetSelectedRows().Select(i => (Guid) gdvUser.GetDataRow(i)["ID"]).ToList();
-            if (ts.Count + gs.Count + us.Count == 0 && General.ShowConfirm("当前未选择任何角色成员！您确定要离开此界面吗？") != DialogResult.OK)
-            {
-                return;
-            }
+            if (ts.Count + gs.Count + us.Count == 0 && General.ShowConfirm("当前未选择任何角色成员！您确定要离开此界面吗？") != DialogResult.OK) return;
 
-            _Client = new BaseClient(OpenForm.Binding, OpenForm.Address);
-            if (_Client.AddRoleMember(OpenForm.UserSession, ObjectId, ts, gs, us))
+            using (var cli = new BaseClient(OpenForm.Binding, OpenForm.Address))
             {
-                DialogResult = DialogResult.OK;
-            }
-            else
-            {
-                General.ShowError("添加角色成员失败！如多次失败，请联系管理员。");
+                if (cli.AddRoleMember(OpenForm.UserSession, ObjectId, ts, gs, us))
+                {
+                    DialogResult = DialogResult.OK;
+                }
+                else
+                {
+                    General.ShowError("添加角色成员失败！如多次失败，请联系管理员。");
+                }
             }
         }
 

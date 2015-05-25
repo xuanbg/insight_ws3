@@ -14,7 +14,6 @@ namespace Insight.WS.Client.Platform.Base
 
         #region 变量声明
 
-        private BaseClient _Client;
         private DataTable _Schemes;
         private DataTable _Record;
         private DataTable _Allot;
@@ -116,12 +115,13 @@ namespace Insight.WS.Client.Platform.Base
         /// </summary>
         private void InitScheme()
         {
-            _Client = new BaseClient(Binding, Address);
-            _Schemes = _Client.GetSchemes(UserSession);
-            _Record = _Client.GetSerialRecord(UserSession);
-            _Allot = _Client.GetAllotRecord(UserSession);
-            _HasScheme = _Schemes.Rows.Count > 0;
-            _Client.Close();
+            using (var cli = new BaseClient(Binding, Address))
+            {
+                _Schemes = cli.GetSchemes(UserSession);
+                _Record = cli.GetSerialRecord(UserSession);
+                _Allot = cli.GetAllotRecord(UserSession);
+                _HasScheme = _Schemes.Rows.Count > 0;
+            }
 
             grdScheme.DataSource = _Schemes;
             Format.GridFormat(gdvScheme);
@@ -246,12 +246,11 @@ namespace Insight.WS.Client.Platform.Base
         private void DelScheme()
         {
             var row = gdvScheme.GetFocusedDataRow();
-            if (General.ShowConfirm(string.Format("您确定要删除编码方案【{0}】吗？", row["名称"])) == DialogResult.OK)
-            {
-                _Client = new BaseClient(Binding, Address);
-                var result = _Client.DeleteScheme(UserSession, (Guid)row["ID"]);
-                _Client.Close();
+            if (General.ShowConfirm(string.Format("您确定要删除编码方案【{0}】吗？", row["名称"])) != DialogResult.OK) return;
 
+            using (var cli = new BaseClient(Binding, Address))
+            {
+                var result = cli.DeleteScheme(UserSession, (Guid) row["ID"]);
                 switch (result)
                 {
                     case 1:
@@ -278,10 +277,11 @@ namespace Insight.WS.Client.Platform.Base
         private void Enable()
         {
             var row = gdvScheme.GetFocusedDataRow();
-            if (General.ShowConfirm(string.Format("您确定要启用编码方案【{0}】吗？", row["名称"])) == DialogResult.OK)
+            if (General.ShowConfirm(string.Format("您确定要启用编码方案【{0}】吗？", row["名称"])) != DialogResult.OK) return;
+
+            using (var cli = new BaseClient(Binding, Address))
             {
-                _Client = new BaseClient(Binding, Address);
-                if (_Client.EnableScheme(UserSession, (Guid)row["ID"]))
+                if (cli.EnableScheme(UserSession, (Guid) row["ID"]))
                 {
                     General.ShowMessage(string.Format("编码方案【{0}】启用成功！", row["名称"]));
                     gdvScheme.SetFocusedRowCellValue("状态", "正常");

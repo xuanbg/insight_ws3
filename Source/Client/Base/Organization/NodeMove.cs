@@ -22,7 +22,6 @@ namespace Insight.WS.Client.Platform.Base
 
         #region 变量声明
 
-        private BaseClient _Client;
         private SYS_Organization _Org;
         private DataTable _OrgList;
         private DataView _Orgs;
@@ -89,11 +88,12 @@ namespace Insight.WS.Client.Platform.Base
         /// </summary>
         private void InitTree()
         {
-            _Client = new BaseClient(OpenForm.Binding, OpenForm.Address);
-            _Org = _Client.GetOrg(OpenForm.UserSession, ObjectId);
-            _OrgList = _Client.GetOrgs(OpenForm.UserSession);
-            _Orgs = _OrgList.Copy().DefaultView;
-            _Client.Close();
+            using (var cli = new BaseClient(OpenForm.Binding, OpenForm.Address))
+            {
+                _Org = cli.GetOrg(OpenForm.UserSession, ObjectId);
+                _OrgList = cli.GetOrgs(OpenForm.UserSession);
+                _Orgs = _OrgList.Copy().DefaultView;
+            }
 
             RemoveNode();
             Format.InitTreeListLookUpEdit(trlOrgList, _OrgList, "全称");
@@ -170,15 +170,20 @@ namespace Insight.WS.Client.Platform.Base
 
         protected override void Confirm_Click(object sender, EventArgs e)
         {
-            if (trlOrgList.EditValue != null)
+            if (trlOrgList.EditValue == null)
             {
-                _Org.ParentId = (Guid)trlOrgList.EditValue;
-                var filter = "ParentId " + (_Org.ParentId == null ? "is null" : string.Format("= '{0}'", _Org.ParentId));
-                _Orgs.RowFilter = filter;
-                _Org.Index = _Orgs.Count + 1;
+                MessageBox.Show(string.Format("请选择节点【{0}】的移动目标节点！", _Org.Name));
+                return;
+            }
 
-                _Client = new BaseClient(OpenForm.Binding, OpenForm.Address);
-                if (_Client.UpdateOrgParentId(OpenForm.UserSession, _Org))
+            _Org.ParentId = (Guid) trlOrgList.EditValue;
+            var filter = "ParentId " + (_Org.ParentId == null ? "is null" : string.Format("= '{0}'", _Org.ParentId));
+            _Orgs.RowFilter = filter;
+            _Org.Index = _Orgs.Count + 1;
+
+            using (var cli = new BaseClient(OpenForm.Binding, OpenForm.Address))
+            {
+                if (cli.UpdateOrgParentId(OpenForm.UserSession, _Org))
                 {
                     ObjectData["ParentId"] = _Org.ParentId;
                     ObjectData["Index"] = _Org.Index;
@@ -188,11 +193,6 @@ namespace Insight.WS.Client.Platform.Base
                 {
                     General.ShowError(string.Format("对不起，节点【{0}】移动失败！", _Org.Name));
                 }
-                _Client.Close();
-            }
-            else
-            {
-                MessageBox.Show(string.Format("请选择节点【{0}】的移动目标节点！", _Org.Name));
             }
         }
 

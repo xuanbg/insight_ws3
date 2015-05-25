@@ -18,7 +18,6 @@ namespace Insight.WS.Client.Platform.Base
 
         #region 变量声明
 
-        private BaseClient _Client;
         private SYS_Role _Role;
         private DataTable _Actions;
         private DataTable _RelData;
@@ -132,11 +131,12 @@ namespace Insight.WS.Client.Platform.Base
         /// </summary>
         private void InitWizard()
         {
-            _Client = new BaseClient(OpenForm.Binding, OpenForm.Address);
-            _Role = IsEdit ? _Client.GetRole(OpenForm.UserSession, ObjectId) : new SYS_Role();
-            _Actions = _Client.GetRoleActions(OpenForm.UserSession, ObjectId);
-            _RelData = _Client.GetRoleRelData(OpenForm.UserSession, ObjectId);
-            _Client.Close();
+            using (var cli = new BaseClient(OpenForm.Binding, OpenForm.Address))
+            {
+                _Role = IsEdit ? cli.GetRole(OpenForm.UserSession, ObjectId) : new SYS_Role();
+                _Actions = cli.GetRoleActions(OpenForm.UserSession, ObjectId);
+                _RelData = cli.GetRoleRelData(OpenForm.UserSession, ObjectId);
+            }
 
             _Actions.Select("Action = 2 and CheckState is not null").ToList().ForEach(r => _OldActions.Add(r["ID"]));
             _RelData.Select("Action > 3 and CheckState is not null").ToList().ForEach(r => _OldRelData.Add(r["ID"]));
@@ -339,31 +339,31 @@ namespace Insight.WS.Client.Platform.Base
             }
             _RelData.AcceptChanges();
 
-            _Client = new BaseClient(OpenForm.Binding, OpenForm.Address);
-            if (IsEdit)
+            using (var cli = new BaseClient(OpenForm.Binding, OpenForm.Address))
             {
-                if (_Client.EditRole(OpenForm.UserSession, _Role, _OldActions, _OldRelData, null, _Actions, _RelData, null))
+                if (IsEdit)
                 {
-                    DialogResult = DialogResult.OK;
+                    if (cli.EditRole(OpenForm.UserSession, _Role, _OldActions, _OldRelData, null, _Actions, _RelData, null))
+                    {
+                        DialogResult = DialogResult.OK;
+                    }
+                    else
+                    {
+                        General.ShowError("角色权限更新失败！如多次失败，请联系管理员。");
+                    }
                 }
                 else
                 {
-                    General.ShowError("角色权限更新失败！如多次失败，请联系管理员。");
+                    if (cli.AddRole(OpenForm.UserSession, _Role, _Actions, _RelData, null))
+                    {
+                        DialogResult = DialogResult.OK;
+                    }
+                    else
+                    {
+                        General.ShowError("角色权限保存失败！如多次失败，请联系管理员。");
+                    }
                 }
             }
-            else
-            {
-                _Role.CreatorUserId = OpenForm.UserSession.UserId;
-                if (_Client.AddRole(OpenForm.UserSession, _Role, _Actions, _RelData, null))
-                {
-                    DialogResult = DialogResult.OK;
-                }
-                else
-                {
-                    General.ShowError("角色权限保存失败！如多次失败，请联系管理员。");
-                }
-            }
-            _Client.Close();
         }
 
         #endregion

@@ -13,7 +13,6 @@ namespace Insight.WS.Client.Platform.Base
 
         #region 变量声明
 
-        private BaseClient _Client;
         private SYS_Organization _Org;
         private SYS_OrgMerger _Merger;
         private DataTable _OrgList;
@@ -66,11 +65,12 @@ namespace Insight.WS.Client.Platform.Base
         /// </summary>
         private void InitTree()
         {
-            _Client = new BaseClient(OpenForm.Binding, OpenForm.Address);
-            _Org = _Client.GetOrg(OpenForm.UserSession, ObjectId);
-            _OrgList = _Client.GetOrgs(OpenForm.UserSession);
-            _SourceNode = _OrgList.Rows.Find(ObjectId)["全称"].ToString();
-            _Client.Close();
+            using (var cli = new BaseClient(OpenForm.Binding, OpenForm.Address))
+            {
+                _Org = cli.GetOrg(OpenForm.UserSession, ObjectId);
+                _OrgList = cli.GetOrgs(OpenForm.UserSession);
+                _SourceNode = _OrgList.Rows.Find(ObjectId)["全称"].ToString();
+            }
 
             RemoveNode();
             Format.InitTreeListLookUpEdit(trlOrgList, _OrgList, "全称");
@@ -148,30 +148,30 @@ namespace Insight.WS.Client.Platform.Base
         protected override void Confirm_Click(object sender, EventArgs e)
         {
             if (General.ShowConfirm(string.Format("您确定要将节点【{0}】合并到【{1}】吗？\n\r警告！合并操作结果将不可逆转！", _SourceNode, trlOrgList.Text.Trim())) != DialogResult.OK) return;
-            if (trlOrgList.EditValue != null)
-            {
-                _Merger = new SYS_OrgMerger
-                {
-                    OrgId = (Guid) trlOrgList.EditValue,
-                    MergerOrgId = ObjectId,
-                    CreatorUserId = OpenForm.UserSession.UserId
-                };
 
-                _Client = new BaseClient(OpenForm.Binding, OpenForm.Address);
-                if (_Client.AddOrgMerger(OpenForm.UserSession, _Merger))
+            if (trlOrgList.EditValue == null)
+            {
+                General.ShowWarning(string.Format("请选择节点【{0}】的合并目标节点！", _Org.Name));
+                return;
+            }
+            
+            _Merger = new SYS_OrgMerger
+            {
+                OrgId = (Guid) trlOrgList.EditValue,
+                MergerOrgId = ObjectId,
+                CreatorUserId = OpenForm.UserSession.UserId
+            };
+
+            using (var cli = new BaseClient(OpenForm.Binding, OpenForm.Address))
+            {
+                if (cli.AddOrgMerger(OpenForm.UserSession, _Merger))
                 {
-                    _Client.Close();
                     DialogResult = DialogResult.OK;
                 }
                 else
                 {
-                    _Client.Close();
                     General.ShowError(string.Format("对不起，节点【{0}】合并失败！", _Org.Name));
                 }
-            }
-            else
-            {
-                General.ShowWarning(string.Format("请选择节点【{0}】的合并目标节点！", _Org.Name));
             }
         }
 

@@ -101,7 +101,7 @@ namespace Insight.WS.Service
                 new SqlParameter("@Alias", obj.Alias),
                 new SqlParameter("@FullName", obj.FullName),
                 new SqlParameter("@PositionId", SqlDbType.UniqueIdentifier) {Value = obj.PositionId},
-                new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = obj.CreatorUserId}
+                new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = us.UserId}
             };
             cmds.Add(SqlHelper.MakeCommand(CommonDAL.ChangeIndex("SYS_Organization", index, obj.Index, obj.ParentId, false)));
             cmds.Add(SqlHelper.MakeCommand(sql.ToString(), parm));

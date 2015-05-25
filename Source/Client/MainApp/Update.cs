@@ -23,7 +23,7 @@ namespace Insight.WS.Client.MainApp
         #region 变量声明
 
         private List<UpdateFile> _LocalFiles = new List<UpdateFile>();
-        private string _RootPath;
+        private string _RootPath = Application.StartupPath;
 
         #endregion
 
@@ -35,11 +35,7 @@ namespace Insight.WS.Client.MainApp
         /// <param name="files"></param>
         internal Update(IEnumerable<UpdateFile> files)
         {
-            // 获取本地文件列表
-            _RootPath = Application.StartupPath;
             GetLocalFiles(_RootPath);
-
-            // 根据服务器文件列表比较文件版本，如本地文件不存在或版本比服务器上的低，则将该文件加入更新列表
             UpdateFiles = new List<UpdateFile>();
             UpdateFiles.AddRange(from sf in files
                                  let cf = _LocalFiles.Find(file => file.Name == sf.Name && file.Path == sf.Path)
@@ -59,12 +55,12 @@ namespace Insight.WS.Client.MainApp
         internal bool UpdateFile(UpdateFile file)
         {
             var path = _RootPath + file.Path + "\\";
-            var restart = false;
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
             }
 
+            var restart = false;
             path += file.Name;
             try
             {

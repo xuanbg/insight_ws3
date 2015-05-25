@@ -12,7 +12,6 @@ namespace Insight.WS.Client.Platform.Base
 
         #region 变量声明
 
-        private BaseClient _Client;
         private List<Session> _Sessions;
 
         #endregion
@@ -34,9 +33,10 @@ namespace Insight.WS.Client.Platform.Base
         /// <param name="e"></param>
         private void OnlineUser_Load(object sender, EventArgs e)
         {
-            _Client = new BaseClient(OpenForm.Binding, OpenForm.Address);
-            _Sessions = _Client.GetOnlineUser(OpenForm.UserSession);
-            _Client.Close();
+            using (var cli = new BaseClient(OpenForm.Binding, OpenForm.Address))
+            {
+                _Sessions = cli.GetOnlineUser(OpenForm.UserSession);
+            }
 
             InitOnlineList();
         }

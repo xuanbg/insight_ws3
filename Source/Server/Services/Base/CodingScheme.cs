@@ -120,8 +120,8 @@ namespace Insight.WS.Service
                 new SqlParameter("@CodeFormat", obj.CodeFormat),
                 new SqlParameter("@SerialFormat", obj.SerialFormat),
                 new SqlParameter("@Description", obj.Description),
-                new SqlParameter("@CreatorDeptId", SqlDbType.UniqueIdentifier) {Value = obj.CreatorDeptId},
-                new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = obj.CreatorUserId}
+                new SqlParameter("@CreatorDeptId", SqlDbType.UniqueIdentifier) {Value = us.DeptId},
+                new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = us.UserId}
             };
             return SqlHelper.SqlNonQuery(sql, parm) > 0;
         }

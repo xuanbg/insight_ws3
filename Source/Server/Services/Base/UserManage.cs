@@ -120,7 +120,7 @@ namespace Insight.WS.Service
             {
                 new SqlParameter("@Name", obj.Name),
                 new SqlParameter("@Description", obj.Description),
-                new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = obj.CreatorUserId}
+                new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = us.UserId}
             };
             return SqlHelper.SqlScalar(sql, parm);
         }
@@ -142,7 +142,7 @@ namespace Insight.WS.Service
                 new SqlParameter("@Name", obj.Name),
                 new SqlParameter("@LoginName", obj.LoginName),
                 new SqlParameter("@Description", obj.Description),
-                new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = obj.CreatorUserId}
+                new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = us.UserId}
             };
             return SqlHelper.SqlNonQuery(sql, parm) > 0;
         }
