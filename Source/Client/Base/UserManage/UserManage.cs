@@ -402,8 +402,7 @@ namespace Insight.WS.Client.Platform.Base
                 }
                 else
                 {
-                    General.ShowError(string.Format("对不起，用户【{0}】已经在系统中产生了相关业务记录，无法删除！\r\n如果您想禁止该用户登录系统，请使用封禁功能。",
-                        row["登录名"]));
+                    General.ShowError(string.Format("对不起，用户【{0}】已经在系统中产生了相关业务记录，无法删除！\r\n如果您想禁止该用户登录系统，请使用封禁功能。", row["登录名"]));
                 }
             }
         }
