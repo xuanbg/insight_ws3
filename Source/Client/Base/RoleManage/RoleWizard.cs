@@ -253,25 +253,25 @@ namespace Insight.WS.Client.Platform.Base
             if (node.HasChildren)
             {
                 node.Nodes.ToList().ForEach(n => NodesForEach(n, type));
+                return;
             }
-            else
+
+            var pstr = "";
+            switch (type)
             {
-                var p = "";
-                switch (type)
-                {
-                    case 1:
-                        p = node.CheckState == CheckState.Checked ? "允许" : (node.CheckState == CheckState.Indeterminate ? "拒绝" : null);
-                        _Actions.Rows.Find(node.GetValue("ID"))["CheckState"] = node.CheckState.ToString();
-                        _Actions.Rows.Find(node.GetValue("ID"))["Info"] = p;
-                        break;
-                    case 2:
-                        p = node.CheckState == CheckState.Checked ? "读写" : (node.CheckState == CheckState.Indeterminate ? "只读" : null);
-                        _RelData.Rows.Find(node.GetValue("ID"))["CheckState"] = node.CheckState.ToString();
-                        _RelData.Rows.Find(node.GetValue("ID"))["Info"] = p;
-                        break;
-                }
-                node.SetValue("Info", p);
+                case 1:
+                    pstr = node.CheckState == CheckState.Checked ? "允许" : (node.CheckState == CheckState.Indeterminate ? "拒绝" : null);
+                    _Actions.Rows.Find(node.GetValue("ID"))["CheckState"] = node.CheckState.ToString();
+                    _Actions.Rows.Find(node.GetValue("ID"))["Info"] = pstr;
+                    break;
+
+                case 2:
+                    pstr = node.CheckState == CheckState.Checked ? "读写" : (node.CheckState == CheckState.Indeterminate ? "只读" : null);
+                    _RelData.Rows.Find(node.GetValue("ID"))["CheckState"] = node.CheckState.ToString();
+                    _RelData.Rows.Find(node.GetValue("ID"))["Info"] = pstr;
+                    break;
             }
+            node.SetValue("Info", pstr);
         }
 
         /// <summary>
@@ -314,13 +314,9 @@ namespace Insight.WS.Client.Platform.Base
             foreach (DataRow row in _Actions.Rows)
             {
                 if (string.IsNullOrEmpty(row["Info"].ToString()) || !ids.Exists(id => id.Equals(row["ParentId"])))
-                {
                     row.Delete();
-                }
                 else if (treAction.FindNodeByKeyID(row["ID"]).CheckState.ToString() == row["Original"].ToString() && _OldActions.Remove(row["ID"]))
-                {
                     row.Delete();
-                }
             }
             _Actions.AcceptChanges();
 
@@ -329,13 +325,9 @@ namespace Insight.WS.Client.Platform.Base
             foreach (DataRow row in _RelData.Rows)
             {
                 if (string.IsNullOrEmpty(row["Info"].ToString()) || !ids.Exists(id => id.Equals(row["ParentId"])))
-                {
                     row.Delete();
-                }
                 else if (treDataPerm.FindNodeByKeyID(row["ID"]).CheckState.ToString() == row["Original"].ToString() && _OldRelData.Remove(row["ID"]))
-                {
                     row.Delete();
-                }
             }
             _RelData.AcceptChanges();
 
@@ -344,24 +336,16 @@ namespace Insight.WS.Client.Platform.Base
                 if (IsEdit)
                 {
                     if (cli.EditRole(OpenForm.UserSession, _Role, _OldActions, _OldRelData, null, _Actions, _RelData, null))
-                    {
                         DialogResult = DialogResult.OK;
-                    }
                     else
-                    {
                         General.ShowError("角色权限更新失败！如多次失败，请联系管理员。");
-                    }
                 }
                 else
                 {
                     if (cli.AddRole(OpenForm.UserSession, _Role, _Actions, _RelData, null))
-                    {
                         DialogResult = DialogResult.OK;
-                    }
                     else
-                    {
                         General.ShowError("角色权限保存失败！如多次失败，请联系管理员。");
-                    }
                 }
             }
         }

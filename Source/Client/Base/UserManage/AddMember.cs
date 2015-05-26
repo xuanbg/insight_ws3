@@ -113,14 +113,13 @@ namespace Insight.WS.Client.Platform.Base
 
             using (var cli = new BaseClient(OpenForm.Binding, OpenForm.Address))
             {
-                if (cli.AddRoleMember(OpenForm.UserSession, ObjectId, ts, gs, us))
-                {
-                    DialogResult = DialogResult.OK;
-                }
-                else
+                if (!cli.AddRoleMember(OpenForm.UserSession, ObjectId, ts, gs, us))
                 {
                     General.ShowError("添加角色成员失败！如多次失败，请联系管理员。");
+                    return;
                 }
+                
+                DialogResult = DialogResult.OK;
             }
         }
 

@@ -110,28 +110,26 @@ namespace Insight.WS.Client.Platform.Base
             {
                 if (IsEdit)
                 {
-                    if (cli.UpdateGroup(OpenForm.UserSession, _Group))
-                    {
-                        SetObjectData(_Group.ID);
-                        DialogResult = DialogResult.OK;
-                    }
-                    else
+                    if (!cli.UpdateGroup(OpenForm.UserSession, _Group))
                     {
                         General.ShowError(string.Format("没有更新用户组【{0}】的任何信息！", _Group.Name));
+                        return;
                     }
+                    
+                    SetObjectData(_Group.ID);
+                    DialogResult = DialogResult.OK;
                 }
                 else
                 {
                     var id = cli.AddGroup(OpenForm.UserSession, _Group);
-                    if (id != null)
-                    {
-                        SetObjectData((Guid) id);
-                        DialogResult = DialogResult.OK;
-                    }
-                    else
+                    if (id == null)
                     {
                         General.ShowError("新建用户组【" + _Group.Name + "】失败！");
+                        return;
                     }
+                    
+                    SetObjectData((Guid) id);
+                    DialogResult = DialogResult.OK;
                 }
             }
         }

@@ -155,14 +155,12 @@ namespace Insight.WS.Client.Business.Storage
         {
             txtName.EditValue = _Delivery.ObjectName;
             memDesc.EditValue = _Delivery.Description;
+            if (_Delivery.Direction != 0) return;
 
-            if (_Delivery.Direction == 0)
+            foreach (DataRow row in _Items.Rows)
             {
-                foreach (DataRow row in _Items.Rows)
-                {
-                    row["数量"] = -(decimal)row["数量"];
-                    row["金额"] = -(decimal)row["金额"];
-                }
+                row["数量"] = -(decimal)row["数量"];
+                row["金额"] = -(decimal)row["金额"];
             }
         }
 
@@ -231,16 +229,15 @@ namespace Insight.WS.Client.Business.Storage
             var name = gdvAttach.GetFocusedDataRow()["名称"];
             if (General.ShowConfirm(string.Format("您确定要删除附件【{0}】吗？", name)) != DialogResult.OK) return;
 
-            if (Commons.DelImageData(_AttachId))
-            {
-                _Attachs.Rows.Find(_AttachId).Delete();
-                _Attachs.AcceptChanges();
-                _HasAttach = _Attachs.Rows.Count > 0;
-            }
-            else
+            if (!Commons.DelImageData(_AttachId))
             {
                 General.ShowError("删除附件失败！该附件可能被别的业务引用。");
+                return;
             }
+            
+            _Attachs.Rows.Find(_AttachId).Delete();
+            _Attachs.AcceptChanges();
+            _HasAttach = _Attachs.Rows.Count > 0;
         }
 
         #endregion

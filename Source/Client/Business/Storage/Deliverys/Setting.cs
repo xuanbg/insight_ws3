@@ -128,13 +128,16 @@ namespace Insight.WS.Client.Business.Storage
             var smo = grlStoneOutScheme.EditValue == null ? null : grlStoneOutScheme.EditValue.ToString();
             var smb = grlStoneBakScheme.EditValue == null ? null : grlStoneBakScheme.EditValue.ToString();
             var sec = lokSecrecy.EditValue == null ? null : lokSecrecy.EditValue.ToString();
-            string[][] mps = { new[]{ "16EBDC03-B0BB-481B-8EDC-0B9F29A97911", "入库单打印模板", tpi},
-                               new[]{ "8A5AF44F-B0CE-4D0A-B0CF-FFB8315613C8", "出库单打印模板", tpo},
-                               new[]{ "42244164-E340-48C7-B153-920497B6F069", "退库单打印模板", tpb},
-                               new[]{ "2F2ED486-2C52-4D83-AF61-85F6736C8337", "入库单编码方案", smi},
-                               new[]{ "A22F4C4D-6A43-4F02-BB22-429F6FB78580", "出库单编码方案", smo},
-                               new[]{ "56C7ED33-4263-46D4-BA11-E99BC6BDBCBB", "退库单编码方案", smb},
-                               new[]{ "F52A5EB0-D491-49BE-9FCB-2031D8AABB3C", "涉密等级", sec} };
+            var mps = new[]
+            {
+                new[] {"16EBDC03-B0BB-481B-8EDC-0B9F29A97911", "入库单打印模板", tpi},
+                new[] {"8A5AF44F-B0CE-4D0A-B0CF-FFB8315613C8", "出库单打印模板", tpo},
+                new[] {"42244164-E340-48C7-B153-920497B6F069", "退库单打印模板", tpb},
+                new[] {"2F2ED486-2C52-4D83-AF61-85F6736C8337", "入库单编码方案", smi},
+                new[] {"A22F4C4D-6A43-4F02-BB22-429F6FB78580", "出库单编码方案", smo},
+                new[] {"56C7ED33-4263-46D4-BA11-E99BC6BDBCBB", "退库单编码方案", smb},
+                new[] {"F52A5EB0-D491-49BE-9FCB-2031D8AABB3C", "涉密等级", sec}
+            };
             Parameters = UpdateParameter(Parameters, mps);
             DialogResult = DialogResult.OK;
         }

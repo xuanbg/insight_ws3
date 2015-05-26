@@ -238,16 +238,15 @@ namespace Insight.WS.Client.Business.Settlement
             var name = gdvAttach.GetFocusedDataRow()["名称"];
             if (General.ShowConfirm(string.Format("您确定要删除附件【{0}】吗？", name)) != DialogResult.OK) return;
 
-            if (Commons.DelImageData(_AttachId))
-            {
-                _Attachs.Rows.Find(_AttachId).Delete();
-                _Attachs.AcceptChanges();
-                _HasAttach = _Attachs.Rows.Count > 0;
-            }
-            else
+            if (!Commons.DelImageData(_AttachId))
             {
                 General.ShowError("删除附件失败！该附件可能被别的业务引用。");
+                return;
             }
+            
+            _Attachs.Rows.Find(_AttachId).Delete();
+            _Attachs.AcceptChanges();
+            _HasAttach = _Attachs.Rows.Count > 0;
         }
 
         #endregion

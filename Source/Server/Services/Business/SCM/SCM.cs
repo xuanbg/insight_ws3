@@ -92,8 +92,8 @@ namespace Insight.WS.Service.Business
                 new SqlParameter("@ZipCode", d.ZipCode),
                 new SqlParameter("@Website", d.Website),
                 new SqlParameter("@Description", d.Description),
-                new SqlParameter("@CreatorDeptId", SqlDbType.UniqueIdentifier) {Value = d.CreatorDeptId},
-                new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = d.CreatorUserId},
+                new SqlParameter("@CreatorDeptId", SqlDbType.UniqueIdentifier) {Value = us.DeptId},
+                new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = us.UserId},
                 new SqlParameter("@Read", SqlDbType.Int) {Value = 0}
             };
             cmds.Add(SqlHelper.MakeCommand(sql, parm));
@@ -102,7 +102,7 @@ namespace Insight.WS.Service.Business
             parm = new[]
             {
                 new SqlParameter("@MasterDataId", SqlDbType.UniqueIdentifier) {Value = d.MID},
-                new SqlParameter("@UserId", SqlDbType.UniqueIdentifier) {Value = d.CreatorUserId},
+                new SqlParameter("@UserId", SqlDbType.UniqueIdentifier) {Value = us.UserId},
                 new SqlParameter("@Read", SqlDbType.Int) {Value = 0}
             };
             cmds.Add(SqlHelper.MakeCommand(sql, parm));

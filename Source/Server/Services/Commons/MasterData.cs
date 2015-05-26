@@ -149,7 +149,7 @@ namespace Insight.WS.Service
             {
                 new SqlParameter("@MasterId", SqlDbType.UniqueIdentifier) {Value = obj.MasterId},
                 new SqlParameter("@MergerId", SqlDbType.UniqueIdentifier) {Value = obj.MergerId},
-                new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = obj.CreatorUserId}
+                new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = us.UserId}
             };
             cmds.Add(SqlHelper.MakeCommand(sql, parm));
             return SqlHelper.SqlExecute(cmds);
@@ -337,8 +337,6 @@ namespace Insight.WS.Service
                 new SqlParameter("@Description", d.Description),
                 new SqlParameter("@IsMaster", d.IsMaster),
                 new SqlParameter("@LoginUser", d.LoginUser),
-                new SqlParameter("@CreatorDeptId", SqlDbType.UniqueIdentifier) {Value = d.CreatorDeptId},
-                new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = d.CreatorUserId},
                 new SqlParameter("@MID", SqlDbType.UniqueIdentifier) {Value = d.MID}
             };
             cmds.Add(SqlHelper.MakeCommand(sql, parm));

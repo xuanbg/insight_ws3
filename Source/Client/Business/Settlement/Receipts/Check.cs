@@ -58,14 +58,13 @@ namespace Insight.WS.Client.Business.Settlement
         {
             using (var cli = new SettlementClient(OpenForm.Binding, OpenForm.Address))
             {
-                if (cli.AddCheck(OpenForm.UserSession, TempletId, SchemeId))
-                {
-                    DialogResult = DialogResult.OK;
-                }
-                else
+                if (!cli.AddCheck(OpenForm.UserSession, TempletId, SchemeId))
                 {
                     General.ShowError("结账信息保存失败！如多次失败，请联系管理员。");
+                    return;
                 }
+                
+                DialogResult = DialogResult.OK;
             }
         }
 

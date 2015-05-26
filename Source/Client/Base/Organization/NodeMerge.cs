@@ -159,19 +159,17 @@ namespace Insight.WS.Client.Platform.Base
             {
                 OrgId = (Guid) trlOrgList.EditValue,
                 MergerOrgId = ObjectId,
-                CreatorUserId = OpenForm.UserSession.UserId
             };
 
             using (var cli = new BaseClient(OpenForm.Binding, OpenForm.Address))
             {
-                if (cli.AddOrgMerger(OpenForm.UserSession, _Merger))
-                {
-                    DialogResult = DialogResult.OK;
-                }
-                else
+                if (!cli.AddOrgMerger(OpenForm.UserSession, _Merger))
                 {
                     General.ShowError(string.Format("对不起，节点【{0}】合并失败！", _Org.Name));
+                    return;
                 }
+                
+                DialogResult = DialogResult.OK;
             }
         }
 

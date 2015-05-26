@@ -51,10 +51,7 @@ namespace Insight.WS.Client.Platform.Base
             if (e.KeyCode != Keys.Delete) return;
 
             var cs = gdvOnline.GetFocusedRow() as Session;
-            if (General.ShowConfirm(string.Format("您确定要使用户【{0}】离线吗？用户离线后将必须重新登录系统才能继续操作。", cs.UserName)) != DialogResult.OK)
-            {
-                return;
-            }
+            if (General.ShowConfirm(string.Format("您确定要使用户【{0}】离线吗？用户离线后将必须重新登录系统才能继续操作。", cs.UserName)) != DialogResult.OK) return;
 
             if (Commons.DelOnlineUser(cs.ID))
             {

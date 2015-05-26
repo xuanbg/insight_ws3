@@ -17,7 +17,6 @@ namespace Insight.WS.Client.Business.SCM
 
         #region 变量声明
 
-        private SCMClient _Client;
         private DataTable _Suppliers;
         private DataTable _SupplierInfo;
         private DataTable _Contacts;
@@ -178,10 +177,11 @@ namespace Insight.WS.Client.Business.SCM
             _Contacts = Commons.GetContacts();
             _ContactInfo = Commons.GetContactInfos();
 
-            _Client = new SCMClient(Binding, Address);
-            _Suppliers = _Client.GetSuppliers(UserSession);
-            _SupplierInfo = _Client.GetSupplierInfo(UserSession);
-            _Client.Close();
+            using (var cli = new SCMClient(Binding, Address))
+            {
+                _Suppliers = cli.GetSuppliers(UserSession);
+                _SupplierInfo = cli.GetSupplierInfo(UserSession);
+            }
 
             Filter_CheckedChanged(null, null);
         }
@@ -217,15 +217,14 @@ namespace Insight.WS.Client.Business.SCM
             gdvSupplier.Columns["邮编"].Width = 60;
             gdvSupplier.Columns["邮编"].AppearanceCell.TextOptions.HAlignment = HorzAlignment.Center;
 
-            if (!_HasSupplier)
-            {
-                SwitchItemStatus(new Context("EditSupplier", false), new Context("DelSupplier", false),
-                                 new Context("Enable", false), new Context("Transfer", false), new Context("Sharing", false),
-                                 new Context("NewContact", false), new Context("EditContact", false), new Context("DelContact", false));
-                _SupplierId = Guid.Empty;
-                InitSupplierInfo();
-                InitContact();
-            }
+            if (_HasSupplier) return;
+
+            SwitchItemStatus(new Context("EditSupplier", false), new Context("DelSupplier", false),
+                new Context("Enable", false), new Context("Transfer", false), new Context("Sharing", false),
+                new Context("NewContact", false), new Context("EditContact", false), new Context("DelContact", false));
+            _SupplierId = Guid.Empty;
+            InitSupplierInfo();
+            InitContact();
         }
 
         /// <summary>
@@ -299,30 +298,39 @@ namespace Insight.WS.Client.Business.SCM
                 case "Refresh":
                     InitData();
                     break;
+
                 case "NewSupplier":
                     Supplier(false);
                     break;
+
                 case "EditSupplier":
                     Supplier(true);
                     break;
+
                 case "DelSupplier":
                     DelSupplier();
                     break;
+
                 case "Sharing":
                     Transfer(false);
                     break;
+
                 case "Transfer":
                     Transfer(true);
                     break;
+
                 case "Enable":
                     Enable();
                     break;
+
                 case "NewContact":
                     Contact(false);
                     break;
+
                 case "EditContact":
                     Contact(true);
                     break;
+
                 case "DelContact":
                     DelContact();
                     break;
@@ -359,9 +367,12 @@ namespace Insight.WS.Client.Business.SCM
             var row = gdvSupplier.GetFocusedDataRow();
             if (General.ShowConfirm(string.Format("您确定要删除供应商【{0}】吗?", row["名称"])) != DialogResult.OK) return;
 
-            var n = Commons.DelMasterData(_SupplierId);
-            switch (n)
+            switch (Commons.DelMasterData(_SupplierId))
             {
+                case 0:
+                    General.ShowError("对不起，该供应商已经被使用，且无法停用！");
+                    break;
+
                 case 1:
                     _Suppliers.Rows.Find(row["ID"]).Delete();
                     _Suppliers.AcceptChanges();
@@ -372,10 +383,6 @@ namespace Insight.WS.Client.Business.SCM
                     General.ShowWarning("该供应商已被使用，无法删除，已停用！");
                     _Suppliers.Rows.Find(row["ID"])["状态"] = "停用";
                     InitSupplier();
-                    break;
-
-                default:
-                    General.ShowError("对不起，该供应商已经被使用，且无法停用！");
                     break;
             }
         }
@@ -388,15 +395,14 @@ namespace Insight.WS.Client.Business.SCM
             var row = gdvSupplier.GetFocusedDataRow();
             if (General.ShowConfirm(string.Format("您确定要启用【{0}】吗?", row["名称"])) != DialogResult.OK) return;
 
-            if (Commons.EnableMasterData(_SupplierId, "MDG_Supplier"))
-            {
-                _Suppliers.Rows.Find(row["ID"])["状态"] = "正常";
-                InitSupplier();
-            }
-            else
+            if (!Commons.EnableMasterData(_SupplierId, "MDG_Supplier"))
             {
                 General.ShowError(string.Format("对不起，供应商【{0}】启用失败！", row["名称"]));
+                return;
             }
+            
+            _Suppliers.Rows.Find(row["ID"])["状态"] = "正常";
+            InitSupplier();
         }
 
         /// <summary>
@@ -450,20 +456,19 @@ namespace Insight.WS.Client.Business.SCM
             var row = glvContact.GetFocusedDataRow();
             if (General.ShowConfirm(string.Format("您确定要删除【{0}】吗?", row["姓名"])) != DialogResult.OK) return;
 
-            if (Commons.DelMasterData( _ContactId) > 0)
-            {
-                if (row["主要联系人"].ToString() == "是")
-                {
-                    General.ShowWarning("您删除了一个主要联系人，请为该供应商设定一个新的主要联系人！");
-                }
-                _Contacts.Rows.Find(row["ID"]).Delete();
-                _Contacts.AcceptChanges();
-                InitContact();
-            }
-            else
+            if (Commons.DelMasterData(_ContactId) <= 0)
             {
                 General.ShowError(string.Format("对不起！删除联系人【{0}】失败。", row["名称"]));
+                return;
             }
+            
+            if (row["主要联系人"].ToString() == "是")
+            {
+                General.ShowWarning("您删除了一个主要联系人，请为该供应商设定一个新的主要联系人！");
+            }
+            _Contacts.Rows.Find(row["ID"]).Delete();
+            _Contacts.AcceptChanges();
+            InitContact();
         }
 
         #endregion

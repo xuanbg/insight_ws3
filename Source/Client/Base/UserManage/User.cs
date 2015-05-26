@@ -137,28 +137,26 @@ namespace Insight.WS.Client.Platform.Base
             {
                 if (IsEdit)
                 {
-                    if (cli.UpdateUser(OpenForm.UserSession, _User))
-                    {
-                        DialogResult = DialogResult.OK;
-                        SetObjectData(_User.ID);
-                    }
-                    else
+                    if (!cli.UpdateUser(OpenForm.UserSession, _User))
                     {
                         General.ShowError(string.Format("没有更新用户【{0}】的任何信息！", _User.LoginName));
+                        return;
                     }
+                    
+                    DialogResult = DialogResult.OK;
+                    SetObjectData(_User.ID);
                 }
                 else
                 {
                     _User.ID = Guid.NewGuid();
-                    if (cli.AddUser(OpenForm.UserSession, _User))
-                    {
-                        DialogResult = DialogResult.OK;
-                        SetObjectData(_User.ID);
-                    }
-                    else
+                    if (!cli.AddUser(OpenForm.UserSession, _User))
                     {
                         General.ShowError(string.Format("新建用户【{0}】失败！", _User.LoginName));
+                        return;
                     }
+                    
+                    DialogResult = DialogResult.OK;
+                    SetObjectData(_User.ID);
                 }
             }
         }

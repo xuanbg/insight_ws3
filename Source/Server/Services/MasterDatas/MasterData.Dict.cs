@@ -76,8 +76,8 @@ namespace Insight.WS.Service
                 new SqlParameter("@MID", SqlDbType.UniqueIdentifier) {Value = d.MID},
                 new SqlParameter("@Index", SqlDbType.Int) {Value = d.Index},
                 new SqlParameter("@Description", d.Description),
-                new SqlParameter("@CreatorDeptId", SqlDbType.UniqueIdentifier) {Value = d.CreatorDeptId},
-                new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = d.CreatorUserId},
+                new SqlParameter("@CreatorDeptId", SqlDbType.UniqueIdentifier) {Value = us.DeptId},
+                new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = us.UserId},
                 new SqlParameter("@CategoryId", SqlDbType.UniqueIdentifier) {Value = m.CategoryId},
                 new SqlParameter("@Read", SqlDbType.Int) {Value = 0}
             };

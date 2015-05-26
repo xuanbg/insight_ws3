@@ -118,24 +118,16 @@ namespace Insight.WS.Client.Platform.Base
                 if (IsEdit)
                 {
                     if (cli.UpdateScheme(OpenForm.UserSession, _Scheme))
-                    {
                         DialogResult = DialogResult.OK;
-                    }
                     else
-                    {
                         General.ShowError(string.Format("更新编码方案【{0}】失败！如多次失败，请联系管理员。", _Scheme.Name));
-                    }
                 }
                 else
                 {
                     if (cli.AddScheme(OpenForm.UserSession, _Scheme))
-                    {
                         DialogResult = DialogResult.OK;
-                    }
                     else
-                    {
                         General.ShowError("新建编码方案【" + _Scheme.Name + "】失败！如多次失败，请联系管理员。");
-                    }
                 }
             }
         }

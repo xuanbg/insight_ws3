@@ -36,7 +36,6 @@ namespace Insight.WS.Client.Business.CRM
 
         #region 变量声明
 
-        private CRMClient _Client;
         private MasterData _MasterData;
         private MDG_Customer _Customer;
         private DataTable _Enterprise;
@@ -69,9 +68,10 @@ namespace Insight.WS.Client.Business.CRM
             _Industry = Commons.Dictionary("Industry");
             _Enterprise = Commons.Dictionary("Enterprise");
 
-            _Client = new CRMClient(OpenForm.Binding, OpenForm.Address);
-            _Customer = IsEdit ? _Client.GetCustomer(OpenForm.UserSession, ObjectId) : new MDG_Customer();
-            _Client.Close();
+            using (var cli = new CRMClient(OpenForm.Binding, OpenForm.Address))
+            {
+                _Customer = IsEdit ? cli.GetCustomer(OpenForm.UserSession, ObjectId) : new MDG_Customer();
+            }
 
             _Province = RegionData.Copy().DefaultView;
             _City = RegionData.Copy().DefaultView;
@@ -170,23 +170,6 @@ namespace Insight.WS.Client.Business.CRM
                 return false;
             }
 
-            _Client = new CRMClient(OpenForm.Binding, OpenForm.Address);
-            if (txtName.Text.Trim() != _MasterData.Name && Commons.NameIsExist(txtName.Text.Trim(), "Name"))
-            {
-                _Client.Close();
-                General.ShowError(string.Format("已存在名称为【{0}】的数据！", txtName.Text.Trim()));
-                txtName.Focus();
-                return false;
-            }
-            if (!string.IsNullOrEmpty(txtAlias.Text.Trim()) && txtAlias.Text.Trim() != _MasterData.Alias && Commons.NameIsExist(txtAlias.Text.Trim(), "Alias"))
-            {
-                _Client.Close();
-                General.ShowError(string.Format("已存在简称为【{0}】的数据！", txtAlias.Text.Trim()));
-                txtAlias.Focus();
-                return false;
-            }
-            _Client.Close();
-
             if (lokProvince.EditValue == null)
             {
                 General.ShowError("地址填写不完整！请选择客户所在的省或直辖市。");
@@ -210,6 +193,23 @@ namespace Insight.WS.Client.Business.CRM
                 General.ShowError("地址填写不完整！请输入客户所在街道和门牌号码等具体地址信息。");
                 txtAddress.Focus();
                 return false;
+            }
+
+            using (var cli = new CRMClient(OpenForm.Binding, OpenForm.Address))
+            {
+                if (txtName.Text.Trim() != _MasterData.Name && Commons.NameIsExist(txtName.Text.Trim(), "Name"))
+                {
+                    General.ShowError(string.Format("已存在名称为【{0}】的数据！", txtName.Text.Trim()));
+                    txtName.Focus();
+                    return false;
+                }
+
+                if (!string.IsNullOrEmpty(txtAlias.Text.Trim()) && txtAlias.Text.Trim() != _MasterData.Alias && Commons.NameIsExist(txtAlias.Text.Trim(), "Alias"))
+                {
+                    General.ShowError(string.Format("已存在简称为【{0}】的数据！", txtAlias.Text.Trim()));
+                    txtAlias.Focus();
+                    return false;
+                }
             }
             return true;
         }
@@ -243,30 +243,23 @@ namespace Insight.WS.Client.Business.CRM
             _Customer.Statu = (Guid)lokStatu.EditValue;
             _Customer.Description = memDescription.Text.Trim();
 
-            _Client = new CRMClient(OpenForm.Binding, OpenForm.Address);
-            if (IsEdit)
+            using (var cli = new CRMClient(OpenForm.Binding, OpenForm.Address))
             {
-                if (_Client.UpdateCustomer(OpenForm.UserSession, _MasterData, _Customer))
+                if (IsEdit)
                 {
-                    DialogResult = DialogResult.OK;
+                    if (cli.UpdateCustomer(OpenForm.UserSession, _MasterData, _Customer))
+                        DialogResult = DialogResult.OK;
+                    else
+                        General.ShowError("未能更新数据！");
                 }
                 else
                 {
-                    General.ShowError("未能更新数据！");
+                    if (cli.AddCustomer(OpenForm.UserSession, _MasterData, _Customer))
+                        DialogResult = DialogResult.OK;
+                    else
+                        General.ShowError("数据保存失败！");
                 }
             }
-            else
-            {
-                if (_Client.AddCustomer(OpenForm.UserSession, _MasterData, _Customer))
-                {
-                    DialogResult = DialogResult.OK;
-                }
-                else
-                {
-                    General.ShowError("数据保存失败！");
-                }
-            }
-            _Client.Close();
         }
 
         #endregion

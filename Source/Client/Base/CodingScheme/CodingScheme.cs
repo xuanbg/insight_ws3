@@ -250,9 +250,12 @@ namespace Insight.WS.Client.Platform.Base
 
             using (var cli = new BaseClient(Binding, Address))
             {
-                var result = cli.DeleteScheme(UserSession, (Guid) row["ID"]);
-                switch (result)
+                switch (cli.DeleteScheme(UserSession, (Guid) row["ID"]))
                 {
+                    case 0:
+                        General.ShowError("对不起，数据操作失败！如多次操作失败，请联系管理员。");
+                        break;
+
                     case 1:
                         General.ShowMessage(string.Format("编码方案【{0}】删除成功！", row["名称"]));
                         gdvScheme.DeleteRow(gdvScheme.FocusedRowHandle);
@@ -262,10 +265,6 @@ namespace Insight.WS.Client.Platform.Base
                         General.ShowMessage(string.Format("对不起，编码方案【{0}】已被使用，该编码方案已被设置为停用状态！", row["名称"]));
                         gdvScheme.SetFocusedRowCellValue("状态", "停用");
                         SwitchItemStatus(new Context("DeleteScheme", false), new Context("Enable", true));
-                        break;
-
-                    default:
-                        General.ShowError("对不起，数据操作失败！如多次操作失败，请联系管理员。");
                         break;
                 }
             }
@@ -281,16 +280,15 @@ namespace Insight.WS.Client.Platform.Base
 
             using (var cli = new BaseClient(Binding, Address))
             {
-                if (cli.EnableScheme(UserSession, (Guid) row["ID"]))
-                {
-                    General.ShowMessage(string.Format("编码方案【{0}】启用成功！", row["名称"]));
-                    gdvScheme.SetFocusedRowCellValue("状态", "正常");
-                    SwitchItemStatus(new Context("DeleteScheme", true), new Context("Enable", false));
-                }
-                else
+                if (!cli.EnableScheme(UserSession, (Guid) row["ID"]))
                 {
                     General.ShowError(string.Format("编码方案【{0}】启用失败！如多次操作失败，请联系管理员。", row["名称"]));
+                    return;
                 }
+                
+                General.ShowMessage(string.Format("编码方案【{0}】启用成功！", row["名称"]));
+                gdvScheme.SetFocusedRowCellValue("状态", "正常");
+                SwitchItemStatus(new Context("DeleteScheme", true), new Context("Enable", false));
             }
         }
 

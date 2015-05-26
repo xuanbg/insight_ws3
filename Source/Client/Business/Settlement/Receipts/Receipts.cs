@@ -340,33 +340,43 @@ namespace Insight.WS.Client.Business.Settlement
                 case "Refresh":
                     InitDateTree();
                     break;
+
                 case "Cashier":
                     Cashier();
                     break;
+
                 case "Payment":
                     Payment();
                     break;
+
                 case "Check":
                     Check();
                     break;
+
                 case "Print":
                     Print();
                     break;
+
                 case "Preview":
                     Preview();
                     break;
+
                 case "Show":
                     ShowReceipt();
                     break;
+
                 case "Attachment":
                     AddAttachment();
                     break;
+
                 case "Delete":
                     Delete();
                     break;
+
                 case "Deduction":
                     Deduction();
                     break;
+
                 case "Setting":
                     Setting();
                     break;
@@ -544,13 +554,9 @@ namespace Insight.WS.Client.Business.Settlement
             if (imgs == null) return;
 
             if (Commons.SaveImages(id, imgs, "ABS_Clearing_Attachs", "ClearingId"))
-            {
                 General.ShowMessage("附件上传成功！如需查看附件，请打开查看对话框并切换到附件清单页。");
-            }
             else
-            {
                 General.ShowError("附件上传失败！如多次上次失败，请联系管理员。");
-            }
         }
 
         /// <summary>
@@ -564,22 +570,20 @@ namespace Insight.WS.Client.Business.Settlement
             using (var cli = new SettlementClient(Binding, Address))
             {
                 var result = cli.DelReceipt(UserSession, _ReceiptId, _Status);
-                if (result)
-                {
-                    if (_Status == 1)
-                    {
-                        row.Delete();
-                    }
-                    else
-                    {
-                        row["状态"] = "作废";
-                        SwitchItemStatus(new Context("Attachment", false), new Context("Delete", false));
-                    }
-                }
-                else
+                if (!result)
                 {
                     General.ShowError(string.Format("{0}结算记录失败！如多次失败，请联系管理员。", barManager.Items["Delete"].Caption));
+                    return;
                 }
+                
+                if (_Status == 1)
+                {
+                    row.Delete();
+                    return;
+                }
+                
+                row["状态"] = "作废";
+                SwitchItemStatus(new Context("Attachment", false), new Context("Delete", false));
             }
         }
 

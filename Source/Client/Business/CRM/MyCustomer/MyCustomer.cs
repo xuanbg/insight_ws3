@@ -19,7 +19,6 @@ namespace Insight.WS.Client.Business.CRM
 
         #region 变量声明
 
-        private CRMClient _Client;
         private DataTable _Customers;
         private DataTable _CustomerInfo;
         private DataTable _Contacts;
@@ -203,10 +202,11 @@ namespace Insight.WS.Client.Business.CRM
             _Contacts = Commons.GetContacts();
             _ContactInfo = Commons.GetContactInfos();
 
-            _Client = new CRMClient(Binding, Address);
-            _Customers = _Client.GetCustomers(UserSession);
-            _CustomerInfo = _Client.GetCustomerInfo(UserSession);
-            _Client.Close();
+            using (var cli = new CRMClient(Binding, Address))
+            {
+                _Customers = cli.GetCustomers(UserSession);
+                _CustomerInfo = cli.GetCustomerInfo(UserSession);
+            }
 
             Filter_CheckedChanged(null, null);
         }
@@ -269,15 +269,14 @@ namespace Insight.WS.Client.Business.CRM
             gdvCustomer.Columns["邮编"].Width = 60;
             gdvCustomer.Columns["邮编"].AppearanceCell.TextOptions.HAlignment = HorzAlignment.Center;
 
-            if (!_HasCustomer)
-            {
-                SwitchItemStatus(new Context("EditCustomer", false), new Context("DelCustomer", false),
-                                 new Context("Enable", false), new Context("Transfer", false), new Context("Sharing", false),
-                                 new Context("NewContact", false), new Context("EditContact", false), new Context("DelContact", false));
-                _CustomerId = Guid.Empty;
-                InitCustomerInfo();
-                InitContact();
-            }
+            if (_HasCustomer) return;
+
+            SwitchItemStatus(new Context("EditCustomer", false), new Context("DelCustomer", false),
+                new Context("Enable", false), new Context("Transfer", false), new Context("Sharing", false),
+                new Context("NewContact", false), new Context("EditContact", false), new Context("DelContact", false));
+            _CustomerId = Guid.Empty;
+            InitCustomerInfo();
+            InitContact();
         }
 
         /// <summary>
@@ -351,33 +350,43 @@ namespace Insight.WS.Client.Business.CRM
                 case "Refresh":
                     InitData();
                     break;
+
                 case "NewCustomer":
                     Customer(false);
                     break;
+
                 case "EditCustomer":
                     Customer(true);
                     break;
+
                 case "DelCustomer":
                     DelCustomer();
                     break;
+
                 case "Sharing":
                     Transfer(false);
                     break;
+
                 case "Unshared":
                     Unshared();
                     break;
+
                 case "Transfer":
                     Transfer(true);
                     break;
+
                 case "Enable":
                     Enable();
                     break;
+
                 case "NewContact":
                     Contact(false);
                     break;
+
                 case "EditContact":
                     Contact(true);
                     break;
+
                 case "DelContact":
                     DelContact();
                     break;
@@ -416,9 +425,12 @@ namespace Insight.WS.Client.Business.CRM
             var row = gdvCustomer.GetFocusedDataRow();
             if (General.ShowConfirm(string.Format("您确定要删除客户【{0}】吗?", row["名称"])) != DialogResult.OK) return;
 
-            var n = Commons.DelMasterData(_CustomerId);
-            switch (n)
+            switch (Commons.DelMasterData(_CustomerId))
             {
+                case 0:
+                    General.ShowError("对不起，该客户已经被使用，且无法停用！");
+                    break;
+
                 case 1:
                     _Customers.Rows.Find(row["ID"]).Delete();
                     _Customers.AcceptChanges();
@@ -429,10 +441,6 @@ namespace Insight.WS.Client.Business.CRM
                     General.ShowWarning("该客户已被使用，无法删除，已停用！");
                     _Customers.Rows.Find(row["ID"])["Statu"] = "停用";
                     InitCustomer();
-                    break;
-
-                default:
-                    General.ShowError("对不起，该客户已经被使用，且无法停用！");
                     break;
             }
         }
@@ -478,15 +486,14 @@ namespace Insight.WS.Client.Business.CRM
             var row = gdvCustomer.GetFocusedDataRow();
             if (General.ShowConfirm(string.Format("您确定要启用【{0}】吗?", row["名称"])) != DialogResult.OK) return;
 
-            if (Commons.EnableMasterData(_CustomerId, "MDG_Customer"))
-            {
-                _Customers.Rows.Find(row["ID"])["Statu"] = "正常";
-                InitCustomer();
-            }
-            else
+            if (!Commons.EnableMasterData(_CustomerId, "MDG_Customer"))
             {
                 General.ShowError(string.Format("对不起，客户【{0}】启用失败！", row["名称"]));
+                return;
             }
+            
+            _Customers.Rows.Find(row["ID"])["Statu"] = "正常";
+            InitCustomer();
         }
 
         /// <summary>
@@ -521,20 +528,19 @@ namespace Insight.WS.Client.Business.CRM
             var row = glvContact.GetFocusedDataRow();
             if (General.ShowConfirm(string.Format("您确定要删除【{0}】吗?", row["姓名"])) != DialogResult.OK) return;
 
-            if (Commons.DelMasterData(_ContactId) > 0)
-            {
-                if (row["主要联系人"].ToString() == "是")
-                {
-                    General.ShowWarning("您删除了一个主要联系人，请为该客户设定一个新的主要联系人！");
-                }
-                _Contacts.Rows.Find(row["ID"]).Delete();
-                _Contacts.AcceptChanges();
-                InitContact();
-            }
-            else
+            if (Commons.DelMasterData(_ContactId) <= 0)
             {
                 General.ShowError(string.Format("对不起！删除联系人【{0}】失败。", row["名称"]));
+                return;
             }
+            
+            if (row["主要联系人"].ToString() == "是")
+            {
+                General.ShowWarning("您删除了一个主要联系人，请为该客户设定一个新的主要联系人！");
+            }
+            _Contacts.Rows.Find(row["ID"]).Delete();
+            _Contacts.AcceptChanges();
+            InitContact();
         }
 
         #endregion

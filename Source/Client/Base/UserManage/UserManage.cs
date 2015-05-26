@@ -265,16 +265,15 @@ namespace Insight.WS.Client.Platform.Base
 
             using (var cli = new BaseClient(Binding, Address))
             {
-                if (cli.DeleteGroup(UserSession, (Guid) row["ID"]))
-                {
-                    row.Delete();
-                    _Groups.AcceptChanges();
-                    grdGroup.Refresh();
-                }
-                else
+                if (!cli.DeleteGroup(UserSession, (Guid) row["ID"]))
                 {
                     General.ShowError(string.Format("对不起，用户组【{0}】已经被使用，无法删除！", row["组名称"]));
+                    return;
                 }
+                
+                row.Delete();
+                _Groups.AcceptChanges();
+                grdGroup.Refresh();
             }
         }
 
@@ -299,15 +298,14 @@ namespace Insight.WS.Client.Platform.Base
             {
                 using (var cli = new BaseClient(Binding, Address))
                 {
-                    if (cli.AddGroupMember(UserSession, id, dig.IdList))
-                    {
-                        InitGroupList();
-                        gdvGroup.FocusedRowHandle = focused;
-                    }
-                    else
+                    if (!cli.AddGroupMember(UserSession, id, dig.IdList))
                     {
                         General.ShowError("未能增加任何成员！");
+                        return;
                     }
+                    
+                    InitGroupList();
+                    gdvGroup.FocusedRowHandle = focused;
                 }
             }
             dig.Close();
@@ -331,15 +329,14 @@ namespace Insight.WS.Client.Platform.Base
             {
                 using (var cli = new BaseClient(Binding, Address))
                 {
-                    if (cli.DeleteMember(UserSession, dig.IdList))
-                    {
-                        InitGroupList();
-                        gdvGroup.FocusedRowHandle = focused;
-                    }
-                    else
+                    if (!cli.DeleteMember(UserSession, dig.IdList))
                     {
                         General.ShowError("未能移除任何成员！");
+                        return;
                     }
+                    
+                    InitGroupList();
+                    gdvGroup.FocusedRowHandle = focused;
                 }
             }
             dig.Close();
@@ -385,25 +382,22 @@ namespace Insight.WS.Client.Platform.Base
 
             using (var cli = new BaseClient(Binding, Address))
             {
-                if (cli.DeleteUser(UserSession, (Guid) row["ID"]))
-                {
-                    foreach (
-                        var memberRow in
-                            _Members.Rows.Cast<DataRow>().Where(memberRow => memberRow["UserId"].Equals(row["ID"])))
-                    {
-                        memberRow.Delete();
-                    }
-                    _Members.AcceptChanges();
-                    InitMemberList();
-
-                    row.Delete();
-                    _Users.AcceptChanges();
-                    grdUser.Refresh();
-                }
-                else
+                if (!cli.DeleteUser(UserSession, (Guid) row["ID"]))
                 {
                     General.ShowError(string.Format("对不起，用户【{0}】已经在系统中产生了相关业务记录，无法删除！\r\n如果您想禁止该用户登录系统，请使用封禁功能。", row["登录名"]));
+                    return;
                 }
+                
+                foreach (var memberRow in _Members.Rows.Cast<DataRow>().Where(memberRow => memberRow["UserId"].Equals(row["ID"])))
+                {
+                    memberRow.Delete();
+                }
+                _Members.AcceptChanges();
+                InitMemberList();
+
+                row.Delete();
+                _Users.AcceptChanges();
+                grdUser.Refresh();
             }
         }
 
@@ -417,12 +411,11 @@ namespace Insight.WS.Client.Platform.Base
 
             using (var cli = new BaseClient(Binding, Address))
             {
-                if (cli.UpdateUserStatus(UserSession, (Guid) row["ID"], false))
-                {
-                    row["状态"] = "封禁";
-                    _Users.AcceptChanges();
-                    grdUser.Refresh();
-                }
+                if (!cli.UpdateUserStatus(UserSession, (Guid) row["ID"], false)) return;
+
+                row["状态"] = "封禁";
+                _Users.AcceptChanges();
+                grdUser.Refresh();
             }
         }
 
@@ -436,12 +429,11 @@ namespace Insight.WS.Client.Platform.Base
 
             using (var cli = new BaseClient(Binding, Address))
             {
-                if (cli.UpdateUserStatus(UserSession, (Guid) row["ID"], true))
-                {
-                    row["状态"] = "正常";
-                    _Users.AcceptChanges();
-                    grdUser.Refresh();
-                }
+                if (!cli.UpdateUserStatus(UserSession, (Guid) row["ID"], true)) return;
+
+                row["状态"] = "正常";
+                _Users.AcceptChanges();
+                grdUser.Refresh();
             }
         }
 

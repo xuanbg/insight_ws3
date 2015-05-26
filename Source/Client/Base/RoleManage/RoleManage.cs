@@ -342,14 +342,13 @@ namespace Insight.WS.Client.Platform.Base
 
             using (var cli = new BaseClient(Binding, Address))
             {
-                if (cli.DeleteRole(UserSession, (Guid) row["ID"]))
-                {
-                    row.Delete();
-                }
-                else
+                if (!cli.DeleteRole(UserSession, (Guid) row["ID"]))
                 {
                     General.ShowError(string.Format("对不起，角色【{0}】删除失败！如多次删除失败，请联系管理员。", row["名称"]));
+                    return;
                 }
+                
+                row.Delete();
             }
         }
 
@@ -384,15 +383,14 @@ namespace Insight.WS.Client.Platform.Base
 
             using (var cli = new BaseClient(Binding, Address))
             {
-                if (cli.DeleteRoleMember(UserSession, (int) node.GetValue("NodeType"), (Guid) node.GetValue("ID")))
-                {
-                    InitRoleMember();
-                    gdvRole.FocusedRowHandle = handle;
-                }
-                else
+                if (!cli.DeleteRoleMember(UserSession, (int) node.GetValue("NodeType"), (Guid) node.GetValue("ID")))
                 {
                     General.ShowError(string.Format("对不起，角色成员【{0}】移除失败！如多次移除失败，请联系管理员。", node.GetValue("成员")));
+                    return;
                 }
+                
+                InitRoleMember();
+                gdvRole.FocusedRowHandle = handle;
             }
         }
 

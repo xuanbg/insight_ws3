@@ -56,8 +56,6 @@ namespace Insight.WS.Client.MasterDatas
             if (!IsEdit)
             {
                 _MasterData.CategoryId = ObjectId;
-                _Dictionary.CreatorDeptId = OpenForm.UserSession.DeptId;
-                _Dictionary.CreatorUserId = OpenForm.UserSession.UserId;
             }
 
             Text = IsEdit ? "编辑数据" : "新建数据";

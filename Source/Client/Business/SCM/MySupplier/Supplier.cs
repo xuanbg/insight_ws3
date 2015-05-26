@@ -26,7 +26,6 @@ namespace Insight.WS.Client.Business.SCM
 
         #region 变量声明
 
-        private SCMClient _Client;
         private MasterData _MasterData;
         private MDG_Supplier _Supplier;
         private DataTable _Enterprise;
@@ -59,9 +58,10 @@ namespace Insight.WS.Client.Business.SCM
             _Industry = Commons.Dictionary("Industry");
             _Enterprise = Commons.Dictionary("Enterprise");
 
-            _Client = new SCMClient(OpenForm.Binding, OpenForm.Address);
-            _Supplier = IsEdit ? _Client.GetSupplier(OpenForm.UserSession, ObjectId) : new MDG_Supplier();
-            _Client.Close();
+            using (var cli = new SCMClient(OpenForm.Binding, OpenForm.Address))
+            {
+                _Supplier = IsEdit ? cli.GetSupplier(OpenForm.UserSession, ObjectId) : new MDG_Supplier();
+            }
 
             _Province = RegionData.Copy().DefaultView;
             _City = RegionData.Copy().DefaultView;
@@ -154,23 +154,6 @@ namespace Insight.WS.Client.Business.SCM
                 return false;
             }
 
-            _Client = new SCMClient(OpenForm.Binding, OpenForm.Address);
-            if (txtName.Text.Trim() != _MasterData.Name && Commons.NameIsExist(txtName.Text.Trim(), "Name"))
-            {
-                _Client.Close();
-                General.ShowError(string.Format("已存在名称为【{0}】的数据！", txtName.Text.Trim()));
-                txtName.Focus();
-                return false;
-            }
-            if (!string.IsNullOrEmpty(txtAlias.Text.Trim()) && txtAlias.Text.Trim() != _MasterData.Alias && Commons.NameIsExist(txtAlias.Text.Trim(), "Alias"))
-            {
-                _Client.Close();
-                General.ShowError(string.Format("已存在简称为【{0}】的数据！", txtAlias.Text.Trim()));
-                txtAlias.Focus();
-                return false;
-            }
-            _Client.Close();
-
             if (lokProvince.EditValue == null)
             {
                 General.ShowError("地址填写不完整！请选择供应商所在的省或直辖市。");
@@ -194,6 +177,23 @@ namespace Insight.WS.Client.Business.SCM
                 General.ShowError("地址填写不完整！请输入供应商所在街道和门牌号码等具体地址信息。");
                 txtAddress.Focus();
                 return false;
+            }
+
+            using (var cli = new SCMClient(OpenForm.Binding, OpenForm.Address))
+            {
+                if (txtName.Text.Trim() != _MasterData.Name && Commons.NameIsExist(txtName.Text.Trim(), "Name"))
+                {
+                    General.ShowError(string.Format("已存在名称为【{0}】的数据！", txtName.Text.Trim()));
+                    txtName.Focus();
+                    return false;
+                }
+
+                if (!string.IsNullOrEmpty(txtAlias.Text.Trim()) && txtAlias.Text.Trim() != _MasterData.Alias && Commons.NameIsExist(txtAlias.Text.Trim(), "Alias"))
+                {
+                    General.ShowError(string.Format("已存在简称为【{0}】的数据！", txtAlias.Text.Trim()));
+                    txtAlias.Focus();
+                    return false;
+                }
             }
             return true;
         }
@@ -225,32 +225,23 @@ namespace Insight.WS.Client.Business.SCM
             _Supplier.Website = txtWebsite.Text.Trim();
             _Supplier.Description = memDescription.Text.Trim();
 
-            _Client = new SCMClient(OpenForm.Binding, OpenForm.Address);
-            if (IsEdit)
+            using (var cli = new SCMClient(OpenForm.Binding, OpenForm.Address))
             {
-                if (_Client.UpdateMasterData(OpenForm.UserSession, _MasterData, _Supplier))
+                if (IsEdit)
                 {
-                    DialogResult = DialogResult.OK;
+                    if (cli.UpdateMasterData(OpenForm.UserSession, _MasterData, _Supplier))
+                        DialogResult = DialogResult.OK;
+                    else
+                        General.ShowError("未能更新数据！");
                 }
                 else
                 {
-                    General.ShowError("未能更新数据！");
+                    if (cli.AddMasterData(OpenForm.UserSession, _MasterData, _Supplier))
+                        DialogResult = DialogResult.OK;
+                    else
+                        General.ShowError("数据保存失败！");
                 }
             }
-            else
-            {
-                _Supplier.CreatorDeptId = OpenForm.UserSession.DeptId;
-                _Supplier.CreatorUserId = OpenForm.UserSession.UserId;
-                if (_Client.AddMasterData(OpenForm.UserSession, _MasterData, _Supplier))
-                {
-                    DialogResult = DialogResult.OK;
-                }
-                else
-                {
-                    General.ShowError("数据保存失败！");
-                }
-            }
-            _Client.Close();
         }
 
         #endregion

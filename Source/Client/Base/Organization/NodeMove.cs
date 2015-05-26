@@ -183,16 +183,15 @@ namespace Insight.WS.Client.Platform.Base
 
             using (var cli = new BaseClient(OpenForm.Binding, OpenForm.Address))
             {
-                if (cli.UpdateOrgParentId(OpenForm.UserSession, _Org))
-                {
-                    ObjectData["ParentId"] = _Org.ParentId;
-                    ObjectData["Index"] = _Org.Index;
-                    DialogResult = DialogResult.OK;
-                }
-                else
+                if (!cli.UpdateOrgParentId(OpenForm.UserSession, _Org))
                 {
                     General.ShowError(string.Format("对不起，节点【{0}】移动失败！", _Org.Name));
+                    return;
                 }
+                
+                ObjectData["ParentId"] = _Org.ParentId;
+                ObjectData["Index"] = _Org.Index;
+                DialogResult = DialogResult.OK;
             }
         }
 

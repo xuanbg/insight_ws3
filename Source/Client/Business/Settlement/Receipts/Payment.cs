@@ -522,15 +522,14 @@ namespace Insight.WS.Client.Business.Settlement
             if (ReceiptId == null)
             {
                 General.ShowError("付款数据保存失败！如多次保存失败，请联系管理员。");
+                return;
             }
-            else
+            
+            if (General.ShowConfirm("您需要现在打印单据吗？如不打印，可在结算管理界面进行打印。") == DialogResult.OK)
             {
-                if (General.ShowConfirm("您需要现在打印单据吗？如不打印，可在结算管理界面进行打印。") == DialogResult.OK)
-                {
-                    IsPrint = true;
-                }
-                DialogResult = DialogResult.OK;
+                IsPrint = true;
             }
+            DialogResult = DialogResult.OK;
         }
 
         #endregion

@@ -204,8 +204,8 @@ namespace Insight.WS.Service
                 new SqlParameter("@Write", SqlDbType.Int) {Value = 0}
             };
             cmds.Add(SqlHelper.MakeCommand(sql, parm));
-            cmds.AddRange(InsertRoleAction(obj.ID, action, obj.CreatorUserId));
-            cmds.AddRange(InsertRoleRelData(obj.ID, data, obj.CreatorUserId));
+            cmds.AddRange(InsertRoleAction(obj.ID, action, us.UserId));
+            cmds.AddRange(InsertRoleRelData(obj.ID, data, us.UserId));
             return SqlHelper.SqlExecute(cmds);
         }
 

@@ -545,15 +545,14 @@ namespace Insight.WS.Client.Business.Settlement
             labAdvance.Text = string.Format("通用预付款：{0}/{1} | 专项预付款：{2}/{3}（可用/余额）", ug.ToString("n"), _General.ToString("n"), us.ToString("n"), _Specific.ToString("n"));
             labAdvance.Visible = _General > 0 || _Specific > 0;
 
-            if (_ItemList.Select(string.Format("ProductId = '{0}' and 金额 < 0", _AdvanceId)).Length > 0)
+            if (_ItemList.Select(string.Format("ProductId = '{0}' and 金额 < 0", _AdvanceId)).Length <= 0) return;
+
+            for (var i = 0; i < gdvItem.RowCount; i++)
             {
-                for (var i = 0; i < gdvItem.RowCount; i++)
-                {
-                    var pid = (Guid)gdvItem.GetDataRow(i)["ProductId"];
-                    var amount = (decimal)gdvItem.GetDataRow(i)["金额"];
-                    if (pid == _AdvanceId && amount < -_MaxAdvance) gdvItem.SetRowCellValue(i, gdvItem.Columns["金额"], -_MaxAdvance);
-                    if (pid == _AdvanceId && amount < 0 && _MaxAdvance == 0) gdvItem.DeleteRow(i);
-                }
+                var pid = (Guid)gdvItem.GetDataRow(i)["ProductId"];
+                var amount = (decimal)gdvItem.GetDataRow(i)["金额"];
+                if (pid == _AdvanceId && amount < -_MaxAdvance) gdvItem.SetRowCellValue(i, gdvItem.Columns["金额"], -_MaxAdvance);
+                if (pid == _AdvanceId && amount < 0 && _MaxAdvance == 0) gdvItem.DeleteRow(i);
             }
         }
 
@@ -652,10 +651,9 @@ namespace Insight.WS.Client.Business.Settlement
         /// </summary>
         private void SetAmount()
         {
-            if (txtPrice.EditValue != null && txtCount.EditValue != null)
-            {
-                calAmount.Value = Math.Round(Convert.ToDecimal(txtPrice.EditValue) * Convert.ToDecimal(txtCount.EditValue), 2);
-            }
+            if (txtPrice.EditValue == null || txtCount.EditValue == null) return;
+
+            calAmount.Value = Math.Round(Convert.ToDecimal(txtPrice.EditValue) * Convert.ToDecimal(txtCount.EditValue), 2);
         }
 
         /// <summary>
@@ -711,15 +709,14 @@ namespace Insight.WS.Client.Business.Settlement
             if (ReceiptId == null)
             {
                 General.ShowError("收款数据保存失败！如多次保存失败，请联系管理员。");
+                return;
             }
-            else
+            
+            if (General.ShowConfirm("您需要现在打印单据吗？如不打印，可在结算管理界面进行打印。") == DialogResult.OK)
             {
-                if (General.ShowConfirm("您需要现在打印单据吗？如不打印，可在结算管理界面进行打印。") == DialogResult.OK)
-                {
-                    IsPrint = true;
-                }
-                DialogResult = DialogResult.OK;
+                IsPrint = true;
             }
+            DialogResult = DialogResult.OK;
         }
 
         #endregion

@@ -321,30 +321,39 @@ namespace Insight.WS.Client.Business.Storage
                 case "Refresh":
                     InitDateTree();
                     break;
+
                 case "StoreIn":
                     StoreIn();
                     break;
+
                 case "StoreOut":
                     StoreOut();
                     break;
+
                 case "StoreBack":
                     StoreBack();
                     break;
+
                 case "Print":
                     Print();
                     break;
+
                 case "Preview":
                     Preview();
                     break;
+
                 case "ShowReceipt":
                     ShowReceipt();
                     break;
+
                 case "Attachment":
                     AddAttachment();
                     break;
+
                 case "Delete":
                     Delete();
                     break;
+
                 case "Setting":
                     Setting();
                     break;
@@ -465,13 +474,9 @@ namespace Insight.WS.Client.Business.Storage
             if (imgs == null) return;
 
             if (Commons.SaveImages(id, imgs, "ABS_Delivery_Attachs", "DeliveryId"))
-            {
                 General.ShowMessage("附件上传成功！如需查看附件，请打开查看对话框并切换到附件清单页。");
-            }
             else
-            {
                 General.ShowError("附件上传失败！如多次上次失败，请联系管理员。");
-            }
         }
 
         /// <summary>
@@ -484,23 +489,20 @@ namespace Insight.WS.Client.Business.Storage
 
             using (var cli = new StorageClient(Binding, Address))
             {
-                var result = cli.DelDelivery(UserSession, _DeliveryId);
-                if (result)
-                {
-                    if (_Status == 1)
-                    {
-                        row.Delete();
-                    }
-                    else
-                    {
-                        row["状态"] = "作废";
-                        SwitchItemStatus(new Context("Attachment", false), new Context("Delete", false));
-                    }
-                }
-                else
+                if (!cli.DelDelivery(UserSession, _DeliveryId))
                 {
                     General.ShowError(string.Format("{0}收款记录失败！如多次失败，请联系管理员。", barManager.Items["Delete"].Caption));
+                    return;
                 }
+                
+                if (_Status == 1)
+                {
+                    row.Delete();
+                    return;
+                }
+                
+                row["状态"] = "作废";
+                SwitchItemStatus(new Context("Attachment", false), new Context("Delete", false));
             }
         }
 

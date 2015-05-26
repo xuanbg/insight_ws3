@@ -262,28 +262,22 @@ namespace Insight.WS.Client.Platform.Base
                 if (IsEdit)
                 {
                     if (cli.UpdateOrg(OpenForm.UserSession, _Org, _Value))
-                    {
                         DialogResult = DialogResult.OK;
-                    }
                     else
-                    {
                         General.ShowError(string.Format("没有更新{0}【{1}】的任何信息！", cmbNodeType.Text, _Org.FullName));
-                    }
                 }
                 else
                 {
                     _Org.NodeType = cmbNodeType.EditValue.GetHashCode();
                     _Org.ParentId = _ParentId;
-                    if (cli.AddOrg(OpenForm.UserSession, _Org, _Value))
+                    if (!cli.AddOrg(OpenForm.UserSession, _Org, _Value))
                     {
-                        NodeType = _Org.NodeType;
-                        DialogResult = DialogResult.OK;
+                        General.ShowError(string.Format("对不起，因为未知的原因，新建{0}【{1}】失败！\r\n如出现重复失败的情况，请联系管理员。", cmbNodeType.Text, _Org.FullName));
+                        return;
                     }
-                    else
-                    {
-                        General.ShowError(string.Format("对不起，因为未知的原因，新建{0}【{1}】失败！\r\n如出现重复失败的情况，请联系管理员。",
-                            cmbNodeType.Text, _Org.FullName));
-                    }
+                    
+                    NodeType = _Org.NodeType;
+                    DialogResult = DialogResult.OK;
                 }
             }
         }
