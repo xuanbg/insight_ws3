@@ -21,7 +21,6 @@ namespace Insight.WS.Client.MasterDatas
 
         #region 变量声明
 
-        private MasterDatasClient _Client;
         private MasterData _MasterData;
         private MDG_Expense _Expense;
         private DataTable _Units;
@@ -55,9 +54,10 @@ namespace Insight.WS.Client.MasterDatas
             Format.InitTreeListLookUpEdit(trlCategory, Commons.Categorys(OpenForm.ModuleId));
             Format.InitTreeListLookUpEdit(trlUnit, _Units);
 
-            _Client = new MasterDatasClient(OpenForm.Binding, OpenForm.Address);
-            _Expense = IsEdit ? _Client.GetExpense(OpenForm.UserSession, ObjectId) : new MDG_Expense();
-            _Client.Close();
+            using (var cli = new MasterDatasClient(OpenForm.Binding, OpenForm.Address))
+            {
+                _Expense = IsEdit ? cli.GetExpense(OpenForm.UserSession, ObjectId) : new MDG_Expense();
+            }
 
             if (!IsEdit)
             {
@@ -164,30 +164,23 @@ namespace Insight.WS.Client.MasterDatas
             _Expense.Price = (txtPrice.EditValue == null || (decimal)txtPrice.EditValue == 0) ? null : (decimal?)txtPrice.EditValue;
             _Expense.Description = memDescription.EditValue == null ? null : memDescription.Text.Trim();
 
-            _Client = new MasterDatasClient(OpenForm.Binding, OpenForm.Address);
-            if (IsEdit)
+            using (var cli = new MasterDatasClient(OpenForm.Binding, OpenForm.Address))
             {
-                if (_Client.UpdateExpense(OpenForm.UserSession, _MasterData, _Expense, _Value))
+                if (IsEdit)
                 {
-                    DialogResult = DialogResult.OK;
+                    if (cli.UpdateExpense(OpenForm.UserSession, _MasterData, _Expense, _Value))
+                        DialogResult = DialogResult.OK;
+                    else
+                        General.ShowError("未能更新数据！");
                 }
                 else
                 {
-                    General.ShowError("未能更新数据！");
+                    if (cli.AddExpense(OpenForm.UserSession, _MasterData, _Expense, _Value))
+                        DialogResult = DialogResult.OK;
+                    else
+                        General.ShowError("数据保存失败！");
                 }
             }
-            else
-            {
-                if (_Client.AddExpense(OpenForm.UserSession, _MasterData, _Expense, _Value))
-                {
-                    DialogResult = DialogResult.OK;
-                }
-                else
-                {
-                    General.ShowError("数据保存失败！");
-                }
-            }
-            _Client.Close();
         }
 
         #endregion

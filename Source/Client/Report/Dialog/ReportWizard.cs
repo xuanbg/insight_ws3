@@ -20,7 +20,6 @@ namespace Insight.WS.Client.Platform.Report.Dialog
 
         #region 变量声明
 
-        private ReportClient _Client;
         private SYS_Report_Definition _Definition;
         private DataTable _Templets;
         private DataTable _Rules;
@@ -231,16 +230,18 @@ namespace Insight.WS.Client.Platform.Report.Dialog
         /// </summary>
         private void InitWizard()
         {
-            _Client = new ReportClient(OpenForm.Binding, OpenForm.Address);
-            _Definition = IsEdit ? _Client.GetDefinition(OpenForm.UserSession, _DefinitionId) : new SYS_Report_Definition();
-            _Rules = _Client.GetReportRule(OpenForm.UserSession, _DefinitionId);
-            _Entitys = _Client.GetReportEntity(OpenForm.UserSession, _DefinitionId);
-            _Members = _Client.GetReportMember(OpenForm.UserSession, _DefinitionId);
-            _HasMember = _Members.Select("Selected = 1").Length > 0;
-            _Client.Close();
+            using (var cli = new ReportClient(OpenForm.Binding, OpenForm.Address))
+            {
+                _Definition = IsEdit
+                    ? cli.GetDefinition(OpenForm.UserSession, _DefinitionId)
+                    : new SYS_Report_Definition();
+                _Rules = cli.GetReportRule(OpenForm.UserSession, _DefinitionId);
+                _Entitys = cli.GetReportEntity(OpenForm.UserSession, _DefinitionId);
+                _Members = cli.GetReportMember(OpenForm.UserSession, _DefinitionId);
+                _HasMember = _Members.Select("Selected = 1").Length > 0;
+            }
 
             _Members.Select("Selected = 1").ToList().ForEach(r => _OldMembers.Add(r["RoleId"]));
-
             if (!IsEdit)
             {
                 _Definition.CategoryId = ObjectId;
@@ -419,45 +420,32 @@ namespace Insight.WS.Client.Platform.Report.Dialog
             {
                 var hasMember = _Members.Select(string.Format("OrgId = '{0}' and Selected = 1", node.GetValue("OrgId"))).Length > 0;
                 if (hasMember)
-                {
                     _OldEntitys.Remove(node.GetValue("ID"));
-                }
                 else
-                {
                     _Entitys.Rows.Find(node.GetValue("ID"))["Selected"] = 0;
-                }
             }
 
             RemoveUnusedData(_Rules, _OldRules);
             RemoveUnusedData(_Entitys, _OldEntitys);
             RemoveUnusedData(_Members, _OldMembers, "RoleId");
 
-            _Client = new ReportClient(OpenForm.Binding, OpenForm.Address);
-            if (IsEdit)
+            using (var cli = new ReportClient(OpenForm.Binding, OpenForm.Address))
             {
-                if (_Client.EditDefinition(OpenForm.UserSession, _Definition, _OldRules, _OldEntitys, _OldMembers, _Rules, _Entitys, _Members))
+                if (IsEdit)
                 {
-                    DialogResult = DialogResult.OK;
+                    if (cli.EditDefinition(OpenForm.UserSession, _Definition, _OldRules, _OldEntitys, _OldMembers, _Rules, _Entitys, _Members))
+                        DialogResult = DialogResult.OK;
+                    else
+                        General.ShowError("报表定义更新失败！如多次失败，请联系管理员。");
                 }
                 else
                 {
-                    General.ShowError("报表定义更新失败！如多次失败，请联系管理员。");
+                    if (cli.AddDefinition(OpenForm.UserSession, _Definition, _Rules, _Entitys, _Members))
+                        DialogResult = DialogResult.OK;
+                    else
+                        General.ShowError("报表定义保存失败！如多次失败，请联系管理员。");
                 }
             }
-            else
-            {
-                _Definition.CreatorDeptId = OpenForm.UserSession.DeptId;
-                _Definition.CreatorUserId = OpenForm.UserSession.UserId;
-                if (_Client.AddDefinition(OpenForm.UserSession, _Definition, _Rules, _Entitys, _Members))
-                {
-                    DialogResult = DialogResult.OK;
-                }
-                else
-                {
-                    General.ShowError("报表定义保存失败！如多次失败，请联系管理员。");
-                }
-            }
-            _Client.Close();
         }
 
         #endregion

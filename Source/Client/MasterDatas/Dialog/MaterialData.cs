@@ -22,7 +22,6 @@ namespace Insight.WS.Client.MasterDatas
 
         #region 变量声明
 
-        private MasterDatasClient _Client;
         private MasterData _MasterData;
         private MDG_Material _Material;
         private DataTable _SizeType;
@@ -51,9 +50,10 @@ namespace Insight.WS.Client.MasterDatas
             _MasterData = IsEdit ? Commons.GetMasterData(ObjectId) : new MasterData();
             _SizeType = Commons.Dictionary("Unit", false);
 
-            _Client = new MasterDatasClient(OpenForm.Binding, OpenForm.Address);
-            _Material = IsEdit ? _Client.GetMaterial(OpenForm.UserSession, ObjectId) : new MDG_Material();
-            _Client.Close();
+            using (var cli = new MasterDatasClient(OpenForm.Binding, OpenForm.Address))
+            {
+                _Material = IsEdit ? cli.GetMaterial(OpenForm.UserSession, ObjectId) : new MDG_Material();
+            }
 
             if (!IsEdit)
             {
@@ -196,30 +196,23 @@ namespace Insight.WS.Client.MasterDatas
             _Material.StorageType = (Guid?) lokStoreType.EditValue;
             _Material.Description = memDescription.EditValue == null ? null : memDescription.Text.Trim();
 
-            _Client = new MasterDatasClient(OpenForm.Binding, OpenForm.Address);
-            if (IsEdit)
+            using (var cli = new MasterDatasClient(OpenForm.Binding, OpenForm.Address))
             {
-                if (_Client.UpdateMaterial(OpenForm.UserSession, _MasterData, _Material, _Value))
+                if (IsEdit)
                 {
-                    DialogResult = DialogResult.OK;
+                    if (cli.UpdateMaterial(OpenForm.UserSession, _MasterData, _Material, _Value))
+                        DialogResult = DialogResult.OK;
+                    else
+                        General.ShowError("未能更新数据！");
                 }
                 else
                 {
-                    General.ShowError("未能更新数据！");
+                    if (cli.AddMaterial(OpenForm.UserSession, _MasterData, _Material, _Value))
+                        DialogResult = DialogResult.OK;
+                    else
+                        General.ShowError("数据保存失败！");
                 }
             }
-            else
-            {
-                if (_Client.AddMaterial(OpenForm.UserSession, _MasterData, _Material, _Value))
-                {
-                    DialogResult = DialogResult.OK;
-                }
-                else
-                {
-                    General.ShowError("数据保存失败！");
-                }
-            }
-            _Client.Close();
         }
 
         #endregion

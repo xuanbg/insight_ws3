@@ -26,7 +26,6 @@ namespace Insight.WS.Client.MasterDatas
 
         #region 变量声明
 
-        private MasterDatasClient _Client;
         private MasterData _MasterData;
         private MDG_Dictionary _Dictionary;
         private int _MaxValue;
@@ -49,9 +48,10 @@ namespace Insight.WS.Client.MasterDatas
         {
             _MasterData = IsEdit ? Commons.GetMasterData(ObjectId) : new MasterData();
 
-            _Client = new MasterDatasClient(OpenForm.Binding, OpenForm.Address);
-            _Dictionary = IsEdit ? _Client.GetDictionary(OpenForm.UserSession, ObjectId) : new MDG_Dictionary();
-            _Client.Close();
+            using (var cli = new MasterDatasClient(OpenForm.Binding, OpenForm.Address))
+            {
+                _Dictionary = IsEdit ? cli.GetDictionary(OpenForm.UserSession, ObjectId) : new MDG_Dictionary();
+            }
 
             if (!IsEdit)
             {
@@ -133,30 +133,23 @@ namespace Insight.WS.Client.MasterDatas
             _Dictionary.Index = (int)spiIndex.Value;
             _Dictionary.Description = memDescription.EditValue == null ? null : memDescription.Text.Trim();
 
-            _Client = new MasterDatasClient(OpenForm.Binding, OpenForm.Address);
-            if (IsEdit)
+            using (var cli = new MasterDatasClient(OpenForm.Binding, OpenForm.Address))
             {
-                if (_Client.UpdateDictionary(OpenForm.UserSession, _MasterData, _Dictionary, _Value))
+                if (IsEdit)
                 {
-                    DialogResult = DialogResult.OK;
+                    if (cli.UpdateDictionary(OpenForm.UserSession, _MasterData, _Dictionary, _Value))
+                        DialogResult = DialogResult.OK;
+                    else
+                        General.ShowError("未能更新数据！");
                 }
                 else
                 {
-                    General.ShowError("未能更新数据！");
+                    if (cli.AddDictionary(OpenForm.UserSession, _MasterData, _Dictionary, _Value))
+                        DialogResult = DialogResult.OK;
+                    else
+                        General.ShowError("数据保存失败！");
                 }
             }
-            else
-            {
-                if (_Client.AddDictionary(OpenForm.UserSession, _MasterData, _Dictionary, _Value))
-                {
-                    DialogResult = DialogResult.OK;
-                }
-                else
-                {
-                    General.ShowError("数据保存失败！");
-                }
-            }
-            _Client.Close();
         }
 
         #endregion

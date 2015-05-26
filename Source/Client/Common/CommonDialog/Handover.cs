@@ -83,14 +83,13 @@ namespace Insight.WS.Client.Common
 
             using (var cli = new CommonsClient(MainForm.Binding, MainForm.Address))
             {
-                if (cli.Transfer(MainForm.Session, MUId, owner))
-                {
-                    DialogResult = DialogResult.OK;
-                }
-                else
+                if (!cli.Transfer(MainForm.Session, MUId, owner))
                 {
                     General.ShowError("数据保存失败！如多次保存失败，请联系管理员。");
+                    return;
                 }
+                
+                DialogResult = DialogResult.OK;
             }
         }
 

@@ -151,8 +151,8 @@ namespace Insight.WS.Service
                 new SqlParameter("@Type", def.Type),
                 new SqlParameter("@DataSource", def.DataSource),
                 new SqlParameter("@Description", def.Description),
-                new SqlParameter("@CreatorDeptId", SqlDbType.UniqueIdentifier) {Value = def.CreatorDeptId},
-                new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = def.CreatorUserId},
+                new SqlParameter("@CreatorDeptId", SqlDbType.UniqueIdentifier) {Value = us.DeptId},
+                new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = us.UserId},
                 new SqlParameter("@Write", SqlDbType.Int) {Value = 0}
             };
             cmds.Add(SqlHelper.MakeCommand(sql.ToString(), parm));

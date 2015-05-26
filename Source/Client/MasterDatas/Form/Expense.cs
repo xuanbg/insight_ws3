@@ -15,7 +15,6 @@ namespace Insight.WS.Client.MasterDatas
 
         #region 变量声明
 
-        private MasterDatasClient _Client;
         private DataTable _Category;
         private DataTable _Expenses;
         private bool _HasExpense;
@@ -107,9 +106,10 @@ namespace Insight.WS.Client.MasterDatas
         {
             _Category = Commons.Categorys(ModuleId);
 
-            _Client = new MasterDatasClient(Binding, Address);
-            _Expenses = _Client.GetExpenses(UserSession);
-            _Client.Close();
+            using (var cli = new MasterDatasClient(Binding, Address))
+            {
+                _Expenses = cli.GetExpenses(UserSession);
+            }
 
             var ids = new List<object>();
             treCategory.GetNodeList().FindAll(n => n.HasChildren && n.Expanded).ForEach(n => ids.Add(n.GetValue("ID")));
@@ -231,25 +231,27 @@ namespace Insight.WS.Client.MasterDatas
             var row = gdvExpense.GetFocusedDataRow();
             if (General.ShowConfirm(string.Format("您确定要删除【{0}】吗?", row["名称"])) != DialogResult.OK) return;
 
-            _Client = new MasterDatasClient(Binding, Address);
-            var n = _Client.DelExpense(UserSession, (Guid)row["ID"]);
-            _Client.Close();
-            if (n == 1)
+            using (var cli = new MasterDatasClient(Binding, Address))
             {
-                _Expenses.Rows.Find(row["ID"]).Delete();
-                _Expenses.AcceptChanges();
-                InitExpense();
-            }
-            if (n == 2)
-            {
-                General.ShowMessage("该项目已被使用，无法删除，已停用！");
-                _Expenses.Rows.Find(row["ID"])["状态"] = "停用";
-                _Expenses.AcceptChanges();
-                InitExpense();
-            }
-            if (n == 0)
-            {
-                General.ShowError("对不起，该项目已经被使用，且无法停用！");
+                switch (cli.DelExpense(UserSession, (Guid) row["ID"]))
+                {
+                    case 0:
+                        General.ShowError("对不起，该项目已经被使用，且无法停用！");
+                        break;
+
+                    case 1:
+                        _Expenses.Rows.Find(row["ID"]).Delete();
+                        _Expenses.AcceptChanges();
+                        InitExpense();
+                        break;
+
+                    case 2:
+                        General.ShowMessage("该项目已被使用，无法删除，已停用！");
+                        _Expenses.Rows.Find(row["ID"])["状态"] = "停用";
+                        _Expenses.AcceptChanges();
+                        InitExpense();
+                        break;
+                }
             }
         }
 
@@ -261,16 +263,15 @@ namespace Insight.WS.Client.MasterDatas
             var row = gdvExpense.GetFocusedDataRow();
             if (General.ShowConfirm(string.Format("您确定要启用【{0}】吗?", row["名称"])) != DialogResult.OK) return;
 
-            if (Commons.EnableMasterData((Guid)row["ID"], "MDG_Expense"))
-            {
-                _Expenses.Rows.Find(row["ID"])["状态"] = "正常";
-                _Expenses.AcceptChanges();
-                InitExpense();
-            }
-            else
+            if (!Commons.EnableMasterData((Guid) row["ID"], "MDG_Expense"))
             {
                 General.ShowError(string.Format("对不起，项目【{0}】启用失败！", row["名称"]));
+                return;
             }
+            
+            _Expenses.Rows.Find(row["ID"])["状态"] = "正常";
+            _Expenses.AcceptChanges();
+            InitExpense();
         }
 
         #endregion

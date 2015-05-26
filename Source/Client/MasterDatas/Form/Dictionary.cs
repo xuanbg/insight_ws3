@@ -15,7 +15,6 @@ namespace Insight.WS.Client.MasterDatas
 
         #region 变量声明
 
-        private MasterDatasClient _Client;
         private DataTable _Category;
         private DataTable _Dictionary;
         private bool _CanNewCat;
@@ -49,6 +48,11 @@ namespace Insight.WS.Client.MasterDatas
             InitCategory();
         }
 
+        /// <summary>
+        /// 选择分类刷新工具栏按钮状态
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void treeList_FocusedNodeChanged(object sender, FocusedNodeChangedEventArgs e)
         {
             _CanNewCat = (bool)e.Node.GetValue("Visible");
@@ -57,6 +61,11 @@ namespace Insight.WS.Client.MasterDatas
             InitData();
         }
 
+        /// <summary>
+        /// 双击分类进行分类编辑
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void treCategory_DoubleClick(object sender, EventArgs e)
         {
             if (_CanNewCat) Catalog(true);
@@ -75,6 +84,11 @@ namespace Insight.WS.Client.MasterDatas
             SwitchItemStatus(new Context("EditData", _CanEdit), new Context("DeleteData", _CanDel), new Context("Enable", _CanEnable));
         }
 
+        /// <summary>
+        /// 双击列表编辑数据或启用
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void gdvData_DoubleClick(object sender, EventArgs e)
         {
             if (_CanEnable)
@@ -97,10 +111,10 @@ namespace Insight.WS.Client.MasterDatas
         private void InitCategory()
         {
             _Category = Commons.Categorys(ModuleId, true);
-
-            _Client = new MasterDatasClient(Binding, Address);
-            _Dictionary = _Client.GetDictionarys(UserSession);
-            _Client.Close();
+            using (var cli = new MasterDatasClient(Binding, Address))
+            {
+                _Dictionary = cli.GetDictionarys(UserSession);
+            }
 
             var ids = new List<object>();
             treCategory.GetNodeList().FindAll(n => n.HasChildren && n.Expanded).ForEach(n => ids.Add(n.GetValue("ID")));
@@ -115,6 +129,9 @@ namespace Insight.WS.Client.MasterDatas
             treCategory.FocusedNode = treCategory.FindNodeByKeyID(fid);
         }
 
+        /// <summary>
+        /// 初始化字典数据
+        /// </summary>
         private void InitData()
         {
             var dv = _Dictionary.Copy().DefaultView;
@@ -197,8 +214,7 @@ namespace Insight.WS.Client.MasterDatas
             {
                 Owner = this,
                 IsEdit = isEdit,
-                ObjectId =
-                    isEdit ? (Guid) gdvData.GetFocusedDataRow()["ID"] : (Guid) treCategory.FocusedNode.GetValue("ID")
+                ObjectId = isEdit ? (Guid) gdvData.GetFocusedDataRow()["ID"] : (Guid) treCategory.FocusedNode.GetValue("ID")
             };
             if (dig.ShowDialog() == DialogResult.OK)
             {
@@ -216,28 +232,27 @@ namespace Insight.WS.Client.MasterDatas
             var row = gdvData.GetFocusedDataRow();
             if (General.ShowConfirm(string.Format("您确定要删除【{0}】吗?", row["名称"])) != DialogResult.OK) return;
 
-            _Client = new MasterDatasClient(Binding, Address);
-            var n = _Client.DelDictionary(UserSession, (Guid)row["ID"]);
-            _Client.Close();
-
-            switch (n)
+            using (var cli = new MasterDatasClient(Binding, Address))
             {
-                case 0:
-                    General.ShowError("对不起，该数据已经被使用，且无法停用！");
-                    break;
+                switch (cli.DelDictionary(UserSession, (Guid) row["ID"]))
+                {
+                    case 0:
+                        General.ShowError("对不起，该数据已经被使用，且无法停用！");
+                        break;
 
-                case 1:
-                    _Dictionary.Rows.Find(row["ID"]).Delete();
-                    _Dictionary.AcceptChanges();
-                    InitData();
-                    break;
+                    case 1:
+                        _Dictionary.Rows.Find(row["ID"]).Delete();
+                        _Dictionary.AcceptChanges();
+                        InitData();
+                        break;
 
-                case 2:
-                    General.ShowMessage("该数据已被使用，无法删除，已停用！");
-                    _Dictionary.Rows.Find(row["ID"])["状态"] = "停用";
-                    _Dictionary.AcceptChanges();
-                    InitData();
-                    break;
+                    case 2:
+                        General.ShowMessage("该数据已被使用，无法删除，已停用！");
+                        _Dictionary.Rows.Find(row["ID"])["状态"] = "停用";
+                        _Dictionary.AcceptChanges();
+                        InitData();
+                        break;
+                }
             }
         }
 
@@ -249,16 +264,15 @@ namespace Insight.WS.Client.MasterDatas
             var row = gdvData.GetFocusedDataRow();
             if (General.ShowConfirm(string.Format("您确定要启用【{0}】吗?", row["名称"])) != DialogResult.OK) return;
 
-            if (Commons.EnableMasterData((Guid)row["ID"], "MDG_Dictionary"))
-            {
-                _Dictionary.Rows.Find(row["ID"])["状态"] = "正常";
-                _Dictionary.AcceptChanges();
-                InitData();
-            }
-            else
+            if (!Commons.EnableMasterData((Guid) row["ID"], "MDG_Dictionary"))
             {
                 General.ShowError(string.Format("对不起，数据【{0}】启用失败！", row["名称"]));
+                return;
             }
+            
+            _Dictionary.Rows.Find(row["ID"])["状态"] = "正常";
+            _Dictionary.AcceptChanges();
+            InitData();
         }
 
         #endregion

@@ -79,8 +79,8 @@ namespace Insight.WS.Service
                 new SqlParameter("@Name", obj.Name),
                 new SqlParameter("@Content", obj.Content),
                 new SqlParameter("@Description", obj.Description),
-                new SqlParameter("@CreatorDeptId", SqlDbType.UniqueIdentifier) {Value = obj.CreatorDeptId},
-                new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = obj.CreatorUserId}
+                new SqlParameter("@CreatorDeptId", SqlDbType.UniqueIdentifier) {Value = us.DeptId},
+                new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = us.UserId}
             };
             return SqlHelper.SqlScalar(sql, parm);
         }

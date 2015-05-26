@@ -18,7 +18,6 @@ namespace Insight.WS.Client.Platform.Report
 
         #region 变量声明
 
-        private ReportClient _Client;
         private DataTable _Categorys;
         private DataTable _Reports;
         private DataTable _Rules;
@@ -128,12 +127,13 @@ namespace Insight.WS.Client.Platform.Report
         {
             _Categorys = Commons.Categorys(ModuleId);
 
-            _Client = new ReportClient(Binding, Address);
-            _Reports = _Client.GetReports(UserSession);
-            _Rules = _Client.GetReportRules(UserSession);
-            _Entitys = _Client.GetReportEntitys(UserSession);
-            _Members = _Client.GetReportMembers(UserSession);
-            _Client.Close();
+            using (var cli = new ReportClient(Binding, Address))
+            {
+                _Reports = cli.GetReports(UserSession);
+                _Rules = cli.GetReportRules(UserSession);
+                _Entitys = cli.GetReportEntitys(UserSession);
+                _Members = cli.GetReportMembers(UserSession);
+            }
 
             var ids = new List<object>();
             treCategory.GetNodeList().FindAll(n => n.HasChildren && n.Expanded).ForEach(n => { ids.Add(n.GetValue("ID")); });
@@ -293,18 +293,18 @@ namespace Insight.WS.Client.Platform.Report
             var row = gdvReport.GetFocusedDataRow();
             if (General.ShowConfirm(string.Format("您确定要删除报表【{0}】吗?", row["名称"])) != DialogResult.OK) return;
 
-            _Client = new ReportClient(Binding, Address);
-            if (_Client.DelReport(UserSession, (Guid)row["ID"]))
+            using (var cli = new ReportClient(Binding, Address))
             {
+                if (!cli.DelReport(UserSession, (Guid) row["ID"]))
+                {
+                    General.ShowError("对不起，该报表已经被使用，无法删除！");
+                    return;
+                }
+                
                 _Reports.Rows.Find(row["ID"]).Delete();
                 _Reports.AcceptChanges();
                 InitReport();
             }
-            else
-            {
-                General.ShowError("对不起，该报表已经被使用，无法删除！");
-            }
-            _Client.Close();
         }
 
         /// <summary>

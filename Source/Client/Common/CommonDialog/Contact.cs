@@ -269,26 +269,16 @@ namespace Insight.WS.Client.Common
             if (IsEdit)
             {
                 if (Commons.UpdateContact(_MasterData, _Contact, _OldContacts, _ContactInfo))
-                {
                     DialogResult = DialogResult.OK;
-                }
                 else
-                {
                     General.ShowError("未能更新数据！");
-                }
             }
             else
             {
-                _Contact.CreatorDeptId = OpenForm.UserSession.DeptId;
-                _Contact.CreatorUserId = OpenForm.UserSession.UserId;
                 if (Commons.AddContact(_MasterData, _Contact, _ContactInfo))
-                {
                     DialogResult = DialogResult.OK;
-                }
                 else
-                {
                     General.ShowError("数据保存失败！");
-                }
             }
         }
 

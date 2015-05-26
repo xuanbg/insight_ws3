@@ -26,7 +26,6 @@ namespace Insight.WS.Client.MasterDatas
 
         #region 变量声明
 
-        private MasterDatasClient _Client;
         private MasterData _MasterData;
         private MDG_Employee _Employee;
         private MDR_ET _Title;
@@ -61,10 +60,11 @@ namespace Insight.WS.Client.MasterDatas
             _ContactInfo = Commons.GetContactInfo(ObjectId);
             _OrgList = Commons.OrgTree();
 
-            _Client = new MasterDatasClient(OpenForm.Binding, OpenForm.Address);
-            _Employee = IsEdit ? _Client.GetEmployee(OpenForm.UserSession, ObjectId) : new MDG_Employee();
-            _Title = IsEdit ? _Client.GetEmployeeTitle(OpenForm.UserSession, ObjectId) : new MDR_ET();
-            _Client.Close();
+            using (var cli = new MasterDatasClient(OpenForm.Binding, OpenForm.Address))
+            {
+                _Employee = IsEdit ? cli.GetEmployee(OpenForm.UserSession, ObjectId) : new MDG_Employee();
+                _Title = IsEdit ? cli.GetEmployeeTitle(OpenForm.UserSession, ObjectId) : new MDR_ET();
+            }
 
             var dv = _OrgList.Copy().DefaultView;
             dv.RowFilter = string.Format("ParentId = '{0}'", ObjectId);
@@ -371,33 +371,24 @@ namespace Insight.WS.Client.MasterDatas
             }
             _ContactInfo.AcceptChanges();
 
-            _Client = new MasterDatasClient(OpenForm.Binding, OpenForm.Address);
-            if (IsEdit)
+            using (var cli = new MasterDatasClient(OpenForm.Binding, OpenForm.Address))
             {
-                if (_Client.UpdateEmployee(OpenForm.UserSession, _MasterData, _Employee, _Title, _OldContacts, _ContactInfo))
+                if (IsEdit)
                 {
-                    DialogResult = DialogResult.OK;
+                    if (cli.UpdateEmployee(OpenForm.UserSession, _MasterData, _Employee, _Title, _OldContacts, _ContactInfo))
+                        DialogResult = DialogResult.OK;
+                    else
+                        General.ShowError("未能更新数据！");
                 }
                 else
                 {
-                    General.ShowError("未能更新数据！");
+                    _Employee.Status = 1;
+                    if (cli.AddEmployee(OpenForm.UserSession, _MasterData, _Employee, _Title, _ContactInfo))
+                        DialogResult = DialogResult.OK;
+                    else
+                        General.ShowError("数据保存失败！");
                 }
             }
-            else
-            {
-                _Employee.Status = 1;
-                _Employee.CreatorDeptId = OpenForm.UserSession.DeptId;
-                _Employee.CreatorUserId = OpenForm.UserSession.UserId;
-                if (_Client.AddEmployee(OpenForm.UserSession, _MasterData, _Employee, _Title, _ContactInfo))
-                {
-                    DialogResult = DialogResult.OK;
-                }
-                else
-                {
-                    General.ShowError("数据保存失败！");
-                }
-            }
-            _Client.Close();
         }
 
         #endregion

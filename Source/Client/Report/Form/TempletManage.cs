@@ -244,16 +244,15 @@ namespace Insight.WS.Client.Platform.Report
 
             using (var cli = new ReportClient(Binding, Address))
             {
-                if (cli.DelTemplets(UserSession, (Guid)gdvTemplet.GetFocusedDataRow()["ID"]))
-                {
-                    _Templates.Rows.Find(row["ID"]).Delete();
-                    _Templates.AcceptChanges();
-                    InitTemplets();
-                }
-                else
+                if (!cli.DelTemplets(UserSession, (Guid) gdvTemplet.GetFocusedDataRow()["ID"]))
                 {
                     General.ShowError("对不起，该模板已经被使用，无法删除！");
+                    return;
                 }
+                
+                _Templates.Rows.Find(row["ID"]).Delete();
+                _Templates.AcceptChanges();
+                InitTemplets();
             }
         }
 
@@ -306,38 +305,36 @@ namespace Insight.WS.Client.Platform.Report
             _Template = new SYS_Report_Templates();
 
             var open = new OpenFileDialog {Filter = "报表文件(*.frx)|*.FRX"};
-            if (open.ShowDialog() == DialogResult.OK)
-            {
-                var fullName = open.SafeFileName;
-                _Template.Name = fullName.Substring(0, fullName.IndexOf("."));
-                _Template.CategoryId = (Guid)treCategory.FocusedNode.GetValue("ID");
+            if (open.ShowDialog() != DialogResult.OK) return;
 
-                if (Commons.NameIsExist((Guid)_Template.CategoryId, _Template.Name, "Name", "SYS_Report_Templates"))
+            var fullName = open.SafeFileName;
+            _Template.Name = fullName.Substring(0, fullName.IndexOf("."));
+            _Template.CategoryId = (Guid)treCategory.FocusedNode.GetValue("ID");
+
+            if (Commons.NameIsExist((Guid)_Template.CategoryId, _Template.Name, "Name", "SYS_Report_Templates"))
+            {
+                General.ShowError("对不起，在当前所选分类下该模板已存在！");
+                return;
+            }
+
+            var path = open.FileName;
+            var reader = new StreamReader(path);
+            _Template.Content = reader.ReadToEnd();
+            reader.Close();
+
+            _Template.CreatorUserId = UserSession.UserId;
+            _Template.CreatorDeptId = UserSession.DeptId;
+
+            using (var cli = new ReportClient(Binding, Address))
+            {
+                var obj = cli.AddTemplet(UserSession, _Template);
+                if (obj == null)
                 {
-                    General.ShowError("对不起，在当前所选分类下该模板已存在！");
+                    General.ShowError("对不起，导入模板失败！请确认您要导入的文件是否存在。");
                     return;
                 }
-
-                var path = open.FileName;
-                var reader = new StreamReader(path);
-                _Template.Content = reader.ReadToEnd();
-                reader.Close();
-
-                _Template.CreatorUserId = UserSession.UserId;
-                _Template.CreatorDeptId = UserSession.DeptId;
-
-                using (var cli = new ReportClient(Binding, Address))
-                {
-                    var obj = cli.AddTemplet(UserSession, _Template);
-                    if (obj != null)
-                    {
-                        InitCategory();
-                    }
-                    else
-                    {
-                        General.ShowError("对不起，导入模板失败！请确认您要导入的文件是否存在。");
-                    }
-                }
+                    
+                InitCategory();
             }
         }
 
@@ -359,18 +356,17 @@ namespace Insight.WS.Client.Platform.Report
                 DefaultExt = "frx",
                 FileName = _Template.Name
             };
-            if (save.ShowDialog() == DialogResult.OK)
+            if (save.ShowDialog() != DialogResult.OK) return;
+
+            using (var sw = new StreamWriter(save.FileName))
             {
-                var sw = new StreamWriter(save.FileName);
                 try
                 {
                     sw.Write(_Template.Content);
-                    sw.Close();
                 }
                 catch
                 {
                     General.ShowError("对不起，模板导出失败！请确认是否具有足够的系统权限。");
-                    sw.Close();
                 }
             }
         }

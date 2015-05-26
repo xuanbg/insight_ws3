@@ -17,7 +17,6 @@ namespace Insight.WS.Client.Platform.Report.Dialog
 
         #region 变量声明
 
-        private ReportClient _Client;
         private SYS_Report_Rules _Rule;
 
         #endregion
@@ -40,9 +39,10 @@ namespace Insight.WS.Client.Platform.Report.Dialog
         /// <param name="e"></param>
         private void EditRule_Load(object sender, EventArgs e)
         {
-            _Client = new ReportClient(OpenForm.Binding, OpenForm.Address);
-            _Rule = IsEdit ? _Client.GetRule(OpenForm.UserSession, ObjectId) : new SYS_Report_Rules();
-            _Client.Close();
+            using (var cli = new ReportClient(OpenForm.Binding, OpenForm.Address))
+            {
+                _Rule = IsEdit ? cli.GetRule(OpenForm.UserSession, ObjectId) : new SYS_Report_Rules();
+            }
 
             Text = IsEdit ? "编辑分期" : "新建分期";
             txtName.Text = _Rule.Name;
@@ -95,32 +95,23 @@ namespace Insight.WS.Client.Platform.Report.Dialog
             _Rule.StartTime = (DateTime)datStart.EditValue;
             _Rule.Description = memDescription.EditValue == null ? null : memDescription.Text.Trim();
 
-            _Client = new ReportClient(OpenForm.Binding, OpenForm.Address);
-            if (IsEdit)
+            using (var cli = new ReportClient(OpenForm.Binding, OpenForm.Address))
             {
-                if (_Client.EditRule(OpenForm.UserSession, _Rule))
+                if (IsEdit)
                 {
-                    DialogResult = DialogResult.OK;
+                    if (cli.EditRule(OpenForm.UserSession, _Rule))
+                        DialogResult = DialogResult.OK;
+                    else
+                        General.ShowError("对不起，分期规则保存失败！如连续保存失败，请联系管理员。");
                 }
                 else
                 {
-                    General.ShowError("对不起，分期规则保存失败！如连续保存失败，请联系管理员。");
+                    if (cli.AddRule(OpenForm.UserSession, _Rule) != null)
+                        DialogResult = DialogResult.OK;
+                    else
+                        General.ShowError("对不起，分期规则更新失败！如连续更新失败，请联系管理员。");
                 }
             }
-            else
-            {
-                _Rule.CreatorUserId = OpenForm.UserSession.UserId;
-                _Rule.CreatorDeptId = OpenForm.UserSession.DeptId;
-                if (_Client.AddRule(OpenForm.UserSession, _Rule) != null)
-                {
-                    DialogResult = DialogResult.OK;
-                }
-                else
-                {
-                    General.ShowError("对不起，分期规则更新失败！如连续更新失败，请联系管理员。");
-                }
-            }
-            _Client.Close();
         }
 
         #endregion

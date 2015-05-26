@@ -21,7 +21,6 @@ namespace Insight.WS.Client.Platform.Report.Dialog
 
         #region 变量声明
 
-        private ReportClient _Client;
         private SYS_Report_Templates _Templet;
 
         #endregion
@@ -40,13 +39,13 @@ namespace Insight.WS.Client.Platform.Report.Dialog
 
         private void EditTemplet_Load(object sender, EventArgs e)
         {
+            using (var cli = new ReportClient(OpenForm.Binding, OpenForm.Address))
+            {
+                _Templet = cli.GetTemplate(OpenForm.UserSession, ObjectId);
+            }
+
             var mid = Guid.Parse("DD46BA9F-A345-4CEC-AE00-26561460E470");
             Format.InitTreeListLookUpEdit(trlCategory, Commons.Categorys(mid, true));
-
-            _Client = new ReportClient(OpenForm.Binding, OpenForm.Address);
-            _Templet = _Client.GetTemplate(OpenForm.UserSession, ObjectId);
-            _Client.Close();
-
 
             trlCategory.EditValue = _Templet.CategoryId;
             txtName.Text = _Templet.Name;
@@ -91,19 +90,19 @@ namespace Insight.WS.Client.Platform.Report.Dialog
             _Templet.Name = txtName.Text.Trim();
             _Templet.Description = memDescription.EditValue == null ? null : memDescription.Text.Trim();
 
-            _Client = new ReportClient(OpenForm.Binding, OpenForm.Address);
-            if (_Client.EditTemplets(OpenForm.UserSession, _Templet))
+            using (var cli = new ReportClient(OpenForm.Binding, OpenForm.Address))
             {
+                if (!cli.EditTemplets(OpenForm.UserSession, _Templet))
+                {
+                    General.ShowError("对不起，修改后的内容没有保存成功！请再试一次。");
+                    return;
+                }
+                
                 ObjectData["CategoryId"] = _Templet.CategoryId;
                 ObjectData["名称"] = _Templet.Name;
                 ObjectData["描述"] = _Templet.Description;
                 DialogResult = DialogResult.OK;
             }
-            else
-            {
-                General.ShowError("对不起，修改后的内容没有保存成功！请再试一次。");
-            }
-            _Client.Close();
         }
 
         #endregion

@@ -248,9 +248,6 @@ namespace Insight.WS.Client.Common
                 else
                 {
                     _Category.ModuleId = ModuleId;
-                    _Category.CreatorDeptId = OpenForm.UserSession.DeptId;
-                    _Category.CreatorUserId = OpenForm.UserSession.UserId;
-
                     if (cli.AddCategory(MainForm.Session, _Category, _IndexValue))
                         DialogResult = DialogResult.OK;
                     else

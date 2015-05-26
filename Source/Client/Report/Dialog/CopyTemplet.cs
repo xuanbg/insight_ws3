@@ -21,7 +21,6 @@ namespace Insight.WS.Client.Platform.Report.Dialog
 
         #region 变量声明
 
-        private ReportClient _Client;
         private SYS_Report_Templates _Templet;
 
         #endregion
@@ -66,7 +65,7 @@ namespace Insight.WS.Client.Platform.Report.Dialog
                 trlCategory.Focus();
                 return false;
             }
-            if (Commons.NameIsExist((Guid)trlCategory.EditValue, txtName.Text.Trim(), "Name", "SYS_Report_Templates"))
+            if (Commons.NameIsExist((Guid) trlCategory.EditValue, txtName.Text.Trim(), "Name", "SYS_Report_Templates"))
             {
                 General.ShowWarning("对不起，同一分类下模板名称不能相同！");
                 txtName.Focus();
@@ -88,32 +87,27 @@ namespace Insight.WS.Client.Platform.Report.Dialog
                 Name = txtName.Text.Trim(),
                 CategoryId = (Guid) trlCategory.EditValue,
                 Description = memDescription.EditValue == null ? null : memDescription.Text.Trim(),
-                CreatorUserId = OpenForm.UserSession.UserId,
-                CreatorDeptId = OpenForm.UserSession.DeptId
             };
-
-            _Client = new ReportClient(OpenForm.Binding, OpenForm.Address);
-            var id = _Client.CopyTemplet(OpenForm.UserSession, ObjectId, _Templet);
-            _Client.Close();
-
-            if (id != null)
+            using (var cli = new ReportClient(OpenForm.Binding, OpenForm.Address))
             {
-                ObjectData["ID"] = (Guid)id;
+                var id = cli.CopyTemplet(OpenForm.UserSession, ObjectId, _Templet);
+                if (id == null)
+                {
+                    General.ShowError("对不起，模板复制失败！如果连续失败，请联系管理员。");
+                    return;
+                }
+
+                ObjectData["ID"] = (Guid) id;
                 ObjectData["CategoryId"] = _Templet.CategoryId;
                 ObjectData["名称"] = _Templet.Name;
                 ObjectData["描述"] = _Templet.Description;
                 ObjectData["创建人"] = OpenForm.UserSession.UserName;
                 ObjectData["创建日期"] = DateTime.Now;
-
                 DialogResult = DialogResult.OK;
             }
-            else
-            {
-                General.ShowError("对不起，模板复制失败！如果连续失败，请联系管理员。");
-            }
         }
-
-        #endregion
-
     }
+
+    #endregion
+
 }

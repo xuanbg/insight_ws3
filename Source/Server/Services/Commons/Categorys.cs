@@ -70,8 +70,8 @@ namespace Insight.WS.Service
                 new SqlParameter("@Name", obj.Name),
                 new SqlParameter("@Alias", obj.Alias),
                 new SqlParameter("@Description", obj.Description),
-                new SqlParameter("@CreatorDeptId", SqlDbType.UniqueIdentifier) {Value = obj.CreatorDeptId},
-                new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = obj.CreatorUserId}
+                new SqlParameter("@CreatorDeptId", SqlDbType.UniqueIdentifier) {Value = us.DeptId},
+                new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = us.UserId}
             };
             cmds.Add(SqlHelper.MakeCommand(CommonDAL.ChangeIndex("BASE_Category", index, obj.Index, obj.ParentId, false, obj.ModuleId)));
             cmds.Add(SqlHelper.MakeCommand(sql.ToString(), parm));

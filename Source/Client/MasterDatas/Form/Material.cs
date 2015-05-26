@@ -15,7 +15,6 @@ namespace Insight.WS.Client.MasterDatas
 
         #region 声明变量
 
-        private MasterDatasClient _Client;
         private DataTable _Categorys;
         private DataTable _Materials;
         private Guid _CategoryId = Guid.Empty;
@@ -117,9 +116,10 @@ namespace Insight.WS.Client.MasterDatas
         {
             _Categorys = Commons.Categorys(ModuleId);
 
-            _Client = new MasterDatasClient(Binding, Address);
-            _Materials = _Client.GetMaterials(UserSession);
-            _Client.Close();
+            using (var cli = new MasterDatasClient(Binding, Address))
+            {
+                _Materials = cli.GetMaterials(UserSession);
+            }
 
             _HasCategory = _Categorys.Rows.Count > 0;
 
@@ -245,13 +245,11 @@ namespace Insight.WS.Client.MasterDatas
         private void DeleteMaterial()
         {
             var row = gdvMaterial.GetFocusedDataRow();
-            if (General.ShowConfirm(string.Format("您确定要删除【{0}】吗?", row["名称"])) == DialogResult.OK)
-            {
-                _Client = new MasterDatasClient(Binding, Address);
-                var n = _Client.DelMaterial(UserSession, (Guid)row["ID"]);
-                _Client.Close();
+            if (General.ShowConfirm(string.Format("您确定要删除【{0}】吗?", row["名称"])) != DialogResult.OK) return;
 
-                switch (n)
+            using (var cli = new MasterDatasClient(Binding, Address))
+            {
+                switch (cli.DelMaterial(UserSession, (Guid) row["ID"]))
                 {
                     case 0:
                         General.ShowError("对不起，该物资已经被使用，且无法停用！");
@@ -281,16 +279,15 @@ namespace Insight.WS.Client.MasterDatas
             var row = gdvMaterial.GetFocusedDataRow();
             if (General.ShowConfirm(string.Format("您确定要启用【{0}】吗?", row["名称"])) != DialogResult.OK) return;
 
-            if (Commons.EnableMasterData((Guid)row["ID"], "MDG_Material"))
-            {
-                _Materials.Rows.Find(row["ID"])["状态"] = "正常";
-                _Materials.AcceptChanges();
-                InitMaterial();
-            }
-            else
+            if (!Commons.EnableMasterData((Guid) row["ID"], "MDG_Material"))
             {
                 General.ShowError(string.Format("对不起，物资【{0}】启用失败！", row["名称"]));
+                return;
             }
+            
+            _Materials.Rows.Find(row["ID"])["状态"] = "正常";
+            _Materials.AcceptChanges();
+            InitMaterial();
         }
 
         #endregion

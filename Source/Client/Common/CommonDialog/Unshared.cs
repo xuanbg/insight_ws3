@@ -55,7 +55,6 @@ namespace Insight.WS.Client.Common
             }
 
             var ids = gdvSharing.GetSelectedRows().Select(h => (Guid) gdvSharing.GetDataRow(h)["ID"]).ToList();
-
             using (var cli = new CommonsClient(MainForm.Binding, MainForm.Address))
             {
                 if (cli.UnShare(MainForm.Session, ids))

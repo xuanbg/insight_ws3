@@ -76,11 +76,10 @@ namespace Insight.WS.Client.Common
             if (IdList.Count == 0)
             {
                 General.ShowWarning("当前未选中任何成员！");
+                return;
             }
-            else
-            {
-                DialogResult = DialogResult.OK;
-            }
+            
+            DialogResult = DialogResult.OK;
         }
 
         #endregion

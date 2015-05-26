@@ -17,7 +17,6 @@ namespace Insight.WS.Client.MasterDatas
 
         #region 变量声明
 
-        private MasterDatasClient _Client;
         private DataTable _OrgList;
         private DataTable _Employee;
         private Guid _TemplateId;
@@ -62,9 +61,10 @@ namespace Insight.WS.Client.MasterDatas
         /// <param name="e">分类事件</param>
         private void treeList_FocusedNodeChanged(object sender, FocusedNodeChangedEventArgs e)
         {
-            _Client = new MasterDatasClient(Binding, Address);
-            _Employee = _Client.GetEmployees(UserSession, (Guid)e.Node.GetValue("ID"));
-            _Client.Close();
+            using (var cli = new MasterDatasClient(Binding, Address))
+            {
+                _Employee = cli.GetEmployees(UserSession, (Guid) e.Node.GetValue("ID"));
+            }
 
             InitEmployee();
         }
@@ -198,9 +198,10 @@ namespace Insight.WS.Client.MasterDatas
         private void Search()
         {
             if (bteSearch.EditValue == null) return;
-            _Client = new MasterDatasClient(Binding, Address);
-            _Employee = _Client.GetEmployeesForName(UserSession, bteSearch.Text.Trim());
-            _Client.Close();
+            using (var cli = new MasterDatasClient(Binding, Address))
+            {
+                _Employee = cli.GetEmployeesForName(UserSession, bteSearch.Text.Trim());
+            }
 
             _HasEmployee = _Employee.Rows.Count > 0;
             InitEmployee();
@@ -349,20 +350,19 @@ namespace Insight.WS.Client.MasterDatas
             var row = gdvEmployee.GetFocusedDataRow();
             if (General.ShowConfirm(string.Format("员工【{0}】确定要{1}吗?", row["姓名"], msg)) != DialogResult.OK) return;
 
-            _Client = new MasterDatasClient(Binding, Address);
-            var result = _Client.UpdateStatus(UserSession, (Guid)row["ID"], stu);
-            _Client.Close();
-
-            if (result)
+            using (var cli = new MasterDatasClient(Binding, Address))
             {
-                _Employee.Rows.Find(row["ID"])["状态"] = stu % 2 == 0 ? "正常" : msg;
+                var result = cli.UpdateStatus(UserSession, (Guid) row["ID"], stu);
+                if (!result)
+                {
+                    General.ShowError(string.Format("对不起，员工【{0}】{1}操作失败！", row["名称"], msg));
+                    return;
+                }
+                
+                _Employee.Rows.Find(row["ID"])["状态"] = stu%2 == 0 ? "正常" : msg;
                 if (stu == 3) _Employee.Rows.Find(row["ID"])["离职日期"] = DateTime.Now;
                 if (stu == 4) _Employee.Rows.Find(row["ID"])["离职日期"] = DBNull.Value;
                 InitEmployee();
-            }
-            else
-            {
-                General.ShowError(string.Format("对不起，员工【{0}】{1}操作失败！", row["名称"], msg));
             }
         }
 

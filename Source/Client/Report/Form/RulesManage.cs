@@ -15,7 +15,6 @@ namespace Insight.WS.Client.Platform.Report
 
         #region 变量声明
 
-        private ReportClient _Client ;
         private DataTable _Rules;
         private bool _CanEdit;
 
@@ -60,9 +59,10 @@ namespace Insight.WS.Client.Platform.Report
         /// </summary>
         private void InitData()
         {
-            _Client = new ReportClient(Binding, Address);
-            _Rules = _Client.GetRules(UserSession);
-            _Client.Close();
+            using (var cli = new ReportClient(Binding, Address))
+            {
+                _Rules = cli.GetRules(UserSession);
+            }
 
             grdRule.DataSource = _Rules;
             Format.GridFormat(gdvRule);
@@ -127,16 +127,16 @@ namespace Insight.WS.Client.Platform.Report
             var row = gdvRule.GetDataRow(gdvRule.FocusedRowHandle);
             if (General.ShowConfirm(string.Format("您确定要删除分期规则【{0}】吗?", row["名称"])) != DialogResult.OK) return;
 
-            _Client = new ReportClient(Binding, Address);
-            if (_Client.DelRule(UserSession, (Guid)row["ID"]))
+            using (var cli = new ReportClient(Binding, Address))
             {
+                if (!cli.DelRule(UserSession, (Guid) row["ID"]))
+                {
+                    General.ShowError(string.Format("对不起，分期规则【{0}】已经被使用，无法删除该规则！", row["名称"]));
+                    return;
+                }
+                
                 gdvRule.DeleteRow(gdvRule.FocusedRowHandle);
             }
-            else
-            {
-                General.ShowError(string.Format("对不起，分期规则【{0}】已经被使用，无法删除该规则！", row["名称"]));
-            }
-            _Client.Close();
         }
 
         #endregion

@@ -21,7 +21,6 @@ namespace Insight.WS.Client.Platform.Report
 
         #region 变量声明
 
-        private ReportClient _Client;
         private DataTable _Reports;
         private DataTable _Instances;
         private SYS_Report_Instances _Instanc;
@@ -158,9 +157,10 @@ namespace Insight.WS.Client.Platform.Report
         /// <param name="e"></param>
         private void btnOpen_Click(object sender, EventArgs e)
         {
-            _Client = new ReportClient(Binding, Address);
-            _Instanc = _Client.GetReportInstance(UserSession, (Guid)grlInstances.EditValue);
-            _Client.Close();
+            using (var cli = new ReportClient(Binding, Address))
+            {
+                _Instanc = cli.GetReportInstance(UserSession, (Guid) grlInstances.EditValue);
+            }
 
             ViewReport(false);
         }
@@ -174,10 +174,11 @@ namespace Insight.WS.Client.Platform.Report
         /// </summary>
         private void InitReport()
         {
-            _Client = new ReportClient(Binding, Address);
-            _Reports = _Client.GetMyReports(UserSession);
-            _Instances = _Client.GetInstances(UserSession);
-            _Client.Close();
+            using (var cli = new ReportClient(Binding, Address))
+            {
+                _Reports = cli.GetMyReports(UserSession);
+                _Instances = cli.GetInstances(UserSession);
+            }
 
             Format.InitTreeListLookUpEdit(trlReports, _Reports);
 
@@ -354,12 +355,15 @@ namespace Insight.WS.Client.Platform.Report
                 Content = bytes
             };
 
-            _Client = new ReportClient(Binding, Address);
-            var obj = _Client.AddInstance(UserSession, _Instanc);
-            _Client.Close();
-
-            if (obj != null)
+            using (var cli = new ReportClient(Binding, Address))
             {
+                var obj = cli.AddInstance(UserSession, _Instanc);
+                if (obj == null)
+                {
+                    General.ShowError(string.Format("对不起， {0} 保存失败！\r\n如多次保存失败，请联系管理员。", _Instanc.Name));
+                    return;
+                }
+
                 General.ShowMessage(string.Format("{0} 已保存！", _Instanc.Name));
 
                 view.Name = obj.InstanceId.ToString();
@@ -367,13 +371,9 @@ namespace Insight.WS.Client.Platform.Report
                 page.Tag = false;
 
                 var row = _Instances.NewRow();
-                row.ItemArray = new[] { obj.InstanceId, page.Text, view.Tag, DateTime.Now, obj.ID };
+                row.ItemArray = new[] {obj.InstanceId, page.Text, view.Tag, DateTime.Now, obj.ID};
                 _Instances.Rows.InsertAt(row, 0);
                 InitInstance();
-            }
-            else
-            {
-                General.ShowError(string.Format("对不起， {0} 保存失败！\r\n如多次保存失败，请联系管理员。", _Instanc.Name));
             }
         }
 
@@ -385,12 +385,15 @@ namespace Insight.WS.Client.Platform.Report
             var str = string.Format("您是否要删除报表期次：\r\n    {0} ？\r\n报表删除后将无法继续查看。", grlInstances.Text);
             if (General.ShowConfirm(str) != DialogResult.OK) return;
 
-            _Client = new ReportClient(Binding, Address);
-            var result = _Client.DeleteReportIU(UserSession, (Guid)_Instances.Rows.Find(grlInstances.EditValue)["RID"]);
-            _Client.Close();
-
-            if (result)
+            using (var cli = new ReportClient(Binding, Address))
             {
+                var result = cli.DeleteReportIU(UserSession, (Guid) _Instances.Rows.Find(grlInstances.EditValue)["RID"]);
+                if (!result)
+                {
+                    General.ShowError(string.Format("对不起，您所选的期次【{0}】删除失败！", grlInstances.Text));
+                    return;
+                }
+
                 foreach (XtraTabPage page in tabControl.TabPages)
                 {
                     if (page.Name == grlInstances.EditValue.ToString())
@@ -402,10 +405,6 @@ namespace Insight.WS.Client.Platform.Report
                 _Instances.Rows.Find(grlInstances.EditValue).Delete();
                 _Instances.AcceptChanges();
                 InitInstance();
-            }
-            else
-            {
-                General.ShowError(string.Format("对不起，您所选的期次【{0}】删除失败！", grlInstances.Text));
             }
         }
 

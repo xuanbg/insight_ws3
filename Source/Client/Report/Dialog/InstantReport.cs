@@ -31,7 +31,6 @@ namespace Insight.WS.Client.Platform.Report.Dialog
 
         #region 变量声明
 
-        private ReportClient _Client;
         private SYS_Report_Definition _Definition;
         private DataTable _ReportEntitys;
 
@@ -55,10 +54,11 @@ namespace Insight.WS.Client.Platform.Report.Dialog
         /// <param name="e"></param>
         private void OpenDig_Load(object sender, EventArgs e)
         {
-            _Client = new ReportClient(OpenForm.Binding, OpenForm.Address);
-            _ReportEntitys = _Client.GetMyReportEntitys(OpenForm.UserSession, ObjectId);
-            _Definition = _Client.GetDefinition(OpenForm.UserSession, ObjectId);
-            _Client.Close();
+            using (var cli = new ReportClient(OpenForm.Binding, OpenForm.Address))
+            {
+                _ReportEntitys = cli.GetMyReportEntitys(OpenForm.UserSession, ObjectId);
+                _Definition = cli.GetDefinition(OpenForm.UserSession, ObjectId);
+            }
 
             txtReport.Text = _Definition.Name;
             lokEntitys.Properties.ValueMember = "ID";
@@ -101,21 +101,22 @@ namespace Insight.WS.Client.Platform.Report.Dialog
         {
             var sd = datBegin.Enabled ? (DateTime?)datBegin.DateTime.Date : null;
             var ed = datEnd.Enabled ? (DateTime?)datEnd.DateTime.Date : null;
-            _Client = new ReportClient(OpenForm.Binding, OpenForm.Address);
-            try
+            using (var cli = new ReportClient(OpenForm.Binding, OpenForm.Address))
             {
-                var instance = _Client.BulidReport(OpenForm.UserSession, ObjectId, sd, ed, lokEntitys.Text, (Guid)lokEntitys.EditValue);
-                CanSave = true;
-                ReportName = instance.Name;
-                Content = instance.Content;
-                DialogResult = DialogResult.OK;
-                Close();
+                try
+                {
+                    var instance = cli.BulidReport(OpenForm.UserSession, ObjectId, sd, ed, lokEntitys.Text, (Guid) lokEntitys.EditValue);
+                    CanSave = true;
+                    ReportName = instance.Name;
+                    Content = instance.Content;
+                    DialogResult = DialogResult.OK;
+                    Close();
+                }
+                catch
+                {
+                    General.ShowError("对不起，生成报表失败！如多次生成失败，请联系管理员。");
+                }
             }
-            catch
-            {
-                General.ShowError("对不起，生成报表失败！如多次生成失败，请联系管理员。");
-            }
-            _Client.Close();
         }
 
         #endregion
