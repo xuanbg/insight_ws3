@@ -77,15 +77,11 @@ namespace Insight.WS.Client.Common
         /// <param name="e"></param>
         private void chkIsLogin_CheckedChanged(object sender, EventArgs e)
         {
-            if (!_Contact.LoginUser && chkIsLogin.Checked)
-            {
-                if (Commons.NameIsExist(txtLoginName.Text.Trim(), "LoginName", "SYS_User"))
-                {
-                    General.ShowError("您输入的登录账号已经存在！请更换登录账号…");
-                    txtLoginName.Focus();
-                    chkIsLogin.Checked = false;
-                }
-            }
+            if (_Contact.LoginUser || !chkIsLogin.Checked || !Commons.NameIsExist(txtLoginName.Text.Trim(), "LoginName", "SYS_User")) return;
+
+            General.ShowError("您输入的登录账号已经存在！请更换登录账号…");
+            txtLoginName.Focus();
+            chkIsLogin.Checked = false;
         }
 
         /// <summary>
@@ -95,17 +91,15 @@ namespace Insight.WS.Client.Common
         /// <param name="e"></param>
         private void gdvContact_CellValueChanged(object sender, CellValueChangedEventArgs e)
         {
+            if (e.Column.FieldName != "联系方式") return;
+
             if (gdvContact.GetRowCellValue(e.RowHandle, "ID") == DBNull.Value)
-            {
                 gdvContact.SetRowCellValue(e.RowHandle, "ID", Guid.NewGuid());
-            }
-            if (e.Column.FieldName == "联系方式")
-            {
-                var alias = _ContactType.Rows.Find(e.Value)["Alias"];
-                var isOnly = _ContactInfo.Select(string.Format("Alias = '{0}'", alias)).Length == 0;
-                gdvContact.SetRowCellValue(e.RowHandle, "Alias", alias);
-                gdvContact.SetRowCellValue(e.RowHandle, "主要", isOnly);
-            }
+
+            var alias = _ContactType.Rows.Find(e.Value)["Alias"];
+            var isOnly = _ContactInfo.Select(string.Format("Alias = '{0}'", alias)).Length == 0;
+            gdvContact.SetRowCellValue(e.RowHandle, "Alias", alias);
+            gdvContact.SetRowCellValue(e.RowHandle, "主要", isOnly);
         }
 
         /// <summary>
@@ -115,16 +109,13 @@ namespace Insight.WS.Client.Common
         /// <param name="e"></param>
         private void gdvContact_RowCellClick(object sender, RowCellClickEventArgs e)
         {
-            if (e.RowHandle >= 0 && e.Column.FieldName == "主要")
-            {
-                var alias = gdvContact.GetDataRow(e.RowHandle)["Alias"];
-                var isOnly = _ContactInfo.Select(string.Format("Alias = '{0}'", alias)).Length == 0;
-                if (!isOnly)
-                {
-                    _ContactInfo.Select(string.Format("Alias = '{0}'", gdvContact.GetDataRow(e.RowHandle)["Alias"])).ToList().ForEach(r => r["主要"] = 0);
-                }
-                gdvContact.SetRowCellValue(e.RowHandle, "主要", true);
-            }
+            if (e.RowHandle < 0 || e.Column.FieldName != "主要") return;
+
+            var alias = gdvContact.GetDataRow(e.RowHandle)["Alias"];
+            var isOnly = _ContactInfo.Select(string.Format("Alias = '{0}'", alias)).Length == 0;
+            if (!isOnly)
+                _ContactInfo.Select(string.Format("Alias = '{0}'", gdvContact.GetDataRow(e.RowHandle)["Alias"])).ToList().ForEach(r => r["主要"] = 0);
+            gdvContact.SetRowCellValue(e.RowHandle, "主要", true);
         }
 
         /// <summary>
@@ -134,11 +125,10 @@ namespace Insight.WS.Client.Common
         /// <param name="e"></param>
         private void gdvContact_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Delete)
-            {
-                gdvContact.DeleteSelectedRows();
-                _ContactInfo.AcceptChanges();
-            }
+            if (e.KeyCode != Keys.Delete) return;
+
+            gdvContact.DeleteSelectedRows();
+            _ContactInfo.AcceptChanges();
         }
 
         #endregion
@@ -192,6 +182,7 @@ namespace Insight.WS.Client.Common
                 txtLastName.Focus();
                 return false;
             }
+
             if (string.IsNullOrEmpty(txtFirstName.Text.Trim()))
             {
                 General.ShowWarning("请输入联系人姓名！");

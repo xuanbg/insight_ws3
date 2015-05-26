@@ -3377,11 +3377,28 @@ select ID, N'克', N'g' from BASE_Category where Name = '质量单位' union all
 select ID, N'毫克', N'mg' from BASE_Category where Name = '质量单位'
 
 
+/*****初始化主数据（字典：物资规格）*****/
+INSERT MasterData (CategoryId, Name, Alias)
+select ID, N'重要客户', N'Important' from BASE_Category where Name = '客户类型' union all
+select ID, N'合作渠道', N'Channel' from BASE_Category where Name = '客户类型'
+
+
+/*****初始化主数据（字典：物资规格）*****/
+INSERT MasterData (CategoryId, Name)
+select ID, N'初步接触' from BASE_Category where Name = '客户状态' union all
+select ID, N'上门拜访' from BASE_Category where Name = '客户状态' union all
+select ID, N'确定意向' from BASE_Category where Name = '客户状态' union all
+select ID, N'商务谈判' from BASE_Category where Name = '客户状态' union all
+select ID, N'签约成交' from BASE_Category where Name = '客户状态' union all
+select ID, N'售后服务' from BASE_Category where Name = '客户状态' union all
+select ID, N'终止合作' from BASE_Category where Name = '客户状态'
+
+
 /*****初始化主数据扩展：字典*****/
 
 INSERT MDG_Dictionary (MID, [Type], BuiltIn)
 select ID, dbo.Get_DictType(CategoryId), 1
 from MasterData MD
-where not exists (select * from MDG_Dictionary where MID = MD.ID)
+where not exists (select ID from MDG_Dictionary where MID = MD.ID)
 
 

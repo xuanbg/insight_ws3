@@ -28,6 +28,11 @@ namespace Insight.WS.Client.Common
 
         #region 界面事件
 
+        /// <summary>
+        /// 打开对话框初始化窗体内容
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Transfer_Load(object sender, EventArgs e)
         {
             using (var cli = new CommonsClient(MainForm.Binding, MainForm.Address))
@@ -57,10 +62,13 @@ namespace Insight.WS.Client.Common
             var ids = gdvSharing.GetSelectedRows().Select(h => (Guid) gdvSharing.GetDataRow(h)["ID"]).ToList();
             using (var cli = new CommonsClient(MainForm.Binding, MainForm.Address))
             {
-                if (cli.UnShare(MainForm.Session, ids))
-                    DialogResult = DialogResult.OK;
-                else
+                if (!cli.UnShare(MainForm.Session, ids))
+                {
                     General.ShowError("数据保存失败！如多次保存失败，请联系管理员。");
+                    return;
+                }
+                
+                DialogResult = DialogResult.OK;
             }
         }
 

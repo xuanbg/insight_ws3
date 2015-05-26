@@ -39,6 +39,11 @@ namespace Insight.WS.Client.Common
 
         #region 界面事件
 
+        /// <summary>
+        /// 打开对话框初始化窗体内容
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Transfer_Load(object sender, EventArgs e)
         {
             _Member = Commons.GetAllEmployees();
@@ -57,6 +62,11 @@ namespace Insight.WS.Client.Common
             btnConfirm.Enabled = false;
         }
 
+        /// <summary>
+        /// 下拉列表选择内容后设置确定按钮可用
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void sleTarget_EditValueChanged(object sender, EventArgs e)
         {
             btnConfirm.Enabled = true;
