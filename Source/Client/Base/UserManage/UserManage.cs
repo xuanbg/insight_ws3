@@ -84,10 +84,9 @@ namespace Insight.WS.Client.Platform.Base
         /// <param name="e"></param>
         private void gdvGroup_DoubleClick(object sender, EventArgs e)
         {
-            if (gdvGroup.GetFocusedRow() != null)
-            {
-                GroupEdit(true);
-            }
+            if (gdvGroup.GetFocusedRow() == null) return;
+
+            GroupEdit(true);
         }
 
         /// <summary>
@@ -97,10 +96,9 @@ namespace Insight.WS.Client.Platform.Base
         /// <param name="e"></param>
         private void gdvUser_DoubleClick(object sender, EventArgs e)
         {
-            if (gdvUser.GetFocusedRow() != null)
-            {
-                UserEdit(true);
-            }
+            if (gdvUser.GetFocusedRow() == null) return;
+
+            UserEdit(true);
         }
 
         #endregion
@@ -119,7 +117,6 @@ namespace Insight.WS.Client.Platform.Base
             }
 
             grdGroup.DataSource = _Groups;
-
             Format.GridFormat(gdvGroup);
             gdvGroup.Columns["组名称"].Width = 120;
             gdvGroup.Columns["描述"].Width = 286;
@@ -137,7 +134,6 @@ namespace Insight.WS.Client.Platform.Base
             }
 
             grdUser.DataSource = _Users;
-
             Format.GridFormat(gdvUser);
             gdvUser.Columns["名称"].Width = 120;
             gdvUser.Columns["登录名"].Width = 100;
@@ -154,7 +150,6 @@ namespace Insight.WS.Client.Platform.Base
             _Member = _Members.Copy().DefaultView;
             _Member.RowFilter = filter;
             grdMember.DataSource = _Member;
-
             Format.GridFormat(gdvMember);
             gdvMember.Columns["用户名"].Width = 120;
             gdvMember.Columns["登录名"].Width = 100;

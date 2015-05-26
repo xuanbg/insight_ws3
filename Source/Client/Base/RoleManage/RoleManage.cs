@@ -61,8 +61,6 @@ namespace Insight.WS.Client.Platform.Base
             var builtIn = (bool)gdvRole.GetFocusedDataRow()["内置"];
             SwitchItemStatus(new Context("DeleteRole", !builtIn), new Context("AddMember", !builtIn));
             _ObjectId = (Guid)gdvRole.GetFocusedDataRow()["ID"];
-
-            //初始化角色相关信息
             _FilterStr = "RoleId = '" + _ObjectId + "'";
 
             InitRoleMember();
@@ -144,7 +142,6 @@ namespace Insight.WS.Client.Platform.Base
                 _RoleDataPermit = cli.GetRoleDataPermit(UserSession);
             }
 
-            // 格式化角色表
             grdRole.DataSource = _Roles;
             Format.GridFormat(gdvRole);
             gdvRole.Columns["名称"].Width = 200;
@@ -175,8 +172,6 @@ namespace Insight.WS.Client.Platform.Base
             var dv = _Members.Copy().DefaultView;
             dv.RowFilter = _FilterStr;
             treMember.DataSource = dv;
-
-            // 格式化成员树
             Format.TreeFormat(treMember);
             treMember.SelectImageList = imgMember;
             treMember.KeyFieldName = "MemberId";
@@ -191,8 +186,6 @@ namespace Insight.WS.Client.Platform.Base
             var dv = _RoleUsers.Copy().DefaultView;
             dv.RowFilter = _FilterStr;
             grdUser.DataSource = dv;
-
-            // 格式化成员用户表
             Format.GridFormat(gdvUser);
             gdvUser.Columns["用户名"].Width = 120;
             gdvUser.Columns["登录名"].Width = 100;
@@ -229,8 +222,6 @@ namespace Insight.WS.Client.Platform.Base
             var dv = _RoleModulePermit.Copy().DefaultView;
             dv.RowFilter = _FilterStr;
             treModule.DataSource = dv;
-
-            // 格式化模块树
             Format.TreeFormat(treModule);
             treModule.SelectImageList = imgPermission;
             treModule.KeyFieldName = "ModuleId";
@@ -245,8 +236,6 @@ namespace Insight.WS.Client.Platform.Base
             var dv = _RoleActionPermit.Copy().DefaultView;
             dv.RowFilter = _FilterStr;
             treAction.DataSource = dv;
-
-            // 格式化功能树
             Format.TreeFormat(treAction);
             treAction.SelectImageList = imgPermission;
             treAction.KeyFieldName = "ActionId";
@@ -261,8 +250,6 @@ namespace Insight.WS.Client.Platform.Base
             var dv = _RoleDataPermit.Copy().DefaultView;
             dv.RowFilter = _FilterStr;
             treData.DataSource = dv;
-
-            // 格式化功能树
             Format.TreeFormat(treData);
             treData.SelectImageList = imgData;
             treData.KeyFieldName = "DataId";

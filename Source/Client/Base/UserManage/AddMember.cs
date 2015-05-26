@@ -65,7 +65,6 @@ namespace Insight.WS.Client.Platform.Base
         {
 
             treOrg.DataSource = _OrgList;
-
             Format.TreeFormat(treOrg);
             treOrg.SelectImageList = imgOrgTreeNode;
             treOrg.ExpandToLevel(0);
@@ -77,7 +76,6 @@ namespace Insight.WS.Client.Platform.Base
         private void InitGroupList()
         {
             grdGroup.DataSource = _Groups;
-
             Format.GridFormat(gdvGroup, 0);
             gdvGroup.OptionsSelection.CheckBoxSelectorColumnWidth = 30;
             gdvGroup.Columns["名称"].Width = 120;
@@ -90,7 +88,6 @@ namespace Insight.WS.Client.Platform.Base
         private void InitUserList()
         {
             grdUser.DataSource = _Users;
-
             Format.GridFormat(gdvUser, 0);
             gdvUser.OptionsSelection.CheckBoxSelectorColumnWidth = 30;
             gdvUser.Columns["名称"].Width = 100;

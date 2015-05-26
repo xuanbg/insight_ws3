@@ -64,9 +64,8 @@ namespace Insight.WS.Client.Platform.Base
         private void txtName_EditValueChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtName.Text.Trim()))
-            {
                 txtName.EditValue = null;
-            }
+
             wizPage1.AllowNext = txtName.EditValue != null;
         }
 

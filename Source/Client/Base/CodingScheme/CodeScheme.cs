@@ -36,6 +36,11 @@ namespace Insight.WS.Client.Platform.Base
 
         #region 界面事件
 
+        /// <summary>
+        /// 打开对话框时初始化界面
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CodeScheme_Load(object sender, EventArgs e)
         {
             using (var cli = new BaseClient(OpenForm.Binding, OpenForm.Address))
@@ -50,6 +55,11 @@ namespace Insight.WS.Client.Platform.Base
             memDescription.EditValue = _Scheme.Description;
         }
 
+        /// <summary>
+        /// 点击预览按钮预览编码
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void bntPreview_ButtonClick(object sender, ButtonPressedEventArgs e)
         {
             var format = txtFormat.Text.Trim();
@@ -57,15 +67,14 @@ namespace Insight.WS.Client.Platform.Base
             {
                 General.ShowError("请先设定编码格式！");
                 txtFormat.Focus();
+                return;
             }
-            else
+            
+            var id = IsEdit ? ObjectId : Guid.Empty;
+            var mark = txtMark.Text.Trim();
+            using (var cli = new BaseClient(OpenForm.Binding, OpenForm.Address))
             {
-                var id = IsEdit ? ObjectId : Guid.Empty;
-                var mark = txtMark.Text.Trim();
-                using (var cli = new BaseClient(OpenForm.Binding, OpenForm.Address))
-                {
-                    bntPreview.Text = cli.GetCodePreview(OpenForm.UserSession, id, format, mark);
-                }
+                bntPreview.Text = cli.GetCodePreview(OpenForm.UserSession, id, format, mark);
             }
         }
 
@@ -112,7 +121,6 @@ namespace Insight.WS.Client.Platform.Base
             _Scheme.CodeFormat = txtFormat.Text.Trim();
             _Scheme.SerialFormat = txtMark.Text.Trim();
             _Scheme.Description = memDescription.EditValue == null ? null : memDescription.Text.Trim();
-
             using (var cli = new BaseClient(OpenForm.Binding, OpenForm.Address))
             {
                 if (IsEdit)

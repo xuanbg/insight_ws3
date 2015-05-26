@@ -59,23 +59,22 @@ namespace Insight.WS.Client.Platform.Base
         /// <param name="e"></param>
         private void tlOrgList_EditValueChanged(object sender, EventArgs e)
         {
-            if (trlOrgList.EditValue != null)
-            {
-                var type = (int)_OrgList.Rows.Find(trlOrgList.EditValue)["NodeType"];
-                var id = (Guid)trlOrgList.EditValue;
-                if (type < (_Org.NodeType == 3 ? 2 : 1) || id == _Org.ParentId)
-                {
-                    trlOrgList.EditValue = null;
-                    return;
-                }
+            if (trlOrgList.EditValue == null) return;
 
-                var filter = string.Format("ParentId = '{0}' and 名称 = '{1}' and NodeType = {2}", id, _Org.Name, _Org.NodeType);
-                _Orgs.RowFilter = filter;
-                if (_Orgs.Count > 0)
-                {
-                    General.ShowError(string.Format("您所选择的移动目标节点【{0}】下已经存在同类的同名节点！\r\n请使用【合并】功能而非【移动】功能合并到目标节点！", _OrgList.Rows.Find(trlOrgList.EditValue)["名称"]));
-                    trlOrgList.EditValue = null;
-                }
+            var type = (int)_OrgList.Rows.Find(trlOrgList.EditValue)["NodeType"];
+            var id = (Guid)trlOrgList.EditValue;
+            if (type < (_Org.NodeType == 3 ? 2 : 1) || id == _Org.ParentId)
+            {
+                trlOrgList.EditValue = null;
+                return;
+            }
+
+            var filter = string.Format("ParentId = '{0}' and 名称 = '{1}' and NodeType = {2}", id, _Org.Name, _Org.NodeType);
+            _Orgs.RowFilter = filter;
+            if (_Orgs.Count > 0)
+            {
+                General.ShowError(string.Format("您所选择的移动目标节点【{0}】下已经存在同类的同名节点！\r\n请使用【合并】功能而非【移动】功能合并到目标节点！", _OrgList.Rows.Find(trlOrgList.EditValue)["名称"]));
+                trlOrgList.EditValue = null;
             }
         }
 
@@ -110,14 +109,12 @@ namespace Insight.WS.Client.Platform.Base
             foreach (var row in _OrgList.Select("NodeType <= " + (_Org.NodeType == 3 ? 2 : _Org.NodeType)))
             {
                 if (row.RowState != DataRowState.Modified && (Guid)row["ID"] != _Org.ID && (Guid)row["ID"] != _Org.ParentId)
-                {
                     row.SetModified();
-                }
+
                 if ((Guid)row["ID"] != _Org.ID && !string.IsNullOrEmpty(row["ParentId"].ToString()))
-                {
                     LoopTree((Guid)row["ParentId"]);
-                }
             }
+
             SubNodes(_Org.ID);
             foreach (var row in _OrgList.Rows.Cast<DataRow>().Where(row => row.RowState != DataRowState.Modified))
             {
@@ -135,10 +132,9 @@ namespace Insight.WS.Client.Platform.Base
             while (true)
             {
                 var row = _OrgList.Rows.Find(id);
-                if (row.RowState != DataRowState.Modified && (Guid) row["ID"] != _Org.ID)
-                {
+                if (row.RowState != DataRowState.Modified && (Guid) row["ID"] != _Org.ID) 
                     row.SetModified();
-                }
+
                 if (!string.IsNullOrEmpty(row["ParentId"].ToString()))
                 {
                     id = (Guid) row["ParentId"];
@@ -157,9 +153,8 @@ namespace Insight.WS.Client.Platform.Base
             foreach (var row in _OrgList.Select(string.Format("ParentId = '{0}'", id)))
             {
                 if (row.RowState == DataRowState.Modified)
-                {
                     row.AcceptChanges();
-                }
+
                 SubNodes((Guid)row["ID"]);
             }
         }
@@ -180,7 +175,6 @@ namespace Insight.WS.Client.Platform.Base
             var filter = "ParentId " + (_Org.ParentId == null ? "is null" : string.Format("= '{0}'", _Org.ParentId));
             _Orgs.RowFilter = filter;
             _Org.Index = _Orgs.Count + 1;
-
             using (var cli = new BaseClient(OpenForm.Binding, OpenForm.Address))
             {
                 if (!cli.UpdateOrgParentId(OpenForm.UserSession, _Org))

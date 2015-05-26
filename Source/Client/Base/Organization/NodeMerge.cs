@@ -50,10 +50,9 @@ namespace Insight.WS.Client.Platform.Base
         /// <param name="e"></param>
         private void tlOrgList_EditValueChanged(object sender, EventArgs e)
         {
-            if (trlOrgList.EditValue != null && (int)treOrg.FocusedNode.GetValue("NodeType") != _Org.NodeType)
-            {
-                trlOrgList.EditValue = null;
-            }
+            if (trlOrgList.EditValue == null || (int) treOrg.FocusedNode.GetValue("NodeType") == _Org.NodeType) return;
+
+            trlOrgList.EditValue = null;
         }
 
         #endregion
@@ -87,14 +86,12 @@ namespace Insight.WS.Client.Platform.Base
             foreach (var row in _OrgList.Select("NodeType = " + _Org.NodeType))
             {
                 if (row.RowState != DataRowState.Modified && (Guid)row["ID"] != _Org.ID)
-                {
                     row.SetModified();
-                }
+
                 if ((Guid)row["ID"] != _Org.ID && !string.IsNullOrEmpty(row["ParentId"].ToString()))
-                {
                     LoopTree((Guid)row["ParentId"]);
-                }
             }
+
             SubNodes(_Org.ID);
             foreach (var row in _OrgList.Rows.Cast<DataRow>().Where(row => row.RowState != DataRowState.Modified))
             {
@@ -116,6 +113,7 @@ namespace Insight.WS.Client.Platform.Base
                 {
                     row.SetModified();
                 }
+
                 if (!string.IsNullOrEmpty(row["ParentId"].ToString()))
                 {
                     id = (Guid) row["ParentId"];
@@ -133,10 +131,8 @@ namespace Insight.WS.Client.Platform.Base
         {
             foreach (var row in _OrgList.Select(string.Format("NodeType = {0} and ParentId = '{1}'", _Org.NodeType, id)))
             {
-                if (row.RowState == DataRowState.Modified)
-                {
-                    row.AcceptChanges();
-                }
+                if (row.RowState == DataRowState.Modified) row.AcceptChanges();
+
                 SubNodes((Guid)row["ID"]);
             }
         }
@@ -160,7 +156,6 @@ namespace Insight.WS.Client.Platform.Base
                 OrgId = (Guid) trlOrgList.EditValue,
                 MergerOrgId = ObjectId,
             };
-
             using (var cli = new BaseClient(OpenForm.Binding, OpenForm.Address))
             {
                 if (!cli.AddOrgMerger(OpenForm.UserSession, _Merger))

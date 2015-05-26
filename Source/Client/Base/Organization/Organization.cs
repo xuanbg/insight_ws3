@@ -101,10 +101,9 @@ namespace Insight.WS.Client.Platform.Base
         /// <param name="e"></param>
         private void treOrgList_DoubleClick(object sender, EventArgs e)
         {
-            if (treOrgList.FocusedNode != null)
-            {
-                NodeEdit(true);
-            }
+            if (treOrgList.FocusedNode == null) return;
+
+            NodeEdit(true);
         }
 
         #endregion

@@ -86,6 +86,7 @@ namespace Insight.WS.Client.Platform.Base
                 txtGroupName.Focus();
                 return false;
             }
+
             if (_Group.Name != txtGroupName.Text.Trim() && Commons.NameIsExist(txtGroupName.Text.Trim(), "Name", "SYS_UserGroup"))
             {
                 General.ShowWarning(string.Format("用户组【{0}】已经存在！", txtGroupName.Text.Trim()));

@@ -54,23 +54,18 @@ namespace Insight.WS.Client.Platform.Base
         /// <param name="e"></param>
         private void OrgNode_Load(object sender, EventArgs e)
         {
-            _Position = Commons.Dictionary("Position");
-
             using (var cli = new BaseClient(OpenForm.Binding, OpenForm.Address))
             {
                 _Org = (ObjectId != Guid.Empty) ? cli.GetOrg(OpenForm.UserSession, ObjectId) : new SYS_Organization();
             }
 
+            _Position = Commons.Dictionary("Position");
             Format.InitLookUpEdit(lokPosition, _Position);
 
             if (IsEdit)
-            {
                 EditOrgNode();
-            }
             else
-            {
                 NewOrgNode();
-            }
 
             txtCode.Text = _Org.Code;
             txtName.Text = _Org.Name;
@@ -91,10 +86,9 @@ namespace Insight.WS.Client.Platform.Base
 
         private void lokPosition_ButtonClick(object sender, ButtonPressedEventArgs e)
         {
-            if (e.Button.Kind.ToString() == "Clear")
-            {
-                lokPosition.EditValue = null;
-            }
+            if (e.Button.Kind.ToString() != "Clear") return;
+
+            lokPosition.EditValue = null;
         }
 
         private void chkRoot_CheckedChanged(object sender, EventArgs e)
@@ -114,7 +108,6 @@ namespace Insight.WS.Client.Platform.Base
         private void NewOrgNode()
         {
             Text = "新建";
-
             switch (_Org.NodeType)
             {
                 case 1:
@@ -201,30 +194,35 @@ namespace Insight.WS.Client.Platform.Base
                 txtName.Focus();
                 return false;
             }
+
             if (string.IsNullOrEmpty(fullName))
             {
                 General.ShowWarning("全称不能为空！全称用于输出，请输入正确的全称。");
                 txtFullName.Focus();
                 return false;
             }
+
             if (_Org.Name != name && Commons.NameIsExist(_ParentId, name, "Name", "SYS_Organization", true))
             {
                 General.ShowWarning("同一父节点下已经存在名称为【" + name + "】的节点！请不要重复输入。");
                 txtName.Focus();
                 return false;
             }
+
             if (cmbNodeType.EditValue.GetHashCode() != 3 && _Org.FullName != fullName && Commons.NameIsExist(fullName, "FullName", "SYS_Organization"))
             {
                 General.ShowWarning("已经存在全称为【" + fullName + "】的节点！请不要重复输入。");
                 txtFullName.Focus();
                 return false;
             }
+
             if (txtAlias.Text.Trim() != "" && _Org.Alias != alias && Commons.NameIsExist(alias, "Alias", "SYS_Organization"))
             {
                 General.ShowWarning("已经存在简称为【" + alias + "】的节点！请不要重复输入。");
                 txtAlias.Focus();
                 return false;
             }
+
             if (txtCode.Text.Trim() != "" && _Org.Code != code && Commons.NameIsExist(code, "Code", "SYS_Organization"))
             {
                 General.ShowWarning("已经存在编码为【" + code + "】的节点！请不要重复输入。");

@@ -53,10 +53,13 @@ namespace Insight.WS.Client.Platform.Base
             var cs = gdvOnline.GetFocusedRow() as Session;
             if (General.ShowConfirm(string.Format("您确定要使用户【{0}】离线吗？用户离线后将必须重新登录系统才能继续操作。", cs.UserName)) != DialogResult.OK) return;
 
-            if (Commons.DelOnlineUser(cs.ID))
+            if (!Commons.DelOnlineUser(cs.ID))
             {
-                gdvOnline.DeleteRow(gdvOnline.FocusedRowHandle);
+                General.ShowError("删除用户状态失败！如多次失败，请联系管理员。");
+                return;
             }
+
+            gdvOnline.DeleteRow(gdvOnline.FocusedRowHandle);
         }
 
         #endregion
