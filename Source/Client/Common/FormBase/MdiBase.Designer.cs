@@ -33,16 +33,17 @@ namespace Insight.WS.Client.Common
         /// </summary>
         private void InitializeComponent()
         {
-            var resources = new System.ComponentModel.ComponentResourceManager(typeof(MdiBase));
-            this.barManager = new DevExpress.XtraBars.BarManager();
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MdiBase));
+            this.barManager = new DevExpress.XtraBars.BarManager(this.components);
             this.barMainToolBar = new DevExpress.XtraBars.Bar();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-            this.imgFolderNode = new DevExpress.Utils.ImageCollection();
-            this.imgCategoryNode = new DevExpress.Utils.ImageCollection();
-            this.imgOrgTreeNode = new DevExpress.Utils.ImageCollection();
+            this.imgFolderNode = new DevExpress.Utils.ImageCollection(this.components);
+            this.imgCategoryNode = new DevExpress.Utils.ImageCollection(this.components);
+            this.imgOrgTreeNode = new DevExpress.Utils.ImageCollection(this.components);
             this.xtraScrollable = new DevExpress.XtraEditors.XtraScrollableControl();
             ((System.ComponentModel.ISupportInitialize)(this.barManager)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgFolderNode)).BeginInit();
