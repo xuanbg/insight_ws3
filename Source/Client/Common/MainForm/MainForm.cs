@@ -203,20 +203,19 @@ namespace Insight.WS.Client.Common
                 return;
             }
 
-            Refresh();
-            bprMain.Visibility = BarItemVisibility.Always;
-            bprMain.Refresh();
-
             using (var cli = new CommonsClient(Binding, Address))
             {
-                var mod = cli.GetModuleInfo(Session, (Guid)mid);
+                var mod = cli.GetModuleInfo(Session, (Guid) mid);
                 var path = string.Format("{0}\\{1}\\{2}.dll", Application.StartupPath, mod.Location ?? "", mod.ProgramName).Replace("\\\\", "\\");
                 if (!File.Exists(path))
                 {
-                    var str = string.Format("对不起，{0}模块无法加载！\r\n在您的安装文件夹中缺少{1}.dll文件。", mod.ApplicationName, mod.ProgramName);
-                    General.ShowError(str);
+                    General.ShowError(string.Format("对不起，{0}模块无法加载！\r\n在您的安装文件夹中缺少{1}.dll文件。", mod.ApplicationName, mod.ProgramName));
                     return;
                 }
+
+                bprMain.Visibility = BarItemVisibility.Always;
+                bprMain.Refresh();
+
                 var asm = Assembly.LoadFrom(path);
                 var mdi = (MdiBase) asm.CreateInstance(mod.MainFrom);
                 mdi.Icon = Icon.FromHandle(new Bitmap(new MemoryStream(mod.Icon)).GetHicon());
@@ -228,8 +227,9 @@ namespace Insight.WS.Client.Common
                 mdi.Binding = Binding;
                 mdi.Address = new EndpointAddress(Session.BaseAddress + mod.ProgramName);
                 mdi.Show();
+
+                bprMain.Visibility = BarItemVisibility.Never;
             }
-            bprMain.Visibility = BarItemVisibility.Never;
         }
 
         #endregion
