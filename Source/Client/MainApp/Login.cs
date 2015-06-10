@@ -74,9 +74,9 @@ namespace Insight.WS.Client.MainApp
         /// <param name="e"></param>
         private void txtUserName_Leave(object sender, EventArgs e)
         {
-            if (!_CanConnect) return;
+            if (!_CanConnect || string.IsNullOrEmpty(txtUserName.Text.Trim())) return;
             
-            if (!string.IsNullOrEmpty(txtUserName.Text)) InitDepartment();
+            InitDepartment();
         }
 
         #endregion
@@ -284,6 +284,7 @@ namespace Insight.WS.Client.MainApp
                 InitParameter();
                 _Restart = CheckUpdate();
             }
+
             EntryLogin();
         }
 
