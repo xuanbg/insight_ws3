@@ -244,7 +244,8 @@ namespace Insight.WS.Client.MainApp
                     break;
 
                 case LoginResult.Failure:
-                    General.ShowWarning("对不起，您输入的密码不正确！\r\n如果您不知道或遗忘自己的密码，请联系管理员。");
+                    var msg = Session.FailureCount < 5 ? "对不起，您输入的密码不正确！\r\n如果您不知道或遗忘自己的密码，请联系管理员。" : "您的帐户已锁定！请在10分钟后再尝试登录。";
+                    General.ShowWarning(msg);
                     txtPassWord.EditValue = null;
                     txtPassWord.Focus();
                     break;

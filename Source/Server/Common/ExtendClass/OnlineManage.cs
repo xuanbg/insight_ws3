@@ -36,10 +36,27 @@ namespace Insight.WS.Server.Common
             if (obj == null || obj.ID >= Sessions.Count) return false;
 
             var us = Sessions[obj.ID];
-            if (us.SessionId != obj.SessionId || us.Signature != obj.Signature || !us.Validity) return false;
+            var result = false;
+
+            // 1天后重置连续失败次数
+            var time = DateTime.Now - us.LastConnect;
+            if (us.FailureCount > 0 && time.TotalDays > 1)
+            {
+                us.FailureCount = 0;
+            }
+
+            if (us.FailureCount > 5 || us.SessionId != obj.SessionId || us.Signature != obj.Signature || !us.Validity)
+            {
+                us.FailureCount += 1;
+            }
+            else
+            {
+                us.FailureCount = 0;
+                result = true;
+            }
 
             us.LastConnect = DateTime.Now;
-            return true;
+            return result;
         }
 
     }
