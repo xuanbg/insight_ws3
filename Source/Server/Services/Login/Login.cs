@@ -70,11 +70,22 @@ namespace Insight.WS.Service
                 us.LoginStatus = LoginResult.Success;
             }
 
+            // 10分钟后重置连续失败次数
+            var time = DateTime.Now - us.LastConnect;
+            if (us.FailureCount > 0 && time.TotalMinutes > 10)
+            {
+                us.FailureCount = 0;
+            }
+
             // 用户被封禁
             if (!us.Validity) us.LoginStatus = LoginResult.Banned;
 
             // 密码不正确
-            if (us.Signature != pw) us.LoginStatus = LoginResult.Failure;
+            if (us.FailureCount > 4 || us.Signature != pw)
+            {
+                us.LoginStatus = LoginResult.Failure;
+                us.FailureCount += 1;
+            }
 
             us.LastConnect = DateTime.Now;
             return us;

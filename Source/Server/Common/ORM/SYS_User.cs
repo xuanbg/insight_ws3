@@ -126,6 +126,8 @@ namespace Insight.WS.Server.Common.ORM
         public Nullable<System.Guid> CreatorUserId { get; set; }
     	[DataMember]
         public System.DateTime CreateTime { get; set; }
+    	[DataMember]
+        public int Type { get; set; }
     
     	[DataMember]
         public virtual ICollection<ABS_Clearing> ABS_Clearing { get; set; }

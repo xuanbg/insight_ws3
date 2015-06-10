@@ -61,6 +61,11 @@ namespace Insight.WS.Server.Common
         public string MachineId { get; set; }
 
         /// <summary>
+        /// 连续失败次数
+        /// </summary>
+        public int FailureCount { get; set; }
+
+        /// <summary>
         /// 上次连接时间
         /// </summary>
         public DateTime LastConnect { get; set; }

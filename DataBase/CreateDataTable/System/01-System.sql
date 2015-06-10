@@ -68,6 +68,7 @@ CREATE TABLE SYS_User(
 [LoginName]        NVARCHAR(32) NOT NULL,                                                                                                  --登录名
 [Password]         VARCHAR(32) DEFAULT 'E10ADC3949BA59ABBE56E057F20F883E' NOT NULL,                                                        --登录密码，保存密码的MD5值，初始密码123456
 [Description]      NVARCHAR(MAX),                                                                                                          --描述
+[Type]             INT DEFAULT 1 NOT NULL,                                                                                                 --用户类型：-1、外部用户；1、内部用户
 [BuiltIn]          BIT DEFAULT 0 NOT NULL,                                                                                                 --是否预置：0、自定；1、预置
 [Validity]         BIT DEFAULT 1 NOT NULL,                                                                                                 --是否有效：0、无效；1、有效
 [CreatorUserId]    UNIQUEIDENTIFIER,                                                                                                       --创建人ID
@@ -82,7 +83,6 @@ CREATE TABLE SYS_UserGroup(
 [SN]               BIGINT IDENTITY(1,1),                                                                                                   --自增序列
 [Name]             NVARCHAR(64) NOT NULL,                                                                                                  --用户组名称
 [Description]      NVARCHAR(MAX),                                                                                                          --描述
-[Type]             INT DEFAULT 1 NOT NULL,                                                                                                 --用户类型：-1、外部用户；1、内部用户
 [BuiltIn]          BIT DEFAULT 0 NOT NULL,                                                                                                 --是否预置：0、自定；1、预置
 [Visible]          BIT DEFAULT 1 NOT NULL,                                                                                                 --是否可见：0、不可见；1、可见
 [CreatorUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID) DEFAULT '00000000-0000-0000-0000-000000000000' NOT NULL,           --创建人ID
