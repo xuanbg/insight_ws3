@@ -82,6 +82,7 @@ CREATE TABLE SYS_UserGroup(
 [SN]               BIGINT IDENTITY(1,1),                                                                                                   --自增序列
 [Name]             NVARCHAR(64) NOT NULL,                                                                                                  --用户组名称
 [Description]      NVARCHAR(MAX),                                                                                                          --描述
+[Type]             INT DEFAULT 1 NOT NULL,                                                                                                 --用户类型：-1、外部用户；1、内部用户
 [BuiltIn]          BIT DEFAULT 0 NOT NULL,                                                                                                 --是否预置：0、自定；1、预置
 [Visible]          BIT DEFAULT 1 NOT NULL,                                                                                                 --是否可见：0、不可见；1、可见
 [CreatorUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID) DEFAULT '00000000-0000-0000-0000-000000000000' NOT NULL,           --创建人ID
