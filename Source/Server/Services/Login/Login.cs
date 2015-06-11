@@ -55,6 +55,7 @@ namespace Insight.WS.Service
                 obj.UserId = user.ID;
                 obj.UserName = user.Name;
                 obj.Signature = user.Password;
+                obj.FailureCount = 0;
                 obj.Validity = user.Validity;
 
                 OnlineManage.Sessions.Add(obj);
