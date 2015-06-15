@@ -61,14 +61,17 @@ namespace Insight.WS.Service
                 OnlineManage.Sessions.Add(obj);
                 us = OnlineManage.Sessions[obj.ID];
             }
-            else if (us.SessionId != Guid.Empty)
-            {
-                us.LoginStatus = us.MachineId != obj.MachineId ? LoginResult.Online : LoginResult.Multiple;
-            }
             else
             {
+                us.LoginStatus = us.SessionId != Guid.Empty
+                    ? (us.MachineId != obj.MachineId ? LoginResult.Online : LoginResult.Multiple)
+                    : LoginResult.Success;
                 us.SessionId = obj.SessionId;
-                us.LoginStatus = LoginResult.Success;
+
+                if (us.FailureCount > 4 && us.MachineId == obj.MachineId)
+                    us.FailureCount = 0;
+
+                us.MachineId = obj.MachineId;
             }
 
             // 10分钟后重置连续失败次数
@@ -82,7 +85,7 @@ namespace Insight.WS.Service
             if (!us.Validity) us.LoginStatus = LoginResult.Banned;
 
             // 密码不正确
-            if (us.FailureCount > 4 || us.Signature != pw)
+            if (us.Signature != pw || us.FailureCount > 4)
             {
                 us.LoginStatus = LoginResult.Failure;
                 us.FailureCount += 1;
