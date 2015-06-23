@@ -13,6 +13,11 @@ namespace Insight.WS.Server.Common
         public static List<Session> Sessions { get; set; }
 
         /// <summary>
+        /// 合法机器码
+        /// </summary>
+        public static List<string> SafeMachine { get; set; }
+
+        /// <summary>
         /// 最大在线用户数
         /// </summary>
         public static int MaxAuthorized { get; set; }
@@ -23,6 +28,7 @@ namespace Insight.WS.Server.Common
         public OnlineManage()
         {
             Sessions = new List<Session>();
+            SafeMachine = new List<string>();
             MaxAuthorized = Convert.ToInt32(ConfigurationManager.AppSettings["MaxAuthorized"]);
         }
 
@@ -36,6 +42,7 @@ namespace Insight.WS.Server.Common
             if (obj == null || obj.ID >= Sessions.Count) return false;
 
             var us = Sessions[obj.ID];
+            var sm = SafeMachine[obj.ID];
             var result = false;
 
             // 1天后重置连续失败次数
@@ -45,7 +52,7 @@ namespace Insight.WS.Server.Common
                 us.FailureCount = 0;
             }
 
-            if (us.FailureCount > 5 || us.SessionId != obj.SessionId || us.Signature != obj.Signature || !us.Validity)
+            if ((us.FailureCount > 5 && us.MachineId != sm) || us.SessionId != obj.SessionId || us.Signature != obj.Signature || !us.Validity)
             {
                 us.FailureCount += 1;
             }

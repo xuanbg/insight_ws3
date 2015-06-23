@@ -40,6 +40,7 @@ namespace Insight.WS.Service
                 return obj;
             }
 
+            var isSafe = true;
             var pw = obj.Signature;
             var us = OnlineManage.Sessions.Find(s => s.LoginName == obj.LoginName);
             if (us == null)
@@ -59,18 +60,19 @@ namespace Insight.WS.Service
                 obj.Validity = user.Validity;
 
                 OnlineManage.Sessions.Add(obj);
+                OnlineManage.SafeMachine.Add(null);
                 us = OnlineManage.Sessions[obj.ID];
             }
             else
             {
+                if (us.FailureCount > 4)
+                {
+                    isSafe = us.MachineId != obj.MachineId && obj.MachineId == OnlineManage.SafeMachine[us.ID];
+                }
                 us.LoginStatus = us.SessionId != Guid.Empty
                     ? (us.MachineId != obj.MachineId ? LoginResult.Online : LoginResult.Multiple)
                     : LoginResult.Success;
                 us.SessionId = obj.SessionId;
-
-                if (us.FailureCount > 4 && us.MachineId == obj.MachineId)
-                    us.FailureCount = 0;
-
                 us.MachineId = obj.MachineId;
             }
 
@@ -81,14 +83,19 @@ namespace Insight.WS.Service
                 us.FailureCount = 0;
             }
 
-            // 用户被封禁
-            if (!us.Validity) us.LoginStatus = LoginResult.Banned;
-
-            // 密码不正确
-            if (us.Signature != pw || us.FailureCount > 4)
+            if (!us.Validity)
             {
-                us.LoginStatus = LoginResult.Failure;
+                us.LoginStatus = LoginResult.Banned;
+            }
+            else if (us.Signature != pw || !isSafe)
+            {
                 us.FailureCount += 1;
+                us.LoginStatus = LoginResult.Failure;
+                us.SessionId = Guid.Empty;
+            }
+            else
+            {
+                OnlineManage.SafeMachine[us.ID] = us.MachineId;
             }
 
             us.LastConnect = DateTime.Now;
