@@ -31,6 +31,8 @@ namespace Insight.WS.Client.MainApp
         #region 变量声明
 
         private EndpointAddress _Address;
+        private Guid _SessionId;
+        private string _BaseAddress;
         private bool _CanConnect;
         private bool _Restart;
 
@@ -88,15 +90,10 @@ namespace Insight.WS.Client.MainApp
         /// </summary>
         private void InitParameter()
         {
-            Session = new Session
-            {
-                SessionId = Guid.NewGuid(),
-                BaseAddress = string.Format("net.tcp://{0}:{1}/", Config.BaseAddress(), Config.Port()),
-                MachineId = General.GetHash(General.GetCpuId() + General.GetMbId())
-            };
-
             // 初始化EndpointAddress参数
-            _Address = new EndpointAddress(Session.BaseAddress + "Login");
+            _BaseAddress = string.Format("net.tcp://{0}:{1}/", Config.BaseAddress(), Config.Port());
+            _Address = new EndpointAddress(_BaseAddress + "Login");
+            _SessionId = Guid.NewGuid();
         }
 
         /// <summary>
@@ -214,10 +211,17 @@ namespace Insight.WS.Client.MainApp
             }
 
             // 初始化Session并登录系统
-            Session.LoginName = txtUserName.Text.Trim();
-            Session.Signature = General.GetHash(txtPassWord.Text.Trim());
-            Session.DeptId = (Guid?)lokDepartment.EditValue;
-            Session.DeptName = lokDepartment.EditValue == null ? null : lokDepartment.Text;
+            Session = new Session
+            {
+                BaseAddress = _BaseAddress,
+                SessionId = _SessionId,
+                LoginName = txtUserName.Text.Trim(),
+                Signature = General.GetHash(txtPassWord.Text.Trim()),
+                DeptId = (Guid?) lokDepartment.EditValue,
+                DeptName = lokDepartment.EditValue == null ? null : lokDepartment.Text,
+                MachineId = General.GetHash(General.GetCpuId() + General.GetMbId())
+            };
+
             using (var cli = new LoginClient(Binding, _Address))
             {
                 Session = cli.UserLogin(Session);

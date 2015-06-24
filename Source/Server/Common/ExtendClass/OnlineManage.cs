@@ -52,7 +52,7 @@ namespace Insight.WS.Server.Common
                 us.FailureCount = 0;
             }
 
-            if ((us.FailureCount > 5 && us.MachineId != sm) || us.SessionId != obj.SessionId || us.Signature != obj.Signature || !us.Validity)
+            if ((us.FailureCount > 5 && obj.MachineId != sm) || us.Signature != obj.Signature || !us.Validity)
             {
                 us.FailureCount += 1;
             }

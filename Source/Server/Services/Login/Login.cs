@@ -69,11 +69,17 @@ namespace Insight.WS.Service
                 {
                     isSafe = us.MachineId != obj.MachineId && obj.MachineId == OnlineManage.SafeMachine[us.ID];
                 }
-                us.LoginStatus = us.SessionId != Guid.Empty
-                    ? (us.MachineId != obj.MachineId ? LoginResult.Online : LoginResult.Multiple)
-                    : LoginResult.Success;
-                us.SessionId = obj.SessionId;
-                us.MachineId = obj.MachineId;
+
+                if (us.SessionId == Guid.Empty)
+                {
+                    us.SessionId = obj.SessionId;
+                    us.MachineId = obj.MachineId;
+                    us.LoginStatus = LoginResult.Success;
+                }
+                else
+                {
+                    us.LoginStatus = us.MachineId != obj.MachineId ? LoginResult.Online : LoginResult.Multiple;
+                }
             }
 
             // 10分钟后重置连续失败次数
@@ -91,7 +97,10 @@ namespace Insight.WS.Service
             {
                 us.FailureCount += 1;
                 us.LoginStatus = LoginResult.Failure;
-                us.SessionId = Guid.Empty;
+                if (us.MachineId == obj.MachineId)
+                {
+                    us.SessionId = Guid.Empty;
+                }
             }
             else
             {
