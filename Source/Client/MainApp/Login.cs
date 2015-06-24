@@ -31,7 +31,8 @@ namespace Insight.WS.Client.MainApp
         #region 变量声明
 
         private EndpointAddress _Address;
-        private Guid _SessionId;
+        private Guid _SessionId = Guid.NewGuid();
+        private string _MachineId = General.GetHash(General.GetCpuId() + General.GetMbId());
         private string _BaseAddress;
         private bool _CanConnect;
         private bool _Restart;
@@ -93,7 +94,6 @@ namespace Insight.WS.Client.MainApp
             // 初始化EndpointAddress参数
             _BaseAddress = string.Format("net.tcp://{0}:{1}/", Config.BaseAddress(), Config.Port());
             _Address = new EndpointAddress(_BaseAddress + "Login");
-            _SessionId = Guid.NewGuid();
         }
 
         /// <summary>
@@ -215,11 +215,11 @@ namespace Insight.WS.Client.MainApp
             {
                 BaseAddress = _BaseAddress,
                 SessionId = _SessionId,
+                MachineId = _MachineId,
                 LoginName = txtUserName.Text.Trim(),
                 Signature = General.GetHash(txtPassWord.Text.Trim()),
                 DeptId = (Guid?) lokDepartment.EditValue,
-                DeptName = lokDepartment.EditValue == null ? null : lokDepartment.Text,
-                MachineId = General.GetHash(General.GetCpuId() + General.GetMbId())
+                DeptName = lokDepartment.EditValue == null ? null : lokDepartment.Text
             };
 
             using (var cli = new LoginClient(Binding, _Address))
