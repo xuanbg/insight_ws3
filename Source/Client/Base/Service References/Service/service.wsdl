@@ -166,6 +166,12 @@
   <wsdl:message name="IBase_UpdateUserStatus_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdateUserStatusResponse" />
   </wsdl:message>
+  <wsdl:message name="IBase_ResetPassword_InputMessage">
+    <wsdl:part name="parameters" element="tns:ResetPassword" />
+  </wsdl:message>
+  <wsdl:message name="IBase_ResetPassword_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ResetPasswordResponse" />
+  </wsdl:message>
   <wsdl:message name="IBase_DeleteGroup_InputMessage">
     <wsdl:part name="parameters" element="tns:DeleteGroup" />
   </wsdl:message>
@@ -436,6 +442,10 @@
     <wsdl:operation name="UpdateUserStatus">
       <wsdl:input wsaw:Action="http://tempuri.org/IBase/UpdateUserStatus" message="tns:IBase_UpdateUserStatus_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBase/UpdateUserStatusResponse" message="tns:IBase_UpdateUserStatus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ResetPassword">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBase/ResetPassword" message="tns:IBase_ResetPassword_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBase/ResetPasswordResponse" message="tns:IBase_ResetPassword_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="DeleteGroup">
       <wsdl:input wsaw:Action="http://tempuri.org/IBase/DeleteGroup" message="tns:IBase_DeleteGroup_InputMessage" />
@@ -767,6 +777,15 @@
     </wsdl:operation>
     <wsdl:operation name="UpdateUserStatus">
       <soap12:operation soapAction="http://tempuri.org/IBase/UpdateUserStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResetPassword">
+      <soap12:operation soapAction="http://tempuri.org/IBase/ResetPassword" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

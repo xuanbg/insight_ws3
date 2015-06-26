@@ -214,6 +214,10 @@ namespace Insight.WS.Client.Platform.Base
                     Release();
                     break;
 
+                case "Reset":
+                    Reset();
+                    break;
+
                 case "Online":
                     Online();
                     break;
@@ -429,6 +433,27 @@ namespace Insight.WS.Client.Platform.Base
                 row["状态"] = "正常";
                 _Users.AcceptChanges();
                 grdUser.Refresh();
+            }
+        }
+
+        /// <summary>
+        /// 重置当前选中用户的密码
+        /// </summary>
+        private void Reset()
+        {
+            var row = gdvUser.GetFocusedDataRow();
+            if (General.ShowConfirm(string.Format("您确定要重置用户【{0}】的密码为 123456 吗？", row["登录名"])) != DialogResult.OK) return;
+
+            using (var cli = new BaseClient(Binding, Address))
+            {
+                if (cli.ResetPassword(UserSession, (Guid)row["ID"]))
+                {
+                    General.ShowMessage(string.Format("用户【{0}】的密码已经重置。", row["登录名"]));
+                }
+                else
+                {
+                    General.ShowError(string.Format("对不起，用户【{0}】的密码重置失败。", row["登录名"]));
+                }
             }
         }
 

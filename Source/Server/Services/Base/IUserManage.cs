@@ -119,6 +119,15 @@ namespace Insight.WS.Service
         bool UpdateUserStatus(Session us, Guid id, bool validity);
 
         /// <summary>
+        /// 根据ID重置用户密码
+        /// </summary>
+        /// <param name="us">用户会话</param>
+        /// <param name="id">用户ID</param>
+        /// <returns>bool 是否更新成功</returns>
+        [OperationContract]
+        bool ResetPassword(Session us, Guid id);
+
+        /// <summary>
         /// 根据ID删除用户组
         /// </summary>
         /// <param name="us">用户会话</param>

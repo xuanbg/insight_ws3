@@ -23,7 +23,7 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return null;
 
-            const string sql = "select [ID], [BuiltIn] as 内置, [Name] as 组名称 ,[Description] as 描述 From [SYS_UserGroup] where Visible = 1 order by SN";
+            const string sql = "select ID, BuiltIn as 内置, Name as 组名称, Description as 描述 From SYS_UserGroup where Visible = 1 order by SN";
             return SqlHelper.SqlQuery(sql);
         }
 
@@ -52,7 +52,7 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return null;
 
-            const string sql = "select [ID], [BuiltIn] as 内置, [Name] as 名称,[LoginName] as 登录名,[Description] as 描述, Case when [Validity]=1 then '正常' else '封禁' end 状态 From [SYS_User] order by SN";
+            const string sql = "select ID, BuiltIn as 内置, Name as 名称, LoginName as 登录名, Description as 描述, Case Validity when 1 then '正常' else '封禁' end 状态 From SYS_User where Type > 0 order by SN";
             return SqlHelper.SqlQuery(sql);
         }
 
@@ -81,7 +81,7 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return null;
 
-            const string sql = "select M.ID, U.Name as 用户名, U.LoginName as 登录名, U.[Description] as 描述, M.GroupId, M.UserId from SYS_UserGroupMember M join SYS_User U on U.ID = M.UserId order by U.SN";
+            const string sql = "select M.ID, U.Name as 用户名, U.LoginName as 登录名, U.Description as 描述, M.GroupId, M.UserId from SYS_UserGroupMember M join SYS_User U on U.ID = M.UserId order by U.SN";
             return SqlHelper.SqlQuery(sql);
         }
 
@@ -95,7 +95,7 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return null;
 
-            var sql = new StringBuilder("select U.ID, U.Name as 用户名, U.LoginName as 登录名, U.[Description] as 描述 from SYS_User U ");
+            var sql = new StringBuilder("select U.ID, U.Name as 用户名, U.LoginName as 登录名, U.Description as 描述 from SYS_User U ");
             sql.AppendFormat("where not exists (select UserId from SYS_UserGroupMember where UserId = U.ID and GroupId = '{0}') ", id);
             sql.Append("order by LoginName");
             return SqlHelper.SqlQuery(sql.ToString());
@@ -135,13 +135,14 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return false;
 
-            const string sql = "insert into SYS_User (ID, Name, LoginName, Description, CreatorUserId) select @ID, @Name, @LoginName, @Description, @CreatorUserId select ID From SYS_User where SN = SCOPE_IDENTITY()";
+            const string sql = "insert into SYS_User (ID, Name, LoginName, Description, Type, CreatorUserId) select @ID, @Name, @LoginName, @Description, @Type, @CreatorUserId select ID From SYS_User where SN = SCOPE_IDENTITY()";
             var parm = new[]
             {
                 new SqlParameter("@ID", SqlDbType.UniqueIdentifier) {Value = obj.ID},
                 new SqlParameter("@Name", obj.Name),
                 new SqlParameter("@LoginName", obj.LoginName),
                 new SqlParameter("@Description", obj.Description),
+                new SqlParameter("@Type", obj.Type),
                 new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = us.UserId}
             };
             return SqlHelper.SqlNonQuery(sql, parm) > 0;
@@ -228,6 +229,25 @@ namespace Insight.WS.Service
             if (SqlHelper.SqlNonQuery(sql) > 0)
             {
                 OnlineManage.Sessions.Find(s => s.UserId == id).Validity = validity;
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// 根据ID重置用户密码
+        /// </summary>
+        /// <param name="us">用户会话</param>
+        /// <param name="id">用户ID</param>
+        /// <returns>bool 是否更新成功</returns>
+        public bool ResetPassword(Session us, Guid id)
+        {
+            if (!OnlineManage.Verification(us)) return false;
+
+            var sql = string.Format("update SYS_User set Password = 'E10ADC3949BA59ABBE56E057F20F883E' where ID = '{0}'", id);
+            if (SqlHelper.SqlNonQuery(sql) > 0)
+            {
+                OnlineManage.Sessions.Find(s => s.UserId == id).Signature = "E10ADC3949BA59ABBE56E057F20F883E";
                 return true;
             }
             return false;
