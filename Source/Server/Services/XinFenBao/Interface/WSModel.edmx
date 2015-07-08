@@ -90,7 +90,7 @@
           <Property Name="Index" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="WSEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="ws_Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Citys" EntityType="Self.Citys" />
           <EntitySet Name="Countys" EntityType="Self.Countys" />
           <EntitySet Name="States" EntityType="Self.States" />
@@ -100,7 +100,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="WSModelStoreContainer" CdmEntityContainer="WSEntities">
+        <EntityContainerMapping StorageEntityContainer="WSModelStoreContainer" CdmEntityContainer="ws_Entities">
           <EntitySetMapping Name="Citys">
             <EntityTypeMapping TypeName="WSModel.Citys">
               <MappingFragment StoreEntitySet="Citys">

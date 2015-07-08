@@ -14,14 +14,6 @@ namespace Insight.WS.Service.XinFenBao
         #region 查询
 
         /// <summary>
-        /// 获取用户登录结果
-        /// </summary>
-        /// <param name="obj">Session对象实体</param>
-        /// <returns>Session对象实体</returns>
-        [OperationContract]
-        Session Login(Session obj);
-
-        /// <summary>
         /// 获取省数据
         /// </summary>
         /// <returns>省数据集合</returns>
@@ -44,16 +36,6 @@ namespace Insight.WS.Service.XinFenBao
         [OperationContract]
         List<Countys> GetCountys(Guid id);
 
-        /// <summary>
-        /// 获取用户Session对象实体
-        /// </summary>
-        /// <param name="ln">登录账号</param>
-        /// <param name="pw">登录密码</param>
-        /// <returns>Session 用户Session对象实体</returns>
-        [OperationContract]
-        Session GetSession(string ln, string pw);
-
-
         #endregion
 
         #region 新增
@@ -66,9 +48,25 @@ namespace Insight.WS.Service.XinFenBao
 
         #endregion
 
-        #region 删除
+        #region 用户登录
 
+        /// <summary>
+        /// 获取用户登录结果
+        /// </summary>
+        /// <param name="obj">Session对象实体</param>
+        /// <returns>Session对象实体</returns>
+        [OperationContract]
+        Session UserLogin(Session obj);
 
+        /// <summary>
+        /// 获取用户Session对象实体
+        /// </summary>
+        /// <param name="ln">登录账号</param>
+        /// <param name="pw">登录密码</param>
+        /// <returns>Session 用户Session对象实体</returns>
+        [OperationContract]
+        Session GetSession(string ln, string pw);
+        
         #endregion
 
     }

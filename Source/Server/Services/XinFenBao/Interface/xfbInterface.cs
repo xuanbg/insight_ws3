@@ -9,11 +9,49 @@ namespace Insight.WS.Service.XinFenBao
     {
 
         /// <summary>
+        /// 获取省数据
+        /// </summary>
+        /// <returns>省数据集合</returns>
+        public List<States> GetStates()
+        {
+            using (var context = new ws_Entities())
+            {
+                return context.States.ToList();
+            }
+        }
+
+        /// <summary>
+        /// 根据省ID获取地市数据
+        /// </summary>
+        /// <param name="id">省ID</param>
+        /// <returns>地市数据集合</returns>
+        public List<Citys> GetCitys(Guid id)
+        {
+            using (var context = new ws_Entities())
+            {
+                return context.Citys.Where(c => c.ParentId == id).ToList();
+            }
+        }
+
+        /// <summary>
+        /// 根据地市ID获取县市数据
+        /// </summary>
+        /// <param name="id">地市ID</param>
+        /// <returns>县市数据集合</returns>
+        public List<Countys> GetCountys(Guid id)
+        {
+            using (var context = new ws_Entities())
+            {
+                return context.Countys.Where(c => c.CategoryId == id).ToList();
+            }
+        }
+
+        /// <summary>
         /// 获取用户登录结果
         /// </summary>
         /// <param name="obj">Session对象实体</param>
         /// <returns>Session对象实体</returns>
-        public Session Login(Session obj)
+        public Session UserLogin(Session obj)
         {
             if (obj == null) return null;
 
@@ -28,7 +66,7 @@ namespace Insight.WS.Service.XinFenBao
             var us = OnlineManage.Sessions.Find(s => s.LoginName == obj.LoginName);
             if (us == null)
             {
-                var user = GetUser(obj.LoginName);
+                var user = CommonDAL.GetUser(obj.LoginName);
                 if (user == null)
                 {
                     obj.LoginStatus = LoginResult.NotExist;
@@ -36,11 +74,11 @@ namespace Insight.WS.Service.XinFenBao
                 }
 
                 obj.ID = OnlineManage.Sessions.Count;
-                obj.UserId = user.uid;
-                obj.UserName = user.login_name;
-                obj.Signature = user.pass_word;
+                obj.UserId = user.ID;
+                obj.UserName = user.Name;
+                obj.Signature = user.Password;
                 obj.FailureCount = 0;
-                obj.Validity = user.status == 0;
+                obj.Validity = user.Validity;
 
                 OnlineManage.Sessions.Add(obj);
                 OnlineManage.SafeMachine.Add(null);
@@ -95,44 +133,6 @@ namespace Insight.WS.Service.XinFenBao
         }
 
         /// <summary>
-        /// 获取省数据
-        /// </summary>
-        /// <returns>省数据集合</returns>
-        public List<States> GetStates()
-        {
-            using (var context = new WSEntities())
-            {
-                return context.States.ToList();
-            }
-        }
-
-        /// <summary>
-        /// 根据省ID获取地市数据
-        /// </summary>
-        /// <param name="id">省ID</param>
-        /// <returns>地市数据集合</returns>
-        public List<Citys> GetCitys(Guid id)
-        {
-            using (var context = new WSEntities())
-            {
-                return context.Citys.Where(c => c.ParentId == id).ToList();
-            }
-        }
-
-        /// <summary>
-        /// 根据地市ID获取县市数据
-        /// </summary>
-        /// <param name="id">地市ID</param>
-        /// <returns>县市数据集合</returns>
-        public List<Countys> GetCountys(Guid id)
-        {
-            using (var context = new WSEntities())
-            {
-                return context.Countys.Where(c => c.CategoryId == id).ToList();
-            }
-        }
-
-        /// <summary>
         /// 获取用户Session对象实体
         /// </summary>
         /// <param name="ln">登录账号</param>
@@ -141,19 +141,6 @@ namespace Insight.WS.Service.XinFenBao
         public Session GetSession(string ln, string pw)
         {
             return OnlineManage.Sessions.Find(s => s.LoginName == ln && s.Signature == pw);
-        }
-
-        /// <summary>
-        /// 获取信分宝用户对象实体
-        /// </summary>
-        /// <param name="str">登录账号</param>
-        /// <returns>t_sys_user 用户对象实体</returns>
-        private t_sys_user GetUser(string str)
-        {
-            using (var context = new xfbEntities())
-            {
-                return context.t_sys_user.SingleOrDefault(s => s.login_name == str);
-            }
         }
 
     }

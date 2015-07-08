@@ -10,33 +10,14 @@
 namespace Insight.WS.Service.XinFenBao
 {
     using System;
-    using System.Data.Entity.Core.Objects;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class WSEntities : DbContext
+    public partial class ws_Entities : DbContext
     {
-    	public WSEntities()
-            : this(false) { }
-    
-        public WSEntities(bool proxyCreationEnabled)
-            : base("name=WSEntities")
+        public ws_Entities()
+            : base("name=ws_Entities")
         {
-    		        this.Configuration.ProxyCreationEnabled = proxyCreationEnabled;
-        }
-    	
-        public WSEntities(string connectionString)
-          : this(connectionString, false) { }
-    	  
-        public WSEntities(string connectionString, bool proxyCreationEnabled)
-            : base(connectionString)
-        {
-    		        this.Configuration.ProxyCreationEnabled = proxyCreationEnabled;
-        }	
-    	
-        public ObjectContext ObjectContext
-        {
-          get { return ((IObjectContextAdapter)this).ObjectContext; }
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
