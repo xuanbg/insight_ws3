@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="WSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Insight_WS.dbo.Citys”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="Citys">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ParentId" Type="uniqueidentifier" />
+          <Property Name="Index" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Insight_WS.dbo.Countys”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="Countys">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CategoryId" Type="uniqueidentifier" />
+          <Property Name="Name" Type="nvarchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Insight_WS.dbo.States”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="States">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Index" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="WSModelStoreContainer">
+          <EntitySet Name="Citys" EntityType="Self.Citys" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Citys].[ID] AS [ID], 
+    [Citys].[ParentId] AS [ParentId], 
+    [Citys].[Index] AS [Index], 
+    [Citys].[Name] AS [Name]
+    FROM [dbo].[Citys] AS [Citys]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Countys" EntityType="Self.Countys" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Countys].[ID] AS [ID], 
+    [Countys].[CategoryId] AS [CategoryId], 
+    [Countys].[Name] AS [Name]
+    FROM [dbo].[Countys] AS [Countys]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="States" EntityType="Self.States" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [States].[ID] AS [ID], 
+    [States].[Index] AS [Index], 
+    [States].[Name] AS [Name]
+    FROM [dbo].[States] AS [States]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Citys">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="ParentId" Type="Guid" />
+          <Property Name="Index" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Countys">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="CategoryId" Type="Guid" />
+          <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="States">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="Index" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="WSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Citys" EntityType="Self.Citys" />
+          <EntitySet Name="Countys" EntityType="Self.Countys" />
+          <EntitySet Name="States" EntityType="Self.States" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WSModelStoreContainer" CdmEntityContainer="WSEntities">
+          <EntitySetMapping Name="Citys">
+            <EntityTypeMapping TypeName="WSModel.Citys">
+              <MappingFragment StoreEntitySet="Citys">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Index" ColumnName="Index" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countys">
+            <EntityTypeMapping TypeName="WSModel.Countys">
+              <MappingFragment StoreEntitySet="Countys">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="States">
+            <EntityTypeMapping TypeName="WSModel.States">
+              <MappingFragment StoreEntitySet="States">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Index" ColumnName="Index" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

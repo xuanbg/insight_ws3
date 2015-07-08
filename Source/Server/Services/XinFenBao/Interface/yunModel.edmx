@@ -1,0 +1,457 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="yunModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="Orders_ID" />
+          </Key>
+          <Property Name="Orders_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Orders_SN" Type="nvarchar" MaxLength="20" />
+          <Property Name="Orders_BuyerID" Type="int" />
+          <Property Name="Orders_SysUserID" Type="int" />
+          <Property Name="Orders_Status" Type="int" />
+          <Property Name="Orders_ERPSyncStatus" Type="int" />
+          <Property Name="Orders_PaymentStatus" Type="int" />
+          <Property Name="Orders_PaymentStatus_Time" Type="datetime" />
+          <Property Name="Orders_DeliveryStatus" Type="int" />
+          <Property Name="Orders_DeliveryStatus_Time" Type="datetime" />
+          <Property Name="Orders_InvoiceStatus" Type="int" />
+          <Property Name="Orders_Fail_SysUserID" Type="int" />
+          <Property Name="Orders_Fail_Note" Type="nvarchar" MaxLength="200" />
+          <Property Name="Orders_Fail_Addtime" Type="datetime" />
+          <Property Name="Orders_IsReturnCoin" Type="int" />
+          <Property Name="Orders_Total_MKTPrice" Type="money" />
+          <Property Name="Orders_Total_Price" Type="money" />
+          <Property Name="Orders_Total_Freight" Type="money" />
+          <Property Name="Orders_Total_Coin" Type="int" />
+          <Property Name="Orders_Total_UseCoin" Type="int" />
+          <Property Name="Orders_Total_PriceDiscount" Type="money" />
+          <Property Name="Orders_Total_FreightDiscount" Type="money" />
+          <Property Name="Orders_Total_PriceDiscount_Note" Type="nvarchar" MaxLength="300" />
+          <Property Name="Orders_Total_FreightDiscount_Note" Type="nvarchar" MaxLength="300" />
+          <Property Name="Orders_Total_AllPrice" Type="money" />
+          <Property Name="Orders_Address_ID" Type="int" />
+          <Property Name="Orders_Address_Country" Type="nvarchar" MaxLength="8" />
+          <Property Name="Orders_Address_State" Type="nvarchar" MaxLength="8" />
+          <Property Name="Orders_Address_City" Type="nvarchar" MaxLength="8" />
+          <Property Name="Orders_Address_County" Type="nvarchar" MaxLength="8" />
+          <Property Name="Orders_Address_StreetAddress" Type="nvarchar" MaxLength="100" />
+          <Property Name="Orders_Address_Zip" Type="nvarchar" MaxLength="20" />
+          <Property Name="Orders_Address_Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Orders_Address_Phone_Countrycode" Type="nvarchar" MaxLength="20" />
+          <Property Name="Orders_Address_Phone_Areacode" Type="nvarchar" MaxLength="20" />
+          <Property Name="Orders_Address_Phone_Number" Type="nvarchar" MaxLength="100" />
+          <Property Name="Orders_Address_Mobile" Type="nvarchar" MaxLength="100" />
+          <Property Name="Orders_Delivery_Time_ID" Type="int" />
+          <Property Name="Orders_Delivery" Type="int" />
+          <Property Name="Orders_Delivery_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Orders_Payway" Type="int" />
+          <Property Name="Orders_Payway_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Orders_Note" Type="nvarchar" MaxLength="100" />
+          <Property Name="Orders_Admin_Note" Type="nvarchar" MaxLength="200" />
+          <Property Name="Orders_Admin_Sign" Type="int" />
+          <Property Name="Orders_Site" Type="nvarchar" MaxLength="50" />
+          <Property Name="Orders_SourceType" Type="int" />
+          <Property Name="Orders_Source" Type="nvarchar" MaxLength="100" />
+          <Property Name="Orders_VerifyCode" Type="nvarchar" MaxLength="128" />
+          <Property Name="U_Orders_IsMonitor" Type="int" />
+          <Property Name="Orders_Addtime" Type="datetime" />
+          <Property Name="Orders_From" Type="nvarchar" MaxLength="100" />
+          <Property Name="Orders_Account_Pay" Type="money" />
+          <Property Name="Orders_Card_Pay" Type="money" />
+          <Property Name="Orders_Total_RemainPrice" Type="money" />
+          <Property Name="Orders_Settle_Price" Type="money" />
+          <Property Name="Orders_IsEvaluate" Type="int" />
+          <Property Name="U_Orders_SMS_Status" Type="int" />
+          <Property Name="U_Orders_IsPush" Type="int" />
+          <Property Name="Orders_SupplierID" Type="int" />
+          <Property Name="Orders_BankOrderSN" Type="nvarchar" MaxLength="50" />
+          <Property Name="Orders_TieIn_Status" Type="int" />
+          <Property Name="Orders_Settle_Account" Type="money" />
+          <Property Name="Orders_Settle_Date" Type="datetime" />
+          <Property Name="Orders_Settle_Note" Type="nvarchar" MaxLength="500" />
+          <Property Name="Orders_Settle_IsSettle" Type="int" />
+          <Property Name="Orders_BankAuditPass" Type="int" />
+          <Property Name="Orders_IsUrgency" Type="int" />
+          <Property Name="Orders_ShipmentsType" Type="int" />
+          <Property Name="Orders_ApplyStatus" Type="int" />
+          <Property Name="Orders_Delivery_Requirements" Type="nvarchar" MaxLength="500" />
+          <Property Name="Orders_PriorityLevel" Type="int" />
+          <Property Name="Orders_PriorityCoefficient" Type="int" />
+          <Property Name="Orders_PriorityLevelTime" Type="datetime" />
+          <Property Name="Orders_Credit_Card_No" Type="nvarchar" MaxLength="50" />
+          <Property Name="Orders_ID_No" Type="nvarchar" MaxLength="50" />
+          <Property Name="Orders_Installment" Type="nvarchar" MaxLength="20" />
+          <Property Name="Orders_Point" Type="float" />
+          <Property Name="Orders_Delivery_Time" Type="datetime" />
+          <Property Name="Orders_Cancel_Time" Type="datetime" />
+          <Property Name="Orders_Return_Time" Type="datetime" />
+          <Property Name="Order_Confirm_Time" Type="datetime" />
+          <Property Name="Orders_RefundStatus" Type="int" />
+          <Property Name="Orders_TieIn_SN" Type="nvarchar" MaxLength="20" />
+          <Property Name="Orders_KFConfirmSMS" Type="int" />
+          <Property Name="Orders_Import_Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="Orders_Import_Cardholder" Type="nvarchar" MaxLength="50" />
+          <Property Name="Orders_Import_cardholder_Tel" Type="nvarchar" MaxLength="50" />
+          <Property Name="Orders_Import_MainOrdersID" Type="nvarchar" MaxLength="50" />
+          <Property Name="Orders_OldGoods" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Orders_Goods">
+          <Key>
+            <PropertyRef Name="Orders_Goods_ID" />
+          </Key>
+          <Property Name="Orders_Goods_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Orders_Goods_Type" Type="int" />
+          <Property Name="Orders_Goods_ParentID" Type="int" />
+          <Property Name="Orders_Goods_OrdersID" Type="int" />
+          <Property Name="Orders_Goods_Product_ID" Type="int" />
+          <Property Name="Orders_Goods_Product_SupplierID" Type="int" />
+          <Property Name="Orders_Goods_Product_Code" Type="nvarchar" MaxLength="50" />
+          <Property Name="Orders_Goods_Product_CateID" Type="int" />
+          <Property Name="Orders_Goods_Product_BrandID" Type="int" />
+          <Property Name="Orders_Goods_Product_Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Orders_Goods_Product_Img" Type="nvarchar" MaxLength="100" />
+          <Property Name="Orders_Goods_Product_Price" Type="money" />
+          <Property Name="Orders_Goods_Product_MKTPrice" Type="money" />
+          <Property Name="Orders_Goods_Product_Maker" Type="nvarchar" MaxLength="100" />
+          <Property Name="Orders_Goods_Product_Spec" Type="nvarchar" MaxLength="50" />
+          <Property Name="Orders_Goods_Product_AuthorizeCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Orders_Goods_Product_brokerage" Type="money" />
+          <Property Name="Orders_Goods_Product_SalePrice" Type="money" />
+          <Property Name="Orders_Goods_Product_PurchasingPrice" Type="money" />
+          <Property Name="Orders_Goods_Product_Coin" Type="int" />
+          <Property Name="Orders_Goods_Product_IsFavor" Type="int" />
+          <Property Name="Orders_Goods_Product_UseCoin" Type="int" />
+          <Property Name="Orders_Goods_Amount" Type="int" />
+          <Property Name="Orders_Goods_DeliveryStatus" Type="int" />
+          <Property Name="Orders_Goods_IsSettle" Type="int" />
+          <Property Name="Orders_Goods_DeliveryID" Type="int" />
+          <Property Name="Orders_Goods_Note" Type="nvarchar" MaxLength="100" />
+          <Property Name="Orders_Goods_ReceivedReturn" Type="int" />
+          <Property Name="Orders_Goods_RefundReason" Type="nvarchar" MaxLength="100" />
+          <Property Name="Orders_Goods_Product_Specification" Type="nvarchar" MaxLength="100" />
+          <Property Name="Orders_Goods_Product_Color" Type="nvarchar" MaxLength="100" />
+          <Property Name="Orders_Goods_Product_Rate" Type="float" />
+          <Property Name="Orders_Goods_Product_Cate" Type="nvarchar" MaxLength="100" />
+          <Property Name="Orders_Goods_Product_Issubstitute" Type="int" />
+          <Property Name="Orders_Goods_Product_Provider" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityContainer Name="yunModelStoreContainer">
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders_Goods" EntityType="Self.Orders_Goods" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="yunModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="Orders_ID" />
+          </Key>
+          <Property Name="Orders_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Orders_SN" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Orders_BuyerID" Type="Int32" />
+          <Property Name="Orders_SysUserID" Type="Int32" />
+          <Property Name="Orders_Status" Type="Int32" />
+          <Property Name="Orders_ERPSyncStatus" Type="Int32" />
+          <Property Name="Orders_PaymentStatus" Type="Int32" />
+          <Property Name="Orders_PaymentStatus_Time" Type="DateTime" Precision="3" />
+          <Property Name="Orders_DeliveryStatus" Type="Int32" />
+          <Property Name="Orders_DeliveryStatus_Time" Type="DateTime" Precision="3" />
+          <Property Name="Orders_InvoiceStatus" Type="Int32" />
+          <Property Name="Orders_Fail_SysUserID" Type="Int32" />
+          <Property Name="Orders_Fail_Note" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Orders_Fail_Addtime" Type="DateTime" Precision="3" />
+          <Property Name="Orders_IsReturnCoin" Type="Int32" />
+          <Property Name="Orders_Total_MKTPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Orders_Total_Price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Orders_Total_Freight" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Orders_Total_Coin" Type="Int32" />
+          <Property Name="Orders_Total_UseCoin" Type="Int32" />
+          <Property Name="Orders_Total_PriceDiscount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Orders_Total_FreightDiscount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Orders_Total_PriceDiscount_Note" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Orders_Total_FreightDiscount_Note" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Orders_Total_AllPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Orders_Address_ID" Type="Int32" />
+          <Property Name="Orders_Address_Country" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="Orders_Address_State" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="Orders_Address_City" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="Orders_Address_County" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="Orders_Address_StreetAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Orders_Address_Zip" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Orders_Address_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Orders_Address_Phone_Countrycode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Orders_Address_Phone_Areacode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Orders_Address_Phone_Number" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Orders_Address_Mobile" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Orders_Delivery_Time_ID" Type="Int32" />
+          <Property Name="Orders_Delivery" Type="Int32" />
+          <Property Name="Orders_Delivery_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Orders_Payway" Type="Int32" />
+          <Property Name="Orders_Payway_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Orders_Note" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Orders_Admin_Note" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Orders_Admin_Sign" Type="Int32" />
+          <Property Name="Orders_Site" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Orders_SourceType" Type="Int32" />
+          <Property Name="Orders_Source" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Orders_VerifyCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="U_Orders_IsMonitor" Type="Int32" />
+          <Property Name="Orders_Addtime" Type="DateTime" Precision="3" />
+          <Property Name="Orders_From" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Orders_Account_Pay" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Orders_Card_Pay" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Orders_Total_RemainPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Orders_Settle_Price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Orders_IsEvaluate" Type="Int32" />
+          <Property Name="U_Orders_SMS_Status" Type="Int32" />
+          <Property Name="U_Orders_IsPush" Type="Int32" />
+          <Property Name="Orders_SupplierID" Type="Int32" />
+          <Property Name="Orders_BankOrderSN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Orders_TieIn_Status" Type="Int32" />
+          <Property Name="Orders_Settle_Account" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Orders_Settle_Date" Type="DateTime" Precision="3" />
+          <Property Name="Orders_Settle_Note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Orders_Settle_IsSettle" Type="Int32" />
+          <Property Name="Orders_BankAuditPass" Type="Int32" />
+          <Property Name="Orders_IsUrgency" Type="Int32" />
+          <Property Name="Orders_ShipmentsType" Type="Int32" />
+          <Property Name="Orders_ApplyStatus" Type="Int32" />
+          <Property Name="Orders_Delivery_Requirements" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Orders_PriorityLevel" Type="Int32" />
+          <Property Name="Orders_PriorityCoefficient" Type="Int32" />
+          <Property Name="Orders_PriorityLevelTime" Type="DateTime" Precision="3" />
+          <Property Name="Orders_Credit_Card_No" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Orders_ID_No" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Orders_Installment" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Orders_Point" Type="Double" />
+          <Property Name="Orders_Delivery_Time" Type="DateTime" Precision="3" />
+          <Property Name="Orders_Cancel_Time" Type="DateTime" Precision="3" />
+          <Property Name="Orders_Return_Time" Type="DateTime" Precision="3" />
+          <Property Name="Order_Confirm_Time" Type="DateTime" Precision="3" />
+          <Property Name="Orders_RefundStatus" Type="Int32" />
+          <Property Name="Orders_TieIn_SN" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Orders_KFConfirmSMS" Type="Int32" />
+          <Property Name="Orders_Import_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Orders_Import_Cardholder" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Orders_Import_cardholder_Tel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Orders_Import_MainOrdersID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Orders_OldGoods" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Orders_Goods">
+          <Key>
+            <PropertyRef Name="Orders_Goods_ID" />
+          </Key>
+          <Property Name="Orders_Goods_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Orders_Goods_Type" Type="Int32" />
+          <Property Name="Orders_Goods_ParentID" Type="Int32" />
+          <Property Name="Orders_Goods_OrdersID" Type="Int32" />
+          <Property Name="Orders_Goods_Product_ID" Type="Int32" />
+          <Property Name="Orders_Goods_Product_SupplierID" Type="Int32" />
+          <Property Name="Orders_Goods_Product_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Orders_Goods_Product_CateID" Type="Int32" />
+          <Property Name="Orders_Goods_Product_BrandID" Type="Int32" />
+          <Property Name="Orders_Goods_Product_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Orders_Goods_Product_Img" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Orders_Goods_Product_Price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Orders_Goods_Product_MKTPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Orders_Goods_Product_Maker" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Orders_Goods_Product_Spec" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Orders_Goods_Product_AuthorizeCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Orders_Goods_Product_brokerage" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Orders_Goods_Product_SalePrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Orders_Goods_Product_PurchasingPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Orders_Goods_Product_Coin" Type="Int32" />
+          <Property Name="Orders_Goods_Product_IsFavor" Type="Int32" />
+          <Property Name="Orders_Goods_Product_UseCoin" Type="Int32" />
+          <Property Name="Orders_Goods_Amount" Type="Int32" />
+          <Property Name="Orders_Goods_DeliveryStatus" Type="Int32" />
+          <Property Name="Orders_Goods_IsSettle" Type="Int32" />
+          <Property Name="Orders_Goods_DeliveryID" Type="Int32" />
+          <Property Name="Orders_Goods_Note" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Orders_Goods_ReceivedReturn" Type="Int32" />
+          <Property Name="Orders_Goods_RefundReason" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Orders_Goods_Product_Specification" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Orders_Goods_Product_Color" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Orders_Goods_Product_Rate" Type="Double" />
+          <Property Name="Orders_Goods_Product_Cate" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Orders_Goods_Product_Issubstitute" Type="Int32" />
+          <Property Name="Orders_Goods_Product_Provider" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="yunEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Orders" EntityType="Self.Orders" />
+          <EntitySet Name="Orders_Goods" EntityType="Self.Orders_Goods" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="yunModelStoreContainer" CdmEntityContainer="yunEntities">
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="yunModel.Orders">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="Orders_ID" ColumnName="Orders_ID" />
+                <ScalarProperty Name="Orders_SN" ColumnName="Orders_SN" />
+                <ScalarProperty Name="Orders_BuyerID" ColumnName="Orders_BuyerID" />
+                <ScalarProperty Name="Orders_SysUserID" ColumnName="Orders_SysUserID" />
+                <ScalarProperty Name="Orders_Status" ColumnName="Orders_Status" />
+                <ScalarProperty Name="Orders_ERPSyncStatus" ColumnName="Orders_ERPSyncStatus" />
+                <ScalarProperty Name="Orders_PaymentStatus" ColumnName="Orders_PaymentStatus" />
+                <ScalarProperty Name="Orders_PaymentStatus_Time" ColumnName="Orders_PaymentStatus_Time" />
+                <ScalarProperty Name="Orders_DeliveryStatus" ColumnName="Orders_DeliveryStatus" />
+                <ScalarProperty Name="Orders_DeliveryStatus_Time" ColumnName="Orders_DeliveryStatus_Time" />
+                <ScalarProperty Name="Orders_InvoiceStatus" ColumnName="Orders_InvoiceStatus" />
+                <ScalarProperty Name="Orders_Fail_SysUserID" ColumnName="Orders_Fail_SysUserID" />
+                <ScalarProperty Name="Orders_Fail_Note" ColumnName="Orders_Fail_Note" />
+                <ScalarProperty Name="Orders_Fail_Addtime" ColumnName="Orders_Fail_Addtime" />
+                <ScalarProperty Name="Orders_IsReturnCoin" ColumnName="Orders_IsReturnCoin" />
+                <ScalarProperty Name="Orders_Total_MKTPrice" ColumnName="Orders_Total_MKTPrice" />
+                <ScalarProperty Name="Orders_Total_Price" ColumnName="Orders_Total_Price" />
+                <ScalarProperty Name="Orders_Total_Freight" ColumnName="Orders_Total_Freight" />
+                <ScalarProperty Name="Orders_Total_Coin" ColumnName="Orders_Total_Coin" />
+                <ScalarProperty Name="Orders_Total_UseCoin" ColumnName="Orders_Total_UseCoin" />
+                <ScalarProperty Name="Orders_Total_PriceDiscount" ColumnName="Orders_Total_PriceDiscount" />
+                <ScalarProperty Name="Orders_Total_FreightDiscount" ColumnName="Orders_Total_FreightDiscount" />
+                <ScalarProperty Name="Orders_Total_PriceDiscount_Note" ColumnName="Orders_Total_PriceDiscount_Note" />
+                <ScalarProperty Name="Orders_Total_FreightDiscount_Note" ColumnName="Orders_Total_FreightDiscount_Note" />
+                <ScalarProperty Name="Orders_Total_AllPrice" ColumnName="Orders_Total_AllPrice" />
+                <ScalarProperty Name="Orders_Address_ID" ColumnName="Orders_Address_ID" />
+                <ScalarProperty Name="Orders_Address_Country" ColumnName="Orders_Address_Country" />
+                <ScalarProperty Name="Orders_Address_State" ColumnName="Orders_Address_State" />
+                <ScalarProperty Name="Orders_Address_City" ColumnName="Orders_Address_City" />
+                <ScalarProperty Name="Orders_Address_County" ColumnName="Orders_Address_County" />
+                <ScalarProperty Name="Orders_Address_StreetAddress" ColumnName="Orders_Address_StreetAddress" />
+                <ScalarProperty Name="Orders_Address_Zip" ColumnName="Orders_Address_Zip" />
+                <ScalarProperty Name="Orders_Address_Name" ColumnName="Orders_Address_Name" />
+                <ScalarProperty Name="Orders_Address_Phone_Countrycode" ColumnName="Orders_Address_Phone_Countrycode" />
+                <ScalarProperty Name="Orders_Address_Phone_Areacode" ColumnName="Orders_Address_Phone_Areacode" />
+                <ScalarProperty Name="Orders_Address_Phone_Number" ColumnName="Orders_Address_Phone_Number" />
+                <ScalarProperty Name="Orders_Address_Mobile" ColumnName="Orders_Address_Mobile" />
+                <ScalarProperty Name="Orders_Delivery_Time_ID" ColumnName="Orders_Delivery_Time_ID" />
+                <ScalarProperty Name="Orders_Delivery" ColumnName="Orders_Delivery" />
+                <ScalarProperty Name="Orders_Delivery_Name" ColumnName="Orders_Delivery_Name" />
+                <ScalarProperty Name="Orders_Payway" ColumnName="Orders_Payway" />
+                <ScalarProperty Name="Orders_Payway_Name" ColumnName="Orders_Payway_Name" />
+                <ScalarProperty Name="Orders_Note" ColumnName="Orders_Note" />
+                <ScalarProperty Name="Orders_Admin_Note" ColumnName="Orders_Admin_Note" />
+                <ScalarProperty Name="Orders_Admin_Sign" ColumnName="Orders_Admin_Sign" />
+                <ScalarProperty Name="Orders_Site" ColumnName="Orders_Site" />
+                <ScalarProperty Name="Orders_SourceType" ColumnName="Orders_SourceType" />
+                <ScalarProperty Name="Orders_Source" ColumnName="Orders_Source" />
+                <ScalarProperty Name="Orders_VerifyCode" ColumnName="Orders_VerifyCode" />
+                <ScalarProperty Name="U_Orders_IsMonitor" ColumnName="U_Orders_IsMonitor" />
+                <ScalarProperty Name="Orders_Addtime" ColumnName="Orders_Addtime" />
+                <ScalarProperty Name="Orders_From" ColumnName="Orders_From" />
+                <ScalarProperty Name="Orders_Account_Pay" ColumnName="Orders_Account_Pay" />
+                <ScalarProperty Name="Orders_Card_Pay" ColumnName="Orders_Card_Pay" />
+                <ScalarProperty Name="Orders_Total_RemainPrice" ColumnName="Orders_Total_RemainPrice" />
+                <ScalarProperty Name="Orders_Settle_Price" ColumnName="Orders_Settle_Price" />
+                <ScalarProperty Name="Orders_IsEvaluate" ColumnName="Orders_IsEvaluate" />
+                <ScalarProperty Name="U_Orders_SMS_Status" ColumnName="U_Orders_SMS_Status" />
+                <ScalarProperty Name="U_Orders_IsPush" ColumnName="U_Orders_IsPush" />
+                <ScalarProperty Name="Orders_SupplierID" ColumnName="Orders_SupplierID" />
+                <ScalarProperty Name="Orders_BankOrderSN" ColumnName="Orders_BankOrderSN" />
+                <ScalarProperty Name="Orders_TieIn_Status" ColumnName="Orders_TieIn_Status" />
+                <ScalarProperty Name="Orders_Settle_Account" ColumnName="Orders_Settle_Account" />
+                <ScalarProperty Name="Orders_Settle_Date" ColumnName="Orders_Settle_Date" />
+                <ScalarProperty Name="Orders_Settle_Note" ColumnName="Orders_Settle_Note" />
+                <ScalarProperty Name="Orders_Settle_IsSettle" ColumnName="Orders_Settle_IsSettle" />
+                <ScalarProperty Name="Orders_BankAuditPass" ColumnName="Orders_BankAuditPass" />
+                <ScalarProperty Name="Orders_IsUrgency" ColumnName="Orders_IsUrgency" />
+                <ScalarProperty Name="Orders_ShipmentsType" ColumnName="Orders_ShipmentsType" />
+                <ScalarProperty Name="Orders_ApplyStatus" ColumnName="Orders_ApplyStatus" />
+                <ScalarProperty Name="Orders_Delivery_Requirements" ColumnName="Orders_Delivery_Requirements" />
+                <ScalarProperty Name="Orders_PriorityLevel" ColumnName="Orders_PriorityLevel" />
+                <ScalarProperty Name="Orders_PriorityCoefficient" ColumnName="Orders_PriorityCoefficient" />
+                <ScalarProperty Name="Orders_PriorityLevelTime" ColumnName="Orders_PriorityLevelTime" />
+                <ScalarProperty Name="Orders_Credit_Card_No" ColumnName="Orders_Credit_Card_No" />
+                <ScalarProperty Name="Orders_ID_No" ColumnName="Orders_ID_No" />
+                <ScalarProperty Name="Orders_Installment" ColumnName="Orders_Installment" />
+                <ScalarProperty Name="Orders_Point" ColumnName="Orders_Point" />
+                <ScalarProperty Name="Orders_Delivery_Time" ColumnName="Orders_Delivery_Time" />
+                <ScalarProperty Name="Orders_Cancel_Time" ColumnName="Orders_Cancel_Time" />
+                <ScalarProperty Name="Orders_Return_Time" ColumnName="Orders_Return_Time" />
+                <ScalarProperty Name="Order_Confirm_Time" ColumnName="Order_Confirm_Time" />
+                <ScalarProperty Name="Orders_RefundStatus" ColumnName="Orders_RefundStatus" />
+                <ScalarProperty Name="Orders_TieIn_SN" ColumnName="Orders_TieIn_SN" />
+                <ScalarProperty Name="Orders_KFConfirmSMS" ColumnName="Orders_KFConfirmSMS" />
+                <ScalarProperty Name="Orders_Import_Type" ColumnName="Orders_Import_Type" />
+                <ScalarProperty Name="Orders_Import_Cardholder" ColumnName="Orders_Import_Cardholder" />
+                <ScalarProperty Name="Orders_Import_cardholder_Tel" ColumnName="Orders_Import_cardholder_Tel" />
+                <ScalarProperty Name="Orders_Import_MainOrdersID" ColumnName="Orders_Import_MainOrdersID" />
+                <ScalarProperty Name="Orders_OldGoods" ColumnName="Orders_OldGoods" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders_Goods">
+            <EntityTypeMapping TypeName="yunModel.Orders_Goods">
+              <MappingFragment StoreEntitySet="Orders_Goods">
+                <ScalarProperty Name="Orders_Goods_ID" ColumnName="Orders_Goods_ID" />
+                <ScalarProperty Name="Orders_Goods_Type" ColumnName="Orders_Goods_Type" />
+                <ScalarProperty Name="Orders_Goods_ParentID" ColumnName="Orders_Goods_ParentID" />
+                <ScalarProperty Name="Orders_Goods_OrdersID" ColumnName="Orders_Goods_OrdersID" />
+                <ScalarProperty Name="Orders_Goods_Product_ID" ColumnName="Orders_Goods_Product_ID" />
+                <ScalarProperty Name="Orders_Goods_Product_SupplierID" ColumnName="Orders_Goods_Product_SupplierID" />
+                <ScalarProperty Name="Orders_Goods_Product_Code" ColumnName="Orders_Goods_Product_Code" />
+                <ScalarProperty Name="Orders_Goods_Product_CateID" ColumnName="Orders_Goods_Product_CateID" />
+                <ScalarProperty Name="Orders_Goods_Product_BrandID" ColumnName="Orders_Goods_Product_BrandID" />
+                <ScalarProperty Name="Orders_Goods_Product_Name" ColumnName="Orders_Goods_Product_Name" />
+                <ScalarProperty Name="Orders_Goods_Product_Img" ColumnName="Orders_Goods_Product_Img" />
+                <ScalarProperty Name="Orders_Goods_Product_Price" ColumnName="Orders_Goods_Product_Price" />
+                <ScalarProperty Name="Orders_Goods_Product_MKTPrice" ColumnName="Orders_Goods_Product_MKTPrice" />
+                <ScalarProperty Name="Orders_Goods_Product_Maker" ColumnName="Orders_Goods_Product_Maker" />
+                <ScalarProperty Name="Orders_Goods_Product_Spec" ColumnName="Orders_Goods_Product_Spec" />
+                <ScalarProperty Name="Orders_Goods_Product_AuthorizeCode" ColumnName="Orders_Goods_Product_AuthorizeCode" />
+                <ScalarProperty Name="Orders_Goods_Product_brokerage" ColumnName="Orders_Goods_Product_brokerage" />
+                <ScalarProperty Name="Orders_Goods_Product_SalePrice" ColumnName="Orders_Goods_Product_SalePrice" />
+                <ScalarProperty Name="Orders_Goods_Product_PurchasingPrice" ColumnName="Orders_Goods_Product_PurchasingPrice" />
+                <ScalarProperty Name="Orders_Goods_Product_Coin" ColumnName="Orders_Goods_Product_Coin" />
+                <ScalarProperty Name="Orders_Goods_Product_IsFavor" ColumnName="Orders_Goods_Product_IsFavor" />
+                <ScalarProperty Name="Orders_Goods_Product_UseCoin" ColumnName="Orders_Goods_Product_UseCoin" />
+                <ScalarProperty Name="Orders_Goods_Amount" ColumnName="Orders_Goods_Amount" />
+                <ScalarProperty Name="Orders_Goods_DeliveryStatus" ColumnName="Orders_Goods_DeliveryStatus" />
+                <ScalarProperty Name="Orders_Goods_IsSettle" ColumnName="Orders_Goods_IsSettle" />
+                <ScalarProperty Name="Orders_Goods_DeliveryID" ColumnName="Orders_Goods_DeliveryID" />
+                <ScalarProperty Name="Orders_Goods_Note" ColumnName="Orders_Goods_Note" />
+                <ScalarProperty Name="Orders_Goods_ReceivedReturn" ColumnName="Orders_Goods_ReceivedReturn" />
+                <ScalarProperty Name="Orders_Goods_RefundReason" ColumnName="Orders_Goods_RefundReason" />
+                <ScalarProperty Name="Orders_Goods_Product_Specification" ColumnName="Orders_Goods_Product_Specification" />
+                <ScalarProperty Name="Orders_Goods_Product_Color" ColumnName="Orders_Goods_Product_Color" />
+                <ScalarProperty Name="Orders_Goods_Product_Rate" ColumnName="Orders_Goods_Product_Rate" />
+                <ScalarProperty Name="Orders_Goods_Product_Cate" ColumnName="Orders_Goods_Product_Cate" />
+                <ScalarProperty Name="Orders_Goods_Product_Issubstitute" ColumnName="Orders_Goods_Product_Issubstitute" />
+                <ScalarProperty Name="Orders_Goods_Product_Provider" ColumnName="Orders_Goods_Product_Provider" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
