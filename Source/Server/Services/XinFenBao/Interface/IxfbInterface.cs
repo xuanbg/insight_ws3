@@ -23,18 +23,18 @@ namespace Insight.WS.Service.XinFenBao
         /// <summary>
         /// 根据省ID获取地市数据
         /// </summary>
-        /// <param name="id">省ID</param>
+        /// <param name="stateId">省ID</param>
         /// <returns>地市数据集合</returns>
         [OperationContract]
-        List<Citys> GetCitys(Guid id);
+        List<Citys> GetCitys(Guid stateId);
 
         /// <summary>
         /// 根据地市ID获取县市数据
         /// </summary>
-        /// <param name="id">地市ID</param>
+        /// <param name="cityId">地市ID</param>
         /// <returns>县市数据集合</returns>
         [OperationContract]
-        List<Countys> GetCountys(Guid id);
+        List<Countys> GetCountys(Guid cityId);
 
         #endregion
 

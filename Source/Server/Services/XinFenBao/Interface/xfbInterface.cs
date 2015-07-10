@@ -23,26 +23,26 @@ namespace Insight.WS.Service.XinFenBao
         /// <summary>
         /// 根据省ID获取地市数据
         /// </summary>
-        /// <param name="id">省ID</param>
+        /// <param name="stateId">省ID</param>
         /// <returns>地市数据集合</returns>
-        public List<Citys> GetCitys(Guid id)
+        public List<Citys> GetCitys(Guid stateId)
         {
             using (var context = new ws_Entities())
             {
-                return context.Citys.Where(c => c.ParentId == id).ToList();
+                return context.Citys.Where(c => c.ParentId == stateId).ToList();
             }
         }
 
         /// <summary>
         /// 根据地市ID获取县市数据
         /// </summary>
-        /// <param name="id">地市ID</param>
+        /// <param name="cityId">地市ID</param>
         /// <returns>县市数据集合</returns>
-        public List<Countys> GetCountys(Guid id)
+        public List<Countys> GetCountys(Guid cityId)
         {
             using (var context = new ws_Entities())
             {
-                return context.Countys.Where(c => c.CategoryId == id).ToList();
+                return context.Countys.Where(c => c.CategoryId == cityId).ToList();
             }
         }
 
