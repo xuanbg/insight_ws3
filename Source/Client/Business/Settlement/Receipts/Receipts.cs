@@ -600,7 +600,7 @@ namespace Insight.WS.Client.Business.Settlement
         /// </summary>
         private void Setting()
         {
-            var dig = new Setting {Owner = this};
+            var dig = new ReceiptsSet {Owner = this};
             if (dig.ShowDialog() == DialogResult.OK)
             {
                 WriteModuleParameter(dig.Parameters);

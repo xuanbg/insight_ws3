@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Data;
 using System.Windows.Forms;
-using Insight.WS.Client.Business.Storage.Service;
+using Insight.WS.Client.Business.Settlement.Service;
 using Insight.WS.Client.Common;
 using Insight.WS.Client.Common.Service;
 
-namespace Insight.WS.Client.Business.Storage
+namespace Insight.WS.Client.Business.Settlement
 {
-    public partial class Outbound : DialogBase
+    public partial class BackStore : DialogBase
     {
 
         #region 属性
@@ -52,7 +52,7 @@ namespace Insight.WS.Client.Business.Storage
 
         #region 构造方法
 
-        public Outbound()
+        public BackStore()
         {
             InitializeComponent();
 
@@ -208,12 +208,9 @@ namespace Insight.WS.Client.Business.Storage
         /// <param name="e"></param>
         private void trlUnit_EditValueChanged(object sender, EventArgs e)
         {
-            if (trlUnit.EditValue == null) return;
+            if (trlUnit.EditValue == null || (bool)Units.Rows.Find(trlUnit.EditValue)["IsData"]) return;
 
-            if (!(bool)Units.Rows.Find(trlUnit.EditValue)["IsData"])
-            {
-                trlUnit.EditValue = null;
-            }
+            trlUnit.EditValue = null;
         }
 
         /// <summary>
@@ -355,7 +352,7 @@ namespace Insight.WS.Client.Business.Storage
         /// <param name="code"></param>
         private void InitItemList(object code)
         {
-            using (var cli = new StorageClient(OpenForm.Binding, OpenForm.Address))
+            using (var cli = new SettlementClient(OpenForm.Binding, OpenForm.Address))
             {
                 _ItemList = cli.Get_GoodsPlan(OpenForm.UserSession, code);
             }
@@ -439,18 +436,14 @@ namespace Insight.WS.Client.Business.Storage
 
         #region 按钮事件
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+
         protected override void Confirm_Click(object sender, EventArgs e)
         {
             if (!OpenForm.UserSession.DeptId.HasValue) return;
 
             _Delivery = new ABS_Delivery
             {
-                Direction = -1,
+                Direction = 0,
                 ObjectId = _CustomerId,
                 ObjectName = txtName.EditValue == null ? sleCustomer.Text : txtName.Text.Trim(),
                 Description = memDesc.Text.Trim(),
@@ -458,11 +451,16 @@ namespace Insight.WS.Client.Business.Storage
                 CreatorUserId = OpenForm.UserSession.UserId
             };
 
+            foreach (DataRow row in _ItemList.Rows)
+            {
+                row["数量"] = -(decimal)row["数量"];
+                row["金额"] = -(decimal)row["金额"];
+            }
             _ItemList.AcceptChanges();
             var dv = _ItemList.Copy().DefaultView;
             dv.RowFilter = "Selected = 1";
 
-            using (var cli = new StorageClient(OpenForm.Binding, OpenForm.Address))
+            using (var cli = new SettlementClient(OpenForm.Binding, OpenForm.Address))
             {
                 ReceiptId = cli.AddDelivery(OpenForm.UserSession, _Delivery, dv.ToTable());
             }

@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 // 有关程序集的常规信息通过以下
 // 特性集控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("资金结算管理模块")]
+[assembly: AssemblyTitle("结算管理模块")]
 [assembly: AssemblyDescription("Insight Workstation 3 客户端")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Insight Software Ltd.")]

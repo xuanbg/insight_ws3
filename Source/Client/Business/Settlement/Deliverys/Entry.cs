@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Data;
 using System.Windows.Forms;
-using Insight.WS.Client.Business.Storage.Service;
+using Insight.WS.Client.Business.Settlement.Service;
 using Insight.WS.Client.Common;
 using Insight.WS.Client.Common.Service;
 
-namespace Insight.WS.Client.Business.Storage
+namespace Insight.WS.Client.Business.Settlement
 {
-    public partial class BackStore : DialogBase
+    public partial class Entry : DialogBase
     {
 
         #region 属性
@@ -52,7 +52,7 @@ namespace Insight.WS.Client.Business.Storage
 
         #region 构造方法
 
-        public BackStore()
+        public Entry()
         {
             InitializeComponent();
 
@@ -103,7 +103,7 @@ namespace Insight.WS.Client.Business.Storage
         }
 
         /// <summary>
-        /// 输入申请单号后更新供应商信息和出库物资列表
+        /// 输入申请单号后更新供应商信息和入库物资列表
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -115,7 +115,7 @@ namespace Insight.WS.Client.Business.Storage
         }
 
         /// <summary>
-        /// 选择出库项目刷新编辑按钮状态
+        /// 选择入库项目刷新编辑按钮状态
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -125,7 +125,7 @@ namespace Insight.WS.Client.Business.Storage
         }
 
         /// <summary>
-        /// 双击出库项目列表编辑选中项目
+        /// 双击入库项目列表编辑选中项目
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -135,7 +135,7 @@ namespace Insight.WS.Client.Business.Storage
         }
 
         /// <summary>
-        /// 增加出库项目
+        /// 增加入库项目
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -145,7 +145,7 @@ namespace Insight.WS.Client.Business.Storage
         }
 
         /// <summary>
-        /// 编辑出库项目
+        /// 编辑入库项目
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -183,7 +183,7 @@ namespace Insight.WS.Client.Business.Storage
         }
 
         /// <summary>
-        /// 选择出库物资
+        /// 选择入库物资
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -268,7 +268,7 @@ namespace Insight.WS.Client.Business.Storage
         }
 
         /// <summary>
-        /// 增加/编辑出库项目
+        /// 增加/编辑入库项目
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -347,19 +347,19 @@ namespace Insight.WS.Client.Business.Storage
         }
 
         /// <summary>
-        /// 初始化出库项目列表
+        /// 初始化入库项目列表
         /// </summary>
         /// <param name="code"></param>
         private void InitItemList(object code)
         {
-            using (var cli = new StorageClient(OpenForm.Binding, OpenForm.Address))
+            using (var cli = new SettlementClient(OpenForm.Binding, OpenForm.Address))
             {
                 _ItemList = cli.Get_GoodsPlan(OpenForm.UserSession, code);
             }
 
             if (code != null && _ItemList.Rows.Count == 0)
             {
-                General.ShowError(string.Format("单号为【{0}】的出库申请未审批通过或不存在。\r\n请输入正确的申请单号。", code));
+                General.ShowError(string.Format("单号为【{0}】的入库申请未审批通过或不存在。\r\n请输入正确的申请单号。", code));
                 return;
             }
 
@@ -381,7 +381,7 @@ namespace Insight.WS.Client.Business.Storage
         }
 
         /// <summary>
-        /// 新增/编辑出库项目
+        /// 新增/编辑入库项目
         /// </summary>
         /// <param name="isEdit"></param>
         private void EditItem(bool isEdit)
@@ -443,7 +443,7 @@ namespace Insight.WS.Client.Business.Storage
 
             _Delivery = new ABS_Delivery
             {
-                Direction = 0,
+                Direction = 1,
                 ObjectId = _CustomerId,
                 ObjectName = txtName.EditValue == null ? sleCustomer.Text : txtName.Text.Trim(),
                 Description = memDesc.Text.Trim(),
@@ -451,27 +451,22 @@ namespace Insight.WS.Client.Business.Storage
                 CreatorUserId = OpenForm.UserSession.UserId
             };
 
-            foreach (DataRow row in _ItemList.Rows)
-            {
-                row["数量"] = -(decimal)row["数量"];
-                row["金额"] = -(decimal)row["金额"];
-            }
             _ItemList.AcceptChanges();
             var dv = _ItemList.Copy().DefaultView;
             dv.RowFilter = "Selected = 1";
 
-            using (var cli = new StorageClient(OpenForm.Binding, OpenForm.Address))
+            using (var cli = new SettlementClient(OpenForm.Binding, OpenForm.Address))
             {
                 ReceiptId = cli.AddDelivery(OpenForm.UserSession, _Delivery, dv.ToTable());
             }
 
             if (ReceiptId == null)
             {
-                General.ShowError("出库数据保存失败！如多次保存失败，请联系管理员。");
+                General.ShowError("入库数据保存失败！如多次保存失败，请联系管理员。");
                 return;
             }
             
-            if (General.ShowConfirm("您需要现在就打印出库单吗？如现在不打印，可在出入库管理界面进行打印。") == DialogResult.OK)
+            if (General.ShowConfirm("您需要现在就打印入库单吗？如现在不打印，可在出入库管理界面进行打印。") == DialogResult.OK)
             {
                 IsPrint = true;
             }

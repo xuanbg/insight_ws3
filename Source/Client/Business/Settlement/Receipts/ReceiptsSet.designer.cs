@@ -10,7 +10,7 @@ using DevExpress.XtraTab;
 
 namespace Insight.WS.Client.Business.Settlement.Receipt
 {
-    partial class Setting
+    partial class ReceiptsSet
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -38,7 +38,7 @@ namespace Insight.WS.Client.Business.Settlement.Receipt
         /// </summary>
         private void InitializeComponent()
         {
-            var resources = new ComponentResourceManager(typeof(Setting));
+            var resources = new ComponentResourceManager(typeof(ReceiptsSet));
             this.tabSetting = new XtraTabControl();
             this.pagGeneral = new XtraTabPage();
             this.grlCheckWF = new GridLookUpEdit();

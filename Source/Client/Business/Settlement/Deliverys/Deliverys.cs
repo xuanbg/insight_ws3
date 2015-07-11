@@ -5,11 +5,11 @@ using System.Windows.Forms;
 using DevExpress.Utils;
 using DevExpress.XtraBars;
 using DevExpress.XtraTreeList;
-using Insight.WS.Client.Business.Storage.Service;
+using Insight.WS.Client.Business.Settlement.Service;
 using Insight.WS.Client.Common;
 using Insight.WS.Client.Common.Service;
 
-namespace Insight.WS.Client.Business.Storage
+namespace Insight.WS.Client.Business.Settlement
 {
     public partial class Deliverys : MdiBase
     {
@@ -80,7 +80,7 @@ namespace Insight.WS.Client.Business.Storage
         {
             if ((int) e.Node.GetValue("Type") != 2) return;
 
-            using (var cli = new StorageClient(Binding, Address))
+            using (var cli = new SettlementClient(Binding, Address))
             {
                 _FilterDeliverys = cli.GetDeliveryForDate(UserSession, ModuleId, e.Node.GetValue("ID").ToString());
             }
@@ -194,7 +194,7 @@ namespace Insight.WS.Client.Business.Storage
         /// </summary>
         private void InitDateTree()
         {
-            using (var cli = new StorageClient(Binding, Address))
+            using (var cli = new SettlementClient(Binding, Address))
             {
                 _DateTree = cli.GetDeliveryDate(UserSession);
             }
@@ -226,7 +226,7 @@ namespace Insight.WS.Client.Business.Storage
         /// </summary>
         private void Search()
         {
-            using (var cli = new StorageClient(Binding, Address))
+            using (var cli = new SettlementClient(Binding, Address))
             {
                 _SearchDeliverys = cli.GetDeliveryForName(UserSession, ModuleId, bteSearch.Text.Trim());
             }
@@ -290,7 +290,7 @@ namespace Insight.WS.Client.Business.Storage
             var printer = Config.Printer("BilPrint");
             if (!isPrinted)
             {
-                using (var cli = new StorageClient(Binding, Address))
+                using (var cli = new SettlementClient(Binding, Address))
                 {
                     var code = cli.GetDeliveryCode(UserSession, (Guid)_SchemeId, (Guid)bid, ModuleId, null);
                     _Deliverys.Table.Rows.Find(bid)["单据号"] = code;
@@ -487,7 +487,7 @@ namespace Insight.WS.Client.Business.Storage
             var row = _Deliverys.Table.Rows.Find(_DeliveryId);
             if (General.ShowConfirm(string.Format("您确定要{0}收费记录吗？", barManager.Items["Delete"].Caption)) != DialogResult.OK) return;
 
-            using (var cli = new StorageClient(Binding, Address))
+            using (var cli = new SettlementClient(Binding, Address))
             {
                 if (!cli.DelDelivery(UserSession, _DeliveryId))
                 {
@@ -511,7 +511,7 @@ namespace Insight.WS.Client.Business.Storage
         /// </summary>
         private void Setting()
         {
-            var dig = new Setting {Owner = this};
+            var dig = new DeliverysSet { Owner = this };
             if (dig.ShowDialog() == DialogResult.OK)
             {
                 WriteModuleParameter(dig.Parameters);

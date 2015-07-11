@@ -5,11 +5,11 @@ using System.Windows.Forms;
 using DevExpress.Utils;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraTab;
-using Insight.WS.Client.Business.Storage.Service;
+using Insight.WS.Client.Business.Settlement.Service;
 using Insight.WS.Client.Common;
 using Insight.WS.Client.Common.Service;
 
-namespace Insight.WS.Client.Business.Storage
+namespace Insight.WS.Client.Business.Settlement
 {
     public partial class ShowDelivery : DialogBase
     {
@@ -57,7 +57,7 @@ namespace Insight.WS.Client.Business.Storage
         {
             _Snapshot = SnapshotId.HasValue ? Commons.ImageData((Guid)SnapshotId) : null;
 
-            using (var cli = new StorageClient(OpenForm.Binding, OpenForm.Address))
+            using (var cli = new SettlementClient(OpenForm.Binding, OpenForm.Address))
             {
                 _Delivery = cli.GetDelivery(OpenForm.UserSession, ObjectId);
                 _Items = cli.GetDeliveryItem(OpenForm.UserSession, ObjectId);

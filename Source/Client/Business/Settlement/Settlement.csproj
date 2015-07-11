@@ -52,6 +52,42 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Deliverys\BackStore.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Deliverys\BackStore.designer.cs">
+      <DependentUpon>BackStore.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Deliverys\Deliverys.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Deliverys\Deliverys.designer.cs">
+      <DependentUpon>Deliverys.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Deliverys\Entry.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Deliverys\Entry.designer.cs">
+      <DependentUpon>Entry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Deliverys\Outbound.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Deliverys\Outbound.designer.cs">
+      <DependentUpon>Outbound.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Deliverys\DeliverysSet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Deliverys\DeliverysSet.designer.cs">
+      <DependentUpon>DeliverysSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Deliverys\ShowDelivery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Deliverys\ShowDelivery.designer.cs">
+      <DependentUpon>ShowDelivery.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Receipts\Check.cs">
       <SubType>Form</SubType>
@@ -77,11 +113,11 @@
     <Compile Include="Receipts\Receipts.Designer.cs">
       <DependentUpon>Receipts.cs</DependentUpon>
     </Compile>
-    <Compile Include="Receipts\Setting.cs">
+    <Compile Include="Receipts\ReceiptsSet.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Receipts\Setting.designer.cs">
-      <DependentUpon>Setting.cs</DependentUpon>
+    <Compile Include="Receipts\ReceiptsSet.designer.cs">
+      <DependentUpon>ReceiptsSet.cs</DependentUpon>
     </Compile>
     <Compile Include="Receipts\ShowReceipt.cs">
       <SubType>Form</SubType>
@@ -96,6 +132,24 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Deliverys\BackStore.resx">
+      <DependentUpon>BackStore.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Deliverys\Deliverys.resx">
+      <DependentUpon>Deliverys.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Deliverys\Entry.resx">
+      <DependentUpon>Entry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Deliverys\Outbound.resx">
+      <DependentUpon>Outbound.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Deliverys\DeliverysSet.resx">
+      <DependentUpon>DeliverysSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Deliverys\ShowDelivery.resx">
+      <DependentUpon>ShowDelivery.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Receipts\Check.resx">
       <DependentUpon>Check.cs</DependentUpon>
     </EmbeddedResource>
@@ -108,8 +162,8 @@
     <EmbeddedResource Include="Receipts\Receipts.resx">
       <DependentUpon>Receipts.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Receipts\Setting.resx">
-      <DependentUpon>Setting.cs</DependentUpon>
+    <EmbeddedResource Include="Receipts\ReceiptsSet.resx">
+      <DependentUpon>ReceiptsSet.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Receipts\ShowReceipt.resx">
       <DependentUpon>ShowReceipt.cs</DependentUpon>
@@ -127,6 +181,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\DataSources\Insight.WS.Client.Common.Service.ABS_Clearing.datasource" />
+    <None Include="Properties\DataSources\Insight.WS.Client.Common.Service.ABS_Delivery.datasource" />
     <None Include="Properties\DataSources\System.Data.DataTable.datasource" />
     <None Include="Service References\Service\Insight.WS.Client.Business.Settlement.Service.Advance.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
