@@ -58,5 +58,15 @@ namespace Insight.WS.Service.XinFenBao
             return OnlineManage.Sessions.Find(s => s.LoginName == ln && s.Signature == pw);
         }
 
+        /// <summary>
+        /// 获取用户登录结果
+        /// </summary>
+        /// <param name="obj">Session对象实体</param>
+        /// <returns>Session对象实体</returns>
+        public Session UserLogin(Session obj)
+        {
+            return CommonDAL.UserLogin(obj);
+        }
+
     }
 }

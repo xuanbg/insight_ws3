@@ -57,7 +57,15 @@ namespace Insight.WS.Service.XinFenBao
         /// <returns>Session 用户Session对象实体</returns>
         [OperationContract]
         Session GetSession(string ln, string pw);
-        
+
+        /// <summary>
+        /// 获取用户登录结果
+        /// </summary>
+        /// <param name="obj">Session对象实体</param>
+        /// <returns>Session对象实体</returns>
+        [OperationContract]
+        Session UserLogin(Session obj);
+
         #endregion
 
     }
