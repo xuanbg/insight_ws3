@@ -340,56 +340,53 @@
 		<col def="S0">ISDotNetInstallerArgsCommit</col>
 		<col def="S0">ISDotNetInstallerArgsUninstall</col>
 		<col def="S0">ISDotNetInstallerArgsRollback</col>
-		<row><td>Base.dll</td><td>{BF4A6BD6-CEB6-498F-A76B-8D4D8F047D08}</td><td>INSIGHT_WS3</td><td>2</td><td/><td>base.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>CRM.dll</td><td>{8C90A6B4-B902-41D8-ACD4-E6A84E337EFC}</td><td>BUSINESS</td><td>2</td><td/><td>crm.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>Common.dll</td><td>{6AB587CF-6A7E-430A-B405-115833152681}</td><td>INSIGHT_WS3</td><td>2</td><td/><td>common.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>DevExpress.Data.v14.1.dll</td><td>{62749D0D-94BE-44C9-9899-C2426A863762}</td><td>COMPONENTS</td><td>2</td><td/><td>devexpress.data.v14.1.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>DevExpress.Images.v14.1.dll</td><td>{54E090D8-42B0-4685-A084-E9386533814D}</td><td>COMPONENTS</td><td>2</td><td/><td>devexpress.images.v14.1.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>DevExpress.Office.v14.1.Core.dll</td><td>{E1C7671D-F232-4F43-A2A6-3043218DC98F}</td><td>COMPONENTS</td><td>2</td><td/><td>devexpress.office.v14.1.core</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>DevExpress.Office.v14.1.Core.resources.dll</td><td>{5D9DC98D-4724-465D-B8F6-52FA3C533260}</td><td>ZH_HANS</td><td>2</td><td/><td>devexpress.office.v14.1.core1</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>DevExpress.Printing.v14.1.Core.dll</td><td>{3BFFDBDE-10E4-42EB-9180-6AE4F6E37DBC}</td><td>COMPONENTS</td><td>2</td><td/><td>devexpress.printing.v14.1.co</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>DevExpress.Printing.v14.1.Core.resources.dll</td><td>{D7B2C017-292F-46FC-82D6-56ED8B69D4A2}</td><td>ZH_HANS</td><td>2</td><td/><td>devexpress.printing.v14.1.co1</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>DevExpress.RichEdit.v14.1.Core.dll</td><td>{4BD916AF-79D5-4424-A232-D8FF9CA6212D}</td><td>COMPONENTS</td><td>2</td><td/><td>devexpress.richedit.v14.1.co</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>DevExpress.RichEdit.v14.1.Core.resources.dll</td><td>{9424F62E-7931-4044-9625-B3D2679C2089}</td><td>ZH_HANS</td><td>2</td><td/><td>devexpress.richedit.v14.1.co1</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>DevExpress.Sparkline.v14.1.Core.dll</td><td>{B8664D2C-2771-4D32-A95C-D30D475563A3}</td><td>COMPONENTS</td><td>2</td><td/><td>devexpress.sparkline.v14.1.c</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>DevExpress.Sparkline.v14.1.Core.resources.dll</td><td>{CCA7A723-9064-4FEC-A921-04C6A72BCB44}</td><td>ZH_HANS</td><td>2</td><td/><td>devexpress.sparkline.v14.1.c1</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>DevExpress.Utils.v14.1.dll</td><td>{72253DAF-32DC-4882-90FA-11479A0825A2}</td><td>COMPONENTS</td><td>2</td><td/><td>devexpress.utils.v14.1.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>DevExpress.Utils.v14.1.resources.dll</td><td>{17376DC1-14C9-435B-886E-AC13B432F2CC}</td><td>ZH_HANS</td><td>2</td><td/><td>devexpress.utils.v14.1.resou</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>DevExpress.XtraBars.v14.1.dll</td><td>{A9F2AA2B-BD7B-43F0-9037-9E863CDE54DB}</td><td>COMPONENTS</td><td>2</td><td/><td>devexpress.xtrabars.v14.1.dl</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>DevExpress.XtraBars.v14.1.resources.dll</td><td>{9D533CA4-02FE-4AA3-988C-04A1AF1022DE}</td><td>ZH_HANS</td><td>2</td><td/><td>devexpress.xtrabars.v14.1.re</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>DevExpress.XtraEditors.v14.1.dll</td><td>{98716224-89C1-4A48-AF8D-C336260B1DF1}</td><td>COMPONENTS</td><td>2</td><td/><td>devexpress.xtraeditors.v14.1</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>DevExpress.XtraEditors.v14.1.resources.dll</td><td>{3ABC9F25-199F-40D4-BDAD-D6054D01AC5C}</td><td>ZH_HANS</td><td>2</td><td/><td>devexpress.xtraeditors.v14.11</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>DevExpress.XtraGrid.v14.1.dll</td><td>{54A26889-7D02-4C57-88CB-4FF674E9E05A}</td><td>COMPONENTS</td><td>2</td><td/><td>devexpress.xtragrid.v14.1.dl</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>DevExpress.XtraGrid.v14.1.resources.dll</td><td>{C78BC2DC-233A-4319-961B-B108BA795093}</td><td>ZH_HANS</td><td>2</td><td/><td>devexpress.xtragrid.v14.1.re</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>DevExpress.XtraLayout.v14.1.dll</td><td>{2B068E30-2C34-41CA-8C05-8F40F48C6AB1}</td><td>COMPONENTS</td><td>2</td><td/><td>devexpress.xtralayout.v14.1.</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>DevExpress.XtraLayout.v14.1.resources.dll</td><td>{87282B95-86A9-4388-8BA3-5BCD5E525528}</td><td>ZH_HANS</td><td>2</td><td/><td>devexpress.xtralayout.v14.1.1</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>DevExpress.XtraNavBar.v14.1.dll</td><td>{5ED65CBC-3809-4730-BF1A-DF7D0C3BCBEA}</td><td>COMPONENTS</td><td>2</td><td/><td>devexpress.xtranavbar.v14.1.</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>DevExpress.XtraNavBar.v14.1.resources.dll</td><td>{F3F56F67-EB0E-4D8C-A203-8A6BD52A4BD6}</td><td>ZH_HANS</td><td>2</td><td/><td>devexpress.xtranavbar.v14.1.1</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>DevExpress.XtraPrinting.v14.1.dll</td><td>{DF097292-225A-474D-87A2-A72A403A7A47}</td><td>COMPONENTS</td><td>2</td><td/><td>devexpress.xtraprinting.v14.</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>DevExpress.XtraTreeList.v14.1.dll</td><td>{20849E31-515E-4DCA-9E9D-9B01AA16CF9A}</td><td>COMPONENTS</td><td>2</td><td/><td>devexpress.xtratreelist.v14.</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>DevExpress.XtraTreeList.v14.1.resources.dll</td><td>{F356C035-0566-4FA0-A107-4CCB787C7BA2}</td><td>ZH_HANS</td><td>2</td><td/><td>devexpress.xtratreelist.v14.1</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>DevExpress.XtraVerticalGrid.v14.1.dll</td><td>{25968FCD-9DA1-40FA-93F3-E8580B3B05BE}</td><td>COMPONENTS</td><td>2</td><td/><td>devexpress.xtraverticalgrid.</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>DevExpress.XtraVerticalGrid.v14.1.resources.dll</td><td>{D9042233-BF41-4A03-A2D7-D01F529DFDD0}</td><td>ZH_HANS</td><td>2</td><td/><td>devexpress.xtraverticalgrid.1</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>DevExpress.XtraWizard.v14.1.dll</td><td>{423290D0-8C8E-4B11-A522-52B13B587643}</td><td>COMPONENTS</td><td>2</td><td/><td>devexpress.xtrawizard.v14.1.</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>DevExpress.XtraWizard.v14.1.resources.dll</td><td>{17FC2323-4F2F-4E0A-8829-A4D7056C2631}</td><td>ZH_HANS</td><td>2</td><td/><td>devexpress.xtrawizard.v14.1.1</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>FastReport.Bars.dll</td><td>{44AFDEE6-4E3F-4EE5-8176-A417B5E50F1F}</td><td>COMPONENTS</td><td>2</td><td/><td>fastreport.bars.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>FastReport.Editor.dll</td><td>{74C872CB-97BA-4A35-8482-AA31BA599D3E}</td><td>COMPONENTS</td><td>2</td><td/><td>fastreport.editor.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>FastReport.dll</td><td>{CE2E469A-40E8-40F8-979F-FF00D76FD5E6}</td><td>COMPONENTS</td><td>2</td><td/><td>fastreport.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>GZipEncoder.dll</td><td>{6850BB6A-C49B-49AB-9AF3-16BE60823A57}</td><td>INSIGHT_WS3</td><td>2</td><td/><td>gzipencoder.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>ISX_DEFAULTCOMPONENT</td><td>{FCEEAC67-45C7-4332-8B3B-90D5A754B532}</td><td>COMPONENTS</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>ISX_DEFAULTCOMPONENT1</td><td>{D9090434-02A8-4888-BD39-AB8389ECBCCC}</td><td>ZH_HANS</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>Base.dll</td><td>{EA8EC380-AE19-49F4-9C55-BFE7EB94B499}</td><td>INSIGHT_WS3</td><td>2</td><td/><td>base.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>Common.dll</td><td>{72D6567C-CDB5-4CF8-A169-4990989F7D1D}</td><td>INSIGHT_WS3</td><td>2</td><td/><td>common.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>DevExpress.BonusSkins.v14.1.dll</td><td>{48CC9F4B-AD2D-4F48-8430-2F16DF64543F}</td><td>COMPONENTS</td><td>2</td><td/><td>devexpress.bonusskins.v14.1.</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>DevExpress.Data.v14.1.dll</td><td>{42AB7EA9-976F-433B-8F48-A480FBEC272B}</td><td>COMPONENTS</td><td>2</td><td/><td>devexpress.data.v14.1.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>DevExpress.Images.v14.1.dll</td><td>{1E723A18-47AA-4009-94D2-F9D56EB3077C}</td><td>COMPONENTS</td><td>2</td><td/><td>devexpress.images.v14.1.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>DevExpress.Office.v14.1.Core.dll</td><td>{9698BD87-4DAB-49F5-87CE-0A27B34E93BF}</td><td>COMPONENTS</td><td>2</td><td/><td>devexpress.office.v14.1.core</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>DevExpress.Office.v14.1.Core.resources.dll</td><td>{7B48B9B9-7FE8-4EBE-B035-CB36BA6C92CA}</td><td>ZH_HANS</td><td>2</td><td/><td>devexpress.office.v14.1.core1</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>DevExpress.Printing.v14.1.Core.dll</td><td>{134738B3-3D87-475C-8828-1FBAEB9863E4}</td><td>COMPONENTS</td><td>2</td><td/><td>devexpress.printing.v14.1.co</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>DevExpress.Printing.v14.1.Core.resources.dll</td><td>{2257A9C8-6412-4412-8B84-EFED2F394371}</td><td>ZH_HANS</td><td>2</td><td/><td>devexpress.printing.v14.1.co1</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>DevExpress.RichEdit.v14.1.Core.dll</td><td>{263B341F-BA51-4F9D-8692-423E2F0E38D2}</td><td>COMPONENTS</td><td>2</td><td/><td>devexpress.richedit.v14.1.co</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>DevExpress.RichEdit.v14.1.Core.resources.dll</td><td>{E008BF26-1F9C-4CDE-A339-967ED79BCDF0}</td><td>ZH_HANS</td><td>2</td><td/><td>devexpress.richedit.v14.1.co1</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>DevExpress.Sparkline.v14.1.Core.dll</td><td>{D5CFC902-FF15-471D-ADB3-BC8A774F3570}</td><td>COMPONENTS</td><td>2</td><td/><td>devexpress.sparkline.v14.1.c</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>DevExpress.Sparkline.v14.1.Core.resources.dll</td><td>{3884249D-9512-4E22-BA81-A5114EE28AF6}</td><td>ZH_HANS</td><td>2</td><td/><td>devexpress.sparkline.v14.1.c1</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>DevExpress.Utils.v14.1.dll</td><td>{7CA30091-8C97-48A3-B0B5-30602729271A}</td><td>COMPONENTS</td><td>2</td><td/><td>devexpress.utils.v14.1.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>DevExpress.Utils.v14.1.resources.dll</td><td>{DC0C5649-6767-4EBA-978A-BB511EBA7D98}</td><td>ZH_HANS</td><td>2</td><td/><td>devexpress.utils.v14.1.resou</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>DevExpress.XtraBars.v14.1.dll</td><td>{EBAEEDE9-623B-480C-B31C-57B1AE2BBC29}</td><td>COMPONENTS</td><td>2</td><td/><td>devexpress.xtrabars.v14.1.dl</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>DevExpress.XtraBars.v14.1.resources.dll</td><td>{F7C8EADC-E601-4FD5-B5D3-8FDC2806F332}</td><td>ZH_HANS</td><td>2</td><td/><td>devexpress.xtrabars.v14.1.re</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>DevExpress.XtraEditors.v14.1.dll</td><td>{54EC365E-79D0-4AE8-BD5F-62BADE14B98B}</td><td>COMPONENTS</td><td>2</td><td/><td>devexpress.xtraeditors.v14.1</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>DevExpress.XtraEditors.v14.1.resources.dll</td><td>{1735469C-B388-4712-920B-57534E2B49B3}</td><td>ZH_HANS</td><td>2</td><td/><td>devexpress.xtraeditors.v14.11</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>DevExpress.XtraGrid.v14.1.dll</td><td>{7FA3F44B-7EC8-4501-84AC-71D22B8A28BB}</td><td>COMPONENTS</td><td>2</td><td/><td>devexpress.xtragrid.v14.1.dl</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>DevExpress.XtraGrid.v14.1.resources.dll</td><td>{EBFCE4E2-2FA8-4306-98FD-61AF508D61BD}</td><td>ZH_HANS</td><td>2</td><td/><td>devexpress.xtragrid.v14.1.re</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>DevExpress.XtraLayout.v14.1.dll</td><td>{D52CB413-5AFF-4FA7-AD6F-5448EA751C5E}</td><td>COMPONENTS</td><td>2</td><td/><td>devexpress.xtralayout.v14.1.</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>DevExpress.XtraLayout.v14.1.resources.dll</td><td>{BAFD3E8E-E66E-4ECF-8B0F-A3337D45F395}</td><td>ZH_HANS</td><td>2</td><td/><td>devexpress.xtralayout.v14.1.1</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>DevExpress.XtraNavBar.v14.1.dll</td><td>{14ECB72F-88F4-47CA-8E34-7FF7D775737D}</td><td>COMPONENTS</td><td>2</td><td/><td>devexpress.xtranavbar.v14.1.</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>DevExpress.XtraNavBar.v14.1.resources.dll</td><td>{026EFDBC-11C5-4970-95FE-C85CB389E73F}</td><td>ZH_HANS</td><td>2</td><td/><td>devexpress.xtranavbar.v14.1.1</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>DevExpress.XtraPrinting.v14.1.dll</td><td>{B628AD6A-213D-4F6A-A14F-9E06A8B3942B}</td><td>COMPONENTS</td><td>2</td><td/><td>devexpress.xtraprinting.v14.</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>DevExpress.XtraPrinting.v14.1.resources.dll</td><td>{C08202AB-B3C7-4544-B955-5B7362AE4FFF}</td><td>ZH_HANS</td><td>2</td><td/><td>devexpress.xtraprinting.v14.1</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>DevExpress.XtraTreeList.v14.1.dll</td><td>{889C6315-DE06-4078-A76F-5C95796F2340}</td><td>COMPONENTS</td><td>2</td><td/><td>devexpress.xtratreelist.v14.</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>DevExpress.XtraTreeList.v14.1.resources.dll</td><td>{10307B41-3B0F-489C-8632-3EE0F395C8AD}</td><td>ZH_HANS</td><td>2</td><td/><td>devexpress.xtratreelist.v14.1</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>DevExpress.XtraVerticalGrid.v14.1.dll</td><td>{B600DD60-96A4-48E1-BF68-ADA2E84C4E76}</td><td>COMPONENTS</td><td>2</td><td/><td>devexpress.xtraverticalgrid.</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>DevExpress.XtraVerticalGrid.v14.1.resources.dll</td><td>{C9920A48-0912-4839-B0B4-F27C306D5432}</td><td>ZH_HANS</td><td>2</td><td/><td>devexpress.xtraverticalgrid.1</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>DevExpress.XtraWizard.v14.1.dll</td><td>{85D14CFB-27A2-4816-B57D-F867BE9A198D}</td><td>COMPONENTS</td><td>2</td><td/><td>devexpress.xtrawizard.v14.1.</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>DevExpress.XtraWizard.v14.1.resources.dll</td><td>{FB1249A6-6BFC-45C0-BC7C-7E1D77EF4999}</td><td>ZH_HANS</td><td>2</td><td/><td>devexpress.xtrawizard.v14.1.1</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>FastReport.Bars.dll</td><td>{31ECCDCC-F1D9-458E-BD42-FA33A14E0F09}</td><td>COMPONENTS</td><td>2</td><td/><td>fastreport.bars.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>FastReport.Editor.dll</td><td>{9419FF47-0F4A-475A-BFAD-272FFA243E28}</td><td>COMPONENTS</td><td>2</td><td/><td>fastreport.editor.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>FastReport.dll</td><td>{8ED307E4-BE18-4A75-8A31-E01E03FC3662}</td><td>COMPONENTS</td><td>2</td><td/><td>fastreport.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>GZipEncoder.dll</td><td>{CE97AD70-16D2-4DD7-A742-C2384CCCC095}</td><td>INSIGHT_WS3</td><td>2</td><td/><td>gzipencoder.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>ISX_DEFAULTCOMPONENT</td><td>{48510F31-423A-400C-B1B6-91AE3FDEF981}</td><td>COMPONENTS</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>ISX_DEFAULTCOMPONENT1</td><td>{F9975228-0B44-4CAD-890B-CF329DCE0B28}</td><td>ZH_HANS</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT2</td><td>{E630C268-E88B-4432-BCA1-7FA88BBD4FAF}</td><td>INSIGHT_WS3</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT3</td><td>{BCDF2718-869F-4D7E-AF3D-7342CE850A44}</td><td>INSTALLDIR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>ISX_DEFAULTCOMPONENT4</td><td>{FBCEB9EF-1732-489E-9B3F-3CF9106E96F4}</td><td>BUSINESS</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>Insight_WS.exe</td><td>{676764AB-74A8-4EDF-A28A-2C0C73333758}</td><td>INSIGHT_WS3</td><td>2</td><td/><td>insight_ws.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>MasterDatas.dll</td><td>{0A3BF952-EC48-40C0-8C1E-E441A5219CA4}</td><td>INSIGHT_WS3</td><td>2</td><td/><td>masterdatas.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>Insight_WS.exe</td><td>{8C743423-4155-44C4-8E98-47146A5068DB}</td><td>INSIGHT_WS3</td><td>2</td><td/><td>insight_ws.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>MasterDatas.dll</td><td>{ED6A2650-B00F-4D6C-984E-41E16738483A}</td><td>INSIGHT_WS3</td><td>2</td><td/><td>masterdatas.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>NewComponent1</td><td>{15C05736-53E1-4803-B9D6-1BC2B6BBA0BF}</td><td>INSTALLDIR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>NewComponent2</td><td>{8A5DE0FF-FDDE-4CC1-BE74-D67A3B719858}</td><td>INSTALLDIR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>NewComponent3</td><td>{6DFA72AA-D211-4967-A6A3-2469C4E111B6}</td><td>INSTALLDIR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>Report.dll</td><td>{2C14BE20-CD66-41A7-842C-9C116995177B}</td><td>INSIGHT_WS3</td><td>2</td><td/><td>report.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>SCM.dll</td><td>{F739F724-7A1E-446F-91EF-9303B38B6EBE}</td><td>BUSINESS</td><td>2</td><td/><td>scm.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>Settlement.dll</td><td>{9DD0D824-F877-42A5-923D-81BF33939DDB}</td><td>BUSINESS</td><td>2</td><td/><td>settlement.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>Storage.dll</td><td>{0208EB77-17BE-48F3-A66F-C56DF9CD2875}</td><td>BUSINESS</td><td>2</td><td/><td>storage.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>Report.dll</td><td>{712A4D80-23C9-43DC-9CA5-6DA5D2D86C3C}</td><td>INSIGHT_WS3</td><td>2</td><td/><td>report.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 	</table>
 
 	<table name="Condition">
@@ -600,7 +597,7 @@
 		<row><td>LicenseAgreement</td><td>DlgLine</td><td>Line</td><td>48</td><td>234</td><td>326</td><td>0</td><td>1</td><td/><td/><td/><td/><td>0</td><td/><td/><td/></row>
 		<row><td>LicenseAgreement</td><td>DlgTitle</td><td>Text</td><td>13</td><td>6</td><td>292</td><td>25</td><td>65539</td><td/><td>##IDS__IsLicenseDlg_LicenseAgreement##</td><td/><td/><td>0</td><td/><td/><td/></row>
 		<row><td>LicenseAgreement</td><td>ISPrintButton</td><td>PushButton</td><td>301</td><td>188</td><td>65</td><td>17</td><td>3</td><td/><td>##IDS_PRINT_BUTTON##</td><td>Agree</td><td/><td>0</td><td/><td/><td/></row>
-		<row><td>LicenseAgreement</td><td>Memo</td><td>ScrollableText</td><td>8</td><td>55</td><td>358</td><td>130</td><td>7</td><td/><td/><td/><td/><td>0</td><td/><td>D:\Insight_WS3\Release\Client\EULA.rtf</td><td/></row>
+		<row><td>LicenseAgreement</td><td>Memo</td><td>ScrollableText</td><td>8</td><td>55</td><td>358</td><td>130</td><td>7</td><td/><td/><td/><td/><td>0</td><td/><td>D:\Project\Insight_WS3\Release\Client\EULA.rtf</td><td/></row>
 		<row><td>LicenseAgreement</td><td>Next</td><td>PushButton</td><td>230</td><td>243</td><td>66</td><td>17</td><td>3</td><td/><td>##IDS_NEXT##</td><td>Cancel</td><td/><td>0</td><td/><td/><td/></row>
 		<row><td>MaintenanceType</td><td>Back</td><td>PushButton</td><td>164</td><td>243</td><td>66</td><td>17</td><td>3</td><td/><td>##IDS_BACK##</td><td>Next</td><td/><td>0</td><td/><td/><td/></row>
 		<row><td>MaintenanceType</td><td>Banner</td><td>Bitmap</td><td>0</td><td>0</td><td>374</td><td>44</td><td>1</td><td/><td/><td/><td/><td>0</td><td/><td/><td>NewBinary1</td></row>
@@ -1098,7 +1095,6 @@
 	<table name="CreateFolder">
 		<col key="yes" def="s72">Directory_</col>
 		<col key="yes" def="s72">Component_</col>
-		<row><td>BUSINESS</td><td>ISX_DEFAULTCOMPONENT4</td></row>
 		<row><td>INSTALLDIR</td><td>ISX_DEFAULTCOMPONENT3</td></row>
 		<row><td>INSTALLDIR</td><td>NewComponent1</td></row>
 		<row><td>INSTALLDIR</td><td>NewComponent2</td></row>
@@ -1186,7 +1182,6 @@
 		<row><td>ALLUSERSPROFILE</td><td>TARGETDIR</td><td>.:ALLUSE~1|All Users</td><td/><td>0</td><td/></row>
 		<row><td>AdminToolsFolder</td><td>TARGETDIR</td><td>.:Admint~1|AdminTools</td><td/><td>0</td><td/></row>
 		<row><td>AppDataFolder</td><td>TARGETDIR</td><td>.:APPLIC~1|Application Data</td><td/><td>0</td><td/></row>
-		<row><td>BUSINESS</td><td>INSIGHT_WS3</td><td>Business</td><td/><td>0</td><td/></row>
 		<row><td>COMPONENTS</td><td>INSIGHT_WS3</td><td>COMPON~1|Components</td><td/><td>0</td><td/></row>
 		<row><td>CommonAppDataFolder</td><td>TARGETDIR</td><td>.:Common~1|CommonAppData</td><td/><td>0</td><td/></row>
 		<row><td>CommonFiles64Folder</td><td>TARGETDIR</td><td>.:Common64</td><td/><td>0</td><td/></row>
@@ -1227,7 +1222,9 @@
 		<row><td>WindowsFolder</td><td>TARGETDIR</td><td>.:Windows</td><td/><td>0</td><td/></row>
 		<row><td>WindowsVolume</td><td>TARGETDIR</td><td>.:WinRoot</td><td/><td>0</td><td/></row>
 		<row><td>ZH_HANS</td><td>COMPONENTS</td><td>zh-Hans</td><td/><td>0</td><td/></row>
+		<row><td>insigh_1_insight_software_ltd.</td><td>ProgramMenuFolder</td><td>INSIGH~1|Insight Software Ltd.</td><td/><td>1</td><td/></row>
 		<row><td>insigh_1_insight_ws3</td><td>ProgramMenuFolder</td><td>INSIGH~1|Insight WS3</td><td/><td>1</td><td/></row>
+		<row><td>insigh_1_insight_ws31</td><td>insigh_1_insight_software_ltd.</td><td>INSIGH~1|Insight WS3</td><td/><td>1</td><td/></row>
 	</table>
 
 	<table name="DrLocator">
@@ -1920,8 +1917,8 @@
 		<col key="yes" def="s38">Feature_</col>
 		<col key="yes" def="s72">Component_</col>
 		<row><td>AlwaysInstall</td><td>Base.dll</td></row>
-		<row><td>AlwaysInstall</td><td>CRM.dll</td></row>
 		<row><td>AlwaysInstall</td><td>Common.dll</td></row>
+		<row><td>AlwaysInstall</td><td>DevExpress.BonusSkins.v14.1.dll</td></row>
 		<row><td>AlwaysInstall</td><td>DevExpress.Data.v14.1.dll</td></row>
 		<row><td>AlwaysInstall</td><td>DevExpress.Images.v14.1.dll</td></row>
 		<row><td>AlwaysInstall</td><td>DevExpress.Office.v14.1.Core.dll</td></row>
@@ -1945,6 +1942,7 @@
 		<row><td>AlwaysInstall</td><td>DevExpress.XtraNavBar.v14.1.dll</td></row>
 		<row><td>AlwaysInstall</td><td>DevExpress.XtraNavBar.v14.1.resources.dll</td></row>
 		<row><td>AlwaysInstall</td><td>DevExpress.XtraPrinting.v14.1.dll</td></row>
+		<row><td>AlwaysInstall</td><td>DevExpress.XtraPrinting.v14.1.resources.dll</td></row>
 		<row><td>AlwaysInstall</td><td>DevExpress.XtraTreeList.v14.1.dll</td></row>
 		<row><td>AlwaysInstall</td><td>DevExpress.XtraTreeList.v14.1.resources.dll</td></row>
 		<row><td>AlwaysInstall</td><td>DevExpress.XtraVerticalGrid.v14.1.dll</td></row>
@@ -1959,16 +1957,12 @@
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT1</td></row>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT2</td></row>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT3</td></row>
-		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT4</td></row>
 		<row><td>AlwaysInstall</td><td>Insight_WS.exe</td></row>
 		<row><td>AlwaysInstall</td><td>MasterDatas.dll</td></row>
 		<row><td>AlwaysInstall</td><td>NewComponent1</td></row>
 		<row><td>AlwaysInstall</td><td>NewComponent2</td></row>
 		<row><td>AlwaysInstall</td><td>NewComponent3</td></row>
 		<row><td>AlwaysInstall</td><td>Report.dll</td></row>
-		<row><td>AlwaysInstall</td><td>SCM.dll</td></row>
-		<row><td>AlwaysInstall</td><td>Settlement.dll</td></row>
-		<row><td>AlwaysInstall</td><td>Storage.dll</td></row>
 	</table>
 
 	<table name="File">
@@ -1983,50 +1977,49 @@
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I4">ISAttributes</col>
 		<col def="S72">ISComponentSubFolder_</col>
-		<row><td>base.dll</td><td>Base.dll</td><td>Base.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\Base.dll</td><td>1</td><td/></row>
-		<row><td>chinese__simplified_.frl</td><td>ISX_DEFAULTCOMPONENT</td><td>CHINES~1.FRL|Chinese (Simplified).frl</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\Components\Chinese (Simplified).frl</td><td>1</td><td/></row>
-		<row><td>common.dll</td><td>Common.dll</td><td>Common.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\Common.dll</td><td>1</td><td/></row>
-		<row><td>crm.dll</td><td>CRM.dll</td><td>CRM.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\Business\CRM.dll</td><td>1</td><td/></row>
-		<row><td>devexpress.data.v14.1.dll</td><td>DevExpress.Data.v14.1.dll</td><td>DEVEXP~1.DLL|DevExpress.Data.v14.1.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\Components\DevExpress.Data.v14.1.dll</td><td>1</td><td/></row>
-		<row><td>devexpress.images.v14.1.dll</td><td>DevExpress.Images.v14.1.dll</td><td>DEVEXP~1.DLL|DevExpress.Images.v14.1.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\Components\DevExpress.Images.v14.1.dll</td><td>1</td><td/></row>
-		<row><td>devexpress.office.v14.1.core</td><td>DevExpress.Office.v14.1.Core.dll</td><td>DEVEXP~1.DLL|DevExpress.Office.v14.1.Core.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\Components\DevExpress.Office.v14.1.Core.dll</td><td>1</td><td/></row>
-		<row><td>devexpress.office.v14.1.core1</td><td>DevExpress.Office.v14.1.Core.resources.dll</td><td>DEVEXP~1.DLL|DevExpress.Office.v14.1.Core.resources.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\Components\zh-Hans\DevExpress.Office.v14.1.Core.resources.dll</td><td>1</td><td/></row>
-		<row><td>devexpress.printing.v14.1.co</td><td>DevExpress.Printing.v14.1.Core.dll</td><td>DEVEXP~1.DLL|DevExpress.Printing.v14.1.Core.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\Components\DevExpress.Printing.v14.1.Core.dll</td><td>1</td><td/></row>
-		<row><td>devexpress.printing.v14.1.co1</td><td>DevExpress.Printing.v14.1.Core.resources.dll</td><td>DEVEXP~1.DLL|DevExpress.Printing.v14.1.Core.resources.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\Components\zh-Hans\DevExpress.Printing.v14.1.Core.resources.dll</td><td>1</td><td/></row>
-		<row><td>devexpress.richedit.v14.1.co</td><td>DevExpress.RichEdit.v14.1.Core.dll</td><td>DEVEXP~1.DLL|DevExpress.RichEdit.v14.1.Core.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\Components\DevExpress.RichEdit.v14.1.Core.dll</td><td>1</td><td/></row>
-		<row><td>devexpress.richedit.v14.1.co1</td><td>DevExpress.RichEdit.v14.1.Core.resources.dll</td><td>DEVEXP~1.DLL|DevExpress.RichEdit.v14.1.Core.resources.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\Components\zh-Hans\DevExpress.RichEdit.v14.1.Core.resources.dll</td><td>1</td><td/></row>
-		<row><td>devexpress.sparkline.v14.1.c</td><td>DevExpress.Sparkline.v14.1.Core.dll</td><td>DEVEXP~1.DLL|DevExpress.Sparkline.v14.1.Core.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\Components\DevExpress.Sparkline.v14.1.Core.dll</td><td>1</td><td/></row>
-		<row><td>devexpress.sparkline.v14.1.c1</td><td>DevExpress.Sparkline.v14.1.Core.resources.dll</td><td>DEVEXP~1.DLL|DevExpress.Sparkline.v14.1.Core.resources.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\Components\zh-Hans\DevExpress.Sparkline.v14.1.Core.resources.dll</td><td>1</td><td/></row>
-		<row><td>devexpress.utils.v14.1.dll</td><td>DevExpress.Utils.v14.1.dll</td><td>DEVEXP~1.DLL|DevExpress.Utils.v14.1.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\Components\DevExpress.Utils.v14.1.dll</td><td>1</td><td/></row>
-		<row><td>devexpress.utils.v14.1.resou</td><td>DevExpress.Utils.v14.1.resources.dll</td><td>DEVEXP~1.DLL|DevExpress.Utils.v14.1.resources.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\Components\zh-Hans\DevExpress.Utils.v14.1.resources.dll</td><td>1</td><td/></row>
-		<row><td>devexpress.xtrabars.v14.1.dl</td><td>DevExpress.XtraBars.v14.1.dll</td><td>DEVEXP~1.DLL|DevExpress.XtraBars.v14.1.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\Components\DevExpress.XtraBars.v14.1.dll</td><td>1</td><td/></row>
-		<row><td>devexpress.xtrabars.v14.1.re</td><td>DevExpress.XtraBars.v14.1.resources.dll</td><td>DEVEXP~1.DLL|DevExpress.XtraBars.v14.1.resources.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\Components\zh-Hans\DevExpress.XtraBars.v14.1.resources.dll</td><td>1</td><td/></row>
-		<row><td>devexpress.xtraeditors.v14.1</td><td>DevExpress.XtraEditors.v14.1.dll</td><td>DEVEXP~1.DLL|DevExpress.XtraEditors.v14.1.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\Components\DevExpress.XtraEditors.v14.1.dll</td><td>1</td><td/></row>
-		<row><td>devexpress.xtraeditors.v14.11</td><td>DevExpress.XtraEditors.v14.1.resources.dll</td><td>DEVEXP~1.DLL|DevExpress.XtraEditors.v14.1.resources.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\Components\zh-Hans\DevExpress.XtraEditors.v14.1.resources.dll</td><td>1</td><td/></row>
-		<row><td>devexpress.xtragrid.v14.1.dl</td><td>DevExpress.XtraGrid.v14.1.dll</td><td>DEVEXP~1.DLL|DevExpress.XtraGrid.v14.1.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\Components\DevExpress.XtraGrid.v14.1.dll</td><td>1</td><td/></row>
-		<row><td>devexpress.xtragrid.v14.1.re</td><td>DevExpress.XtraGrid.v14.1.resources.dll</td><td>DEVEXP~1.DLL|DevExpress.XtraGrid.v14.1.resources.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\Components\zh-Hans\DevExpress.XtraGrid.v14.1.resources.dll</td><td>1</td><td/></row>
-		<row><td>devexpress.xtralayout.v14.1.</td><td>DevExpress.XtraLayout.v14.1.dll</td><td>DEVEXP~1.DLL|DevExpress.XtraLayout.v14.1.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\Components\DevExpress.XtraLayout.v14.1.dll</td><td>1</td><td/></row>
-		<row><td>devexpress.xtralayout.v14.1.1</td><td>DevExpress.XtraLayout.v14.1.resources.dll</td><td>DEVEXP~1.DLL|DevExpress.XtraLayout.v14.1.resources.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\Components\zh-Hans\DevExpress.XtraLayout.v14.1.resources.dll</td><td>1</td><td/></row>
-		<row><td>devexpress.xtranavbar.v14.1.</td><td>DevExpress.XtraNavBar.v14.1.dll</td><td>DEVEXP~1.DLL|DevExpress.XtraNavBar.v14.1.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\Components\DevExpress.XtraNavBar.v14.1.dll</td><td>1</td><td/></row>
-		<row><td>devexpress.xtranavbar.v14.1.1</td><td>DevExpress.XtraNavBar.v14.1.resources.dll</td><td>DEVEXP~1.DLL|DevExpress.XtraNavBar.v14.1.resources.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\Components\zh-Hans\DevExpress.XtraNavBar.v14.1.resources.dll</td><td>1</td><td/></row>
-		<row><td>devexpress.xtraprinting.v14.</td><td>DevExpress.XtraPrinting.v14.1.dll</td><td>DEVEXP~1.DLL|DevExpress.XtraPrinting.v14.1.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\Components\DevExpress.XtraPrinting.v14.1.dll</td><td>1</td><td/></row>
-		<row><td>devexpress.xtratreelist.v14.</td><td>DevExpress.XtraTreeList.v14.1.dll</td><td>DEVEXP~1.DLL|DevExpress.XtraTreeList.v14.1.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\Components\DevExpress.XtraTreeList.v14.1.dll</td><td>1</td><td/></row>
-		<row><td>devexpress.xtratreelist.v14.1</td><td>DevExpress.XtraTreeList.v14.1.resources.dll</td><td>DEVEXP~1.DLL|DevExpress.XtraTreeList.v14.1.resources.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\Components\zh-Hans\DevExpress.XtraTreeList.v14.1.resources.dll</td><td>1</td><td/></row>
-		<row><td>devexpress.xtraverticalgrid.</td><td>DevExpress.XtraVerticalGrid.v14.1.dll</td><td>DEVEXP~1.DLL|DevExpress.XtraVerticalGrid.v14.1.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\Components\DevExpress.XtraVerticalGrid.v14.1.dll</td><td>1</td><td/></row>
-		<row><td>devexpress.xtraverticalgrid.1</td><td>DevExpress.XtraVerticalGrid.v14.1.resources.dll</td><td>DEVEXP~1.DLL|DevExpress.XtraVerticalGrid.v14.1.resources.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\Components\zh-Hans\DevExpress.XtraVerticalGrid.v14.1.resources.dll</td><td>1</td><td/></row>
-		<row><td>devexpress.xtrawizard.v14.1.</td><td>DevExpress.XtraWizard.v14.1.dll</td><td>DEVEXP~1.DLL|DevExpress.XtraWizard.v14.1.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\Components\DevExpress.XtraWizard.v14.1.dll</td><td>1</td><td/></row>
-		<row><td>devexpress.xtrawizard.v14.1.1</td><td>DevExpress.XtraWizard.v14.1.resources.dll</td><td>DEVEXP~1.DLL|DevExpress.XtraWizard.v14.1.resources.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\Components\zh-Hans\DevExpress.XtraWizard.v14.1.resources.dll</td><td>1</td><td/></row>
-		<row><td>fastreport.bars.dll</td><td>FastReport.Bars.dll</td><td>FASTRE~1.DLL|FastReport.Bars.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\Components\FastReport.Bars.dll</td><td>1</td><td/></row>
-		<row><td>fastreport.dll</td><td>FastReport.dll</td><td>FASTRE~1.DLL|FastReport.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\Components\FastReport.dll</td><td>1</td><td/></row>
-		<row><td>fastreport.editor.dll</td><td>FastReport.Editor.dll</td><td>FASTRE~1.DLL|FastReport.Editor.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\Components\FastReport.Editor.dll</td><td>1</td><td/></row>
-		<row><td>gzipencoder.dll</td><td>GZipEncoder.dll</td><td>GZIPEN~1.DLL|GZipEncoder.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\GZipEncoder.dll</td><td>1</td><td/></row>
-		<row><td>insight_ws.exe</td><td>Insight_WS.exe</td><td>INSIGH~1.EXE|Insight WS.exe</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\Insight WS.exe</td><td>1</td><td/></row>
-		<row><td>insight_ws.exe.config</td><td>ISX_DEFAULTCOMPONENT2</td><td>INSIGH~1.CON|Insight WS.exe.Config</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\Insight WS.exe.Config</td><td>1</td><td/></row>
-		<row><td>masterdatas.dll</td><td>MasterDatas.dll</td><td>MASTER~1.DLL|MasterDatas.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\MasterDatas.dll</td><td>1</td><td/></row>
-		<row><td>report.dll</td><td>Report.dll</td><td>Report.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\Report.dll</td><td>1</td><td/></row>
-		<row><td>scm.dll</td><td>SCM.dll</td><td>SCM.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\Business\SCM.dll</td><td>1</td><td/></row>
-		<row><td>settlement.dll</td><td>Settlement.dll</td><td>SETTLE~1.DLL|Settlement.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\Business\Settlement.dll</td><td>1</td><td/></row>
-		<row><td>storage.dll</td><td>Storage.dll</td><td>Storage.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Insight_WS3\Release\Client\Business\Storage.dll</td><td>1</td><td/></row>
+		<row><td>base.dll</td><td>Base.dll</td><td>Base.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Project\Insight_WS3\Release\Client\Base.dll</td><td>1</td><td/></row>
+		<row><td>chinese__simplified_.frl</td><td>ISX_DEFAULTCOMPONENT</td><td>CHINES~1.FRL|Chinese (Simplified).frl</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Project\Insight_WS3\Release\Client\Components\Chinese (Simplified).frl</td><td>1</td><td/></row>
+		<row><td>common.dll</td><td>Common.dll</td><td>Common.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Project\Insight_WS3\Release\Client\Common.dll</td><td>1</td><td/></row>
+		<row><td>devexpress.bonusskins.v14.1.</td><td>DevExpress.BonusSkins.v14.1.dll</td><td>DEVEXP~1.DLL|DevExpress.BonusSkins.v14.1.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Project\Insight_WS3\Release\Client\Components\DevExpress.BonusSkins.v14.1.dll</td><td>1</td><td/></row>
+		<row><td>devexpress.data.v14.1.dll</td><td>DevExpress.Data.v14.1.dll</td><td>DEVEXP~1.DLL|DevExpress.Data.v14.1.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Project\Insight_WS3\Release\Client\Components\DevExpress.Data.v14.1.dll</td><td>1</td><td/></row>
+		<row><td>devexpress.images.v14.1.dll</td><td>DevExpress.Images.v14.1.dll</td><td>DEVEXP~1.DLL|DevExpress.Images.v14.1.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Project\Insight_WS3\Release\Client\Components\DevExpress.Images.v14.1.dll</td><td>1</td><td/></row>
+		<row><td>devexpress.office.v14.1.core</td><td>DevExpress.Office.v14.1.Core.dll</td><td>DEVEXP~1.DLL|DevExpress.Office.v14.1.Core.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Project\Insight_WS3\Release\Client\Components\DevExpress.Office.v14.1.Core.dll</td><td>1</td><td/></row>
+		<row><td>devexpress.office.v14.1.core1</td><td>DevExpress.Office.v14.1.Core.resources.dll</td><td>DEVEXP~1.DLL|DevExpress.Office.v14.1.Core.resources.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Project\Insight_WS3\Release\Client\Components\zh-Hans\DevExpress.Office.v14.1.Core.resources.dll</td><td>1</td><td/></row>
+		<row><td>devexpress.printing.v14.1.co</td><td>DevExpress.Printing.v14.1.Core.dll</td><td>DEVEXP~1.DLL|DevExpress.Printing.v14.1.Core.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Project\Insight_WS3\Release\Client\Components\DevExpress.Printing.v14.1.Core.dll</td><td>1</td><td/></row>
+		<row><td>devexpress.printing.v14.1.co1</td><td>DevExpress.Printing.v14.1.Core.resources.dll</td><td>DEVEXP~1.DLL|DevExpress.Printing.v14.1.Core.resources.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Project\Insight_WS3\Release\Client\Components\zh-Hans\DevExpress.Printing.v14.1.Core.resources.dll</td><td>1</td><td/></row>
+		<row><td>devexpress.richedit.v14.1.co</td><td>DevExpress.RichEdit.v14.1.Core.dll</td><td>DEVEXP~1.DLL|DevExpress.RichEdit.v14.1.Core.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Project\Insight_WS3\Release\Client\Components\DevExpress.RichEdit.v14.1.Core.dll</td><td>1</td><td/></row>
+		<row><td>devexpress.richedit.v14.1.co1</td><td>DevExpress.RichEdit.v14.1.Core.resources.dll</td><td>DEVEXP~1.DLL|DevExpress.RichEdit.v14.1.Core.resources.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Project\Insight_WS3\Release\Client\Components\zh-Hans\DevExpress.RichEdit.v14.1.Core.resources.dll</td><td>1</td><td/></row>
+		<row><td>devexpress.sparkline.v14.1.c</td><td>DevExpress.Sparkline.v14.1.Core.dll</td><td>DEVEXP~1.DLL|DevExpress.Sparkline.v14.1.Core.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Project\Insight_WS3\Release\Client\Components\DevExpress.Sparkline.v14.1.Core.dll</td><td>1</td><td/></row>
+		<row><td>devexpress.sparkline.v14.1.c1</td><td>DevExpress.Sparkline.v14.1.Core.resources.dll</td><td>DEVEXP~1.DLL|DevExpress.Sparkline.v14.1.Core.resources.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Project\Insight_WS3\Release\Client\Components\zh-Hans\DevExpress.Sparkline.v14.1.Core.resources.dll</td><td>1</td><td/></row>
+		<row><td>devexpress.utils.v14.1.dll</td><td>DevExpress.Utils.v14.1.dll</td><td>DEVEXP~1.DLL|DevExpress.Utils.v14.1.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Project\Insight_WS3\Release\Client\Components\DevExpress.Utils.v14.1.dll</td><td>1</td><td/></row>
+		<row><td>devexpress.utils.v14.1.resou</td><td>DevExpress.Utils.v14.1.resources.dll</td><td>DEVEXP~1.DLL|DevExpress.Utils.v14.1.resources.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Project\Insight_WS3\Release\Client\Components\zh-Hans\DevExpress.Utils.v14.1.resources.dll</td><td>1</td><td/></row>
+		<row><td>devexpress.xtrabars.v14.1.dl</td><td>DevExpress.XtraBars.v14.1.dll</td><td>DEVEXP~1.DLL|DevExpress.XtraBars.v14.1.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Project\Insight_WS3\Release\Client\Components\DevExpress.XtraBars.v14.1.dll</td><td>1</td><td/></row>
+		<row><td>devexpress.xtrabars.v14.1.re</td><td>DevExpress.XtraBars.v14.1.resources.dll</td><td>DEVEXP~1.DLL|DevExpress.XtraBars.v14.1.resources.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Project\Insight_WS3\Release\Client\Components\zh-Hans\DevExpress.XtraBars.v14.1.resources.dll</td><td>1</td><td/></row>
+		<row><td>devexpress.xtraeditors.v14.1</td><td>DevExpress.XtraEditors.v14.1.dll</td><td>DEVEXP~1.DLL|DevExpress.XtraEditors.v14.1.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Project\Insight_WS3\Release\Client\Components\DevExpress.XtraEditors.v14.1.dll</td><td>1</td><td/></row>
+		<row><td>devexpress.xtraeditors.v14.11</td><td>DevExpress.XtraEditors.v14.1.resources.dll</td><td>DEVEXP~1.DLL|DevExpress.XtraEditors.v14.1.resources.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Project\Insight_WS3\Release\Client\Components\zh-Hans\DevExpress.XtraEditors.v14.1.resources.dll</td><td>1</td><td/></row>
+		<row><td>devexpress.xtragrid.v14.1.dl</td><td>DevExpress.XtraGrid.v14.1.dll</td><td>DEVEXP~1.DLL|DevExpress.XtraGrid.v14.1.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Project\Insight_WS3\Release\Client\Components\DevExpress.XtraGrid.v14.1.dll</td><td>1</td><td/></row>
+		<row><td>devexpress.xtragrid.v14.1.re</td><td>DevExpress.XtraGrid.v14.1.resources.dll</td><td>DEVEXP~1.DLL|DevExpress.XtraGrid.v14.1.resources.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Project\Insight_WS3\Release\Client\Components\zh-Hans\DevExpress.XtraGrid.v14.1.resources.dll</td><td>1</td><td/></row>
+		<row><td>devexpress.xtralayout.v14.1.</td><td>DevExpress.XtraLayout.v14.1.dll</td><td>DEVEXP~1.DLL|DevExpress.XtraLayout.v14.1.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Project\Insight_WS3\Release\Client\Components\DevExpress.XtraLayout.v14.1.dll</td><td>1</td><td/></row>
+		<row><td>devexpress.xtralayout.v14.1.1</td><td>DevExpress.XtraLayout.v14.1.resources.dll</td><td>DEVEXP~1.DLL|DevExpress.XtraLayout.v14.1.resources.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Project\Insight_WS3\Release\Client\Components\zh-Hans\DevExpress.XtraLayout.v14.1.resources.dll</td><td>1</td><td/></row>
+		<row><td>devexpress.xtranavbar.v14.1.</td><td>DevExpress.XtraNavBar.v14.1.dll</td><td>DEVEXP~1.DLL|DevExpress.XtraNavBar.v14.1.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Project\Insight_WS3\Release\Client\Components\DevExpress.XtraNavBar.v14.1.dll</td><td>1</td><td/></row>
+		<row><td>devexpress.xtranavbar.v14.1.1</td><td>DevExpress.XtraNavBar.v14.1.resources.dll</td><td>DEVEXP~1.DLL|DevExpress.XtraNavBar.v14.1.resources.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Project\Insight_WS3\Release\Client\Components\zh-Hans\DevExpress.XtraNavBar.v14.1.resources.dll</td><td>1</td><td/></row>
+		<row><td>devexpress.xtraprinting.v14.</td><td>DevExpress.XtraPrinting.v14.1.dll</td><td>DEVEXP~1.DLL|DevExpress.XtraPrinting.v14.1.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Project\Insight_WS3\Release\Client\Components\DevExpress.XtraPrinting.v14.1.dll</td><td>1</td><td/></row>
+		<row><td>devexpress.xtraprinting.v14.1</td><td>DevExpress.XtraPrinting.v14.1.resources.dll</td><td>DEVEXP~1.DLL|DevExpress.XtraPrinting.v14.1.resources.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Project\Insight_WS3\Release\Client\Components\zh-Hans\DevExpress.XtraPrinting.v14.1.resources.dll</td><td>1</td><td/></row>
+		<row><td>devexpress.xtratreelist.v14.</td><td>DevExpress.XtraTreeList.v14.1.dll</td><td>DEVEXP~1.DLL|DevExpress.XtraTreeList.v14.1.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Project\Insight_WS3\Release\Client\Components\DevExpress.XtraTreeList.v14.1.dll</td><td>1</td><td/></row>
+		<row><td>devexpress.xtratreelist.v14.1</td><td>DevExpress.XtraTreeList.v14.1.resources.dll</td><td>DEVEXP~1.DLL|DevExpress.XtraTreeList.v14.1.resources.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Project\Insight_WS3\Release\Client\Components\zh-Hans\DevExpress.XtraTreeList.v14.1.resources.dll</td><td>1</td><td/></row>
+		<row><td>devexpress.xtraverticalgrid.</td><td>DevExpress.XtraVerticalGrid.v14.1.dll</td><td>DEVEXP~1.DLL|DevExpress.XtraVerticalGrid.v14.1.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Project\Insight_WS3\Release\Client\Components\DevExpress.XtraVerticalGrid.v14.1.dll</td><td>1</td><td/></row>
+		<row><td>devexpress.xtraverticalgrid.1</td><td>DevExpress.XtraVerticalGrid.v14.1.resources.dll</td><td>DEVEXP~1.DLL|DevExpress.XtraVerticalGrid.v14.1.resources.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Project\Insight_WS3\Release\Client\Components\zh-Hans\DevExpress.XtraVerticalGrid.v14.1.resources.dll</td><td>1</td><td/></row>
+		<row><td>devexpress.xtrawizard.v14.1.</td><td>DevExpress.XtraWizard.v14.1.dll</td><td>DEVEXP~1.DLL|DevExpress.XtraWizard.v14.1.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Project\Insight_WS3\Release\Client\Components\DevExpress.XtraWizard.v14.1.dll</td><td>1</td><td/></row>
+		<row><td>devexpress.xtrawizard.v14.1.1</td><td>DevExpress.XtraWizard.v14.1.resources.dll</td><td>DEVEXP~1.DLL|DevExpress.XtraWizard.v14.1.resources.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Project\Insight_WS3\Release\Client\Components\zh-Hans\DevExpress.XtraWizard.v14.1.resources.dll</td><td>1</td><td/></row>
+		<row><td>eula.rtf</td><td>ISX_DEFAULTCOMPONENT2</td><td>EULA.rtf</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Project\Insight_WS3\Release\Client\EULA.rtf</td><td>1</td><td/></row>
+		<row><td>fastreport.bars.dll</td><td>FastReport.Bars.dll</td><td>FASTRE~1.DLL|FastReport.Bars.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Project\Insight_WS3\Release\Client\Components\FastReport.Bars.dll</td><td>1</td><td/></row>
+		<row><td>fastreport.dll</td><td>FastReport.dll</td><td>FASTRE~1.DLL|FastReport.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Project\Insight_WS3\Release\Client\Components\FastReport.dll</td><td>1</td><td/></row>
+		<row><td>fastreport.editor.dll</td><td>FastReport.Editor.dll</td><td>FASTRE~1.DLL|FastReport.Editor.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Project\Insight_WS3\Release\Client\Components\FastReport.Editor.dll</td><td>1</td><td/></row>
+		<row><td>gzipencoder.dll</td><td>GZipEncoder.dll</td><td>GZIPEN~1.DLL|GZipEncoder.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Project\Insight_WS3\Release\Client\GZipEncoder.dll</td><td>1</td><td/></row>
+		<row><td>insight_ws.exe</td><td>Insight_WS.exe</td><td>INSIGH~1.EXE|Insight WS.exe</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Project\Insight_WS3\Release\Client\Insight WS.exe</td><td>1</td><td/></row>
+		<row><td>insight_ws.exe.config</td><td>ISX_DEFAULTCOMPONENT2</td><td>INSIGH~1.CON|Insight WS.exe.config</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Project\Insight_WS3\Release\Client\Insight WS.exe.config</td><td>1</td><td/></row>
+		<row><td>masterdatas.dll</td><td>MasterDatas.dll</td><td>MASTER~1.DLL|MasterDatas.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Project\Insight_WS3\Release\Client\MasterDatas.dll</td><td>1</td><td/></row>
+		<row><td>report.dll</td><td>Report.dll</td><td>Report.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Project\Insight_WS3\Release\Client\Report.dll</td><td>1</td><td/></row>
 	</table>
 
 	<table name="FileSFPCatalog">
@@ -2171,56 +2164,53 @@
 		<col def="S0">FTPLocation</col>
 		<col def="S0">HTTPLocation</col>
 		<col def="S0">Miscellaneous</col>
-		<row><td>Base.dll</td><td/><td/><td>_D287A84D_6C84_4235_90AC_2D3011AB1464_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>CRM.dll</td><td/><td/><td>_5228152E_5C74_46C1_924A_07C2FD5AA35D_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>Common.dll</td><td/><td/><td>_FF375498_6A15_4D5A_8007_6C8C42D42BF6_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>DevExpress.Data.v14.1.dll</td><td/><td/><td>_87D3397A_DE98_4222_BE92_191E8C9F70C1_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>DevExpress.Images.v14.1.dll</td><td/><td/><td>_362818B1_92D6_4F77_AF1D_C5243782CD1D_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>DevExpress.Office.v14.1.Core.dll</td><td/><td/><td>_D8B2FD1C_FD46_4085_99E0_382FA52E8502_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>DevExpress.Office.v14.1.Core.resources.dll</td><td/><td/><td>_3592D749_5645_4B10_BCB2_896B2C0BD632_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>DevExpress.Printing.v14.1.Core.dll</td><td/><td/><td>_82EC343C_4D4E_45F5_9E13_8BD14839887E_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>DevExpress.Printing.v14.1.Core.resources.dll</td><td/><td/><td>_D9F29CDE_A659_43DB_A298_3430731A9625_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>DevExpress.RichEdit.v14.1.Core.dll</td><td/><td/><td>_D0E49A77_29F7_4146_9B53_8877DABD26F8_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>DevExpress.RichEdit.v14.1.Core.resources.dll</td><td/><td/><td>_7370DBBB_47F5_46E7_AEEE_636D0500A870_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>DevExpress.Sparkline.v14.1.Core.dll</td><td/><td/><td>_3D0C4A10_FB34_474A_94EF_43360C88B1E5_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>DevExpress.Sparkline.v14.1.Core.resources.dll</td><td/><td/><td>_26FE5655_9EF7_434E_8225_A93468B4C4E3_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>DevExpress.Utils.v14.1.dll</td><td/><td/><td>_39F79960_3085_4E73_BC9E_79EDEB2353FC_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>DevExpress.Utils.v14.1.resources.dll</td><td/><td/><td>_9B2CED61_9958_47D3_B671_BD464DC4AD30_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>DevExpress.XtraBars.v14.1.dll</td><td/><td/><td>_BEECDDD1_14F4_4988_A9C8_26F8E948454C_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>DevExpress.XtraBars.v14.1.resources.dll</td><td/><td/><td>_C0C2179F_9215_4991_8586_D4A0BC0B082F_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>DevExpress.XtraEditors.v14.1.dll</td><td/><td/><td>_AF605976_FAB1_49AE_A90D_501F31FD1889_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>DevExpress.XtraEditors.v14.1.resources.dll</td><td/><td/><td>_401C2A22_7E41_42A6_8810_0719E9BEC13E_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>DevExpress.XtraGrid.v14.1.dll</td><td/><td/><td>_F3EB4845_5593_4D16_928D_CB0DD69F7484_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>DevExpress.XtraGrid.v14.1.resources.dll</td><td/><td/><td>_F69A3E5E_657A_478F_ACB3_F217207E533E_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>DevExpress.XtraLayout.v14.1.dll</td><td/><td/><td>_03B44E71_AE91_4AFC_873D_0E2F82C66BF1_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>DevExpress.XtraLayout.v14.1.resources.dll</td><td/><td/><td>_1469362A_49BA_4A7B_95D1_48B0E91A1875_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>DevExpress.XtraNavBar.v14.1.dll</td><td/><td/><td>_800658A8_E02E_4A3C_997F_6E86290C4E3B_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>DevExpress.XtraNavBar.v14.1.resources.dll</td><td/><td/><td>_7D325A77_0495_488B_A813_BDA76A840E2E_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>DevExpress.XtraPrinting.v14.1.dll</td><td/><td/><td>_39A8F4C9_CDDA_4FB6_A5EA_24F61ED596B6_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>DevExpress.XtraTreeList.v14.1.dll</td><td/><td/><td>_A59F525F_C1B1_46BA_9600_3C964EB3C605_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>DevExpress.XtraTreeList.v14.1.resources.dll</td><td/><td/><td>_86FDF446_5D26_4F2E_AAF8_109A978C8C3D_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>DevExpress.XtraVerticalGrid.v14.1.dll</td><td/><td/><td>_63444813_31A7_4A39_A124_8B53522970A1_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>DevExpress.XtraVerticalGrid.v14.1.resources.dll</td><td/><td/><td>_275CDDFD_47A1_4C10_A5EA_9CA9CFC7E08F_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>DevExpress.XtraWizard.v14.1.dll</td><td/><td/><td>_BB1DFAFB_E7D4_45B2_8ED8_68D13DB9A485_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>DevExpress.XtraWizard.v14.1.resources.dll</td><td/><td/><td>_E662474F_26A4_4B1D_888D_968A6D2E8598_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>FastReport.Bars.dll</td><td/><td/><td>_8DEFAB0D_E7F5_4F2E_99FB_D5480FECC060_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>FastReport.Editor.dll</td><td/><td/><td>_C31E939E_246D_4D03_867B_C309A7204F66_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>FastReport.dll</td><td/><td/><td>_3675FFD7_103B_4F64_B712_A43ED393F286_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>GZipEncoder.dll</td><td/><td/><td>_3CA9BFD2_7EE8_403F_9A9F_8ED3932CBD4B_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>ISX_DEFAULTCOMPONENT</td><td/><td/><td>_390B4277_E0D3_4064_8B35_4175973452CE_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>ISX_DEFAULTCOMPONENT1</td><td/><td/><td>_5AB4E0B9_E9D8_4AE3_AB9A_FA3C7969BF6D_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>Base.dll</td><td/><td/><td>_FDA13F5A_BBD8_49AD_81E1_AEE713FC5309_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>Common.dll</td><td/><td/><td>_BEE0098A_C657_4BAC_9703_265CA8ADCF12_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>DevExpress.BonusSkins.v14.1.dll</td><td/><td/><td>_3942E46E_C963_4B8C_9901_E1B79533B09E_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>DevExpress.Data.v14.1.dll</td><td/><td/><td>_A6EBA65A_5BF1_4836_8957_BA05754EE770_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>DevExpress.Images.v14.1.dll</td><td/><td/><td>_4CDF5C01_8FA4_4F3D_95C3_14B935E65ECF_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>DevExpress.Office.v14.1.Core.dll</td><td/><td/><td>_FA961245_4F30_438D_9628_494287528B72_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>DevExpress.Office.v14.1.Core.resources.dll</td><td/><td/><td>_5ED38512_C768_451A_B149_86752A9EE59E_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>DevExpress.Printing.v14.1.Core.dll</td><td/><td/><td>_0A4EF56C_F302_4824_B122_C277FD8E61B3_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>DevExpress.Printing.v14.1.Core.resources.dll</td><td/><td/><td>_B92B338A_B1E8_49EA_B959_75188528879A_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>DevExpress.RichEdit.v14.1.Core.dll</td><td/><td/><td>_5CEFF7A0_32C7_4D74_80DB_0D7EAB652305_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>DevExpress.RichEdit.v14.1.Core.resources.dll</td><td/><td/><td>_D62A2559_3596_443C_BABC_DF3767432B8D_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>DevExpress.Sparkline.v14.1.Core.dll</td><td/><td/><td>_7FAA9F1F_2B31_4465_9E3C_F86E8BC8196A_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>DevExpress.Sparkline.v14.1.Core.resources.dll</td><td/><td/><td>_3EB0C951_5A57_409C_A69D_4F43CAB5D5DD_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>DevExpress.Utils.v14.1.dll</td><td/><td/><td>_35AA2FFA_BFA9_4225_A226_57E5C76695C6_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>DevExpress.Utils.v14.1.resources.dll</td><td/><td/><td>_E5316F9A_B811_47A5_B5CB_AA78BC3FBEA7_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>DevExpress.XtraBars.v14.1.dll</td><td/><td/><td>_331B550C_CC2E_40B9_8651_38594AB118AF_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>DevExpress.XtraBars.v14.1.resources.dll</td><td/><td/><td>_0968E8BA_A18C_402C_968C_D784DEB682F4_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>DevExpress.XtraEditors.v14.1.dll</td><td/><td/><td>_1149663C_C2FA_4CBA_B22E_AD30E81A6FE7_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>DevExpress.XtraEditors.v14.1.resources.dll</td><td/><td/><td>_EF189174_A8BB_4060_A8C0_265E29E90A6E_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>DevExpress.XtraGrid.v14.1.dll</td><td/><td/><td>_A8C6DF03_6AB3_4480_A315_89C6B09489F3_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>DevExpress.XtraGrid.v14.1.resources.dll</td><td/><td/><td>_52EA96F0_D262_4A7B_8DB3_8CB49B873092_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>DevExpress.XtraLayout.v14.1.dll</td><td/><td/><td>_EA6D0A57_155D_44C3_BC11_F98E2427A281_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>DevExpress.XtraLayout.v14.1.resources.dll</td><td/><td/><td>_110A678E_1558_408A_824A_83E93EEF5D61_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>DevExpress.XtraNavBar.v14.1.dll</td><td/><td/><td>_532D5926_782D_472F_9FA3_6FEEE21CF679_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>DevExpress.XtraNavBar.v14.1.resources.dll</td><td/><td/><td>_24FD32D7_E773_4C58_868C_0BAB40FCEF4B_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>DevExpress.XtraPrinting.v14.1.dll</td><td/><td/><td>_CDEA444F_15B7_41F2_98A0_D3DC05979449_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>DevExpress.XtraPrinting.v14.1.resources.dll</td><td/><td/><td>_78561A1C_A0BA_410A_80B5_C5D2826D89A8_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>DevExpress.XtraTreeList.v14.1.dll</td><td/><td/><td>_5E2D3741_7E39_4AE6_91F3_B66A2787168D_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>DevExpress.XtraTreeList.v14.1.resources.dll</td><td/><td/><td>_6F1CBFCD_E104_482E_A331_0C6BF4C23A5D_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>DevExpress.XtraVerticalGrid.v14.1.dll</td><td/><td/><td>_BB0F1E10_D46E_4743_98AF_7D76D062F88B_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>DevExpress.XtraVerticalGrid.v14.1.resources.dll</td><td/><td/><td>_F025F5F0_F8CC_4147_89EC_2DD2DBEFDE1C_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>DevExpress.XtraWizard.v14.1.dll</td><td/><td/><td>_F7E1E177_5026_429C_807B_99414B246540_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>DevExpress.XtraWizard.v14.1.resources.dll</td><td/><td/><td>_DE62C518_B938_4D3A_A10D_C33417A6EBA3_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>FastReport.Bars.dll</td><td/><td/><td>_ED3DC984_D565_4C15_9FAB_5A64180A6448_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>FastReport.Editor.dll</td><td/><td/><td>_F9568655_A782_45BD_8479_07EA724C13C0_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>FastReport.dll</td><td/><td/><td>_B9D38304_993E_48CD_98D8_11E4FCBA385C_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>GZipEncoder.dll</td><td/><td/><td>_3BF2AE51_6807_48FD_873D_FD383527A52C_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>ISX_DEFAULTCOMPONENT</td><td/><td/><td>_8B17351F_5D06_42C4_83E8_FF7D73F63D8F_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>ISX_DEFAULTCOMPONENT1</td><td/><td/><td>_A6F26619_4092_4A1B_B9AD_241C19B50552_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT2</td><td/><td/><td>_0A22214C_8BD7_4D9B_838F_A9E9D8402369_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT3</td><td/><td/><td>_5E0DF899_8CA6_4F96_9E45_5FC275768C12_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>ISX_DEFAULTCOMPONENT4</td><td/><td/><td>_014D6124_8006_490B_A910_A49DE1AADCC1_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>Insight_WS.exe</td><td/><td/><td>_981977B6_65DE_4CDD_A6B3_0C230FEFB8F7_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>MasterDatas.dll</td><td/><td/><td>_F7CAD4FE_5AD6_4C59_A61A_C1E02E678CAD_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>Insight_WS.exe</td><td/><td/><td>_BC5D6205_5976_42A1_B0B6_DAA7B8DD7C7A_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>MasterDatas.dll</td><td/><td/><td>_780C001B_6532_40E6_A880_8C002DA5A0B9_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>NewComponent1</td><td/><td/><td>_29983027_2F43_4105_ADB1_1AE1BA2C6BE0_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>NewComponent2</td><td/><td/><td>_BF8F01E0_CB0F_48B3_A02A_151050E4DC1F_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>NewComponent3</td><td/><td/><td>_6C394128_D5BC_4987_937A_76F753B9E5CE_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>Report.dll</td><td/><td/><td>_C93DB0C3_856D_4613_A928_C6966452E1E5_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>SCM.dll</td><td/><td/><td>_53CAA60E_1348_4A15_AED9_06F0A712FF61_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>Settlement.dll</td><td/><td/><td>_E08520F5_D806_4750_B3BE_9844396433E1_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>Storage.dll</td><td/><td/><td>_07D654C0_BFFD_4E6B_AEFA_55A77371D125_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>Report.dll</td><td/><td/><td>_10254AAA_24A3_49C7_9AF9_FAFDAA5EA103_FILTER</td><td/><td/><td/><td/></row>
 	</table>
 
 	<table name="ISCustomActionReference">
@@ -2850,7 +2840,7 @@
 		<col def="I2">Encoded</col>
 		<col def="S0">Comment</col>
 		<col def="I4">TimeStamp</col>
-		<row><td>COMPANY_NAME</td><td>2052</td><td>Insight Software Ltd.</td><td>0</td><td/><td>-1834763023</td></row>
+		<row><td>COMPANY_NAME</td><td>2052</td><td>Insight Software Ltd.</td><td>0</td><td/><td>1537419637</td></row>
 		<row><td>DN_AlwaysInstall</td><td>2052</td><td>始终安装</td><td>0</td><td/><td>1621341999</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_COLOR</td><td>2052</td><td>系统颜色设置不足以运行 [ProductName]。</td><td>0</td><td/><td>1621341999</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION40CLIENT</td><td>1033</td><td>Microsoft .NET Framework 4.0 Client Package or greater needs to be installed for this installation to continue.</td><td>0</td><td/><td>1621334096</td></row>
@@ -3670,6 +3660,8 @@
 		<row><td>IDS_SHORTCUT_DISPLAY_NAME1</td><td>2052</td><td>Insight Workstation 3</td><td>0</td><td/><td>1621325616</td></row>
 		<row><td>IDS_SHORTCUT_DISPLAY_NAME2</td><td>1033</td><td/><td>0</td><td/><td>1361257264</td></row>
 		<row><td>IDS_SHORTCUT_DISPLAY_NAME2</td><td>2052</td><td>INSIGH~1|Insight WS 3</td><td>0</td><td/><td>967008688</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME3</td><td>1033</td><td/><td>0</td><td/><td>1537468020</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME3</td><td>2052</td><td>LAUNCH~1.EXE|Launch Insight WS.exe</td><td>0</td><td/><td>1537468020</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO</td><td>2052</td><td>从以下服务器列表中选择要连接的数据库服务器。</td><td>0</td><td/><td>1621341999</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO_DB</td><td>2052</td><td>从以下的编录名称列表中，选择您希望将其作为目标的数据库编录。</td><td>0</td><td/><td>1621341999</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO_TEMPLATE</td><td>2052</td><td>[IS_SQLBROWSE_INTRO]</td><td>0</td><td/><td>1621341999</td></row>
@@ -3964,14 +3956,14 @@
 		<row><td>ID_STRING11</td><td>1033</td><td/><td>0</td><td/><td>1621295796</td></row>
 		<row><td>ID_STRING11</td><td>2052</td><td/><td>0</td><td/><td>1621295796</td></row>
 		<row><td>ID_STRING12</td><td>1033</td><td>http://www.</td><td>0</td><td/><td>1621326516</td></row>
-		<row><td>ID_STRING12</td><td>2052</td><td>http://www.InsightSoftwareLtd..com</td><td>0</td><td/><td>-1834763023</td></row>
+		<row><td>ID_STRING12</td><td>2052</td><td>http://www.InsightSoftwareLtd..com</td><td>0</td><td/><td>1537419637</td></row>
 		<row><td>ID_STRING13</td><td>1033</td><td>NEWSHO~1|NewShortcut1</td><td>0</td><td/><td>967033360</td></row>
 		<row><td>ID_STRING13</td><td>2052</td><td>INSIGH~1|Insight WS3</td><td>0</td><td/><td>966990384</td></row>
 		<row><td>ID_STRING14</td><td>1033</td><td>INSIGH~1|Insight WS3</td><td>0</td><td/><td>967025200</td></row>
 		<row><td>ID_STRING14</td><td>2052</td><td>INSIGH~1|Insight WS3</td><td>0</td><td/><td>967025200</td></row>
 		<row><td>ID_STRING2</td><td>1033</td><td/><td>0</td><td/><td>1621296595</td></row>
 		<row><td>ID_STRING2</td><td>2052</td><td/><td>0</td><td/><td>1621296595</td></row>
-		<row><td>ID_STRING3</td><td>2052</td><td>Insight Software Ltd.</td><td>0</td><td/><td>-1834763023</td></row>
+		<row><td>ID_STRING3</td><td>2052</td><td>Insight Software Ltd.</td><td>0</td><td/><td>1537419637</td></row>
 		<row><td>ID_STRING4</td><td>1033</td><td>Launch |Built</td><td>0</td><td/><td>1621339856</td></row>
 		<row><td>ID_STRING4</td><td>2052</td><td>Launch |Built</td><td>0</td><td/><td>1621339856</td></row>
 		<row><td>ID_STRING5</td><td>1033</td><td>INSIGH~1|Insight WS 3</td><td>0</td><td/><td>967023024</td></row>
@@ -4091,7 +4083,8 @@
 		<col def="V0">Data</col>
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I2">ISIconIndex</col>
-		<row><td>ARPPRODUCTICON.exe</td><td/><td>D:\Insight_WS3\Release\Client\Insight WS.exe</td><td>0</td></row>
+		<row><td>ARPPRODUCTICON.exe</td><td/><td>D:\Project\Insight_WS3\Release\Client\Insight WS.exe</td><td>0</td></row>
+		<row><td>Insight_WS.exe_BE1550DE8B204405AA1DCAB3131D8604.exe</td><td/><td>D:\Project\Insight_WS3\Release\Client\Insight WS.exe</td><td>0</td></row>
 		<row><td>NewShortcut11_D77E2608387A4D69927692AEA4630449.exe</td><td/><td>D:\Insight_WS3\Release\Client\Insight WS.exe</td><td>0</td></row>
 		<row><td>NewShortcut1_B21260782A104ED8A2457E20E8482D40.exe</td><td/><td>D:\Insight_WS3\Release\Client\Insight WS.exe</td><td>0</td></row>
 		<row><td>UNINST_Uninstall_I_C1980934217D4849A7338E2963937516.exe</td><td/><td>C:\Program Files (x86)\InstallShield\2013LE\Redist\Language Independent\OS Independent\uninstall.ico</td><td>0</td></row>
@@ -4683,8 +4676,8 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="s72">DirProperty</col>
 		<col def="i2">InstallMode</col>
 		<row><td>FileKey1</td><td>Insight_WS.exe</td><td/><td>insigh_1_insight_software_ltd.</td><td>2</td></row>
-		<row><td>FileKey2</td><td>Insight_WS.exe</td><td/><td>insigh_1_insight_ws3</td><td>2</td></row>
-		<row><td>NewShortcut1</td><td>Insight_WS.exe</td><td/><td>insigh_1_insight_ws3</td><td>2</td></row>
+		<row><td>FileKey2</td><td>Insight_WS.exe</td><td/><td>insigh_1_insight_ws31</td><td>2</td></row>
+		<row><td>Insight_WS.exe</td><td>Insight_WS.exe</td><td/><td>insigh_1_insight_ws31</td><td>2</td></row>
 		<row><td>UNINST_Uninstall_Insight_WS3</td><td>NewComponent3</td><td/><td>insigh_1_insight_ws3</td><td>2</td></row>
 	</table>
 
@@ -4771,8 +4764,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="S255">ISComments</col>
 		<col def="S255">ISShortcutName</col>
 		<col def="I4">ISAttributes</col>
-		<row><td>NewShortcut1</td><td>insigh_1_insight_ws3</td><td>##ID_STRING13##</td><td>Insight_WS.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>NewShortcut1_B21260782A104ED8A2457E20E8482D40.exe</td><td>1</td><td>1</td><td>INSIGHT_WS3</td><td/><td/><td/><td/><td/><td/><td/></row>
-		<row><td>NewShortcut11</td><td>DesktopFolder</td><td>##ID_STRING13##</td><td>Insight_WS.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>NewShortcut11_D77E2608387A4D69927692AEA4630449.exe</td><td>1</td><td>1</td><td>INSIGHT_WS3</td><td/><td/><td/><td/><td/><td/><td/></row>
+		<row><td>Insight_WS.exe</td><td>insigh_1_insight_ws31</td><td>##IDS_SHORTCUT_DISPLAY_NAME3##</td><td>Insight_WS.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>Insight_WS.exe_BE1550DE8B204405AA1DCAB3131D8604.exe</td><td>1</td><td>1</td><td>INSIGHT_WS3</td><td/><td/><td/><td/><td/><td/><td/></row>
 		<row><td>UNINST_Uninstall_Insight_WS3</td><td>insigh_1_insight_ws3</td><td>UNINST|Uninstall Insight WS3</td><td>NewComponent3</td><td>[SystemFolder]msiexec.exe</td><td>/x {211007C3-F1D2-473B-878A-B57239DF2264}</td><td/><td/><td>UNINST_Uninstall_I_C1980934217D4849A7338E2963937516.exe</td><td>0</td><td>1</td><td/><td/><td/><td/><td/><td/><td/><td/></row>
 	</table>
 
