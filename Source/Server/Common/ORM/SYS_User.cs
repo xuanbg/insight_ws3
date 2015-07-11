@@ -18,7 +18,6 @@ namespace Insight.WS.Server.Common.ORM
     [KnownType(typeof(ABS_Contract))]
     [KnownType(typeof(ABS_Delivery))]
     [KnownType(typeof(BASE_Category))]
-    [KnownType(typeof(BIZ_Travel_Apply))]
     [KnownType(typeof(ImageData))]
     [KnownType(typeof(MasterData_Merger))]
     [KnownType(typeof(MDG_Contact))]
@@ -63,7 +62,6 @@ namespace Insight.WS.Server.Common.ORM
             this.ABS_Contract = new HashSet<ABS_Contract>();
             this.ABS_Delivery = new HashSet<ABS_Delivery>();
             this.BASE_Category = new HashSet<BASE_Category>();
-            this.BIZ_Travel_Apply = new HashSet<BIZ_Travel_Apply>();
             this.ImageData = new HashSet<ImageData>();
             this.MasterData_Merger = new HashSet<MasterData_Merger>();
             this.MDG_Contact = new HashSet<MDG_Contact>();
@@ -137,8 +135,6 @@ namespace Insight.WS.Server.Common.ORM
         public virtual ICollection<ABS_Delivery> ABS_Delivery { get; set; }
     	[DataMember]
         public virtual ICollection<BASE_Category> BASE_Category { get; set; }
-    	[DataMember]
-        public virtual ICollection<BIZ_Travel_Apply> BIZ_Travel_Apply { get; set; }
     	[DataMember]
         public virtual ICollection<ImageData> ImageData { get; set; }
     	[DataMember]

@@ -40,6 +40,7 @@ namespace Insight.WS.Server.Common.ORM
     [KnownType(typeof(ABS_Advance))]
     [KnownType(typeof(ABS_Clearing_Item))]
     [KnownType(typeof(ABS_Contract_Subjects))]
+    [KnownType(typeof(MDG_Member))]
     
     public partial class MasterData
     {
@@ -140,5 +141,7 @@ namespace Insight.WS.Server.Common.ORM
         public virtual ICollection<ABS_Clearing_Item> ABS_Clearing_Item { get; set; }
     	[DataMember]
         public virtual ICollection<ABS_Contract_Subjects> ABS_Contract_Subjects { get; set; }
+    	[DataMember]
+        public virtual MDG_Member MDG_Member { get; set; }
     }
 }

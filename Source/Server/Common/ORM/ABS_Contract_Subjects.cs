@@ -18,7 +18,6 @@ namespace Insight.WS.Server.Common.ORM
     [KnownType(typeof(ABS_Contract_GoodsPlan))]
     [KnownType(typeof(BASE_Category))]
     [KnownType(typeof(MasterData))]
-    [KnownType(typeof(BIZ_Reimburse_Detail))]
     [KnownType(typeof(ABS_Contract_FundPlan))]
     
     public partial class ABS_Contract_Subjects
@@ -68,8 +67,6 @@ namespace Insight.WS.Server.Common.ORM
         public virtual BASE_Category BASE_Category { get; set; }
     	[DataMember]
         public virtual MasterData MasterData { get; set; }
-    	[DataMember]
-        public virtual BIZ_Reimburse_Detail BIZ_Reimburse_Detail { get; set; }
     	[DataMember]
         public virtual ICollection<ABS_Contract_FundPlan> ABS_Contract_FundPlan { get; set; }
     }

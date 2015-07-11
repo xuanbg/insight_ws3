@@ -7,15 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Insight.WS.Service.XinFenBao
+namespace Insight.WS.Server.Common.ORM
 {
     using System;
+    using System.Runtime.Serialization;
     using System.Collections.Generic;
     
-    public partial class Countys
+    [DataContract(IsReference = true)]
+    
+    public partial class Citys
     {
+    	[DataMember]
         public System.Guid ID { get; set; }
-        public Nullable<System.Guid> CategoryId { get; set; }
+    	[DataMember]
+        public Nullable<System.Guid> ParentId { get; set; }
+    	[DataMember]
+        public int Index { get; set; }
+    	[DataMember]
         public string Name { get; set; }
     }
 }

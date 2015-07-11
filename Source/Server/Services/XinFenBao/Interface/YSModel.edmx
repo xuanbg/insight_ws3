@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="yunModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="YSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Orders">
           <Key>
             <PropertyRef Name="Orders_ID" />
@@ -100,55 +100,14 @@
           <Property Name="Orders_Import_MainOrdersID" Type="nvarchar" MaxLength="50" />
           <Property Name="Orders_OldGoods" Type="nvarchar" MaxLength="500" />
         </EntityType>
-        <EntityType Name="Orders_Goods">
-          <Key>
-            <PropertyRef Name="Orders_Goods_ID" />
-          </Key>
-          <Property Name="Orders_Goods_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Orders_Goods_Type" Type="int" />
-          <Property Name="Orders_Goods_ParentID" Type="int" />
-          <Property Name="Orders_Goods_OrdersID" Type="int" />
-          <Property Name="Orders_Goods_Product_ID" Type="int" />
-          <Property Name="Orders_Goods_Product_SupplierID" Type="int" />
-          <Property Name="Orders_Goods_Product_Code" Type="nvarchar" MaxLength="50" />
-          <Property Name="Orders_Goods_Product_CateID" Type="int" />
-          <Property Name="Orders_Goods_Product_BrandID" Type="int" />
-          <Property Name="Orders_Goods_Product_Name" Type="nvarchar" MaxLength="100" />
-          <Property Name="Orders_Goods_Product_Img" Type="nvarchar" MaxLength="100" />
-          <Property Name="Orders_Goods_Product_Price" Type="money" />
-          <Property Name="Orders_Goods_Product_MKTPrice" Type="money" />
-          <Property Name="Orders_Goods_Product_Maker" Type="nvarchar" MaxLength="100" />
-          <Property Name="Orders_Goods_Product_Spec" Type="nvarchar" MaxLength="50" />
-          <Property Name="Orders_Goods_Product_AuthorizeCode" Type="nvarchar" MaxLength="50" />
-          <Property Name="Orders_Goods_Product_brokerage" Type="money" />
-          <Property Name="Orders_Goods_Product_SalePrice" Type="money" />
-          <Property Name="Orders_Goods_Product_PurchasingPrice" Type="money" />
-          <Property Name="Orders_Goods_Product_Coin" Type="int" />
-          <Property Name="Orders_Goods_Product_IsFavor" Type="int" />
-          <Property Name="Orders_Goods_Product_UseCoin" Type="int" />
-          <Property Name="Orders_Goods_Amount" Type="int" />
-          <Property Name="Orders_Goods_DeliveryStatus" Type="int" />
-          <Property Name="Orders_Goods_IsSettle" Type="int" />
-          <Property Name="Orders_Goods_DeliveryID" Type="int" />
-          <Property Name="Orders_Goods_Note" Type="nvarchar" MaxLength="100" />
-          <Property Name="Orders_Goods_ReceivedReturn" Type="int" />
-          <Property Name="Orders_Goods_RefundReason" Type="nvarchar" MaxLength="100" />
-          <Property Name="Orders_Goods_Product_Specification" Type="nvarchar" MaxLength="100" />
-          <Property Name="Orders_Goods_Product_Color" Type="nvarchar" MaxLength="100" />
-          <Property Name="Orders_Goods_Product_Rate" Type="float" />
-          <Property Name="Orders_Goods_Product_Cate" Type="nvarchar" MaxLength="100" />
-          <Property Name="Orders_Goods_Product_Issubstitute" Type="int" />
-          <Property Name="Orders_Goods_Product_Provider" Type="nvarchar" MaxLength="50" />
-        </EntityType>
-        <EntityContainer Name="yunModelStoreContainer">
+        <EntityContainer Name="YSModelStoreContainer">
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Orders_Goods" EntityType="Self.Orders_Goods" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="yunModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="YSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Orders">
           <Key>
             <PropertyRef Name="Orders_ID" />
@@ -244,58 +203,17 @@
           <Property Name="Orders_Import_MainOrdersID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Orders_OldGoods" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="Orders_Goods">
-          <Key>
-            <PropertyRef Name="Orders_Goods_ID" />
-          </Key>
-          <Property Name="Orders_Goods_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Orders_Goods_Type" Type="Int32" />
-          <Property Name="Orders_Goods_ParentID" Type="Int32" />
-          <Property Name="Orders_Goods_OrdersID" Type="Int32" />
-          <Property Name="Orders_Goods_Product_ID" Type="Int32" />
-          <Property Name="Orders_Goods_Product_SupplierID" Type="Int32" />
-          <Property Name="Orders_Goods_Product_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Orders_Goods_Product_CateID" Type="Int32" />
-          <Property Name="Orders_Goods_Product_BrandID" Type="Int32" />
-          <Property Name="Orders_Goods_Product_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Orders_Goods_Product_Img" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Orders_Goods_Product_Price" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Orders_Goods_Product_MKTPrice" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Orders_Goods_Product_Maker" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Orders_Goods_Product_Spec" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Orders_Goods_Product_AuthorizeCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Orders_Goods_Product_brokerage" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Orders_Goods_Product_SalePrice" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Orders_Goods_Product_PurchasingPrice" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Orders_Goods_Product_Coin" Type="Int32" />
-          <Property Name="Orders_Goods_Product_IsFavor" Type="Int32" />
-          <Property Name="Orders_Goods_Product_UseCoin" Type="Int32" />
-          <Property Name="Orders_Goods_Amount" Type="Int32" />
-          <Property Name="Orders_Goods_DeliveryStatus" Type="Int32" />
-          <Property Name="Orders_Goods_IsSettle" Type="Int32" />
-          <Property Name="Orders_Goods_DeliveryID" Type="Int32" />
-          <Property Name="Orders_Goods_Note" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Orders_Goods_ReceivedReturn" Type="Int32" />
-          <Property Name="Orders_Goods_RefundReason" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Orders_Goods_Product_Specification" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Orders_Goods_Product_Color" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Orders_Goods_Product_Rate" Type="Double" />
-          <Property Name="Orders_Goods_Product_Cate" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Orders_Goods_Product_Issubstitute" Type="Int32" />
-          <Property Name="Orders_Goods_Product_Provider" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityContainer Name="yunEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="YSEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Orders" EntityType="Self.Orders" />
-          <EntitySet Name="Orders_Goods" EntityType="Self.Orders_Goods" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="yunModelStoreContainer" CdmEntityContainer="yunEntities">
+        <EntityContainerMapping StorageEntityContainer="YSModelStoreContainer" CdmEntityContainer="YSEntities">
           <EntitySetMapping Name="Orders">
-            <EntityTypeMapping TypeName="yunModel.Orders">
+            <EntityTypeMapping TypeName="YSModel.Orders">
               <MappingFragment StoreEntitySet="Orders">
                 <ScalarProperty Name="Orders_ID" ColumnName="Orders_ID" />
                 <ScalarProperty Name="Orders_SN" ColumnName="Orders_SN" />
@@ -387,47 +305,6 @@
                 <ScalarProperty Name="Orders_Import_cardholder_Tel" ColumnName="Orders_Import_cardholder_Tel" />
                 <ScalarProperty Name="Orders_Import_MainOrdersID" ColumnName="Orders_Import_MainOrdersID" />
                 <ScalarProperty Name="Orders_OldGoods" ColumnName="Orders_OldGoods" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Orders_Goods">
-            <EntityTypeMapping TypeName="yunModel.Orders_Goods">
-              <MappingFragment StoreEntitySet="Orders_Goods">
-                <ScalarProperty Name="Orders_Goods_ID" ColumnName="Orders_Goods_ID" />
-                <ScalarProperty Name="Orders_Goods_Type" ColumnName="Orders_Goods_Type" />
-                <ScalarProperty Name="Orders_Goods_ParentID" ColumnName="Orders_Goods_ParentID" />
-                <ScalarProperty Name="Orders_Goods_OrdersID" ColumnName="Orders_Goods_OrdersID" />
-                <ScalarProperty Name="Orders_Goods_Product_ID" ColumnName="Orders_Goods_Product_ID" />
-                <ScalarProperty Name="Orders_Goods_Product_SupplierID" ColumnName="Orders_Goods_Product_SupplierID" />
-                <ScalarProperty Name="Orders_Goods_Product_Code" ColumnName="Orders_Goods_Product_Code" />
-                <ScalarProperty Name="Orders_Goods_Product_CateID" ColumnName="Orders_Goods_Product_CateID" />
-                <ScalarProperty Name="Orders_Goods_Product_BrandID" ColumnName="Orders_Goods_Product_BrandID" />
-                <ScalarProperty Name="Orders_Goods_Product_Name" ColumnName="Orders_Goods_Product_Name" />
-                <ScalarProperty Name="Orders_Goods_Product_Img" ColumnName="Orders_Goods_Product_Img" />
-                <ScalarProperty Name="Orders_Goods_Product_Price" ColumnName="Orders_Goods_Product_Price" />
-                <ScalarProperty Name="Orders_Goods_Product_MKTPrice" ColumnName="Orders_Goods_Product_MKTPrice" />
-                <ScalarProperty Name="Orders_Goods_Product_Maker" ColumnName="Orders_Goods_Product_Maker" />
-                <ScalarProperty Name="Orders_Goods_Product_Spec" ColumnName="Orders_Goods_Product_Spec" />
-                <ScalarProperty Name="Orders_Goods_Product_AuthorizeCode" ColumnName="Orders_Goods_Product_AuthorizeCode" />
-                <ScalarProperty Name="Orders_Goods_Product_brokerage" ColumnName="Orders_Goods_Product_brokerage" />
-                <ScalarProperty Name="Orders_Goods_Product_SalePrice" ColumnName="Orders_Goods_Product_SalePrice" />
-                <ScalarProperty Name="Orders_Goods_Product_PurchasingPrice" ColumnName="Orders_Goods_Product_PurchasingPrice" />
-                <ScalarProperty Name="Orders_Goods_Product_Coin" ColumnName="Orders_Goods_Product_Coin" />
-                <ScalarProperty Name="Orders_Goods_Product_IsFavor" ColumnName="Orders_Goods_Product_IsFavor" />
-                <ScalarProperty Name="Orders_Goods_Product_UseCoin" ColumnName="Orders_Goods_Product_UseCoin" />
-                <ScalarProperty Name="Orders_Goods_Amount" ColumnName="Orders_Goods_Amount" />
-                <ScalarProperty Name="Orders_Goods_DeliveryStatus" ColumnName="Orders_Goods_DeliveryStatus" />
-                <ScalarProperty Name="Orders_Goods_IsSettle" ColumnName="Orders_Goods_IsSettle" />
-                <ScalarProperty Name="Orders_Goods_DeliveryID" ColumnName="Orders_Goods_DeliveryID" />
-                <ScalarProperty Name="Orders_Goods_Note" ColumnName="Orders_Goods_Note" />
-                <ScalarProperty Name="Orders_Goods_ReceivedReturn" ColumnName="Orders_Goods_ReceivedReturn" />
-                <ScalarProperty Name="Orders_Goods_RefundReason" ColumnName="Orders_Goods_RefundReason" />
-                <ScalarProperty Name="Orders_Goods_Product_Specification" ColumnName="Orders_Goods_Product_Specification" />
-                <ScalarProperty Name="Orders_Goods_Product_Color" ColumnName="Orders_Goods_Product_Color" />
-                <ScalarProperty Name="Orders_Goods_Product_Rate" ColumnName="Orders_Goods_Product_Rate" />
-                <ScalarProperty Name="Orders_Goods_Product_Cate" ColumnName="Orders_Goods_Product_Cate" />
-                <ScalarProperty Name="Orders_Goods_Product_Issubstitute" ColumnName="Orders_Goods_Product_Issubstitute" />
-                <ScalarProperty Name="Orders_Goods_Product_Provider" ColumnName="Orders_Goods_Product_Provider" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

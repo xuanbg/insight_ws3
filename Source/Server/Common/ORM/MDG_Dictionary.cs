@@ -17,11 +17,6 @@ namespace Insight.WS.Server.Common.ORM
     [KnownType(typeof(ABS_Clearing_Pay))]
     [KnownType(typeof(ABS_StockDetail))]
     [KnownType(typeof(ABS_Storage_Summary))]
-    [KnownType(typeof(BIZ_Borrowing_Apply))]
-    [KnownType(typeof(BIZ_Refund_Apply))]
-    [KnownType(typeof(BIZ_Reimburse_Detail))]
-    [KnownType(typeof(BIZ_Travel_Apply))]
-    [KnownType(typeof(BIZ_Travel_Plan))]
     [KnownType(typeof(ImageData))]
     [KnownType(typeof(MasterData))]
     [KnownType(typeof(MDG_Customer))]
@@ -35,6 +30,8 @@ namespace Insight.WS.Server.Common.ORM
     [KnownType(typeof(ABS_Advance))]
     [KnownType(typeof(ABS_Contract_FundPlan))]
     [KnownType(typeof(ABS_Storage_Location))]
+    [KnownType(typeof(BIZ_Delivery_Address))]
+    [KnownType(typeof(MDG_Member))]
     
     public partial class MDG_Dictionary
     {
@@ -44,12 +41,6 @@ namespace Insight.WS.Server.Common.ORM
             this.ABS_Clearing_Pay1 = new HashSet<ABS_Clearing_Pay>();
             this.ABS_StockDetail = new HashSet<ABS_StockDetail>();
             this.ABS_Storage_Summary = new HashSet<ABS_Storage_Summary>();
-            this.BIZ_Borrowing_Apply = new HashSet<BIZ_Borrowing_Apply>();
-            this.BIZ_Refund_Apply = new HashSet<BIZ_Refund_Apply>();
-            this.BIZ_Refund_Apply1 = new HashSet<BIZ_Refund_Apply>();
-            this.BIZ_Reimburse_Detail = new HashSet<BIZ_Reimburse_Detail>();
-            this.BIZ_Travel_Apply = new HashSet<BIZ_Travel_Apply>();
-            this.BIZ_Travel_Plan = new HashSet<BIZ_Travel_Plan>();
             this.ImageData = new HashSet<ImageData>();
             this.MDG_Customer = new HashSet<MDG_Customer>();
             this.MDG_Customer1 = new HashSet<MDG_Customer>();
@@ -71,6 +62,8 @@ namespace Insight.WS.Server.Common.ORM
             this.ABS_Advance = new HashSet<ABS_Advance>();
             this.ABS_Contract_FundPlan = new HashSet<ABS_Contract_FundPlan>();
             this.ABS_Storage_Location = new HashSet<ABS_Storage_Location>();
+            this.BIZ_Delivery_Address = new HashSet<BIZ_Delivery_Address>();
+            this.MDG_Member = new HashSet<MDG_Member>();
         }
     
     	[DataMember]
@@ -102,18 +95,6 @@ namespace Insight.WS.Server.Common.ORM
         public virtual ICollection<ABS_StockDetail> ABS_StockDetail { get; set; }
     	[DataMember]
         public virtual ICollection<ABS_Storage_Summary> ABS_Storage_Summary { get; set; }
-    	[DataMember]
-        public virtual ICollection<BIZ_Borrowing_Apply> BIZ_Borrowing_Apply { get; set; }
-    	[DataMember]
-        public virtual ICollection<BIZ_Refund_Apply> BIZ_Refund_Apply { get; set; }
-    	[DataMember]
-        public virtual ICollection<BIZ_Refund_Apply> BIZ_Refund_Apply1 { get; set; }
-    	[DataMember]
-        public virtual ICollection<BIZ_Reimburse_Detail> BIZ_Reimburse_Detail { get; set; }
-    	[DataMember]
-        public virtual ICollection<BIZ_Travel_Apply> BIZ_Travel_Apply { get; set; }
-    	[DataMember]
-        public virtual ICollection<BIZ_Travel_Plan> BIZ_Travel_Plan { get; set; }
     	[DataMember]
         public virtual ICollection<ImageData> ImageData { get; set; }
     	[DataMember]
@@ -162,5 +143,9 @@ namespace Insight.WS.Server.Common.ORM
         public virtual ICollection<ABS_Contract_FundPlan> ABS_Contract_FundPlan { get; set; }
     	[DataMember]
         public virtual ICollection<ABS_Storage_Location> ABS_Storage_Location { get; set; }
+    	[DataMember]
+        public virtual ICollection<BIZ_Delivery_Address> BIZ_Delivery_Address { get; set; }
+    	[DataMember]
+        public virtual ICollection<MDG_Member> MDG_Member { get; set; }
     }
 }

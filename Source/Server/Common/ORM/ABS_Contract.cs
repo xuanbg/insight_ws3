@@ -19,9 +19,6 @@ namespace Insight.WS.Server.Common.ORM
     [KnownType(typeof(SYS_Organization))]
     [KnownType(typeof(SYS_User))]
     [KnownType(typeof(MDG_Employee))]
-    [KnownType(typeof(BIZ_Borrowing_Apply))]
-    [KnownType(typeof(BIZ_Reimburse_Apply))]
-    [KnownType(typeof(BIZ_Travel_Apply))]
     [KnownType(typeof(ABS_Contract_Subjects))]
     [KnownType(typeof(ABS_Contract_FundPlan))]
     
@@ -85,12 +82,6 @@ namespace Insight.WS.Server.Common.ORM
         public virtual MDG_Employee MDG_Employee { get; set; }
     	[DataMember]
         public virtual MasterData MasterData1 { get; set; }
-    	[DataMember]
-        public virtual BIZ_Borrowing_Apply BIZ_Borrowing_Apply { get; set; }
-    	[DataMember]
-        public virtual BIZ_Reimburse_Apply BIZ_Reimburse_Apply { get; set; }
-    	[DataMember]
-        public virtual BIZ_Travel_Apply BIZ_Travel_Apply { get; set; }
     	[DataMember]
         public virtual ICollection<ABS_Contract_Subjects> ABS_Contract_Subjects { get; set; }
     	[DataMember]

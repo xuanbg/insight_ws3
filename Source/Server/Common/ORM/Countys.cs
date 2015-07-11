@@ -14,27 +14,14 @@ namespace Insight.WS.Server.Common.ORM
     using System.Collections.Generic;
     
     [DataContract(IsReference = true)]
-    [KnownType(typeof(ABS_Clearing))]
-    [KnownType(typeof(MDG_Dictionary))]
     
-    public partial class BIZ_Refund_Apply
+    public partial class Countys
     {
     	[DataMember]
         public System.Guid ID { get; set; }
     	[DataMember]
-        public long SN { get; set; }
+        public Nullable<System.Guid> CategoryId { get; set; }
     	[DataMember]
-        public System.Guid ClearingId { get; set; }
-    	[DataMember]
-        public System.Guid Reason { get; set; }
-    	[DataMember]
-        public System.Guid PayType { get; set; }
-    
-    	[DataMember]
-        public virtual ABS_Clearing ABS_Clearing { get; set; }
-    	[DataMember]
-        public virtual MDG_Dictionary MDG_Dictionary { get; set; }
-    	[DataMember]
-        public virtual MDG_Dictionary MDG_Dictionary1 { get; set; }
+        public string Name { get; set; }
     }
 }

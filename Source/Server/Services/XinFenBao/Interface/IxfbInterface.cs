@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.ServiceModel;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
@@ -49,14 +48,6 @@ namespace Insight.WS.Service.XinFenBao
         #endregion
 
         #region 用户登录
-
-        /// <summary>
-        /// 获取用户登录结果
-        /// </summary>
-        /// <param name="obj">Session对象实体</param>
-        /// <returns>Session对象实体</returns>
-        [OperationContract]
-        Session UserLogin(Session obj);
 
         /// <summary>
         /// 获取用户Session对象实体

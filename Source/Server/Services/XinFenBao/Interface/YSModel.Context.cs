@@ -10,14 +10,33 @@
 namespace Insight.WS.Service.XinFenBao
 {
     using System;
+    using System.Data.Entity.Core.Objects;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class yunEntities : DbContext
+    public partial class YSEntities : DbContext
     {
-        public yunEntities()
-            : base("name=yunEntities")
+    	public YSEntities()
+            : this(false) { }
+    
+        public YSEntities(bool proxyCreationEnabled)
+            : base("name=YSEntities")
         {
+    		        this.Configuration.ProxyCreationEnabled = proxyCreationEnabled;
+        }
+    	
+        public YSEntities(string connectionString)
+          : this(connectionString, false) { }
+    	  
+        public YSEntities(string connectionString, bool proxyCreationEnabled)
+            : base(connectionString)
+        {
+    		        this.Configuration.ProxyCreationEnabled = proxyCreationEnabled;
+        }	
+    	
+        public ObjectContext ObjectContext
+        {
+          get { return ((IObjectContextAdapter)this).ObjectContext; }
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -26,6 +45,5 @@ namespace Insight.WS.Service.XinFenBao
         }
     
         public virtual DbSet<Orders> Orders { get; set; }
-        public virtual DbSet<Orders_Goods> Orders_Goods { get; set; }
     }
 }

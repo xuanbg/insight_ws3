@@ -17,7 +17,6 @@ namespace Insight.WS.Server.Common.ORM
     [KnownType(typeof(ABS_Clearing))]
     [KnownType(typeof(ABS_Clearing_Pay))]
     [KnownType(typeof(MasterData))]
-    [KnownType(typeof(BIZ_Refund_Detail))]
     [KnownType(typeof(ABS_Contract_FundPerform))]
     
     public partial class ABS_Clearing_Item
@@ -25,7 +24,6 @@ namespace Insight.WS.Server.Common.ORM
         public ABS_Clearing_Item()
         {
             this.ABS_Clearing_Pay = new HashSet<ABS_Clearing_Pay>();
-            this.BIZ_Refund_Detail = new HashSet<BIZ_Refund_Detail>();
             this.ABS_Contract_FundPerform = new HashSet<ABS_Contract_FundPerform>();
         }
     
@@ -56,8 +54,6 @@ namespace Insight.WS.Server.Common.ORM
         public virtual ICollection<ABS_Clearing_Pay> ABS_Clearing_Pay { get; set; }
     	[DataMember]
         public virtual MasterData MasterData { get; set; }
-    	[DataMember]
-        public virtual ICollection<BIZ_Refund_Detail> BIZ_Refund_Detail { get; set; }
     	[DataMember]
         public virtual ICollection<ABS_Contract_FundPerform> ABS_Contract_FundPerform { get; set; }
     }

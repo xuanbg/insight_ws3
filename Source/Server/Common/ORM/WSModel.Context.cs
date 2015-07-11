@@ -58,13 +58,6 @@ namespace Insight.WS.Server.Common.ORM
         public virtual DbSet<ABS_Storage_Detail> ABS_Storage_Detail { get; set; }
         public virtual DbSet<ABS_Storage_Summary> ABS_Storage_Summary { get; set; }
         public virtual DbSet<BASE_Category> BASE_Category { get; set; }
-        public virtual DbSet<BIZ_Borrowing_Apply> BIZ_Borrowing_Apply { get; set; }
-        public virtual DbSet<BIZ_Refund_Apply> BIZ_Refund_Apply { get; set; }
-        public virtual DbSet<BIZ_Refund_Detail> BIZ_Refund_Detail { get; set; }
-        public virtual DbSet<BIZ_Reimburse_Apply> BIZ_Reimburse_Apply { get; set; }
-        public virtual DbSet<BIZ_Reimburse_Detail> BIZ_Reimburse_Detail { get; set; }
-        public virtual DbSet<BIZ_Travel_Apply> BIZ_Travel_Apply { get; set; }
-        public virtual DbSet<BIZ_Travel_Plan> BIZ_Travel_Plan { get; set; }
         public virtual DbSet<ImageData> ImageData { get; set; }
         public virtual DbSet<MasterData> MasterData { get; set; }
         public virtual DbSet<MasterData_Merger> MasterData_Merger { get; set; }
@@ -130,5 +123,11 @@ namespace Insight.WS.Server.Common.ORM
         public virtual DbSet<ABS_Contract_FundPlan> ABS_Contract_FundPlan { get; set; }
         public virtual DbSet<ABS_Clearing_Check> ABS_Clearing_Check { get; set; }
         public virtual DbSet<ABS_Storage_Location> ABS_Storage_Location { get; set; }
+        public virtual DbSet<BIZ_Delivery_Address> BIZ_Delivery_Address { get; set; }
+        public virtual DbSet<BIZ_Produce_Category> BIZ_Produce_Category { get; set; }
+        public virtual DbSet<MDG_Member> MDG_Member { get; set; }
+        public virtual DbSet<Citys> Citys { get; set; }
+        public virtual DbSet<Countys> Countys { get; set; }
+        public virtual DbSet<States> States { get; set; }
     }
 }

@@ -7,15 +7,21 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Insight.WS.Service.XinFenBao
+namespace Insight.WS.Server.Common.ORM
 {
     using System;
+    using System.Runtime.Serialization;
     using System.Collections.Generic;
+    
+    [DataContract(IsReference = true)]
     
     public partial class States
     {
+    	[DataMember]
         public System.Guid ID { get; set; }
+    	[DataMember]
         public int Index { get; set; }
+    	[DataMember]
         public string Name { get; set; }
     }
 }

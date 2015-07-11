@@ -19,13 +19,6 @@
         <EntityTypeShape EntityType="Insight_WSModel.ABS_Storage_Detail" Width="1.5" PointX="18.75" PointY="107.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Insight_WSModel.ABS_Storage_Summary" Width="1.5" PointX="13.5" PointY="117.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Insight_WSModel.BASE_Category" Width="1.5" PointX="9" PointY="107.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Insight_WSModel.BIZ_Borrowing_Apply" Width="1.5" PointX="5.25" PointY="106.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Insight_WSModel.BIZ_Refund_Apply" Width="1.5" PointX="23.75" PointY="112.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Insight_WSModel.BIZ_Refund_Detail" Width="1.5" PointX="24.75" PointY="131.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Insight_WSModel.BIZ_Reimburse_Apply" Width="1.5" PointX="5.25" PointY="120.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Insight_WSModel.BIZ_Reimburse_Detail" Width="1.5" PointX="27.75" PointY="116.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Insight_WSModel.BIZ_Travel_Apply" Width="1.5" PointX="11.25" PointY="107.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Insight_WSModel.BIZ_Travel_Plan" Width="1.5" PointX="23.75" PointY="108" IsExpanded="true" />
         <EntityTypeShape EntityType="Insight_WSModel.ImageData" Width="1.5" PointX="16.25" PointY="111.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Insight_WSModel.MasterData" Width="1.5" PointX="11.25" PointY="112.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Insight_WSModel.MasterData_Merger" Width="1.5" PointX="16.5" PointY="118.875" IsExpanded="true" />
@@ -85,7 +78,6 @@
         <AssociationConnector Association="Insight_WSModel.FK__ABS_Clear__Creat__44978F4B" ManuallyRouted="false" />
         <AssociationConnector Association="Insight_WSModel.FK__ABS_Clear__Creat__458BB384" ManuallyRouted="false" />
         <AssociationConnector Association="Insight_WSModel.FK__ABS_Clear__Objec__40C6FE67" ManuallyRouted="false" />
-        <AssociationConnector Association="Insight_WSModel.FK__BIZ_Refun__Clear__5A51C640" ManuallyRouted="false" />
         <AssociationConnector Association="Insight_WSModel.FK__ABS_Clear__Image__56B63F86" ManuallyRouted="false" />
         <AssociationConnector Association="Insight_WSModel.FK__ABS_Clear__Curre__50FD6630" ManuallyRouted="false" />
         <AssociationConnector Association="Insight_WSModel.FK__ABS_Clear__PayTy__500941F7" ManuallyRouted="false" />
@@ -97,9 +89,6 @@
         <AssociationConnector Association="Insight_WSModel.FK__ABS_Contr__Execu__1D48B800" ManuallyRouted="false" />
         <AssociationConnector Association="Insight_WSModel.FK__ABS_Contr__Execu__1E3CDC39" ManuallyRouted="false" />
         <AssociationConnector Association="Insight_WSModel.FK__ABS_Contr__Objec__1B606F8E" ManuallyRouted="false" />
-        <AssociationConnector Association="Insight_WSModel.FK__BIZ_Borrowi__CID__62E70C41" ManuallyRouted="false" />
-        <AssociationConnector Association="Insight_WSModel.FK__BIZ_Reimbur__CID__66B79D25" ManuallyRouted="false" />
-        <AssociationConnector Association="Insight_WSModel.FK__BIZ_Travel___CID__6D649AB4" ManuallyRouted="false" />
         <AssociationConnector Association="Insight_WSModel.FK__ABS_Contr__Image__2C8AFB90" ManuallyRouted="false" />
         <AssociationConnector Association="Insight_WSModel.FK__ABS_Deliv__Creat__79FF7BC3" ManuallyRouted="false" />
         <AssociationConnector Association="Insight_WSModel.FK__ABS_Deliv__Creat__7AF39FFC" ManuallyRouted="false" />
@@ -127,14 +116,6 @@
         <AssociationConnector Association="Insight_WSModel.FK__SYS_Alert__Categ__04B21460" ManuallyRouted="false" />
         <AssociationConnector Association="Insight_WSModel.FK__SYS_Repor__Categ__531AB8CC" ManuallyRouted="false" />
         <AssociationConnector Association="Insight_WSModel.FK__SYS_Repor__Categ__5ABBDA94" ManuallyRouted="false" />
-        <AssociationConnector Association="Insight_WSModel.FK__BIZ_Borro__PayTy__63DB307A" ManuallyRouted="false" />
-        <AssociationConnector Association="Insight_WSModel.FK__BIZ_Refun__PayTy__5C3A0EB2" ManuallyRouted="false" />
-        <AssociationConnector Association="Insight_WSModel.FK__BIZ_Refun__Reaso__5B45EA79" ManuallyRouted="false" />
-        <AssociationConnector Association="Insight_WSModel.FK__BIZ_Reimb__Expen__6A882E09" ManuallyRouted="false" />
-        <AssociationConnector Association="Insight_WSModel.FK__BIZ_Trave__PayTy__6E58BEED" ManuallyRouted="false" />
-        <AssociationConnector Association="Insight_WSModel.FK__BIZ_Trave__Ticke__6F4CE326" ManuallyRouted="false" />
-        <AssociationConnector Association="Insight_WSModel.FK__BIZ_Trave__Trave__74119843" ManuallyRouted="false" />
-        <AssociationConnector Association="Insight_WSModel.FK__BIZ_Trave__Vehic__7505BC7C" ManuallyRouted="false" />
         <AssociationConnector Association="Insight_WSModel.FK__ImageData__Creat__3E1F9BE6" ManuallyRouted="false" />
         <AssociationConnector Association="Insight_WSModel.FK__ImageData__Creat__3F13C01F" ManuallyRouted="false" />
         <AssociationConnector Association="Insight_WSModel.FK__ImageData__Secre__3C375374" ManuallyRouted="false" />
@@ -287,14 +268,12 @@
         <AssociationConnector Association="Insight_WSModel.FK__ABS_Clear__Clear__4A5068A1" />
         <AssociationConnector Association="Insight_WSModel.FK__ABS_Clear__Clear__4F151DBE" />
         <AssociationConnector Association="Insight_WSModel.FK__ABS_Clear__Objec__4B448CDA" />
-        <AssociationConnector Association="Insight_WSModel.FK__BIZ_Refun__Clear__600A9F96" />
         <AssociationConnector Association="Insight_WSModel.FK__ABS_Contr__Contr__25DDFE01" />
         <AssociationConnector Association="Insight_WSModel.FK__ABS_Contr__Deliv__4CC2C0F8" />
         <AssociationConnector Association="Insight_WSModel.FK__ABS_Contr__PlanI__4BCE9CBF" />
         <AssociationConnector Association="Insight_WSModel.FK__ABS_Contr__Subje__4709E7A2" />
         <AssociationConnector Association="Insight_WSModel.FK__ABS_Contr__Categ__26D2223A" />
         <AssociationConnector Association="Insight_WSModel.FK__ABS_Contr__Objec__27C64673" />
-        <AssociationConnector Association="Insight_WSModel.FK__BIZ_Reimbur__SID__699409D0" />
         <EntityTypeShape EntityType="Insight_WSModel.ABS_Contract_FundPerform" Width="1.5" PointX="29" PointY="119.25" />
         <EntityTypeShape EntityType="Insight_WSModel.ABS_Contract_FundPlan" Width="1.5" PointX="26.75" PointY="106.375" />
         <AssociationConnector Association="Insight_WSModel.FK__ABS_Contr__Clear__42453285" />
@@ -313,6 +292,20 @@
         <AssociationConnector Association="Insight_WSModel.FK__ABS_Stora__Creat__46D4DD78" />
         <AssociationConnector Association="Insight_WSModel.FK__ABS_Stora__Stora__44EC9506" />
         <AssociationConnector Association="Insight_WSModel.FK__ABS_Contr__Contr__0D6755F2" />
+        <EntityTypeShape EntityType="Insight_WSModel.BIZ_Delivery_Address" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="Insight_WSModel.BIZ_Produce_Category" Width="1.5" PointX="6.625" PointY="0.75" />
+        <EntityTypeShape EntityType="Insight_WSModel.MDG_Member" Width="1.5" PointX="13.875" PointY="130" />
+        <AssociationConnector Association="Insight_WSModel.FK__MDG_Member__MID__77DFC722" />
+        <AssociationConnector Association="Insight_WSModel.FK__BIZ_Deliv__CityI__792B531B" />
+        <AssociationConnector Association="Insight_WSModel.FK__BIZ_Deliv__State__78372EE2" />
+        <AssociationConnector Association="Insight_WSModel.FK__MDG_Membe__CityI__6CC57C36" />
+        <AssociationConnector Association="Insight_WSModel.FK__MDG_Membe__State__6BD157FD" />
+        <AssociationConnector Association="Insight_WSModel.FK__BIZ_Deliv__Count__7A1F7754" />
+        <AssociationConnector Association="Insight_WSModel.FK__BIZ_Deliv__Membe__77430AA9" />
+        <AssociationConnector Association="Insight_WSModel.FK__MDG_Membe__Count__6DB9A06F" />
+        <EntityTypeShape EntityType="Insight_WSModel.Citys" Width="1.5" PointX="10.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Insight_WSModel.Countys" Width="1.5" PointX="12.25" PointY="0.75" />
+        <EntityTypeShape EntityType="Insight_WSModel.States" Width="1.5" PointX="8.5" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

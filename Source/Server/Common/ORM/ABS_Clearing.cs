@@ -18,7 +18,6 @@ namespace Insight.WS.Server.Common.ORM
     [KnownType(typeof(SYS_Organization))]
     [KnownType(typeof(SYS_User))]
     [KnownType(typeof(MasterData))]
-    [KnownType(typeof(BIZ_Refund_Apply))]
     [KnownType(typeof(ABS_Advance_Record))]
     [KnownType(typeof(ABS_Clearing_Item))]
     [KnownType(typeof(ABS_Clearing_Check))]
@@ -28,7 +27,6 @@ namespace Insight.WS.Server.Common.ORM
         public ABS_Clearing()
         {
             this.ABS_Clearing_Attachs = new HashSet<ABS_Clearing_Attachs>();
-            this.BIZ_Refund_Apply = new HashSet<BIZ_Refund_Apply>();
             this.ABS_Advance_Record = new HashSet<ABS_Advance_Record>();
             this.ABS_Clearing_Item = new HashSet<ABS_Clearing_Item>();
         }
@@ -72,8 +70,6 @@ namespace Insight.WS.Server.Common.ORM
         public virtual SYS_User SYS_User { get; set; }
     	[DataMember]
         public virtual MasterData MasterData { get; set; }
-    	[DataMember]
-        public virtual ICollection<BIZ_Refund_Apply> BIZ_Refund_Apply { get; set; }
     	[DataMember]
         public virtual ICollection<ABS_Advance_Record> ABS_Advance_Record { get; set; }
     	[DataMember]

@@ -26,6 +26,8 @@ namespace Insight.WS.Server.Common.ORM
     [KnownType(typeof(SYS_Report_Templates))]
     [KnownType(typeof(SYS_Report_Definition))]
     [KnownType(typeof(ABS_Contract_Subjects))]
+    [KnownType(typeof(BIZ_Delivery_Address))]
+    [KnownType(typeof(MDG_Member))]
     
     public partial class BASE_Category
     {
@@ -42,6 +44,10 @@ namespace Insight.WS.Server.Common.ORM
             this.SYS_Report_Templates = new HashSet<SYS_Report_Templates>();
             this.SYS_Report_Definition = new HashSet<SYS_Report_Definition>();
             this.ABS_Contract_Subjects = new HashSet<ABS_Contract_Subjects>();
+            this.BIZ_Delivery_Address = new HashSet<BIZ_Delivery_Address>();
+            this.BIZ_Delivery_Address1 = new HashSet<BIZ_Delivery_Address>();
+            this.MDG_Member = new HashSet<MDG_Member>();
+            this.MDG_Member1 = new HashSet<MDG_Member>();
         }
     
     	[DataMember]
@@ -101,5 +107,13 @@ namespace Insight.WS.Server.Common.ORM
         public virtual ICollection<SYS_Report_Definition> SYS_Report_Definition { get; set; }
     	[DataMember]
         public virtual ICollection<ABS_Contract_Subjects> ABS_Contract_Subjects { get; set; }
+    	[DataMember]
+        public virtual ICollection<BIZ_Delivery_Address> BIZ_Delivery_Address { get; set; }
+    	[DataMember]
+        public virtual ICollection<BIZ_Delivery_Address> BIZ_Delivery_Address1 { get; set; }
+    	[DataMember]
+        public virtual ICollection<MDG_Member> MDG_Member { get; set; }
+    	[DataMember]
+        public virtual ICollection<MDG_Member> MDG_Member1 { get; set; }
     }
 }

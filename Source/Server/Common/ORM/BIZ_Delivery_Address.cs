@@ -14,39 +14,46 @@ namespace Insight.WS.Server.Common.ORM
     using System.Collections.Generic;
     
     [DataContract(IsReference = true)]
-    [KnownType(typeof(BIZ_Travel_Apply))]
+    [KnownType(typeof(BASE_Category))]
     [KnownType(typeof(MDG_Dictionary))]
+    [KnownType(typeof(MDG_Member))]
     
-    public partial class BIZ_Travel_Plan
+    public partial class BIZ_Delivery_Address
     {
     	[DataMember]
         public System.Guid ID { get; set; }
     	[DataMember]
         public long SN { get; set; }
     	[DataMember]
-        public System.Guid TravelId { get; set; }
+        public System.Guid MemberId { get; set; }
     	[DataMember]
-        public string Starting { get; set; }
+        public string Name { get; set; }
     	[DataMember]
-        public string Destination { get; set; }
+        public string Mobile { get; set; }
     	[DataMember]
-        public Nullable<System.DateTime> StartingTime { get; set; }
+        public Nullable<System.Guid> StateId { get; set; }
     	[DataMember]
-        public Nullable<System.Guid> Vehicle { get; set; }
+        public Nullable<System.Guid> CityId { get; set; }
     	[DataMember]
-        public Nullable<bool> NeedTicket { get; set; }
+        public Nullable<System.Guid> CountyId { get; set; }
+    	[DataMember]
+        public string Street { get; set; }
+    	[DataMember]
+        public string ZipCode { get; set; }
     	[DataMember]
         public string Description { get; set; }
     	[DataMember]
-        public string Trains { get; set; }
+        public bool Default { get; set; }
     	[DataMember]
-        public Nullable<decimal> Fare { get; set; }
-    	[DataMember]
-        public Nullable<int> GetTicket { get; set; }
+        public System.DateTime CreateTime { get; set; }
     
     	[DataMember]
-        public virtual BIZ_Travel_Apply BIZ_Travel_Apply { get; set; }
+        public virtual BASE_Category BASE_Category { get; set; }
+    	[DataMember]
+        public virtual BASE_Category BASE_Category1 { get; set; }
     	[DataMember]
         public virtual MDG_Dictionary MDG_Dictionary { get; set; }
+    	[DataMember]
+        public virtual MDG_Member MDG_Member { get; set; }
     }
 }
