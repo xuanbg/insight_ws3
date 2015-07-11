@@ -9,10 +9,8 @@ using Insight.WS.Server.Common.ORM;
 
 namespace Insight.WS.Service.Business
 {
-    public class Storage : IStorage
+    public partial class Settlement
     {
-
-        #region 查询
 
         /// <summary>
         /// 获取结算记录日期列表
@@ -144,10 +142,6 @@ namespace Insight.WS.Service.Business
             }
         }
 
-        #endregion
-
-        #region 新增
-
         /// <summary>
         /// 保存收款记录
         /// </summary>
@@ -163,10 +157,6 @@ namespace Insight.WS.Service.Business
             cmds.AddRange(InsertDeliveryDetail(idt));
             return SqlHelper.SqlExecute(cmds, 0);
         }
-
-        #endregion
-
-        #region 编辑
 
         /// <summary>
         /// 更新出入库单据号
@@ -193,10 +183,6 @@ namespace Insight.WS.Service.Business
             return SqlHelper.SqlScalar(sql, parm);
         }
 
-        #endregion
-
-        #region 删除
-
         /// <summary>
         /// 删除/作废出入库单据
         /// </summary>
@@ -218,58 +204,6 @@ namespace Insight.WS.Service.Business
                 return SqlHelper.SqlNonQuery(sql) > 0;
             }
         }
-
-        #endregion
-
-        #region 其它
-
-        /// <summary>
-        /// 插入结算主记录
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        private SqlCommand InsertDelivery(ABS_Delivery obj)
-        {
-            var sql = "insert ABS_Delivery (Direction, ObjectId, ObjectName, Description, CreatorDeptId, CreatorUserId) select @Direction, @ObjectId, @ObjectName, @Description, @CreatorDeptId, @CreatorUserId ";
-            sql += "select ID from ABS_Delivery where SN = scope_identity()";
-            var parm = new[]
-            {
-                new SqlParameter("@Direction", obj.Direction),
-                new SqlParameter("@ObjectId", SqlDbType.UniqueIdentifier) {Value = obj.ObjectId},
-                new SqlParameter("@ObjectName", obj.ObjectName),
-                new SqlParameter("@Description", obj.Description),
-                new SqlParameter("@CreatorDeptId", SqlDbType.UniqueIdentifier) {Value = obj.CreatorDeptId},
-                new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = obj.CreatorUserId},
-                new SqlParameter("@Write", SqlDbType.Int) {Value = 0}
-            };
-            return SqlHelper.MakeCommand(sql, parm);
-        }
-
-        /// <summary>
-        /// 插入项目明细记录
-        /// </summary>
-        /// <param name="idt"></param>
-        /// <returns></returns>
-        private IEnumerable<SqlCommand> InsertDeliveryDetail(DataTable idt)
-        {
-            const string sql = "insert ABS_Delivery_Item (DeliveryId, Summary, ObjectId, ObjectName, Units, Price, Counts, Amount) select @DeliveryId, @Summary, @ObjectId, @ObjectName, @Units, @Price, @Counts, @Amount ";
-            return (from DataRow row in idt.Rows
-                select new[]
-                {
-                    new SqlParameter("@DeliveryId", SqlDbType.UniqueIdentifier) {Value = Guid.Empty}, 
-                    new SqlParameter("@Summary", row["摘要"]), 
-                    new SqlParameter("@ObjectId", SqlDbType.UniqueIdentifier) {Value = row["ProductId"]}, 
-                    new SqlParameter("@ObjectName", row["项目"]), 
-                    new SqlParameter("@Units", row["单位"]), 
-                    new SqlParameter("@Price", row["单价"]), 
-                    new SqlParameter("@Counts", row["数量"]), 
-                    new SqlParameter("@Amount", row["金额"]), 
-                    new SqlParameter("@Read", SqlDbType.Int) {Value = 0}
-                } into parm
-                select SqlHelper.MakeCommand(sql, parm)).ToList();
-        }
-
-        #endregion
 
     }
 }

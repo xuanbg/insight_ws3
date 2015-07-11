@@ -1,6 +1,6 @@
-﻿namespace Insight.WS.Client.Business.Storage
+﻿namespace Insight.WS.Client.Business.Settlement
 {
-    partial class Setting
+    partial class DeliverysSet
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            var resources = new System.ComponentModel.ComponentResourceManager(typeof(Setting));
+            var resources = new System.ComponentModel.ComponentResourceManager(typeof(DeliverysSet));
             this.tabSet = new DevExpress.XtraTab.XtraTabControl();
             this.pagTemple = new DevExpress.XtraTab.XtraTabPage();
             this.panTemple = new DevExpress.XtraEditors.PanelControl();

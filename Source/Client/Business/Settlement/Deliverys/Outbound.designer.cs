@@ -1,4 +1,4 @@
-﻿namespace Insight.WS.Client.Business.Storage
+﻿namespace Insight.WS.Client.Business.Settlement
 {
     partial class Outbound
     {

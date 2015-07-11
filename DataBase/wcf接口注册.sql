@@ -22,5 +22,4 @@ select 'MasterDatas', 'Insight.WS.Service.MasterDatas', 'Insight.WS.Service.IMas
 
 select 'CRM', 'Insight.WS.Service.Business.CRM', 'Insight.WS.Service.Business.ICRM', 'Services\\Business' union all
 select 'SCM', 'Insight.WS.Service.Business.SCM', 'Insight.WS.Service.Business.ISCM', 'Services\\Business' union all
-select 'Storage', 'Insight.WS.Service.Business.Storage', 'Insight.WS.Service.Business.IStorage', 'Services\\Business' union all
 select 'Settlement', 'Insight.WS.Service.Business.Settlement', 'Insight.WS.Service.Business.ISettlement', 'Services\\Business'

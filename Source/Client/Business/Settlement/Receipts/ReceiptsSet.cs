@@ -7,7 +7,7 @@ using Insight.WS.Client.Common.Service;
 
 namespace Insight.WS.Client.Business.Settlement.Receipt
 {
-    public partial class Setting : DialogBase
+    public partial class ReceiptsSet : DialogBase
     {
 
         #region 属性
@@ -29,7 +29,7 @@ namespace Insight.WS.Client.Business.Settlement.Receipt
 
         #region 构造方法
 
-        public Setting()
+        public ReceiptsSet()
         {
             InitializeComponent();
         }

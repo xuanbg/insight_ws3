@@ -99,6 +99,66 @@
   <wsdl:message name="ISettlement_AddCheck_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddCheckResponse" />
   </wsdl:message>
+  <wsdl:message name="ISettlement_GetDeliveryDate_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDeliveryDate" />
+  </wsdl:message>
+  <wsdl:message name="ISettlement_GetDeliveryDate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDeliveryDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISettlement_GetDeliveryForDate_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDeliveryForDate" />
+  </wsdl:message>
+  <wsdl:message name="ISettlement_GetDeliveryForDate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDeliveryForDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISettlement_GetDeliveryForName_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDeliveryForName" />
+  </wsdl:message>
+  <wsdl:message name="ISettlement_GetDeliveryForName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDeliveryForNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISettlement_Get_GoodsPlan_InputMessage">
+    <wsdl:part name="parameters" element="tns:Get_GoodsPlan" />
+  </wsdl:message>
+  <wsdl:message name="ISettlement_Get_GoodsPlan_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Get_GoodsPlanResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISettlement_GetDeliveryItem_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDeliveryItem" />
+  </wsdl:message>
+  <wsdl:message name="ISettlement_GetDeliveryItem_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDeliveryItemResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISettlement_GetDeliveryAttach_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDeliveryAttach" />
+  </wsdl:message>
+  <wsdl:message name="ISettlement_GetDeliveryAttach_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDeliveryAttachResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISettlement_GetDelivery_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDelivery" />
+  </wsdl:message>
+  <wsdl:message name="ISettlement_GetDelivery_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDeliveryResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISettlement_AddDelivery_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddDelivery" />
+  </wsdl:message>
+  <wsdl:message name="ISettlement_AddDelivery_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddDeliveryResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISettlement_GetDeliveryCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDeliveryCode" />
+  </wsdl:message>
+  <wsdl:message name="ISettlement_GetDeliveryCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDeliveryCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISettlement_DelDelivery_InputMessage">
+    <wsdl:part name="parameters" element="tns:DelDelivery" />
+  </wsdl:message>
+  <wsdl:message name="ISettlement_DelDelivery_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DelDeliveryResponse" />
+  </wsdl:message>
   <wsdl:portType name="ISettlement">
     <wsdl:operation name="GetClearingDate">
       <wsdl:input wsaw:Action="http://tempuri.org/ISettlement/GetClearingDate" message="tns:ISettlement_GetClearingDate_InputMessage" />
@@ -151,6 +211,46 @@
     <wsdl:operation name="AddCheck">
       <wsdl:input wsaw:Action="http://tempuri.org/ISettlement/AddCheck" message="tns:ISettlement_AddCheck_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISettlement/AddCheckResponse" message="tns:ISettlement_AddCheck_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDeliveryDate">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISettlement/GetDeliveryDate" message="tns:ISettlement_GetDeliveryDate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISettlement/GetDeliveryDateResponse" message="tns:ISettlement_GetDeliveryDate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDeliveryForDate">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISettlement/GetDeliveryForDate" message="tns:ISettlement_GetDeliveryForDate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISettlement/GetDeliveryForDateResponse" message="tns:ISettlement_GetDeliveryForDate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDeliveryForName">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISettlement/GetDeliveryForName" message="tns:ISettlement_GetDeliveryForName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISettlement/GetDeliveryForNameResponse" message="tns:ISettlement_GetDeliveryForName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_GoodsPlan">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISettlement/Get_GoodsPlan" message="tns:ISettlement_Get_GoodsPlan_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISettlement/Get_GoodsPlanResponse" message="tns:ISettlement_Get_GoodsPlan_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDeliveryItem">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISettlement/GetDeliveryItem" message="tns:ISettlement_GetDeliveryItem_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISettlement/GetDeliveryItemResponse" message="tns:ISettlement_GetDeliveryItem_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDeliveryAttach">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISettlement/GetDeliveryAttach" message="tns:ISettlement_GetDeliveryAttach_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISettlement/GetDeliveryAttachResponse" message="tns:ISettlement_GetDeliveryAttach_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDelivery">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISettlement/GetDelivery" message="tns:ISettlement_GetDelivery_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISettlement/GetDeliveryResponse" message="tns:ISettlement_GetDelivery_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddDelivery">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISettlement/AddDelivery" message="tns:ISettlement_AddDelivery_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISettlement/AddDeliveryResponse" message="tns:ISettlement_AddDelivery_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDeliveryCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISettlement/GetDeliveryCode" message="tns:ISettlement_GetDeliveryCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISettlement/GetDeliveryCodeResponse" message="tns:ISettlement_GetDeliveryCode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DelDelivery">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISettlement/DelDelivery" message="tns:ISettlement_DelDelivery_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISettlement/DelDeliveryResponse" message="tns:ISettlement_DelDelivery_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="CustomBinding_ISettlement" type="tns:ISettlement">
@@ -267,6 +367,96 @@
     </wsdl:operation>
     <wsdl:operation name="AddCheck">
       <soap12:operation soapAction="http://tempuri.org/ISettlement/AddCheck" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDeliveryDate">
+      <soap12:operation soapAction="http://tempuri.org/ISettlement/GetDeliveryDate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDeliveryForDate">
+      <soap12:operation soapAction="http://tempuri.org/ISettlement/GetDeliveryForDate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDeliveryForName">
+      <soap12:operation soapAction="http://tempuri.org/ISettlement/GetDeliveryForName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_GoodsPlan">
+      <soap12:operation soapAction="http://tempuri.org/ISettlement/Get_GoodsPlan" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDeliveryItem">
+      <soap12:operation soapAction="http://tempuri.org/ISettlement/GetDeliveryItem" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDeliveryAttach">
+      <soap12:operation soapAction="http://tempuri.org/ISettlement/GetDeliveryAttach" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDelivery">
+      <soap12:operation soapAction="http://tempuri.org/ISettlement/GetDelivery" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddDelivery">
+      <soap12:operation soapAction="http://tempuri.org/ISettlement/AddDelivery" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDeliveryCode">
+      <soap12:operation soapAction="http://tempuri.org/ISettlement/GetDeliveryCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DelDelivery">
+      <soap12:operation soapAction="http://tempuri.org/ISettlement/DelDelivery" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

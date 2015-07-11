@@ -1,6 +1,6 @@
-﻿namespace Insight.WS.Client.Business.Storage
+﻿namespace Insight.WS.Client.Business.Settlement
 {
-    partial class BackStore
+    partial class Entry
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            var resources = new System.ComponentModel.ComponentResourceManager(typeof(BackStore));
+            var resources = new System.ComponentModel.ComponentResourceManager(typeof(Entry));
             var serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
             this.grdItem = new DevExpress.XtraGrid.GridControl();
             this.gdvItem = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -60,13 +60,13 @@
             this.labUnit = new DevExpress.XtraEditors.LabelControl();
             this.labCodeBar = new DevExpress.XtraEditors.LabelControl();
             this.txtCount = new DevExpress.XtraEditors.TextEdit();
-            this.txtApplyCode = new DevExpress.XtraEditors.TextEdit();
             this.labApplyCode = new DevExpress.XtraEditors.LabelControl();
-            ((System.ComponentModel.ISupportInitialize)(this.panel)).BeginInit();
-            this.panel.SuspendLayout();
+            this.txtApplyCode = new DevExpress.XtraEditors.TextEdit();
             ((System.ComponentModel.ISupportInitialize)(this.imgFolderNode)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCategoryNode)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgOrgTreeNode)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panel)).BeginInit();
+            this.panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdItem)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gdvItem)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sleCustomer.Properties)).BeginInit();
@@ -86,30 +86,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtCount.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtApplyCode.Properties)).BeginInit();
             this.SuspendLayout();
-            // 
-            // panel
-            // 
-            this.panel.Controls.Add(this.txtApplyCode);
-            this.panel.Controls.Add(this.labApplyCode);
-            this.panel.Controls.Add(this.memDesc);
-            this.panel.Controls.Add(this.txtName);
-            this.panel.Controls.Add(this.sleCustomer);
-            this.panel.Controls.Add(this.labDesc);
-            this.panel.Controls.Add(this.labCustomer);
-            this.panel.Size = new System.Drawing.Size(770, 100);
-            // 
-            // btnConfirm
-            // 
-            this.btnConfirm.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnConfirm.Appearance.Options.UseFont = true;
-            this.btnConfirm.Location = new System.Drawing.Point(690, 524);
-            this.btnConfirm.Text = "退  库";
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCancel.Appearance.Options.UseFont = true;
-            this.btnCancel.Location = new System.Drawing.Point(600, 524);
             // 
             // imgFolderNode
             // 
@@ -131,6 +107,30 @@
             this.imgOrgTreeNode.Images.SetKeyName(0, "NodeOrg.png");
             this.imgOrgTreeNode.Images.SetKeyName(1, "NodeDept.png");
             this.imgOrgTreeNode.Images.SetKeyName(2, "NodePost.png");
+            // 
+            // btnConfirm
+            // 
+            this.btnConfirm.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnConfirm.Appearance.Options.UseFont = true;
+            this.btnConfirm.Location = new System.Drawing.Point(690, 524);
+            this.btnConfirm.Text = "入  库";
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnCancel.Appearance.Options.UseFont = true;
+            this.btnCancel.Location = new System.Drawing.Point(600, 524);
+            // 
+            // panel
+            // 
+            this.panel.Controls.Add(this.memDesc);
+            this.panel.Controls.Add(this.txtApplyCode);
+            this.panel.Controls.Add(this.txtName);
+            this.panel.Controls.Add(this.sleCustomer);
+            this.panel.Controls.Add(this.labDesc);
+            this.panel.Controls.Add(this.labApplyCode);
+            this.panel.Controls.Add(this.labCustomer);
+            this.panel.Size = new System.Drawing.Size(770, 100);
             // 
             // grdItem
             // 
@@ -162,7 +162,7 @@
             this.labCustomer.Name = "labCustomer";
             this.labCustomer.Size = new System.Drawing.Size(60, 21);
             this.labCustomer.TabIndex = 0;
-            this.labCustomer.Text = "客户：";
+            this.labCustomer.Text = "供应商：";
             // 
             // sleCustomer
             // 
@@ -171,7 +171,8 @@
             this.sleCustomer.Name = "sleCustomer";
             this.sleCustomer.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.sleCustomer.Properties.NullText = "请选择客户…";
+            this.sleCustomer.Properties.NullText = "请选择供应商…";
+            this.sleCustomer.Properties.PopupFormSize = new System.Drawing.Size(240, 240);
             this.sleCustomer.Properties.ShowClearButton = false;
             this.sleCustomer.Properties.ShowFooter = false;
             this.sleCustomer.Properties.View = this.gdvCustomer;
@@ -356,7 +357,7 @@
             this.sleMaterial.Name = "sleMaterial";
             this.sleMaterial.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.sleMaterial.Properties.NullText = "请选择退库物资…";
+            this.sleMaterial.Properties.NullText = "请选择入库物资…";
             this.sleMaterial.Properties.PopupFormSize = new System.Drawing.Size(285, 240);
             this.sleMaterial.Properties.ShowClearButton = false;
             this.sleMaterial.Properties.ShowFooter = false;
@@ -474,15 +475,6 @@
             this.txtCount.TabIndex = 14;
             this.txtCount.EditValueChanged += new System.EventHandler(this.txtCount_EditValueChanged);
             // 
-            // txtApplyCode
-            // 
-            this.txtApplyCode.EnterMoveNextControl = true;
-            this.txtApplyCode.Location = new System.Drawing.Point(605, 15);
-            this.txtApplyCode.Name = "txtApplyCode";
-            this.txtApplyCode.Size = new System.Drawing.Size(150, 20);
-            this.txtApplyCode.TabIndex = 6;
-            this.txtApplyCode.ParseEditValue += new DevExpress.XtraEditors.Controls.ConvertEditValueEventHandler(this.txtApplyCode_ParseEditValue);
-            // 
             // labApplyCode
             // 
             this.labApplyCode.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
@@ -490,10 +482,19 @@
             this.labApplyCode.Location = new System.Drawing.Point(545, 15);
             this.labApplyCode.Name = "labApplyCode";
             this.labApplyCode.Size = new System.Drawing.Size(60, 21);
-            this.labApplyCode.TabIndex = 5;
+            this.labApplyCode.TabIndex = 0;
             this.labApplyCode.Text = "单号：";
             // 
-            // BackStore
+            // txtApplyCode
+            // 
+            this.txtApplyCode.EnterMoveNextControl = true;
+            this.txtApplyCode.Location = new System.Drawing.Point(605, 15);
+            this.txtApplyCode.Name = "txtApplyCode";
+            this.txtApplyCode.Size = new System.Drawing.Size(150, 20);
+            this.txtApplyCode.TabIndex = 3;
+            this.txtApplyCode.ParseEditValue += new DevExpress.XtraEditors.Controls.ConvertEditValueEventHandler(this.txtApplyCode_ParseEditValue);
+            // 
+            // Entry
             // 
             this.AcceptButton = null;
             this.ClientSize = new System.Drawing.Size(784, 562);
@@ -502,8 +503,8 @@
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.labitem);
             this.Controls.Add(this.grdItem);
-            this.Name = "BackStore";
-            this.Text = "退库";
+            this.Name = "Entry";
+            this.Text = "入库";
             this.Load += new System.EventHandler(this.Cashier_Load);
             this.Controls.SetChildIndex(this.grdItem, 0);
             this.Controls.SetChildIndex(this.labitem, 0);
@@ -513,11 +514,11 @@
             this.Controls.SetChildIndex(this.btnConfirm, 0);
             this.Controls.SetChildIndex(this.panel, 0);
             this.Controls.SetChildIndex(this.palItem, 0);
-            ((System.ComponentModel.ISupportInitialize)(this.panel)).EndInit();
-            this.panel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.imgFolderNode)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCategoryNode)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgOrgTreeNode)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panel)).EndInit();
+            this.panel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdItem)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gdvItem)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sleCustomer.Properties)).EndInit();
@@ -567,12 +568,12 @@
         private DevExpress.XtraTreeList.TreeList treUnit;
         private DevExpress.XtraEditors.TextEdit txtCount;
         private DevExpress.XtraEditors.TextEdit txtCodeBar;
+        private DevExpress.XtraEditors.TextEdit txtApplyCode;
+        private DevExpress.XtraEditors.LabelControl labApplyCode;
         private DevExpress.XtraEditors.SearchLookUpEdit sleMaterial;
         private DevExpress.XtraGrid.Views.Grid.GridView gdvMaterial;
         private DevExpress.XtraEditors.CalcEdit calAmount;
         private DevExpress.XtraEditors.LabelControl labAmount;
         private DevExpress.XtraEditors.LabelControl labCodeBar;
-        private DevExpress.XtraEditors.TextEdit txtApplyCode;
-        private DevExpress.XtraEditors.LabelControl labApplyCode;
     }
 }
