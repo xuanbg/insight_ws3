@@ -1137,6 +1137,19 @@
           <Property Name="CreatorUserId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="CreateTime" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="SYS_Verify_Record">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SN" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="Mobile" Type="varchar" MaxLength="11" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="Verified" Type="bit" Nullable="false" />
+          <Property Name="VerifyTime" Type="datetime" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+        </EntityType>
         <!--生成过程中发现错误:
 警告 6002: 表/视图“xfb.dbo.Advance”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="Advance">
@@ -1160,6 +1173,8 @@
         <EntityType Name="Citys">
           <Key>
             <PropertyRef Name="ID" />
+            
+            
           </Key>
           <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ParentId" Type="uniqueidentifier" />
@@ -1171,6 +1186,7 @@
         <EntityType Name="Countys">
           <Key>
             <PropertyRef Name="ID" />
+            
           </Key>
           <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="CategoryId" Type="uniqueidentifier" />
@@ -1203,6 +1219,8 @@
         <EntityType Name="States">
           <Key>
             <PropertyRef Name="ID" />
+            
+            
           </Key>
           <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Index" Type="int" Nullable="false" />
@@ -2010,7 +2028,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__BIZ_Deliv__CityI__636EBA21">
+        <Association Name="FK__BIZ_Deliv__CityI__06B7F65E">
           <End Role="BASE_Category" Type="Self.BASE_Category" Multiplicity="0..1" />
           <End Role="BIZ_Delivery_Address" Type="Self.BIZ_Delivery_Address" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2022,7 +2040,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__BIZ_Deliv__Count__6462DE5A">
+        <Association Name="FK__BIZ_Deliv__Count__07AC1A97">
           <End Role="MDG_Dictionary" Type="Self.MDG_Dictionary" Multiplicity="0..1" />
           <End Role="BIZ_Delivery_Address" Type="Self.BIZ_Delivery_Address" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2034,7 +2052,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__BIZ_Deliv__Membe__618671AF">
+        <Association Name="FK__BIZ_Deliv__Membe__04CFADEC">
           <End Role="MDG_Member" Type="Self.MDG_Member" Multiplicity="1" />
           <End Role="BIZ_Delivery_Address" Type="Self.BIZ_Delivery_Address" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2046,7 +2064,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__BIZ_Deliv__State__627A95E8">
+        <Association Name="FK__BIZ_Deliv__State__05C3D225">
           <End Role="BASE_Category" Type="Self.BASE_Category" Multiplicity="0..1" />
           <End Role="BIZ_Delivery_Address" Type="Self.BIZ_Delivery_Address" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2686,7 +2704,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__MDG_Membe__CityI__5708E33C">
+        <Association Name="FK__MDG_Membe__CityI__7A521F79">
           <End Role="BASE_Category" Type="Self.BASE_Category" Multiplicity="0..1" />
           <End Role="MDG_Member" Type="Self.MDG_Member" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2698,7 +2716,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__MDG_Membe__Count__57FD0775">
+        <Association Name="FK__MDG_Membe__Count__7B4643B2">
           <End Role="MDG_Dictionary" Type="Self.MDG_Dictionary" Multiplicity="0..1" />
           <End Role="MDG_Member" Type="Self.MDG_Member" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2710,7 +2728,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__MDG_Membe__State__5614BF03">
+        <Association Name="FK__MDG_Membe__State__795DFB40">
           <End Role="BASE_Category" Type="Self.BASE_Category" Multiplicity="0..1" />
           <End Role="MDG_Member" Type="Self.MDG_Member" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2722,7 +2740,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__MDG_Member__MID__55209ACA">
+        <Association Name="FK__MDG_Member__MID__7869D707">
           <End Role="MasterData" Type="Self.MasterData" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -4045,6 +4063,7 @@
           <EntitySet Name="SYS_User" EntityType="Self.SYS_User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SYS_UserGroup" EntityType="Self.SYS_UserGroup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SYS_UserGroupMember" EntityType="Self.SYS_UserGroupMember" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SYS_Verify_Record" EntityType="Self.SYS_Verify_Record" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Advance" EntityType="Self.Advance" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Advance].[ID] AS [ID], 
@@ -4347,19 +4366,19 @@
             <End Role="SYS_Module" EntitySet="SYS_Module" />
             <End Role="BASE_Category" EntitySet="BASE_Category" />
           </AssociationSet>
-          <AssociationSet Name="FK__BIZ_Deliv__CityI__636EBA21" Association="Self.FK__BIZ_Deliv__CityI__636EBA21">
+          <AssociationSet Name="FK__BIZ_Deliv__CityI__06B7F65E" Association="Self.FK__BIZ_Deliv__CityI__06B7F65E">
             <End Role="BASE_Category" EntitySet="BASE_Category" />
             <End Role="BIZ_Delivery_Address" EntitySet="BIZ_Delivery_Address" />
           </AssociationSet>
-          <AssociationSet Name="FK__BIZ_Deliv__Count__6462DE5A" Association="Self.FK__BIZ_Deliv__Count__6462DE5A">
+          <AssociationSet Name="FK__BIZ_Deliv__Count__07AC1A97" Association="Self.FK__BIZ_Deliv__Count__07AC1A97">
             <End Role="MDG_Dictionary" EntitySet="MDG_Dictionary" />
             <End Role="BIZ_Delivery_Address" EntitySet="BIZ_Delivery_Address" />
           </AssociationSet>
-          <AssociationSet Name="FK__BIZ_Deliv__Membe__618671AF" Association="Self.FK__BIZ_Deliv__Membe__618671AF">
+          <AssociationSet Name="FK__BIZ_Deliv__Membe__04CFADEC" Association="Self.FK__BIZ_Deliv__Membe__04CFADEC">
             <End Role="MDG_Member" EntitySet="MDG_Member" />
             <End Role="BIZ_Delivery_Address" EntitySet="BIZ_Delivery_Address" />
           </AssociationSet>
-          <AssociationSet Name="FK__BIZ_Deliv__State__627A95E8" Association="Self.FK__BIZ_Deliv__State__627A95E8">
+          <AssociationSet Name="FK__BIZ_Deliv__State__05C3D225" Association="Self.FK__BIZ_Deliv__State__05C3D225">
             <End Role="BASE_Category" EntitySet="BASE_Category" />
             <End Role="BIZ_Delivery_Address" EntitySet="BIZ_Delivery_Address" />
           </AssociationSet>
@@ -4563,19 +4582,19 @@
             <End Role="MasterData" EntitySet="MasterData" />
             <End Role="MDG_Material" EntitySet="MDG_Material" />
           </AssociationSet>
-          <AssociationSet Name="FK__MDG_Membe__CityI__5708E33C" Association="Self.FK__MDG_Membe__CityI__5708E33C">
+          <AssociationSet Name="FK__MDG_Membe__CityI__7A521F79" Association="Self.FK__MDG_Membe__CityI__7A521F79">
             <End Role="BASE_Category" EntitySet="BASE_Category" />
             <End Role="MDG_Member" EntitySet="MDG_Member" />
           </AssociationSet>
-          <AssociationSet Name="FK__MDG_Membe__Count__57FD0775" Association="Self.FK__MDG_Membe__Count__57FD0775">
+          <AssociationSet Name="FK__MDG_Membe__Count__7B4643B2" Association="Self.FK__MDG_Membe__Count__7B4643B2">
             <End Role="MDG_Dictionary" EntitySet="MDG_Dictionary" />
             <End Role="MDG_Member" EntitySet="MDG_Member" />
           </AssociationSet>
-          <AssociationSet Name="FK__MDG_Membe__State__5614BF03" Association="Self.FK__MDG_Membe__State__5614BF03">
+          <AssociationSet Name="FK__MDG_Membe__State__795DFB40" Association="Self.FK__MDG_Membe__State__795DFB40">
             <End Role="BASE_Category" EntitySet="BASE_Category" />
             <End Role="MDG_Member" EntitySet="MDG_Member" />
           </AssociationSet>
-          <AssociationSet Name="FK__MDG_Member__MID__55209ACA" Association="Self.FK__MDG_Member__MID__55209ACA">
+          <AssociationSet Name="FK__MDG_Member__MID__7869D707" Association="Self.FK__MDG_Member__MID__7869D707">
             <End Role="MasterData" EntitySet="MasterData" />
             <End Role="MDG_Member" EntitySet="MDG_Member" />
           </AssociationSet>
@@ -9526,6 +9545,7 @@
           <EntitySet Name="Citys" EntityType="Insight_WSModel.Citys" />
           <EntitySet Name="Countys" EntityType="Insight_WSModel.Countys" />
           <EntitySet Name="States" EntityType="Insight_WSModel.States" />
+          <EntitySet Name="SYS_Verify_Record" EntityType="Insight_WSModel.SYS_Verify_Record" />
           </EntityContainer>
         <EntityType Name="Advance">
           <Key>
@@ -10291,6 +10311,19 @@
           <Property Name="ID" Type="Guid" Nullable="false" />
           <Property Name="Index" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SYS_Verify_Record">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="SN" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="Mobile" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="Verified" Type="Boolean" Nullable="false" />
+          <Property Name="VerifyTime" Type="DateTime" Precision="3" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -11566,6 +11599,20 @@
               <MappingFragment StoreEntitySet="States">
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Index" ColumnName="Index" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SYS_Verify_Record">
+            <EntityTypeMapping TypeName="Insight_WSModel.SYS_Verify_Record">
+              <MappingFragment StoreEntitySet="SYS_Verify_Record">
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="VerifyTime" ColumnName="VerifyTime" />
+                <ScalarProperty Name="Verified" ColumnName="Verified" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="SN" ColumnName="SN" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

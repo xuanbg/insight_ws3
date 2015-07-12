@@ -129,5 +129,6 @@ namespace Insight.WS.Server.Common.ORM
         public virtual DbSet<Citys> Citys { get; set; }
         public virtual DbSet<Countys> Countys { get; set; }
         public virtual DbSet<States> States { get; set; }
+        public virtual DbSet<SYS_Verify_Record> SYS_Verify_Record { get; set; }
     }
 }

@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using Insight.WS.Server.Common.ORM;
+using Insight.WS.Server.Common.Service;
 
 namespace Insight.WS.Server.Common
 {
@@ -97,6 +98,25 @@ namespace Insight.WS.Server.Common
 
             us.LastConnect = DateTime.Now;
             return us;
+        }
+
+        /// <summary>
+        /// 修改指定用户的密码
+        /// </summary>
+        /// <param name="us">Session对象实体</param>
+        /// <param name="pw">新密码Hash值</param>
+        /// <returns>bool 是否修改成功</returns>
+        public static bool UpdataPassword(Session us, string pw)
+        {
+            if (!OnlineManage.Verification(us)) return false;
+
+            var sql = string.Format("update SYS_User set Password = '{0}' where ID = '{1}' ", pw, us.UserId);
+            if (SqlHelper.SqlNonQuery(sql) > 0)
+            {
+                OnlineManage.Sessions[us.ID].Signature = pw;
+                return true;
+            }
+            return false;
         }
 
         /// <summary>
@@ -207,6 +227,72 @@ namespace Insight.WS.Server.Common
                 new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = img.CreatorUserId}, 
                 new SqlParameter("@Id", SqlDbType.UniqueIdentifier) {Value = bid}
             }).Select(parm => SqlHelper.MakeCommand(sql, parm)).ToList();
+        }
+
+        /// <summary>
+        /// 验证验证码是否正确
+        /// </summary>
+        /// <param name="number">手机号</param>
+        /// <param name="code">验证码</param>
+        /// <param name="timeout">超时秒数</param>
+        /// <returns>bool 是否正确</returns>
+        public static bool CodeVerify(string number, string code, int timeout)
+        {
+            using (var context = new WSEntities())
+            {
+                var vr = context.SYS_Verify_Record.Where(v => v.Mobile == number && v.Code == code)
+                         .OrderByDescending(v => v.SN)
+                         .FirstOrDefault();
+                if (vr == null) return false;
+
+                var time = DateTime.Now - vr.CreateTime;
+                if (time.Seconds > timeout) return false;
+
+                vr.Verified = true;
+                vr.VerifyTime = DateTime.Now;
+                context.SaveChanges();
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// 生成验证码
+        /// </summary>
+        /// <param name="number">手机号</param>
+        /// <param name="type">验证码类型</param>
+        /// <returns>string 验证码</returns>
+        public static string GetVerifyCode(string number, int type)
+        {
+            var msg = "";
+            var r = new Random(Environment.TickCount);
+            var code = r.Next(100000, 999999).ToString();
+            switch (type)
+            {
+                case 1: // 注册新用户
+                    msg = string.Format("欢迎使用信分宝，开启信用新生活。么么哒…您的验证码是【{0}】,该验证码3分钟内有效！", code);
+                    break;
+
+                case 2: // 重置密码
+                    msg = string.Format("亲爱的信分宝用户，您正在重置登录密码！如非本人操作，请告知客服。您的验证码是【{0}】,该验证码3分钟内有效！", code);
+                    break;
+            }
+
+            using (var cli = new Service1SoapClient())
+            {
+                cli.g_Submit("dlbjtrxx", "12345678", "", "1012818", number, msg);
+            }
+
+            var vr = new SYS_Verify_Record
+            {
+                Type = type,
+                Mobile = number,
+                Code = code
+            };
+            using (var context = new WSEntities())
+            {
+                context.SYS_Verify_Record.Add(vr);
+                return context.SaveChanges() > 0 ? code : null;
+            }
         }
 
         #endregion

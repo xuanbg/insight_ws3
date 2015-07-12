@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="98e213524dc0441ba0185b943e0cb29a" Name="Diagram1" ZoomLevel="90">
+      <Diagram DiagramId="98e213524dc0441ba0185b943e0cb29a" Name="Diagram1" ZoomLevel="94">
         <EntityTypeShape EntityType="Insight_WSModel.ABS_Advance_Detail" Width="1.5" PointX="19.5" PointY="123.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Insight_WSModel.ABS_Clearing" Width="1.5" PointX="6" PointY="113.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Insight_WSModel.ABS_Clearing_Attachs" Width="1.5" PointX="22.5" PointY="119.125" IsExpanded="true" />
@@ -45,7 +45,7 @@
         <EntityTypeShape EntityType="Insight_WSModel.SYS_Code_Allot" Width="1.5" PointX="41" PointY="111.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Insight_WSModel.SYS_Code_Record" Width="1.5" PointX="45.25" PointY="121.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Insight_WSModel.SYS_Code_Scheme" Width="1.5" PointX="43" PointY="116.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Insight_WSModel.SYS_Interface" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Insight_WSModel.SYS_Interface" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Insight_WSModel.SYS_Module" Width="1.5" PointX="6.75" PointY="99.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Insight_WSModel.SYS_ModuleAction" Width="1.5" PointX="6" PointY="125.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Insight_WSModel.SYS_ModuleGroup" Width="1.5" PointX="4.5" PointY="101" IsExpanded="true" />
@@ -72,7 +72,7 @@
         <EntityTypeShape EntityType="Insight_WSModel.SYS_User" Width="1.5" PointX="0.75" PointY="110.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Insight_WSModel.SYS_UserGroup" Width="1.5" PointX="3" PointY="152.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Insight_WSModel.SYS_UserGroupMember" Width="1.5" PointX="8.25" PointY="134.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Insight_WSModel.ReportSchedular" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Insight_WSModel.ReportSchedular" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="Insight_WSModel.FK__ABS_Advan__Objec__6D99A4DE" ManuallyRouted="false" />
         <AssociationConnector Association="Insight_WSModel.FK__ABS_Clear__Clear__55C21B4D" ManuallyRouted="false" />
         <AssociationConnector Association="Insight_WSModel.FK__ABS_Clear__Creat__44978F4B" ManuallyRouted="false" />
@@ -251,7 +251,7 @@
         <AssociationConnector Association="Insight_WSModel.FK__SYS_UserG__Creat__3BAD438F" ManuallyRouted="false" />
         <AssociationConnector Association="Insight_WSModel.FK__SYS_UserG__UserI__3AB91F56" ManuallyRouted="false" />
         <AssociationConnector Association="Insight_WSModel.FK__SYS_UserG__Group__39C4FB1D" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="Insight_WSModel.Advance" Width="1.5" PointX="2.875" PointY="0.75" />
+        <EntityTypeShape EntityType="Insight_WSModel.Advance" Width="1.5" PointX="2.625" PointY="0.75" />
         <EntityTypeShape EntityType="Insight_WSModel.ABS_Advance" Width="1.5" PointX="46" PointY="124.5" />
         <EntityTypeShape EntityType="Insight_WSModel.ABS_Advance_Record" Width="1.5" PointX="21.75" PointY="122.75" />
         <EntityTypeShape EntityType="Insight_WSModel.ABS_Clearing_Item" Width="1.5" PointX="13.5" PointY="124.75" />
@@ -292,8 +292,8 @@
         <AssociationConnector Association="Insight_WSModel.FK__ABS_Stora__Creat__46D4DD78" />
         <AssociationConnector Association="Insight_WSModel.FK__ABS_Stora__Stora__44EC9506" />
         <AssociationConnector Association="Insight_WSModel.FK__ABS_Contr__Contr__0D6755F2" />
-        <EntityTypeShape EntityType="Insight_WSModel.BIZ_Delivery_Address" Width="1.5" PointX="0.75" PointY="4.75" />
-        <EntityTypeShape EntityType="Insight_WSModel.BIZ_Produce_Category" Width="1.5" PointX="6.625" PointY="0.75" />
+        <EntityTypeShape EntityType="Insight_WSModel.BIZ_Delivery_Address" Width="1.5" PointX="9.125" PointY="99.25" />
+        <EntityTypeShape EntityType="Insight_WSModel.BIZ_Produce_Category" Width="1.5" PointX="4.5" PointY="0.75" />
         <EntityTypeShape EntityType="Insight_WSModel.MDG_Member" Width="1.5" PointX="13.875" PointY="130" />
         <AssociationConnector Association="Insight_WSModel.FK__MDG_Member__MID__77DFC722" />
         <AssociationConnector Association="Insight_WSModel.FK__BIZ_Deliv__CityI__792B531B" />
@@ -303,9 +303,10 @@
         <AssociationConnector Association="Insight_WSModel.FK__BIZ_Deliv__Count__7A1F7754" />
         <AssociationConnector Association="Insight_WSModel.FK__BIZ_Deliv__Membe__77430AA9" />
         <AssociationConnector Association="Insight_WSModel.FK__MDG_Membe__Count__6DB9A06F" />
-        <EntityTypeShape EntityType="Insight_WSModel.Citys" Width="1.5" PointX="10.375" PointY="0.75" />
-        <EntityTypeShape EntityType="Insight_WSModel.Countys" Width="1.5" PointX="12.25" PointY="0.75" />
-        <EntityTypeShape EntityType="Insight_WSModel.States" Width="1.5" PointX="8.5" PointY="0.75" />
+        <EntityTypeShape EntityType="Insight_WSModel.Citys" Width="1.5" PointX="8.25" PointY="0.75" />
+        <EntityTypeShape EntityType="Insight_WSModel.Countys" Width="1.5" PointX="10.125" PointY="0.75" />
+        <EntityTypeShape EntityType="Insight_WSModel.States" Width="1.5" PointX="6.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Insight_WSModel.SYS_Verify_Record" Width="1.5" PointX="2.625" PointY="4.125" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

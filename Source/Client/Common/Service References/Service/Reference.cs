@@ -737,6 +737,12 @@ namespace Insight.WS.Client.Common.Service {
         private string AliasField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.BIZ_Delivery_Address> BIZ_Delivery_AddressField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.BIZ_Delivery_Address> BIZ_Delivery_Address1Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool BuiltInField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -768,6 +774,12 @@ namespace Insight.WS.Client.Common.Service {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDG_Customer> MDG_Customer1Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDG_Member> MDG_MemberField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDG_Member> MDG_Member1Field;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDG_Supplier> MDG_SupplierField;
@@ -846,6 +858,32 @@ namespace Insight.WS.Client.Common.Service {
                 if ((object.ReferenceEquals(this.AliasField, value) != true)) {
                     this.AliasField = value;
                     this.RaisePropertyChanged("Alias");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.BIZ_Delivery_Address> BIZ_Delivery_Address {
+            get {
+                return this.BIZ_Delivery_AddressField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.BIZ_Delivery_AddressField, value) != true)) {
+                    this.BIZ_Delivery_AddressField = value;
+                    this.RaisePropertyChanged("BIZ_Delivery_Address");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.BIZ_Delivery_Address> BIZ_Delivery_Address1 {
+            get {
+                return this.BIZ_Delivery_Address1Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.BIZ_Delivery_Address1Field, value) != true)) {
+                    this.BIZ_Delivery_Address1Field = value;
+                    this.RaisePropertyChanged("BIZ_Delivery_Address1");
                 }
             }
         }
@@ -989,6 +1027,32 @@ namespace Insight.WS.Client.Common.Service {
                 if ((object.ReferenceEquals(this.MDG_Customer1Field, value) != true)) {
                     this.MDG_Customer1Field = value;
                     this.RaisePropertyChanged("MDG_Customer1");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDG_Member> MDG_Member {
+            get {
+                return this.MDG_MemberField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MDG_MemberField, value) != true)) {
+                    this.MDG_MemberField = value;
+                    this.RaisePropertyChanged("MDG_Member");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDG_Member> MDG_Member1 {
+            get {
+                return this.MDG_Member1Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MDG_Member1Field, value) != true)) {
+                    this.MDG_Member1Field = value;
+                    this.RaisePropertyChanged("MDG_Member1");
                 }
             }
         }
@@ -1229,22 +1293,7 @@ namespace Insight.WS.Client.Common.Service {
         private System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Storage_Summary> ABS_Storage_SummaryField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.BIZ_Borrowing_Apply> BIZ_Borrowing_ApplyField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.BIZ_Refund_Apply> BIZ_Refund_ApplyField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.BIZ_Refund_Apply> BIZ_Refund_Apply1Field;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.BIZ_Reimburse_Detail> BIZ_Reimburse_DetailField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.BIZ_Travel_Apply> BIZ_Travel_ApplyField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.BIZ_Travel_Plan> BIZ_Travel_PlanField;
+        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.BIZ_Delivery_Address> BIZ_Delivery_AddressField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool BuiltInField;
@@ -1302,6 +1351,9 @@ namespace Insight.WS.Client.Common.Service {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDG_Material> MDG_Material2Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDG_Member> MDG_MemberField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDG_Supplier> MDG_SupplierField;
@@ -1441,79 +1493,14 @@ namespace Insight.WS.Client.Common.Service {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.BIZ_Borrowing_Apply> BIZ_Borrowing_Apply {
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.BIZ_Delivery_Address> BIZ_Delivery_Address {
             get {
-                return this.BIZ_Borrowing_ApplyField;
+                return this.BIZ_Delivery_AddressField;
             }
             set {
-                if ((object.ReferenceEquals(this.BIZ_Borrowing_ApplyField, value) != true)) {
-                    this.BIZ_Borrowing_ApplyField = value;
-                    this.RaisePropertyChanged("BIZ_Borrowing_Apply");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.BIZ_Refund_Apply> BIZ_Refund_Apply {
-            get {
-                return this.BIZ_Refund_ApplyField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.BIZ_Refund_ApplyField, value) != true)) {
-                    this.BIZ_Refund_ApplyField = value;
-                    this.RaisePropertyChanged("BIZ_Refund_Apply");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.BIZ_Refund_Apply> BIZ_Refund_Apply1 {
-            get {
-                return this.BIZ_Refund_Apply1Field;
-            }
-            set {
-                if ((object.ReferenceEquals(this.BIZ_Refund_Apply1Field, value) != true)) {
-                    this.BIZ_Refund_Apply1Field = value;
-                    this.RaisePropertyChanged("BIZ_Refund_Apply1");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.BIZ_Reimburse_Detail> BIZ_Reimburse_Detail {
-            get {
-                return this.BIZ_Reimburse_DetailField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.BIZ_Reimburse_DetailField, value) != true)) {
-                    this.BIZ_Reimburse_DetailField = value;
-                    this.RaisePropertyChanged("BIZ_Reimburse_Detail");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.BIZ_Travel_Apply> BIZ_Travel_Apply {
-            get {
-                return this.BIZ_Travel_ApplyField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.BIZ_Travel_ApplyField, value) != true)) {
-                    this.BIZ_Travel_ApplyField = value;
-                    this.RaisePropertyChanged("BIZ_Travel_Apply");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.BIZ_Travel_Plan> BIZ_Travel_Plan {
-            get {
-                return this.BIZ_Travel_PlanField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.BIZ_Travel_PlanField, value) != true)) {
-                    this.BIZ_Travel_PlanField = value;
-                    this.RaisePropertyChanged("BIZ_Travel_Plan");
+                if ((object.ReferenceEquals(this.BIZ_Delivery_AddressField, value) != true)) {
+                    this.BIZ_Delivery_AddressField = value;
+                    this.RaisePropertyChanged("BIZ_Delivery_Address");
                 }
             }
         }
@@ -1761,6 +1748,19 @@ namespace Insight.WS.Client.Common.Service {
                 if ((object.ReferenceEquals(this.MDG_Material2Field, value) != true)) {
                     this.MDG_Material2Field = value;
                     this.RaisePropertyChanged("MDG_Material2");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDG_Member> MDG_Member {
+            get {
+                return this.MDG_MemberField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MDG_MemberField, value) != true)) {
+                    this.MDG_MemberField = value;
+                    this.RaisePropertyChanged("MDG_Member");
                 }
             }
         }
@@ -2775,9 +2775,6 @@ namespace Insight.WS.Client.Common.Service {
         private System.Collections.Generic.List<Insight.WS.Client.Common.Service.BASE_Category> BASE_CategoryField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.BIZ_Travel_Apply> BIZ_Travel_ApplyField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool BuiltInField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -3018,19 +3015,6 @@ namespace Insight.WS.Client.Common.Service {
                 if ((object.ReferenceEquals(this.BASE_CategoryField, value) != true)) {
                     this.BASE_CategoryField = value;
                     this.RaisePropertyChanged("BASE_Category");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.BIZ_Travel_Apply> BIZ_Travel_Apply {
-            get {
-                return this.BIZ_Travel_ApplyField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.BIZ_Travel_ApplyField, value) != true)) {
-                    this.BIZ_Travel_ApplyField = value;
-                    this.RaisePropertyChanged("BIZ_Travel_Apply");
                 }
             }
         }
@@ -4319,9 +4303,6 @@ namespace Insight.WS.Client.Common.Service {
         private System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Clearing_Item> ABS_Clearing_ItemField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.BIZ_Refund_Apply> BIZ_Refund_ApplyField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<System.Guid> CheckIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -4433,19 +4414,6 @@ namespace Insight.WS.Client.Common.Service {
                 if ((object.ReferenceEquals(this.ABS_Clearing_ItemField, value) != true)) {
                     this.ABS_Clearing_ItemField = value;
                     this.RaisePropertyChanged("ABS_Clearing_Item");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.BIZ_Refund_Apply> BIZ_Refund_Apply {
-            get {
-                return this.BIZ_Refund_ApplyField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.BIZ_Refund_ApplyField, value) != true)) {
-                    this.BIZ_Refund_ApplyField = value;
-                    this.RaisePropertyChanged("BIZ_Refund_Apply");
                 }
             }
         }
@@ -4780,6 +4748,9 @@ namespace Insight.WS.Client.Common.Service {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private Insight.WS.Client.Common.Service.MDG_Material MDG_MaterialField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Insight.WS.Client.Common.Service.MDG_Member MDG_MemberField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private Insight.WS.Client.Common.Service.MDG_Supplier MDG_SupplierField;
@@ -5160,6 +5131,19 @@ namespace Insight.WS.Client.Common.Service {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public Insight.WS.Client.Common.Service.MDG_Member MDG_Member {
+            get {
+                return this.MDG_MemberField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MDG_MemberField, value) != true)) {
+                    this.MDG_MemberField = value;
+                    this.RaisePropertyChanged("MDG_Member");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public Insight.WS.Client.Common.Service.MDG_Supplier MDG_Supplier {
             get {
                 return this.MDG_SupplierField;
@@ -5462,9 +5446,6 @@ namespace Insight.WS.Client.Common.Service {
         private decimal AmountField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.BIZ_Refund_Detail> BIZ_Refund_DetailField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Guid ClearingIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -5552,19 +5533,6 @@ namespace Insight.WS.Client.Common.Service {
                 if ((this.AmountField.Equals(value) != true)) {
                     this.AmountField = value;
                     this.RaisePropertyChanged("Amount");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.BIZ_Refund_Detail> BIZ_Refund_Detail {
-            get {
-                return this.BIZ_Refund_DetailField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.BIZ_Refund_DetailField, value) != true)) {
-                    this.BIZ_Refund_DetailField = value;
-                    this.RaisePropertyChanged("BIZ_Refund_Detail");
                 }
             }
         }
@@ -5695,163 +5663,6 @@ namespace Insight.WS.Client.Common.Service {
                 if ((object.ReferenceEquals(this.UnitsField, value) != true)) {
                     this.UnitsField = value;
                     this.RaisePropertyChanged("Units");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="BIZ_Refund_Apply", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
-    [System.SerializableAttribute()]
-    public partial class BIZ_Refund_Apply : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Insight.WS.Client.Common.Service.ABS_Clearing ABS_ClearingField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Guid ClearingIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Guid IDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Insight.WS.Client.Common.Service.MDG_Dictionary MDG_DictionaryField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Insight.WS.Client.Common.Service.MDG_Dictionary MDG_Dictionary1Field;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Guid PayTypeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Guid ReasonField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long SNField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Insight.WS.Client.Common.Service.ABS_Clearing ABS_Clearing {
-            get {
-                return this.ABS_ClearingField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ABS_ClearingField, value) != true)) {
-                    this.ABS_ClearingField = value;
-                    this.RaisePropertyChanged("ABS_Clearing");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid ClearingId {
-            get {
-                return this.ClearingIdField;
-            }
-            set {
-                if ((this.ClearingIdField.Equals(value) != true)) {
-                    this.ClearingIdField = value;
-                    this.RaisePropertyChanged("ClearingId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid ID {
-            get {
-                return this.IDField;
-            }
-            set {
-                if ((this.IDField.Equals(value) != true)) {
-                    this.IDField = value;
-                    this.RaisePropertyChanged("ID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Insight.WS.Client.Common.Service.MDG_Dictionary MDG_Dictionary {
-            get {
-                return this.MDG_DictionaryField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.MDG_DictionaryField, value) != true)) {
-                    this.MDG_DictionaryField = value;
-                    this.RaisePropertyChanged("MDG_Dictionary");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Insight.WS.Client.Common.Service.MDG_Dictionary MDG_Dictionary1 {
-            get {
-                return this.MDG_Dictionary1Field;
-            }
-            set {
-                if ((object.ReferenceEquals(this.MDG_Dictionary1Field, value) != true)) {
-                    this.MDG_Dictionary1Field = value;
-                    this.RaisePropertyChanged("MDG_Dictionary1");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid PayType {
-            get {
-                return this.PayTypeField;
-            }
-            set {
-                if ((this.PayTypeField.Equals(value) != true)) {
-                    this.PayTypeField = value;
-                    this.RaisePropertyChanged("PayType");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Reason {
-            get {
-                return this.ReasonField;
-            }
-            set {
-                if ((this.ReasonField.Equals(value) != true)) {
-                    this.ReasonField = value;
-                    this.RaisePropertyChanged("Reason");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long SN {
-            get {
-                return this.SNField;
-            }
-            set {
-                if ((this.SNField.Equals(value) != true)) {
-                    this.SNField = value;
-                    this.RaisePropertyChanged("SN");
                 }
             }
         }
@@ -7479,530 +7290,33 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="BIZ_Borrowing_Apply", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="BIZ_Delivery_Address", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
-    public partial class BIZ_Borrowing_Apply : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class BIZ_Delivery_Address : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Insight.WS.Client.Common.Service.ABS_Contract ABS_ContractField;
+        private Insight.WS.Client.Common.Service.BASE_Category BASE_CategoryField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Guid CIDField;
+        private Insight.WS.Client.Common.Service.BASE_Category BASE_Category1Field;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Insight.WS.Client.Common.Service.MDG_Dictionary MDG_DictionaryField;
+        private System.Nullable<System.Guid> CityIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<System.Guid> PayTypeField;
+        private System.Nullable<System.Guid> CountyIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long SNField;
+        private System.DateTime CreateTimeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int TypeField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Insight.WS.Client.Common.Service.ABS_Contract ABS_Contract {
-            get {
-                return this.ABS_ContractField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ABS_ContractField, value) != true)) {
-                    this.ABS_ContractField = value;
-                    this.RaisePropertyChanged("ABS_Contract");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid CID {
-            get {
-                return this.CIDField;
-            }
-            set {
-                if ((this.CIDField.Equals(value) != true)) {
-                    this.CIDField = value;
-                    this.RaisePropertyChanged("CID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Insight.WS.Client.Common.Service.MDG_Dictionary MDG_Dictionary {
-            get {
-                return this.MDG_DictionaryField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.MDG_DictionaryField, value) != true)) {
-                    this.MDG_DictionaryField = value;
-                    this.RaisePropertyChanged("MDG_Dictionary");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<System.Guid> PayType {
-            get {
-                return this.PayTypeField;
-            }
-            set {
-                if ((this.PayTypeField.Equals(value) != true)) {
-                    this.PayTypeField = value;
-                    this.RaisePropertyChanged("PayType");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long SN {
-            get {
-                return this.SNField;
-            }
-            set {
-                if ((this.SNField.Equals(value) != true)) {
-                    this.SNField = value;
-                    this.RaisePropertyChanged("SN");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Type {
-            get {
-                return this.TypeField;
-            }
-            set {
-                if ((this.TypeField.Equals(value) != true)) {
-                    this.TypeField = value;
-                    this.RaisePropertyChanged("Type");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="BIZ_Reimburse_Detail", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
-    [System.SerializableAttribute()]
-    public partial class BIZ_Reimburse_Detail : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Insight.WS.Client.Common.Service.ABS_Contract_Subjects ABS_Contract_SubjectsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<System.Guid> ExpensesTypeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Insight.WS.Client.Common.Service.MDG_Dictionary MDG_DictionaryField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Guid SIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long SNField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Insight.WS.Client.Common.Service.ABS_Contract_Subjects ABS_Contract_Subjects {
-            get {
-                return this.ABS_Contract_SubjectsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ABS_Contract_SubjectsField, value) != true)) {
-                    this.ABS_Contract_SubjectsField = value;
-                    this.RaisePropertyChanged("ABS_Contract_Subjects");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<System.Guid> ExpensesType {
-            get {
-                return this.ExpensesTypeField;
-            }
-            set {
-                if ((this.ExpensesTypeField.Equals(value) != true)) {
-                    this.ExpensesTypeField = value;
-                    this.RaisePropertyChanged("ExpensesType");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Insight.WS.Client.Common.Service.MDG_Dictionary MDG_Dictionary {
-            get {
-                return this.MDG_DictionaryField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.MDG_DictionaryField, value) != true)) {
-                    this.MDG_DictionaryField = value;
-                    this.RaisePropertyChanged("MDG_Dictionary");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid SID {
-            get {
-                return this.SIDField;
-            }
-            set {
-                if ((this.SIDField.Equals(value) != true)) {
-                    this.SIDField = value;
-                    this.RaisePropertyChanged("SID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long SN {
-            get {
-                return this.SNField;
-            }
-            set {
-                if ((this.SNField.Equals(value) != true)) {
-                    this.SNField = value;
-                    this.RaisePropertyChanged("SN");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="BIZ_Travel_Apply", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
-    [System.SerializableAttribute()]
-    public partial class BIZ_Travel_Apply : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Insight.WS.Client.Common.Service.ABS_Contract ABS_ContractField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.BIZ_Travel_Plan> BIZ_Travel_PlanField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<decimal> BudgetField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Guid CIDField;
+        private bool DefaultField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string DescriptionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string DestinationField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Insight.WS.Client.Common.Service.MDG_Dictionary MDG_DictionaryField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<System.Guid> PayTypeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long SNField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Insight.WS.Client.Common.Service.SYS_User SYS_UserField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<int> StatusField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<System.DateTime> TakeTimeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<System.DateTime> TicketTimeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<System.Guid> TicketUserIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int TravelTypeField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Insight.WS.Client.Common.Service.ABS_Contract ABS_Contract {
-            get {
-                return this.ABS_ContractField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ABS_ContractField, value) != true)) {
-                    this.ABS_ContractField = value;
-                    this.RaisePropertyChanged("ABS_Contract");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.BIZ_Travel_Plan> BIZ_Travel_Plan {
-            get {
-                return this.BIZ_Travel_PlanField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.BIZ_Travel_PlanField, value) != true)) {
-                    this.BIZ_Travel_PlanField = value;
-                    this.RaisePropertyChanged("BIZ_Travel_Plan");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<decimal> Budget {
-            get {
-                return this.BudgetField;
-            }
-            set {
-                if ((this.BudgetField.Equals(value) != true)) {
-                    this.BudgetField = value;
-                    this.RaisePropertyChanged("Budget");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid CID {
-            get {
-                return this.CIDField;
-            }
-            set {
-                if ((this.CIDField.Equals(value) != true)) {
-                    this.CIDField = value;
-                    this.RaisePropertyChanged("CID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Description {
-            get {
-                return this.DescriptionField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
-                    this.DescriptionField = value;
-                    this.RaisePropertyChanged("Description");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Destination {
-            get {
-                return this.DestinationField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.DestinationField, value) != true)) {
-                    this.DestinationField = value;
-                    this.RaisePropertyChanged("Destination");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Insight.WS.Client.Common.Service.MDG_Dictionary MDG_Dictionary {
-            get {
-                return this.MDG_DictionaryField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.MDG_DictionaryField, value) != true)) {
-                    this.MDG_DictionaryField = value;
-                    this.RaisePropertyChanged("MDG_Dictionary");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<System.Guid> PayType {
-            get {
-                return this.PayTypeField;
-            }
-            set {
-                if ((this.PayTypeField.Equals(value) != true)) {
-                    this.PayTypeField = value;
-                    this.RaisePropertyChanged("PayType");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long SN {
-            get {
-                return this.SNField;
-            }
-            set {
-                if ((this.SNField.Equals(value) != true)) {
-                    this.SNField = value;
-                    this.RaisePropertyChanged("SN");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Insight.WS.Client.Common.Service.SYS_User SYS_User {
-            get {
-                return this.SYS_UserField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.SYS_UserField, value) != true)) {
-                    this.SYS_UserField = value;
-                    this.RaisePropertyChanged("SYS_User");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<int> Status {
-            get {
-                return this.StatusField;
-            }
-            set {
-                if ((this.StatusField.Equals(value) != true)) {
-                    this.StatusField = value;
-                    this.RaisePropertyChanged("Status");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<System.DateTime> TakeTime {
-            get {
-                return this.TakeTimeField;
-            }
-            set {
-                if ((this.TakeTimeField.Equals(value) != true)) {
-                    this.TakeTimeField = value;
-                    this.RaisePropertyChanged("TakeTime");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<System.DateTime> TicketTime {
-            get {
-                return this.TicketTimeField;
-            }
-            set {
-                if ((this.TicketTimeField.Equals(value) != true)) {
-                    this.TicketTimeField = value;
-                    this.RaisePropertyChanged("TicketTime");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<System.Guid> TicketUserId {
-            get {
-                return this.TicketUserIdField;
-            }
-            set {
-                if ((this.TicketUserIdField.Equals(value) != true)) {
-                    this.TicketUserIdField = value;
-                    this.RaisePropertyChanged("TicketUserId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int TravelType {
-            get {
-                return this.TravelTypeField;
-            }
-            set {
-                if ((this.TravelTypeField.Equals(value) != true)) {
-                    this.TravelTypeField = value;
-                    this.RaisePropertyChanged("TravelType");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="BIZ_Travel_Plan", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
-    [System.SerializableAttribute()]
-    public partial class BIZ_Travel_Plan : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Insight.WS.Client.Common.Service.BIZ_Travel_Apply BIZ_Travel_ApplyField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string DescriptionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string DestinationField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<decimal> FareField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<int> GetTicketField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Guid IDField;
@@ -8011,25 +7325,28 @@ namespace Insight.WS.Client.Common.Service {
         private Insight.WS.Client.Common.Service.MDG_Dictionary MDG_DictionaryField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<bool> NeedTicketField;
+        private Insight.WS.Client.Common.Service.MDG_Member MDG_MemberField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid MemberIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MobileField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private long SNField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string StartingField;
+        private System.Nullable<System.Guid> StateIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<System.DateTime> StartingTimeField;
+        private string StreetField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string TrainsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Guid TravelIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<System.Guid> VehicleField;
+        private string ZipCodeField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -8042,14 +7359,79 @@ namespace Insight.WS.Client.Common.Service {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Insight.WS.Client.Common.Service.BIZ_Travel_Apply BIZ_Travel_Apply {
+        public Insight.WS.Client.Common.Service.BASE_Category BASE_Category {
             get {
-                return this.BIZ_Travel_ApplyField;
+                return this.BASE_CategoryField;
             }
             set {
-                if ((object.ReferenceEquals(this.BIZ_Travel_ApplyField, value) != true)) {
-                    this.BIZ_Travel_ApplyField = value;
-                    this.RaisePropertyChanged("BIZ_Travel_Apply");
+                if ((object.ReferenceEquals(this.BASE_CategoryField, value) != true)) {
+                    this.BASE_CategoryField = value;
+                    this.RaisePropertyChanged("BASE_Category");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Insight.WS.Client.Common.Service.BASE_Category BASE_Category1 {
+            get {
+                return this.BASE_Category1Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.BASE_Category1Field, value) != true)) {
+                    this.BASE_Category1Field = value;
+                    this.RaisePropertyChanged("BASE_Category1");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.Guid> CityId {
+            get {
+                return this.CityIdField;
+            }
+            set {
+                if ((this.CityIdField.Equals(value) != true)) {
+                    this.CityIdField = value;
+                    this.RaisePropertyChanged("CityId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.Guid> CountyId {
+            get {
+                return this.CountyIdField;
+            }
+            set {
+                if ((this.CountyIdField.Equals(value) != true)) {
+                    this.CountyIdField = value;
+                    this.RaisePropertyChanged("CountyId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime CreateTime {
+            get {
+                return this.CreateTimeField;
+            }
+            set {
+                if ((this.CreateTimeField.Equals(value) != true)) {
+                    this.CreateTimeField = value;
+                    this.RaisePropertyChanged("CreateTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Default {
+            get {
+                return this.DefaultField;
+            }
+            set {
+                if ((this.DefaultField.Equals(value) != true)) {
+                    this.DefaultField = value;
+                    this.RaisePropertyChanged("Default");
                 }
             }
         }
@@ -8063,45 +7445,6 @@ namespace Insight.WS.Client.Common.Service {
                 if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
                     this.DescriptionField = value;
                     this.RaisePropertyChanged("Description");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Destination {
-            get {
-                return this.DestinationField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.DestinationField, value) != true)) {
-                    this.DestinationField = value;
-                    this.RaisePropertyChanged("Destination");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<decimal> Fare {
-            get {
-                return this.FareField;
-            }
-            set {
-                if ((this.FareField.Equals(value) != true)) {
-                    this.FareField = value;
-                    this.RaisePropertyChanged("Fare");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<int> GetTicket {
-            get {
-                return this.GetTicketField;
-            }
-            set {
-                if ((this.GetTicketField.Equals(value) != true)) {
-                    this.GetTicketField = value;
-                    this.RaisePropertyChanged("GetTicket");
                 }
             }
         }
@@ -8133,14 +7476,53 @@ namespace Insight.WS.Client.Common.Service {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<bool> NeedTicket {
+        public Insight.WS.Client.Common.Service.MDG_Member MDG_Member {
             get {
-                return this.NeedTicketField;
+                return this.MDG_MemberField;
             }
             set {
-                if ((this.NeedTicketField.Equals(value) != true)) {
-                    this.NeedTicketField = value;
-                    this.RaisePropertyChanged("NeedTicket");
+                if ((object.ReferenceEquals(this.MDG_MemberField, value) != true)) {
+                    this.MDG_MemberField = value;
+                    this.RaisePropertyChanged("MDG_Member");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid MemberId {
+            get {
+                return this.MemberIdField;
+            }
+            set {
+                if ((this.MemberIdField.Equals(value) != true)) {
+                    this.MemberIdField = value;
+                    this.RaisePropertyChanged("MemberId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Mobile {
+            get {
+                return this.MobileField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MobileField, value) != true)) {
+                    this.MobileField = value;
+                    this.RaisePropertyChanged("Mobile");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
                 }
             }
         }
@@ -8159,66 +7541,40 @@ namespace Insight.WS.Client.Common.Service {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Starting {
+        public System.Nullable<System.Guid> StateId {
             get {
-                return this.StartingField;
+                return this.StateIdField;
             }
             set {
-                if ((object.ReferenceEquals(this.StartingField, value) != true)) {
-                    this.StartingField = value;
-                    this.RaisePropertyChanged("Starting");
+                if ((this.StateIdField.Equals(value) != true)) {
+                    this.StateIdField = value;
+                    this.RaisePropertyChanged("StateId");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<System.DateTime> StartingTime {
+        public string Street {
             get {
-                return this.StartingTimeField;
+                return this.StreetField;
             }
             set {
-                if ((this.StartingTimeField.Equals(value) != true)) {
-                    this.StartingTimeField = value;
-                    this.RaisePropertyChanged("StartingTime");
+                if ((object.ReferenceEquals(this.StreetField, value) != true)) {
+                    this.StreetField = value;
+                    this.RaisePropertyChanged("Street");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Trains {
+        public string ZipCode {
             get {
-                return this.TrainsField;
+                return this.ZipCodeField;
             }
             set {
-                if ((object.ReferenceEquals(this.TrainsField, value) != true)) {
-                    this.TrainsField = value;
-                    this.RaisePropertyChanged("Trains");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid TravelId {
-            get {
-                return this.TravelIdField;
-            }
-            set {
-                if ((this.TravelIdField.Equals(value) != true)) {
-                    this.TravelIdField = value;
-                    this.RaisePropertyChanged("TravelId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<System.Guid> Vehicle {
-            get {
-                return this.VehicleField;
-            }
-            set {
-                if ((this.VehicleField.Equals(value) != true)) {
-                    this.VehicleField = value;
-                    this.RaisePropertyChanged("Vehicle");
+                if ((object.ReferenceEquals(this.ZipCodeField, value) != true)) {
+                    this.ZipCodeField = value;
+                    this.RaisePropertyChanged("ZipCode");
                 }
             }
         }
@@ -9935,6 +9291,307 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MDG_Member", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
+    [System.SerializableAttribute()]
+    public partial class MDG_Member : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Insight.WS.Client.Common.Service.BASE_Category BASE_CategoryField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Insight.WS.Client.Common.Service.BASE_Category BASE_Category1Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.BIZ_Delivery_Address> BIZ_Delivery_AddressField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.Guid> CityIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.Guid> CountyIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime CreateTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DescriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool EnableField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string IdCardNoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal LoansField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Insight.WS.Client.Common.Service.MDG_Dictionary MDG_DictionaryField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid MIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Insight.WS.Client.Common.Service.MasterData MasterDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long SNField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.Guid> StateIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string StreetField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ZipCodeField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Insight.WS.Client.Common.Service.BASE_Category BASE_Category {
+            get {
+                return this.BASE_CategoryField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.BASE_CategoryField, value) != true)) {
+                    this.BASE_CategoryField = value;
+                    this.RaisePropertyChanged("BASE_Category");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Insight.WS.Client.Common.Service.BASE_Category BASE_Category1 {
+            get {
+                return this.BASE_Category1Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.BASE_Category1Field, value) != true)) {
+                    this.BASE_Category1Field = value;
+                    this.RaisePropertyChanged("BASE_Category1");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.BIZ_Delivery_Address> BIZ_Delivery_Address {
+            get {
+                return this.BIZ_Delivery_AddressField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.BIZ_Delivery_AddressField, value) != true)) {
+                    this.BIZ_Delivery_AddressField = value;
+                    this.RaisePropertyChanged("BIZ_Delivery_Address");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.Guid> CityId {
+            get {
+                return this.CityIdField;
+            }
+            set {
+                if ((this.CityIdField.Equals(value) != true)) {
+                    this.CityIdField = value;
+                    this.RaisePropertyChanged("CityId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.Guid> CountyId {
+            get {
+                return this.CountyIdField;
+            }
+            set {
+                if ((this.CountyIdField.Equals(value) != true)) {
+                    this.CountyIdField = value;
+                    this.RaisePropertyChanged("CountyId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime CreateTime {
+            get {
+                return this.CreateTimeField;
+            }
+            set {
+                if ((this.CreateTimeField.Equals(value) != true)) {
+                    this.CreateTimeField = value;
+                    this.RaisePropertyChanged("CreateTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Description {
+            get {
+                return this.DescriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
+                    this.DescriptionField = value;
+                    this.RaisePropertyChanged("Description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Enable {
+            get {
+                return this.EnableField;
+            }
+            set {
+                if ((this.EnableField.Equals(value) != true)) {
+                    this.EnableField = value;
+                    this.RaisePropertyChanged("Enable");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string IdCardNo {
+            get {
+                return this.IdCardNoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.IdCardNoField, value) != true)) {
+                    this.IdCardNoField = value;
+                    this.RaisePropertyChanged("IdCardNo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal Loans {
+            get {
+                return this.LoansField;
+            }
+            set {
+                if ((this.LoansField.Equals(value) != true)) {
+                    this.LoansField = value;
+                    this.RaisePropertyChanged("Loans");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Insight.WS.Client.Common.Service.MDG_Dictionary MDG_Dictionary {
+            get {
+                return this.MDG_DictionaryField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MDG_DictionaryField, value) != true)) {
+                    this.MDG_DictionaryField = value;
+                    this.RaisePropertyChanged("MDG_Dictionary");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid MID {
+            get {
+                return this.MIDField;
+            }
+            set {
+                if ((this.MIDField.Equals(value) != true)) {
+                    this.MIDField = value;
+                    this.RaisePropertyChanged("MID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Insight.WS.Client.Common.Service.MasterData MasterData {
+            get {
+                return this.MasterDataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MasterDataField, value) != true)) {
+                    this.MasterDataField = value;
+                    this.RaisePropertyChanged("MasterData");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long SN {
+            get {
+                return this.SNField;
+            }
+            set {
+                if ((this.SNField.Equals(value) != true)) {
+                    this.SNField = value;
+                    this.RaisePropertyChanged("SN");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.Guid> StateId {
+            get {
+                return this.StateIdField;
+            }
+            set {
+                if ((this.StateIdField.Equals(value) != true)) {
+                    this.StateIdField = value;
+                    this.RaisePropertyChanged("StateId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Street {
+            get {
+                return this.StreetField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.StreetField, value) != true)) {
+                    this.StreetField = value;
+                    this.RaisePropertyChanged("Street");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ZipCode {
+            get {
+                return this.ZipCodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ZipCodeField, value) != true)) {
+                    this.ZipCodeField = value;
+                    this.RaisePropertyChanged("ZipCode");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="MDG_Supplier", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class MDG_Supplier : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -10822,99 +10479,6 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="BIZ_Refund_Detail", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
-    [System.SerializableAttribute()]
-    public partial class BIZ_Refund_Detail : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Insight.WS.Client.Common.Service.ABS_Clearing_Item ABS_Clearing_ItemField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Guid ClearingItemIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Guid IDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long SNField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Insight.WS.Client.Common.Service.ABS_Clearing_Item ABS_Clearing_Item {
-            get {
-                return this.ABS_Clearing_ItemField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ABS_Clearing_ItemField, value) != true)) {
-                    this.ABS_Clearing_ItemField = value;
-                    this.RaisePropertyChanged("ABS_Clearing_Item");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid ClearingItemId {
-            get {
-                return this.ClearingItemIdField;
-            }
-            set {
-                if ((this.ClearingItemIdField.Equals(value) != true)) {
-                    this.ClearingItemIdField = value;
-                    this.RaisePropertyChanged("ClearingItemId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid ID {
-            get {
-                return this.IDField;
-            }
-            set {
-                if ((this.IDField.Equals(value) != true)) {
-                    this.IDField = value;
-                    this.RaisePropertyChanged("ID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long SN {
-            get {
-                return this.SNField;
-            }
-            set {
-                if ((this.SNField.Equals(value) != true)) {
-                    this.SNField = value;
-                    this.RaisePropertyChanged("SN");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ABS_Contract", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class ABS_Contract : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -10936,15 +10500,6 @@ namespace Insight.WS.Client.Common.Service {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string AgentNameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Insight.WS.Client.Common.Service.BIZ_Borrowing_Apply BIZ_Borrowing_ApplyField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Insight.WS.Client.Common.Service.BIZ_Reimburse_Apply BIZ_Reimburse_ApplyField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Insight.WS.Client.Common.Service.BIZ_Travel_Apply BIZ_Travel_ApplyField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string ContractCodeField;
@@ -11083,45 +10638,6 @@ namespace Insight.WS.Client.Common.Service {
                 if ((object.ReferenceEquals(this.AgentNameField, value) != true)) {
                     this.AgentNameField = value;
                     this.RaisePropertyChanged("AgentName");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Insight.WS.Client.Common.Service.BIZ_Borrowing_Apply BIZ_Borrowing_Apply {
-            get {
-                return this.BIZ_Borrowing_ApplyField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.BIZ_Borrowing_ApplyField, value) != true)) {
-                    this.BIZ_Borrowing_ApplyField = value;
-                    this.RaisePropertyChanged("BIZ_Borrowing_Apply");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Insight.WS.Client.Common.Service.BIZ_Reimburse_Apply BIZ_Reimburse_Apply {
-            get {
-                return this.BIZ_Reimburse_ApplyField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.BIZ_Reimburse_ApplyField, value) != true)) {
-                    this.BIZ_Reimburse_ApplyField = value;
-                    this.RaisePropertyChanged("BIZ_Reimburse_Apply");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Insight.WS.Client.Common.Service.BIZ_Travel_Apply BIZ_Travel_Apply {
-            get {
-                return this.BIZ_Travel_ApplyField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.BIZ_Travel_ApplyField, value) != true)) {
-                    this.BIZ_Travel_ApplyField = value;
-                    this.RaisePropertyChanged("BIZ_Travel_Apply");
                 }
             }
         }
@@ -11447,9 +10963,6 @@ namespace Insight.WS.Client.Common.Service {
         private Insight.WS.Client.Common.Service.BASE_Category BASE_CategoryField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Insight.WS.Client.Common.Service.BIZ_Reimburse_Detail BIZ_Reimburse_DetailField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<System.Guid> CategoryIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -11565,19 +11078,6 @@ namespace Insight.WS.Client.Common.Service {
                 if ((object.ReferenceEquals(this.BASE_CategoryField, value) != true)) {
                     this.BASE_CategoryField = value;
                     this.RaisePropertyChanged("BASE_Category");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Insight.WS.Client.Common.Service.BIZ_Reimburse_Detail BIZ_Reimburse_Detail {
-            get {
-                return this.BIZ_Reimburse_DetailField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.BIZ_Reimburse_DetailField, value) != true)) {
-                    this.BIZ_Reimburse_DetailField = value;
-                    this.RaisePropertyChanged("BIZ_Reimburse_Detail");
                 }
             }
         }
@@ -11773,115 +11273,6 @@ namespace Insight.WS.Client.Common.Service {
                 if ((object.ReferenceEquals(this.UnitsField, value) != true)) {
                     this.UnitsField = value;
                     this.RaisePropertyChanged("Units");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="BIZ_Reimburse_Apply", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
-    [System.SerializableAttribute()]
-    public partial class BIZ_Reimburse_Apply : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Insight.WS.Client.Common.Service.ABS_Contract ABS_ContractField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<decimal> ArrearageField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Guid CIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<int> DaysField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long SNField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Insight.WS.Client.Common.Service.ABS_Contract ABS_Contract {
-            get {
-                return this.ABS_ContractField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ABS_ContractField, value) != true)) {
-                    this.ABS_ContractField = value;
-                    this.RaisePropertyChanged("ABS_Contract");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<decimal> Arrearage {
-            get {
-                return this.ArrearageField;
-            }
-            set {
-                if ((this.ArrearageField.Equals(value) != true)) {
-                    this.ArrearageField = value;
-                    this.RaisePropertyChanged("Arrearage");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid CID {
-            get {
-                return this.CIDField;
-            }
-            set {
-                if ((this.CIDField.Equals(value) != true)) {
-                    this.CIDField = value;
-                    this.RaisePropertyChanged("CID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<int> Days {
-            get {
-                return this.DaysField;
-            }
-            set {
-                if ((this.DaysField.Equals(value) != true)) {
-                    this.DaysField = value;
-                    this.RaisePropertyChanged("Days");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long SN {
-            get {
-                return this.SNField;
-            }
-            set {
-                if ((this.SNField.Equals(value) != true)) {
-                    this.SNField = value;
-                    this.RaisePropertyChanged("SN");
                 }
             }
         }
@@ -21739,42 +21130,72 @@ namespace Insight.WS.Client.Common.Service {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Contract))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Contract_Attachs>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Contract_Attachs))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_User))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Clearing>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Clearing_Check>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Clearing_Check))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Organization))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Contract>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Delivery>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Delivery_Attachs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Delivery))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Delivery_Attachs>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Delivery_Attachs))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_ModuleParam))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Module))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.BASE_Category>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.BASE_Category))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Contract_Subjects>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Delivery_Item>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Delivery_Item))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Contract_GoodsPerform>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Contract_GoodsPerform))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Contract_GoodsPlan))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Contract_Subjects))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Contract_FundPlan>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Contract_GoodsPlan>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Contract_GoodsPlan))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Contract_GoodsPerform>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Contract_GoodsPerform))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Delivery_Item))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.BASE_Category))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Contract_Subjects>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.BIZ_Delivery_Address>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.BIZ_Delivery_Address))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Member))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MasterData))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Clearing>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Clearing_Item>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Delivery_Item>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Contract>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Delivery>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Storage_Summary>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Storage_Summary))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Storage_Detail>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Storage_Detail))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Storage_Location))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MasterData_Merger))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Supplier))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Organization))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Clearing_Check>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Clearing_Check))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_User))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Storage_Location>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.BASE_Category>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ImageData>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDG_Contact>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Contact))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Expense))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MasterData_Property))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDD_Binary>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDD_Binary))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_RolePerm_Data))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDR_ET))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Employee))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDG_Employee>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDR_ET>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Customer))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDD_Character))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDD_Numeric))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Module))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MasterData_Property>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Allot_Record>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Allot_Record))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Code_Scheme))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Code_Allot>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Code_Allot))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Supplier))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_StockDetail))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_StockCapital))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_StockDetail>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Code_Record))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_ModuleGroup))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Module>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Alert_Rules))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Alert_Message>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Alert_Message))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Alert_Send>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Alert_Send))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_RolePerm_DataAbs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Role))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_Member>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Member))]
@@ -21785,103 +21206,64 @@ namespace Insight.WS.Client.Common.Service {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Instances))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_IU>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_IU))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Customer))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDD_Numeric))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Expense))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDD_Date))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Alert_Target))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Material))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_StockDetail))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_StockCapital))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_StockDetail>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDD_Character))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.BIZ_Refund_Detail))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Role_User))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_ModuleAction))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_RolePerm_Action>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_RolePerm_Action))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Templates))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_Definition>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Schedular))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Rules))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_Period>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Period))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Role_Title))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_ModuleParam))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Role_UserGroup))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_UserGroup))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Role_UserGroup>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_UserGroupMember>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_UserGroupMember))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Employee))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDG_Employee>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDR_ET>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDR_ET))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.BIZ_Borrowing_Apply))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Role_Title))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.BIZ_Reimburse_Apply))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.BIZ_Reimburse_Detail))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Role_User))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.BIZ_Travel_Apply))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.BIZ_Travel_Plan>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.BIZ_Travel_Plan))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_RolePerm_DataAbs))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Templates))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_Definition>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Alert_Rules))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Alert_Message>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Alert_Message))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Alert_Send>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Alert_Send))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Alert_Target))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.BIZ_Refund_Apply))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Period))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Rules))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_Period>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_Schedular>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Schedular))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDS_Contact_Info))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_RolePerm_Action))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_ModuleAction))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_RolePerm_Action>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Allot_Record))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Code_Scheme))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Allot_Record>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Code_Allot>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Code_Allot))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Contact))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDR_MU))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Code_Record))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_ModuleGroup))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Module>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_RolePerm_Data))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_OrgMerger))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDD_Date))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_OrgMember))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Code_Record>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Alert_Target>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MasterData_Merger))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDR_MU))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDS_Contact_Info))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_Schedular>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_RolePerm_Data>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_RolePerm_DataAbs>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Role_Title>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Role_User>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Alert_Target>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Code_Record>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_ModuleAction>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_ModuleParam>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDD_Character>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDD_Date>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDD_Numeric>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDR_MU>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDS_Contact_Info>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MasterData_Merger>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ImageData>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDG_Customer>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDG_Supplier>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MasterData>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MasterData_Property>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Alert_Rules>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_Templates>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_ModuleAction>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_ModuleParam>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_StockCapital>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Storage_Location>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDG_Contact>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDG_Dictionary>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDG_Expense>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDG_Material>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDG_Supplier>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDR_MU>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MasterData_Merger>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Alert_Rules>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Code_Scheme>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_OrgMember>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_OrgMerger>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Organization>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_Rules>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.BIZ_Travel_Apply>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_Templates>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Role>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_UserGroup>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.BIZ_Refund_Detail>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.BIZ_Borrowing_Apply>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.BIZ_Refund_Apply>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.BIZ_Reimburse_Detail>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_StockCapital>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDS_Contact_Info>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDG_Member>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MasterData>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<System.Guid>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<object>))]
         bool UpdateContact(Insight.WS.Client.Common.Service.Session us, Insight.WS.Client.Common.Service.MasterData m, Insight.WS.Client.Common.Service.MDG_Contact d, System.Collections.Generic.List<object> cdl, System.Data.DataTable cdt);

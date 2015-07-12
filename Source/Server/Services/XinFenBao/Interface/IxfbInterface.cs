@@ -59,12 +59,48 @@ namespace Insight.WS.Service.XinFenBao
         Session GetSession(string ln, string pw);
 
         /// <summary>
-        /// 获取用户登录结果
+        /// 用户登录
         /// </summary>
         /// <param name="obj">Session对象实体</param>
         /// <returns>Session对象实体</returns>
         [OperationContract]
         Session UserLogin(Session obj);
+
+        /// <summary>
+        /// 会员注册
+        /// </summary>
+        /// <param name="obj">Session对象实体</param>
+        /// <param name="code">验证码</param>
+        /// <returns>Session对象实体</returns>
+        [OperationContract]
+        Session Register(Session obj, string code);
+
+        /// <summary>
+        /// 修改指定用户的密码
+        /// </summary>
+        /// <param name="us">Session对象实体</param>
+        /// <param name="pw">新密码Hash值</param>
+        /// <returns>bool 是否修改成功</returns>
+        [OperationContract]
+        bool UpdataPassword(Session us, string pw);
+
+        /// <summary>
+        /// 重置密码
+        /// </summary>
+        /// <param name="obj">Session对象实体</param>
+        /// <param name="code">验证码</param>
+        /// <returns>Session对象实体</returns>
+        [OperationContract]
+        Session ResetPassword(Session obj, string code);
+
+        /// <summary>
+        /// 生成验证码
+        /// </summary>
+        /// <param name="number">手机号</param>
+        /// <param name="type">验证码类型</param>
+        /// <returns>string 验证码</returns>
+        [OperationContract]
+        string GetVerifyCode(string number, int type);
 
         #endregion
 

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
@@ -59,13 +61,101 @@ namespace Insight.WS.Service.XinFenBao
         }
 
         /// <summary>
-        /// 获取用户登录结果
+        /// 用户登录
         /// </summary>
         /// <param name="obj">Session对象实体</param>
         /// <returns>Session对象实体</returns>
         public Session UserLogin(Session obj)
         {
             return CommonDAL.UserLogin(obj);
+        }
+
+        /// <summary>
+        /// 会员注册
+        /// </summary>
+        /// <param name="obj">Session对象实体</param>
+        /// <param name="code">验证码</param>
+        /// <returns>Session对象实体</returns>
+        public Session Register(Session obj, string code)
+        {
+            if (obj == null) return null;
+
+            if (!CommonDAL.CodeVerify(obj.LoginName, code, 180))
+            {
+                obj.LoginStatus = LoginResult.Failure;
+                return obj;
+            }
+
+            // 插入主数据索引
+            var md = new MasterData {Name = obj.LoginName, Alias = obj.LoginName};
+            var cmds = new List<SqlCommand> {MasterDataDAL.AddMasterData(md)};
+
+            // 插入会员主数据
+            var sql = "insert MDG_Member (MID) select @MID";
+            var parm = new[]
+            {
+                new SqlParameter("@MID", SqlDbType.UniqueIdentifier) {Value = Guid.Empty},
+                new SqlParameter("@Read", SqlDbType.Int) {Value = 0}
+            };
+            cmds.Add(SqlHelper.MakeCommand(sql, parm));
+
+            // 插入外部用户
+            sql = "insert SYS_User (ID, Name, LoginName, Password, Type, CreatorUserId) select @ID, @Name, @LoginName, @Password, @Type, @CreatorUserId";
+            parm = new[]
+            {
+                new SqlParameter("@ID", SqlDbType.UniqueIdentifier) {Value = Guid.Empty},
+                new SqlParameter("@Name", obj.LoginName),
+                new SqlParameter("@LoginName", obj.LoginName),
+                new SqlParameter("@Password", obj.Signature),
+                new SqlParameter("@Type", -1),
+                new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = Guid.Empty},
+                new SqlParameter("@Read", SqlDbType.Int) {Value = 0}
+            };
+            cmds.Add(SqlHelper.MakeCommand(sql, parm));
+
+            return SqlHelper.SqlExecute(cmds) ? CommonDAL.UserLogin(obj) : null;
+        }
+
+        /// <summary>
+        /// 修改指定用户的密码
+        /// </summary>
+        /// <param name="us">Session对象实体</param>
+        /// <param name="pw">新密码Hash值</param>
+        /// <returns>bool 是否修改成功</returns>
+        public bool UpdataPassword(Session us, string pw)
+        {
+            return CommonDAL.UpdataPassword(us, pw);
+        }
+
+        /// <summary>
+        /// 重置密码
+        /// </summary>
+        /// <param name="obj">Session对象实体</param>
+        /// <param name="code">验证码</param>
+        /// <returns>Session对象实体</returns>
+        public Session ResetPassword(Session obj, string code)
+        {
+            if (obj == null) return null;
+
+            if (!CommonDAL.CodeVerify(obj.LoginName, code, 180))
+            {
+                obj.LoginStatus = LoginResult.Failure;
+                return obj;
+            }
+
+            var sql = string.Format("update SYS_User set Password = '{0}' where LoginName = '{1}'", obj.Signature, obj.LoginName);
+            return SqlHelper.SqlNonQuery(sql) > 0 ? CommonDAL.UserLogin(obj) : null;
+        }
+
+        /// <summary>
+        /// 生成验证码
+        /// </summary>
+        /// <param name="number">手机号</param>
+        /// <param name="type">验证码类型</param>
+        /// <returns>string 验证码</returns>
+        public string GetVerifyCode(string number, int type)
+        {
+            return CommonDAL.GetVerifyCode(number, type);
         }
 
     }
