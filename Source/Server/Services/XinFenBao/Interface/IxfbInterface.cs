@@ -76,6 +76,16 @@ namespace Insight.WS.Service.XinFenBao
         Session Register(Session obj, string code);
 
         /// <summary>
+        /// 更新会员信息
+        /// </summary>
+        /// <param name="us">用户会话</param>
+        /// <param name="name">会员姓名</param>
+        /// <param name="member">会员对象实体</param>
+        /// <returns>bool 是否成功</returns>
+        [OperationContract]
+        bool UpdateMember(Session us, string name, MDG_Member member);
+
+        /// <summary>
         /// 修改指定用户的密码
         /// </summary>
         /// <param name="us">Session对象实体</param>

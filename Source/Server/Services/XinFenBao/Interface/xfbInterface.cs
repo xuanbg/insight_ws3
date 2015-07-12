@@ -117,6 +117,43 @@ namespace Insight.WS.Service.XinFenBao
         }
 
         /// <summary>
+        /// 更新会员信息
+        /// </summary>
+        /// <param name="us">用户会话</param>
+        /// <param name="name">会员姓名</param>
+        /// <param name="member">会员对象实体</param>
+        /// <returns>bool 是否成功</returns>
+        public bool UpdateMember(Session us, string name, MDG_Member member)
+        {
+            if (!OnlineManage.Verification(us)) return false;
+
+            // 更新会员姓名
+            var sql = string.Format("update MasterData set Name = '{0}' where ID = '{1}'", name, member.MID);
+            var cmds = new List<SqlCommand> {SqlHelper.MakeCommand(sql)};
+
+            // 更新会员信息
+            sql = "update MDG_Member set IdCardNo = @IdCardNo, StateId = @StateId, CityId = @CityId, CountyId = @CountyId, Street = @Street, ZipCode = @ZipCode, Description = @Description where MID = @MID";
+            var parm = new[]
+            {
+                new SqlParameter("@IdCardNo", member.IdCardNo),
+                new SqlParameter("@StateId", SqlDbType.UniqueIdentifier) {Value = member.StateId},
+                new SqlParameter("@CityId", SqlDbType.UniqueIdentifier) {Value = member.CityId},
+                new SqlParameter("@CountyId", SqlDbType.UniqueIdentifier) {Value = member.CountyId},
+                new SqlParameter("@Street", member.Street),
+                new SqlParameter("@ZipCode", member.ZipCode),
+                new SqlParameter("@Description", member.Description),
+                new SqlParameter("@MID", SqlDbType.UniqueIdentifier) {Value = member.MID}
+            };
+            cmds.Add(SqlHelper.MakeCommand(sql, parm));
+
+            // 更新用户名
+            sql = string.Format("update SYS_User set Name = '{0}' where ID = '{1}'", name, member.MID);
+            cmds.Add(SqlHelper.MakeCommand(sql));
+
+            return SqlHelper.SqlExecute(cmds);
+        }
+
+        /// <summary>
         /// 修改指定用户的密码
         /// </summary>
         /// <param name="us">Session对象实体</param>
