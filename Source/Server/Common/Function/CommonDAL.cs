@@ -259,22 +259,22 @@ namespace Insight.WS.Server.Common
         /// <summary>
         /// 生成验证码
         /// </summary>
-        /// <param name="number">手机号</param>
+        /// <param name="sdst">手机号</param>
         /// <param name="type">验证码类型</param>
         /// <returns>string 验证码</returns>
-        public static string GetVerifyCode(string number, int type)
+        public static string GetVerifyCode(string sdst, int type)
         {
-            var msg = "";
+            var smsg = "";
             var r = new Random(Environment.TickCount);
             var code = r.Next(100000, 999999).ToString();
             switch (type)
             {
                 case 1: // 注册新用户
-                    msg = string.Format("欢迎使用信分宝，开启信用新生活。么么哒…您的验证码是【{0}】,该验证码3分钟内有效！", code);
+                    smsg = string.Format("您的验证码是：{0}，该验证码3分钟内有效！欢迎使用信分宝，开启信用新生活。么么哒【信分宝】", code);
                     break;
 
                 case 2: // 重置密码
-                    msg = string.Format("亲爱的信分宝用户，您正在重置登录密码！如非本人操作，请告知客服。您的验证码是【{0}】,该验证码3分钟内有效！", code);
+                    smsg = string.Format("您的验证码是：{0}，该验证码3分钟内有效！亲爱的用户，您正在重置登录密码！如非本人操作，请告知客服【信分宝】", code);
                     break;
             }
 
@@ -282,7 +282,11 @@ namespace Insight.WS.Server.Common
             var binding = new BasicHttpBinding();
             using (var cli = new Service1SoapClient(binding, address))
             {
-                var state = cli.g_Submit("dlbjtrxx", "12345678", "", "1012818", number, msg);
+                var sname = "dlxinfb";
+                var spwd = "50wTKJIW";
+                var scorpid = "";
+                var sprdid = "1012818";
+                var state = cli.g_Submit(sname, spwd, scorpid, sprdid, sdst, smsg);
                 var rs = state.MsgID + ":" + state.MsgState;
             }
 
@@ -290,7 +294,7 @@ namespace Insight.WS.Server.Common
             var parm = new[]
             {
                 new SqlParameter("@Type", type),
-                new SqlParameter("@Mobile", number),
+                new SqlParameter("@Mobile", sdst),
                 new SqlParameter("@Code", code)
             };
                 return SqlHelper.SqlNonQuery(sql, parm) > 0 ? code : null;
