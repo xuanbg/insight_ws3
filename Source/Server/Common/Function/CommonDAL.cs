@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using Insight.WS.Server.Common.ORM;
 using Insight.WS.Server.Common.Service;
@@ -277,22 +278,22 @@ namespace Insight.WS.Server.Common
                     break;
             }
 
-            using (var cli = new Service1SoapClient())
+            var address = new EndpointAddress("http://cf.lmobile.cn/submitdata/service.asmx");
+            var binding = new BasicHttpBinding();
+            using (var cli = new Service1SoapClient(binding, address))
             {
-                cli.g_Submit("dlbjtrxx", "12345678", "", "1012818", number, msg);
+                var state = cli.g_Submit("dlbjtrxx", "12345678", "", "1012818", number, msg);
+                var rs = state.MsgID + ":" + state.MsgState;
             }
 
-            var vr = new SYS_Verify_Record
+            var sql = "insert SYS_Verify_Record (Type, Mobile, Code) select @Type, @Mobile, @Code";
+            var parm = new[]
             {
-                Type = type,
-                Mobile = number,
-                Code = code
+                new SqlParameter("@Type", type),
+                new SqlParameter("@Mobile", number),
+                new SqlParameter("@Code", code)
             };
-            using (var context = new WSEntities())
-            {
-                context.SYS_Verify_Record.Add(vr);
-                return context.SaveChanges() > 0 ? code : null;
-            }
+                return SqlHelper.SqlNonQuery(sql, parm) > 0 ? code : null;
         }
 
         #endregion

@@ -10,7 +10,7 @@ namespace Insight.WS.Service.XinFenBao
     public interface IXfbInterface
     {
 
-        #region 查询
+        #region 地址数据
 
         /// <summary>
         /// 获取省数据
@@ -35,6 +35,23 @@ namespace Insight.WS.Service.XinFenBao
         [OperationContract]
         List<Countys> GetCountys(Guid cityId);
 
+        /// <summary>
+        /// 获取会员收货地址
+        /// </summary>
+        /// <param name="us">用户会话</param>
+        /// <returns>收货地址列表</returns>
+        [OperationContract]
+        List<BIZ_Delivery_Address> GetAddresses(Session us);
+
+        /// <summary>
+        /// 新增会员收货地址
+        /// </summary>
+        /// <param name="us">用户会话</param>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        [OperationContract]
+        bool AddDeliveryAddress(Session us, BIZ_Delivery_Address obj);
+
         #endregion
 
         #region 新增
@@ -47,7 +64,7 @@ namespace Insight.WS.Service.XinFenBao
 
         #endregion
 
-        #region 用户登录
+        #region 会员
 
         /// <summary>
         /// 获取用户Session对象实体

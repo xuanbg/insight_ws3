@@ -11,6 +11,8 @@ namespace Insight.WS.Service.XinFenBao
     public class XfbInterface:IXfbInterface
     {
 
+        #region 地址数据
+        
         /// <summary>
         /// 获取省数据
         /// </summary>
@@ -48,6 +50,47 @@ namespace Insight.WS.Service.XinFenBao
                 return context.Countys.Where(c => c.CategoryId == cityId).ToList();
             }
         }
+
+        /// <summary>
+        /// 获取会员收货地址
+        /// </summary>
+        /// <param name="us">用户会话</param>
+        /// <returns>收货地址列表</returns>
+        public List<BIZ_Delivery_Address> GetAddresses(Session us)
+        {
+            if (!OnlineManage.Verification(us)) return null;
+
+            using (var context = new WSEntities())
+            {
+                return context.BIZ_Delivery_Address.Where(a => a.MemberId == us.UserId).ToList();
+            }
+        }
+
+        /// <summary>
+        /// 新增会员收货地址
+        /// </summary>
+        /// <param name="us">用户会话</param>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public bool AddDeliveryAddress(Session us, BIZ_Delivery_Address obj)
+        {
+            if (!OnlineManage.Verification(us)) return false;
+
+            using (var context = new WSEntities())
+            {
+                context.BIZ_Delivery_Address.Add(obj);
+                return context.SaveChanges() > 0;
+            }
+        }
+
+        #endregion
+
+        #region 新增
+
+
+        #endregion
+
+        #region 会员
 
         /// <summary>
         /// 获取用户Session对象实体
@@ -194,6 +237,8 @@ namespace Insight.WS.Service.XinFenBao
         {
             return CommonDAL.GetVerifyCode(number, type);
         }
+
+        #endregion
 
     }
 }
