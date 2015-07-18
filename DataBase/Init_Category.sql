@@ -48,6 +48,7 @@ select ID, @ModuleId, 2, N'行政区划', 'Region', BuiltIn, Visible from BASE_Categ
 select ID, @ModuleId, 3, N'行业类型', 'Industry', BuiltIn, Visible from BASE_Category where Alias = 'System' union all
 select ID, @ModuleId, 4, N'企业类型', 'Enterprise', BuiltIn, Visible from BASE_Category where Alias = 'System' union all
 select ID, @ModuleId, 5, N'结算币种', 'Currency', BuiltIn, Visible from BASE_Category where Alias = 'System' union all
+select ID, @ModuleId, 6, N'学历', 'Educate', BuiltIn, Visible from BASE_Category where Alias = 'System' union all
 
 select ID, @ModuleId, 1, N'规格单位', 'Unit', BuiltIn, Visible from BASE_Category where Alias = 'Business' union all
 select ID, @ModuleId, 2, N'结算方式', 'Settlement', BuiltIn, Visible from BASE_Category where Alias = 'Business' union all

@@ -3306,6 +3306,16 @@ select ID, N'980', N'乌克兰格里夫纳', N'UAH' from BASE_Category where Ali
 select ID, N'981', N'格鲁吉亚拉里', N'GEL' from BASE_Category where Alias = 'Currency' union all
 select ID, N'986', N'巴西瑞尔', N'BRL' from BASE_Category where Alias = 'Currency'
 
+/*****初始化主数据（字典：学历）*****/
+INSERT MasterData (CategoryId, Name, Alias)
+select ID, N'无', 'Null' from BASE_Category where Alias = 'Educate' union all
+select ID, N'博士', 'Doctor' from BASE_Category where Alias = 'Educate' union all
+select ID, N'硕士', 'Master' from BASE_Category where Alias = 'Educate' union all
+select ID, N'本科', 'Undergraduate' from BASE_Category where Alias = 'Educate' union all
+select ID, N'专科', 'Specialist' from BASE_Category where Alias = 'Educate' union all
+select ID, N'高中', 'Senior' from BASE_Category where Alias = 'Educate' union all
+select ID, N'初中', 'Junior' from BASE_Category where Alias = 'Educate' union all
+select ID, N'小学', 'Elementary' from BASE_Category where Alias = 'Educate'
 
 /*****初始化主数据（字典：结算方式）*****/
 INSERT MasterData (CategoryId, Name)
