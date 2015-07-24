@@ -222,6 +222,9 @@ CREATE TABLE BIZ_Order(
 [FirstPay]         DECIMAL(20,2) DEFAULT 0 NOT NULL,                                                                                       --首付款
 [FirstPayChannel]  UNIQUEIDENTIFIER FOREIGN KEY REFERENCES MDG_Dictionary(MID),                                                            --收费支付渠道ID
 [AddressId]        UNIQUEIDENTIFIER FOREIGN KEY REFERENCES MDE_Member_Address(ID),                                                         --收货地址ID
+[InvoiceType]      INT DEFAULT 1 NOT NULL,                                                                                                 --发票类型：1、个人；2、单位；3、增值税票
+[InvoiceInfo]      NVARCHAR(128),
+                                                                                                          --发票信息
 [PayStatus]        BIT DEFAULT 0 NOT NULL,                                                                                                 --是否付款：0、未付款；1、已付款
 [CancelTime]       DATETIME DEFAULT GETDATE() NOT NULL,                                                                                    --取消时间
 [RefundTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --退款时间
