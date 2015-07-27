@@ -51,7 +51,7 @@ CREATE TABLE BIZ_Advertiser(
 [Name]             NVARCHAR(64) NOT NULL,                                                                                                  --商品名称
 [TargetURL]        NVARCHAR(128) NOT NULL,                                                                                                 --目标地址
 [ImageURL]         NVARCHAR(128) NOT NULL,                                                                                                 --图片路径
-[ProductId]        INT NOT NULL,                                                                                                           --商品ID
+[ProductId]        INT,                                                                                                                    --商品ID
 [ProductCode]      VARCHAR(32) NOT NULL,                                                                                                   --商品编号
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )
