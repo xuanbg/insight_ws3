@@ -75,7 +75,7 @@ CREATE TABLE BIZ_StagePlan(
 )
 GO
 
-/*****通用主数据：会员表*****/
+/*****通用主数据：企业会员表*****/
 
 CREATE TABLE MDG_EntMember(
 [MID]              UNIQUEIDENTIFIER CONSTRAINT IX_MDG_EntMember PRIMARY KEY FOREIGN KEY REFERENCES MasterData(ID) ON DELETE CASCADE,
@@ -92,7 +92,6 @@ CREATE TABLE MDG_EntMember(
 [Description]      NVARCHAR(MAX),                                                                                                          --描述
 [Loans]            DECIMAL(20,2) DEFAULT 0 NOT NULL,                                                                                       --授信额度
 [Available]        DECIMAL(20,2) DEFAULT 0 NOT NULL,                                                                                       --可用额度
-[Password]         VARCHAR(32),                                                       　　　　　　　　　　　　　　　　　　　　　　　　　　 --支付密码，保存密码的MD5值
 [Enable]           BIT DEFAULT 1 NOT NULL,                                                                                                 --额度是否可用：0、不可用；1、可用
 [Status]           INT DEFAULT 0 NOT NULL,                                                                                                 --状态：0、未提交；1、待核实；2、已核实；3、已拒绝
 [VerifyDeptId]     UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Sys_Organization(ID),                                                           --核实部门ID
