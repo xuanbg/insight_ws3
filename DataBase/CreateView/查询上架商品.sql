@@ -9,7 +9,8 @@ CREATE VIEW Products
 AS
 
 select L.Product_ID as ID,
-       L.Product_GroupCode as Code, 
+       L.Product_GroupCode as GroupCode, 
+	   L.Product_Code as Code,
 	   C.Cate_Name as Category, 
 	   L.Product_TypeID as TypeId, 
 	   L.Product_Name as Name, 
