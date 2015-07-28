@@ -47,12 +47,12 @@ GO
 CREATE TABLE BIZ_Advertiser(
 [ID]               UNIQUEIDENTIFIER CONSTRAINT IX_BIZ_Advertiser PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
 [SN]               BIGINT IDENTITY(1,1),                                                                                                   --自增序列
-[Index]            INT NOT NULL,                                                                                                           --序号
+[Sort]             INT NOT NULL,                                                                                                           --序号
 [Name]             NVARCHAR(64) NOT NULL,                                                                                                  --商品名称
-[TargetURL]        NVARCHAR(128) NOT NULL,                                                                                                 --目标地址
+[TargetURL]        NVARCHAR(128),                                                                                                          --目标地址
 [ImageURL]         NVARCHAR(128) NOT NULL,                                                                                                 --图片路径
 [ProductId]        INT,                                                                                                                    --商品ID
-[ProductCode]      VARCHAR(32) NOT NULL,                                                                                                   --商品编号
+[ProductCode]      VARCHAR(32),                                                                                                            --商品编号
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )
 GO
@@ -178,8 +178,7 @@ CREATE TABLE MDE_Member_Withdrawal(
 [SN]               BIGINT IDENTITY(1,1),                                                                                                   --自增序列
 [MemberId]         UNIQUEIDENTIFIER FOREIGN KEY REFERENCES MasterData(ID) NOT NULL,                                                        --会员ID
 [CardId]           UNIQUEIDENTIFIER FOREIGN KEY REFERENCES MDE_Member_Card(ID) NOT NULL,                                                   --绑定银行卡ID
-[StagePlanId]      UNIQUEIDENTIFIER FOREIGN KEY REFERENCES BIZ_StagePlan(ID) NOT NULL,                                                     --分期方案ID
-[LoanAmount]       DECIMAL(20,2) DEFAULT 0 NOT NULL,                                                                                       --提现金额
+[OrderId]          UNIQUEIDENTIFIER FOREIGN KEY REFERENCES ABS_Contract(ID) NOT NULL,                                                      --订单ID
 [Description]      NVARCHAR(MAX),                                                                                                          --描述
 [Status]           INT DEFAULT 1 NOT NULL,                                                                                                 --状态：1、待处理；2、已放款；
 [LoanDeptId]       UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Sys_Organization(ID),                                                           --放款部门ID
@@ -214,9 +213,10 @@ CREATE TABLE BIZ_Order(
 [SN]               BIGINT IDENTITY(1,1),                                                                                                   --自增序列
 [ShopId]           UNIQUEIDENTIFIER FOREIGN KEY REFERENCES MDG_Dictionary(MID),                                                            --店铺ID
 [StagePlan]        UNIQUEIDENTIFIER FOREIGN KEY REFERENCES BIZ_StagePlan(ID),                                                              --分期方案ID
-[StageAmount]      DECIMAL(20,2) DEFAULT 0 NOT NULL,                                                                                       --服务费
 [FirstPay]         DECIMAL(20,2) DEFAULT 0 NOT NULL,                                                                                       --首付款
 [FirstPayChannel]  UNIQUEIDENTIFIER FOREIGN KEY REFERENCES MDG_Dictionary(MID),                                                            --收费支付渠道ID
+[OrderAmount]      DECIMAL(20,2) DEFAULT 0 NOT NULL,                                                                                       --订单金额
+[StageAmount]      DECIMAL(20,2) DEFAULT 0 NOT NULL,                                                                                       --总服务费
 [AddressId]        UNIQUEIDENTIFIER FOREIGN KEY REFERENCES MDE_Member_Address(ID),                                                         --收货地址ID
 [InvoiceType]      INT DEFAULT 1 NOT NULL,                                                                                                 --发票类型：1、个人；2、单位；3、增值税票
 [InvoiceInfo]      NVARCHAR(128),                                                                                                          --发票信息
