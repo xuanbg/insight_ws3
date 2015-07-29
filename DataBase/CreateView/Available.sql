@@ -8,19 +8,21 @@ GO
 CREATE VIEW Available
 AS
 
-select E.MID as MemberId, sum(isnull(S.Amount, 0)) as TotalAmount, sum(isnull(F.Amount, 0)) as LoanAmount, sum(isnull(P.Perform, 0)) as Perform,
-E.Enable, E.Status
+select distinct E.MID as MemberId, sum(isnull(S.Amount, 0)) as TotalAmount, sum(isnull(F.Amount, 0)) as LoanAmount, sum(isnull(F.Perform, 0)) as Perform, E.Enable, E.Status
 from MDG_EntMember E
 left join ABS_Contract C on C.ObjectId = E.MID
   and C.Status > 0
 left join ABS_Contract_Subjects S on S.ContractId = C.ID
 left join MasterData M on M.ID = S.ObjectId
   and M.Alias = 'Loans'
-left join ABS_Contract_FundPlan F on F.SubjectsId = S.ID
 left join (
-  select PlanId, sum(Amount) as Perform 
-  from ABS_Contract_FundPerform 
-  group by PlanId) P on P.PlanId = F.ID
+  select F.SubjectsId, sum(F.Amount) as Amount, sum(P.Perform) as Perform
+  from ABS_Contract_FundPlan F
+  left join (
+    select PlanId, sum(Amount) as Perform 
+    from ABS_Contract_FundPerform 
+    group by PlanId) P on P.PlanId = F.ID
+    group by SubjectsId) F on F.SubjectsId = S.ID
 group by E.MID, E.Enable, E.Status
 
 GO
