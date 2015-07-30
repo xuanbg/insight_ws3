@@ -91,9 +91,8 @@ CREATE TABLE MDG_EntMember(
 [Phone]            VARCHAR(16),                                                       　　　　　　　　　　　　　　　　　　　　　　　　　　 --固定电话
 [Description]      NVARCHAR(MAX),                                                                                                          --描述
 [Loans]            DECIMAL(20,2) DEFAULT 0 NOT NULL,                                                                                       --授信额度
-[Available]        DECIMAL(20,2) DEFAULT 0 NOT NULL,                                                                                       --可用额度
 [Enable]           BIT DEFAULT 1 NOT NULL,                                                                                                 --额度是否可用：0、不可用；1、可用
-[Status]           INT DEFAULT 0 NOT NULL,                                                                                                 --状态：0、未提交；1、待核实；2、已核实；3、已拒绝
+[Status]           INT DEFAULT 2 NOT NULL,                                                                                                 --状态：-1、已拒绝；0、已退回；1、未提交；2、待核实；3、已核实
 [VerifyDeptId]     UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Sys_Organization(ID),                                                           --核实部门ID
 [VerifyUserId]     UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Sys_User(ID),                                                                   --核实人ID
 [VerifyTime]       DATETIME,                                                                                                               --核实时间
@@ -110,7 +109,7 @@ CREATE TABLE MDE_Member_CreditInfo(
 [Type]             INT NOT NULL,                                                                                                           --类型：1、身份证（正面）；2、身份证（反面）；3、身份证（手持）
 [Name]             NVARCHAR(16) NOT NULL,                                                                                                  --授信资料名称
 [Image]            VARCHAR(64) NOT NULL,                                                                                                   --授信资料存放路径
-[Status]           INT DEFAULT 1 NOT NULL,                                                                                                 --状态：1、待核实；2、已核实；3、已拒绝
+[Status]           INT DEFAULT 1 NOT NULL,                                                                                                 --状态：-1、已拒绝；0、已退回；1、待核实；2、已核实；
 [VerifyDeptId]     UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Sys_Organization(ID),                                                           --核实部门ID
 [VerifyUserId]     UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Sys_User(ID),                                                                   --核实人ID
 [VerifyTime]       DATETIME,                                                                                                               --核实时间
@@ -127,7 +126,7 @@ CREATE TABLE MDE_Member_Contact(
 [Type]             INT NOT NULL,                                                                                                           --类型：1、直系亲属；2、同事
 [Name]             NVARCHAR(8) NOT NULL,                                                                                                   --联系人姓名
 [Mobile]           VARCHAR(11) NOT NULL,                                                                                                   --联系人手机号
-[Status]           INT DEFAULT 1 NOT NULL,                                                                                                 --状态：1、待核实；2、已核实；3、已拒绝
+[Status]           INT DEFAULT 1 NOT NULL,                                                                                                 --状态：-1、已拒绝；0、已退回；1、待核实；2、已核实；
 [VerifyDeptId]     UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Sys_Organization(ID),                                                           --核实部门ID
 [VerifyUserId]     UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Sys_User(ID),                                                                   --核实人ID
 [VerifyTime]       DATETIME,                                                                                                               --核实时间
@@ -232,16 +231,17 @@ CREATE TABLE BIZ_Product_Snapshot(
 [SID]              UNIQUEIDENTIFIER CONSTRAINT IX_BIZ_Product_Snapshot PRIMARY KEY FOREIGN KEY REFERENCES ABS_Contract_Subjects(ID) ON DELETE CASCADE,
 [SN]               BIGINT IDENTITY(1,1),                                                                                                   --自增序列
 [ProductName]      NVARCHAR(64) NOT NULL,                                                                                                  --商品名称
+[ProductSpeci]     NVARCHAR(64),                                                                                                           --商品规格
 [ProductPrice]     DECIMAL(20,4),                                                                                                          --商品单价
-[ProductImage]     NVARCHAR(128) NOT NULL,                                                                                                 --图片路径
+[ProductImage]     NVARCHAR(128),                                                                                                          --图片路径
 [Parameter]        NVARCHAR(MAX),                                                                                                          --商品参数
 [PackingList]      NVARCHAR(MAX),                                                                                                          --包装清单
 [Description]      NVARCHAR(MAX),                                                                                                          --商品描述
-[ProductPic1]      NVARCHAR(128) NOT NULL,                                                                                                 --轮播图片1路径
-[ProductPic2]      NVARCHAR(128) NOT NULL,                                                                                                 --轮播图片2路径
-[ProductPic3]      NVARCHAR(128) NOT NULL,                                                                                                 --轮播图片3路径
-[ProductPic4]      NVARCHAR(128) NOT NULL,                                                                                                 --轮播图片4路径
-[ProductPic5]      NVARCHAR(128) NOT NULL,                                                                                                 --轮播图片5路径
+[ProductPic1]      NVARCHAR(128),                                                                                                          --轮播图片1路径
+[ProductPic2]      NVARCHAR(128),                                                                                                          --轮播图片2路径
+[ProductPic3]      NVARCHAR(128),                                                                                                          --轮播图片3路径
+[ProductPic4]      NVARCHAR(128),                                                                                                          --轮播图片4路径
+[ProductPic5]      NVARCHAR(128),                                                                                                          --轮播图片5路径
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )
 GO
