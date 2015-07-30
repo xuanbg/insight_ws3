@@ -10,9 +10,9 @@ AS
 
 select distinct Product_Extend_ProductID as ProductId ,stuff((
   select ','+ Product_Extend_Value 
-  from tianyao2014.dbo.Product_Library_Extend 
+  from Product_Library_Extend 
   where Product_Extend_ProductID = PE.Product_Extend_ProductID 
   for xml path('')),1,1,'') as Specific
-from tianyao2014.dbo.Product_Library_Extend PE
+from Product_Library_Extend PE
 
 GO
