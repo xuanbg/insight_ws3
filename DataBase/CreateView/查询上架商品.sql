@@ -16,13 +16,13 @@ select L.Product_ID as ID,
 	   L.Product_Name as Name, 
 	   L.Product_ERPSKU1 as Color, 
 	   L.Product_MKTPrice as MarketPrice, 
-	   L.Product_Price as SalePrice, 
+	   isnull(L.Product_Price, 0) as SalePrice, 
 	   C.Cate_Sort as OutDay,
 	   L.Product_Img as ImageUrl, 
 	   L.Product_Intro as Description, 
 	   L.Product_Parameter as Parameter, 
 	   L.Product_Intro_Extend1 as Warranty, 
-	   case T.Product_RelateTag_TagID when 17 then cast(1 as bit) else cast(0 as bit) end as Recommend
+	   isnull(cast(case T.Product_RelateTag_TagID when 17 then 1 else 0 end as bit), 0) as Recommend
   from Product_Library L
   join Product_Basic B on B.Product_Code = L.Product_Code
   join BasicCategory C on C.Cate_ID = L.Product_CateID

@@ -1,11 +1,11 @@
-IF EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'Specification') AND OBJECTPROPERTY(id, N'ISVIEW') = 1)
-DROP VIEW Specification
+IF EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'ProductSpec') AND OBJECTPROPERTY(id, N'ISVIEW') = 1)
+DROP VIEW ProductSpec
 GO
 
 
 /*****视图：查询可用预付款*****/
 
-CREATE VIEW Specification
+CREATE VIEW ProductSpec
 AS
 
 select distinct Product_Extend_ProductID as ProductId ,stuff((

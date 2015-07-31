@@ -3,12 +3,12 @@ DROP VIEW Available
 GO
 
 
-/*****视图：查询可用预付款*****/
+/*****视图：查询可用额度*****/
 
 CREATE VIEW Available
 AS
 
-select distinct E.MID as MemberId, sum(isnull(S.Amount, 0)) as TotalAmount, sum(isnull(F.Amount, 0)) as LoanAmount, sum(isnull(F.Perform, 0)) as Perform, E.Enable, E.Status
+select distinct E.MID as MemberId, isnull(sum(S.Amount), 0) as TotalAmount, isnull(sum(F.Amount), 0) as LoanAmount, isnull(sum(F.Perform), 0) as Perform, E.Enable, E.Status
 from MDG_EntMember E
 left join ABS_Contract C on C.ObjectId = E.MID
   and C.Status > 0
