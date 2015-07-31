@@ -220,6 +220,7 @@ CREATE TABLE BIZ_Order(
 [InvoiceType]      INT DEFAULT 1 NOT NULL,                                                                                                 --发票类型：1、个人；2、单位；3、增值税票
 [InvoiceInfo]      NVARCHAR(128),                                                                                                          --发票信息
 [PayStatus]        BIT DEFAULT 0 NOT NULL,                                                                                                 --是否付款：0、未付款；1、已付款
+[OutDate]          DATETIME,                                                                                                               --退货截至日期
 [CancelTime]       DATETIME DEFAULT GETDATE() NOT NULL,                                                                                    --取消时间
 [RefundTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --退款时间
 )
