@@ -8,7 +8,7 @@ GO
 CREATE VIEW BillList
 AS
 
-select F.ID, F.SubjectsId, F.Description as Descrip, isnull(F.Amount - isnull(P.Perform, 0), 0) as Amount, F.EndDate, isnull(P.Perform, 0) as Perform, P.PerformDate
+select F.ID, F.SubjectsId, F.Description, isnull(F.Amount - isnull(P.Perform, 0), 0) as Amount, F.EndDate, isnull(P.Perform, 0) as Perform, P.PerformDate
 from ABS_Contract_FundPlan F
 left join (
   select PlanId, sum(Amount) as Perform, max(CreateTime) as PerformDate

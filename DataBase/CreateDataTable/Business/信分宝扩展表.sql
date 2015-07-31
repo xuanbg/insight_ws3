@@ -177,7 +177,7 @@ CREATE TABLE MDE_Member_Withdrawal(
 [SN]               BIGINT IDENTITY(1,1),                                                                                                   --自增序列
 [MemberId]         UNIQUEIDENTIFIER FOREIGN KEY REFERENCES MasterData(ID) NOT NULL,                                                        --会员ID
 [CardId]           UNIQUEIDENTIFIER FOREIGN KEY REFERENCES MDE_Member_Card(ID) NOT NULL,                                                   --绑定银行卡ID
-[OrderId]          UNIQUEIDENTIFIER FOREIGN KEY REFERENCES ABS_Contract(ID) NOT NULL,                                                      --订单ID
+[OrderId]          UNIQUEIDENTIFIER FOREIGN KEY REFERENCES ABS_Contract(ID) ON DELETE CASCADE NOT NULL,                                    --订单ID
 [Description]      NVARCHAR(MAX),                                                                                                          --描述
 [Status]           INT DEFAULT 1 NOT NULL,                                                                                                 --状态：1、待处理；2、已放款；
 [LoanDeptId]       UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Sys_Organization(ID),                                                           --放款部门ID
