@@ -21,21 +21,22 @@ namespace Insight.WS.Server.Common
             using (var conn = new SqlConnection(ConnStr))
             {
                 conn.Open();
-                var table = new DataTable("DataTable");
-                var cmd = new SqlCommand(sql, conn);
-                foreach (var p in parms)
-                {
-                    if (p.Value == null || p.Value.ToString() == "")
-                    {
-                        p.Value = DBNull.Value;
-                    }
-                    cmd.Parameters.Add(p);
-                }
+                var cmd = MakeCommand(sql, parms);
+                cmd.Connection = conn;
 
-                var adapter = new SqlDataAdapter(cmd);
-                adapter.Fill(table);
-                table.PrimaryKey = new[] { table.Columns["ID"] };
-                return table;
+                try
+                {
+                    var table = new DataTable("DataTable");
+                    var adapter = new SqlDataAdapter(cmd);
+                    adapter.Fill(table);
+                    table.PrimaryKey = new[] { table.Columns["ID"] };
+                    return table;
+                }
+                catch (Exception ex)
+                {
+                    Util.LogToEvent(ex.ToString());
+                    return null;
+                }
             }
         }
 
@@ -50,21 +51,16 @@ namespace Insight.WS.Server.Common
             using (var conn = new SqlConnection(ConnStr))
             {
                 conn.Open();
-                var cmd = new SqlCommand(sql, conn);
+                var cmd = MakeCommand(sql, parms);
+                cmd.Connection = conn;
+
                 try
                 {
-                    foreach (var p in parms)
-                    {
-                        if (p.Value == null || p.Value.ToString() == "")
-                        {
-                            p.Value = DBNull.Value;
-                        }
-                        cmd.Parameters.Add(p);
-                    }
                     return cmd.ExecuteNonQuery();
                 }
-                catch
+                catch (Exception ex)
                 {
+                    Util.LogToEvent(ex.ToString());
                     return -1;
                 }
             }
@@ -73,24 +69,26 @@ namespace Insight.WS.Server.Common
         /// <summary>
         /// 返回第一行第一列内容的方法
         /// </summary>
-        /// <param name="sql"></param>
-        /// <param name="parms"></param>
-        /// <returns></returns>
+        /// <param name="sql">SQL语句</param>
+        /// <param name="parms">可变长参数组</param>
+        /// <returns>执行SQL语句后的第一行第一列内容</returns>
         public static object SqlScalar(string sql, params SqlParameter[] parms)
         {
             using (var conn = new SqlConnection(ConnStr))
             {
                 conn.Open();
-                var cmd = new SqlCommand(sql, conn);
-                foreach (var p in parms)
+                var cmd = MakeCommand(sql, parms);
+                cmd.Connection = conn;
+
+                try
                 {
-                    if (p.Value == null || p.Value.ToString() == "")
-                    {
-                        p.Value = DBNull.Value;
-                    }
-                    cmd.Parameters.Add(p);
+                    return cmd.ExecuteScalar();
                 }
-                return cmd.ExecuteScalar();
+                catch (Exception ex)
+                {
+                    Util.LogToEvent(ex.ToString());
+                    return null;
+                }
             }
         }
 
@@ -126,8 +124,9 @@ namespace Insight.WS.Server.Common
                     tran.Commit();
                     return true;
                 }
-                catch
+                catch (Exception ex)
                 {
+                    Util.LogToEvent(ex.ToString());
                     tran.Rollback();
                     return false;
                 }
@@ -167,8 +166,9 @@ namespace Insight.WS.Server.Common
                     tran.Commit();
                     return ids[i];
                 }
-                catch
+                catch (Exception ex)
                 {
+                    Util.LogToEvent(ex.ToString());
                     tran.Rollback();
                     return null;
                 }
