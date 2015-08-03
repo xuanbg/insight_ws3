@@ -108,7 +108,7 @@ CREATE TABLE ABS_Clearing(
 [CheckId]          UNIQUEIDENTIFIER FOREIGN KEY REFERENCES ABS_Clearing_Check(ID),                                                         --结账ID
 [RelationId]       UNIQUEIDENTIFIER,                                                                                                       --关联结算记录ID
 [Validity]         BIT DEFAULT 1 NOT NULL,                                                                                                 --是否有效：0、无效；1、有效
-[CreatorDeptId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Sys_Organization(ID) NOT NULL,                                                  --创建部门ID
+[CreatorDeptId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Sys_Organization(ID),                                                           --创建部门ID
 [CreatorUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Sys_User(ID) NOT NULL,                                                          --创建人ID
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )
