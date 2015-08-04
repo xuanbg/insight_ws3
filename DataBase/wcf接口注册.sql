@@ -20,9 +20,6 @@ select 'Base', 'Insight.WS.Service.Base', 'Insight.WS.Service.IBase', 'Services'
 select 'Report', 'Insight.WS.Service.Report', 'Insight.WS.Service.IReport', 'Services' union all
 select 'MasterDatas', 'Insight.WS.Service.MasterDatas', 'Insight.WS.Service.IMasterDatas', 'Services' union all
 
-select 'XfbInterface', 'Insight.WS.Service.XinFenBao.Interface', 'Insight.WS.Service.XinFenBao.IInterface', 'Services' union all
-select 'XfbManager', 'Insight.WS.Service.XinFenBao.Manager', 'Insight.WS.Service.XinFenBao.IManager', 'Services' union all
-
 select 'CRM', 'Insight.WS.Service.Business.CRM', 'Insight.WS.Service.Business.ICRM', 'Services\\Business' union all
 select 'SCM', 'Insight.WS.Service.Business.SCM', 'Insight.WS.Service.Business.ISCM', 'Services\\Business' union all
 select 'Settlement', 'Insight.WS.Service.Business.Settlement', 'Insight.WS.Service.Business.ISettlement', 'Services\\Business'
