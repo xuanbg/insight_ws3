@@ -350,7 +350,7 @@ CREATE TABLE ABS_Contract_Subjects(
 [SN]               BIGINT IDENTITY(1,1),                                                                                                   --自增序列
 [ContractId]       UNIQUEIDENTIFIER FOREIGN KEY REFERENCES ABS_Contract(ID) ON DELETE CASCADE NOT NULL,                                    --契约ID
 [Direction]        INT NOT NULL,                                                                                                           --标的流向：-1、资金流出物资流入；1、资金流入物资流出
-[PlanType]         INT NOT NULL,                                                                                                           --计划类型：1、仅有资金计划；2、仅有物资计划；3、两者皆有
+[PlanType]         INT NOT NULL,                                                                                                           --计划类型：0、无计划；1、仅有资金计划；2、仅有物资计划；3、两者皆有
 [CategoryId]       UNIQUEIDENTIFIER FOREIGN KEY REFERENCES BASE_Category(ID),                                                              --标的物品类ID
 [ObjectId]         UNIQUEIDENTIFIER FOREIGN KEY REFERENCES MasterData(ID),                                                                 --标的物ID
 [ObjectName]       NVARCHAR(64),                                                                                                           --标的物名称
