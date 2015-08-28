@@ -69,7 +69,7 @@ CREATE TABLE SYS_User(
 [Password]         VARCHAR(32) DEFAULT 'E10ADC3949BA59ABBE56E057F20F883E' NOT NULL,                                                        --登录密码，保存密码的MD5值，初始密码123456
 [PayPassword]      VARCHAR(32),                                                       　　　　　　　　　　　　　　　　　　　　　　　　　　 --支付密码，保存密码的MD5值
 [Description]      NVARCHAR(MAX),                                                                                                          --描述
-[Type]             INT DEFAULT 1 NOT NULL,                                                                                                 --用户类型：-1、外部用户；1、内部用户
+[Type]             INT DEFAULT 0 NOT NULL,                                                                                                 --用户类型：-1、外部用户；1、内部用户
 [BuiltIn]          BIT DEFAULT 0 NOT NULL,                                                                                                 --是否预置：0、自定；1、预置
 [Validity]         BIT DEFAULT 1 NOT NULL,                                                                                                 --是否有效：0、无效；1、有效
 [CreatorUserId]    UNIQUEIDENTIFIER,                                                                                                       --创建人ID
