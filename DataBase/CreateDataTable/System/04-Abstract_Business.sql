@@ -137,7 +137,7 @@ CREATE TABLE ABS_Clearing_Pay(
 [SN]               BIGINT IDENTITY(1,1),                                                                                                   --自增序列
 [ClearingItemId]   UNIQUEIDENTIFIER FOREIGN KEY REFERENCES ABS_Clearing_Item(ID) ON DELETE CASCADE NOT NULL,                               --结算项目明细ID
 [PayType]          UNIQUEIDENTIFIER FOREIGN KEY REFERENCES MDG_Dictionary(MID),                                                            --结算方式ID，字典
-[Code]             VARCHAR(16),                                                                                                            --结算号
+[Code]             VARCHAR(32),                                                                                                            --结算号
 [CurrencyId]       UNIQUEIDENTIFIER FOREIGN KEY REFERENCES MDG_Dictionary(MID),                                                            --币种ID，字典
 [Amount]           DECIMAL(20,2) NOT NULL,                                                                                                 --金额
 [ExchangeRate]     DECIMAL(20,6) DEFAULT 1 NOT NULL                                                                                        --汇率
@@ -162,7 +162,7 @@ GO
 CREATE TABLE ABS_StockCapital(
 [ID]               UNIQUEIDENTIFIER CONSTRAINT IX_ABS_StockCapital PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
 [SN]               BIGINT IDENTITY(1,1),                                                                                                   --自增序列
-[OrgId]            UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Sys_Organization(ID) NOT NULL,                                                  --组织机构ID
+[OrgId]            UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Sys_Organization(ID),                                                           --组织机构ID
 [Amount]           DECIMAL(20,2) NOT NULL                                                                                                  --金额
 )
 GO
