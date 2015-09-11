@@ -399,7 +399,7 @@ CREATE TABLE ABS_Contract_FundPerform(
 [ID]               UNIQUEIDENTIFIER CONSTRAINT IX_ABS_Contract_FundPerform PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
 [SN]               BIGINT IDENTITY(1,1),                                                                                                   --自增序列
 [PlanId]           UNIQUEIDENTIFIER FOREIGN KEY REFERENCES ABS_Contract_FundPlan(ID) ON DELETE CASCADE NOT NULL,                           --资金计划ID
-[ClearingId]       UNIQUEIDENTIFIER FOREIGN KEY REFERENCES ABS_Clearing_Item(ID) ON DELETE CASCADE NOT NULL,                               --结算记录ID
+[ClearingId]       UNIQUEIDENTIFIER FOREIGN KEY REFERENCES ABS_Clearing(ID) ON DELETE CASCADE,                                             --结算记录ID
 [Amount]           DECIMAL(20,2) NOT NULL,                                                                                                 --履约金额
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )
@@ -428,7 +428,7 @@ CREATE TABLE ABS_Contract_GoodsPerform(
 [ID]               UNIQUEIDENTIFIER CONSTRAINT IX_ABS_Contract_GoodsPerform PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
 [SN]               BIGINT IDENTITY(1,1),                                                                                                   --自增序列
 [PlanId]           UNIQUEIDENTIFIER FOREIGN KEY REFERENCES ABS_Contract_GoodsPlan(ID) ON DELETE CASCADE NOT NULL,                          --物资计划ID
-[DeliveryId]       UNIQUEIDENTIFIER FOREIGN KEY REFERENCES ABS_Delivery_Item(ID) ON DELETE CASCADE NOT NULL,                               --结算记录ID
+[DeliveryId]       UNIQUEIDENTIFIER FOREIGN KEY REFERENCES ABS_Delivery(ID) ON DELETE CASCADE,                                             --结算记录ID
 [Counts]           DECIMAL(20,6),                                                                                                          --履约数量
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )
