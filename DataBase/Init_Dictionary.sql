@@ -3306,6 +3306,16 @@ select ID, N'980', N'乌克兰格里夫纳', N'UAH' from BASE_Category where Ali
 select ID, N'981', N'格鲁吉亚拉里', N'GEL' from BASE_Category where Alias = 'Currency' union all
 select ID, N'986', N'巴西瑞尔', N'BRL' from BASE_Category where Alias = 'Currency'
 
+/*****初始化主数据（字典：学历）*****/
+INSERT MasterData (CategoryId, Name, Alias)
+select ID, N'无', 'Null' from BASE_Category where Alias = 'Educate' union all
+select ID, N'博士', 'Doctor' from BASE_Category where Alias = 'Educate' union all
+select ID, N'硕士', 'Master' from BASE_Category where Alias = 'Educate' union all
+select ID, N'本科', 'Undergraduate' from BASE_Category where Alias = 'Educate' union all
+select ID, N'专科', 'Specialist' from BASE_Category where Alias = 'Educate' union all
+select ID, N'高中', 'Senior' from BASE_Category where Alias = 'Educate' union all
+select ID, N'初中', 'Junior' from BASE_Category where Alias = 'Educate' union all
+select ID, N'小学', 'Elementary' from BASE_Category where Alias = 'Educate'
 
 /*****初始化主数据（字典：结算方式）*****/
 INSERT MasterData (CategoryId, Name, Alias)
@@ -3314,14 +3324,15 @@ select ID, N'银联卡', 'UnionPay' from BASE_Category where Alias = 'Settlement
 select ID, N'现金支票', 'CashCheck' from BASE_Category where Alias = 'Settlement' union all
 select ID, N'转账支票', 'TransferCheck' from BASE_Category where Alias = 'Settlement' union all
 select ID, N'支付宝', 'AliPay' from BASE_Category where Alias = 'Settlement' union all
-select ID, N'微信', 'WeiXinPay' from BASE_Category where Alias = 'Settlement' union all
+select ID, N'微信支付', 'WeiXinPay' from BASE_Category where Alias = 'Settlement' union all
 select ID, N'银行汇款', 'Transfer' from BASE_Category where Alias = 'Settlement' union all
 select ID, N'商业承兑汇票', 'Commercial' from BASE_Category where Alias = 'Settlement' union all
 select ID, N'银行承兑汇票', 'Bankers' from BASE_Category where Alias = 'Settlement' union all
 select ID, N'银行本票', 'Cashier' from BASE_Category where Alias = 'Settlement' union all
 select ID, N'银行汇票', 'BankDraft' from BASE_Category where Alias = 'Settlement' union all
 select ID, N'委托收款', 'Entrust' from BASE_Category where Alias = 'Settlement' union all
-select ID, N'托收承付', 'Promissory' from BASE_Category where Alias = 'Settlement'
+select ID, N'托收承付', 'Promissory' from BASE_Category where Alias = 'Settlement' union all
+select ID, N'其他', 'OtherPay' from BASE_Category where Alias = 'Settlement'
 
 
 /*****初始化主数据（字典：涉密等级）*****/
