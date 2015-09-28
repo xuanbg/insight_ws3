@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Business", "Business", "{DB801584-D27C-42B4-AF70-811E3DC67A6B}"
 EndProject
@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MainApp", "Client\MainApp\M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Server\Common\Common.csproj", "{132CE7B2-A22C-430E-947C-DB629960AE7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServicesHost", "Server\ServicesHost\ServicesHost.csproj", "{02699996-8EC6-46C8-BF31-5F6DF880EE1B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsightServer", "Server\ServicesHost\InsightServer.csproj", "{02699996-8EC6-46C8-BF31-5F6DF880EE1B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{F7054E2C-5940-4025-AAAB-528AE30DFD49}"
 EndProject

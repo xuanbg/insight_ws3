@@ -12,8 +12,10 @@
       <xs:element minOccurs="0" name="LoginName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="LoginStatus" type="tns:LoginResult" />
       <xs:element minOccurs="0" name="MachineId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OpenId" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="SessionId" type="ser:guid" />
       <xs:element minOccurs="0" name="Signature" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Type" type="xs:int" />
       <xs:element minOccurs="0" name="UserId" type="ser:guid" />
       <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Validity" type="xs:boolean" />

@@ -325,7 +325,7 @@ namespace Insight.WS.Client.Platform.Report.Dialog
         private void InitMemberList()
         {
             var dv = _Members.Copy().DefaultView;
-            dv.RowFilter = string.Format("OrgId = '{0}'", treEntity.FocusedNode.GetValue("OrgId"));
+            dv.RowFilter = $"OrgId = '{treEntity.FocusedNode.GetValue("OrgId")}'";
             grdMember.DataSource = dv;
             Format.GridFormat(gdvMember, 0);
             gdvMember.OptionsSelection.CheckBoxSelectorColumnWidth = 30;
@@ -355,7 +355,7 @@ namespace Insight.WS.Client.Platform.Report.Dialog
         /// <returns></returns>
         private bool HasMember()
         {
-            return treEntity.GetNodeList().Aggregate(false, (current, node) => (node.Checked && _Members.Select(string.Format("OrgId = '{0}' and Selected = 1", node.GetValue("OrgId"))).Length > 0) || current);
+            return treEntity.GetNodeList().Aggregate(false, (current, node) => (node.Checked && _Members.Select($"OrgId = '{node.GetValue("OrgId")}' and Selected = 1").Length > 0) || current);
         }
 
         /// <summary>
@@ -366,7 +366,7 @@ namespace Insight.WS.Client.Platform.Report.Dialog
             var name = txtName.Text.Trim();
             if (name != _Definition.Name && Commons.NameIsExist(_Definition.CategoryId, name, "Name", "SYS_Report_Definition"))
             {
-                General.ShowError(string.Format("此分类下已经存在名称为【{0}】的报表！请重新命名。", name));
+                General.ShowError($"此分类下已经存在名称为【{name}】的报表！请重新命名。");
             }
         }
 
@@ -418,7 +418,7 @@ namespace Insight.WS.Client.Platform.Report.Dialog
 
             foreach (var node in treEntity.GetNodeList())
             {
-                var hasMember = _Members.Select(string.Format("OrgId = '{0}' and Selected = 1", node.GetValue("OrgId"))).Length > 0;
+                var hasMember = _Members.Select($"OrgId = '{node.GetValue("OrgId")}' and Selected = 1").Length > 0;
                 if (hasMember)
                     _OldEntitys.Remove(node.GetValue("ID"));
                 else

@@ -14,9 +14,12 @@ namespace Insight.WS.Server.Common.ORM
     using System.Collections.Generic;
     
     [DataContract(IsReference = true)]
+    [KnownType(typeof(ABS_Advance))]
     [KnownType(typeof(ABS_Advance_Detail))]
     [KnownType(typeof(ABS_Clearing))]
+    [KnownType(typeof(ABS_Clearing_Item))]
     [KnownType(typeof(ABS_Contract))]
+    [KnownType(typeof(ABS_Contract_Subjects))]
     [KnownType(typeof(ABS_Delivery))]
     [KnownType(typeof(ABS_Delivery_Item))]
     [KnownType(typeof(ABS_Storage_Summary))]
@@ -37,18 +40,18 @@ namespace Insight.WS.Server.Common.ORM
     [KnownType(typeof(MDS_Contact_Info))]
     [KnownType(typeof(SYS_Alert_Target))]
     [KnownType(typeof(SYS_Alert_Send))]
-    [KnownType(typeof(ABS_Advance))]
-    [KnownType(typeof(ABS_Clearing_Item))]
-    [KnownType(typeof(ABS_Contract_Subjects))]
     
     public partial class MasterData
     {
         public MasterData()
         {
+            this.ABS_Advance = new HashSet<ABS_Advance>();
             this.ABS_Advance_Detail = new HashSet<ABS_Advance_Detail>();
             this.ABS_Clearing = new HashSet<ABS_Clearing>();
+            this.ABS_Clearing_Item = new HashSet<ABS_Clearing_Item>();
             this.ABS_Contract = new HashSet<ABS_Contract>();
             this.ABS_Contract1 = new HashSet<ABS_Contract>();
+            this.ABS_Contract_Subjects = new HashSet<ABS_Contract_Subjects>();
             this.ABS_Delivery = new HashSet<ABS_Delivery>();
             this.ABS_Delivery_Item = new HashSet<ABS_Delivery_Item>();
             this.ABS_Storage_Summary = new HashSet<ABS_Storage_Summary>();
@@ -62,9 +65,6 @@ namespace Insight.WS.Server.Common.ORM
             this.MDS_Contact_Info = new HashSet<MDS_Contact_Info>();
             this.SYS_Alert_Target = new HashSet<SYS_Alert_Target>();
             this.SYS_Alert_Send = new HashSet<SYS_Alert_Send>();
-            this.ABS_Advance = new HashSet<ABS_Advance>();
-            this.ABS_Clearing_Item = new HashSet<ABS_Clearing_Item>();
-            this.ABS_Contract_Subjects = new HashSet<ABS_Contract_Subjects>();
         }
     
     	[DataMember]
@@ -85,13 +85,19 @@ namespace Insight.WS.Server.Common.ORM
         public string FullName { get; set; }
     
     	[DataMember]
+        public virtual ICollection<ABS_Advance> ABS_Advance { get; set; }
+    	[DataMember]
         public virtual ICollection<ABS_Advance_Detail> ABS_Advance_Detail { get; set; }
     	[DataMember]
         public virtual ICollection<ABS_Clearing> ABS_Clearing { get; set; }
     	[DataMember]
+        public virtual ICollection<ABS_Clearing_Item> ABS_Clearing_Item { get; set; }
+    	[DataMember]
         public virtual ICollection<ABS_Contract> ABS_Contract { get; set; }
     	[DataMember]
         public virtual ICollection<ABS_Contract> ABS_Contract1 { get; set; }
+    	[DataMember]
+        public virtual ICollection<ABS_Contract_Subjects> ABS_Contract_Subjects { get; set; }
     	[DataMember]
         public virtual ICollection<ABS_Delivery> ABS_Delivery { get; set; }
     	[DataMember]
@@ -134,11 +140,5 @@ namespace Insight.WS.Server.Common.ORM
         public virtual ICollection<SYS_Alert_Target> SYS_Alert_Target { get; set; }
     	[DataMember]
         public virtual ICollection<SYS_Alert_Send> SYS_Alert_Send { get; set; }
-    	[DataMember]
-        public virtual ICollection<ABS_Advance> ABS_Advance { get; set; }
-    	[DataMember]
-        public virtual ICollection<ABS_Clearing_Item> ABS_Clearing_Item { get; set; }
-    	[DataMember]
-        public virtual ICollection<ABS_Contract_Subjects> ABS_Contract_Subjects { get; set; }
     }
 }

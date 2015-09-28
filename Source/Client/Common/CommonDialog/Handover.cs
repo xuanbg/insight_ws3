@@ -78,7 +78,7 @@ namespace Insight.WS.Client.Common
 
         protected override void Confirm_Click(object sender, EventArgs e)
         {
-            if (General.ShowConfirm(string.Format("您确认要{0}给【{1}】吗？", Text, sleTarget.Text)) != DialogResult.OK)
+            if (General.ShowConfirm($"您确认要{Text}给【{sleTarget.Text}】吗？") != DialogResult.OK)
             {
                 return;
             }

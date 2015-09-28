@@ -1,4 +1,8 @@
-﻿IF EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'SYS_RolePerm_DataAbs') AND OBJECTPROPERTY(id, N'ISUSERTABLE') = 1)
+﻿IF EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'SYS_Verify_Record') AND OBJECTPROPERTY(id, N'ISUSERTABLE') = 1)
+DROP TABLE SYS_Verify_Record
+GO
+
+IF EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'SYS_RolePerm_DataAbs') AND OBJECTPROPERTY(id, N'ISUSERTABLE') = 1)
 DROP TABLE SYS_RolePerm_DataAbs
 GO
 IF EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'SYS_RolePerm_Data') AND OBJECTPROPERTY(id, N'ISUSERTABLE') = 1)
@@ -312,6 +316,21 @@ CREATE TABLE SYS_RolePerm_DataAbs(
 [OrgId]            UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_Organization(ID) ON DELETE CASCADE,                                         --部门ID
 [UserId]           UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID) ON DELETE CASCADE,                                                 --用户ID
 [Permission]       INT DEFAULT 0 NOT NULL,                                                                                                 --权限：0、只读；1、读写
+)
+GO
+
+
+/*****验证记录表*****/
+
+CREATE TABLE SYS_Verify_Record(
+[ID]               UNIQUEIDENTIFIER CONSTRAINT IX_SYS_Verify_Record PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
+[SN]               BIGINT IDENTITY(1,1),                                                                                                   --自增序列
+[Type]             INT NOT NULL,                                                                                                           --类型：1、注册；2、重置密码
+[Mobile]           VARCHAR(11) NOT NULL,                                                                                                   --手机号
+[Code]             VARCHAR(6) NOT NULL,                                                                                                    --验证码
+[Verified]         BIT DEFAULT 0 NOT NULL,                                                                                                 --是否验证：0、否；1、是
+[VerifyTime]       DATETIME,                                                                                                               --验证时间
+[CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )
 GO
 

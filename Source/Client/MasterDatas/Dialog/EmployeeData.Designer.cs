@@ -470,7 +470,7 @@ namespace Insight.WS.Client.MasterDatas
             // 
             // gdvWorkType
             // 
-            this.gdvWorkType.FocusRectStyle = DrawFocusRectStyle.RowFocus;
+            this.gdvWorkType.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             this.gdvWorkType.Name = "gdvWorkType";
             this.gdvWorkType.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.gdvWorkType.OptionsView.ShowColumnHeaders = false;
@@ -491,7 +491,7 @@ namespace Insight.WS.Client.MasterDatas
             // 
             // gdvLeader
             // 
-            this.gdvLeader.FocusRectStyle = DrawFocusRectStyle.RowFocus;
+            this.gdvLeader.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             this.gdvLeader.Name = "gdvLeader";
             this.gdvLeader.OptionsFind.AlwaysVisible = true;
             this.gdvLeader.OptionsFind.FindNullPrompt = "输入关键字进行查询…";

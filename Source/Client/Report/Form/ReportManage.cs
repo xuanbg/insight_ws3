@@ -137,7 +137,7 @@ namespace Insight.WS.Client.Platform.Report
 
             var ids = new List<object>();
             treCategory.GetNodeList().FindAll(n => n.HasChildren && n.Expanded).ForEach(n => { ids.Add(n.GetValue("ID")); });
-            var fid = treCategory.FocusedNode == null ? null : treCategory.FocusedNode.GetValue("ID");
+            var fid = treCategory.FocusedNode?.GetValue("ID");
 
             treCategory.DataSource = _Categorys;
             Format.TreeFormat(treCategory);
@@ -153,7 +153,7 @@ namespace Insight.WS.Client.Platform.Report
         private void InitReport()
         {
             var dv = _Reports.Copy().DefaultView;
-            dv.RowFilter = string.Format("CategoryId = '{0}'", treCategory.FocusedNode.GetValue("ID"));
+            dv.RowFilter = $"CategoryId = '{treCategory.FocusedNode.GetValue("ID")}'";
             _HasReport = dv.Count > 0;
             SwitchItemStatus(new Context("EditReport", _HasReport), new Context("DeleteReport", _HasReport));
 
@@ -177,7 +177,7 @@ namespace Insight.WS.Client.Platform.Report
         private void InitRules()
         {
             var dv = _Rules.Copy().DefaultView;
-            dv.RowFilter = string.Format("ReportId = '{0}'", _HasReport ? gdvReport.GetFocusedDataRow()["ID"] : null);
+            dv.RowFilter = $"ReportId = '{(_HasReport ? gdvReport.GetFocusedDataRow()["ID"] : null)}'";
             grdRules.DataSource = _HasReport ? dv : null;
             Format.GridFormat(gdvRules);
             gdvRules.OptionsView.ShowColumnHeaders = false;
@@ -189,7 +189,7 @@ namespace Insight.WS.Client.Platform.Report
         private void InitEntitys()
         {
             var dv = _Entitys.Copy().DefaultView;
-            dv.RowFilter = string.Format("ReportId = '{0}'", _HasReport ? gdvReport.GetFocusedDataRow()["ID"] : "");
+            dv.RowFilter = $"ReportId = '{(_HasReport ? gdvReport.GetFocusedDataRow()["ID"] : "")}'";
             _HasEntity = dv.Count > 0;
 
             grdEntitys.DataSource = _HasReport ? dv : null;
@@ -205,7 +205,7 @@ namespace Insight.WS.Client.Platform.Report
         private void InitMembers()
         {
             var dv = _Members.Copy().DefaultView;
-            dv.RowFilter = string.Format("EntityId = '{0}'", _HasEntity ? gdvEntitys.GetFocusedDataRow()["ID"] : "");
+            dv.RowFilter = $"EntityId = '{(_HasEntity ? gdvEntitys.GetFocusedDataRow()["ID"] : "")}'";
             grdMembers.DataSource = _HasEntity ? dv : null;
 
             Format.GridFormat(gdvMembers);
@@ -291,7 +291,7 @@ namespace Insight.WS.Client.Platform.Report
         private void DelReport()
         {
             var row = gdvReport.GetFocusedDataRow();
-            if (General.ShowConfirm(string.Format("您确定要删除报表【{0}】吗?", row["名称"])) != DialogResult.OK) return;
+            if (General.ShowConfirm($"您确定要删除报表【{row["名称"]}】吗?") != DialogResult.OK) return;
 
             using (var cli = new ReportClient(Binding, Address))
             {

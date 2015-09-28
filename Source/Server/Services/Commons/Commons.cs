@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Windows.Forms;
 using System.Text;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
@@ -12,6 +15,8 @@ namespace Insight.WS.Service
 
     public partial class Commons : ICommons
     {
+
+        private string _RootPath;
 
         #region 报表接口
 
@@ -117,7 +122,7 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return false;
 
-            return SqlHelper.SqlNonQuery(string.Format("delete ImageData where ID = '{0}'", id)) > 0;
+            return SqlHelper.SqlNonQuery($"delete ImageData where ID = '{id}'") > 0;
         }
 
         #endregion
@@ -136,7 +141,7 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return false;
 
-            var sql = string.Format("select count(*) from {0} where {1} = '{2}'", tab, col, str);
+            var sql = $"select count(*) from {tab} where {col} = '{str}'";
             return (int)SqlHelper.SqlScalar(sql) > 0;
         }
 
@@ -155,8 +160,8 @@ namespace Insight.WS.Service
             if (!OnlineManage.Verification(us)) return false;
 
             var p = isParent ? "ParentId" : "CategoryId";
-            var pn = pid.HasValue ? string.Format("= '{0}'", pid) : "is null";
-            var sql = string.Format("select count(*) from {0} where {1} = '{2}' and {3} {4}", tab, col, str, p, pn);
+            var pn = pid.HasValue ? $"= '{pid}'" : "is null";
+            var sql = $"select count(*) from {tab} where {col} = '{str}' and {p} {pn}";
             return (int)SqlHelper.SqlScalar(sql) > 0;
         }
 
@@ -172,7 +177,7 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return -1;
 
-            var sql = string.Format("select count(ID) from {0} where {1} {2}", tab, type, id.HasValue ? "= @ID" : "is null");
+            var sql = $"select count(ID) from {tab} where {type} {(id.HasValue ? "= @ID" : "is null")}";
             var parm = new[] {new SqlParameter("@ID", SqlDbType.UniqueIdentifier) {Value = id}};
             return (int)SqlHelper.SqlScalar(sql, parm);
         }
@@ -182,6 +187,17 @@ namespace Insight.WS.Service
         #region 其它接口
 
         /// <summary>
+        /// 获取客户端文件列表
+        /// </summary>
+        /// <returns>FileAttribute List 文件列表</returns>
+        public List<UpdateFile> GetServerList()
+        {
+            _RootPath = Application.StartupPath + "\\Client";
+            var list = new List<UpdateFile>();
+            return GetLocalList(_RootPath, list);
+        }
+
+        /// <summary>
         /// 删除在线用户会话
         /// </summary>
         /// <param name="us">Session对象实体</param>
@@ -189,8 +205,6 @@ namespace Insight.WS.Service
         /// <returns>bool 是否删除成功</returns>
         public bool DelOnlineUser(Session us, int? sid)
         {
-            if (us == null) return false;
-
             if (!OnlineManage.Verification(us)) return false;
 
             OnlineManage.Sessions[sid ?? us.ID].SessionId = Guid.Empty;
@@ -311,6 +325,33 @@ namespace Insight.WS.Service
         }
 
         #endregion
+
+        /// <summary>
+        /// 获取客户端文件列表
+        /// </summary>
+        /// <param name="dir">客户端文件路径</param>
+        /// <param name="list">文件列表</param>
+        /// <returns>FileAttribute List 文件列表</returns>
+        private List<UpdateFile> GetLocalList(string dir, List<UpdateFile> list)
+        {
+            var dirInfo = new DirectoryInfo(dir);
+            list.AddRange(from file in dirInfo.GetFiles()
+                          where ".dll.exe.frl".IndexOf(file.Extension) >= 0
+                          select new UpdateFile
+                          {
+                              Name = file.Name,
+                              Path = file.DirectoryName?.Replace(_RootPath, ""),
+                              FullPath = file.FullName,
+                              Version = FileVersionInfo.GetVersionInfo(file.FullName).FileVersion
+                          });
+
+            var dirs = Directory.GetDirectories(dir);
+            foreach (var path in dirs)
+            {
+                GetLocalList(path, list);
+            }
+            return list;
+        }
 
     }
 }

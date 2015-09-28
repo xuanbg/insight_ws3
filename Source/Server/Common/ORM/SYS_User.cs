@@ -14,11 +14,13 @@ namespace Insight.WS.Server.Common.ORM
     using System.Collections.Generic;
     
     [DataContract(IsReference = true)]
+    [KnownType(typeof(ABS_Advance))]
     [KnownType(typeof(ABS_Clearing))]
+    [KnownType(typeof(ABS_Clearing_Check))]
     [KnownType(typeof(ABS_Contract))]
     [KnownType(typeof(ABS_Delivery))]
+    [KnownType(typeof(ABS_Storage_Location))]
     [KnownType(typeof(BASE_Category))]
-    [KnownType(typeof(BIZ_Travel_Apply))]
     [KnownType(typeof(ImageData))]
     [KnownType(typeof(MasterData_Merger))]
     [KnownType(typeof(MDG_Contact))]
@@ -51,19 +53,18 @@ namespace Insight.WS.Server.Common.ORM
     [KnownType(typeof(SYS_RolePerm_DataAbs))]
     [KnownType(typeof(SYS_UserGroup))]
     [KnownType(typeof(SYS_UserGroupMember))]
-    [KnownType(typeof(ABS_Advance))]
-    [KnownType(typeof(ABS_Clearing_Check))]
-    [KnownType(typeof(ABS_Storage_Location))]
     
     public partial class SYS_User
     {
         public SYS_User()
         {
+            this.ABS_Advance = new HashSet<ABS_Advance>();
             this.ABS_Clearing = new HashSet<ABS_Clearing>();
+            this.ABS_Clearing_Check = new HashSet<ABS_Clearing_Check>();
             this.ABS_Contract = new HashSet<ABS_Contract>();
             this.ABS_Delivery = new HashSet<ABS_Delivery>();
+            this.ABS_Storage_Location = new HashSet<ABS_Storage_Location>();
             this.BASE_Category = new HashSet<BASE_Category>();
-            this.BIZ_Travel_Apply = new HashSet<BIZ_Travel_Apply>();
             this.ImageData = new HashSet<ImageData>();
             this.MasterData_Merger = new HashSet<MasterData_Merger>();
             this.MDG_Contact = new HashSet<MDG_Contact>();
@@ -101,9 +102,6 @@ namespace Insight.WS.Server.Common.ORM
             this.SYS_UserGroup = new HashSet<SYS_UserGroup>();
             this.SYS_UserGroupMember = new HashSet<SYS_UserGroupMember>();
             this.SYS_UserGroupMember1 = new HashSet<SYS_UserGroupMember>();
-            this.ABS_Advance = new HashSet<ABS_Advance>();
-            this.ABS_Clearing_Check = new HashSet<ABS_Clearing_Check>();
-            this.ABS_Storage_Location = new HashSet<ABS_Storage_Location>();
         }
     
     	[DataMember]
@@ -117,7 +115,11 @@ namespace Insight.WS.Server.Common.ORM
     	[DataMember]
         public string Password { get; set; }
     	[DataMember]
+        public string PayPassword { get; set; }
+    	[DataMember]
         public string Description { get; set; }
+    	[DataMember]
+        public int Type { get; set; }
     	[DataMember]
         public bool BuiltIn { get; set; }
     	[DataMember]
@@ -127,18 +129,22 @@ namespace Insight.WS.Server.Common.ORM
     	[DataMember]
         public System.DateTime CreateTime { get; set; }
     	[DataMember]
-        public int Type { get; set; }
+        public string OpenId { get; set; }
     
     	[DataMember]
+        public virtual ICollection<ABS_Advance> ABS_Advance { get; set; }
+    	[DataMember]
         public virtual ICollection<ABS_Clearing> ABS_Clearing { get; set; }
+    	[DataMember]
+        public virtual ICollection<ABS_Clearing_Check> ABS_Clearing_Check { get; set; }
     	[DataMember]
         public virtual ICollection<ABS_Contract> ABS_Contract { get; set; }
     	[DataMember]
         public virtual ICollection<ABS_Delivery> ABS_Delivery { get; set; }
     	[DataMember]
-        public virtual ICollection<BASE_Category> BASE_Category { get; set; }
+        public virtual ICollection<ABS_Storage_Location> ABS_Storage_Location { get; set; }
     	[DataMember]
-        public virtual ICollection<BIZ_Travel_Apply> BIZ_Travel_Apply { get; set; }
+        public virtual ICollection<BASE_Category> BASE_Category { get; set; }
     	[DataMember]
         public virtual ICollection<ImageData> ImageData { get; set; }
     	[DataMember]
@@ -213,11 +219,5 @@ namespace Insight.WS.Server.Common.ORM
         public virtual ICollection<SYS_UserGroupMember> SYS_UserGroupMember { get; set; }
     	[DataMember]
         public virtual ICollection<SYS_UserGroupMember> SYS_UserGroupMember1 { get; set; }
-    	[DataMember]
-        public virtual ICollection<ABS_Advance> ABS_Advance { get; set; }
-    	[DataMember]
-        public virtual ICollection<ABS_Clearing_Check> ABS_Clearing_Check { get; set; }
-    	[DataMember]
-        public virtual ICollection<ABS_Storage_Location> ABS_Storage_Location { get; set; }
     }
 }

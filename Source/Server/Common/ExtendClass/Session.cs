@@ -16,6 +16,11 @@ namespace Insight.WS.Server.Common
         public Guid SessionId { get; set; }
 
         /// <summary>
+        /// 用户OpenId
+        /// </summary>
+        public string OpenId { get; set; }
+
+        /// <summary>
         /// 登录用户ID
         /// </summary>
         public Guid UserId { get; set; }
@@ -49,6 +54,11 @@ namespace Insight.WS.Server.Common
         /// 用户签名
         /// </summary>
         public string Signature { get; set; }
+
+        /// <summary>
+        /// 用户类型
+        /// </summary>
+        public int Type { get; set; }
 
         /// <summary>
         /// 用户状态

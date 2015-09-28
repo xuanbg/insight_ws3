@@ -195,22 +195,20 @@ namespace Insight.WS.Client.Business.CRM
                 return false;
             }
 
-            using (var cli = new CRMClient(OpenForm.Binding, OpenForm.Address))
+            if (txtName.Text.Trim() != _MasterData.Name && Commons.NameIsExist(txtName.Text.Trim(), "Name"))
             {
-                if (txtName.Text.Trim() != _MasterData.Name && Commons.NameIsExist(txtName.Text.Trim(), "Name"))
-                {
-                    General.ShowError(string.Format("已存在名称为【{0}】的数据！", txtName.Text.Trim()));
-                    txtName.Focus();
-                    return false;
-                }
-
-                if (!string.IsNullOrEmpty(txtAlias.Text.Trim()) && txtAlias.Text.Trim() != _MasterData.Alias && Commons.NameIsExist(txtAlias.Text.Trim(), "Alias"))
-                {
-                    General.ShowError(string.Format("已存在简称为【{0}】的数据！", txtAlias.Text.Trim()));
-                    txtAlias.Focus();
-                    return false;
-                }
+                General.ShowError($"已存在名称为【{txtName.Text.Trim()}】的数据！");
+                txtName.Focus();
+                return false;
             }
+
+            if (!string.IsNullOrEmpty(txtAlias.Text.Trim()) && txtAlias.Text.Trim() != _MasterData.Alias && Commons.NameIsExist(txtAlias.Text.Trim(), "Alias"))
+            {
+                General.ShowError($"已存在简称为【{txtAlias.Text.Trim()}】的数据！");
+                txtAlias.Focus();
+                return false;
+            }
+
             return true;
         }
 

@@ -77,7 +77,7 @@ namespace Insight.WS.Service
                     };
                     cmds.Add(SqlHelper.MakeCommand(sql, parm));
                 }
-                cmds.AddRange(InsertMembers(mdt.Select(string.Format("OrgId = '{0}'", row["OrgId"]))));
+                cmds.AddRange(InsertMembers(mdt.Select($"OrgId = '{row["OrgId"]}'")));
             }
             return cmds;
         }

@@ -15,22 +15,19 @@ namespace Insight.WS.Server.Common.ORM
     
     [DataContract(IsReference = true)]
     [KnownType(typeof(MasterData))]
+    [KnownType(typeof(ABS_Contract_Subjects))]
     [KnownType(typeof(ABS_Contract_Attachs))]
+    [KnownType(typeof(ABS_Contract_FundPlan))]
     [KnownType(typeof(SYS_Organization))]
     [KnownType(typeof(SYS_User))]
     [KnownType(typeof(MDG_Employee))]
-    [KnownType(typeof(BIZ_Borrowing_Apply))]
-    [KnownType(typeof(BIZ_Reimburse_Apply))]
-    [KnownType(typeof(BIZ_Travel_Apply))]
-    [KnownType(typeof(ABS_Contract_Subjects))]
-    [KnownType(typeof(ABS_Contract_FundPlan))]
     
     public partial class ABS_Contract
     {
         public ABS_Contract()
         {
-            this.ABS_Contract_Attachs = new HashSet<ABS_Contract_Attachs>();
             this.ABS_Contract_Subjects = new HashSet<ABS_Contract_Subjects>();
+            this.ABS_Contract_Attachs = new HashSet<ABS_Contract_Attachs>();
             this.ABS_Contract_FundPlan = new HashSet<ABS_Contract_FundPlan>();
         }
     
@@ -74,7 +71,11 @@ namespace Insight.WS.Server.Common.ORM
     	[DataMember]
         public virtual MasterData MasterData { get; set; }
     	[DataMember]
+        public virtual ICollection<ABS_Contract_Subjects> ABS_Contract_Subjects { get; set; }
+    	[DataMember]
         public virtual ICollection<ABS_Contract_Attachs> ABS_Contract_Attachs { get; set; }
+    	[DataMember]
+        public virtual ICollection<ABS_Contract_FundPlan> ABS_Contract_FundPlan { get; set; }
     	[DataMember]
         public virtual SYS_Organization SYS_Organization { get; set; }
     	[DataMember]
@@ -85,15 +86,5 @@ namespace Insight.WS.Server.Common.ORM
         public virtual MDG_Employee MDG_Employee { get; set; }
     	[DataMember]
         public virtual MasterData MasterData1 { get; set; }
-    	[DataMember]
-        public virtual BIZ_Borrowing_Apply BIZ_Borrowing_Apply { get; set; }
-    	[DataMember]
-        public virtual BIZ_Reimburse_Apply BIZ_Reimburse_Apply { get; set; }
-    	[DataMember]
-        public virtual BIZ_Travel_Apply BIZ_Travel_Apply { get; set; }
-    	[DataMember]
-        public virtual ICollection<ABS_Contract_Subjects> ABS_Contract_Subjects { get; set; }
-    	[DataMember]
-        public virtual ICollection<ABS_Contract_FundPlan> ABS_Contract_FundPlan { get; set; }
     }
 }

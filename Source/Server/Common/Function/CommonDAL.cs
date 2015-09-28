@@ -14,6 +14,107 @@ namespace Insight.WS.Server.Common
         #region 公共数据接口
 
         /// <summary>
+        /// 获取用户登录结果
+        /// </summary>
+        /// <param name="obj">Session对象实体</param>
+        /// <returns>Session对象实体</returns>
+        public static Session UserLogin(Session obj)
+        {
+            if (obj == null) return null;
+
+            if (OnlineManage.Sessions.Count >= OnlineManage.MaxAuthorized)
+            {
+                obj.LoginStatus = LoginResult.Unauthorized;
+                return obj;
+            }
+
+            var isSafe = false;
+            var pw = obj.Signature;
+            var us = OnlineManage.Sessions.Find(s => s.LoginName == obj.LoginName);
+            if (us == null)
+            {
+                var user = GetUser(obj.LoginName);
+                if (user == null)
+                {
+                    obj.LoginStatus = LoginResult.NotExist;
+                    return obj;
+                }
+
+                obj.ID = OnlineManage.Sessions.Count;
+                obj.OpenId = user.OpenId;
+                obj.UserId = user.ID;
+                obj.UserName = user.Name;
+                obj.Signature = user.Password;
+                obj.FailureCount = 0;
+                obj.Validity = user.Validity;
+                obj.Type = user.Type;
+
+                OnlineManage.Sessions.Add(obj);
+                OnlineManage.SafeMachine.Add(null);
+                us = OnlineManage.Sessions[obj.ID];
+            }
+            else
+            {
+                isSafe = obj.MachineId == OnlineManage.SafeMachine[us.ID];
+                if (us.SessionId == Guid.Empty)
+                {
+                    us.SessionId = obj.SessionId;
+                    us.MachineId = obj.MachineId;
+                    us.LoginStatus = LoginResult.Success;
+                }
+                else
+                {
+                    us.LoginStatus = us.MachineId != obj.MachineId ? LoginResult.Online : LoginResult.Multiple;
+                }
+            }
+
+            // 10分钟后重置连续失败次数
+            var time = DateTime.Now - us.LastConnect;
+            if (us.FailureCount > 0 && time.TotalMinutes > 10)
+            {
+                us.FailureCount = 0;
+            }
+
+            if (!us.Validity)
+            {
+                us.LoginStatus = LoginResult.Banned;
+            }
+            else if (us.Signature != pw || (us.FailureCount > 4 && !isSafe))
+            {
+                us.FailureCount += 1;
+                us.LoginStatus = LoginResult.Failure;
+                if (us.MachineId == obj.MachineId)
+                {
+                    us.SessionId = Guid.Empty;
+                }
+            }
+            else
+            {
+                OnlineManage.SafeMachine[us.ID] = us.MachineId;
+            }
+
+            us.LastConnect = DateTime.Now;
+            return us;
+        }
+
+        /// <summary>
+        /// 修改指定用户的密码
+        /// </summary>
+        /// <param name="us">Session对象实体</param>
+        /// <param name="pw">新密码Hash值</param>
+        /// <returns>bool 是否修改成功</returns>
+        public static bool UpdataPassword(Session us, string pw)
+        {
+            if (!OnlineManage.Verification(us)) return false;
+
+            var sql = $"update SYS_User set Password = '{pw}' where ID = '{us.UserId}' ";
+            if (SqlHelper.SqlNonQuery(sql) <= 0) return false;
+
+            OnlineManage.Sessions[us.ID].Signature = pw;
+            return true;
+        }
+
+        /// <summary>
         /// 根据用户登录名获取用户对象实体
         /// </summary>
         /// <param name="str">用户登录名</param>
@@ -24,6 +125,46 @@ namespace Insight.WS.Server.Common
             {
                 return context.SYS_User.SingleOrDefault(s => s.LoginName == str);
             }
+        }
+
+        /// <summary>
+        /// 写入会员数据
+        /// </summary>
+        /// <param name="sourec">来源</param>
+        /// <param name="name">姓名</param>
+        /// <param name="ln">登录名</param>
+        /// <param name="pw">登陆密码</param>
+        /// <param name="id">身份证号</param>
+        /// <param name="openid">OpenId</param>
+        /// <returns>bool 是否成功</returns>
+        public static bool AddMember(string sourec, string name, string ln, string pw, string id, string openid)
+        {
+            Guid? catId;
+            using (var context = new WSEntities())
+            {
+                catId = context.BASE_Category.FirstOrDefault(c => c.Alias == sourec)?.ID;
+            }
+            
+            // 插入主数据索引
+            var md = new MasterData { CategoryId = catId, Code = id, Name = name, Alias = ln };
+            var cmds = new List<SqlCommand> { MasterDataDAL.AddMasterData(md) };
+
+            // 插入外部用户
+            const string sql = "insert SYS_User (ID, Name, LoginName, Password, OpenId, Type, CreatorUserId) select @ID, @Name, @LoginName, @Password, @OpenId, @Type, @CreatorUserId";
+            var parm = new[]
+            {
+                new SqlParameter("@ID", SqlDbType.UniqueIdentifier) {Value = Guid.Empty},
+                new SqlParameter("@Name", name),
+                new SqlParameter("@LoginName", ln),
+                new SqlParameter("@Password", pw),
+                new SqlParameter("@OpenId", openid),
+                new SqlParameter("@Type", SqlDbType.Int) {Value = 0},
+                new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = Guid.Empty},
+                new SqlParameter("@Read", SqlDbType.Int) {Value = 0}
+            };
+            cmds.Add(SqlHelper.MakeCommand(sql, parm));
+
+            return SqlHelper.SqlExecute(cmds);
         }
 
         /// <summary>
@@ -56,11 +197,11 @@ namespace Insight.WS.Server.Common
         /// 获取可用服务列表
         /// </summary>
         /// <returns></returns>
-        public static IEnumerable<SYS_Interface> GetServiceList()
+        public static IEnumerable<SYS_Interface> GetServiceList(string type)
         {
             using (var context = new WSEntities())
             {
-                return context.SYS_Interface.ToList();
+                return context.SYS_Interface.Where(i => i.Binding == type).ToList();
             }
         }
 
@@ -84,7 +225,7 @@ namespace Insight.WS.Server.Common
             sql.AppendFormat("update D set [Index] = D.[Index] {0} 1 from {1} D ", (oldIndex < newIndex ? "-" : "+"), dataTable);
             sql.Append(dataTable.Substring(0, 3) == "MDG" ? "join MasterData M on M.ID = D.MID " : "");
             sql.AppendFormat("where {0} {1} ", (isCategoryId ? "CategoryId" : "ParentId"), (parentId == null ? "is null" : "= '" + parentId + "'"));
-            sql.Append(dataTable == "BASE_Category" ? string.Format("and ModuleId = '{0}' ", moduleId) : "");
+            sql.Append(dataTable == "BASE_Category" ? $"and ModuleId = '{moduleId}' " : "");
             sql.AppendFormat("and [Index] {0} {1} ", (oldIndex < newIndex ? ">" : "<"), oldIndex);
             sql.AppendFormat("and [Index] {0} {1}", (oldIndex < newIndex ? "<=" : ">="), newIndex);
             return sql.ToString();
@@ -102,7 +243,7 @@ namespace Insight.WS.Server.Common
         {
             var sql = "insert ImageData (CategoryId, ImageType, Code, Name, Expand, SecrecyDegree, Pages, Size, Path, Image, Description, CreatorDeptId, CreatorUserId) ";
             sql += "select @CategoryId, @ImageType, @Code, @Name, @Expand, @SecrecyDegree, @Pages, @Size, @Path, @Image, @Description, @CreatorDeptId, @CreatorUserId select @ID = ID from ImageData where SN = SCOPE_IDENTITY() ";
-            sql += string.Format("insert {0} ({1}, ImageId) select '{2}', @ID", tab, col, bid);
+            sql += $"insert {tab} ({col}, ImageId) select '{bid}', @ID";
             return imgs.Select(img => new[]
             {
                 new SqlParameter("@CategoryId", SqlDbType.UniqueIdentifier) {Value = img.CategoryId},
@@ -121,6 +262,73 @@ namespace Insight.WS.Server.Common
                 new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = img.CreatorUserId}, 
                 new SqlParameter("@Id", SqlDbType.UniqueIdentifier) {Value = bid}
             }).Select(parm => SqlHelper.MakeCommand(sql, parm)).ToList();
+        }
+
+        /// <summary>
+        /// 验证验证码是否正确
+        /// </summary>
+        /// <param name="number">手机号</param>
+        /// <param name="code">验证码</param>
+        /// <param name="timeout">超时分钟数（默认30分钟）</param>
+        /// <returns>bool 是否正确</returns>
+        public static bool CodeVerify(string number, string code, int timeout = 30)
+        {
+            using (var context = new WSEntities())
+            {
+                var vr = context.SYS_Verify_Record.Where(v => !v.Verified && v.Mobile == number && v.Code == code)
+                         .OrderByDescending(v => v.SN)
+                         .FirstOrDefault();
+                if (vr == null) return false;
+
+                var time = DateTime.Now - vr.CreateTime;
+                if (time.TotalMinutes > timeout) return false;
+
+                vr.Verified = true;
+                vr.VerifyTime = DateTime.Now;
+                context.SaveChanges();
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// 生成验证码
+        /// </summary>
+        /// <param name="sdst">手机号</param>
+        /// <param name="type">验证码类型</param>
+        /// <param name="time">有效时间（分钟）</param>
+        /// <returns>string 验证码</returns>
+        public static string GetVerifyCode(string sdst, int type, int time = 30)
+        {
+            var random = new Random(Environment.TickCount);
+            var code = random.Next(100000, 999999).ToString();
+            var smsg = $"您的验证码是：{code}，该验证码{time}分钟内有效！";
+            switch (type)
+            {
+                case 1: // 注册新用户
+                    smsg += "欢迎使用信分宝，开启信用新生活。么么哒";
+                    break;
+
+                case 2: // 重置登录密码
+                    smsg += "亲爱的用户，您正在重置登录密码！如非本人操作，请告知客服";
+                    break;
+
+                case 3: // 重置支付密码
+                    smsg += "亲爱的用户，您正在重置支付密码！如非本人操作，请立即修改登录密码";
+                    break;
+            }
+
+            // 发送短信
+            Util.SendMessage(sdst, smsg);
+
+            // 保存验证码
+            const string sql = "insert SYS_Verify_Record (Type, Mobile, Code) select @Type, @Mobile, @Code";
+            var parm = new[]
+            {
+                new SqlParameter("@Type", type),
+                new SqlParameter("@Mobile", sdst),
+                new SqlParameter("@Code", code)
+            };
+            return SqlHelper.SqlNonQuery(sql, parm) > 0 ? code : null;
         }
 
         #endregion

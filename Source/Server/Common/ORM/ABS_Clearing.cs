@@ -14,23 +14,23 @@ namespace Insight.WS.Server.Common.ORM
     using System.Collections.Generic;
     
     [DataContract(IsReference = true)]
+    [KnownType(typeof(ABS_Advance_Record))]
+    [KnownType(typeof(ABS_Clearing_Check))]
+    [KnownType(typeof(ABS_Clearing_Item))]
     [KnownType(typeof(ABS_Clearing_Attachs))]
     [KnownType(typeof(SYS_Organization))]
     [KnownType(typeof(SYS_User))]
     [KnownType(typeof(MasterData))]
-    [KnownType(typeof(BIZ_Refund_Apply))]
-    [KnownType(typeof(ABS_Advance_Record))]
-    [KnownType(typeof(ABS_Clearing_Item))]
-    [KnownType(typeof(ABS_Clearing_Check))]
+    [KnownType(typeof(ABS_Contract_FundPerform))]
     
     public partial class ABS_Clearing
     {
         public ABS_Clearing()
         {
-            this.ABS_Clearing_Attachs = new HashSet<ABS_Clearing_Attachs>();
-            this.BIZ_Refund_Apply = new HashSet<BIZ_Refund_Apply>();
             this.ABS_Advance_Record = new HashSet<ABS_Advance_Record>();
             this.ABS_Clearing_Item = new HashSet<ABS_Clearing_Item>();
+            this.ABS_Clearing_Attachs = new HashSet<ABS_Clearing_Attachs>();
+            this.ABS_Contract_FundPerform = new HashSet<ABS_Contract_FundPerform>();
         }
     
     	[DataMember]
@@ -58,12 +58,18 @@ namespace Insight.WS.Server.Common.ORM
     	[DataMember]
         public bool Validity { get; set; }
     	[DataMember]
-        public System.Guid CreatorDeptId { get; set; }
+        public Nullable<System.Guid> CreatorDeptId { get; set; }
     	[DataMember]
         public System.Guid CreatorUserId { get; set; }
     	[DataMember]
         public System.DateTime CreateTime { get; set; }
     
+    	[DataMember]
+        public virtual ICollection<ABS_Advance_Record> ABS_Advance_Record { get; set; }
+    	[DataMember]
+        public virtual ABS_Clearing_Check ABS_Clearing_Check { get; set; }
+    	[DataMember]
+        public virtual ICollection<ABS_Clearing_Item> ABS_Clearing_Item { get; set; }
     	[DataMember]
         public virtual ICollection<ABS_Clearing_Attachs> ABS_Clearing_Attachs { get; set; }
     	[DataMember]
@@ -73,12 +79,6 @@ namespace Insight.WS.Server.Common.ORM
     	[DataMember]
         public virtual MasterData MasterData { get; set; }
     	[DataMember]
-        public virtual ICollection<BIZ_Refund_Apply> BIZ_Refund_Apply { get; set; }
-    	[DataMember]
-        public virtual ICollection<ABS_Advance_Record> ABS_Advance_Record { get; set; }
-    	[DataMember]
-        public virtual ICollection<ABS_Clearing_Item> ABS_Clearing_Item { get; set; }
-    	[DataMember]
-        public virtual ABS_Clearing_Check ABS_Clearing_Check { get; set; }
+        public virtual ICollection<ABS_Contract_FundPerform> ABS_Contract_FundPerform { get; set; }
     }
 }

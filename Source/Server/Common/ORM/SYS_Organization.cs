@@ -14,10 +14,13 @@ namespace Insight.WS.Server.Common.ORM
     using System.Collections.Generic;
     
     [DataContract(IsReference = true)]
+    [KnownType(typeof(ABS_Advance))]
     [KnownType(typeof(ABS_Clearing))]
+    [KnownType(typeof(ABS_Clearing_Check))]
     [KnownType(typeof(ABS_Contract))]
     [KnownType(typeof(ABS_Delivery))]
     [KnownType(typeof(ABS_StockCapital))]
+    [KnownType(typeof(ABS_Storage_Location))]
     [KnownType(typeof(BASE_Category))]
     [KnownType(typeof(ImageData))]
     [KnownType(typeof(MDG_Contact))]
@@ -43,19 +46,19 @@ namespace Insight.WS.Server.Common.ORM
     [KnownType(typeof(SYS_Report_Entity))]
     [KnownType(typeof(SYS_Role_Title))]
     [KnownType(typeof(SYS_RolePerm_DataAbs))]
-    [KnownType(typeof(ABS_Advance))]
-    [KnownType(typeof(ABS_Clearing_Check))]
-    [KnownType(typeof(ABS_Storage_Location))]
     
     public partial class SYS_Organization
     {
         public SYS_Organization()
         {
+            this.ABS_Advance = new HashSet<ABS_Advance>();
             this.ABS_Clearing = new HashSet<ABS_Clearing>();
+            this.ABS_Clearing_Check = new HashSet<ABS_Clearing_Check>();
             this.ABS_Contract = new HashSet<ABS_Contract>();
             this.ABS_Contract1 = new HashSet<ABS_Contract>();
             this.ABS_Delivery = new HashSet<ABS_Delivery>();
             this.ABS_StockCapital = new HashSet<ABS_StockCapital>();
+            this.ABS_Storage_Location = new HashSet<ABS_Storage_Location>();
             this.BASE_Category = new HashSet<BASE_Category>();
             this.ImageData = new HashSet<ImageData>();
             this.MDG_Contact = new HashSet<MDG_Contact>();
@@ -81,9 +84,6 @@ namespace Insight.WS.Server.Common.ORM
             this.SYS_Report_Entity = new HashSet<SYS_Report_Entity>();
             this.SYS_Role_Title = new HashSet<SYS_Role_Title>();
             this.SYS_RolePerm_DataAbs = new HashSet<SYS_RolePerm_DataAbs>();
-            this.ABS_Advance = new HashSet<ABS_Advance>();
-            this.ABS_Clearing_Check = new HashSet<ABS_Clearing_Check>();
-            this.ABS_Storage_Location = new HashSet<ABS_Storage_Location>();
         }
     
     	[DataMember]
@@ -114,7 +114,11 @@ namespace Insight.WS.Server.Common.ORM
         public System.DateTime CreateTime { get; set; }
     
     	[DataMember]
+        public virtual ICollection<ABS_Advance> ABS_Advance { get; set; }
+    	[DataMember]
         public virtual ICollection<ABS_Clearing> ABS_Clearing { get; set; }
+    	[DataMember]
+        public virtual ICollection<ABS_Clearing_Check> ABS_Clearing_Check { get; set; }
     	[DataMember]
         public virtual ICollection<ABS_Contract> ABS_Contract { get; set; }
     	[DataMember]
@@ -123,6 +127,8 @@ namespace Insight.WS.Server.Common.ORM
         public virtual ICollection<ABS_Delivery> ABS_Delivery { get; set; }
     	[DataMember]
         public virtual ICollection<ABS_StockCapital> ABS_StockCapital { get; set; }
+    	[DataMember]
+        public virtual ICollection<ABS_Storage_Location> ABS_Storage_Location { get; set; }
     	[DataMember]
         public virtual ICollection<BASE_Category> BASE_Category { get; set; }
     	[DataMember]
@@ -179,11 +185,5 @@ namespace Insight.WS.Server.Common.ORM
         public virtual ICollection<SYS_Role_Title> SYS_Role_Title { get; set; }
     	[DataMember]
         public virtual ICollection<SYS_RolePerm_DataAbs> SYS_RolePerm_DataAbs { get; set; }
-    	[DataMember]
-        public virtual ICollection<ABS_Advance> ABS_Advance { get; set; }
-    	[DataMember]
-        public virtual ICollection<ABS_Clearing_Check> ABS_Clearing_Check { get; set; }
-    	[DataMember]
-        public virtual ICollection<ABS_Storage_Location> ABS_Storage_Location { get; set; }
     }
 }

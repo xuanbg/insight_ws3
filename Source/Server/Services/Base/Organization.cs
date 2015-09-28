@@ -226,7 +226,7 @@ namespace Insight.WS.Service
 
             var cmds = new List<SqlCommand>();
             var obj = GetOrg(us, id);
-            var sql = string.Format("Delete from SYS_Organization where ID = '{0}'", id);
+            var sql = $"Delete from SYS_Organization where ID = '{id}'";
             cmds.Add(SqlHelper.MakeCommand(sql));
             cmds.Add(SqlHelper.MakeCommand(CommonDAL.ChangeIndex("SYS_Organization", obj.Index, 99999, obj.ParentId, false)));
             return SqlHelper.SqlExecute(cmds);

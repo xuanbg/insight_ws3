@@ -119,7 +119,7 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return false;
 
-            var sql = string.Format("delete SYS_Report_Rules where ID = '{0}'", id);
+            var sql = $"delete SYS_Report_Rules where ID = '{id}'";
             return SqlHelper.SqlNonQuery(sql) > 0;
         }
 

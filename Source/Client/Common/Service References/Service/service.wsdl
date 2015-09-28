@@ -70,6 +70,12 @@
   <wsdl:message name="ICommons_GetObjectCount_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetObjectCountResponse" />
   </wsdl:message>
+  <wsdl:message name="ICommons_GetServerList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetServerList" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_GetServerList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetServerListResponse" />
+  </wsdl:message>
   <wsdl:message name="ICommons_DelOnlineUser_InputMessage">
     <wsdl:part name="parameters" element="tns:DelOnlineUser" />
   </wsdl:message>
@@ -325,6 +331,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ICommons/GetObjectCount" message="tns:ICommons_GetObjectCount_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICommons/GetObjectCountResponse" message="tns:ICommons_GetObjectCount_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetServerList">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/GetServerList" message="tns:ICommons_GetServerList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/GetServerListResponse" message="tns:ICommons_GetServerList_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="DelOnlineUser">
       <wsdl:input wsaw:Action="http://tempuri.org/ICommons/DelOnlineUser" message="tns:ICommons_DelOnlineUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICommons/DelOnlineUserResponse" message="tns:ICommons_DelOnlineUser_OutputMessage" />
@@ -543,6 +553,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetObjectCount">
       <soap12:operation soapAction="http://tempuri.org/ICommons/GetObjectCount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetServerList">
+      <soap12:operation soapAction="http://tempuri.org/ICommons/GetServerList" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

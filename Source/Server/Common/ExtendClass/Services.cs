@@ -19,90 +19,97 @@ namespace Insight.WS.Server.Common
         #region 成员属性
 
         /// <summary>
-        /// 服务绑定
-        /// </summary>
-        public dynamic Binding { get; set; }
-
-        /// <summary>
         /// 服务基地址
         /// </summary>
         public Uri BaseAddress { get; set; }
 
         /// <summary>
+        /// 服务绑定
+        /// </summary>
+        public dynamic Binding { get; set; }
+
+        /// <summary>
+        /// 服务绑定
+        /// </summary>
+        public dynamic ExchangeBindings { get; set; }
+
+        /// <summary>
         /// 最大接收消息大小（字节）
         /// </summary>
-        public int MaxReceivedMessageSize { get; set; }
+        public int MaxReceivedMessageSize { get; } = 1073741824;
 
         /// <summary>
         /// 最大数组长度
         /// </summary>
-        public int MaxArrayLength { get; set; }
+        public int MaxArrayLength { get; } = 67108864;
 
         /// <summary>
         /// 最大字符串长度
         /// </summary>
-        public int MaxStringContentLength { get; set; }
+        public int MaxStringContentLength { get; } = 67108864;
 
         /// <summary>
         /// 发送超时（秒）
         /// </summary>
-        public int SendTimeout { get; set; }
+        public int SendTimeout { get; } = 600;
 
         /// <summary>
         /// 接收超时（秒）
         /// </summary>
-        public int ReceiveTimeout { get; set; }
+        public int ReceiveTimeout { get; } = 600;
 
         #endregion
 
         #region 构造函数
-
-        /// <summary>
-        /// 构造Services对象
-        /// </summary>
-        public Services()
-        {
-
-        }
-
-        /// <summary>
-        /// 构造Services对象（使用自定义服务绑定）
-        /// </summary>
-        /// <param name="IsCompres">是否压缩传输</param>
-        /// <param name="MaxReceivedMessage">最大接收消息大小（默认2G字节）</param>
-        /// <param name="MaxArray">最大数组长度（默认64K）</param>
-        /// <param name="MaxStringContent">最大字符串长度（默认64M）</param>
-        /// <param name="Send">发送超时（默认600秒）</param>
-        /// <param name="Receive">接收超时（默认600秒）</param>
-        public Services(bool IsCompres, int MaxReceivedMessage = 1073741824, int MaxArray = 67108864, int MaxStringContent = 67108864, int Send = 600, int Receive = 600)
-        {
-            MaxReceivedMessageSize = MaxReceivedMessage;
-            MaxArrayLength = MaxArray;
-            MaxStringContentLength = MaxStringContent;
-            SendTimeout = Send;
-            ReceiveTimeout = Receive;
-
-            InitCustomBinding(IsCompres);
-        }
 
         #endregion
 
         #region 公共方法
 
         /// <summary>
+        /// 初始化自定义服务绑定
+        /// </summary>
+        /// <param name="isCompres"></param>
+        public void InitTcpBinding(bool isCompres)
+        {
+            var encoder = new BinaryMessageEncodingBindingElement { ReaderQuotas = { MaxArrayLength = MaxArrayLength, MaxStringContentLength = MaxStringContentLength } };
+            var transport = new TcpTransportBindingElement { MaxReceivedMessageSize = MaxReceivedMessageSize, TransferMode = TransferMode.Streamed };
+            Binding = new CustomBinding { SendTimeout = TimeSpan.FromSeconds(SendTimeout), ReceiveTimeout = TimeSpan.FromSeconds(ReceiveTimeout) };
+            ExchangeBindings = MetadataExchangeBindings.CreateMexTcpBinding();
+            if (isCompres)
+            {
+                var gZipEncode = new GZipMessageEncodingBindingElement(encoder);
+                Binding.Elements.AddRange(gZipEncode, transport);
+            }
+            else
+            {
+                Binding.Elements.AddRange(encoder, transport);
+            }
+        }
+
+        /// <summary>
+        /// 初始化基本HTTP服务绑定
+        /// </summary>
+        public void InitHttpBinding()
+        {
+            Binding = new BasicHttpBinding();
+            ExchangeBindings = MetadataExchangeBindings.CreateMexHttpBinding();
+        }
+
+        /// <summary>
         /// 启动服务主机
         /// </summary>
-        /// <param name="ServiceList">服务定义对象实体集合</param>
-        /// <param name="DevelopMode">是否开发模式</param>
+        /// <param name="type">Binding类型</param>
+        /// <param name="develop">是否开发模式</param>
         /// <returns>ServiceHost List 已启动服务主机集合</returns>
-        public List<ServiceHost> StartService(IEnumerable<SYS_Interface> ServiceList, bool DevelopMode)
+        public List<ServiceHost> StartService(string type, bool develop)
         {
+            var tcpService = CommonDAL.GetServiceList(type);
             var hosts = new List<ServiceHost>();
-            foreach (var td in from serv in ServiceList 
-                               let path = string.Format("{0}\\{1}\\{2}.dll", Application.StartupPath, serv.Location, serv.Name)
-                               where File.Exists(path) 
-                               select new Thread(() => hosts.Add(OpenHost(path, serv.Name, serv.Class, serv.Interface, DevelopMode))))
+            foreach (var host in tcpService.Select(serv => CreateHost(serv, develop)).Where(host => host != null))
             {
+                hosts.Add(host);
+                var td = new Thread(() => host.Open());
                 td.Start();
             }
             return hosts;
@@ -119,8 +126,18 @@ namespace Insight.WS.Server.Common
         /// <returns>ServiceHost 服务主机</returns>
         public ServiceHost StartService(string Path, string Name, string ClassName, string Interface, bool DevelopMode)
         {
-            var path = Application.StartupPath + string.Format("\\{0}\\{1}.dll", Path, Name);
-            return !File.Exists(path) ? null : OpenHost(path, Name, ClassName, Interface, DevelopMode);
+            var servInfo = new SYS_Interface
+            {
+                Name = Name,
+                Class = ClassName,
+                Interface = Interface,
+                Location = Path
+            };
+            var host = CreateHost(servInfo, DevelopMode);
+            if (host == null) return null;
+
+            host.Open();
+            return host;
         }
 
         #endregion
@@ -128,48 +145,42 @@ namespace Insight.WS.Server.Common
         #region 私有方法
 
         /// <summary>
-        /// 初始化自定义服务绑定
+        /// 创建WCF服务主机
         /// </summary>
-        /// <param name="IsCompres">是否压缩传输</param>
-        private void InitCustomBinding(bool IsCompres)
-        {
-            // 初始化WCF参数
-            var encoder = new BinaryMessageEncodingBindingElement { ReaderQuotas = { MaxArrayLength = MaxArrayLength, MaxStringContentLength = MaxStringContentLength } };
-            var transport = new TcpTransportBindingElement { MaxReceivedMessageSize = MaxReceivedMessageSize, TransferMode = TransferMode.Streamed };
-            Binding = new CustomBinding { SendTimeout = TimeSpan.FromSeconds(SendTimeout), ReceiveTimeout = TimeSpan.FromSeconds(ReceiveTimeout) };
-            if (IsCompres)
-            {
-                var gZipEncode = new GZipMessageEncodingBindingElement(encoder);
-                Binding.Elements.AddRange(gZipEncode, transport);
-            }
-            else
-            {
-                Binding.Elements.AddRange(encoder, transport);
-            }
-        }
-        
-        /// <summary>
-        /// 创建并打开服务主机
-        /// </summary>
-        /// <param name="Path">文件绝对路径</param>
-        /// <param name="Name">主机名</param>
-        /// <param name="ClassName">类名</param>
-        /// <param name="Interface">接口</param>
+        /// <param name="servinfo">服务信息</param>
         /// <param name="DevelopMode">是否开发模式</param>
-        /// <returns>ServiceHost 服务主机</returns>
-        private ServiceHost OpenHost(string Path, string Name, string ClassName, string Interface, bool DevelopMode)
+        /// <returns>ServiceHost WCF服务主机</returns>
+        private ServiceHost CreateHost(SYS_Interface servinfo, bool DevelopMode)
         {
-            var asm = Assembly.LoadFrom(Path);
-            var host = new ServiceHost(asm.GetType(ClassName), BaseAddress);
-            host.AddServiceEndpoint(asm.GetType(Interface), Binding, Name);
-            if (DevelopMode)
-            {
-                host.Description.Behaviors.Add(new ServiceMetadataBehavior());
-                host.AddServiceEndpoint(typeof(IMetadataExchange), MetadataExchangeBindings.CreateMexTcpBinding(), Name + "/mex");
-            }
+            string path = $"{Application.StartupPath}\\{servinfo.Location}\\{servinfo.Name}.dll";
+            if (!File.Exists(path)) return null;
 
-            host.Open();
-            return host;
+            var asm = Assembly.LoadFrom(path);
+            try
+            {
+                var host = new ServiceHost(asm.GetType(servinfo.Class), BaseAddress);
+                host.AddServiceEndpoint(asm.GetType(servinfo.Interface), Binding, servinfo.Name);
+
+                var behavior = new ServiceMetadataBehavior();
+                if (servinfo.Binding == "HTTP")
+                {
+                    behavior.HttpGetEnabled = true;
+                    behavior.HttpGetUrl = new Uri(BaseAddress, servinfo.Name + "/mex");
+                    host.Description.Behaviors.Add(behavior);
+                }
+                else if (DevelopMode)
+                {
+                    host.Description.Behaviors.Add(behavior);
+                    host.AddServiceEndpoint(typeof (IMetadataExchange), ExchangeBindings, servinfo.Name + "/mex");
+                }
+
+                return host;
+            }
+            catch (Exception ex)
+            {
+                Util.LogToEvent(ex.ToString());
+                return null;
+            }
         }
 
         #endregion

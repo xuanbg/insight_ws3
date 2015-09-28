@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
+﻿using System.Data;
 using System.Net;
 using Insight.WS.Server.Common;
 
@@ -12,8 +7,6 @@ namespace Insight.WS.Service
     public class Login : ILogin
     {
 
-        private string _RootPath;
-
         /// <summary>
         /// 根据用户登录名获取可登录部门列表
         /// </summary>
@@ -21,7 +14,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 可登录部门列表</returns>
         public DataTable GetDeptList(string loginName)
         {
-            var sql = string.Format("select * from dbo.Get_LoginDept('{0}')", loginName);
+            var sql = $"select * from dbo.Get_LoginDept('{loginName}')";
             return SqlHelper.SqlQuery(sql);
         }
 
@@ -32,94 +25,7 @@ namespace Insight.WS.Service
         /// <returns>Session对象实体</returns>
         public Session UserLogin(Session obj)
         {
-            if (obj == null) return null;
-
-            if (OnlineManage.Sessions.Count >= OnlineManage.MaxAuthorized)
-            {
-                obj.LoginStatus = LoginResult.Unauthorized;
-                return obj;
-            }
-
-            var isSafe = true;
-            var pw = obj.Signature;
-            var us = OnlineManage.Sessions.Find(s => s.LoginName == obj.LoginName);
-            if (us == null)
-            {
-                var user = CommonDAL.GetUser(obj.LoginName);
-                if (user == null)
-                {
-                    obj.LoginStatus = LoginResult.NotExist;
-                    return obj;
-                }
-
-                obj.ID = OnlineManage.Sessions.Count;
-                obj.UserId = user.ID;
-                obj.UserName = user.Name;
-                obj.Signature = user.Password;
-                obj.FailureCount = 0;
-                obj.Validity = user.Validity;
-
-                OnlineManage.Sessions.Add(obj);
-                OnlineManage.SafeMachine.Add(null);
-                us = OnlineManage.Sessions[obj.ID];
-            }
-            else
-            {
-                if (us.FailureCount > 4)
-                {
-                    isSafe = us.MachineId != obj.MachineId && obj.MachineId == OnlineManage.SafeMachine[us.ID];
-                }
-
-                if (us.SessionId == Guid.Empty)
-                {
-                    us.SessionId = obj.SessionId;
-                    us.MachineId = obj.MachineId;
-                    us.LoginStatus = LoginResult.Success;
-                }
-                else
-                {
-                    us.LoginStatus = us.MachineId != obj.MachineId ? LoginResult.Online : LoginResult.Multiple;
-                }
-            }
-
-            // 10分钟后重置连续失败次数
-            var time = DateTime.Now - us.LastConnect;
-            if (us.FailureCount > 0 && time.TotalMinutes > 10)
-            {
-                us.FailureCount = 0;
-            }
-
-            if (!us.Validity)
-            {
-                us.LoginStatus = LoginResult.Banned;
-            }
-            else if (us.Signature != pw || !isSafe)
-            {
-                us.FailureCount += 1;
-                us.LoginStatus = LoginResult.Failure;
-                if (us.MachineId == obj.MachineId)
-                {
-                    us.SessionId = Guid.Empty;
-                }
-            }
-            else
-            {
-                OnlineManage.SafeMachine[us.ID] = us.MachineId;
-            }
-
-            us.LastConnect = DateTime.Now;
-            return us;
-        }
-
-        /// <summary>
-        /// 获取客户端文件列表
-        /// </summary>
-        /// <returns>FileAttribute List 文件列表</returns>
-        public List<UpdateFile> GetServerList()
-        {
-            _RootPath = System.Windows.Forms.Application.StartupPath + "\\Client";
-            var list = new List<UpdateFile>();
-            return GetLocalList(_RootPath, list);
+            return CommonDAL.UserLogin(obj);
         }
 
         /// <summary>
@@ -132,36 +38,9 @@ namespace Insight.WS.Service
             var webRes = WebRequest.Create(file.FullPath).GetResponse();
             var stream = webRes.GetResponseStream();
             file.FileBytes = new byte[webRes.ContentLength];
-            stream.Read(file.FileBytes, 0, file.FileBytes.Length);
-            stream.Close();
+            stream?.Read(file.FileBytes, 0, file.FileBytes.Length);
+            stream?.Close();
             return file;
-        }
-
-        /// <summary>
-        /// 获取客户端文件列表
-        /// </summary>
-        /// <param name="dir">客户端文件路径</param>
-        /// <param name="list">文件列表</param>
-        /// <returns>FileAttribute List 文件列表</returns>
-        private List<UpdateFile> GetLocalList(string dir, List<UpdateFile> list)
-        {
-            var dirInfo = new DirectoryInfo(dir);
-            list.AddRange(from file in dirInfo.GetFiles()
-                          where ".dll.exe.frl".IndexOf(file.Extension) >= 0
-                          select new UpdateFile
-                          {
-                              Name = file.Name,
-                              Path = file.DirectoryName.Replace(_RootPath, ""),
-                              FullPath = file.FullName, 
-                              Version = FileVersionInfo.GetVersionInfo(file.FullName).FileVersion
-                          });
-
-            var dirs = Directory.GetDirectories(dir);
-            foreach (var path in dirs)
-            {
-                GetLocalList(path, list);
-            }
-            return list;
         }
 
     }

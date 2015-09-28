@@ -242,7 +242,7 @@ namespace Insight.WS.Client.Business.Settlement
             // 
             // gdvCustomer
             // 
-            this.gdvCustomer.FocusRectStyle = DrawFocusRectStyle.RowFocus;
+            this.gdvCustomer.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             this.gdvCustomer.Name = "gdvCustomer";
             this.gdvCustomer.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.gdvCustomer.OptionsView.ShowColumnHeaders = false;

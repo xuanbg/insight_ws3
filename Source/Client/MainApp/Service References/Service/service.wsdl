@@ -32,12 +32,6 @@
   <wsdl:message name="ILogin_UserLogin_OutputMessage">
     <wsdl:part name="parameters" element="tns:UserLoginResponse" />
   </wsdl:message>
-  <wsdl:message name="ILogin_GetServerList_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetServerList" />
-  </wsdl:message>
-  <wsdl:message name="ILogin_GetServerList_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetServerListResponse" />
-  </wsdl:message>
   <wsdl:message name="ILogin_GetFile_InputMessage">
     <wsdl:part name="parameters" element="tns:GetFile" />
   </wsdl:message>
@@ -52,10 +46,6 @@
     <wsdl:operation name="UserLogin">
       <wsdl:input wsaw:Action="http://tempuri.org/ILogin/UserLogin" message="tns:ILogin_UserLogin_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ILogin/UserLoginResponse" message="tns:ILogin_UserLogin_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="GetServerList">
-      <wsdl:input wsaw:Action="http://tempuri.org/ILogin/GetServerList" message="tns:ILogin_GetServerList_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ILogin/GetServerListResponse" message="tns:ILogin_GetServerList_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetFile">
       <wsdl:input wsaw:Action="http://tempuri.org/ILogin/GetFile" message="tns:ILogin_GetFile_InputMessage" />
@@ -77,15 +67,6 @@
     </wsdl:operation>
     <wsdl:operation name="UserLogin">
       <soap12:operation soapAction="http://tempuri.org/ILogin/UserLogin" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetServerList">
-      <soap12:operation soapAction="http://tempuri.org/ILogin/GetServerList" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

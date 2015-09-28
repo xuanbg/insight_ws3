@@ -15,22 +15,22 @@ namespace Insight.WS.Server.Common.ORM
     
     [DataContract(IsReference = true)]
     [KnownType(typeof(ABS_Clearing_Attachs))]
+    [KnownType(typeof(ABS_Clearing_Check))]
     [KnownType(typeof(ABS_Contract_Attachs))]
     [KnownType(typeof(ABS_Delivery_Attachs))]
     [KnownType(typeof(BASE_Category))]
     [KnownType(typeof(SYS_Organization))]
     [KnownType(typeof(SYS_User))]
     [KnownType(typeof(MDG_Dictionary))]
-    [KnownType(typeof(ABS_Clearing_Check))]
     
     public partial class ImageData
     {
         public ImageData()
         {
             this.ABS_Clearing_Attachs = new HashSet<ABS_Clearing_Attachs>();
+            this.ABS_Clearing_Check = new HashSet<ABS_Clearing_Check>();
             this.ABS_Contract_Attachs = new HashSet<ABS_Contract_Attachs>();
             this.ABS_Delivery_Attachs = new HashSet<ABS_Delivery_Attachs>();
-            this.ABS_Clearing_Check = new HashSet<ABS_Clearing_Check>();
         }
     
     	[DataMember]
@@ -71,6 +71,8 @@ namespace Insight.WS.Server.Common.ORM
     	[DataMember]
         public virtual ICollection<ABS_Clearing_Attachs> ABS_Clearing_Attachs { get; set; }
     	[DataMember]
+        public virtual ICollection<ABS_Clearing_Check> ABS_Clearing_Check { get; set; }
+    	[DataMember]
         public virtual ICollection<ABS_Contract_Attachs> ABS_Contract_Attachs { get; set; }
     	[DataMember]
         public virtual ICollection<ABS_Delivery_Attachs> ABS_Delivery_Attachs { get; set; }
@@ -82,7 +84,5 @@ namespace Insight.WS.Server.Common.ORM
         public virtual SYS_User SYS_User { get; set; }
     	[DataMember]
         public virtual MDG_Dictionary MDG_Dictionary { get; set; }
-    	[DataMember]
-        public virtual ICollection<ABS_Clearing_Check> ABS_Clearing_Check { get; set; }
     }
 }

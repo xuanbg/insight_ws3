@@ -5,7 +5,9 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Reflection;
+using System.Text;
 
 namespace Insight.WS.Server.Common
 {
@@ -14,45 +16,63 @@ namespace Insight.WS.Server.Common
     {
 
         /// <summary>
+        /// 发送短信
+        /// </summary>
+        /// <param name="number">手机号</param>
+        /// <param name="msg">消息内容</param>
+        public static void SendMessage(string number, string msg)
+        {
+            const string url = "http://116.255.238.184:8888/sms.aspx";
+            const string uid = "2066";
+            const string account = "10690xinfenbao";
+            const string password = "asd456";
+            const string signature = "【信分宝】";
+
+            var post = $"{url}?action=send&userid={uid}&account={account}&password={password}&mobile={number}&content={msg}{signature}&sendTime=&extno=";
+            HttpPost(post, "");
+        }
+
+        /// <summary>
+        /// 读取配置项的值
+        /// </summary>
+        /// <param name="key">配置项</param>
+        /// <returns>配置项的值</returns>
+        public static string GetAppSetting(string key)
+        {
+            return ConfigurationManager.AppSettings[key];
+        }
+
+        /// <summary>
         /// 保存图片到image文件夹，通过URL访问
         /// </summary>
         /// <param name="pic">图片字节流</param>
         /// <param name="catalog">分类</param>
-        /// <param name="name">文件名</param>
+        /// <param name="name">文件名（可选）</param>
         /// <returns>string 图片保存路径</returns>
-        public static string SaveImage(byte[] pic, string catalog, string name)
+        public static string SaveImage(byte[] pic, string catalog, string name = null)
         {
-            var local = ConfigurationManager.AppSettings["ImageLocal"];
-            var path = string.Format("{0}/{1}/", local, catalog);
-            if (!Directory.Exists(path))
+            var path = $"{GetAppSetting("ImageLocal")}\\{catalog}\\";
+            try
             {
-                Directory.CreateDirectory(path);
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+
+                if (name == null)
+                {
+                    var img = Image.FromStream(new MemoryStream(pic));
+                    name = $"{Guid.NewGuid()}.{GetImageExtension(img)}";
+                }
+
+                File.WriteAllBytes(path + name, pic);
+                return $"/{catalog}/{name}";
             }
-
-            File.WriteAllBytes(path + name, pic);
-            return string.Format("/Image/{0}/{1}", catalog, name);
-        }
-
-        /// <summary>
-        /// 保存图片到个人文件夹
-        /// </summary>
-        /// <param name="pic">图片字节流</param>
-        /// <param name="catalog">分类</param>
-        /// <param name="link">可否通过URL访问</param>
-        /// <returns>string 图片保存路径</returns>
-        public static string SaveImage(byte[] pic, string catalog, bool link = false)
-        {
-            var local = ConfigurationManager.AppSettings["ImageLocal"];
-            var path = string.Format("{0}/{1}/", local, catalog);
-            if (!Directory.Exists(path))
+            catch (Exception ex)
             {
-                Directory.CreateDirectory(path);
+                LogToEvent(ex.ToString());
+                return null;
             }
-
-            var img = Image.FromStream(new MemoryStream(pic));
-            var name = string.Format("{0}.{1}", Guid.NewGuid(), GetImageExtension(img));
-            File.WriteAllBytes(path + name, pic);
-            return string.Format("{0}/{1}/{2}", link ? "/Image" : "", catalog, name);
         }
 
         /// <summary>
@@ -89,10 +109,68 @@ namespace Insight.WS.Server.Common
         /// 将事件消息写入系统日志
         /// </summary>
         /// <param name="msg">Log消息</param>
-        /// <param name="type">Log类型</param>
-        public static void LogToEvent(string msg, EventLogEntryType type = EventLogEntryType.Error)
+        /// <param name="type">Log类型（默认Error）</param>
+        /// <param name="source">事件源（默认Insight Workstation 3 Service）</param>
+        public static void LogToEvent(string msg, EventLogEntryType type = EventLogEntryType.Error, string source = "Insight Workstation 3 Service")
         {
-            EventLog.WriteEntry("Insight Workstation 3 Service", msg, type);
+            EventLog.WriteEntry(source, msg, type);
+        }
+
+        /// <summary>
+        /// Post数据
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="postDataStr"></param>
+        /// <returns></returns>
+        public static string HttpPost(string url, string postDataStr)
+        {
+            var cookie = new CookieContainer();
+            var request = (HttpWebRequest)WebRequest.Create(url);
+            request.Method = "POST";
+            request.ContentType = "application/x-www-form-urlencoded";
+            request.ContentLength = Encoding.UTF8.GetByteCount(postDataStr);
+            request.CookieContainer = cookie;
+
+            var myStreamWriter = new StreamWriter(request.GetRequestStream());
+            myStreamWriter.Write(postDataStr);
+            myStreamWriter.Close();
+
+            var response = (HttpWebResponse)request.GetResponse();
+
+            response.Cookies = cookie.GetCookies(response.ResponseUri);
+            var myResponseStream = response.GetResponseStream();
+            if (myResponseStream == null) return null;
+
+            var myStreamReader = new StreamReader(myResponseStream, Encoding.GetEncoding("utf-8"));
+            var retString = myStreamReader.ReadToEnd();
+            myStreamReader.Close();
+            myResponseStream.Close();
+
+            return retString;
+        }
+
+        /// <summary>
+        /// Get数据
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="postDataStr"></param>
+        /// <returns></returns>
+        public static string HttpGet(string url, string postDataStr)
+        {
+            var request = (HttpWebRequest)WebRequest.Create(url + (postDataStr == "" ? "" : "?") + postDataStr);
+            request.Method = "GET";
+            request.ContentType = "text/html;charset=UTF-8";
+
+            var response = (HttpWebResponse)request.GetResponse();
+            var myResponseStream = response.GetResponseStream();
+            if (myResponseStream == null) return null;
+
+            var myStreamReader = new StreamReader(myResponseStream, Encoding.GetEncoding("utf-8"));
+            var retString = myStreamReader.ReadToEnd();
+            myStreamReader.Close();
+            myResponseStream.Close();
+
+            return retString;
         }
 
     }

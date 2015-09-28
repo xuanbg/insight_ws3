@@ -112,6 +112,13 @@ namespace Insight.WS.Service
         #region 其它接口
 
         /// <summary>
+        /// 获取客户端文件列表
+        /// </summary>
+        /// <returns>FileAttribute List 文件列表</returns>
+        [OperationContract]
+        List<UpdateFile> GetServerList();
+
+        /// <summary>
         /// 删除在线用户会话
         /// </summary>
         /// <param name="us">Session对象实体</param>

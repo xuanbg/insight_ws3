@@ -72,7 +72,7 @@ namespace Insight.WS.Service.Business
             sql += "join Get_PermData(@ModuleId, @UserId, @DeptId) P on P.OrgId = isnull(C.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = C.CreatorUserId group by C.ID) ";
             sql += "select C.ID, case when C.Validity = 1 then '正常' else '作废' end as 状态, case C.Direction when 1 then '入库' when 0 then '退库' else '出库' end as 类型, C.ReceiptCode as 单据号, ";
             sql += "C.ObjectName as [客户/供应商], C.Description as 备注, C.CreateTime as 出入库时间, U.Name as 经办人, A.ImageId, L.Permission from ABS_Delivery C join List L on L.ID = C.ID join SYS_User U on U.ID = C.CreatorUserId ";
-            sql += string.Format("left join (select A.DeliveryId, A.ImageId from ABS_Delivery_Attachs A join ImageData D on D.ID = A.ImageId and D.ImageType = 1 and D.Expand = 'fpx') A on A.DeliveryId = C.ID where C.ObjectName like '%{0}%' order by C.CreateTime desc", str);
+            sql += $"left join (select A.DeliveryId, A.ImageId from ABS_Delivery_Attachs A join ImageData D on D.ID = A.ImageId and D.ImageType = 1 and D.Expand = 'fpx') A on A.DeliveryId = C.ID where C.ObjectName like '%{str}%' order by C.CreateTime desc";
             var parm = new[]
             {
                 new SqlParameter("@ModuleId", SqlDbType.UniqueIdentifier) {Value = mid},
@@ -93,7 +93,7 @@ namespace Insight.WS.Service.Business
         {
             if (!OnlineManage.Verification(us)) return null;
 
-            var sql = string.Format("select * from dbo.Get_GoodsPlan('{0}')", code);
+            var sql = $"select * from dbo.Get_GoodsPlan('{code}')";
             return SqlHelper.SqlQuery(sql);
         }
 
@@ -107,7 +107,7 @@ namespace Insight.WS.Service.Business
         {
             if (!OnlineManage.Verification(us)) return null;
 
-            var sql = string.Format("select Summary as 摘要, ObjectName as 项目, Units as 单位, Price as 单价, Counts as 数量, Amount as 金额 from ABS_Delivery_Item where DeliveryId = '{0}'", cid);
+            var sql = $"select Summary as 摘要, ObjectName as 项目, Units as 单位, Price as 单价, Counts as 数量, Amount as 金额 from ABS_Delivery_Item where DeliveryId = '{cid}'";
             return SqlHelper.SqlQuery(sql);
         }
 
@@ -122,7 +122,7 @@ namespace Insight.WS.Service.Business
             if (!OnlineManage.Verification(us)) return null;
 
             var sql = "select I.ID, case I.ImageType when 1 then '收据' when  2 then '发票' when 3 then '付款单' when 4 then '报销单' when 5 then '入库单' when 6 then '出库单' else '附件' end as 类型, I.Code as 编码, I.Name as 名称, I.Expand as 扩展名, ";
-            sql += string.Format("M.Name as 密级, I.Pages as 页数, I.Size as 字节数 from ABS_Delivery_Attachs A join ImageData I on I.ID = A.ImageId left join MasterData M on M.ID = I.SecrecyDegree where DeliveryId = '{0}'", did);
+            sql += $"M.Name as 密级, I.Pages as 页数, I.Size as 字节数 from ABS_Delivery_Attachs A join ImageData I on I.ID = A.ImageId left join MasterData M on M.ID = I.SecrecyDegree where DeliveryId = '{did}'";
             return SqlHelper.SqlQuery(sql);
         }
 
@@ -195,12 +195,12 @@ namespace Insight.WS.Service.Business
 
             if (GetDelivery(us, bid).PrintTimes == 0)
             {
-                var sql = string.Format("delete ABS_Delivery where ID = '{0}'", bid);
+                var sql = $"delete ABS_Delivery where ID = '{bid}'";
                 return SqlHelper.SqlNonQuery(sql) > 0;
             }
             else
             {
-                var sql = string.Format("update ABS_Delivery set Validity = 0 where ID = '{0}'", bid);
+                var sql = $"update ABS_Delivery set Validity = 0 where ID = '{bid}'";
                 return SqlHelper.SqlNonQuery(sql) > 0;
             }
         }

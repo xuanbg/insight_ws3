@@ -40,7 +40,7 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return null;
 
-            var sql = string.Format("select distinct I.ID, I.Name, I.ReportId, I.CreateTime, R.ID as RID from SYS_Report_Instances I join SYS_Report_IU R on R.InstanceId = I.ID and R.UserId = '{0}' order by I.CreateTime desc", us.UserId);
+            var sql = $"select distinct I.ID, I.Name, I.ReportId, I.CreateTime, R.ID as RID from SYS_Report_Instances I join SYS_Report_IU R on R.InstanceId = I.ID and R.UserId = '{us.UserId}' order by I.CreateTime desc";
             return SqlHelper.SqlQuery(sql);
         }
 
@@ -122,7 +122,7 @@ namespace Insight.WS.Service
             var iu = new SYS_Report_IU
             {
                 InstanceId = (Guid) id,
-                ID = (Guid)SqlHelper.SqlScalar(string.Format("select ID from SYS_Report_IU where InstanceId = '{0}' and UserId = '{1}'", id,us.UserId))
+                ID = (Guid)SqlHelper.SqlScalar($"select ID from SYS_Report_IU where InstanceId = '{id}' and UserId = '{us.UserId}'")
             };
             return iu;
         }
@@ -143,7 +143,7 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return false;
 
-            var sql = string.Format("select count(1) from SYS_Report_IU A join SYS_Report_IU B on B.InstanceId = A.InstanceId where B.ID = '{0}'", id);
+            var sql = $"select count(1) from SYS_Report_IU A join SYS_Report_IU B on B.InstanceId = A.InstanceId where B.ID = '{id}'";
             sql = string.Format((int)SqlHelper.SqlScalar(sql) > 1 ? "delete from SYS_Report_IU where ID = '{0}'" : "delete I from SYS_Report_Instances I join SYS_Report_IU R on R.InstanceId = I.ID and R.ID = '{0}'", id);
             return SqlHelper.SqlNonQuery(sql) > 0;
         }

@@ -44,27 +44,30 @@ namespace Insight.WS.Server.Common.ORM
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<ABS_Advance> ABS_Advance { get; set; }
         public virtual DbSet<ABS_Advance_Detail> ABS_Advance_Detail { get; set; }
+        public virtual DbSet<ABS_Advance_Record> ABS_Advance_Record { get; set; }
         public virtual DbSet<ABS_Clearing> ABS_Clearing { get; set; }
         public virtual DbSet<ABS_Clearing_Attachs> ABS_Clearing_Attachs { get; set; }
+        public virtual DbSet<ABS_Clearing_Check> ABS_Clearing_Check { get; set; }
+        public virtual DbSet<ABS_Clearing_Item> ABS_Clearing_Item { get; set; }
         public virtual DbSet<ABS_Clearing_Pay> ABS_Clearing_Pay { get; set; }
         public virtual DbSet<ABS_Contract> ABS_Contract { get; set; }
         public virtual DbSet<ABS_Contract_Attachs> ABS_Contract_Attachs { get; set; }
+        public virtual DbSet<ABS_Contract_FundPerform> ABS_Contract_FundPerform { get; set; }
+        public virtual DbSet<ABS_Contract_FundPlan> ABS_Contract_FundPlan { get; set; }
+        public virtual DbSet<ABS_Contract_GoodsPerform> ABS_Contract_GoodsPerform { get; set; }
+        public virtual DbSet<ABS_Contract_GoodsPlan> ABS_Contract_GoodsPlan { get; set; }
+        public virtual DbSet<ABS_Contract_Subjects> ABS_Contract_Subjects { get; set; }
         public virtual DbSet<ABS_Delivery> ABS_Delivery { get; set; }
         public virtual DbSet<ABS_Delivery_Attachs> ABS_Delivery_Attachs { get; set; }
         public virtual DbSet<ABS_Delivery_Item> ABS_Delivery_Item { get; set; }
         public virtual DbSet<ABS_StockCapital> ABS_StockCapital { get; set; }
         public virtual DbSet<ABS_StockDetail> ABS_StockDetail { get; set; }
         public virtual DbSet<ABS_Storage_Detail> ABS_Storage_Detail { get; set; }
+        public virtual DbSet<ABS_Storage_Location> ABS_Storage_Location { get; set; }
         public virtual DbSet<ABS_Storage_Summary> ABS_Storage_Summary { get; set; }
         public virtual DbSet<BASE_Category> BASE_Category { get; set; }
-        public virtual DbSet<BIZ_Borrowing_Apply> BIZ_Borrowing_Apply { get; set; }
-        public virtual DbSet<BIZ_Refund_Apply> BIZ_Refund_Apply { get; set; }
-        public virtual DbSet<BIZ_Refund_Detail> BIZ_Refund_Detail { get; set; }
-        public virtual DbSet<BIZ_Reimburse_Apply> BIZ_Reimburse_Apply { get; set; }
-        public virtual DbSet<BIZ_Reimburse_Detail> BIZ_Reimburse_Detail { get; set; }
-        public virtual DbSet<BIZ_Travel_Apply> BIZ_Travel_Apply { get; set; }
-        public virtual DbSet<BIZ_Travel_Plan> BIZ_Travel_Plan { get; set; }
         public virtual DbSet<ImageData> ImageData { get; set; }
         public virtual DbSet<MasterData> MasterData { get; set; }
         public virtual DbSet<MasterData_Merger> MasterData_Merger { get; set; }
@@ -118,17 +121,10 @@ namespace Insight.WS.Server.Common.ORM
         public virtual DbSet<SYS_User> SYS_User { get; set; }
         public virtual DbSet<SYS_UserGroup> SYS_UserGroup { get; set; }
         public virtual DbSet<SYS_UserGroupMember> SYS_UserGroupMember { get; set; }
-        public virtual DbSet<ReportSchedular> ReportSchedular { get; set; }
         public virtual DbSet<Advance> Advance { get; set; }
-        public virtual DbSet<ABS_Advance> ABS_Advance { get; set; }
-        public virtual DbSet<ABS_Advance_Record> ABS_Advance_Record { get; set; }
-        public virtual DbSet<ABS_Clearing_Item> ABS_Clearing_Item { get; set; }
-        public virtual DbSet<ABS_Contract_GoodsPerform> ABS_Contract_GoodsPerform { get; set; }
-        public virtual DbSet<ABS_Contract_GoodsPlan> ABS_Contract_GoodsPlan { get; set; }
-        public virtual DbSet<ABS_Contract_Subjects> ABS_Contract_Subjects { get; set; }
-        public virtual DbSet<ABS_Contract_FundPerform> ABS_Contract_FundPerform { get; set; }
-        public virtual DbSet<ABS_Contract_FundPlan> ABS_Contract_FundPlan { get; set; }
-        public virtual DbSet<ABS_Clearing_Check> ABS_Clearing_Check { get; set; }
-        public virtual DbSet<ABS_Storage_Location> ABS_Storage_Location { get; set; }
+        public virtual DbSet<Dictionary> Dictionary { get; set; }
+        public virtual DbSet<ReportSchedular> ReportSchedular { get; set; }
+        public virtual DbSet<ReportTemplet> ReportTemplet { get; set; }
+        public virtual DbSet<SYS_Verify_Record> SYS_Verify_Record { get; set; }
     }
 }
