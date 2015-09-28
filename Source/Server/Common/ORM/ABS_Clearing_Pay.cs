@@ -14,9 +14,9 @@ namespace Insight.WS.Server.Common.ORM
     using System.Collections.Generic;
     
     [DataContract(IsReference = true)]
-    [KnownType(typeof(ABS_Clearing_Item))]
     [KnownType(typeof(MDG_Dictionary))]
     [KnownType(typeof(ABS_StockDetail))]
+    [KnownType(typeof(ABS_Clearing_Item))]
     
     public partial class ABS_Clearing_Pay
     {
@@ -43,12 +43,12 @@ namespace Insight.WS.Server.Common.ORM
         public decimal ExchangeRate { get; set; }
     
     	[DataMember]
-        public virtual ABS_Clearing_Item ABS_Clearing_Item { get; set; }
-    	[DataMember]
         public virtual MDG_Dictionary MDG_Dictionary { get; set; }
     	[DataMember]
         public virtual MDG_Dictionary MDG_Dictionary1 { get; set; }
     	[DataMember]
         public virtual ICollection<ABS_StockDetail> ABS_StockDetail { get; set; }
+    	[DataMember]
+        public virtual ABS_Clearing_Item ABS_Clearing_Item { get; set; }
     }
 }

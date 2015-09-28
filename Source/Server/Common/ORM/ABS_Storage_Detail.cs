@@ -14,8 +14,8 @@ namespace Insight.WS.Server.Common.ORM
     using System.Collections.Generic;
     
     [DataContract(IsReference = true)]
-    [KnownType(typeof(ABS_Storage_Location))]
     [KnownType(typeof(ABS_Storage_Summary))]
+    [KnownType(typeof(ABS_Storage_Location))]
     
     public partial class ABS_Storage_Detail
     {
@@ -35,8 +35,8 @@ namespace Insight.WS.Server.Common.ORM
         public Nullable<decimal> Counts { get; set; }
     
     	[DataMember]
-        public virtual ABS_Storage_Location ABS_Storage_Location { get; set; }
-    	[DataMember]
         public virtual ABS_Storage_Summary ABS_Storage_Summary { get; set; }
+    	[DataMember]
+        public virtual ABS_Storage_Location ABS_Storage_Location { get; set; }
     }
 }

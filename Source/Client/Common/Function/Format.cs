@@ -16,7 +16,7 @@ namespace Insight.WS.Client.Common
 {
     public class Format
     {
-        private const string Ignores = "SN;Index;Type;Class;Permission;Selected;Status;CheckState;BuiltIn;IsMaster;Enable;Visible;NodeType;IsData;Action;Alias;Code;PrintTimes;Unit;CreateTime";
+        private const string Ignores = "SN;Index;Type;Class;Permission;Selected;Status;CheckState;BuiltIn;IsMaster;Enable;Visible;NodeType;IsData;Action;Alias;Code;PrintTimes;Unit";
         private const string AlignCenters = "类型;状态;创建人;规格;单位;单价;数量;币种;汇率";
         private const string ColumnW40S = "类型;状态;内置;预置";
         private const string ColumnW80S = "创建人;简称;编码;规格;单位;单价;数量;币种;汇率";
@@ -53,13 +53,13 @@ namespace Insight.WS.Client.Common
             {
                 var name = col.FieldName;
                 col.AppearanceHeader.TextOptions.HAlignment = HorzAlignment.Center;
-                col.Visible = !Ignores.Contains(name) && !name.EndsWith("ID", StringComparison.CurrentCultureIgnoreCase);
+                col.Visible = Ignores.IndexOf(name) < 0 && !name.EndsWith("ID", StringComparison.CurrentCultureIgnoreCase);
 
-                if (ColumnW40S.Contains(name)) col.Width = 40;
-                if (ColumnW80S.Contains(name)) col.Width = 80;
-                if (AlignCenters.Contains(name)) col.AppearanceCell.TextOptions.HAlignment = HorzAlignment.Center;
+                if (ColumnW40S.IndexOf(name) >= 0) col.Width = 40;
+                if (ColumnW80S.IndexOf(name) >= 0) col.Width = 80;
+                if (AlignCenters.IndexOf(name) >= 0) col.AppearanceCell.TextOptions.HAlignment = HorzAlignment.Center;
                 if (name == "Index") col.SortOrder = ColumnSortOrder.Ascending;
-                if (Numerics.Contains(name))
+                if (Numerics.IndexOf(name) >= 0)
                 {
                     col.DisplayFormat.FormatType = FormatType.Numeric;
                     col.DisplayFormat.FormatString = "#,##0.######";
@@ -87,7 +87,7 @@ namespace Insight.WS.Client.Common
             }
 
             // 格式化GridView属性
-            view.FocusRectStyle = editable ? DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.CellFocus : DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFullFocus;
+            view.FocusRectStyle = editable ? DrawFocusRectStyle.CellFocus : DrawFocusRectStyle.RowFullFocus;
             view.OptionsBehavior.Editable = editable;
             view.OptionsBehavior.EditorShowMode = EditorShowMode.MouseDown;
             view.OptionsCustomization.AllowFilter = false;
@@ -111,7 +111,7 @@ namespace Insight.WS.Client.Common
             {
                 var name = column.FieldName;
                 column.AppearanceHeader.TextOptions.HAlignment = HorzAlignment.Center;
-                column.Visible = !Ignores.Contains(name) && name.Substring(name.Length - 2).ToUpper() != "ID";
+                column.Visible = Ignores.IndexOf(name) < 0 && name.Substring(name.Length - 2).ToUpper() != "ID";
                 if (name == "Index") column.SortOrder = SortOrder.Ascending;
             }
 

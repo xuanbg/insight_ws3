@@ -24,7 +24,7 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return false;
 
-            var sql = $"update {tab} set [Enable] = 1 where MID = '{id}'";
+            var sql = string.Format("update {0} set [Enable] = 1 where MID = '{1}'", tab, id);
             return SqlHelper.SqlNonQuery(sql) > 0;
         }
 
@@ -42,7 +42,7 @@ namespace Insight.WS.Service
             var cmds = new List<SqlCommand>();
             var rest = 0;
 
-            var sql = $"Delete From MasterData where ID = '{id}'";
+            var sql = string.Format("Delete From MasterData where ID = '{0}'", id);
             cmds.Add(SqlHelper.MakeCommand(sql));
             if (SqlHelper.SqlExecute(cmds))
             {
@@ -51,7 +51,7 @@ namespace Insight.WS.Service
             else if (tab != null)
             {
                 cmds.Clear();
-                cmds.Add(SqlHelper.MakeCommand($"update {tab} set [Enable] = 0 where MID = '{id}'"));
+                cmds.Add(SqlHelper.MakeCommand(string.Format("update {0} set [Enable] = 0 where MID = '{1}'", tab, id)));
                 rest = SqlHelper.SqlExecute(cmds) ? 2 : 0;
             }
             return rest;
@@ -82,7 +82,7 @@ namespace Insight.WS.Service
             var cmds = new List<SqlCommand>();
             if (id.HasValue) cmds.Add(UpdateFailureDate((Guid)id, obj.EffectiveDate));
 
-            var sql = $"select count(*) from MDR_MU where FailureDate is null and MasterDataId = '{obj.MasterDataId}' and UserId = '{obj.UserId}'";
+            var sql = string.Format("select count(*) from MDR_MU where FailureDate is null and MasterDataId = '{0}' and UserId = '{1}'", obj.MasterDataId, obj.UserId);
             if ((int)SqlHelper.SqlScalar(sql) == 0)
             {
                 sql = "insert MDR_MU (MasterDataId, UserId, IsMaster, EffectiveDate) select @MasterDataId, @UserId, @IsMaster, @EffectiveDate";
@@ -141,7 +141,7 @@ namespace Insight.WS.Service
 
             var cmds = new List<SqlCommand>
             {
-                SqlHelper.MakeCommand($"update MDG_Customer set [Enable] = 0, Visible = 0 where MID = '{obj.MasterId}'")
+                SqlHelper.MakeCommand(string.Format("update MDG_Customer set [Enable] = 0, Visible = 0 where MID = '{0}'", obj.MasterId))
             };
 
             const string sql = "insert MasterData_Merger (MasterId, MergerId, CreatorUserId) select @MasterId, @MergerId, @CreatorUserId";
@@ -259,7 +259,7 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return null;
 
-            var sql = $"select R.ID, U.Name as 姓名, U.LoginName as 登录账号 from MDR_MU R join SYS_User U on U.ID = R.UserId where R.IsMaster = 0 and R.FailureDate is null and R.MasterDataId = '{id}'";
+            var sql = string.Format("select R.ID, U.Name as 姓名, U.LoginName as 登录账号 from MDR_MU R join SYS_User U on U.ID = R.UserId where R.IsMaster = 0 and R.FailureDate is null and R.MasterDataId = '{0}'", id);
             return SqlHelper.SqlQuery(sql);
         }
 

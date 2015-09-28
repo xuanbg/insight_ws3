@@ -67,7 +67,7 @@ namespace Insight.WS.Client.MasterDatas
             }
 
             var dv = _OrgList.Copy().DefaultView;
-            dv.RowFilter = $"ParentId = '{ObjectId}'";
+            dv.RowFilter = string.Format("ParentId = '{0}'", ObjectId);
             Format.InitTreeListLookUpEdit(trlTitle, IsEdit ? _OrgList.DefaultView : dv);
             Format.InitSearchLookUpEdit(sleLeader, Commons.GetAllEmployees(), "姓名");
             Format.InitGridLookUpEdit(grlWorkType, Commons.Dictionary("WorkType"));
@@ -133,7 +133,7 @@ namespace Insight.WS.Client.MasterDatas
             if (e.Column.FieldName == "联系方式")
             {
                 var alias = _ContactType.Rows.Find(e.Value)["Alias"];
-                var isOnly = _ContactInfo.Select($"Alias = '{alias}'").Length == 0;
+                var isOnly = _ContactInfo.Select(string.Format("Alias = '{0}'", alias)).Length == 0;
                 gdvContact.SetRowCellValue(e.RowHandle, "Alias", alias);
                 gdvContact.SetRowCellValue(e.RowHandle, "主要", isOnly);
             }
@@ -149,10 +149,10 @@ namespace Insight.WS.Client.MasterDatas
             if (e.RowHandle >= 0 && e.Column.FieldName == "主要")
             {
                 var alias = gdvContact.GetDataRow(e.RowHandle)["Alias"];
-                var isOnly = _ContactInfo.Select($"Alias = '{alias}'").Length == 0;
+                var isOnly = _ContactInfo.Select(string.Format("Alias = '{0}'", alias)).Length == 0;
                 if (!isOnly)
                 {
-                    _ContactInfo.Select($"Alias = '{gdvContact.GetDataRow(e.RowHandle)["Alias"]}'").ToList().ForEach(r => r["主要"] = 0);
+                    _ContactInfo.Select(string.Format("Alias = '{0}'", gdvContact.GetDataRow(e.RowHandle)["Alias"])).ToList().ForEach(r => r["主要"] = 0);
                 }
                 gdvContact.SetRowCellValue(e.RowHandle, "主要", true);
             }
@@ -289,17 +289,17 @@ namespace Insight.WS.Client.MasterDatas
             {
                 if (row["号码"] == DBNull.Value)
                 {
-                    General.ShowWarning($"没有输入{_ContactType.Rows.Find(row["联系方式"])["Name"]}号码！请输入正确的号码…");
+                    General.ShowWarning(string.Format("没有输入{0}号码！请输入正确的号码…", _ContactType.Rows.Find(row["联系方式"])["Name"]));
                     return false;
                 }
                 if (!General.CheckInput(row["Alias"].ToString(), row["号码"].ToString()))
                 {
-                    General.ShowWarning($"{row["号码"]}不是合法的{_ContactType.Rows.Find(row["联系方式"])["Name"]}号码！请输入正确的号码…");
+                    General.ShowWarning(string.Format("{0}不是合法的{1}号码！请输入正确的号码…", row["号码"], _ContactType.Rows.Find(row["联系方式"])["Name"]));
                     return false;
                 }
                 if (CheckMaster(row["Alias"]) > 1)
                 {
-                    General.ShowWarning($"有多个{_ContactType.Rows.Find(row["联系方式"])["Name"]}号码被设置为主要联系方式！请选择正确选择主要联系方式…");
+                    General.ShowWarning(string.Format("有多个{0}号码被设置为主要联系方式！请选择正确选择主要联系方式…", _ContactType.Rows.Find(row["联系方式"])["Name"]));
                     return false;
                 }
                 if (CheckMaster(row["Alias"]) == 0)
@@ -330,7 +330,7 @@ namespace Insight.WS.Client.MasterDatas
         /// <returns></returns>
         private int CheckMaster(object obj)
         {
-            return _ContactInfo.Select($"Alias = '{obj}'").Count(row => (bool) row["主要"]);
+            return _ContactInfo.Select(string.Format("Alias = '{0}'", obj)).Count(row => (bool) row["主要"]);
         }
 
         #endregion

@@ -223,7 +223,7 @@ namespace Insight.WS.Client.Platform.Report
             // 
             // gdvInstances
             // 
-            this.gdvInstances.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.gdvInstances.FocusRectStyle = DrawFocusRectStyle.RowFocus;
             this.gdvInstances.Name = "gdvInstances";
             this.gdvInstances.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.gdvInstances.OptionsView.ShowColumnHeaders = false;

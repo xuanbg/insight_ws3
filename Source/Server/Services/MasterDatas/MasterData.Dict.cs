@@ -130,7 +130,7 @@ namespace Insight.WS.Service
 
             var obj = MasterDataDAL.GetData(id);
             var dict = GetDictionary(us, id);
-            var sql = $"Delete From MasterData where ID = '{id}'";
+            var sql = string.Format("Delete From MasterData where ID = '{0}'", id);
 
             cmds.Add(SqlHelper.MakeCommand(CommonDAL.ChangeIndex("MDG_Dictionary", dict.Index, 99999, obj.CategoryId, false)));
             cmds.Add(SqlHelper.MakeCommand(sql));
@@ -138,7 +138,7 @@ namespace Insight.WS.Service
             {
                 return 1;
             }
-            return SqlHelper.SqlExecute(new[] {SqlHelper.MakeCommand($"update MDG_Dictionary set [Enable] = 0 where MID = '{id}'")}) ? 2 : 0;
+            return SqlHelper.SqlExecute(new[] {SqlHelper.MakeCommand(string.Format("update MDG_Dictionary set [Enable] = 0 where MID = '{0}'", id))}) ? 2 : 0;
         }
 
     }

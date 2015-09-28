@@ -17,7 +17,7 @@ namespace Insight.WS.Client.MasterDatas
         public List<SYS_ModuleParam> Parameters { get; private set; }
 
         #endregion
-         
+
         #region 构造方法
 
         public Setting()

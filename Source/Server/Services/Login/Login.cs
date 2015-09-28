@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Windows.Forms;
 using Insight.WS.Server.Common;
 
 namespace Insight.WS.Service
@@ -21,7 +21,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 可登录部门列表</returns>
         public DataTable GetDeptList(string loginName)
         {
-            var sql = $"select * from dbo.Get_LoginDept('{loginName}')";
+            var sql = string.Format("select * from dbo.Get_LoginDept('{0}')", loginName);
             return SqlHelper.SqlQuery(sql);
         }
 
@@ -32,7 +32,83 @@ namespace Insight.WS.Service
         /// <returns>Session对象实体</returns>
         public Session UserLogin(Session obj)
         {
-            return CommonDAL.UserLogin(obj);
+            if (obj == null) return null;
+
+            if (OnlineManage.Sessions.Count >= OnlineManage.MaxAuthorized)
+            {
+                obj.LoginStatus = LoginResult.Unauthorized;
+                return obj;
+            }
+
+            var isSafe = true;
+            var pw = obj.Signature;
+            var us = OnlineManage.Sessions.Find(s => s.LoginName == obj.LoginName);
+            if (us == null)
+            {
+                var user = CommonDAL.GetUser(obj.LoginName);
+                if (user == null)
+                {
+                    obj.LoginStatus = LoginResult.NotExist;
+                    return obj;
+                }
+
+                obj.ID = OnlineManage.Sessions.Count;
+                obj.UserId = user.ID;
+                obj.UserName = user.Name;
+                obj.Signature = user.Password;
+                obj.FailureCount = 0;
+                obj.Validity = user.Validity;
+
+                OnlineManage.Sessions.Add(obj);
+                OnlineManage.SafeMachine.Add(null);
+                us = OnlineManage.Sessions[obj.ID];
+            }
+            else
+            {
+                if (us.FailureCount > 4)
+                {
+                    isSafe = us.MachineId != obj.MachineId && obj.MachineId == OnlineManage.SafeMachine[us.ID];
+                }
+
+                if (us.SessionId == Guid.Empty)
+                {
+                    us.SessionId = obj.SessionId;
+                    us.MachineId = obj.MachineId;
+                    us.LoginStatus = LoginResult.Success;
+                }
+                else
+                {
+                    us.LoginStatus = us.MachineId != obj.MachineId ? LoginResult.Online : LoginResult.Multiple;
+                }
+            }
+
+            // 10分钟后重置连续失败次数
+            var time = DateTime.Now - us.LastConnect;
+            if (us.FailureCount > 0 && time.TotalMinutes > 10)
+            {
+                us.FailureCount = 0;
+            }
+
+            if (!us.Validity)
+            {
+                us.LoginStatus = LoginResult.Banned;
+            }
+            else if (us.Signature != pw || !isSafe)
+            {
+                us.FailureCount += 1;
+                us.LoginStatus = LoginResult.Failure;
+                if (us.MachineId == obj.MachineId)
+                {
+                    us.SessionId = Guid.Empty;
+                }
+            }
+            else
+            {
+                OnlineManage.SafeMachine[us.ID] = us.MachineId;
+            }
+
+            us.LastConnect = DateTime.Now;
+            return us;
         }
 
         /// <summary>
@@ -41,7 +117,7 @@ namespace Insight.WS.Service
         /// <returns>FileAttribute List 文件列表</returns>
         public List<UpdateFile> GetServerList()
         {
-            _RootPath = Application.StartupPath + "\\Client";
+            _RootPath = System.Windows.Forms.Application.StartupPath + "\\Client";
             var list = new List<UpdateFile>();
             return GetLocalList(_RootPath, list);
         }

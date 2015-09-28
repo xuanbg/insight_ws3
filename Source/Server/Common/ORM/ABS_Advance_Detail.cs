@@ -14,9 +14,9 @@ namespace Insight.WS.Server.Common.ORM
     using System.Collections.Generic;
     
     [DataContract(IsReference = true)]
+    [KnownType(typeof(MasterData))]
     [KnownType(typeof(ABS_Advance))]
     [KnownType(typeof(ABS_Advance_Record))]
-    [KnownType(typeof(MasterData))]
     
     public partial class ABS_Advance_Detail
     {
@@ -41,10 +41,10 @@ namespace Insight.WS.Server.Common.ORM
         public Nullable<System.DateTime> ValidDate { get; set; }
     
     	[DataMember]
+        public virtual MasterData MasterData { get; set; }
+    	[DataMember]
         public virtual ABS_Advance ABS_Advance { get; set; }
     	[DataMember]
         public virtual ICollection<ABS_Advance_Record> ABS_Advance_Record { get; set; }
-    	[DataMember]
-        public virtual MasterData MasterData { get; set; }
     }
 }

@@ -15,25 +15,25 @@ namespace Insight.WS.Server.Common.ORM
     
     [DataContract(IsReference = true)]
     [KnownType(typeof(SYS_Report_Member))]
+    [KnownType(typeof(SYS_Role_Title))]
     [KnownType(typeof(SYS_Role_User))]
     [KnownType(typeof(SYS_Role_UserGroup))]
-    [KnownType(typeof(SYS_Role_Title))]
     [KnownType(typeof(SYS_User))]
+    [KnownType(typeof(SYS_RolePerm_Action))]
     [KnownType(typeof(SYS_RolePerm_Data))]
     [KnownType(typeof(SYS_RolePerm_DataAbs))]
-    [KnownType(typeof(SYS_RolePerm_Action))]
     
     public partial class SYS_Role
     {
         public SYS_Role()
         {
             this.SYS_Report_Member = new HashSet<SYS_Report_Member>();
+            this.SYS_Role_Title = new HashSet<SYS_Role_Title>();
             this.SYS_Role_User = new HashSet<SYS_Role_User>();
             this.SYS_Role_UserGroup = new HashSet<SYS_Role_UserGroup>();
-            this.SYS_Role_Title = new HashSet<SYS_Role_Title>();
+            this.SYS_RolePerm_Action = new HashSet<SYS_RolePerm_Action>();
             this.SYS_RolePerm_Data = new HashSet<SYS_RolePerm_Data>();
             this.SYS_RolePerm_DataAbs = new HashSet<SYS_RolePerm_DataAbs>();
-            this.SYS_RolePerm_Action = new HashSet<SYS_RolePerm_Action>();
         }
     
     	[DataMember]
@@ -56,18 +56,18 @@ namespace Insight.WS.Server.Common.ORM
     	[DataMember]
         public virtual ICollection<SYS_Report_Member> SYS_Report_Member { get; set; }
     	[DataMember]
+        public virtual ICollection<SYS_Role_Title> SYS_Role_Title { get; set; }
+    	[DataMember]
         public virtual ICollection<SYS_Role_User> SYS_Role_User { get; set; }
     	[DataMember]
         public virtual ICollection<SYS_Role_UserGroup> SYS_Role_UserGroup { get; set; }
     	[DataMember]
-        public virtual ICollection<SYS_Role_Title> SYS_Role_Title { get; set; }
-    	[DataMember]
         public virtual SYS_User SYS_User { get; set; }
+    	[DataMember]
+        public virtual ICollection<SYS_RolePerm_Action> SYS_RolePerm_Action { get; set; }
     	[DataMember]
         public virtual ICollection<SYS_RolePerm_Data> SYS_RolePerm_Data { get; set; }
     	[DataMember]
         public virtual ICollection<SYS_RolePerm_DataAbs> SYS_RolePerm_DataAbs { get; set; }
-    	[DataMember]
-        public virtual ICollection<SYS_RolePerm_Action> SYS_RolePerm_Action { get; set; }
     }
 }

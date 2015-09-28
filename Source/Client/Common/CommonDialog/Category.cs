@@ -74,8 +74,7 @@ namespace Insight.WS.Client.Common
             SetIndexValue(id);
 
             var dv = _Categorys.Copy().DefaultView;
-            dv.RowFilter = (id == null) ? $"ParentId is null and Name = '{txtName.Text}'"
-                : $"ParentId = '{id}' and Name = '{txtName.Text}'";
+            dv.RowFilter = (id == null) ? string.Format("ParentId is null and Name = '{0}'", txtName.Text) : string.Format("ParentId = '{0}' and Name = '{1}'", id, txtName.Text);
             if (dv.Count > 0)
             {
                 General.ShowMessage("您所选择的父分类下已经存在同名分类！请修改分类名称或重新选择父分类。");
@@ -149,7 +148,7 @@ namespace Insight.WS.Client.Common
         /// <param name="id"></param>
         private void SubNodes(Guid? id)
         {
-            foreach (var row in _Categorys.Select($"ParentId = '{id}'"))
+            foreach (var row in _Categorys.Select(string.Format("ParentId = '{0}'", id)))
             {
                 SubNodes((Guid)row["ID"]);
                 row.Delete();
@@ -163,7 +162,7 @@ namespace Insight.WS.Client.Common
         private void SetIndexValue(Guid? id)
         {
             var dv = _Categorys.Copy().DefaultView;
-            dv.RowFilter = (id == null) ? "ParentId is null" : $"ParentId = '{id}'";
+            dv.RowFilter = (id == null) ? "ParentId is null" : string.Format("ParentId = '{0}'", id);
             var maxValue = dv.Count + 1;
             _IndexValue = IsEdit ? _IndexValue : maxValue;
             _Index = id == _ParentId ? _IndexValue : maxValue;
@@ -187,21 +186,21 @@ namespace Insight.WS.Client.Common
 
             if (_Category.Name != txtName.Text.Trim() && Commons.NameIsExist(ModuleId, (Guid?)trlParent.EditValue, "Name", txtName.Text.Trim()))
             {
-                General.ShowError($"对不起，在父分类【{trlParent.Text}】中已存在名称为【{txtName.Text}】的分类！\n\r请修改分类名称后再点击确定按钮保存数据。");
+                General.ShowError(string.Format("对不起，在父分类【{0}】中已存在名称为【{1}】的分类！\n\r请修改分类名称后再点击确定按钮保存数据。", trlParent.Text, txtName.Text));
                 txtName.Focus();
                 return false;
             }
 
             if (!string.IsNullOrEmpty(txtAlias.Text.Trim()) && _Category.Alias != txtAlias.Text.Trim() && Commons.NameIsExist(ModuleId, "Alias", txtAlias.Text.Trim()))
             {
-                General.ShowError($"对不起，已经存在名为【{txtAlias.Text}】的简称！分类简称可以为空，但不能重复。");
+                General.ShowError( string.Format("对不起，已经存在名为【{0}】的简称！分类简称可以为空，但不能重复。", txtAlias.Text));
                 txtAlias.Focus();
                 return false;
             }
 
             if (!string.IsNullOrEmpty(txtCode.Text.Trim()) && _Category.Code != txtCode.Text.Trim() && Commons.NameIsExist(ModuleId, "Code", txtCode.Text.Trim()))
             {
-                General.ShowError($"对不起，已经存在名为【{txtCode.Text}】的编码！分类编码可以为空，但不能重复。");
+                General.ShowError(string.Format("对不起，已经存在名为【{0}】的编码！分类编码可以为空，但不能重复。", txtCode.Text));
                 txtCode.Focus();
                 return false;
             }

@@ -108,7 +108,7 @@ CREATE TABLE ABS_Clearing(
 [CheckId]          UNIQUEIDENTIFIER FOREIGN KEY REFERENCES ABS_Clearing_Check(ID),                                                         --结账ID
 [RelationId]       UNIQUEIDENTIFIER,                                                                                                       --关联结算记录ID
 [Validity]         BIT DEFAULT 1 NOT NULL,                                                                                                 --是否有效：0、无效；1、有效
-[CreatorDeptId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Sys_Organization(ID),                                                           --创建部门ID
+[CreatorDeptId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Sys_Organization(ID) NOT NULL,                                                  --创建部门ID
 [CreatorUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Sys_User(ID) NOT NULL,                                                          --创建人ID
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )
@@ -137,7 +137,7 @@ CREATE TABLE ABS_Clearing_Pay(
 [SN]               BIGINT IDENTITY(1,1),                                                                                                   --自增序列
 [ClearingItemId]   UNIQUEIDENTIFIER FOREIGN KEY REFERENCES ABS_Clearing_Item(ID) ON DELETE CASCADE NOT NULL,                               --结算项目明细ID
 [PayType]          UNIQUEIDENTIFIER FOREIGN KEY REFERENCES MDG_Dictionary(MID),                                                            --结算方式ID，字典
-[Code]             VARCHAR(32),                                                                                                            --结算号
+[Code]             VARCHAR(16),                                                                                                            --结算号
 [CurrencyId]       UNIQUEIDENTIFIER FOREIGN KEY REFERENCES MDG_Dictionary(MID),                                                            --币种ID，字典
 [Amount]           DECIMAL(20,2) NOT NULL,                                                                                                 --金额
 [ExchangeRate]     DECIMAL(20,6) DEFAULT 1 NOT NULL                                                                                        --汇率
@@ -162,7 +162,7 @@ GO
 CREATE TABLE ABS_StockCapital(
 [ID]               UNIQUEIDENTIFIER CONSTRAINT IX_ABS_StockCapital PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
 [SN]               BIGINT IDENTITY(1,1),                                                                                                   --自增序列
-[OrgId]            UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Sys_Organization(ID),                                                           --组织机构ID
+[OrgId]            UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Sys_Organization(ID) NOT NULL,                                                  --组织机构ID
 [Amount]           DECIMAL(20,2) NOT NULL                                                                                                  --金额
 )
 GO
@@ -350,7 +350,7 @@ CREATE TABLE ABS_Contract_Subjects(
 [SN]               BIGINT IDENTITY(1,1),                                                                                                   --自增序列
 [ContractId]       UNIQUEIDENTIFIER FOREIGN KEY REFERENCES ABS_Contract(ID) ON DELETE CASCADE NOT NULL,                                    --契约ID
 [Direction]        INT NOT NULL,                                                                                                           --标的流向：-1、资金流出物资流入；1、资金流入物资流出
-[PlanType]         INT NOT NULL,                                                                                                           --计划类型：0、无计划；1、仅有资金计划；2、仅有物资计划；3、两者皆有
+[PlanType]         INT NOT NULL,                                                                                                           --计划类型：1、仅有资金计划；2、仅有物资计划；3、两者皆有
 [CategoryId]       UNIQUEIDENTIFIER FOREIGN KEY REFERENCES BASE_Category(ID),                                                              --标的物品类ID
 [ObjectId]         UNIQUEIDENTIFIER FOREIGN KEY REFERENCES MasterData(ID),                                                                 --标的物ID
 [ObjectName]       NVARCHAR(64),                                                                                                           --标的物名称
@@ -399,7 +399,7 @@ CREATE TABLE ABS_Contract_FundPerform(
 [ID]               UNIQUEIDENTIFIER CONSTRAINT IX_ABS_Contract_FundPerform PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
 [SN]               BIGINT IDENTITY(1,1),                                                                                                   --自增序列
 [PlanId]           UNIQUEIDENTIFIER FOREIGN KEY REFERENCES ABS_Contract_FundPlan(ID) ON DELETE CASCADE NOT NULL,                           --资金计划ID
-[ClearingId]       UNIQUEIDENTIFIER FOREIGN KEY REFERENCES ABS_Clearing(ID) ON DELETE CASCADE,                                             --结算记录ID
+[ClearingId]       UNIQUEIDENTIFIER FOREIGN KEY REFERENCES ABS_Clearing_Item(ID) ON DELETE CASCADE NOT NULL,                               --结算记录ID
 [Amount]           DECIMAL(20,2) NOT NULL,                                                                                                 --履约金额
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )
@@ -428,7 +428,7 @@ CREATE TABLE ABS_Contract_GoodsPerform(
 [ID]               UNIQUEIDENTIFIER CONSTRAINT IX_ABS_Contract_GoodsPerform PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
 [SN]               BIGINT IDENTITY(1,1),                                                                                                   --自增序列
 [PlanId]           UNIQUEIDENTIFIER FOREIGN KEY REFERENCES ABS_Contract_GoodsPlan(ID) ON DELETE CASCADE NOT NULL,                          --物资计划ID
-[DeliveryId]       UNIQUEIDENTIFIER FOREIGN KEY REFERENCES ABS_Delivery(ID) ON DELETE CASCADE,                                             --结算记录ID
+[DeliveryId]       UNIQUEIDENTIFIER FOREIGN KEY REFERENCES ABS_Delivery_Item(ID) ON DELETE CASCADE NOT NULL,                               --结算记录ID
 [Counts]           DECIMAL(20,6),                                                                                                          --履约数量
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )

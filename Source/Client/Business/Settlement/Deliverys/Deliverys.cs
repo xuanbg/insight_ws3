@@ -485,13 +485,13 @@ namespace Insight.WS.Client.Business.Settlement
         private void Delete()
         {
             var row = _Deliverys.Table.Rows.Find(_DeliveryId);
-            if (General.ShowConfirm($"您确定要{barManager.Items["Delete"].Caption}收费记录吗？") != DialogResult.OK) return;
+            if (General.ShowConfirm(string.Format("您确定要{0}收费记录吗？", barManager.Items["Delete"].Caption)) != DialogResult.OK) return;
 
             using (var cli = new SettlementClient(Binding, Address))
             {
                 if (!cli.DelDelivery(UserSession, _DeliveryId))
                 {
-                    General.ShowError($"{barManager.Items["Delete"].Caption}收款记录失败！如多次失败，请联系管理员。");
+                    General.ShowError(string.Format("{0}收款记录失败！如多次失败，请联系管理员。", barManager.Items["Delete"].Caption));
                     return;
                 }
                 

@@ -98,10 +98,10 @@ namespace Insight.WS.Client.Business.CRM
         /// <param name="e"></param>
         private void Filter_CheckedChanged(object sender, EventArgs e)
         {
-            var statuFilter = palStatu.Controls.Cast<CheckEdit>().Aggregate("'-1'", (current, check) => current + (check.Checked ? $" ,'{check.Properties.Caption}'" : ""));
-            var classFilter = palClass.Controls.Cast<CheckEdit>().Aggregate("'-1'", (current, check) => current + (check.Checked ? $" ,'{check.Properties.Caption}'" : ""));
-            _TypeFilter = $"-1{(chkMy.Checked ? " ,2" : "")}{(chkSub.Checked ? " ,0" : "")}{(chkUnion.Checked ? " ,1" : "")}";
-            _Filter = $"Type in ({_TypeFilter}) and 状态 in ({statuFilter}) and Class in ({classFilter})";
+            var statuFilter = palStatu.Controls.Cast<CheckEdit>().Aggregate("'-1'", (current, check) => current + (check.Checked ? string.Format(" ,'{0}'", check.Properties.Caption) : ""));
+            var classFilter = palClass.Controls.Cast<CheckEdit>().Aggregate("'-1'", (current, check) => current + (check.Checked ? string.Format(" ,'{0}'", check.Properties.Caption) : ""));
+            _TypeFilter = string.Format("-1{0}{1}{2}", chkMy.Checked ? " ,2" : "", chkSub.Checked ? " ,0" : "", chkUnion.Checked ? " ,1" : "");
+            _Filter = string.Format("Type in ({0}) and 状态 in ({1}) and Class in ({2})", _TypeFilter, statuFilter, classFilter);
             InitCustomer();
         }
 
@@ -247,7 +247,7 @@ namespace Insight.WS.Client.Business.CRM
             dv.RowFilter = _Filter;
             var dt = dv.ToTable();
             dt.PrimaryKey = new[] { dt.Columns["ID"] };
-            var dl = (from DataRow row in dt.Rows let str = $"CustomerId = '{row["CustomerId"]}'" where (int) row["Type"] == 0 && dt.Select(str).Length > 1 select row["ID"]).ToList();
+            var dl = (from DataRow row in dt.Rows let str = string.Format("CustomerId = '{0}'", row["CustomerId"]) where (int) row["Type"] == 0 && dt.Select(str).Length > 1 select row["ID"]).ToList();
             dl.ForEach(id => dt.Rows.Find(id).Delete());
             dt.AcceptChanges();
             _HasCustomer = dt.Rows.Count > 0;
@@ -285,7 +285,7 @@ namespace Insight.WS.Client.Business.CRM
         private void InitCustomerInfo()
         {
             var dv = _CustomerInfo.DefaultView;
-            dv.RowFilter = $"CustomerId = '{_CustomerId}'";
+            dv.RowFilter = string.Format("CustomerId = '{0}'", _CustomerId);
 
             vrdInfo.RowHeaderWidth = 80;
             vrdInfo.RecordWidth = 240;
@@ -300,7 +300,7 @@ namespace Insight.WS.Client.Business.CRM
         private void InitContact()
         {
             var dv = _Contacts.DefaultView;
-            dv.RowFilter = $"ParentId = '{_CustomerId}'";
+            dv.RowFilter = string.Format("ParentId = '{0}'", _CustomerId);
             _HasContact = dv.Count > 0;
 
             grdContact.DataSource = dv;
@@ -313,7 +313,7 @@ namespace Insight.WS.Client.Business.CRM
         private void InitContactInfo()
         {
             var dv = _ContactInfo.Copy().DefaultView;
-            dv.RowFilter = $"MasterDataId = '{glvContact.GetFocusedDataRow()["ID"]}'";
+            dv.RowFilter = string.Format("MasterDataId = '{0}'", glvContact.GetFocusedDataRow()["ID"]);
 
             grdOther.DataSource = dv;
             Format.GridFormat(gdvOther);
@@ -327,7 +327,7 @@ namespace Insight.WS.Client.Business.CRM
         /// </summary>
         private void Search()
         {
-            _Filter = $"Type in ({_TypeFilter}) and 名称 like '%{bteSearch.Text.Trim()}%'";
+            _Filter = string.Format("Type in ({0}) and 名称 like '%{1}%'", _TypeFilter, bteSearch.Text.Trim());
             InitCustomer();
         }
 
@@ -423,7 +423,7 @@ namespace Insight.WS.Client.Business.CRM
         private void DelCustomer()
         {
             var row = gdvCustomer.GetFocusedDataRow();
-            if (General.ShowConfirm($"您确定要删除客户【{row["名称"]}】吗?") != DialogResult.OK) return;
+            if (General.ShowConfirm(string.Format("您确定要删除客户【{0}】吗?", row["名称"])) != DialogResult.OK) return;
 
             switch (Commons.DelMasterData(_CustomerId))
             {
@@ -484,11 +484,11 @@ namespace Insight.WS.Client.Business.CRM
         private void Enable()
         {
             var row = gdvCustomer.GetFocusedDataRow();
-            if (General.ShowConfirm($"您确定要启用【{row["名称"]}】吗?") != DialogResult.OK) return;
+            if (General.ShowConfirm(string.Format("您确定要启用【{0}】吗?", row["名称"])) != DialogResult.OK) return;
 
             if (!Commons.EnableMasterData(_CustomerId, "MDG_Customer"))
             {
-                General.ShowError($"对不起，客户【{row["名称"]}】启用失败！");
+                General.ShowError(string.Format("对不起，客户【{0}】启用失败！", row["名称"]));
                 return;
             }
             
@@ -526,11 +526,11 @@ namespace Insight.WS.Client.Business.CRM
         private void DelContact()
         {
             var row = glvContact.GetFocusedDataRow();
-            if (General.ShowConfirm($"您确定要删除【{row["姓名"]}】吗?") != DialogResult.OK) return;
+            if (General.ShowConfirm(string.Format("您确定要删除【{0}】吗?", row["姓名"])) != DialogResult.OK) return;
 
             if (Commons.DelMasterData(_ContactId) <= 0)
             {
-                General.ShowError($"对不起！删除联系人【{row["名称"]}】失败。");
+                General.ShowError(string.Format("对不起！删除联系人【{0}】失败。", row["名称"]));
                 return;
             }
             

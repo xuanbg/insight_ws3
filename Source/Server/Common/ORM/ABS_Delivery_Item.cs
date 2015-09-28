@@ -16,9 +16,15 @@ namespace Insight.WS.Server.Common.ORM
     [DataContract(IsReference = true)]
     [KnownType(typeof(ABS_Delivery))]
     [KnownType(typeof(MasterData))]
+    [KnownType(typeof(ABS_Contract_GoodsPerform))]
     
     public partial class ABS_Delivery_Item
     {
+        public ABS_Delivery_Item()
+        {
+            this.ABS_Contract_GoodsPerform = new HashSet<ABS_Contract_GoodsPerform>();
+        }
+    
     	[DataMember]
         public System.Guid ID { get; set; }
     	[DataMember]
@@ -44,5 +50,7 @@ namespace Insight.WS.Server.Common.ORM
         public virtual ABS_Delivery ABS_Delivery { get; set; }
     	[DataMember]
         public virtual MasterData MasterData { get; set; }
+    	[DataMember]
+        public virtual ICollection<ABS_Contract_GoodsPerform> ABS_Contract_GoodsPerform { get; set; }
     }
 }

@@ -14,10 +14,10 @@ namespace Insight.WS.Server.Common.ORM
     using System.Collections.Generic;
     
     [DataContract(IsReference = true)]
-    [KnownType(typeof(ABS_Contract))]
     [KnownType(typeof(ABS_Contract_FundPerform))]
     [KnownType(typeof(MDG_Dictionary))]
     [KnownType(typeof(ABS_Contract_Subjects))]
+    [KnownType(typeof(ABS_Contract))]
     
     public partial class ABS_Contract_FundPlan
     {
@@ -30,8 +30,6 @@ namespace Insight.WS.Server.Common.ORM
         public System.Guid ID { get; set; }
     	[DataMember]
         public long SN { get; set; }
-    	[DataMember]
-        public System.Guid ContractId { get; set; }
     	[DataMember]
         public Nullable<System.Guid> SubjectsId { get; set; }
     	[DataMember]
@@ -52,14 +50,16 @@ namespace Insight.WS.Server.Common.ORM
         public string Description { get; set; }
     	[DataMember]
         public System.DateTime CreateTime { get; set; }
-    
     	[DataMember]
-        public virtual ABS_Contract ABS_Contract { get; set; }
+        public System.Guid ContractId { get; set; }
+    
     	[DataMember]
         public virtual ICollection<ABS_Contract_FundPerform> ABS_Contract_FundPerform { get; set; }
     	[DataMember]
         public virtual MDG_Dictionary MDG_Dictionary { get; set; }
     	[DataMember]
         public virtual ABS_Contract_Subjects ABS_Contract_Subjects { get; set; }
+    	[DataMember]
+        public virtual ABS_Contract ABS_Contract { get; set; }
     }
 }

@@ -143,7 +143,7 @@ namespace Insight.WS.Client.Platform.Base
         private void InitRecord()
         {
             var dv = _Record.Copy().DefaultView;
-            dv.RowFilter = $"SchemeId = '{_ObjectId}'";
+            dv.RowFilter = string.Format("SchemeId = '{0}'", _ObjectId);
             _HasRecord = dv.Count > 0;
 
             grdCode.DataSource = dv;
@@ -161,7 +161,7 @@ namespace Insight.WS.Client.Platform.Base
         private void InitAllot()
         {
             var dv = _Allot.Copy().DefaultView;
-            dv.RowFilter = $"SchemeId = '{_ObjectId}'";
+            dv.RowFilter = string.Format("SchemeId = '{0}'", _ObjectId);
             _HasAllot = dv.Count > 0;
 
             grdAllot.DataSource = dv;
@@ -246,7 +246,7 @@ namespace Insight.WS.Client.Platform.Base
         private void DelScheme()
         {
             var row = gdvScheme.GetFocusedDataRow();
-            if (General.ShowConfirm($"您确定要删除编码方案【{row["名称"]}】吗？") != DialogResult.OK) return;
+            if (General.ShowConfirm(string.Format("您确定要删除编码方案【{0}】吗？", row["名称"])) != DialogResult.OK) return;
 
             using (var cli = new BaseClient(Binding, Address))
             {
@@ -257,12 +257,12 @@ namespace Insight.WS.Client.Platform.Base
                         break;
 
                     case 1:
-                        General.ShowMessage($"编码方案【{row["名称"]}】删除成功！");
+                        General.ShowMessage(string.Format("编码方案【{0}】删除成功！", row["名称"]));
                         gdvScheme.DeleteRow(gdvScheme.FocusedRowHandle);
                         break;
 
                     case 2:
-                        General.ShowMessage($"对不起，编码方案【{row["名称"]}】已被使用，该编码方案已被设置为停用状态！");
+                        General.ShowMessage(string.Format("对不起，编码方案【{0}】已被使用，该编码方案已被设置为停用状态！", row["名称"]));
                         gdvScheme.SetFocusedRowCellValue("状态", "停用");
                         SwitchItemStatus(new Context("DeleteScheme", false), new Context("Enable", true));
                         break;
@@ -276,17 +276,17 @@ namespace Insight.WS.Client.Platform.Base
         private void Enable()
         {
             var row = gdvScheme.GetFocusedDataRow();
-            if (General.ShowConfirm($"您确定要启用编码方案【{row["名称"]}】吗？") != DialogResult.OK) return;
+            if (General.ShowConfirm(string.Format("您确定要启用编码方案【{0}】吗？", row["名称"])) != DialogResult.OK) return;
 
             using (var cli = new BaseClient(Binding, Address))
             {
                 if (!cli.EnableScheme(UserSession, (Guid) row["ID"]))
                 {
-                    General.ShowError($"编码方案【{row["名称"]}】启用失败！如多次操作失败，请联系管理员。");
+                    General.ShowError(string.Format("编码方案【{0}】启用失败！如多次操作失败，请联系管理员。", row["名称"]));
                     return;
                 }
                 
-                General.ShowMessage($"编码方案【{row["名称"]}】启用成功！");
+                General.ShowMessage(string.Format("编码方案【{0}】启用成功！", row["名称"]));
                 gdvScheme.SetFocusedRowCellValue("状态", "正常");
                 SwitchItemStatus(new Context("DeleteScheme", true), new Context("Enable", false));
             }

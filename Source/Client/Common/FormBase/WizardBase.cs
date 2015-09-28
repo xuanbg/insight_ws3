@@ -54,7 +54,7 @@ namespace Insight.WS.Client.Common
         /// <param name="e"></param>
         private void Wizard_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (DialogResult != DialogResult.OK && General.ShowConfirm($"您确定要放弃{(IsEdit ? "编辑" : "新建")}离开向导吗？") != DialogResult.OK)
+            if (DialogResult != DialogResult.OK && General.ShowConfirm(string.Format("您确定要放弃{0}离开向导吗？", IsEdit ? "编辑" : "新建")) != DialogResult.OK)
             {
                 e.Cancel = true;
             }

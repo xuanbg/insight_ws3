@@ -85,7 +85,7 @@ namespace Insight.WS.Client.Common
         public static string GetCpuId()
         {
             var myCpu = new ManagementClass("win32_Processor").GetInstances();
-            return (from ManagementObject cpu in myCpu select cpu.Properties["Processorid"].Value).Aggregate("", (current, val) => current + (val?.ToString() ?? ""));
+            return (from ManagementObject cpu in myCpu select cpu.Properties["Processorid"].Value).Aggregate("", (current, val) => current + (val == null ? "" : val.ToString()));
         }
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace Insight.WS.Client.Common
         public static string GetMbId()
         {
             var myMb = new ManagementClass("Win32_BaseBoard").GetInstances();
-            return (from ManagementObject mb in myMb select mb.Properties["SerialNumber"].Value).Aggregate("", (current, val) => current + (val?.ToString() ?? ""));
+            return (from ManagementObject mb in myMb select mb.Properties["SerialNumber"].Value).Aggregate("", (current, val) => current + (val == null ? "" : val.ToString()));
         }
 
         /// <summary>
@@ -105,7 +105,7 @@ namespace Insight.WS.Client.Common
         public static string GetHdId()
         {
             var lpm = new ManagementClass("Win32_PhysicalMedia").GetInstances();
-            return (from ManagementObject hd in lpm select hd.Properties["SerialNumber"].Value).Aggregate("", (current, val) => current + (val?.ToString().Trim() ?? ""));
+            return (from ManagementObject hd in lpm select hd.Properties["SerialNumber"].Value).Aggregate("", (current, val) => current + (val == null ? "" : val.ToString().Trim()));
         }
 
         /// <summary>
@@ -250,7 +250,7 @@ namespace Insight.WS.Client.Common
                 return false;//数字验证
             }
             const string address = "11x22x35x44x53x12x23x36x45x54x13x31x37x46x61x14x32x41x50x62x15x33x42x51x63x21x34x43x52x64x65x71x81x82x91";
-            if (!address.Contains(id.Remove(2)))
+            if (address.IndexOf(id.Remove(2)) == -1)
             {
                 return false;//省份验证
             }
@@ -286,7 +286,7 @@ namespace Insight.WS.Client.Common
                 return false;//数字验证
             }
             const string address = "11x22x35x44x53x12x23x36x45x54x13x31x37x46x61x14x32x41x50x62x15x33x42x51x63x21x34x43x52x64x65x71x81x82x91";
-            if (!address.Contains(id.Remove(2)))
+            if (address.IndexOf(id.Remove(2)) == -1)
             {
                 return false;//省份验证
             }

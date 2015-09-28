@@ -117,7 +117,7 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return false;
 
-            return SqlHelper.SqlNonQuery($"delete ImageData where ID = '{id}'") > 0;
+            return SqlHelper.SqlNonQuery(string.Format("delete ImageData where ID = '{0}'", id)) > 0;
         }
 
         #endregion
@@ -136,7 +136,7 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return false;
 
-            var sql = $"select count(*) from {tab} where {col} = '{str}'";
+            var sql = string.Format("select count(*) from {0} where {1} = '{2}'", tab, col, str);
             return (int)SqlHelper.SqlScalar(sql) > 0;
         }
 
@@ -155,8 +155,8 @@ namespace Insight.WS.Service
             if (!OnlineManage.Verification(us)) return false;
 
             var p = isParent ? "ParentId" : "CategoryId";
-            var pn = pid.HasValue ? $"= '{pid}'" : "is null";
-            var sql = $"select count(*) from {tab} where {col} = '{str}' and {p} {pn}";
+            var pn = pid.HasValue ? string.Format("= '{0}'", pid) : "is null";
+            var sql = string.Format("select count(*) from {0} where {1} = '{2}' and {3} {4}", tab, col, str, p, pn);
             return (int)SqlHelper.SqlScalar(sql) > 0;
         }
 
@@ -172,7 +172,7 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return -1;
 
-            var sql = $"select count(ID) from {tab} where {type} {(id.HasValue ? "= @ID" : "is null")}";
+            var sql = string.Format("select count(ID) from {0} where {1} {2}", tab, type, id.HasValue ? "= @ID" : "is null");
             var parm = new[] {new SqlParameter("@ID", SqlDbType.UniqueIdentifier) {Value = id}};
             return (int)SqlHelper.SqlScalar(sql, parm);
         }
@@ -182,36 +182,6 @@ namespace Insight.WS.Service
         #region 其它接口
 
         /// <summary>
-        /// 获取广告商品列表
-        /// </summary>
-        /// <param name="us">用户会话</param>
-        /// <returns>广告商品列表</returns>
-        public List<BIZ_Advertiser> GetAdvertisers(Session us)
-        {
-            if (!OnlineManage.Verification(us)) return null;
-
-            using (var context = new WSEntities())
-            {
-                return context.BIZ_Advertiser.ToList();
-            }
-        }
-
-        public MDG_EntMember g()
-        {
-            return new MDG_EntMember();
-        }
-
-        public UpdateFile a()
-        {
-            return new UpdateFile();
-        }
-
-        public Advance b()
-        {
-            return new Advance();
-        }
-
-        /// <summary>
         /// 删除在线用户会话
         /// </summary>
         /// <param name="us">Session对象实体</param>
@@ -219,6 +189,8 @@ namespace Insight.WS.Service
         /// <returns>bool 是否删除成功</returns>
         public bool DelOnlineUser(Session us, int? sid)
         {
+            if (us == null) return false;
+
             if (!OnlineManage.Verification(us)) return false;
 
             OnlineManage.Sessions[sid ?? us.ID].SessionId = Guid.Empty;

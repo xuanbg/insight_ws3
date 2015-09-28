@@ -69,12 +69,11 @@ namespace Insight.WS.Client.Platform.Base
                 return;
             }
 
-            var filter = $"ParentId = '{id}' and 名称 = '{_Org.Name}' and NodeType = {_Org.NodeType}";
+            var filter = string.Format("ParentId = '{0}' and 名称 = '{1}' and NodeType = {2}", id, _Org.Name, _Org.NodeType);
             _Orgs.RowFilter = filter;
             if (_Orgs.Count > 0)
             {
-                General.ShowError(
-                    $"您所选择的移动目标节点【{_OrgList.Rows.Find(trlOrgList.EditValue)["名称"]}】下已经存在同类的同名节点！\r\n请使用【合并】功能而非【移动】功能合并到目标节点！");
+                General.ShowError(string.Format("您所选择的移动目标节点【{0}】下已经存在同类的同名节点！\r\n请使用【合并】功能而非【移动】功能合并到目标节点！", _OrgList.Rows.Find(trlOrgList.EditValue)["名称"]));
                 trlOrgList.EditValue = null;
             }
         }
@@ -151,7 +150,7 @@ namespace Insight.WS.Client.Platform.Base
         /// <param name="id"></param>
         private void SubNodes(Guid id)
         {
-            foreach (var row in _OrgList.Select($"ParentId = '{id}'"))
+            foreach (var row in _OrgList.Select(string.Format("ParentId = '{0}'", id)))
             {
                 if (row.RowState == DataRowState.Modified)
                     row.AcceptChanges();
@@ -168,19 +167,19 @@ namespace Insight.WS.Client.Platform.Base
         {
             if (trlOrgList.EditValue == null)
             {
-                MessageBox.Show($"请选择节点【{_Org.Name}】的移动目标节点！");
+                MessageBox.Show(string.Format("请选择节点【{0}】的移动目标节点！", _Org.Name));
                 return;
             }
 
             _Org.ParentId = (Guid) trlOrgList.EditValue;
-            var filter = "ParentId " + (_Org.ParentId == null ? "is null" : $"= '{_Org.ParentId}'");
+            var filter = "ParentId " + (_Org.ParentId == null ? "is null" : string.Format("= '{0}'", _Org.ParentId));
             _Orgs.RowFilter = filter;
             _Org.Index = _Orgs.Count + 1;
             using (var cli = new BaseClient(OpenForm.Binding, OpenForm.Address))
             {
                 if (!cli.UpdateOrgParentId(OpenForm.UserSession, _Org))
                 {
-                    General.ShowError($"对不起，节点【{_Org.Name}】移动失败！");
+                    General.ShowError(string.Format("对不起，节点【{0}】移动失败！", _Org.Name));
                     return;
                 }
                 

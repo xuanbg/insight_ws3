@@ -162,7 +162,7 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return false;
 
-            var sql = $"update SYS_Code_Scheme set Validity = 1 where ID = '{id}'";
+            var sql = string.Format("update SYS_Code_Scheme set Validity = 1 where ID = '{0}'", id);
             return SqlHelper.SqlNonQuery(sql) > 0;
         }
 
@@ -180,14 +180,14 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return 0;
 
-            var sql = $"select count(*) from SYS_ModuleParam where Value = '{id}'";
+            var sql = string.Format("select count(*) from SYS_ModuleParam where Value = '{0}'", id);
             var count = (int)SqlHelper.SqlScalar(sql);
             if (count == 0)
             {
-                sql = $"Delete from SYS_Code_Scheme where ID = '{id}'";
+                sql = string.Format("Delete from SYS_Code_Scheme where ID = '{0}'", id);
                 return SqlHelper.SqlNonQuery(sql) > 0 ? 1 : 0;
             }
-            sql = $"update SYS_Code_Scheme set Validity = 0 where ID = '{id}'";
+            sql = string.Format("update SYS_Code_Scheme set Validity = 0 where ID = '{0}'", id);
             return SqlHelper.SqlNonQuery(sql) > 0 ? 2 : 0;
         }
 

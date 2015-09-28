@@ -67,7 +67,7 @@ namespace Insight.WS.Client.Platform.Report
         /// <param name="e"></param>
         private void treeList_FocusedNodeChanged(object sender, FocusedNodeChangedEventArgs e)
         {
-            _FilterStr = $"CategoryId = '{e.Node.GetValue("ID")}'";
+            _FilterStr = string.Format("CategoryId = '{0}'", e.Node.GetValue("ID"));
             InitTemplets();
         }
 
@@ -127,7 +127,7 @@ namespace Insight.WS.Client.Platform.Report
 
             var ids = new List<object>();
             treCategory.GetNodeList().FindAll(n => n.HasChildren && n.Expanded).ForEach(n => { ids.Add(n.GetValue("ID")); });
-            var fid = treCategory.FocusedNode?.GetValue("ID");
+            var fid = treCategory.FocusedNode == null ? null : treCategory.FocusedNode.GetValue("ID");
 
             treCategory.DataSource = _Category;
             Format.TreeFormat(treCategory);
@@ -240,7 +240,7 @@ namespace Insight.WS.Client.Platform.Report
         private void Delete()
         {
             var row = gdvTemplet.GetFocusedDataRow();
-            if (General.ShowConfirm($"您确定要删除模板【{row["名称"]}】吗？\r\n模板删除后将无法恢复！") != DialogResult.OK) return;
+            if (General.ShowConfirm(string.Format("您确定要删除模板【{0}】吗？\r\n模板删除后将无法恢复！", row["名称"])) != DialogResult.OK) return;
 
             using (var cli = new ReportClient(Binding, Address))
             {

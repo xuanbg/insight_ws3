@@ -227,7 +227,7 @@ namespace Insight.WS.Client.Business.Settlement
         private void Delete()
         {
             var name = gdvAttach.GetFocusedDataRow()["名称"];
-            if (General.ShowConfirm($"您确定要删除附件【{name}】吗？") != DialogResult.OK) return;
+            if (General.ShowConfirm(string.Format("您确定要删除附件【{0}】吗？", name)) != DialogResult.OK) return;
 
             if (!Commons.DelImageData(_AttachId))
             {

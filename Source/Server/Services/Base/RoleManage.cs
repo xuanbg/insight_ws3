@@ -117,7 +117,7 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return null;
 
-            var sql = $"select O.ID, O.ParentId, O.NodeType, O.[Index], O.名称 from Organization O left join SYS_Role_Title T on T.OrgId = O.ID and T.RoleId = '{id}' where T.ID is null";
+            var sql = string.Format("select O.ID, O.ParentId, O.NodeType, O.[Index], O.名称 from Organization O left join SYS_Role_Title T on T.OrgId = O.ID and T.RoleId = '{0}' where T.ID is null", id);
             return SqlHelper.SqlQuery(sql);
         }
 
@@ -131,7 +131,7 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return null;
 
-            var sql = $"select G.ID, G.Name as 名称, G.Description as 描述 from SYS_UserGroup G left join SYS_Role_UserGroup R on R.GroupId = G.ID and R.RoleId = '{id}' where R.ID is null order by G.SN";
+            var sql = string.Format("select G.ID, G.Name as 名称, G.Description as 描述 from SYS_UserGroup G left join SYS_Role_UserGroup R on R.GroupId = G.ID and R.RoleId = '{0}' where R.ID is null order by G.SN", id);
             return SqlHelper.SqlQuery(sql);
         }
 
@@ -145,7 +145,7 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return null;
 
-            var sql = $"select U.ID, U.Name as 名称, U.LoginName as 登录名, U.Description as 描述 from SYS_User U left join SYS_Role_User R on R.UserId = U.ID and R.RoleId = '{id}' where R.ID is null order by U.SN";
+            var sql = string.Format("select U.ID, U.Name as 名称, U.LoginName as 登录名, U.Description as 描述 from SYS_User U left join SYS_Role_User R on R.UserId = U.ID and R.RoleId = '{0}' where R.ID is null order by U.SN", id);
             return SqlHelper.SqlQuery(sql);
         }
 
@@ -159,7 +159,7 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return null;
 
-            var sql = $"select * from dbo.Get_RoleAction('{id}') order by [Index]";
+            var sql = string.Format("select * from dbo.Get_RoleAction('{0}') order by [Index]", id);
             return SqlHelper.SqlQuery(sql);
         }
 
@@ -173,7 +173,7 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return null;
 
-            var sql = $"exec Get_RoleData '{id}'";
+            var sql = string.Format("exec Get_RoleData '{0}'", id);
             return SqlHelper.SqlQuery(sql);
         }
 
@@ -259,10 +259,10 @@ namespace Insight.WS.Service
             };
             cmds.Add(SqlHelper.MakeCommand(sql, parm));
 
-            adl.ForEach(id => cmds.Add(SqlHelper.MakeCommand($"delete SYS_RolePerm_Action where ID = '{id}'")));
+            adl.ForEach(id => cmds.Add(SqlHelper.MakeCommand(string.Format("delete SYS_RolePerm_Action where ID = '{0}'", id))));
             cmds.AddRange(InsertRoleAction(obj.ID, adt, us.UserId));
 
-            ddl.ForEach(id => cmds.Add(SqlHelper.MakeCommand($"delete SYS_RolePerm_Data where ID = '{id}'")));
+            ddl.ForEach(id => cmds.Add(SqlHelper.MakeCommand(string.Format("delete SYS_RolePerm_Data where ID = '{0}'", id))));
             cmds.AddRange(InsertRoleRelData(obj.ID, ddt, us.UserId));
 
             //cdl.ForEach(id => cmds.Add(SqlHelper.MakeCommand(String.Format("delete SYS_RolePerm_DataAbs where ID = '{0}'", id))));
@@ -284,7 +284,7 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return false;
 
-            var sql = $"Delete from SYS_Role where ID = '{id}' and BuiltIn = 0";
+            var sql = string.Format("Delete from SYS_Role where ID = '{0}' and BuiltIn = 0", id);
             return SqlHelper.SqlNonQuery(sql) > 0;
         }
 
@@ -299,7 +299,7 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return false;
 
-            var sql = $"Delete from {(type == 3 ? "SYS_Role_Title" : (type == 2 ? "SYS_Role_UserGroup" : "SYS_Role_User"))} where ID = '{id}'";
+            var sql = string.Format("Delete from {0} where ID = '{1}'", type == 3 ? "SYS_Role_Title" : (type == 2 ? "SYS_Role_UserGroup" : "SYS_Role_User"), id);
             return SqlHelper.SqlNonQuery(sql) > 0;
         }
 

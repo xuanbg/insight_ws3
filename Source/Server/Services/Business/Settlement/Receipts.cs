@@ -71,7 +71,7 @@ namespace Insight.WS.Service.Business
             sql += "join Get_PermData(@ModuleId, @UserId, @DeptId) P on P.OrgId = isnull(C.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = C.CreatorUserId group by C.ID) ";
             sql += "select C.ID, case C.Direction when 1 then '收款' else '付款' end as 类型, case when C.Validity = 1 then '正常' else '作废' end as 状态, C.ReceiptCode as 单据号, C.ObjectName as 结算单位, C.Description as 备注, C.CreateTime as 结算时间, U.Name as 经办人, CA.Status as 结账, A.ImageId, L.Permission ";
             sql += "from ABS_Clearing C join List L on L.ID = C.ID join SYS_User U on U.ID = C.CreatorUserId left join ABS_Clearing_Check CA on CA.ID = C.CheckId ";
-            sql += $"left join (select A.ClearingId, A.ImageId from ABS_Clearing_Attachs A join ImageData D on D.ID = A.ImageId and D.ImageType = 1 and D.Expand = 'fpx') A on A.ClearingId = C.ID where C.ObjectName like '%{str}%' order by C.CreateTime desc";
+            sql += string.Format("left join (select A.ClearingId, A.ImageId from ABS_Clearing_Attachs A join ImageData D on D.ID = A.ImageId and D.ImageType = 1 and D.Expand = 'fpx') A on A.ClearingId = C.ID where C.ObjectName like '%{0}%' order by C.CreateTime desc", str);
             var parm = new[]
             {
                 new SqlParameter("@ModuleId", SqlDbType.UniqueIdentifier) {Value = mid},
@@ -93,7 +93,7 @@ namespace Insight.WS.Service.Business
         {
             if (!OnlineManage.Verification(us)) return null;
 
-            var sql = $"select * from dbo.Get_FundPlan('{id}', {dirt})";
+            var sql = string.Format("select * from dbo.Get_FundPlan('{0}', {1})", id, dirt);
             return SqlHelper.SqlQuery(sql);
         }
 
@@ -139,7 +139,7 @@ namespace Insight.WS.Service.Business
         {
             if (!OnlineManage.Verification(us)) return null;
 
-            var sql = $"select Summary as 摘要, ObjectName as 项目, Units as 单位, Price as 单价, Counts as 数量, Amount as 金额 from ABS_Clearing_Item where ClearingId = '{cid}'";
+            var sql = string.Format("select Summary as 摘要, ObjectName as 项目, Units as 单位, Price as 单价, Counts as 数量, Amount as 金额 from ABS_Clearing_Item where ClearingId = '{0}'", cid);
             return SqlHelper.SqlQuery(sql);
         }
 
@@ -154,7 +154,7 @@ namespace Insight.WS.Service.Business
             if (!OnlineManage.Verification(us)) return null;
 
             var sql = "select P.Code as 票号, M.Name as 结算方式, sum(P.Amount) as 金额 from ABS_Clearing_Item I join ABS_Clearing_Pay P on P.ClearingItemId = I.ID ";
-            sql += $"join MasterData M on M.ID = P.PayType where ClearingId = '{cid}' group by P.Code, M.Name";
+            sql += string.Format("join MasterData M on M.ID = P.PayType where ClearingId = '{0}' group by P.Code, M.Name", cid);
             return SqlHelper.SqlQuery(sql);
         }
 
@@ -169,7 +169,7 @@ namespace Insight.WS.Service.Business
             if (!OnlineManage.Verification(us)) return null;
 
             var sql = "select I.ID, case I.ImageType when 1 then '单据' else '附件' end as 类型, I.Code as 编码, I.Name as 名称, I.Expand as 扩展名, ";
-            sql += $"M.Name as 密级, I.Pages as 页数, I.Size as 字节数 from ABS_Clearing_Attachs A join ImageData I on I.ID = A.ImageId left join MasterData M on M.ID = I.SecrecyDegree where ClearingId = '{cid}'";
+            sql += string.Format("M.Name as 密级, I.Pages as 页数, I.Size as 字节数 from ABS_Clearing_Attachs A join ImageData I on I.ID = A.ImageId left join MasterData M on M.ID = I.SecrecyDegree where ClearingId = '{0}'", cid);
             return SqlHelper.SqlQuery(sql);
         }
 
@@ -210,10 +210,10 @@ namespace Insight.WS.Service.Business
             switch (type)
             {
                 case 1:
-                    cmds.Add(SqlHelper.MakeCommand($"delete ABS_Clearing where ID = '{bid}'"));
+                    cmds.Add(SqlHelper.MakeCommand(string.Format("delete ABS_Clearing where ID = '{0}'", bid)));
                     break;
                 case 2:
-                    cmds.Add(SqlHelper.MakeCommand($"update ABS_Clearing set Validity = 0 where ID = '{bid}'"));
+                    cmds.Add(SqlHelper.MakeCommand(string.Format("update ABS_Clearing set Validity = 0 where ID = '{0}'", bid)));
                     break;
                 case 3:
                     break;
@@ -252,7 +252,7 @@ namespace Insight.WS.Service.Business
 
                 foreach (var adv in advs)
                 {
-                    var filter = adv.ObjectId == null ? "项目 <> '预付款' and 金额 - UseAdvance > 0" : $"ProductId = '{adv.ObjectId}' and 金额 - UseAdvance > 0";
+                    var filter = adv.ObjectId == null ? "项目 <> '预付款' and 金额 - UseAdvance > 0" : string.Format("ProductId = '{0}' and 金额 - UseAdvance > 0", adv.ObjectId);
                     UseAdvance(idt.Select(filter), adv, irs[0]);
                 }
             }

@@ -118,7 +118,7 @@ namespace Insight.WS.Client.MasterDatas
 
             var ids = new List<object>();
             treCategory.GetNodeList().FindAll(n => n.HasChildren && n.Expanded).ForEach(n => ids.Add(n.GetValue("ID")));
-            var fid = treCategory.FocusedNode?.GetValue("ID");
+            var fid = treCategory.FocusedNode == null ? null : treCategory.FocusedNode.GetValue("ID");
 
             treCategory.DataSource = _Category;
             Format.TreeFormat(treCategory);
@@ -135,7 +135,7 @@ namespace Insight.WS.Client.MasterDatas
         private void InitData()
         {
             var dv = _Dictionary.Copy().DefaultView;
-            dv.RowFilter = $"CategoryId = '{treCategory.FocusedNode.GetValue("ID")}'";
+            dv.RowFilter = string.Format("CategoryId = '{0}'", treCategory.FocusedNode.GetValue("ID"));
             grdData.DataSource = dv;
 
             if (dv.Count == 0)
@@ -230,7 +230,7 @@ namespace Insight.WS.Client.MasterDatas
         private void DelData()
         {
             var row = gdvData.GetFocusedDataRow();
-            if (General.ShowConfirm($"您确定要删除【{row["名称"]}】吗?") != DialogResult.OK) return;
+            if (General.ShowConfirm(string.Format("您确定要删除【{0}】吗?", row["名称"])) != DialogResult.OK) return;
 
             using (var cli = new MasterDatasClient(Binding, Address))
             {
@@ -262,11 +262,11 @@ namespace Insight.WS.Client.MasterDatas
         private void Enable()
         {
             var row = gdvData.GetFocusedDataRow();
-            if (General.ShowConfirm($"您确定要启用【{row["名称"]}】吗?") != DialogResult.OK) return;
+            if (General.ShowConfirm(string.Format("您确定要启用【{0}】吗?", row["名称"])) != DialogResult.OK) return;
 
             if (!Commons.EnableMasterData((Guid) row["ID"], "MDG_Dictionary"))
             {
-                General.ShowError($"对不起，数据【{row["名称"]}】启用失败！");
+                General.ShowError(string.Format("对不起，数据【{0}】启用失败！", row["名称"]));
                 return;
             }
             

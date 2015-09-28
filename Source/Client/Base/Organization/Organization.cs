@@ -66,7 +66,7 @@ namespace Insight.WS.Client.Platform.Base
             var type = (int)e.Node.GetValue("NodeType");
             var canDel = e.Node.Nodes.Count == 0;
             var canAdd = type == 3;
-            var canRemove = (type == 3 && _Members.Select($"TitleId = '{_ObjectId}'").Length > 0);
+            var canRemove = (type == 3 && _Members.Select(string.Format("TitleId = '{0}'", _ObjectId)).Length > 0);
             SwitchItemStatus(new Context("EditOrg", true), new Context("DeleteOrg", canDel), new Context("Merge", CanMerge(type)), new Context("Move", CanMove(type)), new Context("AddMember", canAdd), new Context("Remove", canRemove));
             InitMember();
         }
@@ -89,7 +89,7 @@ namespace Insight.WS.Client.Platform.Base
                 var type = (int)treOrgList.FocusedNode.GetValue("NodeType");
                 var canDel = treOrgList.FocusedNode.Nodes.Count == 0;
                 var canAdd = type == 3;
-                var canRemove = (type == 3 && _Members.Select($"TitleId = '{_ObjectId}'").Length > 0);
+                var canRemove = (type == 3 && _Members.Select(string.Format("TitleId = '{0}'", _ObjectId)).Length > 0);
                 SwitchItemStatus(new Context("EditOrg", true), new Context("DeleteOrg", canDel), new Context("Merge", CanMerge(type)), new Context("Move", CanMove(type)), new Context("AddMember", canAdd), new Context("Remove", canRemove));
             }
         }
@@ -123,7 +123,7 @@ namespace Insight.WS.Client.Platform.Base
 
             var ids = new List<object>();
             treOrgList.GetNodeList().FindAll(n => n.HasChildren && n.Expanded).ForEach(n => { ids.Add(n.GetValue("ID")); });
-            var fid = treOrgList.FocusedNode?.GetValue("ID");
+            var fid = treOrgList.FocusedNode == null ? null : treOrgList.FocusedNode.GetValue("ID");
 
             treOrgList.DataSource = _Orgs;
             Format.TreeFormat(treOrgList);
@@ -144,7 +144,7 @@ namespace Insight.WS.Client.Platform.Base
         /// </summary>
         private void InitMember()
         {
-            var filter = $"TitleId = '{(treOrgList.FocusedNode == null ? "" : treOrgList.FocusedNode.GetValue("ID"))}'";
+            var filter = string.Format("TitleId = '{0}'", treOrgList.FocusedNode == null ? "" : treOrgList.FocusedNode.GetValue("ID"));
             var dv = _Members.Copy().DefaultView;
             dv.RowFilter = filter;
             grdMember.DataSource = dv;
@@ -166,7 +166,7 @@ namespace Insight.WS.Client.Platform.Base
             SubNodes(_ObjectId);
 
             var parentId = treOrgList.FocusedNode.GetValue("ParentId");
-            var filter = $"NodeType <= {(type == 3 ? 2 : type)}";
+            var filter = string.Format("NodeType <= {0}", (type == 3 ? 2 : type));
             foreach (var row in _Orgs.Select(filter).Where(row => (type != 3 || (int)row["NodeType"] != 1) && !row["ID"].Equals(parentId)))
             {
                 _NodeList.Add((Guid)row["ID"]);
@@ -190,7 +190,7 @@ namespace Insight.WS.Client.Platform.Base
             _SubNodes = new List<Guid>();
             SubNodes(_ObjectId);
 
-            foreach (var row in _Orgs.Select($"NodeType = {type}"))
+            foreach (var row in _Orgs.Select(string.Format("NodeType = {0}", type)))
             {
                 _NodeList.Add((Guid)row["ID"]);
             }
@@ -208,7 +208,7 @@ namespace Insight.WS.Client.Platform.Base
         /// <param name="id"></param>
         private void SubNodes(Guid id)
         {
-            foreach (var nodeId in _Orgs.Select($"ParentId = '{id}'").Select(row => (Guid)row["ID"]))
+            foreach (var nodeId in _Orgs.Select(string.Format("ParentId = '{0}'", id)).Select(row => (Guid)row["ID"]))
             {
                 _SubNodes.Add(nodeId);
                 SubNodes(nodeId);
@@ -289,14 +289,14 @@ namespace Insight.WS.Client.Platform.Base
         private void NodeRemove()
         {
             var fn = treOrgList.FocusedNode.GetValue("名称");
-            if (General.ShowConfirm($"您确定要删除节点【{fn}】吗？\r\n节点删除后将无法恢复！") != DialogResult.OK) return;
+            if (General.ShowConfirm(string.Format("您确定要删除节点【{0}】吗？\r\n节点删除后将无法恢复！", fn)) != DialogResult.OK) return;
 
             var pn = treOrgList.FocusedNode.ParentNode;
             using (var cli = new BaseClient(Binding, Address))
             {
                 if (!cli.DeleteOrg(UserSession, _ObjectId))
                 {
-                    General.ShowError($"对不起，【{fn}】已经被使用，无法删除！");
+                    General.ShowError(string.Format("对不起，【{0}】已经被使用，无法删除！", fn));
                     return;
                 }
                 
@@ -381,7 +381,7 @@ namespace Insight.WS.Client.Platform.Base
             var dig = new Member
             {
                 IsAdd = false,
-                List = _Members.Select($"TitleId = '{_ObjectId}'").CopyToDataTable()
+                List = _Members.Select(string.Format("TitleId = '{0}'", _ObjectId)).CopyToDataTable()
             };
             if (dig.ShowDialog() == DialogResult.OK)
             {

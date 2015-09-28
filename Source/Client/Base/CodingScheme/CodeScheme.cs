@@ -102,7 +102,7 @@ namespace Insight.WS.Client.Platform.Base
             }
             if (_Scheme.Name != txtName.Text.Trim() && Commons.NameIsExist(txtName.Text.Trim(), "Name", "SYS_Code_Scheme"))
             {
-                General.ShowWarning($"编码方案【{txtName.Text.Trim()}】已经存在！");
+                General.ShowWarning(string.Format("编码方案【{0}】已经存在！", txtName.Text.Trim()));
                 txtName.Focus();
                 return false;
             }
@@ -128,7 +128,7 @@ namespace Insight.WS.Client.Platform.Base
                     if (cli.UpdateScheme(OpenForm.UserSession, _Scheme))
                         DialogResult = DialogResult.OK;
                     else
-                        General.ShowError($"更新编码方案【{_Scheme.Name}】失败！如多次失败，请联系管理员。");
+                        General.ShowError(string.Format("更新编码方案【{0}】失败！如多次失败，请联系管理员。", _Scheme.Name));
                 }
                 else
                 {

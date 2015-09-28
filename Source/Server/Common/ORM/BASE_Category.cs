@@ -14,30 +14,26 @@ namespace Insight.WS.Server.Common.ORM
     using System.Collections.Generic;
     
     [DataContract(IsReference = true)]
-    [KnownType(typeof(ABS_Contract_Subjects))]
     [KnownType(typeof(SYS_Organization))]
     [KnownType(typeof(SYS_User))]
     [KnownType(typeof(SYS_Module))]
     [KnownType(typeof(ImageData))]
     [KnownType(typeof(MasterData))]
     [KnownType(typeof(MasterData_Property))]
-    [KnownType(typeof(MDE_Member_Address))]
     [KnownType(typeof(MDG_Customer))]
     [KnownType(typeof(MDG_Supplier))]
     [KnownType(typeof(SYS_Alert_Rules))]
     [KnownType(typeof(SYS_Report_Templates))]
     [KnownType(typeof(SYS_Report_Definition))]
+    [KnownType(typeof(ABS_Contract_Subjects))]
     
     public partial class BASE_Category
     {
         public BASE_Category()
         {
-            this.ABS_Contract_Subjects = new HashSet<ABS_Contract_Subjects>();
             this.ImageData = new HashSet<ImageData>();
             this.MasterData = new HashSet<MasterData>();
             this.MasterData_Property = new HashSet<MasterData_Property>();
-            this.MDE_Member_Address = new HashSet<MDE_Member_Address>();
-            this.MDE_Member_Address1 = new HashSet<MDE_Member_Address>();
             this.MDG_Customer = new HashSet<MDG_Customer>();
             this.MDG_Customer1 = new HashSet<MDG_Customer>();
             this.MDG_Supplier = new HashSet<MDG_Supplier>();
@@ -45,6 +41,7 @@ namespace Insight.WS.Server.Common.ORM
             this.SYS_Alert_Rules = new HashSet<SYS_Alert_Rules>();
             this.SYS_Report_Templates = new HashSet<SYS_Report_Templates>();
             this.SYS_Report_Definition = new HashSet<SYS_Report_Definition>();
+            this.ABS_Contract_Subjects = new HashSet<ABS_Contract_Subjects>();
         }
     
     	[DataMember]
@@ -77,8 +74,6 @@ namespace Insight.WS.Server.Common.ORM
         public System.DateTime CreateTime { get; set; }
     
     	[DataMember]
-        public virtual ICollection<ABS_Contract_Subjects> ABS_Contract_Subjects { get; set; }
-    	[DataMember]
         public virtual SYS_Organization SYS_Organization { get; set; }
     	[DataMember]
         public virtual SYS_User SYS_User { get; set; }
@@ -90,10 +85,6 @@ namespace Insight.WS.Server.Common.ORM
         public virtual ICollection<MasterData> MasterData { get; set; }
     	[DataMember]
         public virtual ICollection<MasterData_Property> MasterData_Property { get; set; }
-    	[DataMember]
-        public virtual ICollection<MDE_Member_Address> MDE_Member_Address { get; set; }
-    	[DataMember]
-        public virtual ICollection<MDE_Member_Address> MDE_Member_Address1 { get; set; }
     	[DataMember]
         public virtual ICollection<MDG_Customer> MDG_Customer { get; set; }
     	[DataMember]
@@ -108,5 +99,7 @@ namespace Insight.WS.Server.Common.ORM
         public virtual ICollection<SYS_Report_Templates> SYS_Report_Templates { get; set; }
     	[DataMember]
         public virtual ICollection<SYS_Report_Definition> SYS_Report_Definition { get; set; }
+    	[DataMember]
+        public virtual ICollection<ABS_Contract_Subjects> ABS_Contract_Subjects { get; set; }
     }
 }

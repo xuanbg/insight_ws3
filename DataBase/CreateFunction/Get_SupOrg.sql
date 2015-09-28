@@ -7,7 +7,7 @@ GO
 
 CREATE FUNCTION Get_SupOrg (
 @DeptId                UNIQUEIDENTIFIER,    --部门ID
-@Type                  INT                  --机构类型：0、根机构；1、上级机构
+@Type                  INT             --机构类型：0、根机构；1、上级机构
 )
 
 RETURNS UNIQUEIDENTIFIER AS

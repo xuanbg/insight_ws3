@@ -144,7 +144,7 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return false;
 
-            var sql = $"delete from SYS_Report_Templates where ID = '{id}'";
+            var sql = string.Format("delete from SYS_Report_Templates where ID = '{0}'", id);
             return SqlHelper.SqlNonQuery(sql) > 0;
         }
 

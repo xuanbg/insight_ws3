@@ -14,25 +14,16 @@ namespace Insight.WS.Server.Common.ORM
     using System.Collections.Generic;
     
     [DataContract(IsReference = true)]
-    [KnownType(typeof(ABS_Advance))]
     [KnownType(typeof(ABS_Clearing))]
-    [KnownType(typeof(ABS_Clearing_Check))]
     [KnownType(typeof(ABS_Contract))]
     [KnownType(typeof(ABS_Delivery))]
     [KnownType(typeof(ABS_StockCapital))]
-    [KnownType(typeof(ABS_Storage_Location))]
     [KnownType(typeof(BASE_Category))]
-    [KnownType(typeof(BIZ_StagePlan))]
     [KnownType(typeof(ImageData))]
-    [KnownType(typeof(MDE_Member_Contact))]
-    [KnownType(typeof(MDE_Member_CreditInfo))]
-    [KnownType(typeof(MDE_Member_Feedback))]
-    [KnownType(typeof(MDE_Member_Withdrawal))]
     [KnownType(typeof(MDG_Contact))]
     [KnownType(typeof(MDG_Customer))]
     [KnownType(typeof(MDG_Dictionary))]
     [KnownType(typeof(MDG_Employee))]
-    [KnownType(typeof(MDG_EntMember))]
     [KnownType(typeof(MDG_Expense))]
     [KnownType(typeof(MDG_Material))]
     [KnownType(typeof(MDG_Supplier))]
@@ -52,31 +43,25 @@ namespace Insight.WS.Server.Common.ORM
     [KnownType(typeof(SYS_Report_Entity))]
     [KnownType(typeof(SYS_Role_Title))]
     [KnownType(typeof(SYS_RolePerm_DataAbs))]
+    [KnownType(typeof(ABS_Advance))]
+    [KnownType(typeof(ABS_Clearing_Check))]
+    [KnownType(typeof(ABS_Storage_Location))]
     
     public partial class SYS_Organization
     {
         public SYS_Organization()
         {
-            this.ABS_Advance = new HashSet<ABS_Advance>();
             this.ABS_Clearing = new HashSet<ABS_Clearing>();
-            this.ABS_Clearing_Check = new HashSet<ABS_Clearing_Check>();
             this.ABS_Contract = new HashSet<ABS_Contract>();
             this.ABS_Contract1 = new HashSet<ABS_Contract>();
             this.ABS_Delivery = new HashSet<ABS_Delivery>();
             this.ABS_StockCapital = new HashSet<ABS_StockCapital>();
-            this.ABS_Storage_Location = new HashSet<ABS_Storage_Location>();
             this.BASE_Category = new HashSet<BASE_Category>();
-            this.BIZ_StagePlan = new HashSet<BIZ_StagePlan>();
             this.ImageData = new HashSet<ImageData>();
-            this.MDE_Member_Contact = new HashSet<MDE_Member_Contact>();
-            this.MDE_Member_CreditInfo = new HashSet<MDE_Member_CreditInfo>();
-            this.MDE_Member_Feedback = new HashSet<MDE_Member_Feedback>();
-            this.MDE_Member_Withdrawal = new HashSet<MDE_Member_Withdrawal>();
             this.MDG_Contact = new HashSet<MDG_Contact>();
             this.MDG_Customer = new HashSet<MDG_Customer>();
             this.MDG_Dictionary = new HashSet<MDG_Dictionary>();
             this.MDG_Employee = new HashSet<MDG_Employee>();
-            this.MDG_EntMember = new HashSet<MDG_EntMember>();
             this.MDG_Expense = new HashSet<MDG_Expense>();
             this.MDG_Material = new HashSet<MDG_Material>();
             this.MDG_Supplier = new HashSet<MDG_Supplier>();
@@ -96,6 +81,9 @@ namespace Insight.WS.Server.Common.ORM
             this.SYS_Report_Entity = new HashSet<SYS_Report_Entity>();
             this.SYS_Role_Title = new HashSet<SYS_Role_Title>();
             this.SYS_RolePerm_DataAbs = new HashSet<SYS_RolePerm_DataAbs>();
+            this.ABS_Advance = new HashSet<ABS_Advance>();
+            this.ABS_Clearing_Check = new HashSet<ABS_Clearing_Check>();
+            this.ABS_Storage_Location = new HashSet<ABS_Storage_Location>();
         }
     
     	[DataMember]
@@ -126,11 +114,7 @@ namespace Insight.WS.Server.Common.ORM
         public System.DateTime CreateTime { get; set; }
     
     	[DataMember]
-        public virtual ICollection<ABS_Advance> ABS_Advance { get; set; }
-    	[DataMember]
         public virtual ICollection<ABS_Clearing> ABS_Clearing { get; set; }
-    	[DataMember]
-        public virtual ICollection<ABS_Clearing_Check> ABS_Clearing_Check { get; set; }
     	[DataMember]
         public virtual ICollection<ABS_Contract> ABS_Contract { get; set; }
     	[DataMember]
@@ -140,21 +124,9 @@ namespace Insight.WS.Server.Common.ORM
     	[DataMember]
         public virtual ICollection<ABS_StockCapital> ABS_StockCapital { get; set; }
     	[DataMember]
-        public virtual ICollection<ABS_Storage_Location> ABS_Storage_Location { get; set; }
-    	[DataMember]
         public virtual ICollection<BASE_Category> BASE_Category { get; set; }
     	[DataMember]
-        public virtual ICollection<BIZ_StagePlan> BIZ_StagePlan { get; set; }
-    	[DataMember]
         public virtual ICollection<ImageData> ImageData { get; set; }
-    	[DataMember]
-        public virtual ICollection<MDE_Member_Contact> MDE_Member_Contact { get; set; }
-    	[DataMember]
-        public virtual ICollection<MDE_Member_CreditInfo> MDE_Member_CreditInfo { get; set; }
-    	[DataMember]
-        public virtual ICollection<MDE_Member_Feedback> MDE_Member_Feedback { get; set; }
-    	[DataMember]
-        public virtual ICollection<MDE_Member_Withdrawal> MDE_Member_Withdrawal { get; set; }
     	[DataMember]
         public virtual ICollection<MDG_Contact> MDG_Contact { get; set; }
     	[DataMember]
@@ -165,8 +137,6 @@ namespace Insight.WS.Server.Common.ORM
         public virtual MDG_Dictionary MDG_Dictionary1 { get; set; }
     	[DataMember]
         public virtual ICollection<MDG_Employee> MDG_Employee { get; set; }
-    	[DataMember]
-        public virtual ICollection<MDG_EntMember> MDG_EntMember { get; set; }
     	[DataMember]
         public virtual ICollection<MDG_Expense> MDG_Expense { get; set; }
     	[DataMember]
@@ -209,5 +179,11 @@ namespace Insight.WS.Server.Common.ORM
         public virtual ICollection<SYS_Role_Title> SYS_Role_Title { get; set; }
     	[DataMember]
         public virtual ICollection<SYS_RolePerm_DataAbs> SYS_RolePerm_DataAbs { get; set; }
+    	[DataMember]
+        public virtual ICollection<ABS_Advance> ABS_Advance { get; set; }
+    	[DataMember]
+        public virtual ICollection<ABS_Clearing_Check> ABS_Clearing_Check { get; set; }
+    	[DataMember]
+        public virtual ICollection<ABS_Storage_Location> ABS_Storage_Location { get; set; }
     }
 }

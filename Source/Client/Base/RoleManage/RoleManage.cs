@@ -325,13 +325,13 @@ namespace Insight.WS.Client.Platform.Base
         private void RoleDelete()
         {
             var row = gdvRole.GetFocusedDataRow();
-            if (General.ShowConfirm($"您确定要删除角色【{row["名称"]}】吗？\r\n角色删除后将无法恢复！") != DialogResult.OK) return;
+            if (General.ShowConfirm(string.Format("您确定要删除角色【{0}】吗？\r\n角色删除后将无法恢复！", row["名称"])) != DialogResult.OK) return;
 
             using (var cli = new BaseClient(Binding, Address))
             {
                 if (!cli.DeleteRole(UserSession, (Guid) row["ID"]))
                 {
-                    General.ShowError($"对不起，角色【{row["名称"]}】删除失败！如多次删除失败，请联系管理员。");
+                    General.ShowError(string.Format("对不起，角色【{0}】删除失败！如多次删除失败，请联系管理员。", row["名称"]));
                     return;
                 }
                 
@@ -366,13 +366,13 @@ namespace Insight.WS.Client.Platform.Base
         {
             var handle = gdvRole.FocusedRowHandle;
             var node = treMember.FocusedNode;
-            if (General.ShowConfirm($"您确定要移除角色成员【{node.GetValue("成员")}】吗？\r\n角色成员被移除后相应用户将失去该角色赋予的权限！") != DialogResult.OK) return;
+            if (General.ShowConfirm(string.Format("您确定要移除角色成员【{0}】吗？\r\n角色成员被移除后相应用户将失去该角色赋予的权限！", node.GetValue("成员"))) != DialogResult.OK) return;
 
             using (var cli = new BaseClient(Binding, Address))
             {
                 if (!cli.DeleteRoleMember(UserSession, (int) node.GetValue("NodeType"), (Guid) node.GetValue("ID")))
                 {
-                    General.ShowError($"对不起，角色成员【{node.GetValue("成员")}】移除失败！如多次移除失败，请联系管理员。");
+                    General.ShowError(string.Format("对不起，角色成员【{0}】移除失败！如多次移除失败，请联系管理员。", node.GetValue("成员")));
                     return;
                 }
                 

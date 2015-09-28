@@ -260,13 +260,13 @@ namespace Insight.WS.Client.Platform.Base
         private void GroupDelete()
         {
             var row = gdvGroup.GetFocusedDataRow();
-            if (General.ShowConfirm($"您确定要删除用户组【{row["组名称"]}】吗？\r\n用户组删除后将无法恢复！") != DialogResult.OK) return;
+            if (General.ShowConfirm(string.Format("您确定要删除用户组【{0}】吗？\r\n用户组删除后将无法恢复！", row["组名称"])) != DialogResult.OK) return;
 
             using (var cli = new BaseClient(Binding, Address))
             {
                 if (!cli.DeleteGroup(UserSession, (Guid) row["ID"]))
                 {
-                    General.ShowError($"对不起，用户组【{row["组名称"]}】已经被使用，无法删除！");
+                    General.ShowError(string.Format("对不起，用户组【{0}】已经被使用，无法删除！", row["组名称"]));
                     return;
                 }
                 
@@ -317,7 +317,7 @@ namespace Insight.WS.Client.Platform.Base
         {
             var focused = gdvGroup.FocusedRowHandle;
             var id = (Guid)gdvGroup.GetFocusedDataRow()["ID"];
-            var list = _Members.Select($"GroupId = '{id}'").CopyToDataTable();
+            var list = _Members.Select(string.Format("GroupId = '{0}'", id)).CopyToDataTable();
 
             var dig = new Member
             {
@@ -377,13 +377,13 @@ namespace Insight.WS.Client.Platform.Base
         private void UserDelete()
         {
             var row = gdvUser.GetFocusedDataRow();
-            if (General.ShowConfirm($"您确定要删除用户【{row["登录名"]}】吗？\r\n用户删除后将无法恢复！") != DialogResult.OK) return;
+            if (General.ShowConfirm(string.Format("您确定要删除用户【{0}】吗？\r\n用户删除后将无法恢复！", row["登录名"])) != DialogResult.OK) return;
 
             using (var cli = new BaseClient(Binding, Address))
             {
                 if (!cli.DeleteUser(UserSession, (Guid) row["ID"]))
                 {
-                    General.ShowError($"对不起，用户【{row["登录名"]}】已经在系统中产生了相关业务记录，无法删除！\r\n如果您想禁止该用户登录系统，请使用封禁功能。");
+                    General.ShowError(string.Format("对不起，用户【{0}】已经在系统中产生了相关业务记录，无法删除！\r\n如果您想禁止该用户登录系统，请使用封禁功能。", row["登录名"]));
                     return;
                 }
                 
@@ -406,7 +406,7 @@ namespace Insight.WS.Client.Platform.Base
         private void Banned()
         {
             var row = gdvUser.GetFocusedDataRow();
-            if (General.ShowConfirm($"您确定要封禁用户【{row["登录名"]}】吗？\r\n用户被封禁后将无法登录系统！") != DialogResult.OK) return;
+            if (General.ShowConfirm(string.Format("您确定要封禁用户【{0}】吗？\r\n用户被封禁后将无法登录系统！", row["登录名"])) != DialogResult.OK) return;
 
             using (var cli = new BaseClient(Binding, Address))
             {
@@ -424,7 +424,7 @@ namespace Insight.WS.Client.Platform.Base
         private void Release()
         {
             var row = gdvUser.GetFocusedDataRow();
-            if (General.ShowConfirm($"您确定要对用户【{row["登录名"]}】解封吗？\r\n用户解封后即可正常登录系统！") != DialogResult.OK) return;
+            if (General.ShowConfirm(string.Format("您确定要对用户【{0}】解封吗？\r\n用户解封后即可正常登录系统！", row["登录名"])) != DialogResult.OK) return;
 
             using (var cli = new BaseClient(Binding, Address))
             {
@@ -442,17 +442,17 @@ namespace Insight.WS.Client.Platform.Base
         private void Reset()
         {
             var row = gdvUser.GetFocusedDataRow();
-            if (General.ShowConfirm($"您确定要重置用户【{row["登录名"]}】的密码为 123456 吗？") != DialogResult.OK) return;
+            if (General.ShowConfirm(string.Format("您确定要重置用户【{0}】的密码为 123456 吗？", row["登录名"])) != DialogResult.OK) return;
 
             using (var cli = new BaseClient(Binding, Address))
             {
                 if (cli.ResetPassword(UserSession, (Guid)row["ID"]))
                 {
-                    General.ShowMessage($"用户【{row["登录名"]}】的密码已经重置。");
+                    General.ShowMessage(string.Format("用户【{0}】的密码已经重置。", row["登录名"]));
                 }
                 else
                 {
-                    General.ShowError($"对不起，用户【{row["登录名"]}】的密码重置失败。");
+                    General.ShowError(string.Format("对不起，用户【{0}】的密码重置失败。", row["登录名"]));
                 }
             }
         }

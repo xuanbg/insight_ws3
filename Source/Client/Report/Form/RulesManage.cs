@@ -125,13 +125,13 @@ namespace Insight.WS.Client.Platform.Report
         private void DeleteRule()
         {
             var row = gdvRule.GetDataRow(gdvRule.FocusedRowHandle);
-            if (General.ShowConfirm($"您确定要删除分期规则【{row["名称"]}】吗?") != DialogResult.OK) return;
+            if (General.ShowConfirm(string.Format("您确定要删除分期规则【{0}】吗?", row["名称"])) != DialogResult.OK) return;
 
             using (var cli = new ReportClient(Binding, Address))
             {
                 if (!cli.DelRule(UserSession, (Guid) row["ID"]))
                 {
-                    General.ShowError($"对不起，分期规则【{row["名称"]}】已经被使用，无法删除该规则！");
+                    General.ShowError(string.Format("对不起，分期规则【{0}】已经被使用，无法删除该规则！", row["名称"]));
                     return;
                 }
                 

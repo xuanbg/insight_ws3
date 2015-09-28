@@ -34,7 +34,7 @@ namespace Insight.WS.Client.Platform.Report
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReportManage));
+            var resources = new System.ComponentModel.ComponentResourceManager(typeof(ReportManage));
             this.splMain = new DevExpress.XtraEditors.SplitContainerControl();
             this.grpTree = new DevExpress.XtraEditors.GroupControl();
             this.treCategory = new DevExpress.XtraTreeList.TreeList();
@@ -152,11 +152,11 @@ namespace Insight.WS.Client.Platform.Report
             // 
             this.treCategory.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.treCategory.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treCategory.Location = new System.Drawing.Point(2, 21);
+            this.treCategory.Location = new System.Drawing.Point(2, 22);
             this.treCategory.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.treCategory.Name = "treCategory";
             this.treCategory.SelectImageList = this.imgFolderNode;
-            this.treCategory.Size = new System.Drawing.Size(196, 567);
+            this.treCategory.Size = new System.Drawing.Size(196, 566);
             this.treCategory.TabIndex = 1;
             this.treCategory.FocusedNodeChanged += new DevExpress.XtraTreeList.FocusedNodeChangedEventHandler(this.treeList_FocusedNodeChanged);
             this.treCategory.DoubleClick += new System.EventHandler(this.treCategory_DoubleClick);
@@ -191,11 +191,11 @@ namespace Insight.WS.Client.Platform.Report
             // 
             this.grdReport.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grdReport.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.grdReport.Location = new System.Drawing.Point(2, 21);
+            this.grdReport.Location = new System.Drawing.Point(2, 22);
             this.grdReport.MainView = this.gdvReport;
             this.grdReport.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.grdReport.Name = "grdReport";
-            this.grdReport.Size = new System.Drawing.Size(861, 337);
+            this.grdReport.Size = new System.Drawing.Size(861, 336);
             this.grdReport.TabIndex = 2;
             this.grdReport.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gdvReport,
@@ -245,11 +245,11 @@ namespace Insight.WS.Client.Platform.Report
             // 
             this.grdRules.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grdRules.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.grdRules.Location = new System.Drawing.Point(2, 21);
+            this.grdRules.Location = new System.Drawing.Point(2, 22);
             this.grdRules.MainView = this.gdvRules;
             this.grdRules.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.grdRules.Name = "grdRules";
-            this.grdRules.Size = new System.Drawing.Size(281, 202);
+            this.grdRules.Size = new System.Drawing.Size(281, 201);
             this.grdRules.TabIndex = 3;
             this.grdRules.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gdvRules,
@@ -294,11 +294,11 @@ namespace Insight.WS.Client.Platform.Report
             // 
             this.grdEntitys.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grdEntitys.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.grdEntitys.Location = new System.Drawing.Point(2, 21);
+            this.grdEntitys.Location = new System.Drawing.Point(2, 22);
             this.grdEntitys.MainView = this.gdvEntitys;
             this.grdEntitys.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.grdEntitys.Name = "grdEntitys";
-            this.grdEntitys.Size = new System.Drawing.Size(281, 202);
+            this.grdEntitys.Size = new System.Drawing.Size(281, 201);
             this.grdEntitys.TabIndex = 4;
             this.grdEntitys.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gdvEntitys,
@@ -330,11 +330,11 @@ namespace Insight.WS.Client.Platform.Report
             // 
             this.grdMembers.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grdMembers.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.grdMembers.Location = new System.Drawing.Point(2, 21);
+            this.grdMembers.Location = new System.Drawing.Point(2, 22);
             this.grdMembers.MainView = this.gdvMembers;
             this.grdMembers.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.grdMembers.Name = "grdMembers";
-            this.grdMembers.Size = new System.Drawing.Size(281, 202);
+            this.grdMembers.Size = new System.Drawing.Size(281, 201);
             this.grdMembers.TabIndex = 5;
             this.grdMembers.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gdvMembers,

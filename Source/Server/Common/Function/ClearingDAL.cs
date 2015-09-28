@@ -1,13 +1,6 @@
 ﻿using System;
-<<<<<<< HEAD
 using System.Data;
 using System.Data.SqlClient;
-=======
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
->>>>>>> xfb
 using Insight.WS.Server.Common.ORM;
 
 namespace Insight.WS.Server.Common
@@ -84,105 +77,5 @@ namespace Insight.WS.Server.Common
             return SqlHelper.MakeCommand(sql, parm);
         }
 
-<<<<<<< HEAD
-=======
-        /// <summary>
-        /// 构造账单履约结算记录的SqlCommand
-        /// </summary>
-        /// <param name="uid">用户ID</param>
-        /// <param name="user">用户姓名</param>
-        /// <param name="ba">本金金额</param>
-        /// <param name="sa">服务费金额</param>
-        /// <param name="la">违约金金额</param>
-        /// <param name="payType">付款方式</param>
-        /// <param name="payCode">结算号</param>
-        /// <param name="direction">资金方向：1、流入；-1、流出（默认流入）</param>
-        /// <returns>SqlCommand集合</returns>
-        public static IEnumerable<SqlCommand> BillClearing(Guid uid, string user, decimal ba, decimal sa, decimal la, string payType, string payCode, int direction = 1)
-        {
-            Guid payId;
-            MasterData product;
-            MasterData service;
-            MasterData liquidated;
-            using (var context = new WSEntities())
-            {
-                payId = context.MasterData.Single(m => m.Alias == payType).ID;
-                product = context.MasterData.Single(m => m.Alias == "Loans");
-                service = context.MasterData.Single(m => m.Alias == "Service");
-                liquidated = context.MasterData.Single(m => m.Alias == "Liquidated");
-            }
-
-            // 插入结算记录
-            var clear = new ABS_Clearing
-            {
-                Direction = direction,
-                ObjectId = uid,
-                ObjectName = user,
-                Description = "分期购物商城账单还款",
-                CreatorUserId = Guid.Empty
-            };
-            var cmds = new List<SqlCommand> { InsertClearing(clear) };
-
-            // 结算本金
-            var item = new ABS_Clearing_Item
-            {
-                Summary = "分期购物账单还款（本金）",
-                ObjectId = product.ID,
-                ObjectName = product.Name,
-                Units = "元",
-                Amount = ba
-            };
-            cmds.Add(InsertDetail(item));
-            var pay = new ABS_Clearing_Pay
-            {
-                PayType = payId,
-                Code = payCode,
-                Amount = sa
-            };
-            cmds.Add(InsertPays(pay));
-
-            // 结算服务费
-            item = new ABS_Clearing_Item
-            {
-                Summary = "支付分期服务费",
-                ObjectId = service.ID,
-                ObjectName = service.Name,
-                Units = "元",
-                Amount = sa
-            };
-            cmds.Add(InsertDetail(item));
-            pay = new ABS_Clearing_Pay
-            {
-                PayType = payId,
-                Code = payCode,
-                Amount = sa
-            };
-            cmds.Add(InsertPays(pay));
-
-            // 结算违约金
-            if (la > 0)
-            {
-                item = new ABS_Clearing_Item
-                {
-                    Summary = "支付逾期违约金",
-                    ObjectId = liquidated.ID,
-                    ObjectName = liquidated.Name,
-                    Units = "元",
-                    Amount = la
-                };
-                cmds.Add(InsertDetail(item));
-                pay = new ABS_Clearing_Pay
-                {
-                    PayType = payId,
-                    Code = payCode,
-                    Amount = la
-                };
-                cmds.Add(InsertPays(pay));
-            }
-
-            return cmds;
-        }
-
->>>>>>> xfb
     }
 }

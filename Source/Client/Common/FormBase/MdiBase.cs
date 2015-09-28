@@ -166,7 +166,7 @@ namespace Insight.WS.Client.Common
         protected void DeleteCatalog(TreeList tree)
         {
             var fn = tree.FocusedNode;
-            if (General.ShowConfirm($"您确定要删除分类【{fn.GetValue("Name")}】吗？") != DialogResult.OK)
+            if (General.ShowConfirm(string.Format("您确定要删除分类【{0}】吗?", fn.GetValue("Name"))) != DialogResult.OK)
                 return;
 
             using (var cli = new CommonsClient(MainForm.Binding, MainForm.Address))
@@ -214,8 +214,9 @@ namespace Insight.WS.Client.Common
         protected void PreviewImage(Guid oid, Guid? tid)
         {
             var print = BuildReport(oid, tid);
+            if (print == null) return;
 
-            print?.ShowPrepared(true);
+            print.ShowPrepared(true);
         }
 
         /// <summary>

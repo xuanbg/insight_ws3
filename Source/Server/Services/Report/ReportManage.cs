@@ -199,9 +199,9 @@ namespace Insight.WS.Service
             };
             cmds.Add(SqlHelper.MakeCommand(sql, parm));
 
-            cmds.AddRange(rdl.Select(id => SqlHelper.MakeCommand($"delete SYS_Report_Period where ReportId = '{def.ID}' and RuleId = '{id}'")));
-            cmds.AddRange(edl.Select(id => SqlHelper.MakeCommand($"delete SYS_Report_Entity where ReportId = '{def.ID}' and OrgId = '{id}'")));
-            cmds.AddRange(mdl.Select(id => SqlHelper.MakeCommand($"delete M from SYS_Report_Member M join SYS_Report_Entity E on E.ID = M.EntityId and E.ReportId = '{def.ID}' where RoleId = '{id}'")));
+            cmds.AddRange(rdl.Select(id => SqlHelper.MakeCommand(string.Format("delete SYS_Report_Period where ReportId = '{0}' and RuleId = '{1}'", def.ID, id))));
+            cmds.AddRange(edl.Select(id => SqlHelper.MakeCommand(string.Format("delete SYS_Report_Entity where ReportId = '{0}' and OrgId = '{1}'", def.ID, id))));
+            cmds.AddRange(mdl.Select(id => SqlHelper.MakeCommand(string.Format("delete M from SYS_Report_Member M join SYS_Report_Entity E on E.ID = M.EntityId and E.ReportId = '{0}' where RoleId = '{1}'", def.ID, id))));
 
             cmds.AddRange(InsertRules(def.ID, rdt));
             cmds.AddRange(InsertEntitys(def.ID, edt, mdt));
@@ -225,7 +225,7 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return false;
 
-            var sql = $"delete SYS_Report_Definition where ID = '{id}'";
+            var sql = string.Format("delete SYS_Report_Definition where ID = '{0}'", id);
             return SqlHelper.SqlNonQuery(sql) > 0;
         }
 

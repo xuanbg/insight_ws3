@@ -281,7 +281,7 @@ namespace Insight.WS.Client.Platform.Base
             var name = txtName.Text.Trim();
             if (name == _Role.Name || !Commons.NameIsExist(name, "Name", "SYS_Role")) return;
 
-            General.ShowError($"系统中已经存在名称为【{name}】的角色！请重新命名。");
+            General.ShowError(string.Format("系统中已经存在名称为【{0}】的角色！请重新命名。", name));
         }
 
         /// <summary>

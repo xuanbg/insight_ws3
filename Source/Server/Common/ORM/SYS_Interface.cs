@@ -22,8 +22,6 @@ namespace Insight.WS.Server.Common.ORM
     	[DataMember]
         public long SN { get; set; }
     	[DataMember]
-        public string Binding { get; set; }
-    	[DataMember]
         public string Name { get; set; }
     	[DataMember]
         public string Class { get; set; }

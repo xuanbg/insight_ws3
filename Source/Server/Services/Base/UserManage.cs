@@ -135,19 +135,15 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return false;
 
-            var sql = "insert SYS_User (ID, Name, LoginName, Password, PayPassword, OpenId, Description, Type, CreatorUserId) ";
-            sql += "select @ID, @Name, @LoginName, @Password, @PayPassword, @OpenId, @Description, @Type, @CreatorUserId";
+            const string sql = "insert into SYS_User (ID, Name, LoginName, Description, Type, CreatorUserId) select @ID, @Name, @LoginName, @Description, @Type, @CreatorUserId select ID From SYS_User where SN = SCOPE_IDENTITY()";
             var parm = new[]
             {
-                new SqlParameter("@ID", SqlDbType.UniqueIdentifier) {Value = Guid.Empty},
+                new SqlParameter("@ID", SqlDbType.UniqueIdentifier) {Value = obj.ID},
                 new SqlParameter("@Name", obj.Name),
                 new SqlParameter("@LoginName", obj.LoginName),
-                new SqlParameter("@Password", obj.Password),
-                new SqlParameter("@PayPassword", obj.PayPassword),
-                new SqlParameter("@OpenId", obj.OpenId),
-                new SqlParameter("@Password", obj.Description),
-                new SqlParameter("@Type", SqlDbType.Int) {Value = 0},
-                new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = Guid.Empty}
+                new SqlParameter("@Description", obj.Description),
+                new SqlParameter("@Type", obj.Type),
+                new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = us.UserId}
             };
             return SqlHelper.SqlNonQuery(sql, parm) > 0;
         }
@@ -229,7 +225,7 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return false;
 
-            var sql = $"update SYS_User set Validity = '{validity}' where ID = '{id}'";
+            var sql = string.Format("update SYS_User set Validity = '{0}' where ID = '{1}'", validity, id);
             if (SqlHelper.SqlNonQuery(sql) > 0)
             {
                 OnlineManage.Sessions.Find(s => s.UserId == id).Validity = validity;
@@ -248,7 +244,7 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return false;
 
-            var sql = $"update SYS_User set Password = 'E10ADC3949BA59ABBE56E057F20F883E' where ID = '{id}'";
+            var sql = string.Format("update SYS_User set Password = 'E10ADC3949BA59ABBE56E057F20F883E' where ID = '{0}'", id);
             if (SqlHelper.SqlNonQuery(sql) > 0)
             {
                 OnlineManage.Sessions.Find(s => s.UserId == id).Signature = "E10ADC3949BA59ABBE56E057F20F883E";
@@ -271,7 +267,7 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return false;
 
-            var sql = $"Delete from SYS_UserGroup where ID = '{id}' and BuiltIn = 0";
+            var sql = string.Format("Delete from SYS_UserGroup where ID = '{0}' and BuiltIn = 0", id);
             return SqlHelper.SqlNonQuery(sql) > 0;
         }
 
@@ -285,7 +281,7 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return false;
 
-            var sql = $"Delete from SYS_User where ID = '{id}' and BuiltIn = 0";
+            var sql = string.Format("Delete from SYS_User where ID = '{0}' and BuiltIn = 0", id);
             return SqlHelper.SqlNonQuery(sql) > 0;
         }
 

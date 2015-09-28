@@ -41,66 +41,34 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.SqlServer.dll</HintPath>
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Release\EntityFramework.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="FastReport, Version=1.8.46.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Debug\Client\Components\FastReport.dll</HintPath>
+      <HintPath>..\..\..\Release\Client\Components\FastReport.dll</HintPath>
     </Reference>
     <Reference Include="GZipEncoder, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Release\GZipEncoder.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MySql.Data, Version=6.9.7.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\MySql.Data.6.9.7\lib\net40\MySql.Data.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MySql.Data.Entity.EF6, Version=6.9.7.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\MySql.Data.Entity.6.9.7\lib\net40\MySql.Data.Entity.EF6.dll</HintPath>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
-<<<<<<< HEAD
-=======
-    <Reference Include="System.Data.Entity" />
->>>>>>> xfb
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <Compile Include="Function\ClearingDAL.cs" />
     <Compile Include="Function\Util.cs" />
-=======
-    <Compile Include="Function\Atom.cs" />
-    <Compile Include="Function\ClearingDAL.cs" />
-    <Compile Include="Function\Util.cs" />
-    <Compile Include="ExtendClass\Services.cs" />
-    <Compile Include="Function\ContractDAL.cs" />
-    <Compile Include="Function\ReportDAL.cs" />
-    <Compile Include="Function\CommonDAL.cs" />
-    <Compile Include="Function\MasterDataDAL.cs" />
-    <Compile Include="ExtendClass\OnlineManage.cs" />
-    <Compile Include="Function\XFBDAL.cs" />
-    <Compile Include="Function\YSDAL.cs" />
->>>>>>> xfb
     <Compile Include="ORM\ABS_Advance.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
@@ -173,39 +141,36 @@
     <Compile Include="ORM\Advance.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ORM\Available.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="ORM\BASE_Category.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ORM\BillList.cs">
+    <Compile Include="ORM\BIZ_Borrowing_Apply.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ORM\BIZ_Advertiser.cs">
+    <Compile Include="ORM\BIZ_Refund_Apply.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ORM\BIZ_Order.cs">
+    <Compile Include="ORM\BIZ_Refund_Detail.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ORM\BIZ_Pay_Record.cs">
+    <Compile Include="ORM\BIZ_Reimburse_Apply.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ORM\BIZ_Product_Snapshot.cs">
+    <Compile Include="ORM\BIZ_Reimburse_Detail.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ORM\BIZ_StagePlan.cs">
+    <Compile Include="ORM\BIZ_Travel_Apply.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ORM\Citys.cs">
+    <Compile Include="ORM\BIZ_Travel_Plan.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ORM\Countys.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\Dictionary.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="ExtendClass\Services.cs" />
+    <Compile Include="Function\ContractDAL.cs" />
+    <Compile Include="Function\ReportDAL.cs" />
+    <Compile Include="Function\CommonDAL.cs" />
+    <Compile Include="Function\MasterDataDAL.cs" />
+    <Compile Include="ExtendClass\OnlineManage.cs" />
     <Compile Include="ORM\ImageData.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
@@ -230,24 +195,6 @@
     <Compile Include="ORM\MDD_Numeric.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ORM\MDE_Member_Address.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\MDE_Member_Card.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\MDE_Member_Contact.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\MDE_Member_CreditInfo.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\MDE_Member_Feedback.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\MDE_Member_Withdrawal.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="ORM\MDG_Contact.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
@@ -258,9 +205,6 @@
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ORM\MDG_Employee.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\MDG_EntMember.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ORM\MDG_Expense.cs">
@@ -281,19 +225,11 @@
     <Compile Include="ORM\MDS_Contact_Info.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ORM\OrderList.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\OrderStatus.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ExtendClass\Session.cs" />
+    <Compile Include="Function\SqlHelper.cs" />
+    <Compile Include="ExtendClass\UpdateFile.cs" />
     <Compile Include="ORM\ReportSchedular.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\ReportTemplet.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\States.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ORM\SYS_Alert_Message.cs">
@@ -401,9 +337,6 @@
     <Compile Include="ORM\SYS_UserGroupMember.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ORM\SYS_Verify_Record.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="ORM\WSModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -419,159 +352,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>WSModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ExtendClass\Session.cs" />
-    <Compile Include="Function\SqlHelper.cs" />
-    <Compile Include="ExtendClass\UpdateFile.cs" />
-    <Compile Include="Service References\Service\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="XFB\t_bank_card_info.cs">
-      <DependentUpon>XFBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="XFB\t_bill_stage.cs">
-      <DependentUpon>XFBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="XFB\t_category_info.cs">
-      <DependentUpon>XFBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="XFB\t_contact_info.cs">
-      <DependentUpon>XFBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="XFB\t_credit_sesame.cs">
-      <DependentUpon>XFBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="XFB\t_image_info.cs">
-      <DependentUpon>XFBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="XFB\t_interface_log.cs">
-      <DependentUpon>XFBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="XFB\t_job_info.cs">
-      <DependentUpon>XFBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="XFB\t_member_info.cs">
-      <DependentUpon>XFBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="XFB\t_model_info.cs">
-      <DependentUpon>XFBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="XFB\t_mysql_seq.cs">
-      <DependentUpon>XFBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="XFB\t_order_info.cs">
-      <DependentUpon>XFBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="XFB\t_quota_score.cs">
-      <DependentUpon>XFBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="XFB\t_score_log.cs">
-      <DependentUpon>XFBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="XFB\t_student_info.cs">
-      <DependentUpon>XFBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="XFB\t_sys_user.cs">
-      <DependentUpon>XFBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="XFB\t_verify_log.cs">
-      <DependentUpon>XFBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="XFB\t_verify_quota.cs">
-      <DependentUpon>XFBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="XFB\XFBModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>XFBModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="XFB\XFBModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>XFBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="XFB\XFBModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>XFBModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="YUN\Orders.cs">
-      <DependentUpon>YSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="YUN\Orders_Delivery.cs">
-      <DependentUpon>YSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="YUN\Orders_Goods.cs">
-      <DependentUpon>YSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="YUN\Orders_Invoice.cs">
-      <DependentUpon>YSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="YUN\Orders_Log.cs">
-      <DependentUpon>YSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="YUN\Orders_Payment.cs">
-      <DependentUpon>YSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="YUN\Orders_Settle.cs">
-      <DependentUpon>YSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="YUN\Products.cs">
-      <DependentUpon>YSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="YUN\ProductType.cs">
-      <DependentUpon>YSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="YUN\ProductType_Brand.cs">
-      <DependentUpon>YSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="YUN\ProductType_Extend.cs">
-      <DependentUpon>YSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="YUN\Product_Basic.cs">
-      <DependentUpon>YSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="YUN\Product_Category.cs">
-      <DependentUpon>YSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="YUN\Product_Extend.cs">
-      <DependentUpon>YSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="YUN\Product_Img.cs">
-      <DependentUpon>YSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="YUN\Product_Library.cs">
-      <DependentUpon>YSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="YUN\Product_Library_Extend.cs">
-      <DependentUpon>YSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="YUN\Product_Library_Img.cs">
-      <DependentUpon>YSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="YUN\Product_Tag.cs">
-      <DependentUpon>YSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="YUN\Product_Tag_Category.cs">
-      <DependentUpon>YSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="YUN\YSModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>YSModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="YUN\YSModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>YSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="YUN\YSModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>YSModel.edmx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -581,76 +361,21 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>WSModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="ORM\WSModel.edmx.diagram">
-      <DependentUpon>WSModel.edmx</DependentUpon>
-    </None>
-    <None Include="packages.config" />
-    <EntityDeploy Include="XFB\XFBModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>XFBModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="Service References\Service\Internal.wsdl" />
-    <None Include="Service References\Service\mex.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\Service\mex1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="XFB\XFBModel.edmx.diagram">
-      <DependentUpon>XFBModel.edmx</DependentUpon>
-    </None>
-    <EntityDeploy Include="YUN\YSModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>YSModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="YUN\YSModel.edmx.diagram">
-      <DependentUpon>YSModel.edmx</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ORM\WSModel.Context.tt">
+    <None Include="ORM\WSModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>WSModel.edmx</DependentUpon>
       <LastGenOutput>WSModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="ORM\WSModel.tt">
+    </None>
+    <None Include="ORM\WSModel.edmx.diagram">
+      <DependentUpon>WSModel.edmx</DependentUpon>
+    </None>
+    <None Include="ORM\WSModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>WSModel.edmx</DependentUpon>
       <LastGenOutput>WSModel.cs</LastGenOutput>
-    </Content>
-    <None Include="Service References\Service\mex.disco" />
-    <None Include="Service References\Service\configuration91.svcinfo" />
-    <None Include="Service References\Service\configuration.svcinfo" />
-    <None Include="Service References\Service\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <Content Include="XFB\XFBModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>XFBModel.edmx</DependentUpon>
-      <LastGenOutput>XFBModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="XFB\XFBModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>XFBModel.edmx</DependentUpon>
-      <LastGenOutput>XFBModel.cs</LastGenOutput>
-    </Content>
-    <Content Include="YUN\YSModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>YSModel.edmx</DependentUpon>
-      <LastGenOutput>YSModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="YUN\YSModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>YSModel.edmx</DependentUpon>
-      <LastGenOutput>YSModel.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Service References\Service\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

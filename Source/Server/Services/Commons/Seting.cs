@@ -98,7 +98,7 @@ namespace Insight.WS.Service
                 new SqlParameter("@UserId", SqlDbType.UniqueIdentifier) {Value = p.UserId},
                 new SqlParameter("@Description", p.Description)
             }).Select(parm => SqlHelper.MakeCommand(sql, parm)).ToList();
-            cmds.AddRange(upl.Select(p => $"update SYS_ModuleParam set Value = '{p.Value}' where ID = '{p.ID}'").Select(s => SqlHelper.MakeCommand(s)));
+            cmds.AddRange(upl.Select(p => string.Format("update SYS_ModuleParam set Value = '{0}' where ID = '{1}'", p.Value, p.ID)).Select(s => SqlHelper.MakeCommand(s)));
             return SqlHelper.SqlExecute(cmds);
         }
 

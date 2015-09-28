@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 
 namespace Insight.WS.Server.Common
 {
@@ -28,7 +29,7 @@ namespace Insight.WS.Server.Common
         {
             Sessions = new List<Session>();
             SafeMachine = new List<string>();
-            MaxAuthorized = Convert.ToInt32(Util.GetAppSetting("MaxAuthorized"));
+            MaxAuthorized = Convert.ToInt32(ConfigurationManager.AppSettings["MaxAuthorized"]);
         }
 
         /// <summary>

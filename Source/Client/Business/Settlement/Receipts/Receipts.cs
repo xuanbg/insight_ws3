@@ -8,7 +8,6 @@ using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraTreeList;
 using FastReport;
-using Insight.WS.Client.Business.Settlement.Properties;
 using Insight.WS.Client.Business.Settlement.Receipt;
 using Insight.WS.Client.Business.Settlement.Service;
 using Insight.WS.Client.Common;
@@ -137,7 +136,7 @@ namespace Insight.WS.Client.Business.Settlement
                 _CanEdit = (int)gdvReceipts.GetFocusedDataRow()["Permission"] > 0;
 
                 var row = gdvReceipts.GetFocusedDataRow();
-                if (_CanEdit && row["状态"].ToString() != Resources.Receipts_Print_作废)
+                if (_CanEdit && row["状态"].ToString() != "作废")
                 {
                     _Status = row["结账"] == DBNull.Value ? (row["单据号"] == DBNull.Value ? 1 : 2) : ((bool)row["结账"] ? 3 : 0);
                 }
@@ -145,7 +144,7 @@ namespace Insight.WS.Client.Business.Settlement
                 _TempletId = row["类型"].ToString() == "收款" ? _ReceiptTId : _PaymentTId;
                 _SchemeId = row["类型"].ToString() == "收款" ? _ReceiptSId : _PaymentSId;
             }
-            barManager.Items["Delete"].Caption = _Status == 1 ? "删除" : Resources.Receipts_Print_作废;
+            barManager.Items["Delete"].Caption = _Status == 1 ? "删除" : "作废";
             SwitchItemStatus(new Context("Attachment", _Status >= 0), new Context("Delete", _Status > 0 && _Status < 3), new Context("Deduction", _Status == 3));
         }
 
@@ -422,7 +421,7 @@ namespace Insight.WS.Client.Business.Settlement
                     if (row != null)
                     {
                         row["ImageId"] = id;
-                        barManager.Items["Delete"].Caption = Resources.Receipts_Print_作废;
+                        barManager.Items["Delete"].Caption = "作废";
                     }
                 }
             }
@@ -465,7 +464,7 @@ namespace Insight.WS.Client.Business.Settlement
                     if (row != null)
                     {
                         row["ImageId"] = id;
-                        barManager.Items["Delete"].Caption = Resources.Receipts_Print_作废;
+                        barManager.Items["Delete"].Caption = "作废";
                     }
                 }
             }
@@ -509,10 +508,11 @@ namespace Insight.WS.Client.Business.Settlement
             var isPrinted = imageId != DBNull.Value;
             var id = isPrinted ? imageId : gdvReceipts.GetFocusedDataRow()["ID"];
             imageId = DoPrint(id, isPrinted);
-            if (isPrinted) return;
-
-            _Receipts.Table.Rows.Find(id)["ImageId"] = imageId;
-            barManager.Items["Delete"].Caption = Resources.Receipts_Print_作废;
+            if (!isPrinted)
+            {
+                _Receipts.Table.Rows.Find(id)["ImageId"] = imageId;
+                barManager.Items["Delete"].Caption = "作废";
+            }
         }
 
         /// <summary>
@@ -565,14 +565,14 @@ namespace Insight.WS.Client.Business.Settlement
         private void Delete()
         {
             var row = _Receipts.Table.Rows.Find(_ReceiptId);
-            if (General.ShowConfirm($"您确定要{barManager.Items["Delete"].Caption}结算记录吗？") != DialogResult.OK) return;
+            if (General.ShowConfirm(string.Format("您确定要{0}结算记录吗？", barManager.Items["Delete"].Caption)) != DialogResult.OK) return;
 
             using (var cli = new SettlementClient(Binding, Address))
             {
                 var result = cli.DelReceipt(UserSession, _ReceiptId, _Status);
                 if (!result)
                 {
-                    General.ShowError($"{barManager.Items["Delete"].Caption}结算记录失败！如多次失败，请联系管理员。");
+                    General.ShowError(string.Format("{0}结算记录失败！如多次失败，请联系管理员。", barManager.Items["Delete"].Caption));
                     return;
                 }
                 
@@ -582,7 +582,7 @@ namespace Insight.WS.Client.Business.Settlement
                     return;
                 }
                 
-                row["状态"] = Resources.Receipts_Print_作废;
+                row["状态"] = "作废";
                 SwitchItemStatus(new Context("Attachment", false), new Context("Delete", false));
             }
         }

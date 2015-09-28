@@ -16,19 +16,17 @@ namespace Insight.WS.Server.Common.ORM
     [DataContract(IsReference = true)]
     [KnownType(typeof(SYS_Organization))]
     [KnownType(typeof(SYS_User))]
-    [KnownType(typeof(ABS_Delivery_Item))]
     [KnownType(typeof(ABS_Delivery_Attachs))]
-    [KnownType(typeof(ABS_Storage_Location))]
+    [KnownType(typeof(ABS_Delivery_Item))]
     [KnownType(typeof(MasterData))]
-    [KnownType(typeof(ABS_Contract_GoodsPerform))]
+    [KnownType(typeof(ABS_Storage_Location))]
     
     public partial class ABS_Delivery
     {
         public ABS_Delivery()
         {
-            this.ABS_Delivery_Item = new HashSet<ABS_Delivery_Item>();
             this.ABS_Delivery_Attachs = new HashSet<ABS_Delivery_Attachs>();
-            this.ABS_Contract_GoodsPerform = new HashSet<ABS_Contract_GoodsPerform>();
+            this.ABS_Delivery_Item = new HashSet<ABS_Delivery_Item>();
         }
     
     	[DataMember]
@@ -39,10 +37,6 @@ namespace Insight.WS.Server.Common.ORM
         public int Direction { get; set; }
     	[DataMember]
         public string ReceiptCode { get; set; }
-    	[DataMember]
-        public string HashCode { get; set; }
-    	[DataMember]
-        public Nullable<System.Guid> LocationId { get; set; }
     	[DataMember]
         public Nullable<System.Guid> ObjectId { get; set; }
     	[DataMember]
@@ -59,20 +53,22 @@ namespace Insight.WS.Server.Common.ORM
         public System.Guid CreatorUserId { get; set; }
     	[DataMember]
         public System.DateTime CreateTime { get; set; }
+    	[DataMember]
+        public string HashCode { get; set; }
+    	[DataMember]
+        public Nullable<System.Guid> LocationId { get; set; }
     
     	[DataMember]
         public virtual SYS_Organization SYS_Organization { get; set; }
     	[DataMember]
         public virtual SYS_User SYS_User { get; set; }
     	[DataMember]
-        public virtual ICollection<ABS_Delivery_Item> ABS_Delivery_Item { get; set; }
-    	[DataMember]
         public virtual ICollection<ABS_Delivery_Attachs> ABS_Delivery_Attachs { get; set; }
     	[DataMember]
-        public virtual ABS_Storage_Location ABS_Storage_Location { get; set; }
+        public virtual ICollection<ABS_Delivery_Item> ABS_Delivery_Item { get; set; }
     	[DataMember]
         public virtual MasterData MasterData { get; set; }
     	[DataMember]
-        public virtual ICollection<ABS_Contract_GoodsPerform> ABS_Contract_GoodsPerform { get; set; }
+        public virtual ABS_Storage_Location ABS_Storage_Location { get; set; }
     }
 }

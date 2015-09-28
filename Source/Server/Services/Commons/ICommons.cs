@@ -112,23 +112,6 @@ namespace Insight.WS.Service
         #region 其它接口
 
         /// <summary>
-        /// 获取广告商品列表
-        /// </summary>
-        /// <param name="us">用户会话</param>
-        /// <returns>广告商品列表</returns>
-        [OperationContract]
-        List<BIZ_Advertiser> GetAdvertisers(Session us);
-
-        [OperationContract]
-        MDG_EntMember g();
-
-        [OperationContract]
-        UpdateFile a();
-
-        [OperationContract]
-        Advance b();
-
-        /// <summary>
         /// 删除在线用户会话
         /// </summary>
         /// <param name="us">Session对象实体</param>

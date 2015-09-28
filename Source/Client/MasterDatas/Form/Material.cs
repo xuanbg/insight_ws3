@@ -125,7 +125,7 @@ namespace Insight.WS.Client.MasterDatas
 
             var ids = new List<object>();
             treCategory.GetNodeList().FindAll(n => n.HasChildren && n.Expanded).ForEach(n => ids.Add(n.GetValue("ID")));
-            var fid = treCategory.FocusedNode?.GetValue("ID");
+            var fid = treCategory.FocusedNode == null ? null : treCategory.FocusedNode.GetValue("ID");
 
             treCategory.DataSource = _Categorys;
             Format.TreeFormat(treCategory);
@@ -144,7 +144,7 @@ namespace Insight.WS.Client.MasterDatas
         private void InitMaterial()
         {
             var dv = _Materials.Copy().DefaultView;
-            dv.RowFilter = $"CategoryId = '{_CategoryId}'";
+            dv.RowFilter = string.Format("CategoryId = '{0}'", _CategoryId);
             _HasMaterial = dv.Count > 0;
             if (!_HasMaterial)
             {
@@ -245,7 +245,7 @@ namespace Insight.WS.Client.MasterDatas
         private void DeleteMaterial()
         {
             var row = gdvMaterial.GetFocusedDataRow();
-            if (General.ShowConfirm($"您确定要删除【{row["名称"]}】吗?") != DialogResult.OK) return;
+            if (General.ShowConfirm(string.Format("您确定要删除【{0}】吗?", row["名称"])) != DialogResult.OK) return;
 
             using (var cli = new MasterDatasClient(Binding, Address))
             {
@@ -277,11 +277,11 @@ namespace Insight.WS.Client.MasterDatas
         private void Enable()
         {
             var row = gdvMaterial.GetFocusedDataRow();
-            if (General.ShowConfirm($"您确定要启用【{row["名称"]}】吗?") != DialogResult.OK) return;
+            if (General.ShowConfirm(string.Format("您确定要启用【{0}】吗?", row["名称"])) != DialogResult.OK) return;
 
             if (!Commons.EnableMasterData((Guid) row["ID"], "MDG_Material"))
             {
-                General.ShowError($"对不起，物资【{row["名称"]}】启用失败！");
+                General.ShowError(string.Format("对不起，物资【{0}】启用失败！", row["名称"]));
                 return;
             }
             
