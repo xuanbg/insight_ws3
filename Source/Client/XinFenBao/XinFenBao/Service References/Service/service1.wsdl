@@ -1,0 +1,381 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Manager" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="CustomBinding_IManager_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1">
+        </msb:BinaryEncoding>
+        <msf:Streamed xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+        </msf:Streamed>
+        <wsaw:UsingAddressing>
+        </wsaw:UsingAddressing>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/System.Data" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IManager_GetCheckListDate_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCheckListDate" />
+  </wsdl:message>
+  <wsdl:message name="IManager_GetCheckListDate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCheckListDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IManager_GetCheckListForDate_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCheckListForDate" />
+  </wsdl:message>
+  <wsdl:message name="IManager_GetCheckListForDate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCheckListForDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IManager_GetCheckListForName_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCheckListForName" />
+  </wsdl:message>
+  <wsdl:message name="IManager_GetCheckListForName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCheckListForNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IManager_GetAuditList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAuditList" />
+  </wsdl:message>
+  <wsdl:message name="IManager_GetAuditList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAuditListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IManager_GetFeedbackDate_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFeedbackDate" />
+  </wsdl:message>
+  <wsdl:message name="IManager_GetFeedbackDate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFeedbackDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IManager_GetFeedBacksForDate_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFeedBacksForDate" />
+  </wsdl:message>
+  <wsdl:message name="IManager_GetFeedBacksForDate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFeedBacksForDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IManager_GetFeedBacksForName_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFeedBacksForName" />
+  </wsdl:message>
+  <wsdl:message name="IManager_GetFeedBacksForName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFeedBacksForNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IManager_GetFeedback_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFeedback" />
+  </wsdl:message>
+  <wsdl:message name="IManager_GetFeedback_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFeedbackResponse" />
+  </wsdl:message>
+  <wsdl:message name="IManager_SaveReply_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveReply" />
+  </wsdl:message>
+  <wsdl:message name="IManager_SaveReply_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveReplyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IManager_Pigeonhole_InputMessage">
+    <wsdl:part name="parameters" element="tns:Pigeonhole" />
+  </wsdl:message>
+  <wsdl:message name="IManager_Pigeonhole_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PigeonholeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IManager_GetStagePlans_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetStagePlans" />
+  </wsdl:message>
+  <wsdl:message name="IManager_GetStagePlans_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetStagePlansResponse" />
+  </wsdl:message>
+  <wsdl:message name="IManager_AddStagePlan_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddStagePlan" />
+  </wsdl:message>
+  <wsdl:message name="IManager_AddStagePlan_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddStagePlanResponse" />
+  </wsdl:message>
+  <wsdl:message name="IManager_SetDefault_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetDefault" />
+  </wsdl:message>
+  <wsdl:message name="IManager_SetDefault_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetDefaultResponse" />
+  </wsdl:message>
+  <wsdl:message name="IManager_DeletePlan_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeletePlan" />
+  </wsdl:message>
+  <wsdl:message name="IManager_DeletePlan_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeletePlanResponse" />
+  </wsdl:message>
+  <wsdl:message name="IManager_GetAdvertisers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAdvertisers" />
+  </wsdl:message>
+  <wsdl:message name="IManager_GetAdvertisers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAdvertisersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IManager_AddAdvertiser_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddAdvertiser" />
+  </wsdl:message>
+  <wsdl:message name="IManager_AddAdvertiser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddAdvertiserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IManager_EditAdvertiser_InputMessage">
+    <wsdl:part name="parameters" element="tns:EditAdvertiser" />
+  </wsdl:message>
+  <wsdl:message name="IManager_EditAdvertiser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EditAdvertiserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IManager_DelAdvertiser_InputMessage">
+    <wsdl:part name="parameters" element="tns:DelAdvertiser" />
+  </wsdl:message>
+  <wsdl:message name="IManager_DelAdvertiser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DelAdvertiserResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IManager">
+    <wsdl:operation name="GetCheckListDate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IManager/GetCheckListDate" message="tns:IManager_GetCheckListDate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IManager/GetCheckListDateResponse" message="tns:IManager_GetCheckListDate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCheckListForDate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IManager/GetCheckListForDate" message="tns:IManager_GetCheckListForDate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IManager/GetCheckListForDateResponse" message="tns:IManager_GetCheckListForDate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCheckListForName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IManager/GetCheckListForName" message="tns:IManager_GetCheckListForName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IManager/GetCheckListForNameResponse" message="tns:IManager_GetCheckListForName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAuditList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IManager/GetAuditList" message="tns:IManager_GetAuditList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IManager/GetAuditListResponse" message="tns:IManager_GetAuditList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFeedbackDate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IManager/GetFeedbackDate" message="tns:IManager_GetFeedbackDate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IManager/GetFeedbackDateResponse" message="tns:IManager_GetFeedbackDate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFeedBacksForDate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IManager/GetFeedBacksForDate" message="tns:IManager_GetFeedBacksForDate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IManager/GetFeedBacksForDateResponse" message="tns:IManager_GetFeedBacksForDate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFeedBacksForName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IManager/GetFeedBacksForName" message="tns:IManager_GetFeedBacksForName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IManager/GetFeedBacksForNameResponse" message="tns:IManager_GetFeedBacksForName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFeedback">
+      <wsdl:input wsaw:Action="http://tempuri.org/IManager/GetFeedback" message="tns:IManager_GetFeedback_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IManager/GetFeedbackResponse" message="tns:IManager_GetFeedback_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveReply">
+      <wsdl:input wsaw:Action="http://tempuri.org/IManager/SaveReply" message="tns:IManager_SaveReply_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IManager/SaveReplyResponse" message="tns:IManager_SaveReply_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Pigeonhole">
+      <wsdl:input wsaw:Action="http://tempuri.org/IManager/Pigeonhole" message="tns:IManager_Pigeonhole_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IManager/PigeonholeResponse" message="tns:IManager_Pigeonhole_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStagePlans">
+      <wsdl:input wsaw:Action="http://tempuri.org/IManager/GetStagePlans" message="tns:IManager_GetStagePlans_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IManager/GetStagePlansResponse" message="tns:IManager_GetStagePlans_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddStagePlan">
+      <wsdl:input wsaw:Action="http://tempuri.org/IManager/AddStagePlan" message="tns:IManager_AddStagePlan_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IManager/AddStagePlanResponse" message="tns:IManager_AddStagePlan_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetDefault">
+      <wsdl:input wsaw:Action="http://tempuri.org/IManager/SetDefault" message="tns:IManager_SetDefault_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IManager/SetDefaultResponse" message="tns:IManager_SetDefault_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeletePlan">
+      <wsdl:input wsaw:Action="http://tempuri.org/IManager/DeletePlan" message="tns:IManager_DeletePlan_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IManager/DeletePlanResponse" message="tns:IManager_DeletePlan_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAdvertisers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IManager/GetAdvertisers" message="tns:IManager_GetAdvertisers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IManager/GetAdvertisersResponse" message="tns:IManager_GetAdvertisers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddAdvertiser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IManager/AddAdvertiser" message="tns:IManager_AddAdvertiser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IManager/AddAdvertiserResponse" message="tns:IManager_AddAdvertiser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EditAdvertiser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IManager/EditAdvertiser" message="tns:IManager_EditAdvertiser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IManager/EditAdvertiserResponse" message="tns:IManager_EditAdvertiser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DelAdvertiser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IManager/DelAdvertiser" message="tns:IManager_DelAdvertiser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IManager/DelAdvertiserResponse" message="tns:IManager_DelAdvertiser_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CustomBinding_IManager" type="tns:IManager">
+    <wsp:PolicyReference URI="#CustomBinding_IManager_policy">
+    </wsp:PolicyReference>
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="GetCheckListDate">
+      <soap12:operation soapAction="http://tempuri.org/IManager/GetCheckListDate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCheckListForDate">
+      <soap12:operation soapAction="http://tempuri.org/IManager/GetCheckListForDate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCheckListForName">
+      <soap12:operation soapAction="http://tempuri.org/IManager/GetCheckListForName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAuditList">
+      <soap12:operation soapAction="http://tempuri.org/IManager/GetAuditList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFeedbackDate">
+      <soap12:operation soapAction="http://tempuri.org/IManager/GetFeedbackDate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFeedBacksForDate">
+      <soap12:operation soapAction="http://tempuri.org/IManager/GetFeedBacksForDate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFeedBacksForName">
+      <soap12:operation soapAction="http://tempuri.org/IManager/GetFeedBacksForName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFeedback">
+      <soap12:operation soapAction="http://tempuri.org/IManager/GetFeedback" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveReply">
+      <soap12:operation soapAction="http://tempuri.org/IManager/SaveReply" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Pigeonhole">
+      <soap12:operation soapAction="http://tempuri.org/IManager/Pigeonhole" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStagePlans">
+      <soap12:operation soapAction="http://tempuri.org/IManager/GetStagePlans" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddStagePlan">
+      <soap12:operation soapAction="http://tempuri.org/IManager/AddStagePlan" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetDefault">
+      <soap12:operation soapAction="http://tempuri.org/IManager/SetDefault" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeletePlan">
+      <soap12:operation soapAction="http://tempuri.org/IManager/DeletePlan" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAdvertisers">
+      <soap12:operation soapAction="http://tempuri.org/IManager/GetAdvertisers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAdvertiser">
+      <soap12:operation soapAction="http://tempuri.org/IManager/AddAdvertiser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditAdvertiser">
+      <soap12:operation soapAction="http://tempuri.org/IManager/EditAdvertiser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DelAdvertiser">
+      <soap12:operation soapAction="http://tempuri.org/IManager/DelAdvertiser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Manager">
+    <wsdl:port name="CustomBinding_IManager" binding="tns:CustomBinding_IManager">
+      <soap12:address location="net.tcp://localhost:7210/XfbManager" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:7210/XfbManager</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

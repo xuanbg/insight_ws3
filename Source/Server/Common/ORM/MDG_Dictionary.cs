@@ -14,34 +14,40 @@ namespace Insight.WS.Server.Common.ORM
     using System.Collections.Generic;
     
     [DataContract(IsReference = true)]
+    [KnownType(typeof(ABS_Advance))]
     [KnownType(typeof(ABS_Clearing_Pay))]
+    [KnownType(typeof(ABS_Contract_FundPlan))]
     [KnownType(typeof(ABS_StockDetail))]
+    [KnownType(typeof(ABS_Storage_Location))]
     [KnownType(typeof(ABS_Storage_Summary))]
+    [KnownType(typeof(BIZ_Order))]
     [KnownType(typeof(ImageData))]
     [KnownType(typeof(MasterData))]
+    [KnownType(typeof(MDE_Member_Address))]
     [KnownType(typeof(MDG_Customer))]
     [KnownType(typeof(SYS_Organization))]
     [KnownType(typeof(SYS_User))]
     [KnownType(typeof(MDG_Employee))]
+    [KnownType(typeof(MDG_EntMember))]
     [KnownType(typeof(MDG_Expense))]
     [KnownType(typeof(MDG_Material))]
     [KnownType(typeof(MDG_Supplier))]
     [KnownType(typeof(MDS_Contact_Info))]
-    [KnownType(typeof(ABS_Advance))]
-    [KnownType(typeof(ABS_Contract_FundPlan))]
-    [KnownType(typeof(ABS_Storage_Location))]
-    [KnownType(typeof(BIZ_Delivery_Address))]
-    [KnownType(typeof(MDG_Member))]
     
     public partial class MDG_Dictionary
     {
         public MDG_Dictionary()
         {
+            this.ABS_Advance = new HashSet<ABS_Advance>();
             this.ABS_Clearing_Pay = new HashSet<ABS_Clearing_Pay>();
             this.ABS_Clearing_Pay1 = new HashSet<ABS_Clearing_Pay>();
+            this.ABS_Contract_FundPlan = new HashSet<ABS_Contract_FundPlan>();
             this.ABS_StockDetail = new HashSet<ABS_StockDetail>();
+            this.ABS_Storage_Location = new HashSet<ABS_Storage_Location>();
             this.ABS_Storage_Summary = new HashSet<ABS_Storage_Summary>();
+            this.BIZ_Order = new HashSet<BIZ_Order>();
             this.ImageData = new HashSet<ImageData>();
+            this.MDE_Member_Address = new HashSet<MDE_Member_Address>();
             this.MDG_Customer = new HashSet<MDG_Customer>();
             this.MDG_Customer1 = new HashSet<MDG_Customer>();
             this.MDG_Customer2 = new HashSet<MDG_Customer>();
@@ -49,6 +55,8 @@ namespace Insight.WS.Server.Common.ORM
             this.MDG_Customer4 = new HashSet<MDG_Customer>();
             this.MDG_Customer5 = new HashSet<MDG_Customer>();
             this.MDG_Employee = new HashSet<MDG_Employee>();
+            this.MDG_EntMember = new HashSet<MDG_EntMember>();
+            this.MDG_EntMember1 = new HashSet<MDG_EntMember>();
             this.MDG_Expense = new HashSet<MDG_Expense>();
             this.MDG_Material = new HashSet<MDG_Material>();
             this.MDG_Material1 = new HashSet<MDG_Material>();
@@ -59,11 +67,6 @@ namespace Insight.WS.Server.Common.ORM
             this.MDG_Supplier3 = new HashSet<MDG_Supplier>();
             this.MDS_Contact_Info = new HashSet<MDS_Contact_Info>();
             this.SYS_Organization1 = new HashSet<SYS_Organization>();
-            this.ABS_Advance = new HashSet<ABS_Advance>();
-            this.ABS_Contract_FundPlan = new HashSet<ABS_Contract_FundPlan>();
-            this.ABS_Storage_Location = new HashSet<ABS_Storage_Location>();
-            this.BIZ_Delivery_Address = new HashSet<BIZ_Delivery_Address>();
-            this.MDG_Member = new HashSet<MDG_Member>();
         }
     
     	[DataMember]
@@ -88,17 +91,27 @@ namespace Insight.WS.Server.Common.ORM
         public System.DateTime CreateTime { get; set; }
     
     	[DataMember]
+        public virtual ICollection<ABS_Advance> ABS_Advance { get; set; }
+    	[DataMember]
         public virtual ICollection<ABS_Clearing_Pay> ABS_Clearing_Pay { get; set; }
     	[DataMember]
         public virtual ICollection<ABS_Clearing_Pay> ABS_Clearing_Pay1 { get; set; }
     	[DataMember]
+        public virtual ICollection<ABS_Contract_FundPlan> ABS_Contract_FundPlan { get; set; }
+    	[DataMember]
         public virtual ICollection<ABS_StockDetail> ABS_StockDetail { get; set; }
     	[DataMember]
+        public virtual ICollection<ABS_Storage_Location> ABS_Storage_Location { get; set; }
+    	[DataMember]
         public virtual ICollection<ABS_Storage_Summary> ABS_Storage_Summary { get; set; }
+    	[DataMember]
+        public virtual ICollection<BIZ_Order> BIZ_Order { get; set; }
     	[DataMember]
         public virtual ICollection<ImageData> ImageData { get; set; }
     	[DataMember]
         public virtual MasterData MasterData { get; set; }
+    	[DataMember]
+        public virtual ICollection<MDE_Member_Address> MDE_Member_Address { get; set; }
     	[DataMember]
         public virtual ICollection<MDG_Customer> MDG_Customer { get; set; }
     	[DataMember]
@@ -117,6 +130,10 @@ namespace Insight.WS.Server.Common.ORM
         public virtual SYS_User SYS_User { get; set; }
     	[DataMember]
         public virtual ICollection<MDG_Employee> MDG_Employee { get; set; }
+    	[DataMember]
+        public virtual ICollection<MDG_EntMember> MDG_EntMember { get; set; }
+    	[DataMember]
+        public virtual ICollection<MDG_EntMember> MDG_EntMember1 { get; set; }
     	[DataMember]
         public virtual ICollection<MDG_Expense> MDG_Expense { get; set; }
     	[DataMember]
@@ -137,15 +154,5 @@ namespace Insight.WS.Server.Common.ORM
         public virtual ICollection<MDS_Contact_Info> MDS_Contact_Info { get; set; }
     	[DataMember]
         public virtual ICollection<SYS_Organization> SYS_Organization1 { get; set; }
-    	[DataMember]
-        public virtual ICollection<ABS_Advance> ABS_Advance { get; set; }
-    	[DataMember]
-        public virtual ICollection<ABS_Contract_FundPlan> ABS_Contract_FundPlan { get; set; }
-    	[DataMember]
-        public virtual ICollection<ABS_Storage_Location> ABS_Storage_Location { get; set; }
-    	[DataMember]
-        public virtual ICollection<BIZ_Delivery_Address> BIZ_Delivery_Address { get; set; }
-    	[DataMember]
-        public virtual ICollection<MDG_Member> MDG_Member { get; set; }
     }
 }

@@ -177,9 +177,9 @@ namespace Insight.WS.Client.Business.Settlement
         {
             if (e.Value == null) return;
 
-            var rows = Material.Select(string.Format("BarCode = '{0}'", e.Value));
+            var rows = Material.Select($"BarCode = '{e.Value}'");
             if (rows.Length > 0) sleMaterial.EditValue = rows[0]["ID"];
-            else General.ShowError(string.Format("系统中不存在条码为【{0}】的物资数据，请输入正确的条码。", e.Value));
+            else General.ShowError($"系统中不存在条码为【{e.Value}】的物资数据，请输入正确的条码。");
         }
 
         /// <summary>
@@ -359,7 +359,7 @@ namespace Insight.WS.Client.Business.Settlement
 
             if (code != null && _ItemList.Rows.Count == 0)
             {
-                General.ShowError(string.Format("单号为【{0}】的出库申请未审批通过或不存在。\r\n请输入正确的申请单号。", code));
+                General.ShowError($"单号为【{code}】的出库申请未审批通过或不存在。\r\n请输入正确的申请单号。");
                 return;
             }
 
@@ -394,9 +394,9 @@ namespace Insight.WS.Client.Business.Settlement
             {
                 var row = gdvItem.GetFocusedDataRow();
                 _IsPlan = (bool)row["IsPlan"];
-                txtCodeBar.EditValue = Material.Select(string.Format("ID = '{0}'", row["ProductId"]))[0]["BarCode"];
+                txtCodeBar.EditValue = Material.Select($"ID = '{row["ProductId"]}'")[0]["BarCode"];
                 sleMaterial.EditValue = row["ProductId"];
-                trlUnit.EditValue = Units.Select(string.Format("Name = '{0}'", row["单位"]))[0]["ID"];
+                trlUnit.EditValue = Units.Select($"Name = '{row["单位"]}'")[0]["ID"];
                 txtPrice.EditValue = row["单价"] == DBNull.Value ? null : row["单价"];
                 txtCount.EditValue = row["数量"] == DBNull.Value ? null : row["数量"];
                 calAmount.EditValue = row["金额"];

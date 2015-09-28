@@ -14,22 +14,33 @@ namespace Insight.WS.Server.Common.ORM
     using System.Collections.Generic;
     
     [DataContract(IsReference = true)]
+    [KnownType(typeof(ABS_Advance))]
     [KnownType(typeof(ABS_Advance_Detail))]
     [KnownType(typeof(ABS_Clearing))]
+    [KnownType(typeof(ABS_Clearing_Item))]
     [KnownType(typeof(ABS_Contract))]
+    [KnownType(typeof(ABS_Contract_Subjects))]
     [KnownType(typeof(ABS_Delivery))]
     [KnownType(typeof(ABS_Delivery_Item))]
     [KnownType(typeof(ABS_Storage_Summary))]
     [KnownType(typeof(BASE_Category))]
+    [KnownType(typeof(BIZ_Pay_Record))]
     [KnownType(typeof(MasterData_Merger))]
     [KnownType(typeof(MDD_Binary))]
     [KnownType(typeof(MDD_Character))]
     [KnownType(typeof(MDD_Date))]
     [KnownType(typeof(MDD_Numeric))]
+    [KnownType(typeof(MDE_Member_Feedback))]
+    [KnownType(typeof(MDE_Member_CreditInfo))]
+    [KnownType(typeof(MDE_Member_Contact))]
+    [KnownType(typeof(MDE_Member_Card))]
+    [KnownType(typeof(MDE_Member_Address))]
+    [KnownType(typeof(MDE_Member_Withdrawal))]
     [KnownType(typeof(MDG_Contact))]
     [KnownType(typeof(MDG_Customer))]
     [KnownType(typeof(MDG_Dictionary))]
     [KnownType(typeof(MDG_Employee))]
+    [KnownType(typeof(MDG_EntMember))]
     [KnownType(typeof(MDG_Expense))]
     [KnownType(typeof(MDG_Material))]
     [KnownType(typeof(MDG_Supplier))]
@@ -37,35 +48,38 @@ namespace Insight.WS.Server.Common.ORM
     [KnownType(typeof(MDS_Contact_Info))]
     [KnownType(typeof(SYS_Alert_Target))]
     [KnownType(typeof(SYS_Alert_Send))]
-    [KnownType(typeof(ABS_Advance))]
-    [KnownType(typeof(ABS_Clearing_Item))]
-    [KnownType(typeof(ABS_Contract_Subjects))]
-    [KnownType(typeof(MDG_Member))]
     
     public partial class MasterData
     {
         public MasterData()
         {
+            this.ABS_Advance = new HashSet<ABS_Advance>();
             this.ABS_Advance_Detail = new HashSet<ABS_Advance_Detail>();
             this.ABS_Clearing = new HashSet<ABS_Clearing>();
+            this.ABS_Clearing_Item = new HashSet<ABS_Clearing_Item>();
             this.ABS_Contract = new HashSet<ABS_Contract>();
             this.ABS_Contract1 = new HashSet<ABS_Contract>();
+            this.ABS_Contract_Subjects = new HashSet<ABS_Contract_Subjects>();
             this.ABS_Delivery = new HashSet<ABS_Delivery>();
             this.ABS_Delivery_Item = new HashSet<ABS_Delivery_Item>();
             this.ABS_Storage_Summary = new HashSet<ABS_Storage_Summary>();
+            this.BIZ_Pay_Record = new HashSet<BIZ_Pay_Record>();
             this.MasterData_Merger = new HashSet<MasterData_Merger>();
             this.MasterData_Merger1 = new HashSet<MasterData_Merger>();
             this.MDD_Binary = new HashSet<MDD_Binary>();
             this.MDD_Character = new HashSet<MDD_Character>();
             this.MDD_Date = new HashSet<MDD_Date>();
             this.MDD_Numeric = new HashSet<MDD_Numeric>();
+            this.MDE_Member_Feedback = new HashSet<MDE_Member_Feedback>();
+            this.MDE_Member_CreditInfo = new HashSet<MDE_Member_CreditInfo>();
+            this.MDE_Member_Contact = new HashSet<MDE_Member_Contact>();
+            this.MDE_Member_Card = new HashSet<MDE_Member_Card>();
+            this.MDE_Member_Address = new HashSet<MDE_Member_Address>();
+            this.MDE_Member_Withdrawal = new HashSet<MDE_Member_Withdrawal>();
             this.MDR_MU = new HashSet<MDR_MU>();
             this.MDS_Contact_Info = new HashSet<MDS_Contact_Info>();
             this.SYS_Alert_Target = new HashSet<SYS_Alert_Target>();
             this.SYS_Alert_Send = new HashSet<SYS_Alert_Send>();
-            this.ABS_Advance = new HashSet<ABS_Advance>();
-            this.ABS_Clearing_Item = new HashSet<ABS_Clearing_Item>();
-            this.ABS_Contract_Subjects = new HashSet<ABS_Contract_Subjects>();
         }
     
     	[DataMember]
@@ -86,13 +100,19 @@ namespace Insight.WS.Server.Common.ORM
         public string FullName { get; set; }
     
     	[DataMember]
+        public virtual ICollection<ABS_Advance> ABS_Advance { get; set; }
+    	[DataMember]
         public virtual ICollection<ABS_Advance_Detail> ABS_Advance_Detail { get; set; }
     	[DataMember]
         public virtual ICollection<ABS_Clearing> ABS_Clearing { get; set; }
     	[DataMember]
+        public virtual ICollection<ABS_Clearing_Item> ABS_Clearing_Item { get; set; }
+    	[DataMember]
         public virtual ICollection<ABS_Contract> ABS_Contract { get; set; }
     	[DataMember]
         public virtual ICollection<ABS_Contract> ABS_Contract1 { get; set; }
+    	[DataMember]
+        public virtual ICollection<ABS_Contract_Subjects> ABS_Contract_Subjects { get; set; }
     	[DataMember]
         public virtual ICollection<ABS_Delivery> ABS_Delivery { get; set; }
     	[DataMember]
@@ -101,6 +121,8 @@ namespace Insight.WS.Server.Common.ORM
         public virtual ICollection<ABS_Storage_Summary> ABS_Storage_Summary { get; set; }
     	[DataMember]
         public virtual BASE_Category BASE_Category { get; set; }
+    	[DataMember]
+        public virtual ICollection<BIZ_Pay_Record> BIZ_Pay_Record { get; set; }
     	[DataMember]
         public virtual ICollection<MasterData_Merger> MasterData_Merger { get; set; }
     	[DataMember]
@@ -114,6 +136,18 @@ namespace Insight.WS.Server.Common.ORM
     	[DataMember]
         public virtual ICollection<MDD_Numeric> MDD_Numeric { get; set; }
     	[DataMember]
+        public virtual ICollection<MDE_Member_Feedback> MDE_Member_Feedback { get; set; }
+    	[DataMember]
+        public virtual ICollection<MDE_Member_CreditInfo> MDE_Member_CreditInfo { get; set; }
+    	[DataMember]
+        public virtual ICollection<MDE_Member_Contact> MDE_Member_Contact { get; set; }
+    	[DataMember]
+        public virtual ICollection<MDE_Member_Card> MDE_Member_Card { get; set; }
+    	[DataMember]
+        public virtual ICollection<MDE_Member_Address> MDE_Member_Address { get; set; }
+    	[DataMember]
+        public virtual ICollection<MDE_Member_Withdrawal> MDE_Member_Withdrawal { get; set; }
+    	[DataMember]
         public virtual MDG_Contact MDG_Contact { get; set; }
     	[DataMember]
         public virtual MDG_Customer MDG_Customer { get; set; }
@@ -121,6 +155,8 @@ namespace Insight.WS.Server.Common.ORM
         public virtual MDG_Dictionary MDG_Dictionary { get; set; }
     	[DataMember]
         public virtual MDG_Employee MDG_Employee { get; set; }
+    	[DataMember]
+        public virtual MDG_EntMember MDG_EntMember { get; set; }
     	[DataMember]
         public virtual MDG_Expense MDG_Expense { get; set; }
     	[DataMember]
@@ -135,13 +171,5 @@ namespace Insight.WS.Server.Common.ORM
         public virtual ICollection<SYS_Alert_Target> SYS_Alert_Target { get; set; }
     	[DataMember]
         public virtual ICollection<SYS_Alert_Send> SYS_Alert_Send { get; set; }
-    	[DataMember]
-        public virtual ICollection<ABS_Advance> ABS_Advance { get; set; }
-    	[DataMember]
-        public virtual ICollection<ABS_Clearing_Item> ABS_Clearing_Item { get; set; }
-    	[DataMember]
-        public virtual ICollection<ABS_Contract_Subjects> ABS_Contract_Subjects { get; set; }
-    	[DataMember]
-        public virtual MDG_Member MDG_Member { get; set; }
     }
 }

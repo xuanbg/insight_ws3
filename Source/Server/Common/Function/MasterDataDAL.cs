@@ -72,7 +72,8 @@ namespace Insight.WS.Server.Common
         /// <returns>DataTable 联系方式列表</returns>
         public static DataTable GetContactInfo(Guid id)
         {
-            var sql = string.Format("select C.ID, C.InfoTypeId as 联系方式, M.Alias, C.Number as 号码, C.IsMaster as 主要 From MDS_Contact_Info C join MasterData M on M.ID = C.InfoTypeId where C.MasterDataId = '{0}'", id);
+            var sql =
+                $"select C.ID, C.InfoTypeId as 联系方式, M.Alias, C.Number as 号码, C.IsMaster as 主要 From MDS_Contact_Info C join MasterData M on M.ID = C.InfoTypeId where C.MasterDataId = '{id}'";
             return SqlHelper.SqlQuery(sql);
         }
 
@@ -103,7 +104,7 @@ namespace Insight.WS.Server.Common
         /// <returns>bool 是否删除成功</returns>
         public static bool DeleteMasterData(Guid id)
         {
-            var sql = string.Format("delete MasterData where ID = '{0}'", id);
+            var sql = $"delete MasterData where ID = '{id}'";
             return SqlHelper.SqlNonQuery(sql) > 0;
         }
 
@@ -114,7 +115,7 @@ namespace Insight.WS.Server.Common
         /// <returns>SqlCommand List SqlCommand集合</returns>
         public static IEnumerable<SqlCommand> DeleteContactInfo(IEnumerable<object> cdl)
         {
-            return cdl.Select(id => SqlHelper.MakeCommand(string.Format("delete MDS_Contact_Info where ID = '{0}'", id))).ToList();
+            return cdl.Select(id => SqlHelper.MakeCommand($"delete MDS_Contact_Info where ID = '{id}'")).ToList();
         }
 
         /// <summary>
@@ -124,7 +125,8 @@ namespace Insight.WS.Server.Common
         /// <returns>SqlCommand 对象实体</returns>
         public static SqlCommand ClearMaster(Guid? id)
         {
-            return SqlHelper.MakeCommand(string.Format("update D set IsMaster = 0 from MDG_Contact D join MasterData M on M.ID = D.MID where M.ParentId = '{0}'", id));
+            return SqlHelper.MakeCommand(
+                $"update D set IsMaster = 0 from MDG_Contact D join MasterData M on M.ID = D.MID where M.ParentId = '{id}'");
         }
 
         /// <summary>
@@ -134,7 +136,7 @@ namespace Insight.WS.Server.Common
         /// <returns>bool 是否存在联系人</returns>
         public static bool HasContact(Guid? id)
         {
-            var sql = string.Format("select count(*) from MDG_Contact D join MasterData M on M.ID = D.MID where M.ParentId = '{0}'", id);
+            var sql = $"select count(*) from MDG_Contact D join MasterData M on M.ID = D.MID where M.ParentId = '{id}'";
             return (int)SqlHelper.SqlScalar(sql) > 0;
         }
 

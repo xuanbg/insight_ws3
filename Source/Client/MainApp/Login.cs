@@ -30,9 +30,9 @@ namespace Insight.WS.Client.MainApp
 
         #region 变量声明
 
+        private readonly Guid _SessionId = Guid.NewGuid();
+        private readonly string _MachineId = General.GetHash(General.GetCpuId() + General.GetMbId());
         private EndpointAddress _Address;
-        private Guid _SessionId = Guid.NewGuid();
-        private string _MachineId = General.GetHash(General.GetCpuId() + General.GetMbId());
         private string _BaseAddress;
         private bool _CanConnect;
         private bool _Restart;
@@ -59,7 +59,6 @@ namespace Insight.WS.Client.MainApp
         {
             Start:
 
-            InitParameter();
             _Restart = CheckUpdate();
             if (!_CanConnect && General.ShowConfirm("无法连接服务器！是否检查服务器地址和端口配置？\n\r如果您不知道如何配置，请联系管理员。", MessageBoxDefaultButton.Button1) == DialogResult.OK)
             {
@@ -87,22 +86,16 @@ namespace Insight.WS.Client.MainApp
         #region 私有方法
 
         /// <summary>
-        /// 初始化用户会话参数
-        /// </summary>
-        private void InitParameter()
-        {
-            // 初始化EndpointAddress参数
-            _BaseAddress = string.Format("net.tcp://{0}:{1}/", Config.BaseAddress(), Config.Port());
-            _Address = new EndpointAddress(_BaseAddress + "Login");
-        }
-
-        /// <summary>
         /// 客户端文件更新
         /// </summary>
         private bool CheckUpdate()
         {
             panel.Visible = false;
             ShowProgress("获取文件更新列表…");
+
+            // 初始化EndpointAddress参数
+            _BaseAddress = $"net.tcp://{Config.BaseAddress()}:{Config.Port()}/";
+            _Address = new EndpointAddress(_BaseAddress + "Login");
 
             // 获取服务器上的客户端文件列表
             try
@@ -114,7 +107,7 @@ namespace Insight.WS.Client.MainApp
                     var update = new Update(sf);
                     foreach (var file in update.UpdateFiles)
                     {
-                        ShowProgress(string.Format("正在更新 {0}…", file.Name));
+                        ShowProgress($"正在更新 {file.Name}…");
                         Thread.Sleep(500);
 
                         restart = update.UpdateFile(cli.GetFile(file)) || restart;
@@ -284,11 +277,7 @@ namespace Insight.WS.Client.MainApp
         private void Setting_Click(object sender, EventArgs e)
         {
             var loginSet = new LoginSet();
-            if (loginSet.ShowDialog() == DialogResult.OK)
-            {
-                InitParameter();
-                _Restart = CheckUpdate();
-            }
+            if (loginSet.ShowDialog() == DialogResult.OK) _Restart = CheckUpdate();
 
             EntryLogin();
         }

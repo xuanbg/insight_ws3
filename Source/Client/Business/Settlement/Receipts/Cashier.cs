@@ -7,6 +7,7 @@ using DevExpress.Data;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Base;
+using Insight.WS.Client.Business.Settlement.Properties;
 using Insight.WS.Client.Business.Settlement.Service;
 using Insight.WS.Client.Common;
 using Insight.WS.Client.Common.Service;
@@ -70,9 +71,9 @@ namespace Insight.WS.Client.Business.Settlement
 
         private ABS_Clearing _Receipt;
         private List<Advance> _AdvanceList;
-        private DataTable _PayList;
+        private readonly DataTable _PayList;
         private DataTable _ItemList;
-        private GridColumnSummaryItem _Amount;
+        private readonly GridColumnSummaryItem _Amount;
         private decimal _Total;
         private decimal _General;
         private decimal _Specific;
@@ -284,7 +285,7 @@ namespace Insight.WS.Client.Business.Settlement
         /// <param name="e"></param>
         private void calCase_EditValueChanged(object sender, EventArgs e)
         {
-            var cash = _PayList.Select(string.Format("结算方式 = '{0}'", _CashId)).ToList().Sum(r => (decimal)r["金额"]);
+            var cash = _PayList.Select($"结算方式 = '{_CashId}'").ToList().Sum(r => (decimal)r["金额"]);
             txtChange.EditValue = calCash.Value - cash;
         }
 
@@ -391,7 +392,7 @@ namespace Insight.WS.Client.Business.Settlement
             if (_IsPlan && Math.Abs(calAmount.Value) > Math.Abs(maxAmount)) calAmount.Value = maxAmount;
             if (!trlExpense.Enabled && calAmount.Value < -_MaxAdvance) calAmount.Value = -_MaxAdvance;
             if (!trlExpense.Enabled && calAmount.Value > 0) calAmount.Value = -calAmount.Value;
-            if (calAmount.Value > 0 && trlExpense.EditValue != null && (Guid)trlExpense.EditValue == _AdvanceId) memSummary.EditValue = "存入通用预付款帐户";
+            if (calAmount.Value > 0 && trlExpense.EditValue != null && (Guid)trlExpense.EditValue == _AdvanceId) memSummary.EditValue = Resources.Cashier_calAmount_EditValueChanged_存入通用预付款帐户;
             btnItem.Enabled = trlExpense.EditValue != null && calAmount.Value != 0;
         }
 
@@ -496,7 +497,7 @@ namespace Insight.WS.Client.Business.Settlement
         /// </summary>
         private void Wipe()
         {
-            var ta = _ItemList.Select(string.Format("Selected = 1 and ID <> '{0}'", _WipeId)).ToList().Sum(r => (decimal)r["金额"]);
+            var ta = _ItemList.Select($"Selected = 1 and ID <> '{_WipeId}'").ToList().Sum(r => (decimal)r["金额"]);
             var pow = (decimal)Math.Pow(10, 2 - WipeMode);
             decimal wipe = 0;
             switch (WipeType)
@@ -531,9 +532,9 @@ namespace Insight.WS.Client.Business.Settlement
         {
             if (_AdvanceList == null) return;
 
-            var total = _ItemList.Select(string.Format("Selected = 1 and ProductId <> '{0}' and ID <> '{1}'", _AdvanceId, _WipeId)).ToList().Sum(r => (decimal)r["金额"]);
+            var total = _ItemList.Select($"Selected = 1 and ProductId <> '{_AdvanceId}' and ID <> '{_WipeId}'").ToList().Sum(r => (decimal)r["金额"]);
             var us = Convert.ToDecimal("0.00");
-            foreach (var row in _ItemList.Select(string.Format("Selected = 1 and ProductId <> '{0}' and ID <> '{1}'", _AdvanceId, _WipeId)).Where(row => _AdvanceList.Exists(a => a.ObjectId == (Guid)row["ProductId"])))
+            foreach (var row in _ItemList.Select($"Selected = 1 and ProductId <> '{_AdvanceId}' and ID <> '{_WipeId}'").Where(row => _AdvanceList.Exists(a => a.ObjectId == (Guid)row["ProductId"])))
             {
                 us += (decimal)row["金额"];
                 if (us > _Specific) us = _Specific;
@@ -542,10 +543,10 @@ namespace Insight.WS.Client.Business.Settlement
             var ug = (total - us > _General) ? _General : total - us;
             _MaxAdvance = us + ug;
             btnAdvance.Enabled = _MaxAdvance > 0;
-            labAdvance.Text = string.Format("通用预付款：{0}/{1} | 专项预付款：{2}/{3}（可用/余额）", ug.ToString("n"), _General.ToString("n"), us.ToString("n"), _Specific.ToString("n"));
+            labAdvance.Text = $"通用预付款：{ug.ToString("n")}/{_General.ToString("n")} | 专项预付款：{us.ToString("n")}/{_Specific.ToString("n")}（可用/余额）";
             labAdvance.Visible = _General > 0 || _Specific > 0;
 
-            if (_ItemList.Select(string.Format("ProductId = '{0}' and 金额 < 0", _AdvanceId)).Length <= 0) return;
+            if (_ItemList.Select($"ProductId = '{_AdvanceId}' and 金额 < 0").Length <= 0) return;
 
             for (var i = 0; i < gdvItem.RowCount; i++)
             {
@@ -589,7 +590,7 @@ namespace Insight.WS.Client.Business.Settlement
                 if (_IsPlan) txtExpense.EditValue = row["项目"];
                 else trlExpense.EditValue = row["ProductId"];
 
-                trlUnit.EditValue = Units.Select(string.Format("Name = '{0}'", row["单位"]))[0]["ID"];
+                trlUnit.EditValue = Units.Select($"Name = '{row["单位"]}'")[0]["ID"];
                 txtPrice.EditValue = row["单价"] == DBNull.Value ? null : row["单价"];
                 txtCount.EditValue = row["数量"] == DBNull.Value ? null : row["数量"];
                 calAmount.EditValue = row["金额"];
@@ -621,7 +622,7 @@ namespace Insight.WS.Client.Business.Settlement
             trlUnit.Enabled = false;
             txtPrice.Enabled = false;
 
-            if (_ItemList.Select(string.Format("ProductId = '{0}' and 金额 < 0", _AdvanceId)).Length > 0)
+            if (_ItemList.Select($"ProductId = '{_AdvanceId}' and 金额 < 0").Length > 0)
             {
                 for (var i = 0; i < gdvItem.RowCount; i++)
                 {
@@ -639,7 +640,7 @@ namespace Insight.WS.Client.Business.Settlement
             else
             {
                 calAmount.EditValue = -_MaxAdvance;
-                memSummary.EditValue = "使用预付款抵扣";
+                memSummary.EditValue = Resources.Cashier_UseAdvance_使用预付款抵扣;
                 _IsEdit = false;
                 btnItem.Focus();
             }

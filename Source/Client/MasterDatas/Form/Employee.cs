@@ -162,7 +162,7 @@ namespace Insight.WS.Client.MasterDatas
 
             var ids = new List<object>();
             treOrgList.GetNodeList().FindAll(n => n.HasChildren && n.Expanded).ForEach(n => ids.Add(n.GetValue("ID")));
-            var fid = treOrgList.FocusedNode == null ? null : treOrgList.FocusedNode.GetValue("ID");
+            var fid = treOrgList.FocusedNode?.GetValue("ID");
 
             var dv = _OrgList.DefaultView;
             dv.RowFilter = "NodeType < 3";
@@ -330,7 +330,7 @@ namespace Insight.WS.Client.MasterDatas
         private void DeleteData()
         {
             var row = gdvEmployee.GetFocusedDataRow();
-            if (General.ShowConfirm(string.Format("您确定要删除【{0}】吗?", row["姓名"])) != DialogResult.OK) return;
+            if (General.ShowConfirm($"您确定要删除【{row["姓名"]}】吗?") != DialogResult.OK) return;
 
             var result = Commons.DelMasterData((Guid)row["ID"]);
             if (result > 0)
@@ -348,14 +348,14 @@ namespace Insight.WS.Client.MasterDatas
         private void UpdateStatus(int stu, string msg)
         {
             var row = gdvEmployee.GetFocusedDataRow();
-            if (General.ShowConfirm(string.Format("员工【{0}】确定要{1}吗?", row["姓名"], msg)) != DialogResult.OK) return;
+            if (General.ShowConfirm($"员工【{row["姓名"]}】确定要{msg}吗?") != DialogResult.OK) return;
 
             using (var cli = new MasterDatasClient(Binding, Address))
             {
                 var result = cli.UpdateStatus(UserSession, (Guid) row["ID"], stu);
                 if (!result)
                 {
-                    General.ShowError(string.Format("对不起，员工【{0}】{1}操作失败！", row["名称"], msg));
+                    General.ShowError($"对不起，员工【{row["名称"]}】{msg}操作失败！");
                     return;
                 }
                 

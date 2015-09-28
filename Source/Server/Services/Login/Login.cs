@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Windows.Forms;
 using Insight.WS.Server.Common;
 
 namespace Insight.WS.Service
@@ -21,7 +21,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 可登录部门列表</returns>
         public DataTable GetDeptList(string loginName)
         {
-            var sql = string.Format("select * from dbo.Get_LoginDept('{0}')", loginName);
+            var sql = $"select * from dbo.Get_LoginDept('{loginName}')";
             return SqlHelper.SqlQuery(sql);
         }
 
@@ -41,7 +41,7 @@ namespace Insight.WS.Service
         /// <returns>FileAttribute List 文件列表</returns>
         public List<UpdateFile> GetServerList()
         {
-            _RootPath = System.Windows.Forms.Application.StartupPath + "\\Client";
+            _RootPath = Application.StartupPath + "\\Client";
             var list = new List<UpdateFile>();
             return GetLocalList(_RootPath, list);
         }

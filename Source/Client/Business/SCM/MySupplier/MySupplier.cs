@@ -75,7 +75,7 @@ namespace Insight.WS.Client.Business.SCM
         private void Filter_CheckedChanged(object sender, EventArgs e)
         {
             _TypeFilter = "-1" + (chkMy.Checked ? " ,0" : "") + (chkSub.Checked ? " ,1" : "") + (chkUnion.Checked ? " ,2" : "");
-            _Filter = string.Format("Type in ({0})", _TypeFilter);
+            _Filter = $"Type in ({_TypeFilter})";
             InitSupplier();
         }
 
@@ -195,7 +195,7 @@ namespace Insight.WS.Client.Business.SCM
             dv.RowFilter = _Filter;
             var dt = dv.ToTable();
             dt.PrimaryKey = new[] { dt.Columns["ID"] };
-            var dl = (from DataRow row in dt.Rows let str = string.Format("SupplierId = '{0}'", row["SupplierId"]) where (int) row["Type"] == 2 && dt.Select(str).Length > 1 select row["ID"]).ToList();
+            var dl = (from DataRow row in dt.Rows let str = $"SupplierId = '{row["SupplierId"]}'" where (int) row["Type"] == 2 && dt.Select(str).Length > 1 select row["ID"]).ToList();
             dl.ForEach(id => dt.Rows.Find(id).Delete());
             dt.AcceptChanges();
             _HasSupplier = dt.Rows.Count > 0;
@@ -233,7 +233,7 @@ namespace Insight.WS.Client.Business.SCM
         private void InitSupplierInfo()
         {
             var dv = _SupplierInfo.DefaultView;
-            dv.RowFilter = string.Format("SupplierId = '{0}'", _SupplierId);
+            dv.RowFilter = $"SupplierId = '{_SupplierId}'";
 
             vrdInfo.RowHeaderWidth = 80;
             vrdInfo.RecordWidth = 240;
@@ -248,7 +248,7 @@ namespace Insight.WS.Client.Business.SCM
         private void InitContact()
         {
             var dv = _Contacts.DefaultView;
-            dv.RowFilter = string.Format("ParentId = '{0}'", _SupplierId);
+            dv.RowFilter = $"ParentId = '{_SupplierId}'";
             _HasContact = dv.Count > 0;
 
             grdContact.DataSource = dv;
@@ -261,7 +261,7 @@ namespace Insight.WS.Client.Business.SCM
         private void InitContactInfo()
         {
             var dv = _ContactInfo.Copy().DefaultView;
-            dv.RowFilter = string.Format("MasterDataId = '{0}'", glvContact.GetFocusedDataRow()["ID"]);
+            dv.RowFilter = $"MasterDataId = '{glvContact.GetFocusedDataRow()["ID"]}'";
 
             grdOther.DataSource = dv;
             Format.GridFormat(gdvOther);
@@ -275,7 +275,7 @@ namespace Insight.WS.Client.Business.SCM
         /// </summary>
         private void Search()
         {
-            _Filter = string.Format("Type in ({0}) and 名称 like '%{1}%'", _TypeFilter, bteSearch.Text.Trim());
+            _Filter = $"Type in ({_TypeFilter}) and 名称 like '%{bteSearch.Text.Trim()}%'";
             InitSupplier();
         }
 
@@ -365,7 +365,7 @@ namespace Insight.WS.Client.Business.SCM
         private void DelSupplier()
         {
             var row = gdvSupplier.GetFocusedDataRow();
-            if (General.ShowConfirm(string.Format("您确定要删除供应商【{0}】吗?", row["名称"])) != DialogResult.OK) return;
+            if (General.ShowConfirm($"您确定要删除供应商【{row["名称"]}】吗?") != DialogResult.OK) return;
 
             switch (Commons.DelMasterData(_SupplierId))
             {
@@ -393,11 +393,11 @@ namespace Insight.WS.Client.Business.SCM
         private void Enable()
         {
             var row = gdvSupplier.GetFocusedDataRow();
-            if (General.ShowConfirm(string.Format("您确定要启用【{0}】吗?", row["名称"])) != DialogResult.OK) return;
+            if (General.ShowConfirm($"您确定要启用【{row["名称"]}】吗?") != DialogResult.OK) return;
 
             if (!Commons.EnableMasterData(_SupplierId, "MDG_Supplier"))
             {
-                General.ShowError(string.Format("对不起，供应商【{0}】启用失败！", row["名称"]));
+                General.ShowError($"对不起，供应商【{row["名称"]}】启用失败！");
                 return;
             }
             
@@ -454,11 +454,11 @@ namespace Insight.WS.Client.Business.SCM
         private void DelContact()
         {
             var row = glvContact.GetFocusedDataRow();
-            if (General.ShowConfirm(string.Format("您确定要删除【{0}】吗?", row["姓名"])) != DialogResult.OK) return;
+            if (General.ShowConfirm($"您确定要删除【{row["姓名"]}】吗?") != DialogResult.OK) return;
 
             if (Commons.DelMasterData(_ContactId) <= 0)
             {
-                General.ShowError(string.Format("对不起！删除联系人【{0}】失败。", row["名称"]));
+                General.ShowError($"对不起！删除联系人【{row["名称"]}】失败。");
                 return;
             }
             

@@ -98,19 +98,19 @@ namespace Insight.WS.Client.MasterDatas
             }
             if (txtName.Text.Trim() != _MasterData.Name && Commons.NameIsExist(_MasterData.CategoryId, txtName.Text.Trim(), "Name"))
             {
-                General.ShowWarning(string.Format("该分类下已存在名称为【{0}】的数据！", txtName.Text.Trim()));
+                General.ShowWarning($"该分类下已存在名称为【{txtName.Text.Trim()}】的数据！");
                 txtName.Focus();
                 return false;
             }
             if (!string.IsNullOrEmpty(txtCode.Text.Trim()) && txtCode.Text.Trim() != _MasterData.Code && Commons.NameIsExist(txtCode.Text.Trim(), "Code"))
             {
-                General.ShowWarning(string.Format("已存在编码为【{0}】的数据！", txtCode.Text.Trim()));
+                General.ShowWarning($"已存在编码为【{txtCode.Text.Trim()}】的数据！");
                 txtCode.Focus();
                 return false;
             }
             if (!string.IsNullOrEmpty(txtAlias.Text.Trim()) && txtAlias.Text.Trim() != _MasterData.Alias && Commons.NameIsExist(txtAlias.Text.Trim(), "Alias"))
             {
-                General.ShowWarning(string.Format("已存在简称为【{0}】的数据！", txtAlias.Text.Trim()));
+                General.ShowWarning($"已存在简称为【{txtAlias.Text.Trim()}】的数据！");
                 txtAlias.Focus();
                 return false;
             }

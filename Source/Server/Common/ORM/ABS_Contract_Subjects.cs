@@ -15,17 +15,18 @@ namespace Insight.WS.Server.Common.ORM
     
     [DataContract(IsReference = true)]
     [KnownType(typeof(ABS_Contract))]
+    [KnownType(typeof(ABS_Contract_FundPlan))]
     [KnownType(typeof(ABS_Contract_GoodsPlan))]
     [KnownType(typeof(BASE_Category))]
     [KnownType(typeof(MasterData))]
-    [KnownType(typeof(ABS_Contract_FundPlan))]
+    [KnownType(typeof(BIZ_Product_Snapshot))]
     
     public partial class ABS_Contract_Subjects
     {
         public ABS_Contract_Subjects()
         {
-            this.ABS_Contract_GoodsPlan = new HashSet<ABS_Contract_GoodsPlan>();
             this.ABS_Contract_FundPlan = new HashSet<ABS_Contract_FundPlan>();
+            this.ABS_Contract_GoodsPlan = new HashSet<ABS_Contract_GoodsPlan>();
         }
     
     	[DataMember]
@@ -62,12 +63,14 @@ namespace Insight.WS.Server.Common.ORM
     	[DataMember]
         public virtual ABS_Contract ABS_Contract { get; set; }
     	[DataMember]
+        public virtual ICollection<ABS_Contract_FundPlan> ABS_Contract_FundPlan { get; set; }
+    	[DataMember]
         public virtual ICollection<ABS_Contract_GoodsPlan> ABS_Contract_GoodsPlan { get; set; }
     	[DataMember]
         public virtual BASE_Category BASE_Category { get; set; }
     	[DataMember]
         public virtual MasterData MasterData { get; set; }
     	[DataMember]
-        public virtual ICollection<ABS_Contract_FundPlan> ABS_Contract_FundPlan { get; set; }
+        public virtual BIZ_Product_Snapshot BIZ_Product_Snapshot { get; set; }
     }
 }

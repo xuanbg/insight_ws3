@@ -29,7 +29,7 @@ namespace Insight.WS.Server.Common.ORM
     	[DataMember]
         public long SN { get; set; }
     	[DataMember]
-        public System.Guid OrgId { get; set; }
+        public Nullable<System.Guid> OrgId { get; set; }
     	[DataMember]
         public decimal Amount { get; set; }
     

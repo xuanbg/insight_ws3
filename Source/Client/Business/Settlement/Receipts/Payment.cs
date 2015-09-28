@@ -442,7 +442,7 @@ namespace Insight.WS.Client.Business.Settlement
                 if (_IsPlan) txtExpense.EditValue = row["项目"];
                 else trlExpense.EditValue = row["ProductId"];
 
-                trlUnit.EditValue = Units.Select(string.Format("Name = '{0}'", row["单位"]))[0]["ID"];
+                trlUnit.EditValue = Units.Select($"Name = '{row["单位"]}'")[0]["ID"];
                 txtPrice.EditValue = row["单价"] == DBNull.Value ? null : row["单价"];
                 txtCount.EditValue = row["数量"] == DBNull.Value ? null : row["数量"];
                 calAmount.EditValue = row["金额"];

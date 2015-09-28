@@ -32,6 +32,17 @@ select '993D148D-C062-4850-8D3E-FD4F12814F99', 2, '收费项目', 'Charge', 1, 1 uni
 select '993D148D-C062-4850-8D3E-FD4F12814F99', 3, '支出项目', 'Spend', 1, 1
 
 
+/*****初始化客户来源分类*****/
+
+INSERT BASE_Category (ParentId, ModuleId, [Index], Name, Alias, BuiltIn, Visible)
+select NULL, '9985686F-7642-452C-A0E7-5E865F573423', 1, '客户来源', 'Source', 1, 0
+GO
+
+INSERT BASE_Category (ParentId, ModuleId, [Index], Name, Alias, BuiltIn, Visible)
+select ID, '9985686F-7642-452C-A0E7-5E865F573423', 1, '微信', 'WeiXin', 1, 0 from BASE_Category where Alias = 'Source' union all
+select ID, '9985686F-7642-452C-A0E7-5E865F573423', 2, 'Android', 'Android', 1, 0 from BASE_Category where Alias = 'Source' union all
+select ID, '9985686F-7642-452C-A0E7-5E865F573423', 3, 'iOS', 'iOS', 1, 0 from BASE_Category where Alias = 'Source'
+
 DECLARE @ModuleId UNIQUEIDENTIFIER
 SET @ModuleId = '5C801552-1905-452B-AE7F-E57227BE70B8'
 

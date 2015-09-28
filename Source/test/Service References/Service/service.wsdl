@@ -1,0 +1,1257 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Interface" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="CustomBinding_IInterface_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1">
+        </msb:BinaryEncoding>
+        <msf:Streamed xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+        </msf:Streamed>
+        <wsaw:UsingAddressing>
+        </wsaw:UsingAddressing>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.YUN" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.XFB" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IInterface_GetAdvertisers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAdvertisers" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetAdvertisers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAdvertisersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetProducts_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProducts" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetProducts_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetRecProducts_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRecProducts" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetRecProducts_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRecProductsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetCatProducts_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCatProducts" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetCatProducts_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCatProductsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_FindProduct_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindProduct" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_FindProduct_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindProductResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetProduct_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProduct" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetProduct_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetProductImage_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductImage" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetProductImage_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductImageResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetProductParm_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductParm" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetProductParm_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductParmResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetProductParms_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductParms" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetProductParms_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductParmsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetProductId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductId" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetProductId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetOrderList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrderList" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetOrderList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrderListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetOrder_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrder" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetOrder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetSnapshot_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSnapshot" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetSnapshot_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSnapshotResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_AddOrder_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddOrder" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_AddOrder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_Withdrawal_InputMessage">
+    <wsdl:part name="parameters" element="tns:Withdrawal" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_Withdrawal_OutputMessage">
+    <wsdl:part name="parameters" element="tns:WithdrawalResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_DeleteOrder_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteOrder" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_DeleteOrder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_AddBill_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddBill" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_AddBill_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddBillResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetBillList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBillList" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetBillList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBillListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_BillPerform_InputMessage">
+    <wsdl:part name="parameters" element="tns:BillPerform" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_BillPerform_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BillPerformResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetSession_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSession" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetSession_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSessionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetLoans_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetLoans" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetLoans_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetLoansResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetAvailable_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAvailable" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetAvailable_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAvailableResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetMemberStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMemberStatus" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetMemberStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMemberStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_HasPayPassword_InputMessage">
+    <wsdl:part name="parameters" element="tns:HasPayPassword" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_HasPayPassword_OutputMessage">
+    <wsdl:part name="parameters" element="tns:HasPayPasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetPortrait_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPortrait" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetPortrait_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPortraitResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetCards_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCards" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetCards_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCardsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_AddCard_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddCard" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_AddCard_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddCardResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_Feedback_InputMessage">
+    <wsdl:part name="parameters" element="tns:Feedback" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_Feedback_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FeedbackResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_UserLogin_InputMessage">
+    <wsdl:part name="parameters" element="tns:UserLogin" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_UserLogin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UserLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_Register_InputMessage">
+    <wsdl:part name="parameters" element="tns:Register" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_Register_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_UpdatePassword_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePassword" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_UpdatePassword_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_ResetPassword_InputMessage">
+    <wsdl:part name="parameters" element="tns:ResetPassword" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_ResetPassword_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ResetPasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_ResetPayPassword_InputMessage">
+    <wsdl:part name="parameters" element="tns:ResetPayPassword" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_ResetPayPassword_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ResetPayPasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_SetPortrait_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetPortrait" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_SetPortrait_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetPortraitResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetStates_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetStates" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetStates_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetStatesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetCitys_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCitys" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetCitys_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCitysResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetCountys_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCountys" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetCountys_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCountysResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetAddresses_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAddresses" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetAddresses_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAddressesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetAddress_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAddress" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetAddress_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAddressResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_SetDefaultAddress_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetDefaultAddress" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_SetDefaultAddress_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetDefaultAddressResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_AddDeliveryAddress_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddDeliveryAddress" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_AddDeliveryAddress_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddDeliveryAddressResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_EditDeliveryAddress_InputMessage">
+    <wsdl:part name="parameters" element="tns:EditDeliveryAddress" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_EditDeliveryAddress_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EditDeliveryAddressResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_DelDeliveryAddress_InputMessage">
+    <wsdl:part name="parameters" element="tns:DelDeliveryAddress" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_DelDeliveryAddress_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DelDeliveryAddressResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetEducate_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEducate" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetEducate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEducateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetIndustry_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetIndustry" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetIndustry_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetIndustryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_SubmitImage_InputMessage">
+    <wsdl:part name="parameters" element="tns:SubmitImage" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_SubmitImage_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SubmitImageResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_SetMemberType_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetMemberType" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_SetMemberType_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetMemberTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetCreditStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCreditStatus" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetCreditStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCreditStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetMemberInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMemberInfo" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetMemberInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMemberInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_SubmitMemberInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:SubmitMemberInfo" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_SubmitMemberInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SubmitMemberInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetJobInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetJobInfo" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetJobInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetJobInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_SubmitJobInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:SubmitJobInfo" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_SubmitJobInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SubmitJobInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetStudentInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetStudentInfo" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetStudentInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetStudentInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_SubmitStudentInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:SubmitStudentInfo" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_SubmitStudentInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SubmitStudentInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetContactInfos_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetContactInfos" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetContactInfos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetContactInfosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_SubmitContactInfos_InputMessage">
+    <wsdl:part name="parameters" element="tns:SubmitContactInfos" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_SubmitContactInfos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SubmitContactInfosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_SubmitBaseInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:SubmitBaseInfo" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_SubmitBaseInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SubmitBaseInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetBankCardInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBankCardInfo" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetBankCardInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBankCardInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_SubmitBankCardInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:SubmitBankCardInfo" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_SubmitBankCardInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SubmitBankCardInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetVerifyCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetVerifyCode" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetVerifyCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetVerifyCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetStagePlans_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetStagePlans" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetStagePlans_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetStagePlansResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_ValidityPayPW_InputMessage">
+    <wsdl:part name="parameters" element="tns:ValidityPayPW" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_ValidityPayPW_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ValidityPayPWResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_SavePayRecord_InputMessage">
+    <wsdl:part name="parameters" element="tns:SavePayRecord" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_SavePayRecord_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SavePayRecordResponse" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetPayRecord_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPayRecord" />
+  </wsdl:message>
+  <wsdl:message name="IInterface_GetPayRecord_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPayRecordResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IInterface">
+    <wsdl:operation name="GetAdvertisers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/GetAdvertisers" message="tns:IInterface_GetAdvertisers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/GetAdvertisersResponse" message="tns:IInterface_GetAdvertisers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProducts">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/GetProducts" message="tns:IInterface_GetProducts_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/GetProductsResponse" message="tns:IInterface_GetProducts_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRecProducts">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/GetRecProducts" message="tns:IInterface_GetRecProducts_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/GetRecProductsResponse" message="tns:IInterface_GetRecProducts_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCatProducts">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/GetCatProducts" message="tns:IInterface_GetCatProducts_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/GetCatProductsResponse" message="tns:IInterface_GetCatProducts_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindProduct">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/FindProduct" message="tns:IInterface_FindProduct_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/FindProductResponse" message="tns:IInterface_FindProduct_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProduct">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/GetProduct" message="tns:IInterface_GetProduct_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/GetProductResponse" message="tns:IInterface_GetProduct_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProductImage">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/GetProductImage" message="tns:IInterface_GetProductImage_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/GetProductImageResponse" message="tns:IInterface_GetProductImage_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProductParm">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/GetProductParm" message="tns:IInterface_GetProductParm_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/GetProductParmResponse" message="tns:IInterface_GetProductParm_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProductParms">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/GetProductParms" message="tns:IInterface_GetProductParms_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/GetProductParmsResponse" message="tns:IInterface_GetProductParms_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProductId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/GetProductId" message="tns:IInterface_GetProductId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/GetProductIdResponse" message="tns:IInterface_GetProductId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/GetOrderList" message="tns:IInterface_GetOrderList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/GetOrderListResponse" message="tns:IInterface_GetOrderList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrder">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/GetOrder" message="tns:IInterface_GetOrder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/GetOrderResponse" message="tns:IInterface_GetOrder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSnapshot">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/GetSnapshot" message="tns:IInterface_GetSnapshot_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/GetSnapshotResponse" message="tns:IInterface_GetSnapshot_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddOrder">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/AddOrder" message="tns:IInterface_AddOrder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/AddOrderResponse" message="tns:IInterface_AddOrder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Withdrawal">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/Withdrawal" message="tns:IInterface_Withdrawal_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/WithdrawalResponse" message="tns:IInterface_Withdrawal_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteOrder">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/DeleteOrder" message="tns:IInterface_DeleteOrder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/DeleteOrderResponse" message="tns:IInterface_DeleteOrder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddBill">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/AddBill" message="tns:IInterface_AddBill_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/AddBillResponse" message="tns:IInterface_AddBill_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBillList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/GetBillList" message="tns:IInterface_GetBillList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/GetBillListResponse" message="tns:IInterface_GetBillList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BillPerform">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/BillPerform" message="tns:IInterface_BillPerform_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/BillPerformResponse" message="tns:IInterface_BillPerform_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSession">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/GetSession" message="tns:IInterface_GetSession_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/GetSessionResponse" message="tns:IInterface_GetSession_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLoans">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/GetLoans" message="tns:IInterface_GetLoans_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/GetLoansResponse" message="tns:IInterface_GetLoans_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAvailable">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/GetAvailable" message="tns:IInterface_GetAvailable_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/GetAvailableResponse" message="tns:IInterface_GetAvailable_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/GetMemberStatus" message="tns:IInterface_GetMemberStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/GetMemberStatusResponse" message="tns:IInterface_GetMemberStatus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="HasPayPassword">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/HasPayPassword" message="tns:IInterface_HasPayPassword_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/HasPayPasswordResponse" message="tns:IInterface_HasPayPassword_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPortrait">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/GetPortrait" message="tns:IInterface_GetPortrait_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/GetPortraitResponse" message="tns:IInterface_GetPortrait_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCards">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/GetCards" message="tns:IInterface_GetCards_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/GetCardsResponse" message="tns:IInterface_GetCards_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddCard">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/AddCard" message="tns:IInterface_AddCard_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/AddCardResponse" message="tns:IInterface_AddCard_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Feedback">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/Feedback" message="tns:IInterface_Feedback_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/FeedbackResponse" message="tns:IInterface_Feedback_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UserLogin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/UserLogin" message="tns:IInterface_UserLogin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/UserLoginResponse" message="tns:IInterface_UserLogin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Register">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/Register" message="tns:IInterface_Register_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/RegisterResponse" message="tns:IInterface_Register_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePassword">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/UpdatePassword" message="tns:IInterface_UpdatePassword_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/UpdatePasswordResponse" message="tns:IInterface_UpdatePassword_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ResetPassword">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/ResetPassword" message="tns:IInterface_ResetPassword_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/ResetPasswordResponse" message="tns:IInterface_ResetPassword_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ResetPayPassword">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/ResetPayPassword" message="tns:IInterface_ResetPayPassword_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/ResetPayPasswordResponse" message="tns:IInterface_ResetPayPassword_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetPortrait">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/SetPortrait" message="tns:IInterface_SetPortrait_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/SetPortraitResponse" message="tns:IInterface_SetPortrait_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStates">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/GetStates" message="tns:IInterface_GetStates_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/GetStatesResponse" message="tns:IInterface_GetStates_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCitys">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/GetCitys" message="tns:IInterface_GetCitys_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/GetCitysResponse" message="tns:IInterface_GetCitys_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCountys">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/GetCountys" message="tns:IInterface_GetCountys_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/GetCountysResponse" message="tns:IInterface_GetCountys_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAddresses">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/GetAddresses" message="tns:IInterface_GetAddresses_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/GetAddressesResponse" message="tns:IInterface_GetAddresses_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAddress">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/GetAddress" message="tns:IInterface_GetAddress_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/GetAddressResponse" message="tns:IInterface_GetAddress_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetDefaultAddress">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/SetDefaultAddress" message="tns:IInterface_SetDefaultAddress_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/SetDefaultAddressResponse" message="tns:IInterface_SetDefaultAddress_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddDeliveryAddress">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/AddDeliveryAddress" message="tns:IInterface_AddDeliveryAddress_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/AddDeliveryAddressResponse" message="tns:IInterface_AddDeliveryAddress_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EditDeliveryAddress">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/EditDeliveryAddress" message="tns:IInterface_EditDeliveryAddress_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/EditDeliveryAddressResponse" message="tns:IInterface_EditDeliveryAddress_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DelDeliveryAddress">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/DelDeliveryAddress" message="tns:IInterface_DelDeliveryAddress_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/DelDeliveryAddressResponse" message="tns:IInterface_DelDeliveryAddress_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEducate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/GetEducate" message="tns:IInterface_GetEducate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/GetEducateResponse" message="tns:IInterface_GetEducate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIndustry">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/GetIndustry" message="tns:IInterface_GetIndustry_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/GetIndustryResponse" message="tns:IInterface_GetIndustry_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitImage">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/SubmitImage" message="tns:IInterface_SubmitImage_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/SubmitImageResponse" message="tns:IInterface_SubmitImage_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetMemberType">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/SetMemberType" message="tns:IInterface_SetMemberType_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/SetMemberTypeResponse" message="tns:IInterface_SetMemberType_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCreditStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/GetCreditStatus" message="tns:IInterface_GetCreditStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/GetCreditStatusResponse" message="tns:IInterface_GetCreditStatus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/GetMemberInfo" message="tns:IInterface_GetMemberInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/GetMemberInfoResponse" message="tns:IInterface_GetMemberInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitMemberInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/SubmitMemberInfo" message="tns:IInterface_SubmitMemberInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/SubmitMemberInfoResponse" message="tns:IInterface_SubmitMemberInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetJobInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/GetJobInfo" message="tns:IInterface_GetJobInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/GetJobInfoResponse" message="tns:IInterface_GetJobInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitJobInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/SubmitJobInfo" message="tns:IInterface_SubmitJobInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/SubmitJobInfoResponse" message="tns:IInterface_SubmitJobInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStudentInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/GetStudentInfo" message="tns:IInterface_GetStudentInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/GetStudentInfoResponse" message="tns:IInterface_GetStudentInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitStudentInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/SubmitStudentInfo" message="tns:IInterface_SubmitStudentInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/SubmitStudentInfoResponse" message="tns:IInterface_SubmitStudentInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetContactInfos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/GetContactInfos" message="tns:IInterface_GetContactInfos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/GetContactInfosResponse" message="tns:IInterface_GetContactInfos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitContactInfos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/SubmitContactInfos" message="tns:IInterface_SubmitContactInfos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/SubmitContactInfosResponse" message="tns:IInterface_SubmitContactInfos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitBaseInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/SubmitBaseInfo" message="tns:IInterface_SubmitBaseInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/SubmitBaseInfoResponse" message="tns:IInterface_SubmitBaseInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBankCardInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/GetBankCardInfo" message="tns:IInterface_GetBankCardInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/GetBankCardInfoResponse" message="tns:IInterface_GetBankCardInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitBankCardInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/SubmitBankCardInfo" message="tns:IInterface_SubmitBankCardInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/SubmitBankCardInfoResponse" message="tns:IInterface_SubmitBankCardInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVerifyCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/GetVerifyCode" message="tns:IInterface_GetVerifyCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/GetVerifyCodeResponse" message="tns:IInterface_GetVerifyCode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStagePlans">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/GetStagePlans" message="tns:IInterface_GetStagePlans_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/GetStagePlansResponse" message="tns:IInterface_GetStagePlans_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidityPayPW">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/ValidityPayPW" message="tns:IInterface_ValidityPayPW_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/ValidityPayPWResponse" message="tns:IInterface_ValidityPayPW_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SavePayRecord">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/SavePayRecord" message="tns:IInterface_SavePayRecord_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/SavePayRecordResponse" message="tns:IInterface_SavePayRecord_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPayRecord">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInterface/GetPayRecord" message="tns:IInterface_GetPayRecord_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInterface/GetPayRecordResponse" message="tns:IInterface_GetPayRecord_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CustomBinding_IInterface" type="tns:IInterface">
+    <wsp:PolicyReference URI="#CustomBinding_IInterface_policy">
+    </wsp:PolicyReference>
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="GetAdvertisers">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/GetAdvertisers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProducts">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/GetProducts" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRecProducts">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/GetRecProducts" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCatProducts">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/GetCatProducts" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindProduct">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/FindProduct" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProduct">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/GetProduct" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductImage">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/GetProductImage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductParm">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/GetProductParm" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductParms">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/GetProductParms" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductId">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/GetProductId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderList">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/GetOrderList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrder">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/GetOrder" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSnapshot">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/GetSnapshot" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddOrder">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/AddOrder" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Withdrawal">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/Withdrawal" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteOrder">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/DeleteOrder" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddBill">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/AddBill" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBillList">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/GetBillList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BillPerform">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/BillPerform" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSession">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/GetSession" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLoans">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/GetLoans" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAvailable">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/GetAvailable" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberStatus">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/GetMemberStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HasPayPassword">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/HasPayPassword" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPortrait">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/GetPortrait" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCards">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/GetCards" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddCard">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/AddCard" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Feedback">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/Feedback" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserLogin">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/UserLogin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Register">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/Register" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePassword">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/UpdatePassword" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResetPassword">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/ResetPassword" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResetPayPassword">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/ResetPayPassword" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetPortrait">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/SetPortrait" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStates">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/GetStates" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCitys">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/GetCitys" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCountys">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/GetCountys" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAddresses">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/GetAddresses" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAddress">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/GetAddress" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetDefaultAddress">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/SetDefaultAddress" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddDeliveryAddress">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/AddDeliveryAddress" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditDeliveryAddress">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/EditDeliveryAddress" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DelDeliveryAddress">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/DelDeliveryAddress" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEducate">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/GetEducate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIndustry">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/GetIndustry" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitImage">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/SubmitImage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetMemberType">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/SetMemberType" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCreditStatus">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/GetCreditStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMemberInfo">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/GetMemberInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitMemberInfo">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/SubmitMemberInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetJobInfo">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/GetJobInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitJobInfo">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/SubmitJobInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStudentInfo">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/GetStudentInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitStudentInfo">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/SubmitStudentInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetContactInfos">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/GetContactInfos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitContactInfos">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/SubmitContactInfos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitBaseInfo">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/SubmitBaseInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBankCardInfo">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/GetBankCardInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitBankCardInfo">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/SubmitBankCardInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVerifyCode">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/GetVerifyCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStagePlans">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/GetStagePlans" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidityPayPW">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/ValidityPayPW" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SavePayRecord">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/SavePayRecord" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPayRecord">
+      <soap12:operation soapAction="http://tempuri.org/IInterface/GetPayRecord" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Interface">
+    <wsdl:port name="CustomBinding_IInterface" binding="tns:CustomBinding_IInterface">
+      <soap12:address location="net.tcp://localhost:7210/XfbInterface" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:7210/XfbInterface</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

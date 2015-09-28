@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="31a5ef6f-9756-4147-9df3-378c577caf62" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="d3faf238-e256-437e-9904-b3277528d3a8" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <EnableDataBinding>true</EnableDataBinding>
     <ExcludedTypes />
     <ImportXmlTypes>false</ImportXmlTypes>
-    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateInternalTypes>true</GenerateInternalTypes>
     <GenerateMessageContracts>false</GenerateMessageContracts>
     <NamespaceMappings />
     <CollectionMappings>
@@ -20,11 +20,13 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://cf.lmobile.cn/submitdata/service.asmx" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost:7280" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.disco" MetadataType="Disco" ID="bc385d51-01d1-41b0-8d33-991df0bced01" SourceId="1" SourceUrl="http://cf.lmobile.cn/submitdata/service.asmx?disco" />
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="c7d5d1af-6da9-4629-a4d2-51ae8befb8aa" SourceId="1" SourceUrl="http://cf.lmobile.cn/submitdata/service.asmx?wsdl" />
+    <MetadataFile FileName="mex.xsd" MetadataType="Schema" ID="c8779251-1220-4960-87b6-9fe17eb97c5d" SourceId="1" SourceUrl="http://localhost:7280/XfbInternal/mex?xsd=xsd0" />
+    <MetadataFile FileName="mex1.xsd" MetadataType="Schema" ID="5403cfd5-39a8-4eb1-bce7-1b2a400bbed7" SourceId="1" SourceUrl="http://localhost:7280/XfbInternal/mex?xsd=xsd1" />
+    <MetadataFile FileName="mex.disco" MetadataType="Disco" ID="3a33a2d0-b738-4e28-8f74-cf98c6e04a06" SourceId="1" SourceUrl="http://localhost:7280/XfbInternal/mex?disco" />
+    <MetadataFile FileName="Internal.wsdl" MetadataType="Wsdl" ID="385d29b6-5bb1-4d04-9f11-393011455c9b" SourceId="1" SourceUrl="http://localhost:7280/XfbInternal/mex?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

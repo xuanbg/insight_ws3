@@ -136,7 +136,7 @@ namespace Insight.WS.Client.Platform.Report
             var page = arg.Page as XtraTabPage;
             if ((bool)page.Tag)
             {
-                var result = General.ShowQuestion(string.Format("{0} 尚未保存，是否需要保存？", page.Text));
+                var result = General.ShowQuestion($"{page.Text} 尚未保存，是否需要保存？");
                 switch (result)
                 {
                     case DialogResult.Cancel:
@@ -198,7 +198,7 @@ namespace Insight.WS.Client.Platform.Report
         private void InitInstance()
         {
             var dv = _Instances.Copy().DefaultView;
-            var filter = string.Format("ReportId = '{0}'", trlReports.EditValue);
+            var filter = $"ReportId = '{trlReports.EditValue}'";
             dv.RowFilter = filter;
 
             var hasInstances = dv.Count > 0;
@@ -216,7 +216,7 @@ namespace Insight.WS.Client.Platform.Report
         private void RefreshList()
         {
             var dv = _Instances.Copy().DefaultView;
-            var filter = string.Format("ReportId = '{0}' and CreateTime >= '{1}' and CreateTime < '{2}'", trlReports.EditValue, datStart.DateTime.Date, datEnd.DateTime.AddDays(1).Date);
+            var filter = $"ReportId = '{trlReports.EditValue}' and CreateTime >= '{datStart.DateTime.Date}' and CreateTime < '{datEnd.DateTime.AddDays(1).Date}'";
             dv.RowFilter = filter;
             var hasInstance = dv.Count > 0;
 
@@ -360,11 +360,11 @@ namespace Insight.WS.Client.Platform.Report
                 var obj = cli.AddInstance(UserSession, _Instanc);
                 if (obj == null)
                 {
-                    General.ShowError(string.Format("对不起， {0} 保存失败！\r\n如多次保存失败，请联系管理员。", _Instanc.Name));
+                    General.ShowError($"对不起， {_Instanc.Name} 保存失败！\r\n如多次保存失败，请联系管理员。");
                     return;
                 }
 
-                General.ShowMessage(string.Format("{0} 已保存！", _Instanc.Name));
+                General.ShowMessage($"{_Instanc.Name} 已保存！");
 
                 view.Name = obj.InstanceId.ToString();
                 page.Name = obj.InstanceId.ToString();
@@ -382,7 +382,7 @@ namespace Insight.WS.Client.Platform.Report
         /// </summary>
         private void Delete()
         {
-            var str = string.Format("您是否要删除报表期次：\r\n    {0} ？\r\n报表删除后将无法继续查看。", grlInstances.Text);
+            var str = $"您是否要删除报表期次：\r\n    {grlInstances.Text} ？\r\n报表删除后将无法继续查看。";
             if (General.ShowConfirm(str) != DialogResult.OK) return;
 
             using (var cli = new ReportClient(Binding, Address))
@@ -390,7 +390,7 @@ namespace Insight.WS.Client.Platform.Report
                 var result = cli.DeleteReportIU(UserSession, (Guid) _Instances.Rows.Find(grlInstances.EditValue)["RID"]);
                 if (!result)
                 {
-                    General.ShowError(string.Format("对不起，您所选的期次【{0}】删除失败！", grlInstances.Text));
+                    General.ShowError($"对不起，您所选的期次【{grlInstances.Text}】删除失败！");
                     return;
                 }
 

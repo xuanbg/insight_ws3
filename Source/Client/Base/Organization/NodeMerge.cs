@@ -129,7 +129,7 @@ namespace Insight.WS.Client.Platform.Base
         /// <param name="id"></param>
         private void SubNodes(Guid id)
         {
-            foreach (var row in _OrgList.Select(string.Format("NodeType = {0} and ParentId = '{1}'", _Org.NodeType, id)))
+            foreach (var row in _OrgList.Select($"NodeType = {_Org.NodeType} and ParentId = '{id}'"))
             {
                 if (row.RowState == DataRowState.Modified) row.AcceptChanges();
 
@@ -143,11 +143,11 @@ namespace Insight.WS.Client.Platform.Base
 
         protected override void Confirm_Click(object sender, EventArgs e)
         {
-            if (General.ShowConfirm(string.Format("您确定要将节点【{0}】合并到【{1}】吗？\n\r警告！合并操作结果将不可逆转！", _SourceNode, trlOrgList.Text.Trim())) != DialogResult.OK) return;
+            if (General.ShowConfirm($"您确定要将节点【{_SourceNode}】合并到【{trlOrgList.Text.Trim()}】吗？\n\r警告！合并操作结果将不可逆转！") != DialogResult.OK) return;
 
             if (trlOrgList.EditValue == null)
             {
-                General.ShowWarning(string.Format("请选择节点【{0}】的合并目标节点！", _Org.Name));
+                General.ShowWarning($"请选择节点【{_Org.Name}】的合并目标节点！");
                 return;
             }
             
@@ -160,7 +160,7 @@ namespace Insight.WS.Client.Platform.Base
             {
                 if (!cli.AddOrgMerger(OpenForm.UserSession, _Merger))
                 {
-                    General.ShowError(string.Format("对不起，节点【{0}】合并失败！", _Org.Name));
+                    General.ShowError($"对不起，节点【{_Org.Name}】合并失败！");
                     return;
                 }
                 
