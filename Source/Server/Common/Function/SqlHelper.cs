@@ -3,12 +3,19 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using Insight.WS.Server.Common.ORM;
+using Insight.WS.Server.Common.XFB;
+using Insight.WS.Server.Common.YUN;
 
 namespace Insight.WS.Server.Common
 {
     public class SqlHelper
     {
-        public static readonly string ConnStr = new WSEntities().Database.Connection.ConnectionString;
+
+        public static readonly string WSConn = new WSEntities().Database.Connection.ConnectionString;
+        public static readonly string YSConn = new YSEntities().Database.Connection.ConnectionString;
+        public static readonly string XFBConn = new XFBEntities().Database.Connection.ConnectionString;
+
+        #region WSEntities
 
         /// <summary>
         /// 返回DataTable的带可变参数组查询方法
@@ -18,7 +25,7 @@ namespace Insight.WS.Server.Common
         /// <returns>DataTable 查询结果集</returns>
         public static DataTable SqlQuery(string sql, params SqlParameter[] parms)
         {
-            using (var conn = new SqlConnection(ConnStr))
+            using (var conn = new SqlConnection(WSConn))
             {
                 conn.Open();
                 var cmd = MakeCommand(sql, parms);
@@ -29,7 +36,17 @@ namespace Insight.WS.Server.Common
                     var table = new DataTable("DataTable");
                     var adapter = new SqlDataAdapter(cmd);
                     adapter.Fill(table);
+<<<<<<< HEAD
                     table.PrimaryKey = new[] { table.Columns["ID"] };
+                    return table;
+                }
+                catch (Exception ex)
+                {
+                    Util.LogToEvent(ex.ToString());
+                    return null;
+                }
+=======
+                    table.PrimaryKey = new[] {table.Columns["ID"]};
                     return table;
                 }
                 catch (Exception ex)
@@ -41,6 +58,45 @@ namespace Insight.WS.Server.Common
         }
 
         /// <summary>
+        /// 返回DataTable的带可变参数组查询方法
+        /// </summary>
+        /// <param name="sql">sql语句</param>
+        /// <param name="db">数据库</param>
+        /// <param name="parms">可变长参数组</param>
+        /// <returns>DataTable 查询结果集</returns>
+        public static DataTable SqlQuery(string sql, string db, params SqlParameter[] parms)
+        {
+            var connStr = "";
+            switch (db)
+            {
+                case "YS": connStr = YSConn; break;
+                case "XFB": connStr = XFBConn; break;
+            }
+
+            using (var conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+                var cmd = MakeCommand(sql, parms);
+                cmd.Connection = conn;
+
+                try
+                {
+                    var table = new DataTable("DataTable");
+                    var adapter = new SqlDataAdapter(cmd);
+                    adapter.Fill(table);
+                    table.PrimaryKey = new[] {table.Columns["ID"]};
+                    return table;
+                }
+                catch (Exception ex)
+                {
+                    Util.LogToEvent(ex.ToString());
+                    return null;
+                }
+>>>>>>> xfb
+            }
+        }
+
+        /// <summary>
         /// 返回受影响行数的方法
         /// </summary>
         /// <param name="sql">sql语句</param>
@@ -48,12 +104,49 @@ namespace Insight.WS.Server.Common
         /// <returns>int 受影响行数</returns>
         public static int SqlNonQuery(string sql, params SqlParameter[] parms)
         {
-            using (var conn = new SqlConnection(ConnStr))
+            using (var conn = new SqlConnection(WSConn))
             {
                 conn.Open();
                 var cmd = MakeCommand(sql, parms);
                 cmd.Connection = conn;
 
+<<<<<<< HEAD
+=======
+                try
+                {
+                    return cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Util.LogToEvent(ex.ToString());
+                    return -1;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 返回受影响行数的方法
+        /// </summary>
+        /// <param name="sql">sql语句</param>
+        /// <param name="db">数据库</param>
+        /// <param name="parms">可变长参数组</param>
+        /// <returns>int 受影响行数</returns>
+        public static int SqlNonQuery(string sql, string db, params SqlParameter[] parms)
+        {
+            var connStr = "";
+            switch (db)
+            {
+                case "YS": connStr = YSConn; break;
+                case "XFB": connStr = XFBConn; break;
+            }
+
+            using (var conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+                var cmd = MakeCommand(sql, parms);
+                cmd.Connection = conn;
+
+>>>>>>> xfb
                 try
                 {
                     return cmd.ExecuteNonQuery();
@@ -74,7 +167,7 @@ namespace Insight.WS.Server.Common
         /// <returns>执行SQL语句后的第一行第一列内容</returns>
         public static object SqlScalar(string sql, params SqlParameter[] parms)
         {
-            using (var conn = new SqlConnection(ConnStr))
+            using (var conn = new SqlConnection(WSConn))
             {
                 conn.Open();
                 var cmd = MakeCommand(sql, parms);
@@ -88,6 +181,43 @@ namespace Insight.WS.Server.Common
                 {
                     Util.LogToEvent(ex.ToString());
                     return null;
+<<<<<<< HEAD
+=======
+                }
+            }
+        }
+
+        /// <summary>
+        /// 返回第一行第一列内容的方法
+        /// </summary>
+        /// <param name="sql">SQL语句</param>
+        /// <param name="db">数据库</param>
+        /// <param name="parms">可变长参数组</param>
+        /// <returns>执行SQL语句后的第一行第一列内容</returns>
+        public static object SqlScalar(string sql, string db, params SqlParameter[] parms)
+        {
+            var connStr = "";
+            switch (db)
+            {
+                case "YS": connStr = YSConn; break;
+                case "XFB": connStr = XFBConn; break;
+            }
+
+            using (var conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+                var cmd = MakeCommand(sql, parms);
+                cmd.Connection = conn;
+
+                try
+                {
+                    return cmd.ExecuteScalar();
+                }
+                catch (Exception ex)
+                {
+                    Util.LogToEvent(ex.ToString());
+                    return null;
+>>>>>>> xfb
                 }
             }
         }
@@ -95,10 +225,19 @@ namespace Insight.WS.Server.Common
         /// <summary>
         /// 执行多条SQL语句，实现数据库事务。
         /// </summary>
-        /// <param name="cmds">多条SQL语句</param>		
-        public static bool SqlExecute(IEnumerable<SqlCommand> cmds)
+        /// <param name="cmds">多条SQL语句</param>
+        /// <param name="db">数据库</param>		
+        /// <returns>bool 执行是否成功</returns>
+        public static bool SqlExecute(IEnumerable<SqlCommand> cmds, string db = "WS")
         {
-            using (var conn = new SqlConnection(ConnStr))
+            var connStr = WSConn;
+            switch (db)
+            {
+                case "YS": connStr = YSConn; break;
+                case "XFB": connStr = XFBConn; break;
+            }
+
+            using (var conn = new SqlConnection(connStr))
             {
                 conn.Open();
                 var ids = new List<object>();
@@ -124,7 +263,11 @@ namespace Insight.WS.Server.Common
                     tran.Commit();
                     return true;
                 }
+<<<<<<< HEAD
                 catch (Exception ex)
+=======
+                catch(Exception ex)
+>>>>>>> xfb
                 {
                     Util.LogToEvent(ex.ToString());
                     tran.Rollback();
@@ -137,10 +280,19 @@ namespace Insight.WS.Server.Common
         /// 执行多条SQL语句，实现数据库事务。
         /// </summary>
         /// <param name="cmds">多条SQL语句</param>
-        /// <param name="i"></param>		
-        public static object SqlExecute(IEnumerable<SqlCommand> cmds, int i)
+        /// <param name="i">返回ID索引位置</param>
+        /// <param name="db">数据库</param>		
+        /// <returns>object 指定索引位置的ID</returns>
+        public static object SqlExecute(IEnumerable<SqlCommand> cmds, int i, string db = "WS")
         {
-            using (var conn = new SqlConnection(ConnStr))
+            var connStr = WSConn;
+            switch (db)
+            {
+                case "YS": connStr = YSConn; break;
+                case "XFB": connStr = XFBConn; break;
+            }
+
+            using (var conn = new SqlConnection(connStr))
             {
                 conn.Open();
                 var ids = new List<object>();
@@ -175,6 +327,10 @@ namespace Insight.WS.Server.Common
             }
         }
 
+        #endregion
+
+        #region Others
+
         /// <summary>
         /// 组装SqlCommand对象
         /// </summary>
@@ -194,6 +350,8 @@ namespace Insight.WS.Server.Common
             }
             return cmd;
         }
+
+        #endregion
 
     }
 }

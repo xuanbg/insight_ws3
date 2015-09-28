@@ -63,7 +63,7 @@ namespace Insight.WS.Client.Common
             btnDept.Caption = Session.DeptName;
             btnDept.Visibility = Session.DeptName == null ? BarItemVisibility.Never : BarItemVisibility.Always;
             btnUser.Caption = Session.UserName;
-            btnServer.Caption = string.Format("{0} : {1}", Config.BaseAddress(), Config.Port());
+            btnServer.Caption = $"{Config.BaseAddress()} : {Config.Port()}";
             if (SystemInformation.WorkingArea.Height < 760)
             {
                 WindowState = FormWindowState.Maximized;
@@ -172,7 +172,7 @@ namespace Insight.WS.Client.Common
         /// <param name="nbg"></param>
         private void CreateNavItem(string gid, NavBarGroup nbg)
         {
-            var filter = string.Format(" ModuleGroupId = '{0}'", gid);
+            var filter = $" ModuleGroupId = '{gid}'";
             foreach (var row in _NavItem.Select(filter))
             {
                 var navItem = new NavBarItem(row["ApplicationName"].ToString())
@@ -203,33 +203,35 @@ namespace Insight.WS.Client.Common
                 return;
             }
 
+            SYS_Module mod;
             using (var cli = new CommonsClient(Binding, Address))
             {
-                var mod = cli.GetModuleInfo(Session, (Guid) mid);
-                var path = string.Format("{0}\\{1}\\{2}.dll", Application.StartupPath, mod.Location ?? "", mod.ProgramName).Replace("\\\\", "\\");
-                if (!File.Exists(path))
-                {
-                    General.ShowError(string.Format("对不起，{0}模块无法加载！\r\n在您的安装文件夹中缺少{1}.dll文件。", mod.ApplicationName, mod.ProgramName));
-                    return;
-                }
-
-                bprMain.Visibility = BarItemVisibility.Always;
-                bprMain.Refresh();
-
-                var asm = Assembly.LoadFrom(path);
-                var mdi = (MdiBase) asm.CreateInstance(mod.MainFrom);
-                mdi.Icon = Icon.FromHandle(new Bitmap(new MemoryStream(mod.Icon)).GetHicon());
-                mdi.MdiParent = this;
-                mdi.Name = mid.ToString();
-                mdi.Text = mod.ApplicationName;
-                mdi.ModuleId = mod.ID;
-                mdi.UserSession = Session;
-                mdi.Binding = Binding;
-                mdi.Address = new EndpointAddress(Session.BaseAddress + mod.ProgramName);
-                mdi.Show();
-
-                bprMain.Visibility = BarItemVisibility.Never;
+                mod = cli.GetModuleInfo(Session, (Guid) mid);
             }
+
+            var path = $"{Application.StartupPath}\\{mod.Location ?? ""}\\{mod.ProgramName}.dll".Replace("\\\\", "\\");
+            if (!File.Exists(path))
+            {
+                General.ShowError($"对不起，{mod.ApplicationName}模块无法加载！\r\n在您的安装文件夹中缺少{mod.ProgramName}.dll文件。");
+                return;
+            }
+
+            bprMain.Visibility = BarItemVisibility.Always;
+            bprMain.Refresh();
+
+            var asm = Assembly.LoadFrom(path);
+            var mdi = (MdiBase) asm.CreateInstance(mod.MainFrom);
+            mdi.Icon = Icon.FromHandle(new Bitmap(new MemoryStream(mod.Icon)).GetHicon());
+            mdi.MdiParent = this;
+            mdi.Name = mid.ToString();
+            mdi.Text = mod.ApplicationName;
+            mdi.ModuleId = mod.ID;
+            mdi.UserSession = Session;
+            mdi.Binding = Binding;
+            mdi.Address = new EndpointAddress(Session.BaseAddress + mod.ProgramName);
+            mdi.Show();
+
+            bprMain.Visibility = BarItemVisibility.Never;
         }
 
         #endregion

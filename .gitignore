@@ -4,5 +4,6 @@ bin
 obj
 Debug
 *.suo
+*.user
 /Images
 Insight Setup

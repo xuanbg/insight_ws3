@@ -72,7 +72,7 @@ namespace Insight.WS.Client.Platform.Base
 
             var i = new Random();
             var loginName = txtLoginName.Text + i.Next(1, 9);
-            if (General.ShowConfirm(string.Format("用户【{0}】已经存在！\n\r是否修改为{1}？", txtLoginName.Text, loginName)) == DialogResult.OK)
+            if (General.ShowConfirm($"用户【{txtLoginName.Text}】已经存在！\n\r是否修改为{loginName}？") == DialogResult.OK)
             {
                 txtLoginName.Text = loginName;
                 CheckName();
@@ -139,7 +139,7 @@ namespace Insight.WS.Client.Platform.Base
                 {
                     if (!cli.UpdateUser(OpenForm.UserSession, _User))
                     {
-                        General.ShowError(string.Format("没有更新用户【{0}】的任何信息！", _User.LoginName));
+                        General.ShowError($"没有更新用户【{_User.LoginName}】的任何信息！");
                         return;
                     }
                     
@@ -151,7 +151,7 @@ namespace Insight.WS.Client.Platform.Base
                     _User.ID = Guid.NewGuid();
                     if (!cli.AddUser(OpenForm.UserSession, _User))
                     {
-                        General.ShowError(string.Format("新建用户【{0}】失败！", _User.LoginName));
+                        General.ShowError($"新建用户【{_User.LoginName}】失败！");
                         return;
                     }
                     

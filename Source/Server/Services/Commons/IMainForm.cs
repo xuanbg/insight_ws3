@@ -50,7 +50,7 @@ namespace Insight.WS.Service
         #region 更新数据
 
         /// <summary>
-        /// 修改指定登录名的密码
+        /// 修改指定用户的密码
         /// </summary>
         /// <param name="us">Session对象实体</param>
         /// <param name="pw">新密码Hash值</param>

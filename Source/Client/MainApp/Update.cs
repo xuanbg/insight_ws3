@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using Insight.WS.Client.MainApp.Service;
+using Insight.WS.Client.Common.Service;
 
 namespace Insight.WS.Client.MainApp
 {
@@ -16,14 +16,14 @@ namespace Insight.WS.Client.MainApp
         /// <summary>
         /// 更新文件列表
         /// </summary>
-        internal List<UpdateFile> UpdateFiles { get; set; }
+        public List<UpdateFile> UpdateFiles { get; }
 
         #endregion
 
         #region 变量声明
 
-        private List<UpdateFile> _LocalFiles = new List<UpdateFile>();
-        private string _RootPath = Application.StartupPath;
+        private readonly List<UpdateFile> _LocalFiles = new List<UpdateFile>();
+        private readonly string _RootPath = Application.StartupPath;
 
         #endregion
 
@@ -33,7 +33,7 @@ namespace Insight.WS.Client.MainApp
         /// 比较本地和远程文件版本差异
         /// </summary>
         /// <param name="files"></param>
-        internal Update(IEnumerable<UpdateFile> files)
+        public Update(IEnumerable<UpdateFile> files)
         {
             GetLocalFiles(_RootPath);
             UpdateFiles = new List<UpdateFile>();
@@ -52,7 +52,7 @@ namespace Insight.WS.Client.MainApp
         /// </summary>
         /// <param name="file"></param>
         /// <returns></returns>
-        internal bool UpdateFile(UpdateFile file)
+        public bool UpdateFile(UpdateFile file)
         {
             var path = _RootPath + file.Path + "\\";
             if (!Directory.Exists(path))
@@ -96,11 +96,13 @@ namespace Insight.WS.Client.MainApp
             // 读取目录下文件信息
             var dirInfo = new DirectoryInfo(dir);
             _LocalFiles.AddRange(from file in dirInfo.GetFiles()
-                                 where ".dll.exe.frl".IndexOf(file.Extension) >= 0
+                                 where ".dll.exe.frl".IndexOf(file.Extension, StringComparison.Ordinal) >= 0
+                                 let directoryName = file.DirectoryName
+                                 where directoryName != null
                                  select new UpdateFile
                                  {
                                      Name = file.Name,
-                                     Path = file.DirectoryName.Replace(_RootPath, ""),
+                                     Path = directoryName.Replace(_RootPath, ""),
                                      FullPath = file.FullName,
                                      Version = FileVersionInfo.GetVersionInfo(file.FullName).FileVersion
                                  });

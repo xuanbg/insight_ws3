@@ -1,0 +1,1749 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="XFBModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.1" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="t_bank_card_info">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="name" Type="varchar" MaxLength="20" />
+          <Property Name="card_no" Type="varchar" MaxLength="20" />
+          <Property Name="opening_bank" Type="varchar" MaxLength="64" />
+          <Property Name="yl_number" Type="varchar" MaxLength="20" />
+          <Property Name="type" Type="char" MaxLength="2" />
+          <Property Name="verify_state" Type="char" MaxLength="2" />
+          <Property Name="verify_userid" Type="int" />
+          <Property Name="verify_time" Type="datetime" Precision="0" />
+          <Property Name="submit_time" Type="datetime" Precision="0" />
+          <Property Name="modify_time" Type="timestamp" Precision="0" />
+          <Property Name="remarks" Type="varchar" MaxLength="128" />
+          <Property Name="is_toPoints" Type="char" MaxLength="2" />
+          <Property Name="score" Type="int" />
+        </EntityType>
+        <EntityType Name="t_bill_stage">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bill_no" Type="varchar" MaxLength="100" />
+          <Property Name="order_id" Type="int" />
+          <Property Name="stage_amount" Type="float" />
+          <Property Name="base_amount" Type="float" />
+          <Property Name="charge_amount" Type="float" />
+          <Property Name="latest_repay" Type="datetime" Precision="0" />
+          <Property Name="overdue_day" Type="int" />
+          <Property Name="repay_amount" Type="float" />
+          <Property Name="bill_status" Type="int" />
+          <Property Name="description" Type="varchar" MaxLength="255" />
+          <Property Name="create_time" Type="datetime" Precision="0" />
+          <Property Name="overdue_fine" Type="float" />
+          <Property Name="actual_repay" Type="datetime" Precision="0" />
+          <Property Name="repay_channel" Type="int" />
+          <Property Name="delete_flag" Type="int" />
+          <Property Name="return_time" Type="datetime" Precision="0" />
+          <Property Name="refund_time" Type="datetime" Precision="0" />
+          <Property Name="update_userid" Type="int" />
+          <Property Name="update_time" Type="datetime" Precision="0" />
+          <Property Name="external_pay_name" Type="varchar" MaxLength="24" />
+          <Property Name="external_bank_name" Type="varchar" MaxLength="24" />
+        </EntityType>
+        <EntityType Name="t_category_info">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code" Type="varchar" MaxLength="64" />
+          <Property Name="name" Type="varchar" MaxLength="64" />
+          <Property Name="parent_id" Type="int" />
+          <Property Name="type" Type="varchar" MaxLength="32" />
+          <Property Name="t_order" Type="int" />
+          <Property Name="flag" Type="varchar" MaxLength="20" />
+          <Property Name="create_userid" Type="int" />
+          <Property Name="create_time" Type="datetime" Precision="0" />
+          <Property Name="modify_userid" Type="int" />
+          <Property Name="modify_time" Type="datetime" Precision="0" />
+          <Property Name="remarks" Type="varchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="t_contact_info">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="contact_name" Type="varchar" MaxLength="20" />
+          <Property Name="contact_phone" Type="varchar" MaxLength="20" />
+          <Property Name="type" Type="char" MaxLength="2" />
+          <Property Name="relationship" Type="char" MaxLength="2" />
+          <Property Name="verify_state" Type="char" MaxLength="2" />
+          <Property Name="verify_userid" Type="int" />
+          <Property Name="verify_time" Type="datetime" Precision="0" />
+          <Property Name="submit_time" Type="datetime" Precision="0" />
+          <Property Name="modify_time" Type="timestamp" Precision="0" />
+          <Property Name="remarks" Type="varchar" MaxLength="128" />
+          <Property Name="is_toPoints" Type="char" MaxLength="2" />
+        </EntityType>
+        <EntityType Name="t_credit_sesame">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="verify_userid" Type="int" />
+          <Property Name="verify_time" Type="datetime" Precision="0" />
+          <Property Name="modify_time" Type="datetime" Precision="0" />
+          <Property Name="remarks" Type="varchar" MaxLength="128" />
+          <Property Name="is_toPoints" Type="char" MaxLength="2" />
+          <Property Name="score" Type="int" />
+        </EntityType>
+        <EntityType Name="t_image_info">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="image_path" Type="varchar" MaxLength="128" />
+          <Property Name="type" Type="char" MaxLength="2" />
+          <Property Name="verify_state" Type="char" MaxLength="2" />
+          <Property Name="verify_userid" Type="int" />
+          <Property Name="verify_time" Type="datetime" Precision="0" />
+          <Property Name="submit_time" Type="datetime" Precision="0" />
+          <Property Name="modify_time" Type="timestamp" Precision="0" />
+          <Property Name="remarks" Type="varchar" MaxLength="128" />
+          <Property Name="is_toPoints" Type="char" MaxLength="2" />
+        </EntityType>
+        <EntityType Name="t_interface_log">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="table_id" Type="int" />
+          <Property Name="table_name" Type="varchar" MaxLength="64" />
+          <Property Name="state" Type="bit" />
+          <Property Name="create_time" Type="datetime" Precision="0" />
+        </EntityType>
+        <EntityType Name="t_job_info">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="company_name" Type="varchar" MaxLength="64" />
+          <Property Name="company_nature" Type="char" MaxLength="2" />
+          <Property Name="department" Type="varchar" MaxLength="32" />
+          <Property Name="post" Type="varchar" MaxLength="32" />
+          <Property Name="tel_number" Type="varchar" MaxLength="20" />
+          <Property Name="province" Type="varchar" MaxLength="32" />
+          <Property Name="city" Type="varchar" MaxLength="32" />
+          <Property Name="county" Type="varchar" MaxLength="32" />
+          <Property Name="address" Type="varchar" MaxLength="64" />
+          <Property Name="annual_income" Type="int" />
+          <Property Name="verify_state" Type="char" MaxLength="2" />
+          <Property Name="verify_userid" Type="int" />
+          <Property Name="verify_time" Type="datetime" Precision="0" />
+          <Property Name="submit_time" Type="datetime" Precision="0" />
+          <Property Name="modify_time" Type="timestamp" Precision="0" />
+          <Property Name="remarks" Type="varchar" MaxLength="128" />
+          <Property Name="is_toPoints" Type="char" MaxLength="2" />
+        </EntityType>
+        <EntityType Name="t_member_info">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="credit_sum" Type="float" />
+          <Property Name="use_sum" Type="float" />
+          <Property Name="card_number" Type="varchar" MaxLength="18" />
+          <Property Name="province" Type="varchar" MaxLength="32" />
+          <Property Name="city" Type="varchar" MaxLength="32" />
+          <Property Name="county" Type="varchar" MaxLength="32" />
+          <Property Name="address" Type="varchar" MaxLength="64" />
+          <Property Name="verify_state" Type="char" MaxLength="2" />
+          <Property Name="verify_userid" Type="int" />
+          <Property Name="verify_time" Type="datetime" Precision="0" />
+          <Property Name="submit_time" Type="datetime" Precision="0" />
+          <Property Name="modify_time" Type="timestamp" Precision="0" />
+          <Property Name="remarks" Type="varchar" MaxLength="128" />
+          <Property Name="is_toPoints" Type="char" MaxLength="2" />
+          <Property Name="head_portrait" Type="varchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="t_model_info">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="category_id" Type="int" />
+          <Property Name="code" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="64" />
+          <Property Name="score" Type="int" />
+          <Property Name="flag" Type="varchar" MaxLength="20" />
+          <Property Name="create_userid" Type="int" />
+          <Property Name="create_time" Type="datetime" Precision="0" />
+          <Property Name="remarks" Type="varchar" MaxLength="128" />
+          <Property Name="min_limit" Type="int" />
+          <Property Name="max_limit" Type="int" />
+        </EntityType>
+        <EntityType Name="t_mysql_seq">
+          <Key>
+            <PropertyRef Name="seq_name" />
+          </Key>
+          <Property Name="seq_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="current_value" Type="int" Nullable="false" />
+          <Property Name="increment" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="t_order_info">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="owner_userid" Type="int" Nullable="false" />
+          <Property Name="order_name" Type="varchar" MaxLength="100" />
+          <Property Name="product_name" Type="varchar" MaxLength="100" />
+          <Property Name="product_price" Type="float" />
+          <Property Name="shop_name" Type="varchar" MaxLength="100" />
+          <Property Name="use_limit" Type="float" />
+          <Property Name="order_status" Type="int" />
+          <Property Name="create_userid" Type="int" />
+          <Property Name="create_time" Type="datetime" Precision="0" />
+          <Property Name="update_userid" Type="int" />
+          <Property Name="update_time" Type="datetime" Precision="0" />
+          <Property Name="description" Type="varchar" MaxLength="255" />
+          <Property Name="stage_plan" Type="int" />
+          <Property Name="first_pay" Type="float" />
+          <Property Name="delete_flag" Type="int" />
+          <Property Name="deal_time" Type="datetime" Precision="0" />
+          <Property Name="cancel_time" Type="datetime" Precision="0" />
+          <Property Name="refund_time" Type="datetime" Precision="0" />
+          <Property Name="payoff_time" Type="datetime" Precision="0" />
+          <Property Name="first_pay_channel" Type="int" />
+          <Property Name="product_pic" Type="varchar" MaxLength="45" />
+          <Property Name="isPay" Type="int" />
+          <Property Name="all_stage_amout" Type="float" />
+          <Property Name="return_time" Type="datetime" Precision="0" />
+          <Property Name="return_cause" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="t_quota_score">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="min_quota" Type="int" />
+          <Property Name="max_quota" Type="int" />
+          <Property Name="min_score" Type="int" />
+          <Property Name="max_score" Type="int" />
+          <Property Name="flag" Type="char" MaxLength="2" />
+          <Property Name="create_userid" Type="int" />
+          <Property Name="create_time" Type="datetime" Precision="0" />
+          <Property Name="modify_userid" Type="int" />
+          <Property Name="modify_time" Type="datetime" Precision="0" />
+          <Property Name="remarks" Type="varchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="t_score_log">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="score" Type="int" />
+          <Property Name="verify_userid" Type="int" />
+          <Property Name="verify_time" Type="datetime" Precision="0" />
+          <Property Name="flag" Type="char" MaxLength="2" />
+          <Property Name="remarks" Type="varchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="t_student_info">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="school_name" Type="varchar" MaxLength="64" />
+          <Property Name="major" Type="varchar" MaxLength="64" />
+          <Property Name="grade" Type="char" MaxLength="2" />
+          <Property Name="graduation_date" Type="varchar" MaxLength="20" />
+          <Property Name="verify_state" Type="char" MaxLength="2" />
+          <Property Name="is_topoints" Type="char" MaxLength="2" />
+          <Property Name="verify_userid" Type="int" />
+          <Property Name="verify_time" Type="datetime" Precision="0" />
+          <Property Name="submit_time" Type="datetime" Precision="0" />
+          <Property Name="modify_time" Type="timestamp" Precision="0" />
+          <Property Name="remarks" Type="varchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="t_sys_user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="login_name" Type="varchar" MaxLength="45" />
+          <Property Name="real_name" Type="varchar" MaxLength="45" />
+          <Property Name="pass_word" Type="varchar" MaxLength="45" />
+          <Property Name="status" Type="uint" />
+          <Property Name="my_code" Type="varchar" MaxLength="20" />
+          <Property Name="recom_code" Type="varchar" MaxLength="20" />
+          <Property Name="create_time" Type="datetime" Precision="0" />
+          <Property Name="create_userid" Type="int" />
+          <Property Name="update_time" Type="datetime" Precision="0" />
+          <Property Name="update_userid" Type="int" />
+          <Property Name="description" Type="varchar" MaxLength="255" />
+          <Property Name="recom_num" Type="int" Nullable="false" />
+          <Property Name="type" Type="char" MaxLength="2" />
+          <Property Name="verify_state" Type="char" MaxLength="2" />
+          <Property Name="has_verify" Type="char" MaxLength="2" />
+        </EntityType>
+        <EntityType Name="t_verify_log">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="verify_userid" Type="int" />
+          <Property Name="verify_time" Type="datetime" Precision="0" />
+          <Property Name="by_verify_userid" Type="int" />
+          <Property Name="verify_state" Type="char" MaxLength="2" />
+          <Property Name="content" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="t_verify_quota">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="credit_userid" Type="int" />
+          <Property Name="credit_time" Type="datetime" Precision="0" />
+          <Property Name="by_credit_userid" Type="int" />
+          <Property Name="quota" Type="int" />
+          <Property Name="flag" Type="char" MaxLength="2" />
+          <Property Name="type" Type="char" MaxLength="2" />
+        </EntityType>
+        <Association Name="FK_BANK_CARD_USER_ID">
+          <End Role="t_sys_user" Type="Self.t_sys_user" Multiplicity="0..1" />
+          <End Role="t_bank_card_info" Type="Self.t_bank_card_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_sys_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_bank_card_info">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BANK_CARD_VERIFY_USERID">
+          <End Role="t_sys_user" Type="Self.t_sys_user" Multiplicity="0..1" />
+          <End Role="t_bank_card_info" Type="Self.t_bank_card_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_sys_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_bank_card_info">
+              <PropertyRef Name="verify_userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CATAGORY_CREATE_USERID">
+          <End Role="t_sys_user" Type="Self.t_sys_user" Multiplicity="0..1" />
+          <End Role="t_category_info" Type="Self.t_category_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_sys_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_category_info">
+              <PropertyRef Name="create_userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CATAGORY_MODEL_ID">
+          <End Role="t_category_info" Type="Self.t_category_info" Multiplicity="0..1" />
+          <End Role="t_model_info" Type="Self.t_model_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_category_info">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_model_info">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CATAGORY_MODIFY_USERID">
+          <End Role="t_sys_user" Type="Self.t_sys_user" Multiplicity="0..1" />
+          <End Role="t_category_info" Type="Self.t_category_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_sys_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_category_info">
+              <PropertyRef Name="modify_userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CATAGORY_PARENT_ID">
+          <End Role="t_category_info" Type="Self.t_category_info" Multiplicity="0..1" />
+          <End Role="t_category_info1" Type="Self.t_category_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_category_info">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_category_info1">
+              <PropertyRef Name="parent_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTACT_USER_ID">
+          <End Role="t_sys_user" Type="Self.t_sys_user" Multiplicity="0..1" />
+          <End Role="t_contact_info" Type="Self.t_contact_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_sys_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_contact_info">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTACT_VERIFY_USERID">
+          <End Role="t_sys_user" Type="Self.t_sys_user" Multiplicity="0..1" />
+          <End Role="t_contact_info" Type="Self.t_contact_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_sys_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_contact_info">
+              <PropertyRef Name="verify_userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IMAGE_USER_ID">
+          <End Role="t_sys_user" Type="Self.t_sys_user" Multiplicity="0..1" />
+          <End Role="t_image_info" Type="Self.t_image_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_sys_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_image_info">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IMAGE_VERIFY_USERID">
+          <End Role="t_sys_user" Type="Self.t_sys_user" Multiplicity="0..1" />
+          <End Role="t_image_info" Type="Self.t_image_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_sys_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_image_info">
+              <PropertyRef Name="verify_userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JOB_USER_ID">
+          <End Role="t_sys_user" Type="Self.t_sys_user" Multiplicity="0..1" />
+          <End Role="t_job_info" Type="Self.t_job_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_sys_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_job_info">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JOB_VERFIY_USERID">
+          <End Role="t_sys_user" Type="Self.t_sys_user" Multiplicity="0..1" />
+          <End Role="t_job_info" Type="Self.t_job_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_sys_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_job_info">
+              <PropertyRef Name="verify_userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MEMBER_USER_ID">
+          <End Role="t_sys_user" Type="Self.t_sys_user" Multiplicity="0..1" />
+          <End Role="t_member_info" Type="Self.t_member_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_sys_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_member_info">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MEMBER_USER_VERFIY_ID">
+          <End Role="t_sys_user" Type="Self.t_sys_user" Multiplicity="0..1" />
+          <End Role="t_member_info" Type="Self.t_member_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_sys_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_member_info">
+              <PropertyRef Name="verify_userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MODEL_CREATE_USERID">
+          <End Role="t_sys_user" Type="Self.t_sys_user" Multiplicity="0..1" />
+          <End Role="t_model_info" Type="Self.t_model_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_sys_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_model_info">
+              <PropertyRef Name="create_userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SDUDENT_INFO_VERIFY_USERID">
+          <End Role="t_sys_user" Type="Self.t_sys_user" Multiplicity="0..1" />
+          <End Role="t_student_info" Type="Self.t_student_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_sys_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_student_info">
+              <PropertyRef Name="verify_userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_STUDENT_INFO_USER_ID">
+          <End Role="t_sys_user" Type="Self.t_sys_user" Multiplicity="0..1" />
+          <End Role="t_student_info" Type="Self.t_student_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_sys_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_student_info">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VERIFY_BY_USERID">
+          <End Role="t_sys_user" Type="Self.t_sys_user" Multiplicity="0..1" />
+          <End Role="t_verify_quota" Type="Self.t_verify_quota" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_sys_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_verify_quota">
+              <PropertyRef Name="by_credit_userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VERIFY_BY_VERIFY_USERID">
+          <End Role="t_sys_user" Type="Self.t_sys_user" Multiplicity="0..1" />
+          <End Role="t_verify_log" Type="Self.t_verify_log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_sys_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_verify_log">
+              <PropertyRef Name="by_verify_userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VERIFY_QUOTA_USERID">
+          <End Role="t_sys_user" Type="Self.t_sys_user" Multiplicity="0..1" />
+          <End Role="t_verify_quota" Type="Self.t_verify_quota" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_sys_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_verify_quota">
+              <PropertyRef Name="credit_userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VERIFY_VERIFY_USERID">
+          <End Role="t_sys_user" Type="Self.t_sys_user" Multiplicity="0..1" />
+          <End Role="t_verify_log" Type="Self.t_verify_log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_sys_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_verify_log">
+              <PropertyRef Name="verify_userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="XFBModelStoreContainer">
+          <EntitySet Name="t_bank_card_info" EntityType="Self.t_bank_card_info" Schema="xfbdb_new" store:Type="Tables" />
+          <EntitySet Name="t_bill_stage" EntityType="Self.t_bill_stage" Schema="xfbdb_new" store:Type="Tables" />
+          <EntitySet Name="t_category_info" EntityType="Self.t_category_info" Schema="xfbdb_new" store:Type="Tables" />
+          <EntitySet Name="t_contact_info" EntityType="Self.t_contact_info" Schema="xfbdb_new" store:Type="Tables" />
+          <EntitySet Name="t_credit_sesame" EntityType="Self.t_credit_sesame" Schema="xfbdb_new" store:Type="Tables" />
+          <EntitySet Name="t_image_info" EntityType="Self.t_image_info" Schema="xfbdb_new" store:Type="Tables" />
+          <EntitySet Name="t_interface_log" EntityType="Self.t_interface_log" Schema="xfbdb_new" store:Type="Tables" />
+          <EntitySet Name="t_job_info" EntityType="Self.t_job_info" Schema="xfbdb_new" store:Type="Tables" />
+          <EntitySet Name="t_member_info" EntityType="Self.t_member_info" Schema="xfbdb_new" store:Type="Tables" />
+          <EntitySet Name="t_model_info" EntityType="Self.t_model_info" Schema="xfbdb_new" store:Type="Tables" />
+          <EntitySet Name="t_mysql_seq" EntityType="Self.t_mysql_seq" Schema="xfbdb_new" store:Type="Tables" />
+          <EntitySet Name="t_order_info" EntityType="Self.t_order_info" Schema="xfbdb_new" store:Type="Tables" />
+          <EntitySet Name="t_quota_score" EntityType="Self.t_quota_score" Schema="xfbdb_new" store:Type="Tables" />
+          <EntitySet Name="t_score_log" EntityType="Self.t_score_log" Schema="xfbdb_new" store:Type="Tables" />
+          <EntitySet Name="t_student_info" EntityType="Self.t_student_info" Schema="xfbdb_new" store:Type="Tables" />
+          <EntitySet Name="t_sys_user" EntityType="Self.t_sys_user" Schema="xfbdb_new" store:Type="Tables" />
+          <EntitySet Name="t_verify_log" EntityType="Self.t_verify_log" Schema="xfbdb_new" store:Type="Tables" />
+          <EntitySet Name="t_verify_quota" EntityType="Self.t_verify_quota" Schema="xfbdb_new" store:Type="Tables" />
+          <AssociationSet Name="FK_BANK_CARD_USER_ID" Association="Self.FK_BANK_CARD_USER_ID">
+            <End Role="t_sys_user" EntitySet="t_sys_user" />
+            <End Role="t_bank_card_info" EntitySet="t_bank_card_info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BANK_CARD_VERIFY_USERID" Association="Self.FK_BANK_CARD_VERIFY_USERID">
+            <End Role="t_sys_user" EntitySet="t_sys_user" />
+            <End Role="t_bank_card_info" EntitySet="t_bank_card_info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CATAGORY_CREATE_USERID" Association="Self.FK_CATAGORY_CREATE_USERID">
+            <End Role="t_sys_user" EntitySet="t_sys_user" />
+            <End Role="t_category_info" EntitySet="t_category_info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CATAGORY_MODEL_ID" Association="Self.FK_CATAGORY_MODEL_ID">
+            <End Role="t_category_info" EntitySet="t_category_info" />
+            <End Role="t_model_info" EntitySet="t_model_info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CATAGORY_MODIFY_USERID" Association="Self.FK_CATAGORY_MODIFY_USERID">
+            <End Role="t_sys_user" EntitySet="t_sys_user" />
+            <End Role="t_category_info" EntitySet="t_category_info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CATAGORY_PARENT_ID" Association="Self.FK_CATAGORY_PARENT_ID">
+            <End Role="t_category_info" EntitySet="t_category_info" />
+            <End Role="t_category_info1" EntitySet="t_category_info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONTACT_USER_ID" Association="Self.FK_CONTACT_USER_ID">
+            <End Role="t_sys_user" EntitySet="t_sys_user" />
+            <End Role="t_contact_info" EntitySet="t_contact_info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONTACT_VERIFY_USERID" Association="Self.FK_CONTACT_VERIFY_USERID">
+            <End Role="t_sys_user" EntitySet="t_sys_user" />
+            <End Role="t_contact_info" EntitySet="t_contact_info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IMAGE_USER_ID" Association="Self.FK_IMAGE_USER_ID">
+            <End Role="t_sys_user" EntitySet="t_sys_user" />
+            <End Role="t_image_info" EntitySet="t_image_info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IMAGE_VERIFY_USERID" Association="Self.FK_IMAGE_VERIFY_USERID">
+            <End Role="t_sys_user" EntitySet="t_sys_user" />
+            <End Role="t_image_info" EntitySet="t_image_info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JOB_USER_ID" Association="Self.FK_JOB_USER_ID">
+            <End Role="t_sys_user" EntitySet="t_sys_user" />
+            <End Role="t_job_info" EntitySet="t_job_info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JOB_VERFIY_USERID" Association="Self.FK_JOB_VERFIY_USERID">
+            <End Role="t_sys_user" EntitySet="t_sys_user" />
+            <End Role="t_job_info" EntitySet="t_job_info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MEMBER_USER_ID" Association="Self.FK_MEMBER_USER_ID">
+            <End Role="t_sys_user" EntitySet="t_sys_user" />
+            <End Role="t_member_info" EntitySet="t_member_info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MEMBER_USER_VERFIY_ID" Association="Self.FK_MEMBER_USER_VERFIY_ID">
+            <End Role="t_sys_user" EntitySet="t_sys_user" />
+            <End Role="t_member_info" EntitySet="t_member_info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MODEL_CREATE_USERID" Association="Self.FK_MODEL_CREATE_USERID">
+            <End Role="t_sys_user" EntitySet="t_sys_user" />
+            <End Role="t_model_info" EntitySet="t_model_info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SDUDENT_INFO_VERIFY_USERID" Association="Self.FK_SDUDENT_INFO_VERIFY_USERID">
+            <End Role="t_sys_user" EntitySet="t_sys_user" />
+            <End Role="t_student_info" EntitySet="t_student_info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STUDENT_INFO_USER_ID" Association="Self.FK_STUDENT_INFO_USER_ID">
+            <End Role="t_sys_user" EntitySet="t_sys_user" />
+            <End Role="t_student_info" EntitySet="t_student_info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VERIFY_BY_USERID" Association="Self.FK_VERIFY_BY_USERID">
+            <End Role="t_sys_user" EntitySet="t_sys_user" />
+            <End Role="t_verify_quota" EntitySet="t_verify_quota" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VERIFY_BY_VERIFY_USERID" Association="Self.FK_VERIFY_BY_VERIFY_USERID">
+            <End Role="t_sys_user" EntitySet="t_sys_user" />
+            <End Role="t_verify_log" EntitySet="t_verify_log" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VERIFY_QUOTA_USERID" Association="Self.FK_VERIFY_QUOTA_USERID">
+            <End Role="t_sys_user" EntitySet="t_sys_user" />
+            <End Role="t_verify_quota" EntitySet="t_verify_quota" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VERIFY_VERIFY_USERID" Association="Self.FK_VERIFY_VERIFY_USERID">
+            <End Role="t_sys_user" EntitySet="t_sys_user" />
+            <End Role="t_verify_log" EntitySet="t_verify_log" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="XFBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="XFBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="t_bank_card_info" EntityType="XFBModel.t_bank_card_info" />
+          <EntitySet Name="t_bill_stage" EntityType="XFBModel.t_bill_stage" />
+          <EntitySet Name="t_category_info" EntityType="XFBModel.t_category_info" />
+          <EntitySet Name="t_contact_info" EntityType="XFBModel.t_contact_info" />
+          <EntitySet Name="t_credit_sesame" EntityType="XFBModel.t_credit_sesame" />
+          <EntitySet Name="t_image_info" EntityType="XFBModel.t_image_info" />
+          <EntitySet Name="t_job_info" EntityType="XFBModel.t_job_info" />
+          <EntitySet Name="t_member_info" EntityType="XFBModel.t_member_info" />
+          <EntitySet Name="t_model_info" EntityType="XFBModel.t_model_info" />
+          <EntitySet Name="t_quota_score" EntityType="XFBModel.t_quota_score" />
+          <EntitySet Name="t_score_log" EntityType="XFBModel.t_score_log" />
+          <EntitySet Name="t_student_info" EntityType="XFBModel.t_student_info" />
+          <EntitySet Name="t_sys_user" EntityType="XFBModel.t_sys_user" />
+          <EntitySet Name="t_verify_log" EntityType="XFBModel.t_verify_log" />
+          <EntitySet Name="t_verify_quota" EntityType="XFBModel.t_verify_quota" />
+          <AssociationSet Name="FK_BANK_CARD_USER_ID" Association="XFBModel.FK_BANK_CARD_USER_ID">
+            <End Role="t_sys_user" EntitySet="t_sys_user" />
+            <End Role="t_bank_card_info" EntitySet="t_bank_card_info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BANK_CARD_VERIFY_USERID" Association="XFBModel.FK_BANK_CARD_VERIFY_USERID">
+            <End Role="t_sys_user" EntitySet="t_sys_user" />
+            <End Role="t_bank_card_info" EntitySet="t_bank_card_info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CATAGORY_CREATE_USERID" Association="XFBModel.FK_CATAGORY_CREATE_USERID">
+            <End Role="t_sys_user" EntitySet="t_sys_user" />
+            <End Role="t_category_info" EntitySet="t_category_info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CATAGORY_MODEL_ID" Association="XFBModel.FK_CATAGORY_MODEL_ID">
+            <End Role="t_category_info" EntitySet="t_category_info" />
+            <End Role="t_model_info" EntitySet="t_model_info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CATAGORY_MODIFY_USERID" Association="XFBModel.FK_CATAGORY_MODIFY_USERID">
+            <End Role="t_sys_user" EntitySet="t_sys_user" />
+            <End Role="t_category_info" EntitySet="t_category_info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CATAGORY_PARENT_ID" Association="XFBModel.FK_CATAGORY_PARENT_ID">
+            <End Role="t_category_info" EntitySet="t_category_info" />
+            <End Role="t_category_info1" EntitySet="t_category_info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONTACT_USER_ID" Association="XFBModel.FK_CONTACT_USER_ID">
+            <End Role="t_sys_user" EntitySet="t_sys_user" />
+            <End Role="t_contact_info" EntitySet="t_contact_info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONTACT_VERIFY_USERID" Association="XFBModel.FK_CONTACT_VERIFY_USERID">
+            <End Role="t_sys_user" EntitySet="t_sys_user" />
+            <End Role="t_contact_info" EntitySet="t_contact_info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IMAGE_USER_ID" Association="XFBModel.FK_IMAGE_USER_ID">
+            <End Role="t_sys_user" EntitySet="t_sys_user" />
+            <End Role="t_image_info" EntitySet="t_image_info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IMAGE_VERIFY_USERID" Association="XFBModel.FK_IMAGE_VERIFY_USERID">
+            <End Role="t_sys_user" EntitySet="t_sys_user" />
+            <End Role="t_image_info" EntitySet="t_image_info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JOB_USER_ID" Association="XFBModel.FK_JOB_USER_ID">
+            <End Role="t_sys_user" EntitySet="t_sys_user" />
+            <End Role="t_job_info" EntitySet="t_job_info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JOB_VERFIY_USERID" Association="XFBModel.FK_JOB_VERFIY_USERID">
+            <End Role="t_sys_user" EntitySet="t_sys_user" />
+            <End Role="t_job_info" EntitySet="t_job_info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MEMBER_USER_ID" Association="XFBModel.FK_MEMBER_USER_ID">
+            <End Role="t_sys_user" EntitySet="t_sys_user" />
+            <End Role="t_member_info" EntitySet="t_member_info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MEMBER_USER_VERFIY_ID" Association="XFBModel.FK_MEMBER_USER_VERFIY_ID">
+            <End Role="t_sys_user" EntitySet="t_sys_user" />
+            <End Role="t_member_info" EntitySet="t_member_info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MODEL_CREATE_USERID" Association="XFBModel.FK_MODEL_CREATE_USERID">
+            <End Role="t_sys_user" EntitySet="t_sys_user" />
+            <End Role="t_model_info" EntitySet="t_model_info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VERIFY_BY_USERID" Association="XFBModel.FK_VERIFY_BY_USERID">
+            <End Role="t_sys_user" EntitySet="t_sys_user" />
+            <End Role="t_verify_quota" EntitySet="t_verify_quota" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VERIFY_BY_VERIFY_USERID" Association="XFBModel.FK_VERIFY_BY_VERIFY_USERID">
+            <End Role="t_sys_user" EntitySet="t_sys_user" />
+            <End Role="t_verify_log" EntitySet="t_verify_log" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VERIFY_QUOTA_USERID" Association="XFBModel.FK_VERIFY_QUOTA_USERID">
+            <End Role="t_sys_user" EntitySet="t_sys_user" />
+            <End Role="t_verify_quota" EntitySet="t_verify_quota" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VERIFY_VERIFY_USERID" Association="XFBModel.FK_VERIFY_VERIFY_USERID">
+            <End Role="t_sys_user" EntitySet="t_sys_user" />
+            <End Role="t_verify_log" EntitySet="t_verify_log" />
+          </AssociationSet>
+          <EntitySet Name="t_order_info" EntityType="XFBModel.t_order_info" />
+          <AssociationSet Name="FK_SDUDENT_INFO_VERIFY_USERID" Association="XFBModel.FK_SDUDENT_INFO_VERIFY_USERID">
+            <End Role="t_sys_user" EntitySet="t_sys_user" />
+            <End Role="t_student_info" EntitySet="t_student_info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STUDENT_INFO_USER_ID" Association="XFBModel.FK_STUDENT_INFO_USER_ID">
+            <End Role="t_sys_user" EntitySet="t_sys_user" />
+            <End Role="t_student_info" EntitySet="t_student_info" />
+          </AssociationSet>
+          <EntitySet Name="t_mysql_seq" EntityType="XFBModel.t_mysql_seq" />
+          <EntitySet Name="t_interface_log" EntityType="XFBModel.t_interface_log" />
+          </EntityContainer>
+        <EntityType Name="t_bank_card_info">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="card_no" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="opening_bank" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="yl_number" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="type" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="verify_state" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="verify_userid" Type="Int32" />
+          <Property Name="verify_time" Type="DateTime" />
+          <Property Name="submit_time" Type="DateTime" />
+          <Property Name="modify_time" Type="DateTime" />
+          <Property Name="remarks" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="is_toPoints" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="score" Type="Int32" />
+          <NavigationProperty Name="t_sys_user" Relationship="XFBModel.FK_BANK_CARD_USER_ID" FromRole="t_bank_card_info" ToRole="t_sys_user" />
+          <NavigationProperty Name="t_sys_user1" Relationship="XFBModel.FK_BANK_CARD_VERIFY_USERID" FromRole="t_bank_card_info" ToRole="t_sys_user" />
+        </EntityType>
+        <EntityType Name="t_bill_stage">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="bill_no" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="order_id" Type="Int32" />
+          <Property Name="stage_amount" Type="Single" />
+          <Property Name="base_amount" Type="Single" />
+          <Property Name="charge_amount" Type="Single" />
+          <Property Name="latest_repay" Type="DateTime" />
+          <Property Name="overdue_day" Type="Int32" />
+          <Property Name="repay_amount" Type="Single" />
+          <Property Name="bill_status" Type="Int32" />
+          <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="create_time" Type="DateTime" />
+          <Property Name="overdue_fine" Type="Single" />
+          <Property Name="actual_repay" Type="DateTime" />
+          <Property Name="repay_channel" Type="Int32" />
+          <Property Name="delete_flag" Type="Int32" />
+          <Property Name="return_time" Type="DateTime" />
+          <Property Name="refund_time" Type="DateTime" />
+          <Property Name="update_userid" Type="Int32" />
+          <Property Name="update_time" Type="DateTime" />
+          <Property Name="external_pay_name" Type="String" MaxLength="24" FixedLength="false" Unicode="false" />
+          <Property Name="external_bank_name" Type="String" MaxLength="24" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="t_category_info">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="parent_id" Type="Int32" />
+          <Property Name="type" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="t_order" Type="Int32" />
+          <Property Name="flag" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="create_userid" Type="Int32" />
+          <Property Name="create_time" Type="DateTime" />
+          <Property Name="modify_userid" Type="Int32" />
+          <Property Name="modify_time" Type="DateTime" />
+          <Property Name="remarks" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="t_sys_user" Relationship="XFBModel.FK_CATAGORY_CREATE_USERID" FromRole="t_category_info" ToRole="t_sys_user" />
+          <NavigationProperty Name="t_model_info" Relationship="XFBModel.FK_CATAGORY_MODEL_ID" FromRole="t_category_info" ToRole="t_model_info" />
+          <NavigationProperty Name="t_sys_user1" Relationship="XFBModel.FK_CATAGORY_MODIFY_USERID" FromRole="t_category_info" ToRole="t_sys_user" />
+          <NavigationProperty Name="t_category_info1" Relationship="XFBModel.FK_CATAGORY_PARENT_ID" FromRole="t_category_info" ToRole="t_category_info1" />
+          <NavigationProperty Name="t_category_info2" Relationship="XFBModel.FK_CATAGORY_PARENT_ID" FromRole="t_category_info1" ToRole="t_category_info" />
+        </EntityType>
+        <EntityType Name="t_contact_info">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="contact_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="contact_phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="type" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="relationship" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="verify_state" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="verify_userid" Type="Int32" />
+          <Property Name="verify_time" Type="DateTime" />
+          <Property Name="submit_time" Type="DateTime" />
+          <Property Name="modify_time" Type="DateTime" />
+          <Property Name="remarks" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="is_toPoints" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="t_sys_user" Relationship="XFBModel.FK_CONTACT_USER_ID" FromRole="t_contact_info" ToRole="t_sys_user" />
+          <NavigationProperty Name="t_sys_user1" Relationship="XFBModel.FK_CONTACT_VERIFY_USERID" FromRole="t_contact_info" ToRole="t_sys_user" />
+        </EntityType>
+        <EntityType Name="t_credit_sesame">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="verify_userid" Type="Int32" />
+          <Property Name="verify_time" Type="DateTime" />
+          <Property Name="modify_time" Type="DateTime" />
+          <Property Name="remarks" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="is_toPoints" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="score" Type="Int32" />
+        </EntityType>
+        <EntityType Name="t_image_info">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="image_path" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="type" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="verify_state" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="verify_userid" Type="Int32" />
+          <Property Name="verify_time" Type="DateTime" />
+          <Property Name="submit_time" Type="DateTime" />
+          <Property Name="modify_time" Type="DateTime" />
+          <Property Name="remarks" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="is_toPoints" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="t_sys_user" Relationship="XFBModel.FK_IMAGE_USER_ID" FromRole="t_image_info" ToRole="t_sys_user" />
+          <NavigationProperty Name="t_sys_user1" Relationship="XFBModel.FK_IMAGE_VERIFY_USERID" FromRole="t_image_info" ToRole="t_sys_user" />
+        </EntityType>
+        <EntityType Name="t_job_info">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="company_name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="company_nature" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="department" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="post" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="tel_number" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="province" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="city" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="county" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="annual_income" Type="Int32" />
+          <Property Name="verify_state" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="verify_userid" Type="Int32" />
+          <Property Name="verify_time" Type="DateTime" />
+          <Property Name="submit_time" Type="DateTime" />
+          <Property Name="modify_time" Type="DateTime" />
+          <Property Name="remarks" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="is_toPoints" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="t_sys_user" Relationship="XFBModel.FK_JOB_USER_ID" FromRole="t_job_info" ToRole="t_sys_user" />
+          <NavigationProperty Name="t_sys_user1" Relationship="XFBModel.FK_JOB_VERFIY_USERID" FromRole="t_job_info" ToRole="t_sys_user" />
+        </EntityType>
+        <EntityType Name="t_member_info">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="credit_sum" Type="Single" />
+          <Property Name="use_sum" Type="Single" />
+          <Property Name="card_number" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
+          <Property Name="province" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="city" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="county" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="verify_state" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="verify_userid" Type="Int32" />
+          <Property Name="verify_time" Type="DateTime" />
+          <Property Name="submit_time" Type="DateTime" />
+          <Property Name="modify_time" Type="DateTime" />
+          <Property Name="remarks" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="is_toPoints" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="t_sys_user" Relationship="XFBModel.FK_MEMBER_USER_ID" FromRole="t_member_info" ToRole="t_sys_user" />
+          <NavigationProperty Name="t_sys_user1" Relationship="XFBModel.FK_MEMBER_USER_VERFIY_ID" FromRole="t_member_info" ToRole="t_sys_user" />
+          <Property Name="head_portrait" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="t_model_info">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="category_id" Type="Int32" />
+          <Property Name="code" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="score" Type="Int32" />
+          <Property Name="flag" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="create_userid" Type="Int32" />
+          <Property Name="create_time" Type="DateTime" />
+          <Property Name="remarks" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="min_limit" Type="Int32" />
+          <Property Name="max_limit" Type="Int32" />
+          <NavigationProperty Name="t_category_info" Relationship="XFBModel.FK_CATAGORY_MODEL_ID" FromRole="t_model_info" ToRole="t_category_info" />
+          <NavigationProperty Name="t_sys_user" Relationship="XFBModel.FK_MODEL_CREATE_USERID" FromRole="t_model_info" ToRole="t_sys_user" />
+        </EntityType>
+        <EntityType Name="t_quota_score">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="min_quota" Type="Int32" />
+          <Property Name="max_quota" Type="Int32" />
+          <Property Name="min_score" Type="Int32" />
+          <Property Name="max_score" Type="Int32" />
+          <Property Name="flag" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="create_userid" Type="Int32" />
+          <Property Name="create_time" Type="DateTime" />
+          <Property Name="modify_userid" Type="Int32" />
+          <Property Name="modify_time" Type="DateTime" />
+          <Property Name="remarks" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="t_score_log">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="score" Type="Int32" />
+          <Property Name="verify_userid" Type="Int32" />
+          <Property Name="verify_time" Type="DateTime" />
+          <Property Name="flag" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="remarks" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="t_student_info">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="school_name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="major" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="grade" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="graduation_date" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="verify_state" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="is_topoints" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="verify_userid" Type="Int32" />
+          <Property Name="verify_time" Type="DateTime" />
+          <Property Name="submit_time" Type="DateTime" />
+          <Property Name="modify_time" Type="DateTime" />
+          <Property Name="remarks" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="t_sys_user" Relationship="XFBModel.FK_SDUDENT_INFO_VERIFY_USERID" FromRole="t_student_info" ToRole="t_sys_user" />
+          <NavigationProperty Name="t_sys_user1" Relationship="XFBModel.FK_STUDENT_INFO_USER_ID" FromRole="t_student_info" ToRole="t_sys_user" />
+        </EntityType>
+        <EntityType Name="t_sys_user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="login_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="real_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="pass_word" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="Int64" />
+          <Property Name="my_code" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="recom_code" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="create_time" Type="DateTime" />
+          <Property Name="create_userid" Type="Int32" />
+          <Property Name="update_time" Type="DateTime" />
+          <Property Name="update_userid" Type="Int32" />
+          <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="recom_num" Type="Int32" Nullable="false" />
+          <Property Name="type" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="verify_state" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="has_verify" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="t_bank_card_info" Relationship="XFBModel.FK_BANK_CARD_USER_ID" FromRole="t_sys_user" ToRole="t_bank_card_info" />
+          <NavigationProperty Name="t_bank_card_info1" Relationship="XFBModel.FK_BANK_CARD_VERIFY_USERID" FromRole="t_sys_user" ToRole="t_bank_card_info" />
+          <NavigationProperty Name="t_category_info" Relationship="XFBModel.FK_CATAGORY_CREATE_USERID" FromRole="t_sys_user" ToRole="t_category_info" />
+          <NavigationProperty Name="t_category_info1" Relationship="XFBModel.FK_CATAGORY_MODIFY_USERID" FromRole="t_sys_user" ToRole="t_category_info" />
+          <NavigationProperty Name="t_contact_info" Relationship="XFBModel.FK_CONTACT_USER_ID" FromRole="t_sys_user" ToRole="t_contact_info" />
+          <NavigationProperty Name="t_contact_info1" Relationship="XFBModel.FK_CONTACT_VERIFY_USERID" FromRole="t_sys_user" ToRole="t_contact_info" />
+          <NavigationProperty Name="t_image_info" Relationship="XFBModel.FK_IMAGE_USER_ID" FromRole="t_sys_user" ToRole="t_image_info" />
+          <NavigationProperty Name="t_image_info1" Relationship="XFBModel.FK_IMAGE_VERIFY_USERID" FromRole="t_sys_user" ToRole="t_image_info" />
+          <NavigationProperty Name="t_job_info" Relationship="XFBModel.FK_JOB_USER_ID" FromRole="t_sys_user" ToRole="t_job_info" />
+          <NavigationProperty Name="t_job_info1" Relationship="XFBModel.FK_JOB_VERFIY_USERID" FromRole="t_sys_user" ToRole="t_job_info" />
+          <NavigationProperty Name="t_member_info" Relationship="XFBModel.FK_MEMBER_USER_ID" FromRole="t_sys_user" ToRole="t_member_info" />
+          <NavigationProperty Name="t_member_info1" Relationship="XFBModel.FK_MEMBER_USER_VERFIY_ID" FromRole="t_sys_user" ToRole="t_member_info" />
+          <NavigationProperty Name="t_model_info" Relationship="XFBModel.FK_MODEL_CREATE_USERID" FromRole="t_sys_user" ToRole="t_model_info" />
+          <NavigationProperty Name="t_verify_quota" Relationship="XFBModel.FK_VERIFY_BY_USERID" FromRole="t_sys_user" ToRole="t_verify_quota" />
+          <NavigationProperty Name="t_verify_log" Relationship="XFBModel.FK_VERIFY_BY_VERIFY_USERID" FromRole="t_sys_user" ToRole="t_verify_log" />
+          <NavigationProperty Name="t_verify_quota1" Relationship="XFBModel.FK_VERIFY_QUOTA_USERID" FromRole="t_sys_user" ToRole="t_verify_quota" />
+          <NavigationProperty Name="t_verify_log1" Relationship="XFBModel.FK_VERIFY_VERIFY_USERID" FromRole="t_sys_user" ToRole="t_verify_log" />
+          <NavigationProperty Name="t_student_info" Relationship="XFBModel.FK_SDUDENT_INFO_VERIFY_USERID" FromRole="t_sys_user" ToRole="t_student_info" />
+          <NavigationProperty Name="t_student_info1" Relationship="XFBModel.FK_STUDENT_INFO_USER_ID" FromRole="t_sys_user" ToRole="t_student_info" />
+        </EntityType>
+        <EntityType Name="t_verify_log">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="verify_userid" Type="Int32" />
+          <Property Name="verify_time" Type="DateTime" />
+          <Property Name="by_verify_userid" Type="Int32" />
+          <Property Name="verify_state" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="content" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="t_sys_user" Relationship="XFBModel.FK_VERIFY_BY_VERIFY_USERID" FromRole="t_verify_log" ToRole="t_sys_user" />
+          <NavigationProperty Name="t_sys_user1" Relationship="XFBModel.FK_VERIFY_VERIFY_USERID" FromRole="t_verify_log" ToRole="t_sys_user" />
+        </EntityType>
+        <EntityType Name="t_verify_quota">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="credit_userid" Type="Int32" />
+          <Property Name="credit_time" Type="DateTime" />
+          <Property Name="by_credit_userid" Type="Int32" />
+          <Property Name="quota" Type="Int32" />
+          <Property Name="flag" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="type" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="t_sys_user" Relationship="XFBModel.FK_VERIFY_BY_USERID" FromRole="t_verify_quota" ToRole="t_sys_user" />
+          <NavigationProperty Name="t_sys_user1" Relationship="XFBModel.FK_VERIFY_QUOTA_USERID" FromRole="t_verify_quota" ToRole="t_sys_user" />
+        </EntityType>
+        <Association Name="FK_BANK_CARD_USER_ID">
+          <End Type="XFBModel.t_sys_user" Role="t_sys_user" Multiplicity="0..1" />
+          <End Type="XFBModel.t_bank_card_info" Role="t_bank_card_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_sys_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_bank_card_info">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BANK_CARD_VERIFY_USERID">
+          <End Type="XFBModel.t_sys_user" Role="t_sys_user" Multiplicity="0..1" />
+          <End Type="XFBModel.t_bank_card_info" Role="t_bank_card_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_sys_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_bank_card_info">
+              <PropertyRef Name="verify_userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CATAGORY_CREATE_USERID">
+          <End Type="XFBModel.t_sys_user" Role="t_sys_user" Multiplicity="0..1" />
+          <End Type="XFBModel.t_category_info" Role="t_category_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_sys_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_category_info">
+              <PropertyRef Name="create_userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CATAGORY_MODEL_ID">
+          <End Type="XFBModel.t_category_info" Role="t_category_info" Multiplicity="0..1" />
+          <End Type="XFBModel.t_model_info" Role="t_model_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_category_info">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_model_info">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CATAGORY_MODIFY_USERID">
+          <End Type="XFBModel.t_sys_user" Role="t_sys_user" Multiplicity="0..1" />
+          <End Type="XFBModel.t_category_info" Role="t_category_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_sys_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_category_info">
+              <PropertyRef Name="modify_userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CATAGORY_PARENT_ID">
+          <End Type="XFBModel.t_category_info" Role="t_category_info" Multiplicity="0..1" />
+          <End Type="XFBModel.t_category_info" Role="t_category_info1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_category_info">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_category_info1">
+              <PropertyRef Name="parent_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTACT_USER_ID">
+          <End Type="XFBModel.t_sys_user" Role="t_sys_user" Multiplicity="0..1" />
+          <End Type="XFBModel.t_contact_info" Role="t_contact_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_sys_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_contact_info">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTACT_VERIFY_USERID">
+          <End Type="XFBModel.t_sys_user" Role="t_sys_user" Multiplicity="0..1" />
+          <End Type="XFBModel.t_contact_info" Role="t_contact_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_sys_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_contact_info">
+              <PropertyRef Name="verify_userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IMAGE_USER_ID">
+          <End Type="XFBModel.t_sys_user" Role="t_sys_user" Multiplicity="0..1" />
+          <End Type="XFBModel.t_image_info" Role="t_image_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_sys_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_image_info">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IMAGE_VERIFY_USERID">
+          <End Type="XFBModel.t_sys_user" Role="t_sys_user" Multiplicity="0..1" />
+          <End Type="XFBModel.t_image_info" Role="t_image_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_sys_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_image_info">
+              <PropertyRef Name="verify_userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JOB_USER_ID">
+          <End Type="XFBModel.t_sys_user" Role="t_sys_user" Multiplicity="0..1" />
+          <End Type="XFBModel.t_job_info" Role="t_job_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_sys_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_job_info">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JOB_VERFIY_USERID">
+          <End Type="XFBModel.t_sys_user" Role="t_sys_user" Multiplicity="0..1" />
+          <End Type="XFBModel.t_job_info" Role="t_job_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_sys_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_job_info">
+              <PropertyRef Name="verify_userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MEMBER_USER_ID">
+          <End Type="XFBModel.t_sys_user" Role="t_sys_user" Multiplicity="0..1" />
+          <End Type="XFBModel.t_member_info" Role="t_member_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_sys_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_member_info">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MEMBER_USER_VERFIY_ID">
+          <End Type="XFBModel.t_sys_user" Role="t_sys_user" Multiplicity="0..1" />
+          <End Type="XFBModel.t_member_info" Role="t_member_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_sys_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_member_info">
+              <PropertyRef Name="verify_userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MODEL_CREATE_USERID">
+          <End Type="XFBModel.t_sys_user" Role="t_sys_user" Multiplicity="0..1" />
+          <End Type="XFBModel.t_model_info" Role="t_model_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_sys_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_model_info">
+              <PropertyRef Name="create_userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VERIFY_BY_USERID">
+          <End Type="XFBModel.t_sys_user" Role="t_sys_user" Multiplicity="0..1" />
+          <End Type="XFBModel.t_verify_quota" Role="t_verify_quota" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_sys_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_verify_quota">
+              <PropertyRef Name="by_credit_userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VERIFY_BY_VERIFY_USERID">
+          <End Type="XFBModel.t_sys_user" Role="t_sys_user" Multiplicity="0..1" />
+          <End Type="XFBModel.t_verify_log" Role="t_verify_log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_sys_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_verify_log">
+              <PropertyRef Name="by_verify_userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VERIFY_QUOTA_USERID">
+          <End Type="XFBModel.t_sys_user" Role="t_sys_user" Multiplicity="0..1" />
+          <End Type="XFBModel.t_verify_quota" Role="t_verify_quota" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_sys_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_verify_quota">
+              <PropertyRef Name="credit_userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VERIFY_VERIFY_USERID">
+          <End Type="XFBModel.t_sys_user" Role="t_sys_user" Multiplicity="0..1" />
+          <End Type="XFBModel.t_verify_log" Role="t_verify_log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_sys_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_verify_log">
+              <PropertyRef Name="verify_userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="t_order_info">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="owner_userid" Type="Int32" Nullable="false" />
+          <Property Name="order_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="product_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="product_price" Type="Single" />
+          <Property Name="shop_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="use_limit" Type="Single" />
+          <Property Name="order_status" Type="Int32" />
+          <Property Name="create_userid" Type="Int32" />
+          <Property Name="create_time" Type="DateTime" />
+          <Property Name="update_userid" Type="Int32" />
+          <Property Name="update_time" Type="DateTime" />
+          <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="stage_plan" Type="Int32" />
+          <Property Name="first_pay" Type="Single" />
+          <Property Name="delete_flag" Type="Int32" />
+          <Property Name="deal_time" Type="DateTime" />
+          <Property Name="cancel_time" Type="DateTime" />
+          <Property Name="refund_time" Type="DateTime" />
+          <Property Name="payoff_time" Type="DateTime" />
+          <Property Name="first_pay_channel" Type="Int32" />
+          <Property Name="product_pic" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="isPay" Type="Int32" />
+          <Property Name="all_stage_amout" Type="Single" />
+          <Property Name="return_time" Type="DateTime" />
+          <Property Name="return_cause" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_SDUDENT_INFO_VERIFY_USERID">
+          <End Type="XFBModel.t_sys_user" Role="t_sys_user" Multiplicity="0..1" />
+          <End Type="XFBModel.t_student_info" Role="t_student_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_sys_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_student_info">
+              <PropertyRef Name="verify_userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_STUDENT_INFO_USER_ID">
+          <End Type="XFBModel.t_sys_user" Role="t_sys_user" Multiplicity="0..1" />
+          <End Type="XFBModel.t_student_info" Role="t_student_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_sys_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_student_info">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="t_mysql_seq">
+          <Key>
+            <PropertyRef Name="seq_name" />
+          </Key>
+          <Property Name="seq_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="current_value" Type="Int32" Nullable="false" />
+          <Property Name="increment" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="t_interface_log">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="table_id" Type="Int32" />
+          <Property Name="table_name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="state" Type="Boolean" />
+          <Property Name="create_time" Type="DateTime" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="XFBModelStoreContainer" CdmEntityContainer="XFBEntities">
+          <EntitySetMapping Name="t_bank_card_info">
+            <EntityTypeMapping TypeName="XFBModel.t_bank_card_info">
+              <MappingFragment StoreEntitySet="t_bank_card_info">
+                <ScalarProperty Name="score" ColumnName="score" />
+                <ScalarProperty Name="is_toPoints" ColumnName="is_toPoints" />
+                <ScalarProperty Name="remarks" ColumnName="remarks" />
+                <ScalarProperty Name="modify_time" ColumnName="modify_time" />
+                <ScalarProperty Name="submit_time" ColumnName="submit_time" />
+                <ScalarProperty Name="verify_time" ColumnName="verify_time" />
+                <ScalarProperty Name="verify_userid" ColumnName="verify_userid" />
+                <ScalarProperty Name="verify_state" ColumnName="verify_state" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="yl_number" ColumnName="yl_number" />
+                <ScalarProperty Name="opening_bank" ColumnName="opening_bank" />
+                <ScalarProperty Name="card_no" ColumnName="card_no" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_bill_stage">
+            <EntityTypeMapping TypeName="XFBModel.t_bill_stage">
+              <MappingFragment StoreEntitySet="t_bill_stage">
+                <ScalarProperty Name="external_bank_name" ColumnName="external_bank_name" />
+                <ScalarProperty Name="external_pay_name" ColumnName="external_pay_name" />
+                <ScalarProperty Name="update_time" ColumnName="update_time" />
+                <ScalarProperty Name="update_userid" ColumnName="update_userid" />
+                <ScalarProperty Name="refund_time" ColumnName="refund_time" />
+                <ScalarProperty Name="return_time" ColumnName="return_time" />
+                <ScalarProperty Name="delete_flag" ColumnName="delete_flag" />
+                <ScalarProperty Name="repay_channel" ColumnName="repay_channel" />
+                <ScalarProperty Name="actual_repay" ColumnName="actual_repay" />
+                <ScalarProperty Name="overdue_fine" ColumnName="overdue_fine" />
+                <ScalarProperty Name="create_time" ColumnName="create_time" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="bill_status" ColumnName="bill_status" />
+                <ScalarProperty Name="repay_amount" ColumnName="repay_amount" />
+                <ScalarProperty Name="overdue_day" ColumnName="overdue_day" />
+                <ScalarProperty Name="latest_repay" ColumnName="latest_repay" />
+                <ScalarProperty Name="charge_amount" ColumnName="charge_amount" />
+                <ScalarProperty Name="base_amount" ColumnName="base_amount" />
+                <ScalarProperty Name="stage_amount" ColumnName="stage_amount" />
+                <ScalarProperty Name="order_id" ColumnName="order_id" />
+                <ScalarProperty Name="bill_no" ColumnName="bill_no" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_category_info">
+            <EntityTypeMapping TypeName="XFBModel.t_category_info">
+              <MappingFragment StoreEntitySet="t_category_info">
+                <ScalarProperty Name="remarks" ColumnName="remarks" />
+                <ScalarProperty Name="modify_time" ColumnName="modify_time" />
+                <ScalarProperty Name="modify_userid" ColumnName="modify_userid" />
+                <ScalarProperty Name="create_time" ColumnName="create_time" />
+                <ScalarProperty Name="create_userid" ColumnName="create_userid" />
+                <ScalarProperty Name="flag" ColumnName="flag" />
+                <ScalarProperty Name="t_order" ColumnName="t_order" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="parent_id" ColumnName="parent_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_contact_info">
+            <EntityTypeMapping TypeName="XFBModel.t_contact_info">
+              <MappingFragment StoreEntitySet="t_contact_info">
+                <ScalarProperty Name="is_toPoints" ColumnName="is_toPoints" />
+                <ScalarProperty Name="remarks" ColumnName="remarks" />
+                <ScalarProperty Name="modify_time" ColumnName="modify_time" />
+                <ScalarProperty Name="submit_time" ColumnName="submit_time" />
+                <ScalarProperty Name="verify_time" ColumnName="verify_time" />
+                <ScalarProperty Name="verify_userid" ColumnName="verify_userid" />
+                <ScalarProperty Name="verify_state" ColumnName="verify_state" />
+                <ScalarProperty Name="relationship" ColumnName="relationship" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="contact_phone" ColumnName="contact_phone" />
+                <ScalarProperty Name="contact_name" ColumnName="contact_name" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_credit_sesame">
+            <EntityTypeMapping TypeName="XFBModel.t_credit_sesame">
+              <MappingFragment StoreEntitySet="t_credit_sesame">
+                <ScalarProperty Name="score" ColumnName="score" />
+                <ScalarProperty Name="is_toPoints" ColumnName="is_toPoints" />
+                <ScalarProperty Name="remarks" ColumnName="remarks" />
+                <ScalarProperty Name="modify_time" ColumnName="modify_time" />
+                <ScalarProperty Name="verify_time" ColumnName="verify_time" />
+                <ScalarProperty Name="verify_userid" ColumnName="verify_userid" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_image_info">
+            <EntityTypeMapping TypeName="XFBModel.t_image_info">
+              <MappingFragment StoreEntitySet="t_image_info">
+                <ScalarProperty Name="is_toPoints" ColumnName="is_toPoints" />
+                <ScalarProperty Name="remarks" ColumnName="remarks" />
+                <ScalarProperty Name="modify_time" ColumnName="modify_time" />
+                <ScalarProperty Name="submit_time" ColumnName="submit_time" />
+                <ScalarProperty Name="verify_time" ColumnName="verify_time" />
+                <ScalarProperty Name="verify_userid" ColumnName="verify_userid" />
+                <ScalarProperty Name="verify_state" ColumnName="verify_state" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="image_path" ColumnName="image_path" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_job_info">
+            <EntityTypeMapping TypeName="XFBModel.t_job_info">
+              <MappingFragment StoreEntitySet="t_job_info">
+                <ScalarProperty Name="is_toPoints" ColumnName="is_toPoints" />
+                <ScalarProperty Name="remarks" ColumnName="remarks" />
+                <ScalarProperty Name="modify_time" ColumnName="modify_time" />
+                <ScalarProperty Name="submit_time" ColumnName="submit_time" />
+                <ScalarProperty Name="verify_time" ColumnName="verify_time" />
+                <ScalarProperty Name="verify_userid" ColumnName="verify_userid" />
+                <ScalarProperty Name="verify_state" ColumnName="verify_state" />
+                <ScalarProperty Name="annual_income" ColumnName="annual_income" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="county" ColumnName="county" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="province" ColumnName="province" />
+                <ScalarProperty Name="tel_number" ColumnName="tel_number" />
+                <ScalarProperty Name="post" ColumnName="post" />
+                <ScalarProperty Name="department" ColumnName="department" />
+                <ScalarProperty Name="company_nature" ColumnName="company_nature" />
+                <ScalarProperty Name="company_name" ColumnName="company_name" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_member_info">
+            <EntityTypeMapping TypeName="XFBModel.t_member_info">
+              <MappingFragment StoreEntitySet="t_member_info">
+                <ScalarProperty Name="head_portrait" ColumnName="head_portrait" />
+                <ScalarProperty Name="is_toPoints" ColumnName="is_toPoints" />
+                <ScalarProperty Name="remarks" ColumnName="remarks" />
+                <ScalarProperty Name="modify_time" ColumnName="modify_time" />
+                <ScalarProperty Name="submit_time" ColumnName="submit_time" />
+                <ScalarProperty Name="verify_time" ColumnName="verify_time" />
+                <ScalarProperty Name="verify_userid" ColumnName="verify_userid" />
+                <ScalarProperty Name="verify_state" ColumnName="verify_state" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="county" ColumnName="county" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="province" ColumnName="province" />
+                <ScalarProperty Name="card_number" ColumnName="card_number" />
+                <ScalarProperty Name="use_sum" ColumnName="use_sum" />
+                <ScalarProperty Name="credit_sum" ColumnName="credit_sum" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_model_info">
+            <EntityTypeMapping TypeName="XFBModel.t_model_info">
+              <MappingFragment StoreEntitySet="t_model_info">
+                <ScalarProperty Name="max_limit" ColumnName="max_limit" />
+                <ScalarProperty Name="min_limit" ColumnName="min_limit" />
+                <ScalarProperty Name="remarks" ColumnName="remarks" />
+                <ScalarProperty Name="create_time" ColumnName="create_time" />
+                <ScalarProperty Name="create_userid" ColumnName="create_userid" />
+                <ScalarProperty Name="flag" ColumnName="flag" />
+                <ScalarProperty Name="score" ColumnName="score" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="category_id" ColumnName="category_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_quota_score">
+            <EntityTypeMapping TypeName="XFBModel.t_quota_score">
+              <MappingFragment StoreEntitySet="t_quota_score">
+                <ScalarProperty Name="remarks" ColumnName="remarks" />
+                <ScalarProperty Name="modify_time" ColumnName="modify_time" />
+                <ScalarProperty Name="modify_userid" ColumnName="modify_userid" />
+                <ScalarProperty Name="create_time" ColumnName="create_time" />
+                <ScalarProperty Name="create_userid" ColumnName="create_userid" />
+                <ScalarProperty Name="flag" ColumnName="flag" />
+                <ScalarProperty Name="max_score" ColumnName="max_score" />
+                <ScalarProperty Name="min_score" ColumnName="min_score" />
+                <ScalarProperty Name="max_quota" ColumnName="max_quota" />
+                <ScalarProperty Name="min_quota" ColumnName="min_quota" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_score_log">
+            <EntityTypeMapping TypeName="XFBModel.t_score_log">
+              <MappingFragment StoreEntitySet="t_score_log">
+                <ScalarProperty Name="remarks" ColumnName="remarks" />
+                <ScalarProperty Name="flag" ColumnName="flag" />
+                <ScalarProperty Name="verify_time" ColumnName="verify_time" />
+                <ScalarProperty Name="verify_userid" ColumnName="verify_userid" />
+                <ScalarProperty Name="score" ColumnName="score" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_student_info">
+            <EntityTypeMapping TypeName="XFBModel.t_student_info">
+              <MappingFragment StoreEntitySet="t_student_info">
+                <ScalarProperty Name="remarks" ColumnName="remarks" />
+                <ScalarProperty Name="modify_time" ColumnName="modify_time" />
+                <ScalarProperty Name="submit_time" ColumnName="submit_time" />
+                <ScalarProperty Name="verify_time" ColumnName="verify_time" />
+                <ScalarProperty Name="verify_userid" ColumnName="verify_userid" />
+                <ScalarProperty Name="is_topoints" ColumnName="is_topoints" />
+                <ScalarProperty Name="verify_state" ColumnName="verify_state" />
+                <ScalarProperty Name="graduation_date" ColumnName="graduation_date" />
+                <ScalarProperty Name="grade" ColumnName="grade" />
+                <ScalarProperty Name="major" ColumnName="major" />
+                <ScalarProperty Name="school_name" ColumnName="school_name" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_sys_user">
+            <EntityTypeMapping TypeName="XFBModel.t_sys_user">
+              <MappingFragment StoreEntitySet="t_sys_user">
+                <ScalarProperty Name="has_verify" ColumnName="has_verify" />
+                <ScalarProperty Name="verify_state" ColumnName="verify_state" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="recom_num" ColumnName="recom_num" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="update_userid" ColumnName="update_userid" />
+                <ScalarProperty Name="update_time" ColumnName="update_time" />
+                <ScalarProperty Name="create_userid" ColumnName="create_userid" />
+                <ScalarProperty Name="create_time" ColumnName="create_time" />
+                <ScalarProperty Name="recom_code" ColumnName="recom_code" />
+                <ScalarProperty Name="my_code" ColumnName="my_code" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="pass_word" ColumnName="pass_word" />
+                <ScalarProperty Name="real_name" ColumnName="real_name" />
+                <ScalarProperty Name="login_name" ColumnName="login_name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_verify_log">
+            <EntityTypeMapping TypeName="XFBModel.t_verify_log">
+              <MappingFragment StoreEntitySet="t_verify_log">
+                <ScalarProperty Name="content" ColumnName="content" />
+                <ScalarProperty Name="verify_state" ColumnName="verify_state" />
+                <ScalarProperty Name="by_verify_userid" ColumnName="by_verify_userid" />
+                <ScalarProperty Name="verify_time" ColumnName="verify_time" />
+                <ScalarProperty Name="verify_userid" ColumnName="verify_userid" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_verify_quota">
+            <EntityTypeMapping TypeName="XFBModel.t_verify_quota">
+              <MappingFragment StoreEntitySet="t_verify_quota">
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="flag" ColumnName="flag" />
+                <ScalarProperty Name="quota" ColumnName="quota" />
+                <ScalarProperty Name="by_credit_userid" ColumnName="by_credit_userid" />
+                <ScalarProperty Name="credit_time" ColumnName="credit_time" />
+                <ScalarProperty Name="credit_userid" ColumnName="credit_userid" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_order_info">
+            <EntityTypeMapping TypeName="XFBModel.t_order_info">
+              <MappingFragment StoreEntitySet="t_order_info">
+                <ScalarProperty Name="return_cause" ColumnName="return_cause" />
+                <ScalarProperty Name="return_time" ColumnName="return_time" />
+                <ScalarProperty Name="all_stage_amout" ColumnName="all_stage_amout" />
+                <ScalarProperty Name="isPay" ColumnName="isPay" />
+                <ScalarProperty Name="product_pic" ColumnName="product_pic" />
+                <ScalarProperty Name="first_pay_channel" ColumnName="first_pay_channel" />
+                <ScalarProperty Name="payoff_time" ColumnName="payoff_time" />
+                <ScalarProperty Name="refund_time" ColumnName="refund_time" />
+                <ScalarProperty Name="cancel_time" ColumnName="cancel_time" />
+                <ScalarProperty Name="deal_time" ColumnName="deal_time" />
+                <ScalarProperty Name="delete_flag" ColumnName="delete_flag" />
+                <ScalarProperty Name="first_pay" ColumnName="first_pay" />
+                <ScalarProperty Name="stage_plan" ColumnName="stage_plan" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="update_time" ColumnName="update_time" />
+                <ScalarProperty Name="update_userid" ColumnName="update_userid" />
+                <ScalarProperty Name="create_time" ColumnName="create_time" />
+                <ScalarProperty Name="create_userid" ColumnName="create_userid" />
+                <ScalarProperty Name="order_status" ColumnName="order_status" />
+                <ScalarProperty Name="use_limit" ColumnName="use_limit" />
+                <ScalarProperty Name="shop_name" ColumnName="shop_name" />
+                <ScalarProperty Name="product_price" ColumnName="product_price" />
+                <ScalarProperty Name="product_name" ColumnName="product_name" />
+                <ScalarProperty Name="order_name" ColumnName="order_name" />
+                <ScalarProperty Name="owner_userid" ColumnName="owner_userid" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_mysql_seq">
+            <EntityTypeMapping TypeName="XFBModel.t_mysql_seq">
+              <MappingFragment StoreEntitySet="t_mysql_seq">
+                <ScalarProperty Name="increment" ColumnName="increment" />
+                <ScalarProperty Name="current_value" ColumnName="current_value" />
+                <ScalarProperty Name="seq_name" ColumnName="seq_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_interface_log">
+            <EntityTypeMapping TypeName="XFBModel.t_interface_log">
+              <MappingFragment StoreEntitySet="t_interface_log">
+                <ScalarProperty Name="create_time" ColumnName="create_time" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="table_name" ColumnName="table_name" />
+                <ScalarProperty Name="table_id" ColumnName="table_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

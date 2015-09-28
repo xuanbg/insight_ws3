@@ -28,8 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            var resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.barManager = new DevExpress.XtraBars.BarManager();
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            this.barManager = new DevExpress.XtraBars.BarManager(this.components);
             this.meuMain = new DevExpress.XtraBars.Bar();
             this.bmuUser = new DevExpress.XtraBars.BarSubItem();
             this.mubChangPassWord = new DevExpress.XtraBars.BarButtonItem();
@@ -58,9 +59,9 @@
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.navMain = new DevExpress.XtraNavBar.NavBarControl();
-            this.mdiManager = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager();
+            this.mdiManager = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
             this.splitterControl = new DevExpress.XtraEditors.SplitterControl();
-            this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel();
+            this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.barManager)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mpbMain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.navMain)).BeginInit();
@@ -102,9 +103,9 @@
             this.btnDept,
             this.btnUser,
             this.bprMain,
+            this.btnMessger,
             this.btnNotice,
             this.btnThing,
-            this.btnMessger,
             this.btnServer});
             this.barManager.MainMenu = this.meuMain;
             this.barManager.MaxItemId = 52;
@@ -266,9 +267,9 @@
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnDept, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnUser, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(this.bprMain, true),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnThing, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnMessger, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnThing),
             new DevExpress.XtraBars.LinkPersistInfo(this.btnNotice),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnMessger),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnServer, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.barStatus.OptionsBar.AllowQuickCustomization = false;
             this.barStatus.OptionsBar.DrawDragBorder = false;
@@ -337,6 +338,7 @@
             // 
             // btnMessger
             // 
+            this.btnMessger.Alignment = DevExpress.XtraBars.BarItemLinkAlignment.Right;
             this.btnMessger.CategoryGuid = new System.Guid("bb5179f7-aee9-4a1f-8fc5-39d222e973a5");
             this.btnMessger.Enabled = false;
             this.btnMessger.Glyph = ((System.Drawing.Image)(resources.GetObject("btnMessger.Glyph")));

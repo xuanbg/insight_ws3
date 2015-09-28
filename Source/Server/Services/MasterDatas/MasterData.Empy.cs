@@ -172,7 +172,7 @@ namespace Insight.WS.Service
                 new SqlParameter("@MID", SqlDbType.UniqueIdentifier) {Value = d.MID}
             };
             cmds.Add(SqlHelper.MakeCommand(sql, parm));
-            cmds.Add(SqlHelper.MakeCommand(string.Format("update MDR_ET set TitleId = '{0}' where ID = '{1}'", r.TitleId, r.ID)));
+            cmds.Add(SqlHelper.MakeCommand($"update MDR_ET set TitleId = '{r.TitleId}' where ID = '{r.ID}'"));
 
             cmds.AddRange(MasterDataDAL.DeleteContactInfo(cdl));
             cmds.AddRange(MasterDataDAL.InsertContactInfo(m.ID, cdt));

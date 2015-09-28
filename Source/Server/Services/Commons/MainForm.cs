@@ -99,22 +99,14 @@ namespace Insight.WS.Service
         #region 更新数据
 
         /// <summary>
-        /// 修改指定登录名的密码
+        /// 修改指定用户的密码
         /// </summary>
         /// <param name="us">Session对象实体</param>
         /// <param name="pw">新密码Hash值</param>
         /// <returns>bool 是否修改成功</returns>
         public bool UpdataPassWord(Session us, string pw)
         {
-            if (!OnlineManage.Verification(us)) return false;
-
-            var sql = string.Format("update SYS_User set Password = '{0}' where ID = '{1}' ", pw, us.UserId);
-            if (SqlHelper.SqlNonQuery(sql) > 0)
-            {
-                OnlineManage.Sessions[us.ID].Signature = pw;
-                return true;
-            }
-            return false;
+            return CommonDAL.UpdataPassword(us, pw);
         }
 
         #endregion

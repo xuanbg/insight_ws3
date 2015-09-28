@@ -262,7 +262,7 @@ namespace Insight.WS.Client.Platform.Base
                     if (cli.UpdateOrg(OpenForm.UserSession, _Org, _Value))
                         DialogResult = DialogResult.OK;
                     else
-                        General.ShowError(string.Format("没有更新{0}【{1}】的任何信息！", cmbNodeType.Text, _Org.FullName));
+                        General.ShowError($"没有更新{cmbNodeType.Text}【{_Org.FullName}】的任何信息！");
                 }
                 else
                 {
@@ -270,7 +270,7 @@ namespace Insight.WS.Client.Platform.Base
                     _Org.ParentId = _ParentId;
                     if (!cli.AddOrg(OpenForm.UserSession, _Org, _Value))
                     {
-                        General.ShowError(string.Format("对不起，因为未知的原因，新建{0}【{1}】失败！\r\n如出现重复失败的情况，请联系管理员。", cmbNodeType.Text, _Org.FullName));
+                        General.ShowError($"对不起，因为未知的原因，新建{cmbNodeType.Text}【{_Org.FullName}】失败！\r\n如出现重复失败的情况，请联系管理员。");
                         return;
                     }
                     

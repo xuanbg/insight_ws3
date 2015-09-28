@@ -26,7 +26,7 @@ namespace Insight.WS.Service
             if (!OnlineManage.Verification(us)) return null;
 
             var str = hasAlias ? "case when Alias is null then '' else '(' + Alias + ')' end" : "''";
-            var sql = string.Format("select ID, ParentId, [Index], Name + {0} as Name, Alias, Code, BuiltIn, Visible from BASE_Category where ModuleId = '{1}'{2} order by [Index]", str, mid, getAll ? "" : " and Visible = 1");
+            var sql = $"select ID, ParentId, [Index], Name + {str} as Name, Alias, Code, BuiltIn, Visible from BASE_Category where ModuleId = '{mid}'{(getAll ? "" : " and Visible = 1")} order by [Index]";
             return SqlHelper.SqlQuery(sql);
         }
 
@@ -124,7 +124,7 @@ namespace Insight.WS.Service
 
             var cmds = new List<SqlCommand>();
             var obj = GetCategory(us, id);
-            var sql = string.Format("delete BASE_Category where ID = '{0}'", id);
+            var sql = $"delete BASE_Category where ID = '{id}'";
 
             cmds.Add(SqlHelper.MakeCommand(sql));
             cmds.Add(SqlHelper.MakeCommand(CommonDAL.ChangeIndex("BASE_Category", obj.Index, 99999, obj.ParentId, false, obj.ModuleId)));
@@ -160,8 +160,8 @@ namespace Insight.WS.Service
 
         private bool NameIsExisting(Guid moduleId, string columnName, string name, params Guid?[] parentId)
         {
-            var sql = string.Format("select count(*) from BASE_Category where ModuleId = '{0}' and {1} = '{2}' ", moduleId, columnName, name);
-            sql += parentId.Length == 0 ? "" : string.Format("and ParentId {0}", parentId[0] == null ? "is null" : string.Format("= '{0}'", parentId[0]));
+            var sql = $"select count(*) from BASE_Category where ModuleId = '{moduleId}' and {columnName} = '{name}' ";
+            sql += parentId.Length == 0 ? "" : $"and ParentId {(parentId[0] == null ? "is null" : $"= '{parentId[0]}'")}";
             using (var context = new WSEntities())
             {
                 return context.Database.SqlQuery<int>(sql).FirstOrDefault() > 0;

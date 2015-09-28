@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using FastReport;
@@ -18,6 +19,8 @@ namespace Insight.WS.Server.Common
         /// <returns>bool 是否完成当前任务</returns>
         public static bool Build()
         {
+            var time = DateTime.Now;
+            Util.LogToEvent($"报表生成任务已经于{time}启动…", EventLogEntryType.Information);
             var task = GetTask();
             var obj = new List<SYS_Report_Instances>();
             string temp = null;
@@ -34,6 +37,7 @@ namespace Insight.WS.Server.Common
                 obj.Clear();
                 temp = null;
             }
+            Util.LogToEvent($"本次报表生成任务已经于{DateTime.Now}完成！共耗时：{(DateTime.Now - time).Seconds}秒。", EventLogEntryType.Information);
             return true;
         }
 
@@ -111,21 +115,20 @@ namespace Insight.WS.Server.Common
         public static SYS_Report_Instances BulidReport(Guid id, DateTime? sd, DateTime? ed, string dn, string un, Guid did, Guid? uid, string templat = null)
         {
             var report = GetDefinition(id);
-            var name = string.Format("{0}【{1}】{2}—{3}", dn, report.Name, sd.HasValue ? sd.Value.ToShortDateString() : "", ed.HasValue ? ed.Value.ToShortDateString() : "");
-
+            var name = $"{dn}【{report.Name}】{sd?.ToShortDateString() ?? ""}—{ed?.ToShortDateString() ?? ""}";
             var fr = new Report();
 
             fr.LoadFromString(templat ?? GetTemplate(report.TemplateId).Content);
             if (report.DataSource == 1)
             {
-                fr.Dictionary.Connections[0].ConnectionString = SqlHelper.ConnStr;
+                fr.Dictionary.Connections[0].ConnectionString = SqlHelper.WSConn;
             }
             fr.SetParameterValue("StartDate", sd);
             fr.SetParameterValue("EndDate", ed);
             fr.SetParameterValue("DeptName", dn);
             fr.SetParameterValue("UserName", un);
             fr.SetParameterValue("DeptId", did.ToString());
-            fr.SetParameterValue("UserId", uid.HasValue ? uid.ToString() : null);
+            fr.SetParameterValue("UserId", uid?.ToString());
 
             if (!fr.Prepare()) return null;
 
@@ -162,11 +165,11 @@ namespace Insight.WS.Server.Common
             var fr = new Report();
 
             fr.LoadFromString(GetTemplate(templetId).Content);
-            fr.Dictionary.Connections[0].ConnectionString = SqlHelper.ConnStr;
+            fr.Dictionary.Connections[0].ConnectionString = SqlHelper.WSConn;
             fr.SetParameterValue("BusinessId", id.ToString());
             fr.SetParameterValue("DeptName", dn);
             fr.SetParameterValue("UserName", un);
-            fr.SetParameterValue("DeptId", did.HasValue ? did.ToString() : null);
+            fr.SetParameterValue("DeptId", did?.ToString());
             fr.SetParameterValue("UserId", uid.ToString());
             if (!fr.Prepare()) return img;
 

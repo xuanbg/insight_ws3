@@ -89,7 +89,7 @@ namespace Insight.WS.Client.Platform.Base
 
             if (_Group.Name != txtGroupName.Text.Trim() && Commons.NameIsExist(txtGroupName.Text.Trim(), "Name", "SYS_UserGroup"))
             {
-                General.ShowWarning(string.Format("用户组【{0}】已经存在！", txtGroupName.Text.Trim()));
+                General.ShowWarning($"用户组【{txtGroupName.Text.Trim()}】已经存在！");
                 txtGroupName.Focus();
                 return false;
             }
@@ -113,7 +113,7 @@ namespace Insight.WS.Client.Platform.Base
                 {
                     if (!cli.UpdateGroup(OpenForm.UserSession, _Group))
                     {
-                        General.ShowError(string.Format("没有更新用户组【{0}】的任何信息！", _Group.Name));
+                        General.ShowError($"没有更新用户组【{_Group.Name}】的任何信息！");
                         return;
                     }
                     
