@@ -67,8 +67,10 @@ CREATE TABLE SYS_User(
 [Name]             NVARCHAR(16) NOT NULL,                                                                                                  --用户名
 [LoginName]        NVARCHAR(32) NOT NULL,                                                                                                  --登录名
 [Password]         VARCHAR(32) DEFAULT 'E10ADC3949BA59ABBE56E057F20F883E' NOT NULL,                                                        --登录密码，保存密码的MD5值，初始密码123456
+[PayPassword]      VARCHAR(32),                                                                                                            --支付密码，保存密码的MD5值
+[OpenId]           VARCHAR(32),                                                                                                            --OpenId
 [Description]      NVARCHAR(MAX),                                                                                                          --描述
-[Type]             INT DEFAULT 1 NOT NULL,                                                                                                 --用户类型：-1、外部用户；1、内部用户
+[Type]             INT DEFAULT 0 NOT NULL,                                                                                                 --用户类型：-1、外部用户；1、内部用户
 [BuiltIn]          BIT DEFAULT 0 NOT NULL,                                                                                                 --是否预置：0、自定；1、预置
 [Validity]         BIT DEFAULT 1 NOT NULL,                                                                                                 --是否有效：0、无效；1、有效
 [CreatorUserId]    UNIQUEIDENTIFIER,                                                                                                       --创建人ID
@@ -399,7 +401,7 @@ DECLARE @GroupId UNIQUEIDENTIFIER
 select @GroupId = ID from SYS_UserGroup where Name = 'AllUsers'
 
 INSERT SYS_UserGroupMember (GroupId, UserId, CreatorUserId)
-select @GroupId, TI.ID, TI.CreatorUserId from Inserted TI
+select @GroupId, TI.ID, TI.CreatorUserId from Inserted TI where Type > 0
 
 END
 GO
