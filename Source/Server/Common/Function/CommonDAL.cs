@@ -269,24 +269,21 @@ namespace Insight.WS.Server.Common
         /// </summary>
         /// <param name="number">手机号</param>
         /// <param name="code">验证码</param>
-        /// <param name="timeout">超时分钟数（默认30分钟）</param>
+        /// <param name="type"></param>
         /// <returns>bool 是否正确</returns>
-        public static bool CodeVerify(string number, string code, int timeout = 30)
+        public static bool CodeVerify(string number, string code, int type)
         {
             using (var context = new WSEntities())
             {
-                var vr = context.SYS_Verify_Record.Where(v => !v.Verified && v.Mobile == number && v.Code == code)
-                         .OrderByDescending(v => v.SN)
-                         .FirstOrDefault();
-                if (vr == null) return false;
+                var list = context.SYS_Verify_Record.Where(c => !c.Verified && c.Mobile == number && c.Type == type).ToList();
+                if (list.Count == 0 || !(list.Exists(c => c.Code == code && c.FailureTime > DateTime.Now))) return false;
 
-                var time = DateTime.Now - vr.CreateTime;
-                if (time.TotalMinutes > timeout) return false;
-
-                vr.Verified = true;
-                vr.VerifyTime = DateTime.Now;
-                context.SaveChanges();
-                return true;
+                foreach (var record in list)
+                {
+                    record.Verified = true;
+                    record.VerifyTime = DateTime.Now;
+                }
+                return context.SaveChanges() > 0;
             }
         }
 
@@ -297,7 +294,7 @@ namespace Insight.WS.Server.Common
         /// <param name="type">验证码类型</param>
         /// <param name="time">有效时间（分钟）</param>
         /// <returns>string 验证码</returns>
-        public static string GetVerifyCode(string sdst, int type, int time = 30)
+        public static void GetVerifyCode(string sdst, int type, int time = 30)
         {
             var random = new Random(Environment.TickCount);
             var code = random.Next(100000, 999999).ToString();
@@ -321,14 +318,15 @@ namespace Insight.WS.Server.Common
             Util.SendMessage(sdst, smsg);
 
             // 保存验证码
-            const string sql = "insert SYS_Verify_Record (Type, Mobile, Code) select @Type, @Mobile, @Code";
+            const string sql = "insert SYS_Verify_Record (Type, Mobile, Code, FailureTime) select @Type, @Mobile, @Code, @FailureTime";
             var parm = new[]
             {
                 new SqlParameter("@Type", type),
                 new SqlParameter("@Mobile", sdst),
-                new SqlParameter("@Code", code)
+                new SqlParameter("@Code", code),
+                new SqlParameter("@FailureTime", DateTime.Now.AddMinutes(time))
             };
-            return SqlHelper.SqlNonQuery(sql, parm) > 0 ? code : null;
+            SqlHelper.SqlNonQuery(sql, parm);
         }
 
         #endregion

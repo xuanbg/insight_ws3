@@ -83,11 +83,12 @@ namespace Insight.WS.Server.Common
         public static string GetImageExtension(Image img)
         {
             var list = typeof(ImageFormat).GetProperties(BindingFlags.Static | BindingFlags.Public);
-            foreach (var n in from n in list let format = (ImageFormat) n.GetValue(null, null) where format.Guid.Equals(img.RawFormat.Guid) select n)
-            {
-                return n.Name;
-            }
-            return "unknown";
+            var name = from n in list
+                       let format = (ImageFormat)n.GetValue(null, null)
+                       where format.Guid.Equals(img.RawFormat.Guid)
+                       select n;
+            var names = name.ToList();
+            return names.Count > 0 ? names[0].Name : "unknown";
         }
 
         /// <summary>

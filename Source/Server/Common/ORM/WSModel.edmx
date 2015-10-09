@@ -1106,6 +1106,7 @@
           <Property Name="Verified" Type="bit" Nullable="false" />
           <Property Name="VerifyTime" Type="datetime" />
           <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="FailureTime" Type="datetime" />
         </EntityType>
         <!--生成过程中发现错误:
 警告 6002: 表/视图“Insight.dbo.Advance”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
@@ -9969,6 +9970,7 @@
           <Property Name="Code" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
           <Property Name="Verified" Type="Boolean" Nullable="false" />
           <Property Name="VerifyTime" Type="DateTime" Precision="3" />
+          <Property Name="FailureTime" Type="DateTime" Precision="3" />
           <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
       </Schema>
@@ -11210,6 +11212,7 @@
           <EntitySetMapping Name="SYS_Verify_Record">
             <EntityTypeMapping TypeName="WSModel.SYS_Verify_Record">
               <MappingFragment StoreEntitySet="SYS_Verify_Record">
+                <ScalarProperty Name="FailureTime" ColumnName="FailureTime" />
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="VerifyTime" ColumnName="VerifyTime" />
                 <ScalarProperty Name="Verified" ColumnName="Verified" />

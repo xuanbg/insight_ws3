@@ -32,6 +32,8 @@ namespace Insight.WS.Server.Common.ORM
     	[DataMember]
         public Nullable<System.DateTime> VerifyTime { get; set; }
     	[DataMember]
+        public Nullable<System.DateTime> FailureTime { get; set; }
+    	[DataMember]
         public System.DateTime CreateTime { get; set; }
     }
 }
