@@ -74,6 +74,17 @@ namespace Insight.WS.Server.Common
         }
 
         /// <summary>
+        /// 返回动态类型的查询方法
+        /// </summary>
+        /// <param name="type">类型</param>
+        /// <param name="sql">查询语句</param>
+        /// <returns>dynamic 动态类型</returns>
+        public static dynamic SqlQuery(Type type, string sql)
+        {
+            return new WSEntities().Database.SqlQuery(type, sql);
+        }
+
+        /// <summary>
         /// 返回受影响行数的方法
         /// </summary>
         /// <param name="sql">sql语句</param>

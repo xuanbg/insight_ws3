@@ -75,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Function\ClearingDAL.cs" />
+    <Compile Include="Function\TypeFactory.cs" />
     <Compile Include="Function\Util.cs" />
     <Compile Include="ExtendClass\Services.cs" />
     <Compile Include="Function\ContractDAL.cs" />
