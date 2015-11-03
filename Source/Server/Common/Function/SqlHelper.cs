@@ -1,16 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using Insight.WS.Server.Common.ORM;
 
 namespace Insight.WS.Server.Common
 {
     public class SqlHelper
     {
-        public static readonly string WSConn = new WSEntities().Database.Connection.ConnectionString;
 
-        #region WSEntities
+        public static Dictionary<string, string> ConStr;
+
+        /// <summary>
+        /// 静态构造函数，初始化系统连结字符串
+        /// </summary>
+        static SqlHelper()
+        {
+            var list = ConfigurationManager.ConnectionStrings;
+            ConStr = new Dictionary<string, string> {{"Template", null}};
+            for (var i = 0; i < list.Count; i++)
+            {
+                var name = list[i].Name;
+                if (name.Contains("Local")) continue;
+
+                ConStr.Add(name, new Entities(name).ConnectionString);
+            }
+        }
 
         /// <summary>
         /// 返回DataTable的带可变参数组查询方法
@@ -20,7 +35,7 @@ namespace Insight.WS.Server.Common
         /// <returns>DataTable 查询结果集</returns>
         public static DataTable SqlQuery(string sql, params SqlParameter[] parms)
         {
-            using (var conn = new SqlConnection(WSConn))
+            using (var conn = new SqlConnection(ConStr["WSEntities"]))
             {
                 conn.Open();
                 var cmd = MakeCommand(sql, parms);
@@ -51,7 +66,7 @@ namespace Insight.WS.Server.Common
         /// <returns>DataTable 查询结果集</returns>
         public static DataTable SqlQuery(string sql, string db, params SqlParameter[] parms)
         {
-            using (var conn = new SqlConnection(WSConn))
+            using (var conn = new SqlConnection(ConStr[db]))
             {
                 conn.Open();
                 var cmd = MakeCommand(sql, parms);
@@ -74,17 +89,6 @@ namespace Insight.WS.Server.Common
         }
 
         /// <summary>
-        /// 返回动态类型的查询方法
-        /// </summary>
-        /// <param name="type">类型</param>
-        /// <param name="sql">查询语句</param>
-        /// <returns>dynamic 动态类型</returns>
-        public static dynamic SqlQuery(Type type, string sql)
-        {
-            return new WSEntities().Database.SqlQuery(type, sql);
-        }
-
-        /// <summary>
         /// 返回受影响行数的方法
         /// </summary>
         /// <param name="sql">sql语句</param>
@@ -92,7 +96,7 @@ namespace Insight.WS.Server.Common
         /// <returns>int 受影响行数</returns>
         public static int SqlNonQuery(string sql, params SqlParameter[] parms)
         {
-            using (var conn = new SqlConnection(WSConn))
+            using (var conn = new SqlConnection(ConStr["WSEntities"]))
             {
                 conn.Open();
                 var cmd = MakeCommand(sql, parms);
@@ -119,7 +123,7 @@ namespace Insight.WS.Server.Common
         /// <returns>int 受影响行数</returns>
         public static int SqlNonQuery(string sql, string db, params SqlParameter[] parms)
         {
-            using (var conn = new SqlConnection(WSConn))
+            using (var conn = new SqlConnection(ConStr[db]))
             {
                 conn.Open();
                 var cmd = MakeCommand(sql, parms);
@@ -145,7 +149,7 @@ namespace Insight.WS.Server.Common
         /// <returns>执行SQL语句后的第一行第一列内容</returns>
         public static object SqlScalar(string sql, params SqlParameter[] parms)
         {
-            using (var conn = new SqlConnection(WSConn))
+            using (var conn = new SqlConnection(ConStr["WSEntities"]))
             {
                 conn.Open();
                 var cmd = MakeCommand(sql, parms);
@@ -172,7 +176,7 @@ namespace Insight.WS.Server.Common
         /// <returns>执行SQL语句后的第一行第一列内容</returns>
         public static object SqlScalar(string sql, string db, params SqlParameter[] parms)
         {
-            using (var conn = new SqlConnection(WSConn))
+            using (var conn = new SqlConnection(ConStr[db]))
             {
                 conn.Open();
                 var cmd = MakeCommand(sql, parms);
@@ -196,9 +200,9 @@ namespace Insight.WS.Server.Common
         /// <param name="cmds">多条SQL语句</param>
         /// <param name="db">数据库</param>		
         /// <returns>bool 执行是否成功</returns>
-        public static bool SqlExecute(IEnumerable<SqlCommand> cmds, string db = "WS")
+        public static bool SqlExecute(IEnumerable<SqlCommand> cmds, string db = "WSEntities")
         {
-            using (var conn = new SqlConnection(WSConn))
+            using (var conn = new SqlConnection(ConStr[db]))
             {
                 conn.Open();
                 var ids = new List<object>();
@@ -240,9 +244,9 @@ namespace Insight.WS.Server.Common
         /// <param name="i">返回ID索引位置</param>
         /// <param name="db">数据库</param>		
         /// <returns>object 指定索引位置的ID</returns>
-        public static object SqlExecute(IEnumerable<SqlCommand> cmds, int i, string db = "WS")
+        public static object SqlExecute(IEnumerable<SqlCommand> cmds, int i, string db = "WSEntities")
         {
-            using (var conn = new SqlConnection(WSConn))
+            using (var conn = new SqlConnection(ConStr[db]))
             {
                 conn.Open();
                 var ids = new List<object>();
@@ -277,10 +281,6 @@ namespace Insight.WS.Server.Common
             }
         }
 
-        #endregion
-
-        #region Others
-
         /// <summary>
         /// 组装SqlCommand对象
         /// </summary>
@@ -300,8 +300,6 @@ namespace Insight.WS.Server.Common
             }
             return cmd;
         }
-
-        #endregion
 
     }
 }

@@ -102,7 +102,7 @@ CREATE TABLE SYS_Report_Definition(
 [Mode]             INT DEFAULT 1 NOT NULL,                                                                                                 --统计模式：1、时段；2、时点；3、当前
 [Delay]            INT DEFAULT 2 NOT NULL,                                                                                                 --延时小时数（正数延后，负数提前）
 [Type]             INT DEFAULT 1 NOT NULL,                                                                                                 --报表类型：1、组织机构；2、个人私有
-[DataSource]       INT DEFAULT 1 NOT NULL,                                                                                                 --数据源：1、使用系统数据源；2、使用模板数据源
+[DataSource]       VARCHAR(16),                                                                                                            --数据源
 [Description]      NVARCHAR(MAX),                                                                                                          --描述
 [CreatorDeptId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_Organization(ID),                                                           --创建部门ID
 [CreatorUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID) DEFAULT '00000000-0000-0000-0000-000000000000' NOT NULL,           --创建人ID

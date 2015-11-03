@@ -28,8 +28,7 @@ namespace Insight.WS.Server.Common
             const string password = "asd456";
             const string signature = "【信分宝】";
 
-            var post =
-                $"{url}?action=send&userid={uid}&account={account}&password={password}&mobile={number}&content={msg}{signature}&sendTime=&extno=";
+            var post = $"{url}?action=send&userid={uid}&account={account}&password={password}&mobile={number}&content={msg}{signature}&sendTime=&extno=";
             HttpPost(post, "");
         }
 
@@ -83,7 +82,7 @@ namespace Insight.WS.Server.Common
         /// <returns>string 图片格式</returns>
         public static string GetImageExtension(Image img)
         {
-            var list = typeof (ImageFormat).GetProperties(BindingFlags.Static | BindingFlags.Public);
+            var list = typeof(ImageFormat).GetProperties(BindingFlags.Static | BindingFlags.Public);
             var name = from n in list
                 let format = (ImageFormat) n.GetValue(null, null)
                 where format.Guid.Equals(img.RawFormat.Guid)
@@ -101,12 +100,10 @@ namespace Insight.WS.Server.Common
         public static DateTime FormatDate(DateTime date, int n)
         {
             var day = date.Day;
-            var mod = day%10;
-            day = (day - mod + n + (mod > n ? 10 : 0))%30;
+            var mod = day % 10;
+            day = (day - mod + n + (mod > n ? 10 : 0)) % 30;
 
-            return
-                DateTime.Parse(date.ToString("yyyy-MM-dd").Substring(0, 8) + day.ToString("00"))
-                    .AddMonths(date.Day > 20 + n ? 1 : 0);
+            return DateTime.Parse(date.ToString("yyyy-MM-dd").Substring(0, 8) + day.ToString("00")).AddMonths(date.Day > 20 + n ? 1 : 0);
         }
 
         /// <summary>
@@ -115,8 +112,7 @@ namespace Insight.WS.Server.Common
         /// <param name="msg">Log消息</param>
         /// <param name="type">Log类型（默认Error）</param>
         /// <param name="source">事件源（默认Insight Workstation 3 Service）</param>
-        public static void LogToEvent(string msg, EventLogEntryType type = EventLogEntryType.Error,
-            string source = "Insight Workstation 3 Service")
+        public static void LogToEvent(string msg, EventLogEntryType type = EventLogEntryType.Error, string source = "XinFenBao Interface Service")
         {
             EventLog.WriteEntry(source, msg, type);
         }
@@ -130,7 +126,7 @@ namespace Insight.WS.Server.Common
         public static string HttpPost(string url, string postDataStr)
         {
             var cookie = new CookieContainer();
-            var request = (HttpWebRequest) WebRequest.Create(url);
+            var request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
             request.ContentLength = Encoding.UTF8.GetByteCount(postDataStr);
@@ -140,7 +136,7 @@ namespace Insight.WS.Server.Common
             myStreamWriter.Write(postDataStr);
             myStreamWriter.Close();
 
-            var response = (HttpWebResponse) request.GetResponse();
+            var response = (HttpWebResponse)request.GetResponse();
 
             response.Cookies = cookie.GetCookies(response.ResponseUri);
             var myResponseStream = response.GetResponseStream();
@@ -162,11 +158,11 @@ namespace Insight.WS.Server.Common
         /// <returns></returns>
         public static string HttpGet(string url, string postDataStr)
         {
-            var request = (HttpWebRequest) WebRequest.Create(url + (postDataStr == "" ? "" : "?") + postDataStr);
+            var request = (HttpWebRequest)WebRequest.Create(url + (postDataStr == "" ? "" : "?") + postDataStr);
             request.Method = "GET";
             request.ContentType = "text/html;charset=UTF-8";
 
-            var response = (HttpWebResponse) request.GetResponse();
+            var response = (HttpWebResponse)request.GetResponse();
             var myResponseStream = response.GetResponseStream();
             if (myResponseStream == null) return null;
 
@@ -176,20 +172,6 @@ namespace Insight.WS.Server.Common
             myResponseStream.Close();
 
             return retString;
-        }
-
-        /// <summary>
-        /// 动态类型例程
-        /// </summary>
-        public dynamic Demo()
-        {
-            const string sql = "select ID ,Name as num from student";
-            var type = TypeFactory.GetUserType(
-                new PropertyItem("ID", typeof (int)),
-                new PropertyItem("num", typeof (string))
-                );
-
-            return SqlHelper.SqlQuery(type, sql);
         }
 
     }

@@ -25,7 +25,7 @@ namespace Insight.WS.Service
 
             var sql = new StringBuilder("with List as(Select D.ID, max(P.Permission) as Permission from SYS_Report_Definition D ");
             sql.Append("join Get_PermData('DD46BA9F-A345-4CEC-AE00-26561460E470', @UserId, @DeptId) P on P.OrgId = isnull(D.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = D.CreatorUserId group by D.ID) ");
-            sql.Append("select D.ID, D.CategoryId, case when D.Type = 1 then '组织' else '个人' end as 类型, case D.Mode when 1 then '时段' when 2 then '时点' else '即时' end as 模式, D.Name as 名称, T.Name as 模板, case when D.DataSource = 1 then '系统' else '模板' end as 数据源, D.[Description] as 备注, L.Permission from SYS_Report_Definition D join List L on L.ID = D.ID join SYS_Report_Templates T on T.ID = D.TemplateId order by D.SN");
+            sql.Append("select D.ID, D.CategoryId, case when D.Type = 1 then '组织' else '个人' end as 类型, case D.Mode when 1 then '时段' when 2 then '时点' else '即时' end as 模式, D.Name as 名称, T.Name as 模板, D.DataSource as 数据源, D.[Description] as 备注, L.Permission from SYS_Report_Definition D join List L on L.ID = D.ID join SYS_Report_Templates T on T.ID = D.TemplateId order by D.SN");
             var parm = new[]
             {
                 new SqlParameter("@UserId", SqlDbType.UniqueIdentifier) {Value = us.UserId},
@@ -119,6 +119,17 @@ namespace Insight.WS.Service
             return SqlHelper.SqlQuery(sql.ToString());
         }
 
+        /// <summary>
+        /// 获取可用系统数据源
+        /// </summary>
+        /// <param name="us">用户会话</param>
+        /// <returns>可用系统数据源集合</returns>
+        public List<string> GetDataSource(Session us)
+        {
+            var list = SqlHelper.ConStr.ToList();
+            return list.Select(obj => obj.Key).ToList();
+        }
+
         #endregion
 
         #region 新增
@@ -205,8 +216,6 @@ namespace Insight.WS.Service
 
             cmds.AddRange(InsertRules(def.ID, rdt));
             cmds.AddRange(InsertEntitys(def.ID, edt, mdt));
-
-            //cmds.AddRange(InsertMembers(def.ID, mdt));
 
             return SqlHelper.SqlExecute(cmds);
         }

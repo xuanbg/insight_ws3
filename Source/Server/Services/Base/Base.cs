@@ -19,7 +19,7 @@ namespace Insight.WS.Service
         /// <returns>Session List 在线用户列表</returns>
         public List<Session> GetOnlineUser(Session us)
         {
-            return !OnlineManage.Verification(us) ? null : OnlineManage.Sessions.FindAll(s => s.SessionId != Guid.Empty);
+            return !OnlineManage.Verification(us) ? null : OnlineManage.Sessions.FindAll(s => s.Type > 0 && s.SessionId != Guid.Empty);
         }
 
         #endregion

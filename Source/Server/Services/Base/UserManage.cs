@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
 
@@ -95,10 +94,9 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return null;
 
-            var sql = new StringBuilder("select U.ID, U.Name as 用户名, U.LoginName as 登录名, U.Description as 描述 from SYS_User U ");
-            sql.AppendFormat("where not exists (select UserId from SYS_UserGroupMember where UserId = U.ID and GroupId = '{0}') ", id);
-            sql.Append("order by LoginName");
-            return SqlHelper.SqlQuery(sql.ToString());
+            var sql = "select U.ID, U.Name as 用户名, U.LoginName as 登录名, U.Description as 描述 from SYS_User U where U.Type > 0 ";
+            sql += $"and not exists (select UserId from SYS_UserGroupMember where UserId = U.ID and GroupId = '{id}') order by U.LoginName";
+            return SqlHelper.SqlQuery(sql);
         }
 
         #endregion
@@ -145,8 +143,8 @@ namespace Insight.WS.Service
                 new SqlParameter("@Password", obj.Password),
                 new SqlParameter("@PayPassword", obj.PayPassword),
                 new SqlParameter("@OpenId", obj.OpenId),
-                new SqlParameter("@Password", obj.Description),
-                new SqlParameter("@Type", SqlDbType.Int) {Value = 0},
+                new SqlParameter("@Description", obj.Description),
+                new SqlParameter("@Type", SqlDbType.Int) {Value = 1},
                 new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = Guid.Empty}
             };
             return SqlHelper.SqlNonQuery(sql, parm) > 0;
@@ -248,10 +246,11 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return false;
 
-            var sql = $"update SYS_User set Password = 'E10ADC3949BA59ABBE56E057F20F883E' where ID = '{id}'";
+            const string pw = "E10ADC3949BA59ABBE56E057F20F883E";
+            var sql = $"update SYS_User set Password = '{pw}' where ID = '{id}'";
             if (SqlHelper.SqlNonQuery(sql) > 0)
             {
-                OnlineManage.Sessions.Find(s => s.UserId == id).Signature = "E10ADC3949BA59ABBE56E057F20F883E";
+                OnlineManage.Sessions.Find(s => s.UserId == id).Signature = pw;
                 return true;
             }
             return false;

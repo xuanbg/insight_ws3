@@ -74,6 +74,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExtendClass\Entities.cs" />
     <Compile Include="Function\ClearingDAL.cs" />
     <Compile Include="Function\TypeFactory.cs" />
     <Compile Include="Function\Util.cs" />

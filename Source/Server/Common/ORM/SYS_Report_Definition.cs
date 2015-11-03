@@ -50,7 +50,7 @@ namespace Insight.WS.Server.Common.ORM
     	[DataMember]
         public int Type { get; set; }
     	[DataMember]
-        public int DataSource { get; set; }
+        public string DataSource { get; set; }
     	[DataMember]
         public string Description { get; set; }
     	[DataMember]

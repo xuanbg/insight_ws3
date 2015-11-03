@@ -489,8 +489,8 @@ UPDATE U set U.Name = MD.Name, U.LoginName = MD.Alias, U.Description = MD.FullNa
   left join SYS_User U on U.ID = TI.MID
   where U.ID is not null
 
-INSERT SYS_User (ID, Name, LoginName, Description, CreatorUserId)
-  select MID, MD.Name, MD.Alias, md.FullName, TI.CreatorUserId
+INSERT SYS_User (ID, Name, LoginName, Description, Type, CreatorUserId)
+  select MID, MD.Name, MD.Alias, md.FullName, 1, TI.CreatorUserId
   from Inserted TI
   join MasterData MD on MD.ID = TI.MID
     and TI.LoginUser = 1

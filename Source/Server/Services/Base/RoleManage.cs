@@ -145,7 +145,7 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return null;
 
-            var sql = $"select U.ID, U.Name as 名称, U.LoginName as 登录名, U.Description as 描述 from SYS_User U left join SYS_Role_User R on R.UserId = U.ID and R.RoleId = '{id}' where R.ID is null order by U.SN";
+            var sql = $"select U.ID, U.Name as 名称, U.LoginName as 登录名, U.Description as 描述 from SYS_User U left join SYS_Role_User R on R.UserId = U.ID and R.RoleId = '{id}' where U.Type > 0 and R.ID is null order by U.SN";
             return SqlHelper.SqlQuery(sql);
         }
 

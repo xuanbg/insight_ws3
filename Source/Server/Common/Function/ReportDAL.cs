@@ -115,14 +115,14 @@ namespace Insight.WS.Server.Common
         public static SYS_Report_Instances BulidReport(Guid id, DateTime? sd, DateTime? ed, string dn, string un, Guid did, Guid? uid, string templat = null)
         {
             var report = GetDefinition(id);
+            var conStr = SqlHelper.ConStr[report.DataSource];
             var name = $"{dn}【{report.Name}】{sd?.ToShortDateString() ?? ""}—{ed?.ToShortDateString() ?? ""}";
             var fr = new Report();
 
             fr.LoadFromString(templat ?? GetTemplate(report.TemplateId).Content);
-            if (report.DataSource == 1)
-            {
-                fr.Dictionary.Connections[0].ConnectionString = SqlHelper.WSConn;
-            }
+
+            if (conStr != null) fr.Dictionary.Connections[0].ConnectionString = conStr;
+
             fr.SetParameterValue("StartDate", sd);
             fr.SetParameterValue("EndDate", ed);
             fr.SetParameterValue("DeptName", dn);
@@ -165,7 +165,7 @@ namespace Insight.WS.Server.Common
             var fr = new Report();
 
             fr.LoadFromString(GetTemplate(templetId).Content);
-            fr.Dictionary.Connections[0].ConnectionString = SqlHelper.WSConn;
+            fr.Dictionary.Connections[0].ConnectionString = SqlHelper.ConStr["WSEntities"];
             fr.SetParameterValue("BusinessId", id.ToString());
             fr.SetParameterValue("DeptName", dn);
             fr.SetParameterValue("UserName", un);
