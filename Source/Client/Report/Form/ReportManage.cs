@@ -161,11 +161,10 @@ namespace Insight.WS.Client.Platform.Report
             Format.GridFormat(gdvReport);
             gdvReport.Columns["模式"].Width = 40;
             gdvReport.Columns["模式"].AppearanceCell.TextOptions.HAlignment = HorzAlignment.Center;
-            gdvReport.Columns["名称"].Width = 160;
+            gdvReport.Columns["名称"].Width = 200;
             gdvReport.Columns["模板"].Width = 200;
-            gdvReport.Columns["数据源"].Width = 60;
-            gdvReport.Columns["数据源"].AppearanceCell.TextOptions.HAlignment = HorzAlignment.Center;
-            gdvReport.Columns["备注"].Width = 315;
+            gdvReport.Columns["数据源"].Width = 80;
+            gdvReport.Columns["备注"].Width = 255;
 
             InitRules();
             InitEntitys();

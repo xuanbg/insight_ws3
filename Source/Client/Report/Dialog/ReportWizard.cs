@@ -25,15 +25,16 @@ namespace Insight.WS.Client.Platform.Report.Dialog
         private DataTable _Rules;
         private DataTable _Entitys;
         private DataTable _Members;
-        private List<object> _OldRules = new List<object>();
-        private List<object> _OldEntitys = new List<object>();
-        private List<object> _OldMembers = new List<object>();
+        private readonly List<object> _OldRules = new List<object>();
+        private readonly List<object> _OldEntitys = new List<object>();
+        private readonly List<object> _OldMembers = new List<object>();
         private Guid _DefinitionId;
         private bool _HasName;
         private bool _HasTemp;
         private bool _HasRule;
         private bool _HasEntity;
         private bool _HasMember;
+        private List<string> _DataSource; 
 
         #endregion
 
@@ -235,6 +236,7 @@ namespace Insight.WS.Client.Platform.Report.Dialog
                 _Definition = IsEdit
                     ? cli.GetDefinition(OpenForm.UserSession, _DefinitionId)
                     : new SYS_Report_Definition();
+                _DataSource = cli.GetDataSource(OpenForm.UserSession);
                 _Rules = cli.GetReportRule(OpenForm.UserSession, _DefinitionId);
                 _Entitys = cli.GetReportEntity(OpenForm.UserSession, _DefinitionId);
                 _Members = cli.GetReportMember(OpenForm.UserSession, _DefinitionId);
@@ -247,13 +249,13 @@ namespace Insight.WS.Client.Platform.Report.Dialog
                 _Definition.CategoryId = ObjectId;
                 _Definition.Mode = 1;
                 _Definition.Delay = 2;
-                _Definition.DataSource = 1;
                 _Definition.Type = 1;
             }
 
             _Templets = Commons.Templets("Report", false);
             Format.InitTreeListLookUpEdit(trlCategory, Commons.Categorys(OpenForm.ModuleId));
             Format.InitTreeListLookUpEdit(trlTemplet, _Templets);
+            cmbDataSource.Properties.Items.AddRange(_DataSource);
             InitRuleList();
             InitEntityTree();
             InitMemberList();
@@ -270,7 +272,7 @@ namespace Insight.WS.Client.Platform.Report.Dialog
             trlTemplet.EditValue = IsEdit ? (Guid?)_Definition.TemplateId : null;
             cmbMode.SelectedIndex = _Definition.Mode - 1;
             cmbDelay.SelectedIndex = _Definition.Delay > 0 ? 0 : 1;
-            cmbDataSource.SelectedIndex = _Definition.DataSource - 1;
+            cmbDataSource.Text = _Definition.DataSource;
             cmbType.SelectedIndex = _Definition.Type - 1;
             memDescription.EditValue = _Definition.Description;
         }
@@ -413,7 +415,7 @@ namespace Insight.WS.Client.Platform.Report.Dialog
             _Definition.Mode = cmbMode.SelectedIndex + 1;
             _Definition.Delay = (int)spiTimes.Value * (cmbDelay.SelectedIndex > 0 ? -1 : 1);
             _Definition.Type = cmbType.SelectedIndex + 1;
-            _Definition.DataSource = cmbDataSource.SelectedIndex + 1;
+            _Definition.DataSource = cmbDataSource.Text;
             _Definition.Description = memDescription.EditValue == null ? null : memDescription.Text.Trim();
 
             foreach (var node in treEntity.GetNodeList())
