@@ -10,19 +10,33 @@
 namespace Insight.WS.Server.Common.ORM
 {
     using System;
+    using System.Runtime.Serialization;
     using System.Collections.Generic;
+    
+    [DataContract(IsReference = true)]
+    [KnownType(typeof(SYS_Organization))]
+    [KnownType(typeof(SYS_User))]
     
     public partial class SYS_OrgMerger
     {
+    	[DataMember]
         public System.Guid ID { get; set; }
+    	[DataMember]
         public long SN { get; set; }
+    	[DataMember]
         public System.Guid OrgId { get; set; }
+    	[DataMember]
         public System.Guid MergerOrgId { get; set; }
+    	[DataMember]
         public System.Guid CreatorUserId { get; set; }
+    	[DataMember]
         public System.DateTime CreateTime { get; set; }
     
+    	[DataMember]
         public virtual SYS_Organization SYS_Organization { get; set; }
+    	[DataMember]
         public virtual SYS_Organization SYS_Organization1 { get; set; }
+    	[DataMember]
         public virtual SYS_User SYS_User { get; set; }
     }
 }

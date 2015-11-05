@@ -10,11 +10,19 @@
 namespace Insight.WS.Server.Common.ORM
 {
     using System;
+    using System.Runtime.Serialization;
     using System.Collections.Generic;
+    
+    [DataContract(IsReference = true)]
+    [KnownType(typeof(BASE_Category))]
+    [KnownType(typeof(SYS_Module))]
+    [KnownType(typeof(MDD_Binary))]
+    [KnownType(typeof(MDD_Character))]
+    [KnownType(typeof(MDD_Date))]
+    [KnownType(typeof(MDD_Numeric))]
     
     public partial class MasterData_Property
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public MasterData_Property()
         {
             this.MDD_Binary = new HashSet<MDD_Binary>();
@@ -23,25 +31,36 @@ namespace Insight.WS.Server.Common.ORM
             this.MDD_Numeric = new HashSet<MDD_Numeric>();
         }
     
+    	[DataMember]
         public System.Guid ID { get; set; }
+    	[DataMember]
         public long SN { get; set; }
+    	[DataMember]
         public System.Guid ModuleId { get; set; }
+    	[DataMember]
         public Nullable<System.Guid> CategoryId { get; set; }
+    	[DataMember]
         public int Index { get; set; }
+    	[DataMember]
         public string Name { get; set; }
+    	[DataMember]
         public string Label { get; set; }
+    	[DataMember]
         public string Parameter { get; set; }
+    	[DataMember]
         public bool BuiltIn { get; set; }
     
+    	[DataMember]
         public virtual BASE_Category BASE_Category { get; set; }
+    	[DataMember]
         public virtual SYS_Module SYS_Module { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    	[DataMember]
         public virtual ICollection<MDD_Binary> MDD_Binary { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    	[DataMember]
         public virtual ICollection<MDD_Character> MDD_Character { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    	[DataMember]
         public virtual ICollection<MDD_Date> MDD_Date { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    	[DataMember]
         public virtual ICollection<MDD_Numeric> MDD_Numeric { get; set; }
     }
 }

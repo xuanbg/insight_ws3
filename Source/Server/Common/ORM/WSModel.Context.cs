@@ -10,14 +10,33 @@
 namespace Insight.WS.Server.Common.ORM
 {
     using System;
+    using System.Data.Entity.Core.Objects;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
     public partial class WSEntities : DbContext
     {
-        public WSEntities()
+    	public WSEntities()
+            : this(false) { }
+    
+        public WSEntities(bool proxyCreationEnabled)
             : base("name=WSEntities")
         {
+    		        this.Configuration.ProxyCreationEnabled = proxyCreationEnabled;
+        }
+    	
+        public WSEntities(string connectionString)
+          : this(connectionString, false) { }
+    	  
+        public WSEntities(string connectionString, bool proxyCreationEnabled)
+            : base(connectionString)
+        {
+    		        this.Configuration.ProxyCreationEnabled = proxyCreationEnabled;
+        }	
+    	
+        public ObjectContext ObjectContext
+        {
+          get { return ((IObjectContextAdapter)this).ObjectContext; }
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -105,5 +124,7 @@ namespace Insight.WS.Server.Common.ORM
         public virtual DbSet<SYS_Verify_Record> SYS_Verify_Record { get; set; }
         public virtual DbSet<Advance> Advance { get; set; }
         public virtual DbSet<ReportSchedular> ReportSchedular { get; set; }
+        public virtual DbSet<Dictionary> Dictionary { get; set; }
+        public virtual DbSet<ReportTemplet> ReportTemplet { get; set; }
     }
 }

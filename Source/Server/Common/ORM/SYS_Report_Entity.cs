@@ -10,24 +10,35 @@
 namespace Insight.WS.Server.Common.ORM
 {
     using System;
+    using System.Runtime.Serialization;
     using System.Collections.Generic;
+    
+    [DataContract(IsReference = true)]
+    [KnownType(typeof(SYS_Organization))]
+    [KnownType(typeof(SYS_Report_Definition))]
+    [KnownType(typeof(SYS_Report_Member))]
     
     public partial class SYS_Report_Entity
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SYS_Report_Entity()
         {
             this.SYS_Report_Member = new HashSet<SYS_Report_Member>();
         }
     
+    	[DataMember]
         public System.Guid ID { get; set; }
+    	[DataMember]
         public long SN { get; set; }
+    	[DataMember]
         public System.Guid ReportId { get; set; }
+    	[DataMember]
         public System.Guid OrgId { get; set; }
     
+    	[DataMember]
         public virtual SYS_Organization SYS_Organization { get; set; }
+    	[DataMember]
         public virtual SYS_Report_Definition SYS_Report_Definition { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    	[DataMember]
         public virtual ICollection<SYS_Report_Member> SYS_Report_Member { get; set; }
     }
 }

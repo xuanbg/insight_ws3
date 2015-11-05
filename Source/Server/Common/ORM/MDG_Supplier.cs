@@ -10,44 +10,86 @@
 namespace Insight.WS.Server.Common.ORM
 {
     using System;
+    using System.Runtime.Serialization;
     using System.Collections.Generic;
+    
+    [DataContract(IsReference = true)]
+    [KnownType(typeof(BASE_Category))]
+    [KnownType(typeof(MasterData))]
+    [KnownType(typeof(MDG_Dictionary))]
+    [KnownType(typeof(SYS_Organization))]
+    [KnownType(typeof(SYS_User))]
     
     public partial class MDG_Supplier
     {
+    	[DataMember]
         public System.Guid MID { get; set; }
+    	[DataMember]
         public long SN { get; set; }
+    	[DataMember]
         public Nullable<System.Guid> EnterpriseType { get; set; }
+    	[DataMember]
         public Nullable<System.Guid> IndustryType { get; set; }
+    	[DataMember]
         public string RegisterNumber { get; set; }
+    	[DataMember]
         public string TaxNumber { get; set; }
+    	[DataMember]
         public string Corporation { get; set; }
+    	[DataMember]
         public Nullable<System.DateTime> RegisterDate { get; set; }
+    	[DataMember]
         public string BusinessScope { get; set; }
+    	[DataMember]
         public string Scale { get; set; }
+    	[DataMember]
         public Nullable<int> Staffs { get; set; }
+    	[DataMember]
         public Nullable<System.Guid> State { get; set; }
+    	[DataMember]
         public Nullable<System.Guid> Province { get; set; }
+    	[DataMember]
         public Nullable<System.Guid> City { get; set; }
+    	[DataMember]
         public Nullable<System.Guid> District { get; set; }
+    	[DataMember]
         public string Address { get; set; }
+    	[DataMember]
         public string Phone { get; set; }
+    	[DataMember]
         public string ZipCode { get; set; }
+    	[DataMember]
         public string Website { get; set; }
+    	[DataMember]
         public string Description { get; set; }
+    	[DataMember]
         public bool Enable { get; set; }
+    	[DataMember]
         public bool Visible { get; set; }
+    	[DataMember]
         public Nullable<System.Guid> CreatorDeptId { get; set; }
+    	[DataMember]
         public System.Guid CreatorUserId { get; set; }
+    	[DataMember]
         public System.DateTime CreateTime { get; set; }
     
+    	[DataMember]
         public virtual BASE_Category BASE_Category { get; set; }
+    	[DataMember]
         public virtual BASE_Category BASE_Category1 { get; set; }
+    	[DataMember]
         public virtual MasterData MasterData { get; set; }
+    	[DataMember]
         public virtual MDG_Dictionary MDG_Dictionary { get; set; }
+    	[DataMember]
         public virtual MDG_Dictionary MDG_Dictionary1 { get; set; }
+    	[DataMember]
         public virtual MDG_Dictionary MDG_Dictionary2 { get; set; }
+    	[DataMember]
         public virtual MDG_Dictionary MDG_Dictionary3 { get; set; }
+    	[DataMember]
         public virtual SYS_Organization SYS_Organization { get; set; }
+    	[DataMember]
         public virtual SYS_User SYS_User { get; set; }
     }
 }

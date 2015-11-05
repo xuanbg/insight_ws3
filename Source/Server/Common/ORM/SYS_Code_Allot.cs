@@ -10,26 +10,49 @@
 namespace Insight.WS.Server.Common.ORM
 {
     using System;
+    using System.Runtime.Serialization;
     using System.Collections.Generic;
+    
+    [DataContract(IsReference = true)]
+    [KnownType(typeof(SYS_Organization))]
+    [KnownType(typeof(SYS_User))]
+    [KnownType(typeof(SYS_Module))]
+    [KnownType(typeof(SYS_Code_Scheme))]
     
     public partial class SYS_Code_Allot
     {
+    	[DataMember]
         public System.Guid ID { get; set; }
+    	[DataMember]
         public long SN { get; set; }
+    	[DataMember]
         public System.Guid SchemeId { get; set; }
+    	[DataMember]
         public System.Guid ModuleId { get; set; }
+    	[DataMember]
         public System.Guid OwnerId { get; set; }
+    	[DataMember]
         public string AllotNumber { get; set; }
+    	[DataMember]
         public Nullable<System.Guid> BusinessId { get; set; }
+    	[DataMember]
         public Nullable<System.DateTime> UpdateTime { get; set; }
+    	[DataMember]
         public Nullable<System.Guid> CreatorDeptId { get; set; }
+    	[DataMember]
         public System.Guid CreatorUserId { get; set; }
+    	[DataMember]
         public System.DateTime CreateTime { get; set; }
     
+    	[DataMember]
         public virtual SYS_Organization SYS_Organization { get; set; }
+    	[DataMember]
         public virtual SYS_User SYS_User { get; set; }
+    	[DataMember]
         public virtual SYS_Module SYS_Module { get; set; }
+    	[DataMember]
         public virtual SYS_User SYS_User1 { get; set; }
+    	[DataMember]
         public virtual SYS_Code_Scheme SYS_Code_Scheme { get; set; }
     }
 }

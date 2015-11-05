@@ -10,30 +10,47 @@
 namespace Insight.WS.Server.Common.ORM
 {
     using System;
+    using System.Runtime.Serialization;
     using System.Collections.Generic;
+    
+    [DataContract(IsReference = true)]
+    [KnownType(typeof(ABS_Clearing))]
+    [KnownType(typeof(ABS_Clearing_Pay))]
+    [KnownType(typeof(MasterData))]
     
     public partial class ABS_Clearing_Item
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ABS_Clearing_Item()
         {
             this.ABS_Clearing_Pay = new HashSet<ABS_Clearing_Pay>();
         }
     
+    	[DataMember]
         public System.Guid ID { get; set; }
+    	[DataMember]
         public long SN { get; set; }
+    	[DataMember]
         public System.Guid ClearingId { get; set; }
+    	[DataMember]
         public string Summary { get; set; }
+    	[DataMember]
         public System.Guid ObjectId { get; set; }
+    	[DataMember]
         public string ObjectName { get; set; }
+    	[DataMember]
         public string Units { get; set; }
+    	[DataMember]
         public Nullable<decimal> Price { get; set; }
+    	[DataMember]
         public Nullable<decimal> Counts { get; set; }
+    	[DataMember]
         public decimal Amount { get; set; }
     
+    	[DataMember]
         public virtual ABS_Clearing ABS_Clearing { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    	[DataMember]
         public virtual ICollection<ABS_Clearing_Pay> ABS_Clearing_Pay { get; set; }
+    	[DataMember]
         public virtual MasterData MasterData { get; set; }
     }
 }

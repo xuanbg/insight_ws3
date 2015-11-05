@@ -10,36 +10,58 @@
 namespace Insight.WS.Server.Common.ORM
 {
     using System;
+    using System.Runtime.Serialization;
     using System.Collections.Generic;
+    
+    [DataContract(IsReference = true)]
+    [KnownType(typeof(ABS_Delivery))]
+    [KnownType(typeof(ABS_Storage_Detail))]
+    [KnownType(typeof(SYS_Organization))]
+    [KnownType(typeof(SYS_User))]
+    [KnownType(typeof(MDG_Dictionary))]
     
     public partial class ABS_Storage_Location
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ABS_Storage_Location()
         {
             this.ABS_Delivery = new HashSet<ABS_Delivery>();
             this.ABS_Storage_Detail = new HashSet<ABS_Storage_Detail>();
         }
     
+    	[DataMember]
         public System.Guid ID { get; set; }
+    	[DataMember]
         public long SN { get; set; }
+    	[DataMember]
         public Nullable<System.Guid> ParentId { get; set; }
+    	[DataMember]
         public int Index { get; set; }
+    	[DataMember]
         public int NodeType { get; set; }
+    	[DataMember]
         public Nullable<System.Guid> StorageType { get; set; }
+    	[DataMember]
         public string Code { get; set; }
+    	[DataMember]
         public string Name { get; set; }
+    	[DataMember]
         public string Alias { get; set; }
+    	[DataMember]
         public Nullable<System.Guid> CreatorDeptId { get; set; }
+    	[DataMember]
         public System.Guid CreatorUserId { get; set; }
+    	[DataMember]
         public System.DateTime CreateTime { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    	[DataMember]
         public virtual ICollection<ABS_Delivery> ABS_Delivery { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    	[DataMember]
         public virtual ICollection<ABS_Storage_Detail> ABS_Storage_Detail { get; set; }
+    	[DataMember]
         public virtual SYS_Organization SYS_Organization { get; set; }
+    	[DataMember]
         public virtual SYS_User SYS_User { get; set; }
+    	[DataMember]
         public virtual MDG_Dictionary MDG_Dictionary { get; set; }
     }
 }

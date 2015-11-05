@@ -10,17 +10,29 @@
 namespace Insight.WS.Server.Common.ORM
 {
     using System;
+    using System.Runtime.Serialization;
     using System.Collections.Generic;
+    
+    [DataContract(IsReference = true)]
+    [KnownType(typeof(ABS_Advance_Detail))]
+    [KnownType(typeof(ABS_Clearing))]
     
     public partial class ABS_Advance_Record
     {
+    	[DataMember]
         public System.Guid ID { get; set; }
+    	[DataMember]
         public long SN { get; set; }
+    	[DataMember]
         public System.Guid DetailId { get; set; }
+    	[DataMember]
         public decimal Amount { get; set; }
+    	[DataMember]
         public System.Guid ClearingId { get; set; }
     
+    	[DataMember]
         public virtual ABS_Advance_Detail ABS_Advance_Detail { get; set; }
+    	[DataMember]
         public virtual ABS_Clearing ABS_Clearing { get; set; }
     }
 }

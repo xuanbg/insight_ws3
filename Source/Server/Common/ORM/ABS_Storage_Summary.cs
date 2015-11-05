@@ -10,25 +10,37 @@
 namespace Insight.WS.Server.Common.ORM
 {
     using System;
+    using System.Runtime.Serialization;
     using System.Collections.Generic;
+    
+    [DataContract(IsReference = true)]
+    [KnownType(typeof(ABS_Storage_Detail))]
+    [KnownType(typeof(MDG_Dictionary))]
+    [KnownType(typeof(MasterData))]
     
     public partial class ABS_Storage_Summary
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ABS_Storage_Summary()
         {
             this.ABS_Storage_Detail = new HashSet<ABS_Storage_Detail>();
         }
     
+    	[DataMember]
         public System.Guid ID { get; set; }
+    	[DataMember]
         public long SN { get; set; }
+    	[DataMember]
         public Nullable<System.Guid> GoodsType { get; set; }
+    	[DataMember]
         public System.Guid SKUId { get; set; }
+    	[DataMember]
         public Nullable<decimal> Total { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    	[DataMember]
         public virtual ICollection<ABS_Storage_Detail> ABS_Storage_Detail { get; set; }
+    	[DataMember]
         public virtual MDG_Dictionary MDG_Dictionary { get; set; }
+    	[DataMember]
         public virtual MasterData MasterData { get; set; }
     }
 }

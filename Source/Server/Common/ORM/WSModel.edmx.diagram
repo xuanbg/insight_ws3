@@ -84,7 +84,7 @@
         <EntityTypeShape EntityType="WSModel.SYS_UserGroupMember" Width="1.5" PointX="8.25" PointY="125.125" IsExpanded="true" />
         <EntityTypeShape EntityType="WSModel.SYS_Verify_Record" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="WSModel.Advance" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="WSModel.ReportSchedular" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WSModel.ReportSchedular" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
         <AssociationConnector Association="WSModel.FK__ABS_Advan__Accou__3D3402A0" ManuallyRouted="false" />
         <AssociationConnector Association="WSModel.FK__ABS_Advan__CardT__349EBC9F" ManuallyRouted="false" />
         <AssociationConnector Association="WSModel.FK__ABS_Advan__Creat__377B294A" ManuallyRouted="false" />
@@ -293,6 +293,8 @@
         <AssociationConnector Association="WSModel.FK__SYS_UserG__Creat__7DEDA633" ManuallyRouted="false" />
         <AssociationConnector Association="WSModel.FK__SYS_UserG__UserI__049AA3C2" ManuallyRouted="false" />
         <AssociationConnector Association="WSModel.FK__SYS_UserG__Group__03A67F89" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="WSModel.Dictionary" Width="1.5" PointX="2.75" PointY="3.875" />
+        <EntityTypeShape EntityType="WSModel.ReportTemplet" Width="1.5" PointX="4.75" PointY="3.875" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

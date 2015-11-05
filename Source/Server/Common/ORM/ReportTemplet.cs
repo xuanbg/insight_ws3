@@ -14,25 +14,26 @@ namespace Insight.WS.Server.Common.ORM
     using System.Collections.Generic;
     
     [DataContract(IsReference = true)]
-    [KnownType(typeof(SYS_Report_Definition))]
-    [KnownType(typeof(SYS_Report_Rules))]
     
-    public partial class SYS_Report_Schedular
+    public partial class ReportTemplet
     {
     	[DataMember]
         public System.Guid ID { get; set; }
     	[DataMember]
-        public long SN { get; set; }
+        public Nullable<System.Guid> ParentId { get; set; }
     	[DataMember]
-        public System.Guid ReportId { get; set; }
+        public long Index { get; set; }
     	[DataMember]
-        public System.Guid RuleId { get; set; }
+        public Nullable<bool> IsData { get; set; }
     	[DataMember]
-        public Nullable<System.DateTime> BuildTime { get; set; }
-    
+        public bool Visible { get; set; }
     	[DataMember]
-        public virtual SYS_Report_Definition SYS_Report_Definition { get; set; }
+        public string Name { get; set; }
     	[DataMember]
-        public virtual SYS_Report_Rules SYS_Report_Rules { get; set; }
+        public string Alias { get; set; }
+    	[DataMember]
+        public Nullable<System.Guid> CreatorDeptId { get; set; }
+    	[DataMember]
+        public System.Guid CreatorUserId { get; set; }
     }
 }

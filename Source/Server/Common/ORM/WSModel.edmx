@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="WSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="WSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ABS_Advance">
           <Key>
             <PropertyRef Name="ID" />
@@ -1113,6 +1113,9 @@
         <EntityType Name="Advance">
           <Key>
             <PropertyRef Name="ID" />
+            
+            
+            
           </Key>
           <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="OwnerId" Type="uniqueidentifier" Nullable="false" />
@@ -1125,9 +1128,31 @@
           <Property Name="Amount" Type="decimal" Precision="38" Scale="2" Nullable="false" />
         </EntityType>
         <!--生成过程中发现错误:
+警告 6002: 表/视图“Insight.dbo.Dictionary”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="Dictionary">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ParentId" Type="uniqueidentifier" />
+          <Property Name="Index" Type="int" Nullable="false" />
+          <Property Name="IsData" Type="bit" />
+          <Property Name="Type" Type="nvarchar" MaxLength="32" />
+          <Property Name="Code" Type="varchar" MaxLength="32" />
+          <Property Name="Name" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Alias" Type="nvarchar" MaxLength="32" />
+          <Property Name="BuiltIn" Type="bit" />
+          <Property Name="CreatorDeptId" Type="uniqueidentifier" />
+          <Property Name="CreatorUserId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <!--生成过程中发现错误:
 警告 6002: 表/视图“Insight.dbo.ReportSchedular”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="ReportSchedular">
           <Key>
+            
+            
+            
+            
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
@@ -1141,6 +1166,22 @@
           <Property Name="DeptName" Type="nvarchar" MaxLength="32" />
           <Property Name="DeptId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="UserId" Type="uniqueidentifier" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Insight.dbo.ReportTemplet”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="ReportTemplet">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ParentId" Type="uniqueidentifier" />
+          <Property Name="Index" Type="bigint" Nullable="false" />
+          <Property Name="IsData" Type="bit" />
+          <Property Name="Visible" Type="bit" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Alias" Type="nvarchar" MaxLength="16" />
+          <Property Name="CreatorDeptId" Type="uniqueidentifier" />
+          <Property Name="CreatorUserId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <Association Name="FK__ABS_Advan__Accou__3D3402A0">
           <End Role="ABS_Advance" Type="Self.ABS_Advance" Multiplicity="1">
@@ -3892,6 +3933,21 @@
     [Advance].[Amount] AS [Amount]
     FROM [dbo].[Advance] AS [Advance]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="Dictionary" EntityType="Self.Dictionary" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Dictionary].[ID] AS [ID], 
+    [Dictionary].[ParentId] AS [ParentId], 
+    [Dictionary].[Index] AS [Index], 
+    [Dictionary].[IsData] AS [IsData], 
+    [Dictionary].[Type] AS [Type], 
+    [Dictionary].[Code] AS [Code], 
+    [Dictionary].[Name] AS [Name], 
+    [Dictionary].[Alias] AS [Alias], 
+    [Dictionary].[BuiltIn] AS [BuiltIn], 
+    [Dictionary].[CreatorDeptId] AS [CreatorDeptId], 
+    [Dictionary].[CreatorUserId] AS [CreatorUserId]
+    FROM [dbo].[Dictionary] AS [Dictionary]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="ReportSchedular" EntityType="Self.ReportSchedular" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [ReportSchedular].[ID] AS [ID], 
@@ -3906,6 +3962,19 @@
     [ReportSchedular].[DeptId] AS [DeptId], 
     [ReportSchedular].[UserId] AS [UserId]
     FROM [dbo].[ReportSchedular] AS [ReportSchedular]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ReportTemplet" EntityType="Self.ReportTemplet" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ReportTemplet].[ID] AS [ID], 
+    [ReportTemplet].[ParentId] AS [ParentId], 
+    [ReportTemplet].[Index] AS [Index], 
+    [ReportTemplet].[IsData] AS [IsData], 
+    [ReportTemplet].[Visible] AS [Visible], 
+    [ReportTemplet].[Name] AS [Name], 
+    [ReportTemplet].[Alias] AS [Alias], 
+    [ReportTemplet].[CreatorDeptId] AS [CreatorDeptId], 
+    [ReportTemplet].[CreatorUserId] AS [CreatorUserId]
+    FROM [dbo].[ReportTemplet] AS [ReportTemplet]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK__ABS_Advan__Accou__3D3402A0" Association="Self.FK__ABS_Advan__Accou__3D3402A0">
             <End Role="ABS_Advance" EntitySet="ABS_Advance" />
@@ -4740,8 +4809,7 @@
             <End Role="SYS_UserGroupMember" EntitySet="SYS_UserGroupMember" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="WSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -9865,7 +9933,39 @@
             <End Role="SYS_UserGroup" EntitySet="SYS_UserGroup" />
             <End Role="SYS_UserGroupMember" EntitySet="SYS_UserGroupMember" />
           </AssociationSet>
+          <EntitySet Name="Dictionary" EntityType="WSModel.Dictionary" />
+          <EntitySet Name="ReportTemplet" EntityType="WSModel.ReportTemplet" />
         </EntityContainer>
+        <EntityType Name="Dictionary">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="ParentId" Type="Guid" />
+          <Property Name="Index" Type="Int32" Nullable="false" />
+          <Property Name="IsData" Type="Boolean" />
+          <Property Name="Type" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Alias" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="BuiltIn" Type="Boolean" />
+          <Property Name="CreatorDeptId" Type="Guid" />
+          <Property Name="CreatorUserId" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReportTemplet">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="ParentId" Type="Guid" />
+          <Property Name="Index" Type="Int64" Nullable="false" />
+          <Property Name="IsData" Type="Boolean" />
+          <Property Name="Visible" Type="Boolean" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Alias" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="CreatorDeptId" Type="Guid" />
+          <Property Name="CreatorUserId" Type="Guid" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -11082,6 +11182,38 @@
                 <ScalarProperty Name="DeptName" ColumnName="DeptName" />
                 <ScalarProperty Name="DeptId" ColumnName="DeptId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dictionary">
+            <EntityTypeMapping TypeName="WSModel.Dictionary">
+              <MappingFragment StoreEntitySet="Dictionary">
+                <ScalarProperty Name="CreatorUserId" ColumnName="CreatorUserId" />
+                <ScalarProperty Name="CreatorDeptId" ColumnName="CreatorDeptId" />
+                <ScalarProperty Name="BuiltIn" ColumnName="BuiltIn" />
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="IsData" ColumnName="IsData" />
+                <ScalarProperty Name="Index" ColumnName="Index" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReportTemplet">
+            <EntityTypeMapping TypeName="WSModel.ReportTemplet">
+              <MappingFragment StoreEntitySet="ReportTemplet">
+                <ScalarProperty Name="CreatorUserId" ColumnName="CreatorUserId" />
+                <ScalarProperty Name="CreatorDeptId" ColumnName="CreatorDeptId" />
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Visible" ColumnName="Visible" />
+                <ScalarProperty Name="IsData" ColumnName="IsData" />
+                <ScalarProperty Name="Index" ColumnName="Index" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

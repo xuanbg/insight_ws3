@@ -10,11 +10,39 @@
 namespace Insight.WS.Server.Common.ORM
 {
     using System;
+    using System.Runtime.Serialization;
     using System.Collections.Generic;
+    
+    [DataContract(IsReference = true)]
+    [KnownType(typeof(ABS_Advance))]
+    [KnownType(typeof(ABS_Advance_Detail))]
+    [KnownType(typeof(ABS_Clearing))]
+    [KnownType(typeof(ABS_Clearing_Item))]
+    [KnownType(typeof(ABS_Contract))]
+    [KnownType(typeof(ABS_Contract_Subjects))]
+    [KnownType(typeof(ABS_Delivery))]
+    [KnownType(typeof(ABS_Delivery_Item))]
+    [KnownType(typeof(ABS_Storage_Summary))]
+    [KnownType(typeof(BASE_Category))]
+    [KnownType(typeof(MasterData_Merger))]
+    [KnownType(typeof(MDD_Binary))]
+    [KnownType(typeof(MDD_Character))]
+    [KnownType(typeof(MDD_Date))]
+    [KnownType(typeof(MDD_Numeric))]
+    [KnownType(typeof(MDG_Contact))]
+    [KnownType(typeof(MDG_Customer))]
+    [KnownType(typeof(MDG_Dictionary))]
+    [KnownType(typeof(MDG_Employee))]
+    [KnownType(typeof(MDG_Expense))]
+    [KnownType(typeof(MDG_Material))]
+    [KnownType(typeof(MDG_Supplier))]
+    [KnownType(typeof(MDR_MU))]
+    [KnownType(typeof(MDS_Contact_Info))]
+    [KnownType(typeof(SYS_Alert_Target))]
+    [KnownType(typeof(SYS_Alert_Send))]
     
     public partial class MasterData
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public MasterData()
         {
             this.ABS_Advance = new HashSet<ABS_Advance>();
@@ -39,62 +67,78 @@ namespace Insight.WS.Server.Common.ORM
             this.SYS_Alert_Send = new HashSet<SYS_Alert_Send>();
         }
     
+    	[DataMember]
         public System.Guid ID { get; set; }
+    	[DataMember]
         public long SN { get; set; }
+    	[DataMember]
         public Nullable<System.Guid> ParentId { get; set; }
+    	[DataMember]
         public Nullable<System.Guid> CategoryId { get; set; }
+    	[DataMember]
         public string Code { get; set; }
+    	[DataMember]
         public string Name { get; set; }
+    	[DataMember]
         public string Alias { get; set; }
+    	[DataMember]
         public string FullName { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    	[DataMember]
         public virtual ICollection<ABS_Advance> ABS_Advance { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    	[DataMember]
         public virtual ICollection<ABS_Advance_Detail> ABS_Advance_Detail { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    	[DataMember]
         public virtual ICollection<ABS_Clearing> ABS_Clearing { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    	[DataMember]
         public virtual ICollection<ABS_Clearing_Item> ABS_Clearing_Item { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    	[DataMember]
         public virtual ICollection<ABS_Contract> ABS_Contract { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    	[DataMember]
         public virtual ICollection<ABS_Contract> ABS_Contract1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    	[DataMember]
         public virtual ICollection<ABS_Contract_Subjects> ABS_Contract_Subjects { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    	[DataMember]
         public virtual ICollection<ABS_Delivery> ABS_Delivery { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    	[DataMember]
         public virtual ICollection<ABS_Delivery_Item> ABS_Delivery_Item { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    	[DataMember]
         public virtual ICollection<ABS_Storage_Summary> ABS_Storage_Summary { get; set; }
+    	[DataMember]
         public virtual BASE_Category BASE_Category { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    	[DataMember]
         public virtual ICollection<MasterData_Merger> MasterData_Merger { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    	[DataMember]
         public virtual ICollection<MasterData_Merger> MasterData_Merger1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    	[DataMember]
         public virtual ICollection<MDD_Binary> MDD_Binary { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    	[DataMember]
         public virtual ICollection<MDD_Character> MDD_Character { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    	[DataMember]
         public virtual ICollection<MDD_Date> MDD_Date { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    	[DataMember]
         public virtual ICollection<MDD_Numeric> MDD_Numeric { get; set; }
+    	[DataMember]
         public virtual MDG_Contact MDG_Contact { get; set; }
+    	[DataMember]
         public virtual MDG_Customer MDG_Customer { get; set; }
+    	[DataMember]
         public virtual MDG_Dictionary MDG_Dictionary { get; set; }
+    	[DataMember]
         public virtual MDG_Employee MDG_Employee { get; set; }
+    	[DataMember]
         public virtual MDG_Expense MDG_Expense { get; set; }
+    	[DataMember]
         public virtual MDG_Material MDG_Material { get; set; }
+    	[DataMember]
         public virtual MDG_Supplier MDG_Supplier { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    	[DataMember]
         public virtual ICollection<MDR_MU> MDR_MU { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    	[DataMember]
         public virtual ICollection<MDS_Contact_Info> MDS_Contact_Info { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    	[DataMember]
         public virtual ICollection<SYS_Alert_Target> SYS_Alert_Target { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    	[DataMember]
         public virtual ICollection<SYS_Alert_Send> SYS_Alert_Send { get; set; }
     }
 }

@@ -10,11 +10,21 @@
 namespace Insight.WS.Server.Common.ORM
 {
     using System;
+    using System.Runtime.Serialization;
     using System.Collections.Generic;
+    
+    [DataContract(IsReference = true)]
+    [KnownType(typeof(ABS_Clearing_Attachs))]
+    [KnownType(typeof(ABS_Clearing_Check))]
+    [KnownType(typeof(ABS_Contract_Attachs))]
+    [KnownType(typeof(ABS_Delivery_Attachs))]
+    [KnownType(typeof(BASE_Category))]
+    [KnownType(typeof(SYS_Organization))]
+    [KnownType(typeof(SYS_User))]
+    [KnownType(typeof(MDG_Dictionary))]
     
     public partial class ImageData
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ImageData()
         {
             this.ABS_Clearing_Attachs = new HashSet<ABS_Clearing_Attachs>();
@@ -23,35 +33,56 @@ namespace Insight.WS.Server.Common.ORM
             this.ABS_Delivery_Attachs = new HashSet<ABS_Delivery_Attachs>();
         }
     
+    	[DataMember]
         public System.Guid ID { get; set; }
+    	[DataMember]
         public long SN { get; set; }
+    	[DataMember]
         public Nullable<System.Guid> CategoryId { get; set; }
+    	[DataMember]
         public int ImageType { get; set; }
+    	[DataMember]
         public string Code { get; set; }
+    	[DataMember]
         public string Name { get; set; }
+    	[DataMember]
         public string Expand { get; set; }
+    	[DataMember]
         public Nullable<System.Guid> SecrecyDegree { get; set; }
+    	[DataMember]
         public Nullable<int> Pages { get; set; }
+    	[DataMember]
         public Nullable<long> Size { get; set; }
+    	[DataMember]
         public string Path { get; set; }
+    	[DataMember]
         public byte[] Image { get; set; }
+    	[DataMember]
         public string Description { get; set; }
+    	[DataMember]
         public bool Validity { get; set; }
+    	[DataMember]
         public Nullable<System.Guid> CreatorDeptId { get; set; }
+    	[DataMember]
         public System.Guid CreatorUserId { get; set; }
+    	[DataMember]
         public System.DateTime CreateTime { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    	[DataMember]
         public virtual ICollection<ABS_Clearing_Attachs> ABS_Clearing_Attachs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    	[DataMember]
         public virtual ICollection<ABS_Clearing_Check> ABS_Clearing_Check { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    	[DataMember]
         public virtual ICollection<ABS_Contract_Attachs> ABS_Contract_Attachs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    	[DataMember]
         public virtual ICollection<ABS_Delivery_Attachs> ABS_Delivery_Attachs { get; set; }
+    	[DataMember]
         public virtual BASE_Category BASE_Category { get; set; }
+    	[DataMember]
         public virtual SYS_Organization SYS_Organization { get; set; }
+    	[DataMember]
         public virtual SYS_User SYS_User { get; set; }
+    	[DataMember]
         public virtual MDG_Dictionary MDG_Dictionary { get; set; }
     }
 }

@@ -10,11 +10,20 @@
 namespace Insight.WS.Server.Common.ORM
 {
     using System;
+    using System.Runtime.Serialization;
     using System.Collections.Generic;
+    
+    [DataContract(IsReference = true)]
+    [KnownType(typeof(MasterData))]
+    [KnownType(typeof(ABS_Contract_Subjects))]
+    [KnownType(typeof(ABS_Contract_Attachs))]
+    [KnownType(typeof(ABS_Contract_FundPlan))]
+    [KnownType(typeof(SYS_Organization))]
+    [KnownType(typeof(SYS_User))]
+    [KnownType(typeof(MDG_Employee))]
     
     public partial class ABS_Contract
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ABS_Contract()
         {
             this.ABS_Contract_Subjects = new HashSet<ABS_Contract_Subjects>();
@@ -22,36 +31,60 @@ namespace Insight.WS.Server.Common.ORM
             this.ABS_Contract_FundPlan = new HashSet<ABS_Contract_FundPlan>();
         }
     
+    	[DataMember]
         public System.Guid ID { get; set; }
+    	[DataMember]
         public long SN { get; set; }
+    	[DataMember]
         public Nullable<System.Guid> ParentId { get; set; }
+    	[DataMember]
         public string ContractCode { get; set; }
+    	[DataMember]
         public string Title { get; set; }
+    	[DataMember]
         public System.Guid ObjectId { get; set; }
+    	[DataMember]
         public string ObjectName { get; set; }
+    	[DataMember]
         public Nullable<System.Guid> AgentId { get; set; }
+    	[DataMember]
         public string AgentName { get; set; }
+    	[DataMember]
         public Nullable<System.Guid> ExecuteDeptId { get; set; }
+    	[DataMember]
         public Nullable<System.Guid> ExecuteUserId { get; set; }
+    	[DataMember]
         public Nullable<System.DateTime> EffectiveDate { get; set; }
+    	[DataMember]
         public Nullable<System.DateTime> InvalidDate { get; set; }
+    	[DataMember]
         public string Description { get; set; }
+    	[DataMember]
         public int Status { get; set; }
+    	[DataMember]
         public Nullable<System.Guid> CreatorDeptId { get; set; }
+    	[DataMember]
         public System.Guid CreatorUserId { get; set; }
+    	[DataMember]
         public System.DateTime CreateTime { get; set; }
     
+    	[DataMember]
         public virtual MasterData MasterData { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    	[DataMember]
         public virtual ICollection<ABS_Contract_Subjects> ABS_Contract_Subjects { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    	[DataMember]
         public virtual ICollection<ABS_Contract_Attachs> ABS_Contract_Attachs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    	[DataMember]
         public virtual ICollection<ABS_Contract_FundPlan> ABS_Contract_FundPlan { get; set; }
+    	[DataMember]
         public virtual SYS_Organization SYS_Organization { get; set; }
+    	[DataMember]
         public virtual SYS_User SYS_User { get; set; }
+    	[DataMember]
         public virtual SYS_Organization SYS_Organization1 { get; set; }
+    	[DataMember]
         public virtual MDG_Employee MDG_Employee { get; set; }
+    	[DataMember]
         public virtual MasterData MasterData1 { get; set; }
     }
 }

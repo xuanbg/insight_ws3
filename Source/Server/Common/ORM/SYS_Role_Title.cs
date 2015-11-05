@@ -10,19 +10,34 @@
 namespace Insight.WS.Server.Common.ORM
 {
     using System;
+    using System.Runtime.Serialization;
     using System.Collections.Generic;
+    
+    [DataContract(IsReference = true)]
+    [KnownType(typeof(SYS_Organization))]
+    [KnownType(typeof(SYS_Role))]
+    [KnownType(typeof(SYS_User))]
     
     public partial class SYS_Role_Title
     {
+    	[DataMember]
         public System.Guid ID { get; set; }
+    	[DataMember]
         public long SN { get; set; }
+    	[DataMember]
         public System.Guid RoleId { get; set; }
+    	[DataMember]
         public System.Guid OrgId { get; set; }
+    	[DataMember]
         public System.Guid CreatorUserId { get; set; }
+    	[DataMember]
         public System.DateTime CreateTime { get; set; }
     
+    	[DataMember]
         public virtual SYS_Organization SYS_Organization { get; set; }
+    	[DataMember]
         public virtual SYS_Role SYS_Role { get; set; }
+    	[DataMember]
         public virtual SYS_User SYS_User { get; set; }
     }
 }

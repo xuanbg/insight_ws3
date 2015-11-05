@@ -10,20 +10,34 @@
 namespace Insight.WS.Server.Common.ORM
 {
     using System;
+    using System.Runtime.Serialization;
     using System.Collections.Generic;
+    
+    [DataContract(IsReference = true)]
     
     public partial class ReportSchedular
     {
+    	[DataMember]
         public System.Guid ID { get; set; }
+    	[DataMember]
         public System.Guid SchedularId { get; set; }
+    	[DataMember]
         public System.Guid ReportId { get; set; }
+    	[DataMember]
         public System.Guid TemplateId { get; set; }
+    	[DataMember]
         public Nullable<System.DateTime> BuildTime { get; set; }
+    	[DataMember]
         public Nullable<System.DateTime> NextDate { get; set; }
+    	[DataMember]
         public Nullable<System.DateTime> StartDate { get; set; }
+    	[DataMember]
         public Nullable<System.DateTime> EndDate { get; set; }
+    	[DataMember]
         public string DeptName { get; set; }
+    	[DataMember]
         public System.Guid DeptId { get; set; }
+    	[DataMember]
         public Nullable<System.Guid> UserId { get; set; }
     }
 }

@@ -10,31 +10,50 @@
 namespace Insight.WS.Server.Common.ORM
 {
     using System;
+    using System.Runtime.Serialization;
     using System.Collections.Generic;
+    
+    [DataContract(IsReference = true)]
+    [KnownType(typeof(ABS_Clearing))]
+    [KnownType(typeof(SYS_Organization))]
+    [KnownType(typeof(SYS_User))]
+    [KnownType(typeof(ImageData))]
     
     public partial class ABS_Clearing_Check
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ABS_Clearing_Check()
         {
             this.ABS_Clearing = new HashSet<ABS_Clearing>();
         }
     
+    	[DataMember]
         public System.Guid ID { get; set; }
+    	[DataMember]
         public long SN { get; set; }
+    	[DataMember]
         public string ReceiptCode { get; set; }
+    	[DataMember]
         public Nullable<System.DateTime> CheckTime { get; set; }
+    	[DataMember]
         public Nullable<System.Guid> ImageId { get; set; }
+    	[DataMember]
         public bool Status { get; set; }
+    	[DataMember]
         public string Description { get; set; }
+    	[DataMember]
         public System.Guid CreatorDeptId { get; set; }
+    	[DataMember]
         public System.Guid CreatorUserId { get; set; }
+    	[DataMember]
         public System.DateTime CreateTime { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    	[DataMember]
         public virtual ICollection<ABS_Clearing> ABS_Clearing { get; set; }
+    	[DataMember]
         public virtual SYS_Organization SYS_Organization { get; set; }
+    	[DataMember]
         public virtual SYS_User SYS_User { get; set; }
+    	[DataMember]
         public virtual ImageData ImageData { get; set; }
     }
 }

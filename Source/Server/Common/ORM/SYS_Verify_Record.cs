@@ -10,18 +10,30 @@
 namespace Insight.WS.Server.Common.ORM
 {
     using System;
+    using System.Runtime.Serialization;
     using System.Collections.Generic;
+    
+    [DataContract(IsReference = true)]
     
     public partial class SYS_Verify_Record
     {
+    	[DataMember]
         public System.Guid ID { get; set; }
+    	[DataMember]
         public long SN { get; set; }
+    	[DataMember]
         public int Type { get; set; }
+    	[DataMember]
         public string Mobile { get; set; }
+    	[DataMember]
         public string Code { get; set; }
+    	[DataMember]
         public bool Verified { get; set; }
+    	[DataMember]
         public Nullable<System.DateTime> VerifyTime { get; set; }
+    	[DataMember]
         public Nullable<System.DateTime> FailureTime { get; set; }
+    	[DataMember]
         public System.DateTime CreateTime { get; set; }
     }
 }

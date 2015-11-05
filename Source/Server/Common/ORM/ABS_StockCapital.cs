@@ -10,23 +10,32 @@
 namespace Insight.WS.Server.Common.ORM
 {
     using System;
+    using System.Runtime.Serialization;
     using System.Collections.Generic;
+    
+    [DataContract(IsReference = true)]
+    [KnownType(typeof(ABS_StockDetail))]
+    [KnownType(typeof(SYS_Organization))]
     
     public partial class ABS_StockCapital
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ABS_StockCapital()
         {
             this.ABS_StockDetail = new HashSet<ABS_StockDetail>();
         }
     
+    	[DataMember]
         public System.Guid ID { get; set; }
+    	[DataMember]
         public long SN { get; set; }
+    	[DataMember]
         public Nullable<System.Guid> OrgId { get; set; }
+    	[DataMember]
         public decimal Amount { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    	[DataMember]
         public virtual ICollection<ABS_StockDetail> ABS_StockDetail { get; set; }
+    	[DataMember]
         public virtual SYS_Organization SYS_Organization { get; set; }
     }
 }

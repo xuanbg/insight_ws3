@@ -10,11 +10,21 @@
 namespace Insight.WS.Server.Common.ORM
 {
     using System;
+    using System.Runtime.Serialization;
     using System.Collections.Generic;
+    
+    [DataContract(IsReference = true)]
+    [KnownType(typeof(BASE_Category))]
+    [KnownType(typeof(SYS_Organization))]
+    [KnownType(typeof(SYS_User))]
+    [KnownType(typeof(SYS_Report_Period))]
+    [KnownType(typeof(SYS_Report_Entity))]
+    [KnownType(typeof(SYS_Report_Schedular))]
+    [KnownType(typeof(SYS_Report_Instances))]
+    [KnownType(typeof(SYS_Report_Templates))]
     
     public partial class SYS_Report_Definition
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SYS_Report_Definition()
         {
             this.SYS_Report_Period = new HashSet<SYS_Report_Period>();
@@ -23,31 +33,48 @@ namespace Insight.WS.Server.Common.ORM
             this.SYS_Report_Instances = new HashSet<SYS_Report_Instances>();
         }
     
+    	[DataMember]
         public System.Guid ID { get; set; }
+    	[DataMember]
         public long SN { get; set; }
+    	[DataMember]
         public System.Guid CategoryId { get; set; }
+    	[DataMember]
         public string Name { get; set; }
+    	[DataMember]
         public System.Guid TemplateId { get; set; }
+    	[DataMember]
         public int Mode { get; set; }
+    	[DataMember]
         public int Delay { get; set; }
+    	[DataMember]
         public int Type { get; set; }
+    	[DataMember]
         public string DataSource { get; set; }
+    	[DataMember]
         public string Description { get; set; }
+    	[DataMember]
         public Nullable<System.Guid> CreatorDeptId { get; set; }
+    	[DataMember]
         public System.Guid CreatorUserId { get; set; }
+    	[DataMember]
         public System.DateTime CreateTime { get; set; }
     
+    	[DataMember]
         public virtual BASE_Category BASE_Category { get; set; }
+    	[DataMember]
         public virtual SYS_Organization SYS_Organization { get; set; }
+    	[DataMember]
         public virtual SYS_User SYS_User { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    	[DataMember]
         public virtual ICollection<SYS_Report_Period> SYS_Report_Period { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    	[DataMember]
         public virtual ICollection<SYS_Report_Entity> SYS_Report_Entity { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    	[DataMember]
         public virtual ICollection<SYS_Report_Schedular> SYS_Report_Schedular { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    	[DataMember]
         public virtual ICollection<SYS_Report_Instances> SYS_Report_Instances { get; set; }
+    	[DataMember]
         public virtual SYS_Report_Templates SYS_Report_Templates { get; set; }
     }
 }

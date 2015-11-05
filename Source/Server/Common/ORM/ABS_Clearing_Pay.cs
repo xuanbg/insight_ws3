@@ -10,29 +10,45 @@
 namespace Insight.WS.Server.Common.ORM
 {
     using System;
+    using System.Runtime.Serialization;
     using System.Collections.Generic;
+    
+    [DataContract(IsReference = true)]
+    [KnownType(typeof(ABS_Clearing_Item))]
+    [KnownType(typeof(MDG_Dictionary))]
+    [KnownType(typeof(ABS_StockDetail))]
     
     public partial class ABS_Clearing_Pay
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ABS_Clearing_Pay()
         {
             this.ABS_StockDetail = new HashSet<ABS_StockDetail>();
         }
     
+    	[DataMember]
         public System.Guid ID { get; set; }
+    	[DataMember]
         public long SN { get; set; }
+    	[DataMember]
         public System.Guid ClearingItemId { get; set; }
+    	[DataMember]
         public Nullable<System.Guid> PayType { get; set; }
+    	[DataMember]
         public string Code { get; set; }
+    	[DataMember]
         public Nullable<System.Guid> CurrencyId { get; set; }
+    	[DataMember]
         public decimal Amount { get; set; }
+    	[DataMember]
         public decimal ExchangeRate { get; set; }
     
+    	[DataMember]
         public virtual ABS_Clearing_Item ABS_Clearing_Item { get; set; }
+    	[DataMember]
         public virtual MDG_Dictionary MDG_Dictionary { get; set; }
+    	[DataMember]
         public virtual MDG_Dictionary MDG_Dictionary1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    	[DataMember]
         public virtual ICollection<ABS_StockDetail> ABS_StockDetail { get; set; }
     }
 }

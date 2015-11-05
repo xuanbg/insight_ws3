@@ -10,19 +10,34 @@
 namespace Insight.WS.Server.Common.ORM
 {
     using System;
+    using System.Runtime.Serialization;
     using System.Collections.Generic;
+    
+    [DataContract(IsReference = true)]
+    [KnownType(typeof(ABS_Clearing_Pay))]
+    [KnownType(typeof(ABS_StockCapital))]
+    [KnownType(typeof(MDG_Dictionary))]
     
     public partial class ABS_StockDetail
     {
+    	[DataMember]
         public System.Guid ID { get; set; }
+    	[DataMember]
         public long SN { get; set; }
+    	[DataMember]
         public System.Guid CapitalId { get; set; }
+    	[DataMember]
         public Nullable<System.Guid> ClearingId { get; set; }
+    	[DataMember]
         public Nullable<System.Guid> AccountId { get; set; }
+    	[DataMember]
         public decimal Amount { get; set; }
     
+    	[DataMember]
         public virtual ABS_Clearing_Pay ABS_Clearing_Pay { get; set; }
+    	[DataMember]
         public virtual ABS_StockCapital ABS_StockCapital { get; set; }
+    	[DataMember]
         public virtual MDG_Dictionary MDG_Dictionary { get; set; }
     }
 }

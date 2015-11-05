@@ -10,24 +10,34 @@
 namespace Insight.WS.Server.Common.ORM
 {
     using System;
+    using System.Runtime.Serialization;
     using System.Collections.Generic;
+    
+    [DataContract(IsReference = true)]
+    [KnownType(typeof(SYS_Alert_Send))]
+    [KnownType(typeof(SYS_Alert_Rules))]
     
     public partial class SYS_Alert_Message
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SYS_Alert_Message()
         {
             this.SYS_Alert_Send = new HashSet<SYS_Alert_Send>();
         }
     
+    	[DataMember]
         public System.Guid ID { get; set; }
+    	[DataMember]
         public long SN { get; set; }
+    	[DataMember]
         public System.Guid RuleId { get; set; }
+    	[DataMember]
         public string Content { get; set; }
+    	[DataMember]
         public System.DateTime CreateTime { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    	[DataMember]
         public virtual ICollection<SYS_Alert_Send> SYS_Alert_Send { get; set; }
+    	[DataMember]
         public virtual SYS_Alert_Rules SYS_Alert_Rules { get; set; }
     }
 }

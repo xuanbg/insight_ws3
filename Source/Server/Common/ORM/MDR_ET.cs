@@ -10,16 +10,27 @@
 namespace Insight.WS.Server.Common.ORM
 {
     using System;
+    using System.Runtime.Serialization;
     using System.Collections.Generic;
+    
+    [DataContract(IsReference = true)]
+    [KnownType(typeof(MDG_Employee))]
+    [KnownType(typeof(SYS_Organization))]
     
     public partial class MDR_ET
     {
+    	[DataMember]
         public System.Guid ID { get; set; }
+    	[DataMember]
         public long SN { get; set; }
+    	[DataMember]
         public System.Guid EmployeeId { get; set; }
+    	[DataMember]
         public System.Guid TitleId { get; set; }
     
+    	[DataMember]
         public virtual MDG_Employee MDG_Employee { get; set; }
+    	[DataMember]
         public virtual SYS_Organization SYS_Organization { get; set; }
     }
 }
