@@ -135,7 +135,8 @@ namespace Insight.WS.Server.Common
                         if (cmd.Parameters.IndexOf("@Write") <= 0) continue;
 
                         var val = (int)cmd.Parameters["@Write"].Value;
-                        if (ids.Count <= val) ids.Add(obj); else ids[val] = obj;
+                        if (ids.Count <= val) ids.Add(obj);
+                        else ids[val] = obj;
                     }
                     tran.Commit();
                     return true;
@@ -179,7 +180,8 @@ namespace Insight.WS.Server.Common
                         if (cmd.Parameters.IndexOf("@Write") <= 0) continue;
 
                         var val = (int)cmd.Parameters["@Write"].Value;
-                        if (ids.Count <= val) ids.Add(obj); else ids[val] = obj;
+                        if (ids.Count <= val) ids.Add(obj);
+                        else ids[val] = obj;
                     }
                     tran.Commit();
                     return ids[index];
@@ -202,6 +204,8 @@ namespace Insight.WS.Server.Common
         public static SqlCommand MakeCommand(string sql, params SqlParameter[] parameters)
         {
             var cmd = new SqlCommand(sql);
+            if (parameters == null) return cmd;
+
             foreach (var p in parameters)
             {
                 if (p.Value == null || p.Value.ToString() == "")
