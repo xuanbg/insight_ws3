@@ -177,40 +177,5 @@ namespace Insight.WS.Server.Common
             return retString;
         }
 
-        /// <summary>
-        /// 初始化密码字典表
-        /// </summary>
-        public void InitCode()
-        {
-            var list = new List<string>();
-            for (var i = 0; i < 1000; i++)
-            {
-                list.Add(i.ToString("000"));
-            }
-
-            var codes = new List<BIZ_CodeContrast>();
-            var rand = new Random(Environment.TickCount);
-            for (var i = 0; i < 1000; i++)
-            {
-                var random = rand.Next(0, 999 - i);
-                var code = new BIZ_CodeContrast
-                {
-                    Source = i.ToString("000"),
-                    Target = list[random]
-                };
-                codes.Add(code);
-                list.RemoveAt(random);
-            }
-
-            const string sql = "insert BIZ_CodeContrast (Source, Target) select @Source, @Target";
-            var cmds = codes.Select(code => new[]
-            {
-                new SqlParameter("@Source", code.Source),
-                new SqlParameter("@Target", code.Target)
-            }).Select(parm => SqlHelper.MakeCommand(sql, parm)).ToList();
-
-            SqlHelper.SqlExecute(cmds);
-        }
-
     }
 }

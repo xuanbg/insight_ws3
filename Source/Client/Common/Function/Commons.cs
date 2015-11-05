@@ -11,18 +11,6 @@ namespace Insight.WS.Client.Common
         #region 公共方法
 
         /// <summary>
-        /// 获取服务器上客户端文件信息
-        /// </summary>
-        /// <returns>文件信息</returns>
-        public static List<UpdateFile> GetServerList()
-        {
-            using (var cli = new CommonsClient(MainForm.Binding, MainForm.Address))
-            {
-                return cli.GetServerList();
-            }
-        }
-
-        /// <summary>
         /// 获取分类列表
         /// </summary>
         /// <param name="mid">模块ID</param>

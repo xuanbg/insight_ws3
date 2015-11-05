@@ -112,6 +112,12 @@
   <wsdl:message name="IReport_GetReportMember_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetReportMemberResponse" />
   </wsdl:message>
+  <wsdl:message name="IReport_GetDataSource_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataSource" />
+  </wsdl:message>
+  <wsdl:message name="IReport_GetDataSource_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataSourceResponse" />
+  </wsdl:message>
   <wsdl:message name="IReport_AddDefinition_InputMessage">
     <wsdl:part name="parameters" element="tns:AddDefinition" />
   </wsdl:message>
@@ -262,6 +268,10 @@
     <wsdl:operation name="GetReportMember">
       <wsdl:input wsaw:Action="http://tempuri.org/IReport/GetReportMember" message="tns:IReport_GetReportMember_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IReport/GetReportMemberResponse" message="tns:IReport_GetReportMember_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataSource">
+      <wsdl:input wsaw:Action="http://tempuri.org/IReport/GetDataSource" message="tns:IReport_GetDataSource_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IReport/GetDataSourceResponse" message="tns:IReport_GetDataSource_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="AddDefinition">
       <wsdl:input wsaw:Action="http://tempuri.org/IReport/AddDefinition" message="tns:IReport_AddDefinition_InputMessage" />
@@ -463,6 +473,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetDataSource">
+      <soap12:operation soapAction="http://tempuri.org/IReport/GetDataSource" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="AddDefinition">
       <soap12:operation soapAction="http://tempuri.org/IReport/AddDefinition" style="document" />
       <wsdl:input>
@@ -601,9 +620,9 @@
   </wsdl:binding>
   <wsdl:service name="Report">
     <wsdl:port name="CustomBinding_IReport" binding="tns:CustomBinding_IReport">
-      <soap12:address location="net.tcp://localhost:7210/Report" />
+      <soap12:address location="net.tcp://localhost:6210/Report" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:7210/Report</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost:6210/Report</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>

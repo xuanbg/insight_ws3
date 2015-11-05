@@ -66,7 +66,7 @@
     <Reference Include="FastReport, Version=1.8.46.0, Culture=neutral, PublicKeyToken=db7e5ce63278458c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Debug\Client\Components\FastReport.dll</HintPath>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -227,12 +227,12 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Properties\DataSources\System.Data.DataTable.datasource" />
     <None Include="Service References\Service\Arrays.xsd">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Service\Insight.WS.Client.Common.Service.Advance.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\Service\Insight.WS.Client.Common.Service.BASE_Category.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -271,6 +271,9 @@
     <None Include="Service References\Service\System.Data.xsd">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\Service\" />

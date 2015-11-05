@@ -209,24 +209,22 @@
   <ItemGroup>
     <None Include="Properties\DataSources\Insight.WS.Client.Common.Service.ABS_Clearing.datasource" />
     <None Include="Properties\DataSources\Insight.WS.Client.Common.Service.ABS_Delivery.datasource" />
+    <None Include="Properties\DataSources\Insight.WS.Client.Common.Service.Advance.datasource" />
     <None Include="Properties\DataSources\System.Data.DataTable.datasource" />
-    <None Include="Service References\Service\Insight.WS.Client.Business.Settlement.Service.Advance.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\Service\Insight.WS.Server.Common.ORM.xsd">
+    <None Include="Service References\Service\Insight.WS.Server.Common.ORM1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\Service\Insight.WS.Server.Common.xsd">
+    <None Include="Service References\Service\Insight.WS.Server.Common1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\Service\service.wsdl" />
-    <None Include="Service References\Service\service.xsd">
+    <None Include="Service References\Service\service1.wsdl" />
+    <None Include="Service References\Service\service2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\Service\service1.xsd">
+    <None Include="Service References\Service\service21.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\Service\System.Data.xsd">
+    <None Include="Service References\Service\System.Data1.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="tEWpYmTkCIoCGRvJ1ctYjTQfOSk=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="gmFqx0waRfYsYWi9UZPyVzs/RXA=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="netTcpBinding" name="CustomBinding_ICommons">
       <properties>
@@ -121,10 +121,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="CustomBinding_ICommons" contract="Service.ICommons" bindingType="netTcpBinding" address="net.tcp://localhost:7210/Commons" bindingConfiguration="CustomBinding_ICommons">
+    <endpoint name="CustomBinding_ICommons" contract="Service.ICommons" bindingType="netTcpBinding" address="net.tcp://localhost:6210/Commons" bindingConfiguration="CustomBinding_ICommons">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>net.tcp://localhost:7210/Commons</serializedValue>
+          <serializedValue>net.tcp://localhost:6210/Commons</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

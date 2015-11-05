@@ -42,17 +42,29 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetServerList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetServerListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="GetServerListResult" nillable="true" type="q3:ArrayOfUpdateFile" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetFile">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="file" nillable="true" type="q3:UpdateFile" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="file" nillable="true" type="q4:UpdateFile" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetFileResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="GetFileResult" nillable="true" type="q4:UpdateFile" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="GetFileResult" nillable="true" type="q5:UpdateFile" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

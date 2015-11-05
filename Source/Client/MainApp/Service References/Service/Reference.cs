@@ -21,6 +21,9 @@ namespace Insight.WS.Client.MainApp.Service {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILogin/UserLogin", ReplyAction="http://tempuri.org/ILogin/UserLoginResponse")]
         Insight.WS.Client.Common.Service.Session UserLogin(Insight.WS.Client.Common.Service.Session us);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILogin/GetServerList", ReplyAction="http://tempuri.org/ILogin/GetServerListResponse")]
+        System.Collections.Generic.List<Insight.WS.Client.Common.Service.UpdateFile> GetServerList();
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILogin/GetFile", ReplyAction="http://tempuri.org/ILogin/GetFileResponse")]
         Insight.WS.Client.Common.Service.UpdateFile GetFile(Insight.WS.Client.Common.Service.UpdateFile file);
     }
@@ -58,6 +61,10 @@ namespace Insight.WS.Client.MainApp.Service {
         
         public Insight.WS.Client.Common.Service.Session UserLogin(Insight.WS.Client.Common.Service.Session us) {
             return base.Channel.UserLogin(us);
+        }
+        
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.UpdateFile> GetServerList() {
+            return base.Channel.GetServerList();
         }
         
         public Insight.WS.Client.Common.Service.UpdateFile GetFile(Insight.WS.Client.Common.Service.UpdateFile file) {

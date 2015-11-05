@@ -1132,6 +1132,9 @@
         <EntityType Name="Dictionary">
           <Key>
             <PropertyRef Name="ID" />
+            
+            
+            
           </Key>
           <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ParentId" Type="uniqueidentifier" />
@@ -1172,6 +1175,10 @@
         <EntityType Name="ReportTemplet">
           <Key>
             <PropertyRef Name="ID" />
+            
+            
+            
+            
           </Key>
           <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ParentId" Type="uniqueidentifier" />

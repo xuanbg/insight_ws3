@@ -182,26 +182,6 @@ namespace Insight.WS.Service
 
         #region 其它接口
 
-        /// <summary>
-        /// 获取广告商品列表
-        /// </summary>
-        /// <param name="us">用户会话</param>
-        /// <returns>广告商品列表</returns>
-        public List<BIZ_Advertiser> GetAdvertisers(Session us)
-        {
-            if (!OnlineManage.Verification(us)) return null;
-
-            using (var context = new WSEntities())
-            {
-                return context.BIZ_Advertiser.ToList();
-            }
-        }
-
-        public MDG_EntMember g()
-        {
-            return new MDG_EntMember();
-        }
-
         public UpdateFile a()
         {
             return new UpdateFile();

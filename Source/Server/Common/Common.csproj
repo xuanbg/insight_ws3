@@ -155,37 +155,7 @@
     <Compile Include="ORM\Advance.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ORM\Available.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="ORM\BASE_Category.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\BIZ_Advertiser.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\BIZ_Bill.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\BIZ_CodeContrast.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\BIZ_Order.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\BIZ_Pay_Record.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\BIZ_Product_Snapshot.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\BIZ_StagePlan.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\Citys.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\Countys.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ORM\Dictionary.cs">
@@ -215,24 +185,6 @@
     <Compile Include="ORM\MDD_Numeric.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ORM\MDE_Member_Address.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\MDE_Member_Card.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\MDE_Member_Contact.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\MDE_Member_CreditInfo.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\MDE_Member_Feedback.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\MDE_Member_Withdrawal.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="ORM\MDG_Contact.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
@@ -243,9 +195,6 @@
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ORM\MDG_Employee.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\MDG_EntMember.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ORM\MDG_Expense.cs">
@@ -266,16 +215,10 @@
     <Compile Include="ORM\MDS_Contact_Info.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ORM\OrderStatus.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="ORM\ReportSchedular.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ORM\ReportTemplet.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\States.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ORM\SYS_Alert_Message.cs">
@@ -414,7 +357,6 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>WSModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="App.Config" />
     <None Include="ORM\WSModel.edmx.diagram">
       <DependentUpon>WSModel.edmx</DependentUpon>
     </None>
@@ -432,7 +374,6 @@
       <LastGenOutput>WSModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

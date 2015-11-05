@@ -467,9 +467,9 @@
   </wsdl:binding>
   <wsdl:service name="Settlement">
     <wsdl:port name="CustomBinding_ISettlement" binding="tns:CustomBinding_ISettlement">
-      <soap12:address location="net.tcp://localhost:7210/Settlement" />
+      <soap12:address location="net.tcp://localhost:6210/Settlement" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:7210/Settlement</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost:6210/Settlement</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>

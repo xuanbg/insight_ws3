@@ -34,12 +34,6 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="LoginResult" nillable="true" type="tns:LoginResult" />
-  <xs:complexType name="ArrayOfUpdateFile">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="UpdateFile" nillable="true" type="tns:UpdateFile" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfUpdateFile" nillable="true" type="tns:ArrayOfUpdateFile" />
   <xs:complexType name="UpdateFile">
     <xs:sequence>
       <xs:element minOccurs="0" name="FileBytes" nillable="true" type="xs:base64Binary" />

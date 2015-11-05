@@ -70,11 +70,17 @@
   <wsdl:message name="ICommons_GetObjectCount_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetObjectCountResponse" />
   </wsdl:message>
-  <wsdl:message name="ICommons_GetServerList_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetServerList" />
+  <wsdl:message name="ICommons_a_InputMessage">
+    <wsdl:part name="parameters" element="tns:a" />
   </wsdl:message>
-  <wsdl:message name="ICommons_GetServerList_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetServerListResponse" />
+  <wsdl:message name="ICommons_a_OutputMessage">
+    <wsdl:part name="parameters" element="tns:aResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_b_InputMessage">
+    <wsdl:part name="parameters" element="tns:b" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_b_OutputMessage">
+    <wsdl:part name="parameters" element="tns:bResponse" />
   </wsdl:message>
   <wsdl:message name="ICommons_DelOnlineUser_InputMessage">
     <wsdl:part name="parameters" element="tns:DelOnlineUser" />
@@ -331,9 +337,13 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ICommons/GetObjectCount" message="tns:ICommons_GetObjectCount_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICommons/GetObjectCountResponse" message="tns:ICommons_GetObjectCount_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetServerList">
-      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/GetServerList" message="tns:ICommons_GetServerList_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/GetServerListResponse" message="tns:ICommons_GetServerList_OutputMessage" />
+    <wsdl:operation name="a">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/a" message="tns:ICommons_a_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/aResponse" message="tns:ICommons_a_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="b">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/b" message="tns:ICommons_b_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/bResponse" message="tns:ICommons_b_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="DelOnlineUser">
       <wsdl:input wsaw:Action="http://tempuri.org/ICommons/DelOnlineUser" message="tns:ICommons_DelOnlineUser_InputMessage" />
@@ -560,8 +570,17 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetServerList">
-      <soap12:operation soapAction="http://tempuri.org/ICommons/GetServerList" style="document" />
+    <wsdl:operation name="a">
+      <soap12:operation soapAction="http://tempuri.org/ICommons/a" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="b">
+      <soap12:operation soapAction="http://tempuri.org/ICommons/b" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -905,9 +924,9 @@
   </wsdl:binding>
   <wsdl:service name="Commons">
     <wsdl:port name="CustomBinding_ICommons" binding="tns:CustomBinding_ICommons">
-      <soap12:address location="net.tcp://localhost:7210/Commons" />
+      <soap12:address location="net.tcp://localhost:6210/Commons" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:7210/Commons</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost:6210/Commons</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>

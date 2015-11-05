@@ -17,7 +17,7 @@ namespace Insight.WS.Client.Common
     public class Format
     {
         private const string Ignores = "SN;Index;Type;Class;Permission;Selected;Status;CheckState;BuiltIn;IsMaster;Enable;Visible;NodeType;IsData;Action;Alias;Code;PrintTimes;Unit;CreateTime";
-        private const string AlignCenters = "类型;状态;创建人;规格;单位;单价;数量;币种;汇率";
+        private const string AlignCenters = "类型;状态;创建人;操作员;规格;单位;单价;数量;币种;汇率";
         private const string ColumnW40S = "类型;状态;内置;预置";
         private const string ColumnW80S = "创建人;简称;编码;规格;单位;单价;数量;币种;汇率";
         private const string Numerics = "汇率;单价;数量";

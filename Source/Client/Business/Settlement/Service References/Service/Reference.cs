@@ -9,182 +9,7 @@
 //------------------------------------------------------------------------------
 
 namespace Insight.WS.Client.Business.Settlement.Service {
-    using System.Runtime.Serialization;
-    using System;
     
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Advance", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
-    [System.SerializableAttribute()]
-    internal partial class Advance : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string AccountNoField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private decimal AmountField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<System.Guid> CardTypeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Guid IDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<System.Guid> ObjectIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Guid OwnerIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<int> PriField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int TypeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<System.DateTime> ValidDateField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        internal string AccountNo {
-            get {
-                return this.AccountNoField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.AccountNoField, value) != true)) {
-                    this.AccountNoField = value;
-                    this.RaisePropertyChanged("AccountNo");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        internal decimal Amount {
-            get {
-                return this.AmountField;
-            }
-            set {
-                if ((this.AmountField.Equals(value) != true)) {
-                    this.AmountField = value;
-                    this.RaisePropertyChanged("Amount");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        internal System.Nullable<System.Guid> CardType {
-            get {
-                return this.CardTypeField;
-            }
-            set {
-                if ((this.CardTypeField.Equals(value) != true)) {
-                    this.CardTypeField = value;
-                    this.RaisePropertyChanged("CardType");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        internal System.Guid ID {
-            get {
-                return this.IDField;
-            }
-            set {
-                if ((this.IDField.Equals(value) != true)) {
-                    this.IDField = value;
-                    this.RaisePropertyChanged("ID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        internal System.Nullable<System.Guid> ObjectId {
-            get {
-                return this.ObjectIdField;
-            }
-            set {
-                if ((this.ObjectIdField.Equals(value) != true)) {
-                    this.ObjectIdField = value;
-                    this.RaisePropertyChanged("ObjectId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        internal System.Guid OwnerId {
-            get {
-                return this.OwnerIdField;
-            }
-            set {
-                if ((this.OwnerIdField.Equals(value) != true)) {
-                    this.OwnerIdField = value;
-                    this.RaisePropertyChanged("OwnerId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        internal System.Nullable<int> Pri {
-            get {
-                return this.PriField;
-            }
-            set {
-                if ((this.PriField.Equals(value) != true)) {
-                    this.PriField = value;
-                    this.RaisePropertyChanged("Pri");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        internal int Type {
-            get {
-                return this.TypeField;
-            }
-            set {
-                if ((this.TypeField.Equals(value) != true)) {
-                    this.TypeField = value;
-                    this.RaisePropertyChanged("Type");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        internal System.Nullable<System.DateTime> ValidDate {
-            get {
-                return this.ValidDateField;
-            }
-            set {
-                if ((this.ValidDateField.Equals(value) != true)) {
-                    this.ValidDateField = value;
-                    this.RaisePropertyChanged("ValidDate");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Service.ISettlement")]
@@ -203,7 +28,7 @@ namespace Insight.WS.Client.Business.Settlement.Service {
         System.Data.DataTable GetFundPlans(Insight.WS.Client.Common.Service.Session us, System.Guid id, int dirt);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISettlement/GetAdvance", ReplyAction="http://tempuri.org/ISettlement/GetAdvanceResponse")]
-        System.Collections.Generic.List<Insight.WS.Client.Business.Settlement.Service.Advance> GetAdvance(Insight.WS.Client.Common.Service.Session us, System.Guid id);
+        System.Collections.Generic.List<Insight.WS.Client.Common.Service.Advance> GetAdvance(Insight.WS.Client.Common.Service.Session us, System.Guid id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISettlement/GetReceipt", ReplyAction="http://tempuri.org/ISettlement/GetReceiptResponse")]
         Insight.WS.Client.Common.Service.ABS_Clearing GetReceipt(Insight.WS.Client.Common.Service.Session us, System.Guid cid);
@@ -220,8 +45,8 @@ namespace Insight.WS.Client.Business.Settlement.Service {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISettlement/GetReceiptCode", ReplyAction="http://tempuri.org/ISettlement/GetReceiptCodeResponse")]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.Session))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.LoginResult))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Business.Settlement.Service.Advance>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Business.Settlement.Service.Advance))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.Advance>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.Advance))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Clearing))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Advance_Record>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Advance_Record))]
@@ -248,14 +73,20 @@ namespace Insight.WS.Client.Business.Settlement.Service {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Contract_FundPlan))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Contract_FundPerform>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Contract_FundPerform))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Contract_GoodsPlan))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Contract_GoodsPerform>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Contract_GoodsPerform))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Delivery))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Delivery_Attachs>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Delivery_Attachs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Clearing_Check))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Organization))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Clearing_Check>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Delivery>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Delivery))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Contract_GoodsPerform>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Contract_GoodsPerform))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Contract_GoodsPlan))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_StockCapital>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_StockCapital))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_StockDetail>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_StockDetail))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_User))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Storage_Location>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Storage_Location))]
@@ -267,9 +98,10 @@ namespace Insight.WS.Client.Business.Settlement.Service {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ImageData>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDG_Customer>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Customer))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_StockDetail))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_StockCapital))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_StockDetail>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Employee))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDG_Employee>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDR_ET>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDR_ET))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Module))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.BASE_Category>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MasterData_Property>))]
@@ -286,13 +118,9 @@ namespace Insight.WS.Client.Business.Settlement.Service {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Code_Allot))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Delivery_Item))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Code_Record))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Delivery_Attachs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_ModuleGroup))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Module>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Employee))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDG_Employee>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDR_ET>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDR_ET))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Expense))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_ModuleAction))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_RolePerm_Action>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_RolePerm_Action))]
@@ -306,20 +134,20 @@ namespace Insight.WS.Client.Business.Settlement.Service {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Instances))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_IU>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_IU))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Expense))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Material))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Period))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Rules))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_Period>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_Schedular>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Schedular))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Material))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Templates))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_Definition>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Supplier))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDS_Contact_Info))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Templates))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_Definition>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MasterData_Merger))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Role_User))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_ModuleParam))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MasterData_Merger))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Contact))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Role_UserGroup))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_UserGroup))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Role_UserGroup>))]
@@ -327,9 +155,8 @@ namespace Insight.WS.Client.Business.Settlement.Service {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_UserGroupMember))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Role_Title))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_RolePerm_Data))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Contact))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_RolePerm_DataAbs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDR_MU))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_RolePerm_DataAbs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Alert_Rules))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Alert_Message>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Alert_Message))]
@@ -366,9 +193,7 @@ namespace Insight.WS.Client.Business.Settlement.Service {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_Rules>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Role>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_UserGroup>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Delivery_Attachs>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Delivery_Item>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_StockCapital>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Contract_GoodsPlan>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Storage_Summary>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDS_Contact_Info>))]
@@ -380,8 +205,8 @@ namespace Insight.WS.Client.Business.Settlement.Service {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISettlement/AddClearing", ReplyAction="http://tempuri.org/ISettlement/AddClearingResponse")]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.Session))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.LoginResult))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Business.Settlement.Service.Advance>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Business.Settlement.Service.Advance))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.Advance>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.Advance))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Clearing))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Advance_Record>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Advance_Record))]
@@ -408,14 +233,20 @@ namespace Insight.WS.Client.Business.Settlement.Service {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Contract_FundPlan))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Contract_FundPerform>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Contract_FundPerform))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Contract_GoodsPlan))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Contract_GoodsPerform>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Contract_GoodsPerform))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Delivery))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Delivery_Attachs>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Delivery_Attachs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Clearing_Check))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Organization))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Clearing_Check>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Delivery>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Delivery))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Contract_GoodsPerform>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Contract_GoodsPerform))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Contract_GoodsPlan))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_StockCapital>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_StockCapital))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_StockDetail>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_StockDetail))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_User))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Storage_Location>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Storage_Location))]
@@ -427,9 +258,10 @@ namespace Insight.WS.Client.Business.Settlement.Service {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ImageData>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDG_Customer>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Customer))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_StockDetail))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_StockCapital))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_StockDetail>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Employee))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDG_Employee>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDR_ET>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDR_ET))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Module))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.BASE_Category>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MasterData_Property>))]
@@ -446,13 +278,9 @@ namespace Insight.WS.Client.Business.Settlement.Service {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Code_Allot))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Delivery_Item))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Code_Record))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Delivery_Attachs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_ModuleGroup))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Module>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Employee))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDG_Employee>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDR_ET>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDR_ET))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Expense))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_ModuleAction))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_RolePerm_Action>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_RolePerm_Action))]
@@ -466,20 +294,20 @@ namespace Insight.WS.Client.Business.Settlement.Service {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Instances))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_IU>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_IU))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Expense))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Material))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Period))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Rules))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_Period>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_Schedular>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Schedular))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Material))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Templates))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_Definition>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Supplier))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDS_Contact_Info))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Templates))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_Definition>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MasterData_Merger))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Role_User))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_ModuleParam))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MasterData_Merger))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Contact))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Role_UserGroup))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_UserGroup))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Role_UserGroup>))]
@@ -487,9 +315,8 @@ namespace Insight.WS.Client.Business.Settlement.Service {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_UserGroupMember))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Role_Title))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_RolePerm_Data))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Contact))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_RolePerm_DataAbs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDR_MU))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_RolePerm_DataAbs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Alert_Rules))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Alert_Message>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Alert_Message))]
@@ -526,9 +353,7 @@ namespace Insight.WS.Client.Business.Settlement.Service {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_Rules>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Role>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_UserGroup>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Delivery_Attachs>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Delivery_Item>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_StockCapital>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Contract_GoodsPlan>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Storage_Summary>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDS_Contact_Info>))]
@@ -549,8 +374,8 @@ namespace Insight.WS.Client.Business.Settlement.Service {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISettlement/Get_GoodsPlan", ReplyAction="http://tempuri.org/ISettlement/Get_GoodsPlanResponse")]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.Session))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.LoginResult))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Business.Settlement.Service.Advance>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Business.Settlement.Service.Advance))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.Advance>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.Advance))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Clearing))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Advance_Record>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Advance_Record))]
@@ -577,14 +402,20 @@ namespace Insight.WS.Client.Business.Settlement.Service {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Contract_FundPlan))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Contract_FundPerform>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Contract_FundPerform))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Contract_GoodsPlan))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Contract_GoodsPerform>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Contract_GoodsPerform))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Delivery))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Delivery_Attachs>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Delivery_Attachs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Clearing_Check))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Organization))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Clearing_Check>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Delivery>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Delivery))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Contract_GoodsPerform>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Contract_GoodsPerform))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Contract_GoodsPlan))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_StockCapital>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_StockCapital))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_StockDetail>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_StockDetail))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_User))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Storage_Location>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Storage_Location))]
@@ -596,9 +427,10 @@ namespace Insight.WS.Client.Business.Settlement.Service {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ImageData>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDG_Customer>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Customer))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_StockDetail))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_StockCapital))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_StockDetail>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Employee))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDG_Employee>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDR_ET>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDR_ET))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Module))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.BASE_Category>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MasterData_Property>))]
@@ -615,13 +447,9 @@ namespace Insight.WS.Client.Business.Settlement.Service {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Code_Allot))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Delivery_Item))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Code_Record))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Delivery_Attachs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_ModuleGroup))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Module>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Employee))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDG_Employee>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDR_ET>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDR_ET))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Expense))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_ModuleAction))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_RolePerm_Action>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_RolePerm_Action))]
@@ -635,20 +463,20 @@ namespace Insight.WS.Client.Business.Settlement.Service {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Instances))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_IU>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_IU))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Expense))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Material))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Period))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Rules))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_Period>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_Schedular>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Schedular))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Material))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Templates))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_Definition>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Supplier))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDS_Contact_Info))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Templates))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_Definition>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MasterData_Merger))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Role_User))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_ModuleParam))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MasterData_Merger))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Contact))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Role_UserGroup))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_UserGroup))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Role_UserGroup>))]
@@ -656,9 +484,8 @@ namespace Insight.WS.Client.Business.Settlement.Service {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_UserGroupMember))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Role_Title))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_RolePerm_Data))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Contact))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_RolePerm_DataAbs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDR_MU))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_RolePerm_DataAbs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Alert_Rules))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Alert_Message>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Alert_Message))]
@@ -695,9 +522,7 @@ namespace Insight.WS.Client.Business.Settlement.Service {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_Rules>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Role>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_UserGroup>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Delivery_Attachs>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Delivery_Item>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_StockCapital>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Contract_GoodsPlan>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Storage_Summary>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDS_Contact_Info>))]
@@ -715,8 +540,8 @@ namespace Insight.WS.Client.Business.Settlement.Service {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISettlement/AddDelivery", ReplyAction="http://tempuri.org/ISettlement/AddDeliveryResponse")]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.Session))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.LoginResult))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Business.Settlement.Service.Advance>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Business.Settlement.Service.Advance))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.Advance>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.Advance))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Clearing))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Advance_Record>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Advance_Record))]
@@ -743,14 +568,20 @@ namespace Insight.WS.Client.Business.Settlement.Service {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Contract_FundPlan))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Contract_FundPerform>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Contract_FundPerform))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Contract_GoodsPlan))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Contract_GoodsPerform>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Contract_GoodsPerform))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Delivery))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Delivery_Attachs>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Delivery_Attachs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Clearing_Check))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Organization))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Clearing_Check>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Delivery>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Delivery))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Contract_GoodsPerform>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Contract_GoodsPerform))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Contract_GoodsPlan))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_StockCapital>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_StockCapital))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_StockDetail>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_StockDetail))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_User))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Storage_Location>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Storage_Location))]
@@ -762,9 +593,10 @@ namespace Insight.WS.Client.Business.Settlement.Service {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ImageData>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDG_Customer>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Customer))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_StockDetail))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_StockCapital))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_StockDetail>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Employee))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDG_Employee>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDR_ET>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDR_ET))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Module))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.BASE_Category>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MasterData_Property>))]
@@ -781,13 +613,9 @@ namespace Insight.WS.Client.Business.Settlement.Service {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Code_Allot))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Delivery_Item))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Code_Record))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Delivery_Attachs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_ModuleGroup))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Module>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Employee))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDG_Employee>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDR_ET>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDR_ET))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Expense))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_ModuleAction))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_RolePerm_Action>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_RolePerm_Action))]
@@ -801,20 +629,20 @@ namespace Insight.WS.Client.Business.Settlement.Service {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Instances))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_IU>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_IU))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Expense))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Material))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Period))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Rules))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_Period>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_Schedular>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Schedular))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Material))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Templates))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_Definition>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Supplier))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDS_Contact_Info))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Templates))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_Definition>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MasterData_Merger))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Role_User))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_ModuleParam))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MasterData_Merger))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Contact))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Role_UserGroup))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_UserGroup))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Role_UserGroup>))]
@@ -822,9 +650,8 @@ namespace Insight.WS.Client.Business.Settlement.Service {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_UserGroupMember))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Role_Title))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_RolePerm_Data))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Contact))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_RolePerm_DataAbs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDR_MU))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_RolePerm_DataAbs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Alert_Rules))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Alert_Message>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Alert_Message))]
@@ -861,9 +688,7 @@ namespace Insight.WS.Client.Business.Settlement.Service {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_Rules>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Role>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_UserGroup>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Delivery_Attachs>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Delivery_Item>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_StockCapital>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Contract_GoodsPlan>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Storage_Summary>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDS_Contact_Info>))]
@@ -872,8 +697,8 @@ namespace Insight.WS.Client.Business.Settlement.Service {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISettlement/GetDeliveryCode", ReplyAction="http://tempuri.org/ISettlement/GetDeliveryCodeResponse")]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.Session))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.LoginResult))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Business.Settlement.Service.Advance>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Business.Settlement.Service.Advance))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.Advance>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.Advance))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Clearing))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Advance_Record>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Advance_Record))]
@@ -900,14 +725,20 @@ namespace Insight.WS.Client.Business.Settlement.Service {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Contract_FundPlan))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Contract_FundPerform>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Contract_FundPerform))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Contract_GoodsPlan))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Contract_GoodsPerform>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Contract_GoodsPerform))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Delivery))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Delivery_Attachs>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Delivery_Attachs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Clearing_Check))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Organization))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Clearing_Check>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Delivery>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Delivery))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Contract_GoodsPerform>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Contract_GoodsPerform))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Contract_GoodsPlan))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_StockCapital>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_StockCapital))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_StockDetail>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_StockDetail))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_User))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Storage_Location>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Storage_Location))]
@@ -919,9 +750,10 @@ namespace Insight.WS.Client.Business.Settlement.Service {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ImageData>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDG_Customer>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Customer))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_StockDetail))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_StockCapital))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_StockDetail>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Employee))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDG_Employee>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDR_ET>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDR_ET))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Module))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.BASE_Category>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MasterData_Property>))]
@@ -938,13 +770,9 @@ namespace Insight.WS.Client.Business.Settlement.Service {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Code_Allot))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Delivery_Item))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Code_Record))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Delivery_Attachs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_ModuleGroup))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Module>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Employee))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDG_Employee>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDR_ET>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDR_ET))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Expense))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_ModuleAction))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_RolePerm_Action>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_RolePerm_Action))]
@@ -958,20 +786,20 @@ namespace Insight.WS.Client.Business.Settlement.Service {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Instances))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_IU>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_IU))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Expense))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Material))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Period))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Rules))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_Period>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_Schedular>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Schedular))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Material))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Templates))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_Definition>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Supplier))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDS_Contact_Info))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Templates))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_Definition>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MasterData_Merger))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Role_User))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_ModuleParam))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MasterData_Merger))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Contact))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Role_UserGroup))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_UserGroup))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Role_UserGroup>))]
@@ -979,9 +807,8 @@ namespace Insight.WS.Client.Business.Settlement.Service {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_UserGroupMember))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Role_Title))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_RolePerm_Data))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Contact))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_RolePerm_DataAbs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDR_MU))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_RolePerm_DataAbs))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Alert_Rules))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Alert_Message>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Alert_Message))]
@@ -1018,9 +845,7 @@ namespace Insight.WS.Client.Business.Settlement.Service {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_Rules>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Role>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_UserGroup>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Delivery_Attachs>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Delivery_Item>))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_StockCapital>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Contract_GoodsPlan>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Storage_Summary>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDS_Contact_Info>))]
@@ -1073,7 +898,7 @@ namespace Insight.WS.Client.Business.Settlement.Service {
             return base.Channel.GetFundPlans(us, id, dirt);
         }
         
-        public System.Collections.Generic.List<Insight.WS.Client.Business.Settlement.Service.Advance> GetAdvance(Insight.WS.Client.Common.Service.Session us, System.Guid id) {
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.Advance> GetAdvance(Insight.WS.Client.Common.Service.Session us, System.Guid id) {
             return base.Channel.GetAdvance(us, id);
         }
         

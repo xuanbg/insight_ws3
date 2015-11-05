@@ -124,17 +124,17 @@
     <None Include="Properties\DataSources\Insight.WS.Client.Common.Service.Session1.datasource" />
     <None Include="Properties\DataSources\Insight.WS.Client.Common.Service.UpdateFile.datasource" />
     <None Include="Properties\DataSources\System.Data.DataTable.datasource" />
-    <None Include="Service References\Service\Insight.WS.Server.Common.xsd">
+    <None Include="Service References\Service\Insight.WS.Server.Common1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\Service\service.wsdl" />
-    <None Include="Service References\Service\service.xsd">
+    <None Include="Service References\Service\service1.wsdl" />
+    <None Include="Service References\Service\service2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\Service\service1.xsd">
+    <None Include="Service References\Service\service21.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\Service\System.Data.xsd">
+    <None Include="Service References\Service\System.Data1.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>

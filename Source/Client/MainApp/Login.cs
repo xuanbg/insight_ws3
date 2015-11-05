@@ -101,9 +101,9 @@ namespace Insight.WS.Client.MainApp
             try
             {
                 var restart = false;
-                var sf = Commons.GetServerList();
                 using (var cli = new LoginClient(Binding, _Address))
                 {
+                    var sf = cli.GetServerList();
                     var update = new Update(sf);
                     foreach (var file in update.UpdateFiles)
                     {

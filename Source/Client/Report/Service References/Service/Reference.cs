@@ -60,6 +60,9 @@ namespace Insight.WS.Client.Platform.Report.Service {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReport/GetReportMember", ReplyAction="http://tempuri.org/IReport/GetReportMemberResponse")]
         System.Data.DataTable GetReportMember(Insight.WS.Client.Common.Service.Session us, System.Guid id);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReport/GetDataSource", ReplyAction="http://tempuri.org/IReport/GetDataSourceResponse")]
+        System.Collections.Generic.List<string> GetDataSource(Insight.WS.Client.Common.Service.Session us);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReport/AddDefinition", ReplyAction="http://tempuri.org/IReport/AddDefinitionResponse")]
         bool AddDefinition(Insight.WS.Client.Common.Service.Session us, Insight.WS.Client.Common.Service.SYS_Report_Definition def, System.Data.DataTable rule, System.Data.DataTable entity, System.Data.DataTable member);
         
@@ -106,12 +109,12 @@ namespace Insight.WS.Client.Platform.Report.Service {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Storage_Detail>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Storage_Detail))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Storage_Summary))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_StockCapital))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_StockDetail>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_StockDetail))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Contract_FundPlan))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Contract_FundPerform>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Contract_FundPerform))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_StockDetail))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_StockCapital))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_StockDetail>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Module))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.BASE_Category>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MasterData_Property>))]
@@ -216,6 +219,7 @@ namespace Insight.WS.Client.Platform.Report.Service {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Contract_FundPlan>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Contract_GoodsPlan>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MasterData>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<string>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<object>))]
         bool EditDefinition(Insight.WS.Client.Common.Service.Session us, Insight.WS.Client.Common.Service.SYS_Report_Definition def, System.Collections.Generic.List<object> rdl, System.Collections.Generic.List<object> edl, System.Collections.Generic.List<object> mdl, System.Data.DataTable rdt, System.Data.DataTable edt, System.Data.DataTable mdt);
         
@@ -271,12 +275,12 @@ namespace Insight.WS.Client.Platform.Report.Service {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Storage_Detail>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Storage_Detail))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Storage_Summary))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_StockCapital))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_StockDetail>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_StockDetail))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Contract_FundPlan))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Contract_FundPerform>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Contract_FundPerform))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_StockDetail))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_StockCapital))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_StockDetail>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Module))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.BASE_Category>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MasterData_Property>))]
@@ -381,6 +385,7 @@ namespace Insight.WS.Client.Platform.Report.Service {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Contract_FundPlan>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Contract_GoodsPlan>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MasterData>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<string>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<object>))]
         object CopyTemplet(Insight.WS.Client.Common.Service.Session us, System.Guid tid, Insight.WS.Client.Common.Service.SYS_Report_Templates obj);
         
@@ -427,12 +432,12 @@ namespace Insight.WS.Client.Platform.Report.Service {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Storage_Detail>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Storage_Detail))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Storage_Summary))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_StockCapital))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_StockDetail>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_StockDetail))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Contract_FundPlan))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Contract_FundPerform>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Contract_FundPerform))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_StockDetail))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_StockCapital))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_StockDetail>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Module))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.BASE_Category>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MasterData_Property>))]
@@ -537,6 +542,7 @@ namespace Insight.WS.Client.Platform.Report.Service {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Contract_FundPlan>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Contract_GoodsPlan>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MasterData>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<string>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<object>))]
         object AddTemplet(Insight.WS.Client.Common.Service.Session us, Insight.WS.Client.Common.Service.SYS_Report_Templates obj);
         
@@ -598,12 +604,12 @@ namespace Insight.WS.Client.Platform.Report.Service {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Storage_Detail>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Storage_Detail))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Storage_Summary))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_StockCapital))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_StockDetail>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_StockDetail))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Contract_FundPlan))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Contract_FundPerform>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Contract_FundPerform))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_StockDetail))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_StockCapital))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_StockDetail>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Module))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.BASE_Category>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MasterData_Property>))]
@@ -708,6 +714,7 @@ namespace Insight.WS.Client.Platform.Report.Service {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Contract_FundPlan>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Contract_GoodsPlan>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MasterData>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<string>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<object>))]
         object AddRule(Insight.WS.Client.Common.Service.Session us, Insight.WS.Client.Common.Service.SYS_Report_Rules obj);
         
@@ -803,6 +810,10 @@ namespace Insight.WS.Client.Platform.Report.Service {
         
         public System.Data.DataTable GetReportMember(Insight.WS.Client.Common.Service.Session us, System.Guid id) {
             return base.Channel.GetReportMember(us, id);
+        }
+        
+        public System.Collections.Generic.List<string> GetDataSource(Insight.WS.Client.Common.Service.Session us) {
+            return base.Channel.GetDataSource(us);
         }
         
         public bool AddDefinition(Insight.WS.Client.Common.Service.Session us, Insight.WS.Client.Common.Service.SYS_Report_Definition def, System.Data.DataTable rule, System.Data.DataTable entity, System.Data.DataTable member) {
