@@ -31,7 +31,7 @@
             // 
             // WcfService
             // 
-            this.ServiceName = "Insight Workstation 3 Service";
+            this.ServiceName = "XinFenBao Interface Service";
 
         }
 

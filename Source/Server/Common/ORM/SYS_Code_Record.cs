@@ -10,30 +10,18 @@
 namespace Insight.WS.Server.Common.ORM
 {
     using System;
-    using System.Runtime.Serialization;
     using System.Collections.Generic;
-    
-    [DataContract(IsReference = true)]
-    [KnownType(typeof(SYS_Code_Scheme))]
     
     public partial class SYS_Code_Record
     {
-    	[DataMember]
         public System.Guid ID { get; set; }
-    	[DataMember]
         public long SN { get; set; }
-    	[DataMember]
         public System.Guid SchemeId { get; set; }
-    	[DataMember]
         public string RelationChar { get; set; }
-    	[DataMember]
         public int SerialNumber { get; set; }
-    	[DataMember]
         public Nullable<System.Guid> BusinessId { get; set; }
-    	[DataMember]
         public System.DateTime CreateTime { get; set; }
     
-    	[DataMember]
         public virtual SYS_Code_Scheme SYS_Code_Scheme { get; set; }
     }
 }

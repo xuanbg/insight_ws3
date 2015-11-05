@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
+using static Insight.WS.Server.Common.SqlHelper;
 
 namespace Insight.WS.Service
 {
@@ -28,7 +29,7 @@ namespace Insight.WS.Service
                 new SqlParameter("@UserId", SqlDbType.UniqueIdentifier) {Value = us.UserId},
                 new SqlParameter("@DeptId", SqlDbType.UniqueIdentifier) {Value = us.DeptId}
             };
-            return SqlHelper.SqlQuery(sql, parm);
+            return SqlQuery(MakeCommand(sql, parm));
         }
 
         /// <summary>
@@ -41,7 +42,7 @@ namespace Insight.WS.Service
             if (!OnlineManage.Verification(us)) return null;
 
             var sql = $"select distinct I.ID, I.Name, I.ReportId, I.CreateTime, R.ID as RID from SYS_Report_Instances I join SYS_Report_IU R on R.InstanceId = I.ID and R.UserId = '{us.UserId}' order by I.CreateTime desc";
-            return SqlHelper.SqlQuery(sql);
+            return SqlQuery(MakeCommand(sql));
         }
 
         /// <summary>
@@ -61,7 +62,7 @@ namespace Insight.WS.Service
                 new SqlParameter("@DeptId", SqlDbType.UniqueIdentifier) {Value = us.DeptId},
                 new SqlParameter("@ReportId", SqlDbType.UniqueIdentifier) {Value = reportId}
             };
-            return SqlHelper.SqlQuery(sql, parm);
+            return SqlQuery(MakeCommand(sql, parm));
         }
 
         /// <summary>
@@ -113,7 +114,7 @@ namespace Insight.WS.Service
                 new SqlParameter("@Content", obj.Content),
                 new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = us.UserId}
             };
-            var id = SqlHelper.SqlScalar(sql, parm);
+            var id = SqlScalar(MakeCommand(sql, parm));
 
             if (id == null)
             {
@@ -122,7 +123,7 @@ namespace Insight.WS.Service
             var iu = new SYS_Report_IU
             {
                 InstanceId = (Guid) id,
-                ID = (Guid)SqlHelper.SqlScalar($"select ID from SYS_Report_IU where InstanceId = '{id}' and UserId = '{us.UserId}'")
+                ID = (Guid)SqlScalar(MakeCommand($"select ID from SYS_Report_IU where InstanceId = '{id}' and UserId = '{us.UserId}'"))
             };
             return iu;
         }
@@ -144,8 +145,8 @@ namespace Insight.WS.Service
             if (!OnlineManage.Verification(us)) return false;
 
             var sql = $"select count(1) from SYS_Report_IU A join SYS_Report_IU B on B.InstanceId = A.InstanceId where B.ID = '{id}'";
-            sql = string.Format((int)SqlHelper.SqlScalar(sql) > 1 ? "delete from SYS_Report_IU where ID = '{0}'" : "delete I from SYS_Report_Instances I join SYS_Report_IU R on R.InstanceId = I.ID and R.ID = '{0}'", id);
-            return SqlHelper.SqlNonQuery(sql) > 0;
+            sql = string.Format((int)SqlScalar(MakeCommand(sql)) > 1 ? "delete from SYS_Report_IU where ID = '{0}'" : "delete I from SYS_Report_Instances I join SYS_Report_IU R on R.InstanceId = I.ID and R.ID = '{0}'", id);
+            return SqlNonQuery(MakeCommand(sql)) > 0;
         }
 
         #endregion

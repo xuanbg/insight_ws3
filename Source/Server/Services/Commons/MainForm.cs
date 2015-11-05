@@ -2,9 +2,9 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
+using static Insight.WS.Server.Common.SqlHelper;
 
 namespace Insight.WS.Service
 {
@@ -23,16 +23,16 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return null;
 
-            var sql = new StringBuilder("select ID, [Index], Name, Icon from SYS_ModuleGroup where ID in ");
-            sql.Append("(select ModuleGroupId from SYS_Module M join dbo.Get_PermModule(@UserId, @DeptId) P on P.ModuleId = M.ID) ");
-            sql.Append("order by [Index]");
+            var sql = "select ID, [Index], Name, Icon from SYS_ModuleGroup where ID in ";
+            sql += "(select ModuleGroupId from SYS_Module M join dbo.Get_PermModule(@UserId, @DeptId) P on P.ModuleId = M.ID) ";
+            sql += "order by [Index]";
             var parm = new[]
             {
                 new SqlParameter("@UserId", SqlDbType.UniqueIdentifier) {Value = us.UserId},
                 new SqlParameter("@DeptId", SqlDbType.UniqueIdentifier) {Value = us.DeptId}
             };
 
-            return SqlHelper.SqlQuery(sql.ToString(), parm);
+            return SqlQuery(MakeCommand(sql, parm));
         }
 
         /// <summary>
@@ -44,15 +44,15 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return null;
 
-            var sql = new StringBuilder("select ModuleGroupId, ID, [Index], ProgramName, MainFrom, ApplicationName, Location, [Default], Icon from SYS_Module M ");
-            sql.Append("join dbo.Get_PermModule(@UserId, @DeptId) P on P.ModuleId = M.ID where M.Validity = 1 order by M.[Index]");
+            var sql = "select ModuleGroupId, ID, [Index], ProgramName, MainFrom, ApplicationName, Location, [Default], Icon from SYS_Module M ";
+            sql += "join dbo.Get_PermModule(@UserId, @DeptId) P on P.ModuleId = M.ID where M.Validity = 1 order by M.[Index]";
             var parm = new[]
             {
                 new SqlParameter("@UserId", SqlDbType.UniqueIdentifier) {Value = us.UserId},
                 new SqlParameter("@DeptId", SqlDbType.UniqueIdentifier) {Value = us.DeptId}
             };
 
-            return SqlHelper.SqlQuery(sql.ToString(), parm);
+            return SqlQuery(MakeCommand(sql, parm));
         }
 
         /// <summary>
@@ -81,9 +81,9 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return null;
 
-            var sql = new StringBuilder("select A.*, cast(case when PA.ActionId is null then 0 else 1 end as bit) as [Enable] from SYS_ModuleAction A ");
-            sql.Append("left join dbo.Get_PermAction(@ModuleId, @UserId, @DeptId) PA on PA.ActionId = A.ID ");
-            sql.Append("where A.ModuleId = @ModuleId order by A.[Index]");
+            var sql = "select A.*, cast(case when PA.ActionId is null then 0 else 1 end as bit) as [Enable] from SYS_ModuleAction A ";
+            sql += "left join dbo.Get_PermAction(@ModuleId, @UserId, @DeptId) PA on PA.ActionId = A.ID ";
+            sql += "where A.ModuleId = @ModuleId order by A.[Index]";
             var parm = new[]
             {
                 new SqlParameter("@ModuleId", SqlDbType.UniqueIdentifier) {Value = id},
@@ -91,7 +91,7 @@ namespace Insight.WS.Service
                 new SqlParameter("@DeptId", SqlDbType.UniqueIdentifier) {Value = us.DeptId}
             };
 
-            return SqlHelper.SqlQuery(sql.ToString(), parm);
+            return SqlQuery(MakeCommand(sql, parm));
         }
 
         #endregion

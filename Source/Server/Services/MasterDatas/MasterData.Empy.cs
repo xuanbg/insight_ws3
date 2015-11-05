@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
+using static Insight.WS.Server.Common.SqlHelper;
 
 namespace Insight.WS.Service
 {
@@ -21,16 +21,16 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return null;
 
-            var sql = new StringBuilder("with List as (select E.MID, MAX(P.Permission) as Permission from [MDG_Employee] E ");
-            sql.Append("join Get_PermData('9B2CB116-6E3B-4A9F-9279-E3F568514BEE', @UserId, @DeptId) P on P.OrgId = isnull(E.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = E.CreatorUserId group by E.MID) ");
-            sql.Append("select E.*, L.Permission from Employee E join List L on L.MID = E.ID where E.DeptId = @ID");
+            var sql = "with List as (select E.MID, MAX(P.Permission) as Permission from [MDG_Employee] E ";
+            sql += "join Get_PermData('9B2CB116-6E3B-4A9F-9279-E3F568514BEE', @UserId, @DeptId) P on P.OrgId = isnull(E.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = E.CreatorUserId group by E.MID) ";
+            sql += "select E.*, L.Permission from Employee E join List L on L.MID = E.ID where E.DeptId = @ID";
             var parm = new[]
             {
                 new SqlParameter("@ID", SqlDbType.UniqueIdentifier) {Value = oid},
                 new SqlParameter("@DeptId", SqlDbType.UniqueIdentifier) {Value = us.DeptId},
                 new SqlParameter("@UserId", SqlDbType.UniqueIdentifier) {Value = us.UserId}
             };
-            return SqlHelper.SqlQuery(sql.ToString(), parm);
+            return SqlQuery(MakeCommand(sql, parm));
         }
 
         /// <summary>
@@ -43,15 +43,15 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return null;
 
-            var sql = new StringBuilder("with List as (select E.MID, MAX(P.Permission) as Permission from [MDG_Employee] E ");
-            sql.Append("join Get_PermData('9B2CB116-6E3B-4A9F-9279-E3F568514BEE', @UserId, @DeptId) P on P.OrgId = isnull(E.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = E.CreatorUserId group by E.MID) ");
-            sql.AppendFormat("select E.*, L.Permission from Employee E join List L on L.MID = E.ID where E.姓名 like '%{0}%'", name);
+            var sql = "with List as (select E.MID, MAX(P.Permission) as Permission from [MDG_Employee] E ";
+            sql += "join Get_PermData('9B2CB116-6E3B-4A9F-9279-E3F568514BEE', @UserId, @DeptId) P on P.OrgId = isnull(E.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = E.CreatorUserId group by E.MID) ";
+            sql += $"select E.*, L.Permission from Employee E join List L on L.MID = E.ID where E.姓名 like '%{name}%'";
             var parm = new[]
             {
                 new SqlParameter("@DeptId", SqlDbType.UniqueIdentifier) {Value = us.DeptId},
                 new SqlParameter("@UserId", SqlDbType.UniqueIdentifier) {Value = us.UserId}
             };
-            return SqlHelper.SqlQuery(sql.ToString(), parm);
+            return SqlQuery(MakeCommand(sql, parm));
         }
 
         /// <summary>
@@ -122,7 +122,7 @@ namespace Insight.WS.Service
                 new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = us.UserId},
                 new SqlParameter("@Read", SqlDbType.Int) {Value = 0}
             };
-            cmds.Add(SqlHelper.MakeCommand(sql, parm));
+            cmds.Add(MakeCommand(sql, parm));
 
             sql = "insert MDR_ET (EmployeeId, TitleId) select @EmployeeId, @TitleId";
             parm = new[]
@@ -131,10 +131,10 @@ namespace Insight.WS.Service
                 new SqlParameter("@TitleId", SqlDbType.UniqueIdentifier) {Value = r.TitleId},
                 new SqlParameter("@Read", SqlDbType.Int) {Value = 0}
             };
-            cmds.Add(SqlHelper.MakeCommand(sql, parm));
+            cmds.Add(MakeCommand(sql, parm));
 
             cmds.AddRange(MasterDataDAL.InsertContactInfo(Guid.Empty, cdt));
-            return SqlHelper.SqlExecute(cmds);
+            return SqlExecute(cmds);
         }
 
         /// <summary>
@@ -171,12 +171,12 @@ namespace Insight.WS.Service
                 new SqlParameter("@LoginUser", d.LoginUser),
                 new SqlParameter("@MID", SqlDbType.UniqueIdentifier) {Value = d.MID}
             };
-            cmds.Add(SqlHelper.MakeCommand(sql, parm));
-            cmds.Add(SqlHelper.MakeCommand($"update MDR_ET set TitleId = '{r.TitleId}' where ID = '{r.ID}'"));
+            cmds.Add(MakeCommand(sql, parm));
+            cmds.Add(MakeCommand($"update MDR_ET set TitleId = '{r.TitleId}' where ID = '{r.ID}'"));
 
             cmds.AddRange(MasterDataDAL.DeleteContactInfo(cdl));
             cmds.AddRange(MasterDataDAL.InsertContactInfo(m.ID, cdt));
-            return SqlHelper.SqlExecute(cmds);
+            return SqlExecute(cmds);
         }
 
         /// <summary>
@@ -214,7 +214,7 @@ namespace Insight.WS.Service
                     sql += "update SYS_User Set Validity = 1 where ID = @ID";
                     break;
             }
-            return SqlHelper.SqlNonQuery(sql, parm) > 0;
+            return SqlNonQuery(MakeCommand(sql, parm)) > 0;
         }
 
     }

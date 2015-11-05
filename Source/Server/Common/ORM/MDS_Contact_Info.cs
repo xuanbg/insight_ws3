@@ -10,31 +10,18 @@
 namespace Insight.WS.Server.Common.ORM
 {
     using System;
-    using System.Runtime.Serialization;
     using System.Collections.Generic;
-    
-    [DataContract(IsReference = true)]
-    [KnownType(typeof(MasterData))]
-    [KnownType(typeof(MDG_Dictionary))]
     
     public partial class MDS_Contact_Info
     {
-    	[DataMember]
         public System.Guid ID { get; set; }
-    	[DataMember]
         public long SN { get; set; }
-    	[DataMember]
         public bool IsMaster { get; set; }
-    	[DataMember]
         public System.Guid MasterDataId { get; set; }
-    	[DataMember]
         public System.Guid InfoTypeId { get; set; }
-    	[DataMember]
         public string Number { get; set; }
     
-    	[DataMember]
         public virtual MasterData MasterData { get; set; }
-    	[DataMember]
         public virtual MDG_Dictionary MDG_Dictionary { get; set; }
     }
 }

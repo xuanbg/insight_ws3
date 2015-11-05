@@ -2,9 +2,9 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
+using static Insight.WS.Server.Common.SqlHelper;
 
 namespace Insight.WS.Service
 {
@@ -22,15 +22,15 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return null;
 
-            var sql = new StringBuilder("with List as(select S.ID, max(P.Permission) as Permission from SYS_Code_Scheme S ");
-            sql.Append("join Get_PermData('1E976784-E58C-47C7-AEC5-D92B7B32F122', @UserId, @DeptId) P on P.OrgId = isnull(S.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = S.CreatorUserId group by S.ID) ");
-            sql.Append("select S.ID, Case when Validity = 1 then '正常' else '停用' end 状态, S.Name as 名称, S.CodeFormat as 编码格式, S.SerialFormat as 分组规则, S.Description as 描述, S.CreateTime as 创建日期, L.Permission from SYS_Code_Scheme S join List L on L.ID = S.ID order by S.SN");
+            var sql = "with List as(select S.ID, max(P.Permission) as Permission from SYS_Code_Scheme S ";
+            sql += "join Get_PermData('1E976784-E58C-47C7-AEC5-D92B7B32F122', @UserId, @DeptId) P on P.OrgId = isnull(S.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = S.CreatorUserId group by S.ID) ";
+            sql += "select S.ID, Case when Validity = 1 then '正常' else '停用' end 状态, S.Name as 名称, S.CodeFormat as 编码格式, S.SerialFormat as 分组规则, S.Description as 描述, S.CreateTime as 创建日期, L.Permission from SYS_Code_Scheme S join List L on L.ID = S.ID order by S.SN";
             var parm = new[]
             {
                 new SqlParameter("@UserId", SqlDbType.UniqueIdentifier) {Value = us.UserId},
                 new SqlParameter("@DeptId", SqlDbType.UniqueIdentifier) {Value = us.DeptId}
             };
-            return SqlHelper.SqlQuery(sql.ToString(), parm);
+            return SqlQuery(MakeCommand(sql, parm));
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace Insight.WS.Service
             if (!OnlineManage.Verification(us)) return null;
 
             const string sql = "select * from SerialRecord";
-            return SqlHelper.SqlQuery(sql);
+            return SqlQuery(MakeCommand(sql));
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace Insight.WS.Service
             if (!OnlineManage.Verification(us)) return null;
 
             const string sql = "select * from AllotRecord order by SN";
-            return SqlHelper.SqlQuery(sql);
+            return SqlQuery(MakeCommand(sql));
         }
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace Insight.WS.Service
                 new SqlParameter("@CodeFormat", code),
                 new SqlParameter("@SerialFormat", mark)
             };
-            return SqlHelper.SqlScalar(sql, parm).ToString();
+            return SqlScalar(MakeCommand(sql, parm)).ToString();
         }
 
         #endregion
@@ -123,7 +123,7 @@ namespace Insight.WS.Service
                 new SqlParameter("@CreatorDeptId", SqlDbType.UniqueIdentifier) {Value = us.DeptId},
                 new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = us.UserId}
             };
-            return SqlHelper.SqlNonQuery(sql, parm) > 0;
+            return SqlNonQuery(MakeCommand(sql, parm)) > 0;
         }
 
         #endregion
@@ -149,7 +149,7 @@ namespace Insight.WS.Service
                 new SqlParameter("@Description", obj.Description),
                 new SqlParameter("@ID", SqlDbType.UniqueIdentifier) {Value = obj.ID}
             };
-            return SqlHelper.SqlNonQuery(sql, parm) > 0;
+            return SqlNonQuery(MakeCommand(sql, parm)) > 0;
         }
 
         /// <summary>
@@ -163,7 +163,7 @@ namespace Insight.WS.Service
             if (!OnlineManage.Verification(us)) return false;
 
             var sql = $"update SYS_Code_Scheme set Validity = 1 where ID = '{id}'";
-            return SqlHelper.SqlNonQuery(sql) > 0;
+            return SqlNonQuery(MakeCommand(sql)) > 0;
         }
 
         #endregion
@@ -181,14 +181,14 @@ namespace Insight.WS.Service
             if (!OnlineManage.Verification(us)) return 0;
 
             var sql = $"select count(*) from SYS_ModuleParam where Value = '{id}'";
-            var count = (int)SqlHelper.SqlScalar(sql);
+            var count = (int)SqlScalar(MakeCommand(sql));
             if (count == 0)
             {
                 sql = $"Delete from SYS_Code_Scheme where ID = '{id}'";
-                return SqlHelper.SqlNonQuery(sql) > 0 ? 1 : 0;
+                return SqlNonQuery(MakeCommand(sql)) > 0 ? 1 : 0;
             }
             sql = $"update SYS_Code_Scheme set Validity = 0 where ID = '{id}'";
-            return SqlHelper.SqlNonQuery(sql) > 0 ? 2 : 0;
+            return SqlNonQuery(MakeCommand(sql)) > 0 ? 2 : 0;
         }
 
         #endregion

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
+using static Insight.WS.Server.Common.SqlHelper;
 
 namespace Insight.WS.Service
 {
@@ -24,7 +24,7 @@ namespace Insight.WS.Service
             if (!OnlineManage.Verification(us)) return null;
 
             const string sql = "select * from Organization order by NodeType desc, [Index]";
-            return SqlHelper.SqlQuery(sql);
+            return SqlQuery(MakeCommand(sql));
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace Insight.WS.Service
             if (!OnlineManage.Verification(us)) return null;
 
             const string sql = "select * from TitleMember";
-            return SqlHelper.SqlQuery(sql);
+            return SqlQuery(MakeCommand(sql));
         }
 
         /// <summary>
@@ -66,10 +66,10 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return null;
 
-            var sql = new StringBuilder("select U.ID, U.Name as 用户名, U.LoginName as 登录名, U.[Description] as 描述 from SYS_User U left join MDG_Contact C on C.MID = U.ID ");
-            sql.AppendFormat("where not exists (select UserId from SYS_OrgMember where UserId = U.ID and OrgId = '{0}') and C.MID is null ", id);
-            sql.Append("order by LoginName");
-            return SqlHelper.SqlQuery(sql.ToString());
+            var sql = "select U.ID, U.Name as 用户名, U.LoginName as 登录名, U.[Description] as 描述 from SYS_User U left join MDG_Contact C on C.MID = U.ID ";
+            sql += $"where not exists (select UserId from SYS_OrgMember where UserId = U.ID and OrgId = '{id}') and C.MID is null ";
+            sql += "order by LoginName";
+            return SqlQuery(MakeCommand(sql));
         }
 
         #endregion
@@ -88,9 +88,9 @@ namespace Insight.WS.Service
             if (!OnlineManage.Verification(us)) return false;
 
             var cmds = new List<SqlCommand>();
-            var sql = new StringBuilder("insert SYS_Organization (ParentId, NodeType, [Index], Code, Name, Alias, FullName, PositionId, CreatorUserId)");
-            sql.Append("select @ParentId, @NodeType, @Index, @Code, @Name, @Alias, @FullName, @PositionId, @CreatorUserId;");
-            sql.Append("select ID from SYS_Organization where SN = scope_identity()");
+            var sql = "insert SYS_Organization (ParentId, NodeType, [Index], Code, Name, Alias, FullName, PositionId, CreatorUserId)";
+            sql += "select @ParentId, @NodeType, @Index, @Code, @Name, @Alias, @FullName, @PositionId, @CreatorUserId;";
+            sql += "select ID from SYS_Organization where SN = scope_identity()";
             var parm = new[]
             {
                 new SqlParameter("@ParentId", SqlDbType.UniqueIdentifier) {Value = obj.ParentId},
@@ -103,9 +103,9 @@ namespace Insight.WS.Service
                 new SqlParameter("@PositionId", SqlDbType.UniqueIdentifier) {Value = obj.PositionId},
                 new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = us.UserId}
             };
-            cmds.Add(SqlHelper.MakeCommand(CommonDAL.ChangeIndex("SYS_Organization", index, obj.Index, obj.ParentId, false)));
-            cmds.Add(SqlHelper.MakeCommand(sql.ToString(), parm));
-            return SqlHelper.SqlExecute(cmds);
+            cmds.Add(MakeCommand(CommonDAL.ChangeIndex("SYS_Organization", index, obj.Index, obj.ParentId, false)));
+            cmds.Add(MakeCommand(sql, parm));
+            return SqlExecute(cmds);
         }
 
         /// <summary>
@@ -125,7 +125,7 @@ namespace Insight.WS.Service
                 new SqlParameter("@MergerOrgId", SqlDbType.UniqueIdentifier) {Value = obj.MergerOrgId},
                 new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = us.UserId}
             };
-            return SqlHelper.SqlNonQuery(sql, parm) > 0;
+            return SqlNonQuery(MakeCommand(sql, parm)) > 0;
         }
 
         /// <summary>
@@ -145,8 +145,8 @@ namespace Insight.WS.Service
                 new SqlParameter("@OrgId", SqlDbType.UniqueIdentifier) {Value = tid}, 
                 new SqlParameter("@UserId", SqlDbType.UniqueIdentifier) {Value = id}, 
                 new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = us.UserId}
-            }).Select(parm => SqlHelper.MakeCommand(sql, parm)).ToList();
-            return SqlHelper.SqlExecute(cmds);
+            }).Select(parm => MakeCommand(sql, parm)).ToList();
+            return SqlExecute(cmds);
         }
 
         #endregion
@@ -178,9 +178,9 @@ namespace Insight.WS.Service
                 new SqlParameter("@PositionId", SqlDbType.UniqueIdentifier) {Value = obj.PositionId}
             };
 
-            cmds.Add(SqlHelper.MakeCommand(CommonDAL.ChangeIndex("SYS_Organization", index, obj.Index, obj.ParentId, false)));
-            cmds.Add(SqlHelper.MakeCommand(sql, parm));
-            return SqlHelper.SqlExecute(cmds);
+            cmds.Add(MakeCommand(CommonDAL.ChangeIndex("SYS_Organization", index, obj.Index, obj.ParentId, false)));
+            cmds.Add(MakeCommand(sql, parm));
+            return SqlExecute(cmds);
         }
 
         /// <summary>
@@ -204,10 +204,10 @@ namespace Insight.WS.Service
                 new SqlParameter("@ParentId", SqlDbType.UniqueIdentifier) {Value = obj.ParentId}
             };
 
-            cmds.Add(SqlHelper.MakeCommand(CommonDAL.ChangeIndex("SYS_Organization", 999, obj.Index, obj.ParentId, false)));
-            cmds.Add(SqlHelper.MakeCommand(CommonDAL.ChangeIndex("SYS_Organization", org.Index, 999, org.ParentId, false)));
-            cmds.Add(SqlHelper.MakeCommand(sql, parm));
-            return SqlHelper.SqlExecute(cmds);
+            cmds.Add(MakeCommand(CommonDAL.ChangeIndex("SYS_Organization", 999, obj.Index, obj.ParentId, false)));
+            cmds.Add(MakeCommand(CommonDAL.ChangeIndex("SYS_Organization", org.Index, 999, org.ParentId, false)));
+            cmds.Add(MakeCommand(sql, parm));
+            return SqlExecute(cmds);
         }
 
         #endregion
@@ -227,9 +227,9 @@ namespace Insight.WS.Service
             var cmds = new List<SqlCommand>();
             var obj = GetOrg(us, id);
             var sql = $"Delete from SYS_Organization where ID = '{id}'";
-            cmds.Add(SqlHelper.MakeCommand(sql));
-            cmds.Add(SqlHelper.MakeCommand(CommonDAL.ChangeIndex("SYS_Organization", obj.Index, 99999, obj.ParentId, false)));
-            return SqlHelper.SqlExecute(cmds);
+            cmds.Add(MakeCommand(sql));
+            cmds.Add(MakeCommand(CommonDAL.ChangeIndex("SYS_Organization", obj.Index, 99999, obj.ParentId, false)));
+            return SqlExecute(cmds);
         }
 
         /// <summary>
@@ -246,8 +246,8 @@ namespace Insight.WS.Service
             var cmds = ids.Select(id => new[]
             {
                 new SqlParameter("@ID", SqlDbType.UniqueIdentifier) {Value = id}
-            }).Select(parm => SqlHelper.MakeCommand(sql, parm)).ToList();
-            return SqlHelper.SqlExecute(cmds);
+            }).Select(parm => MakeCommand(sql, parm)).ToList();
+            return SqlExecute(cmds);
         }
 
         #endregion

@@ -10,69 +10,42 @@
 namespace Insight.WS.Server.Common.ORM
 {
     using System;
-    using System.Runtime.Serialization;
     using System.Collections.Generic;
-    
-    [DataContract(IsReference = true)]
-    [KnownType(typeof(SYS_Organization))]
-    [KnownType(typeof(SYS_User))]
-    [KnownType(typeof(ABS_Delivery_Item))]
-    [KnownType(typeof(ABS_Delivery_Attachs))]
-    [KnownType(typeof(ABS_Storage_Location))]
-    [KnownType(typeof(MasterData))]
-    [KnownType(typeof(ABS_Contract_GoodsPerform))]
     
     public partial class ABS_Delivery
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ABS_Delivery()
         {
+            this.ABS_Contract_GoodsPerform = new HashSet<ABS_Contract_GoodsPerform>();
             this.ABS_Delivery_Item = new HashSet<ABS_Delivery_Item>();
             this.ABS_Delivery_Attachs = new HashSet<ABS_Delivery_Attachs>();
-            this.ABS_Contract_GoodsPerform = new HashSet<ABS_Contract_GoodsPerform>();
         }
     
-    	[DataMember]
         public System.Guid ID { get; set; }
-    	[DataMember]
         public long SN { get; set; }
-    	[DataMember]
         public int Direction { get; set; }
-    	[DataMember]
         public string ReceiptCode { get; set; }
-    	[DataMember]
         public string HashCode { get; set; }
-    	[DataMember]
         public Nullable<System.Guid> LocationId { get; set; }
-    	[DataMember]
         public Nullable<System.Guid> ObjectId { get; set; }
-    	[DataMember]
         public string ObjectName { get; set; }
-    	[DataMember]
         public int PrintTimes { get; set; }
-    	[DataMember]
         public string Description { get; set; }
-    	[DataMember]
         public bool Validity { get; set; }
-    	[DataMember]
         public System.Guid CreatorDeptId { get; set; }
-    	[DataMember]
         public System.Guid CreatorUserId { get; set; }
-    	[DataMember]
         public System.DateTime CreateTime { get; set; }
     
-    	[DataMember]
-        public virtual SYS_Organization SYS_Organization { get; set; }
-    	[DataMember]
-        public virtual SYS_User SYS_User { get; set; }
-    	[DataMember]
-        public virtual ICollection<ABS_Delivery_Item> ABS_Delivery_Item { get; set; }
-    	[DataMember]
-        public virtual ICollection<ABS_Delivery_Attachs> ABS_Delivery_Attachs { get; set; }
-    	[DataMember]
-        public virtual ABS_Storage_Location ABS_Storage_Location { get; set; }
-    	[DataMember]
-        public virtual MasterData MasterData { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ABS_Contract_GoodsPerform> ABS_Contract_GoodsPerform { get; set; }
+        public virtual SYS_Organization SYS_Organization { get; set; }
+        public virtual SYS_User SYS_User { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ABS_Delivery_Item> ABS_Delivery_Item { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ABS_Delivery_Attachs> ABS_Delivery_Attachs { get; set; }
+        public virtual ABS_Storage_Location ABS_Storage_Location { get; set; }
+        public virtual MasterData MasterData { get; set; }
     }
 }

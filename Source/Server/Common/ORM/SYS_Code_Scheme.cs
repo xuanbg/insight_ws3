@@ -10,18 +10,11 @@
 namespace Insight.WS.Server.Common.ORM
 {
     using System;
-    using System.Runtime.Serialization;
     using System.Collections.Generic;
-    
-    [DataContract(IsReference = true)]
-    [KnownType(typeof(SYS_Allot_Record))]
-    [KnownType(typeof(SYS_Code_Allot))]
-    [KnownType(typeof(SYS_Code_Record))]
-    [KnownType(typeof(SYS_Organization))]
-    [KnownType(typeof(SYS_User))]
     
     public partial class SYS_Code_Scheme
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SYS_Code_Scheme()
         {
             this.SYS_Allot_Record = new HashSet<SYS_Allot_Record>();
@@ -29,36 +22,24 @@ namespace Insight.WS.Server.Common.ORM
             this.SYS_Code_Record = new HashSet<SYS_Code_Record>();
         }
     
-    	[DataMember]
         public System.Guid ID { get; set; }
-    	[DataMember]
         public long SN { get; set; }
-    	[DataMember]
         public string Name { get; set; }
-    	[DataMember]
         public string CodeFormat { get; set; }
-    	[DataMember]
         public string SerialFormat { get; set; }
-    	[DataMember]
         public string Description { get; set; }
-    	[DataMember]
         public bool Validity { get; set; }
-    	[DataMember]
         public Nullable<System.Guid> CreatorDeptId { get; set; }
-    	[DataMember]
         public System.Guid CreatorUserId { get; set; }
-    	[DataMember]
         public System.DateTime CreateTime { get; set; }
     
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SYS_Allot_Record> SYS_Allot_Record { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SYS_Code_Allot> SYS_Code_Allot { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SYS_Code_Record> SYS_Code_Record { get; set; }
-    	[DataMember]
         public virtual SYS_Organization SYS_Organization { get; set; }
-    	[DataMember]
         public virtual SYS_User SYS_User { get; set; }
     }
 }

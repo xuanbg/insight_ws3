@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
+using static Insight.WS.Server.Common.SqlHelper;
 
 namespace Insight.WS.Service
 {
@@ -27,7 +28,7 @@ namespace Insight.WS.Service
 
             var str = hasAlias ? "case when Alias is null then '' else '(' + Alias + ')' end" : "''";
             var sql = $"select ID, ParentId, [Index], Name + {str} as Name, Alias, Code, BuiltIn, Visible from BASE_Category where ModuleId = '{mid}'{(getAll ? "" : " and Visible = 1")} order by [Index]";
-            return SqlHelper.SqlQuery(sql);
+            return SqlQuery(MakeCommand(sql));
         }
 
         /// <summary>
@@ -73,9 +74,9 @@ namespace Insight.WS.Service
                 new SqlParameter("@CreatorDeptId", SqlDbType.UniqueIdentifier) {Value = us.DeptId},
                 new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = us.UserId}
             };
-            cmds.Add(SqlHelper.MakeCommand(CommonDAL.ChangeIndex("BASE_Category", index, obj.Index, obj.ParentId, false, obj.ModuleId)));
-            cmds.Add(SqlHelper.MakeCommand(sql.ToString(), parm));
-            return SqlHelper.SqlExecute(cmds);
+            cmds.Add(MakeCommand(CommonDAL.ChangeIndex("BASE_Category", index, obj.Index, obj.ParentId, false, obj.ModuleId)));
+            cmds.Add(MakeCommand(sql.ToString(), parm));
+            return SqlExecute(cmds);
         }
 
         /// <summary>
@@ -103,13 +104,13 @@ namespace Insight.WS.Service
                 new SqlParameter("@Description", obj.Description),
                 new SqlParameter("@ID", SqlDbType.UniqueIdentifier) {Value = obj.ID}
             };
-            cmds.Add(SqlHelper.MakeCommand(CommonDAL.ChangeIndex("BASE_Category", index, obj.Index, obj.ParentId, false, obj.ModuleId)));
-            cmds.Add(SqlHelper.MakeCommand(sql.ToString(), parm));
+            cmds.Add(MakeCommand(CommonDAL.ChangeIndex("BASE_Category", index, obj.Index, obj.ParentId, false, obj.ModuleId)));
+            cmds.Add(MakeCommand(sql.ToString(), parm));
             if (obj.ParentId != oldParentId)
             {
-                cmds.Add(SqlHelper.MakeCommand(CommonDAL.ChangeIndex("BASE_Category", oldIndex, 9999, oldParentId, false, obj.ModuleId)));
+                cmds.Add(MakeCommand(CommonDAL.ChangeIndex("BASE_Category", oldIndex, 9999, oldParentId, false, obj.ModuleId)));
             }
-            return SqlHelper.SqlExecute(cmds);
+            return SqlExecute(cmds);
         }
 
         /// <summary>
@@ -126,9 +127,9 @@ namespace Insight.WS.Service
             var obj = GetCategory(us, id);
             var sql = $"delete BASE_Category where ID = '{id}'";
 
-            cmds.Add(SqlHelper.MakeCommand(sql));
-            cmds.Add(SqlHelper.MakeCommand(CommonDAL.ChangeIndex("BASE_Category", obj.Index, 99999, obj.ParentId, false, obj.ModuleId)));
-            return SqlHelper.SqlExecute(cmds);
+            cmds.Add(MakeCommand(sql));
+            cmds.Add(MakeCommand(CommonDAL.ChangeIndex("BASE_Category", obj.Index, 99999, obj.ParentId, false, obj.ModuleId)));
+            return SqlExecute(cmds);
         }
 
         /// <summary>

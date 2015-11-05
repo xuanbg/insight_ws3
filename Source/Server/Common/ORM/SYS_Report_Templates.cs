@@ -10,48 +10,30 @@
 namespace Insight.WS.Server.Common.ORM
 {
     using System;
-    using System.Runtime.Serialization;
     using System.Collections.Generic;
-    
-    [DataContract(IsReference = true)]
-    [KnownType(typeof(BASE_Category))]
-    [KnownType(typeof(SYS_Organization))]
-    [KnownType(typeof(SYS_Report_Definition))]
-    [KnownType(typeof(SYS_User))]
     
     public partial class SYS_Report_Templates
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SYS_Report_Templates()
         {
             this.SYS_Report_Definition = new HashSet<SYS_Report_Definition>();
         }
     
-    	[DataMember]
         public System.Guid ID { get; set; }
-    	[DataMember]
         public long SN { get; set; }
-    	[DataMember]
         public Nullable<System.Guid> CategoryId { get; set; }
-    	[DataMember]
         public string Name { get; set; }
-    	[DataMember]
         public string Content { get; set; }
-    	[DataMember]
         public string Description { get; set; }
-    	[DataMember]
         public Nullable<System.Guid> CreatorDeptId { get; set; }
-    	[DataMember]
         public System.Guid CreatorUserId { get; set; }
-    	[DataMember]
         public System.DateTime CreateTime { get; set; }
     
-    	[DataMember]
         public virtual BASE_Category BASE_Category { get; set; }
-    	[DataMember]
         public virtual SYS_Organization SYS_Organization { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SYS_Report_Definition> SYS_Report_Definition { get; set; }
-    	[DataMember]
         public virtual SYS_User SYS_User { get; set; }
     }
 }

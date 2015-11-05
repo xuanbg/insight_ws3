@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using FastReport;
 using Insight.WS.Server.Common.ORM;
+using static Insight.WS.Server.Common.SqlHelper;
 
 namespace Insight.WS.Server.Common
 {
@@ -95,9 +96,9 @@ namespace Insight.WS.Server.Common
                 new SqlParameter("@Name", obj.Name), 
                 new SqlParameter("@Content", obj.Content), 
                 new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = obj.CreatorUserId}
-            }).Select(parm => SqlHelper.MakeCommand(sql, parm)).ToList();
-            cmds.Add(SqlHelper.MakeCommand(string.Format("update SYS_Report_Schedular set BuildTime = '{0}' where ID = '{1}' and BuildTime < '{0}'", time, id)));
-            SqlHelper.SqlExecute(cmds);
+            }).Select(parm => MakeCommand(sql, parm)).ToList();
+            cmds.Add(MakeCommand(string.Format("update SYS_Report_Schedular set BuildTime = '{0}' where ID = '{1}' and BuildTime < '{0}'", time, id)));
+            SqlExecute(cmds);
         }
 
         /// <summary>
@@ -115,7 +116,7 @@ namespace Insight.WS.Server.Common
         public static SYS_Report_Instances BulidReport(Guid id, DateTime? sd, DateTime? ed, string dn, string un, Guid did, Guid? uid, string templat = null)
         {
             var report = GetDefinition(id);
-            var conStr = SqlHelper.ConStr[report.DataSource];
+            var conStr = ConStr[report.DataSource];
             var name = $"{dn}【{report.Name}】{sd?.ToShortDateString() ?? ""}—{ed?.ToShortDateString() ?? ""}";
             var fr = new Report();
 
@@ -165,7 +166,7 @@ namespace Insight.WS.Server.Common
             var fr = new Report();
 
             fr.LoadFromString(GetTemplate(templetId).Content);
-            fr.Dictionary.Connections[0].ConnectionString = SqlHelper.ConStr["WSEntities"];
+            fr.Dictionary.Connections[0].ConnectionString = ConStr["WSEntities"];
             fr.SetParameterValue("BusinessId", id.ToString());
             fr.SetParameterValue("DeptName", dn);
             fr.SetParameterValue("UserName", un);
@@ -213,7 +214,7 @@ namespace Insight.WS.Server.Common
                 new SqlParameter("@CreatorDeptId", SqlDbType.UniqueIdentifier) {Value = obj.CreatorDeptId},
                 new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = obj.CreatorUserId}
             };
-            return SqlHelper.SqlScalar(sql, parm);
+            return SqlScalar(MakeCommand(sql, parm));
         }
     
     }

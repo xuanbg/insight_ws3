@@ -10,31 +10,18 @@
 namespace Insight.WS.Server.Common.ORM
 {
     using System;
-    using System.Runtime.Serialization;
     using System.Collections.Generic;
-    
-    [DataContract(IsReference = true)]
-    [KnownType(typeof(ABS_Contract_FundPlan))]
-    [KnownType(typeof(ABS_Clearing))]
     
     public partial class ABS_Contract_FundPerform
     {
-    	[DataMember]
         public System.Guid ID { get; set; }
-    	[DataMember]
         public long SN { get; set; }
-    	[DataMember]
         public System.Guid PlanId { get; set; }
-    	[DataMember]
         public Nullable<System.Guid> ClearingId { get; set; }
-    	[DataMember]
         public decimal Amount { get; set; }
-    	[DataMember]
         public System.DateTime CreateTime { get; set; }
     
-    	[DataMember]
-        public virtual ABS_Contract_FundPlan ABS_Contract_FundPlan { get; set; }
-    	[DataMember]
         public virtual ABS_Clearing ABS_Clearing { get; set; }
+        public virtual ABS_Contract_FundPlan ABS_Contract_FundPlan { get; set; }
     }
 }

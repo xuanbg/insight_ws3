@@ -10,68 +10,41 @@
 namespace Insight.WS.Server.Common.ORM
 {
     using System;
-    using System.Runtime.Serialization;
     using System.Collections.Generic;
-    
-    [DataContract(IsReference = true)]
-    [KnownType(typeof(BASE_Category))]
-    [KnownType(typeof(SYS_Alert_Message))]
-    [KnownType(typeof(SYS_Organization))]
-    [KnownType(typeof(SYS_User))]
-    [KnownType(typeof(SYS_Alert_Target))]
     
     public partial class SYS_Alert_Rules
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SYS_Alert_Rules()
         {
             this.SYS_Alert_Message = new HashSet<SYS_Alert_Message>();
             this.SYS_Alert_Target = new HashSet<SYS_Alert_Target>();
         }
     
-    	[DataMember]
         public System.Guid ID { get; set; }
-    	[DataMember]
         public long SN { get; set; }
-    	[DataMember]
         public Nullable<System.Guid> CategoryId { get; set; }
-    	[DataMember]
         public string Name { get; set; }
-    	[DataMember]
         public string Script { get; set; }
-    	[DataMember]
         public Nullable<int> UpperLimit { get; set; }
-    	[DataMember]
         public Nullable<int> UpperType { get; set; }
-    	[DataMember]
         public Nullable<int> LowerLimit { get; set; }
-    	[DataMember]
         public Nullable<int> LowerType { get; set; }
-    	[DataMember]
         public Nullable<int> LimitRules { get; set; }
-    	[DataMember]
         public int CycleType { get; set; }
-    	[DataMember]
         public int Cycle { get; set; }
-    	[DataMember]
         public string Description { get; set; }
-    	[DataMember]
         public bool Enable { get; set; }
-    	[DataMember]
         public Nullable<System.Guid> CreatorDeptId { get; set; }
-    	[DataMember]
         public System.Guid CreatorUserId { get; set; }
-    	[DataMember]
         public System.DateTime CreateTime { get; set; }
     
-    	[DataMember]
         public virtual BASE_Category BASE_Category { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SYS_Alert_Message> SYS_Alert_Message { get; set; }
-    	[DataMember]
         public virtual SYS_Organization SYS_Organization { get; set; }
-    	[DataMember]
         public virtual SYS_User SYS_User { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SYS_Alert_Target> SYS_Alert_Target { get; set; }
     }
 }

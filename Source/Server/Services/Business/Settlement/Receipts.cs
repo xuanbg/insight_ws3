@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
+using static Insight.WS.Server.Common.SqlHelper;
 
 namespace Insight.WS.Service.Business
 {
@@ -26,7 +27,7 @@ namespace Insight.WS.Service.Business
             sql += "select distinct convert(varchar(4),CreateTime,120) as ID, null as ParentId, 0 as Type, cast(datepart(year , CreateTime) as varchar) + '年' as Name from ABS_Clearing union ";
             sql += "select distinct convert(varchar(7),CreateTime,120) as ID, convert(varchar(4),CreateTime,120) as ParentId, 1 as Type, cast(datepart(month , CreateTime) as varchar) + '月' as Name from ABS_Clearing union ";
             sql += "select distinct convert(varchar(10),CreateTime,120) as ID, convert(varchar(7),CreateTime,120) as ParentId, 2 as Type, cast(datepart(day , CreateTime) as varchar) + '日' as Name from ABS_Clearing order by ID desc";
-            return SqlHelper.SqlQuery(sql);
+            return SqlQuery(MakeCommand(sql));
         }
 
         /// <summary>
@@ -53,7 +54,7 @@ namespace Insight.WS.Service.Business
                 new SqlParameter("@DeptId", SqlDbType.UniqueIdentifier) {Value = us.DeptId}
             };
 
-            return SqlHelper.SqlQuery(sql, parm);
+            return SqlQuery(MakeCommand(sql, parm));
         }
 
         /// <summary>
@@ -79,7 +80,7 @@ namespace Insight.WS.Service.Business
                 new SqlParameter("@DeptId", SqlDbType.UniqueIdentifier) {Value = us.DeptId}
             };
 
-            return SqlHelper.SqlQuery(sql, parm);
+            return SqlQuery(MakeCommand(sql, parm));
         }
 
         /// <summary>
@@ -94,7 +95,7 @@ namespace Insight.WS.Service.Business
             if (!OnlineManage.Verification(us)) return null;
 
             var sql = $"select * from dbo.Get_FundPlan('{id}', {dirt})";
-            return SqlHelper.SqlQuery(sql);
+            return SqlQuery(MakeCommand(sql));
         }
 
         /// <summary>
@@ -140,7 +141,7 @@ namespace Insight.WS.Service.Business
             if (!OnlineManage.Verification(us)) return null;
 
             var sql = $"select Summary as 摘要, ObjectName as 项目, Units as 单位, Price as 单价, Counts as 数量, Amount as 金额 from ABS_Clearing_Item where ClearingId = '{cid}'";
-            return SqlHelper.SqlQuery(sql);
+            return SqlQuery(MakeCommand(sql));
         }
 
         /// <summary>
@@ -155,7 +156,7 @@ namespace Insight.WS.Service.Business
 
             var sql = "select P.Code as 票号, M.Name as 结算方式, sum(P.Amount) as 金额 from ABS_Clearing_Item I join ABS_Clearing_Pay P on P.ClearingItemId = I.ID ";
             sql += $"join MasterData M on M.ID = P.PayType where ClearingId = '{cid}' group by P.Code, M.Name";
-            return SqlHelper.SqlQuery(sql);
+            return SqlQuery(MakeCommand(sql));
         }
 
         /// <summary>
@@ -170,7 +171,7 @@ namespace Insight.WS.Service.Business
 
             var sql = "select I.ID, case I.ImageType when 1 then '单据' else '附件' end as 类型, I.Code as 编码, I.Name as 名称, I.Expand as 扩展名, ";
             sql += $"M.Name as 密级, I.Pages as 页数, I.Size as 字节数 from ABS_Clearing_Attachs A join ImageData I on I.ID = A.ImageId left join MasterData M on M.ID = I.SecrecyDegree where ClearingId = '{cid}'";
-            return SqlHelper.SqlQuery(sql);
+            return SqlQuery(MakeCommand(sql));
         }
 
         /// <summary>
@@ -192,7 +193,7 @@ namespace Insight.WS.Service.Business
                 new SqlParameter("@BusinessId", SqlDbType.UniqueIdentifier) {Value = bid},
                 new SqlParameter("@Code", code)
             };
-            return SqlHelper.SqlNonQuery(sql, parm) > 0 ? code : null;
+            return SqlNonQuery(MakeCommand(sql, parm)) > 0 ? code : null;
         }
 
         /// <summary>
@@ -210,15 +211,15 @@ namespace Insight.WS.Service.Business
             switch (type)
             {
                 case 1:
-                    cmds.Add(SqlHelper.MakeCommand($"delete ABS_Clearing where ID = '{bid}'"));
+                    cmds.Add(MakeCommand($"delete ABS_Clearing where ID = '{bid}'"));
                     break;
                 case 2:
-                    cmds.Add(SqlHelper.MakeCommand($"update ABS_Clearing set Validity = 0 where ID = '{bid}'"));
+                    cmds.Add(MakeCommand($"update ABS_Clearing set Validity = 0 where ID = '{bid}'"));
                     break;
                 case 3:
                     break;
             }
-            return SqlHelper.SqlExecute(cmds);
+            return SqlExecute(cmds);
         }
 
         /// <summary>
@@ -259,7 +260,7 @@ namespace Insight.WS.Service.Business
 
             var cmds = new List<SqlCommand> { InsertClearing(obj) };
             cmds.AddRange(InsertDetail(us, idt, pdt, advs.FindAll(a => a.Amount < 0)));
-            return SqlHelper.SqlExecute(cmds, 0);
+            return SqlExecute(cmds, 0);
         }
 
         /// <summary>
@@ -292,7 +293,7 @@ namespace Insight.WS.Service.Business
                 new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = us.UserId},
                 new SqlParameter("@Write", SqlDbType.Int) {Value = 0}
             };
-            cmds.Add(SqlHelper.MakeCommand(sql, parm));
+            cmds.Add(MakeCommand(sql, parm));
 
             sql = "update C set CheckId = @CheckId from ABS_Clearing C where C.CreatorUserId = @UserID and C.CheckId is null";
             parm = new[]
@@ -301,7 +302,7 @@ namespace Insight.WS.Service.Business
                 new SqlParameter("@UserID", SqlDbType.UniqueIdentifier) {Value = us.UserId},
                 new SqlParameter("@Read", SqlDbType.Int) {Value = 0}
             };
-            cmds.Add(SqlHelper.MakeCommand(sql, parm));
+            cmds.Add(MakeCommand(sql, parm));
 
             sql = "exec Get_Code @SchemeId, @DeptId, @UserId, @BusinessId, @ModuleId, @Char, @Code output ";
             sql += "update ABS_Clearing_Check set ReceiptCode = @Code where ID = @BusinessId";
@@ -316,8 +317,8 @@ namespace Insight.WS.Service.Business
                 new SqlParameter("@Code", SqlDbType.VarChar),
                 new SqlParameter("@Read", SqlDbType.Int) {Value = 0}
             };
-            cmds.Add(SqlHelper.MakeCommand(sql, parm));
-            return SqlHelper.SqlExecute(cmds);
+            cmds.Add(MakeCommand(sql, parm));
+            return SqlExecute(cmds);
         }
 
     }

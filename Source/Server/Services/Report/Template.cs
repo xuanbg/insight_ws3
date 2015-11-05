@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
-using System.Text;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
+using static Insight.WS.Server.Common.SqlHelper;
 
 namespace Insight.WS.Service
 {
@@ -21,15 +21,15 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return null;
 
-            var sql = new StringBuilder("with List as(Select D.ID, max(P.Permission) as Permission from SYS_Report_Templates D ");
-            sql.Append("join Get_PermData('AD0BD296-46F5-46B3-85B9-00B6941343E7', @UserId, @DeptId) P on P.OrgId = isnull(D.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = D.CreatorUserId group by D.ID) ");
-            sql.Append("select T.ID, T.CategoryId, T.Name 名称, T.Description 描述, U.Name as 创建人, T.CreateTime as 创建日期, L.Permission from SYS_Report_Templates T join List L on L.ID = T.ID join SYS_User U on U.ID = T.CreatorUserId order by T.SN");
+            var sql = "with List as(Select D.ID, max(P.Permission) as Permission from SYS_Report_Templates D ";
+            sql += "join Get_PermData('AD0BD296-46F5-46B3-85B9-00B6941343E7', @UserId, @DeptId) P on P.OrgId = isnull(D.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = D.CreatorUserId group by D.ID) ";
+            sql += "select T.ID, T.CategoryId, T.Name 名称, T.Description 描述, U.Name as 创建人, T.CreateTime as 创建日期, L.Permission from SYS_Report_Templates T join List L on L.ID = T.ID join SYS_User U on U.ID = T.CreatorUserId order by T.SN";
             var parm = new[]
             {
                 new SqlParameter("@UserId", SqlDbType.UniqueIdentifier) {Value = us.UserId},
                 new SqlParameter("@DeptId", SqlDbType.UniqueIdentifier) {Value = us.DeptId}
             };
-            return SqlHelper.SqlQuery(sql.ToString(), parm);
+            return SqlQuery(MakeCommand(sql, parm));
         }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace Insight.WS.Service
                 new SqlParameter("@CreatorDeptId", SqlDbType.UniqueIdentifier) {Value = us.DeptId},
                 new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = us.UserId}
             };
-            return SqlHelper.SqlScalar(sql, parm);
+            return SqlScalar(MakeCommand(sql, parm));
         }
 
         #endregion
@@ -107,7 +107,7 @@ namespace Insight.WS.Service
                 new SqlParameter("@Description", obj.Description),
                 new SqlParameter("@ID", SqlDbType.UniqueIdentifier) {Value = obj.ID}
             };
-            return SqlHelper.SqlNonQuery(sql, parm) > 0;
+            return SqlNonQuery(MakeCommand(sql, parm)) > 0;
         }
 
         /// <summary>
@@ -127,7 +127,7 @@ namespace Insight.WS.Service
                 new SqlParameter("@Content", content),
                 new SqlParameter("@ID", SqlDbType.UniqueIdentifier) {Value = id}
             };
-            return SqlHelper.SqlNonQuery(sql, parm) > 0;
+            return SqlNonQuery(MakeCommand(sql, parm)) > 0;
         }
 
         #endregion
@@ -145,7 +145,7 @@ namespace Insight.WS.Service
             if (!OnlineManage.Verification(us)) return false;
 
             var sql = $"delete from SYS_Report_Templates where ID = '{id}'";
-            return SqlHelper.SqlNonQuery(sql) > 0;
+            return SqlNonQuery(MakeCommand(sql)) > 0;
         }
 
         #endregion

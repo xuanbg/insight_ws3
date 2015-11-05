@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
+using static Insight.WS.Server.Common.SqlHelper;
 
 namespace Insight.WS.Service.Business
 {
@@ -23,7 +24,7 @@ namespace Insight.WS.Service.Business
             var sql = "select R.ID, case when R.IsMaster = 1 then 0 else 2 end as Type, C.* from Supplier C join MDR_MU R on R.MasterDataId = C.SupplierId and R.FailureDate is null and R.UserId = @UserId union all ";
             sql += "select R.ID, 1 as Type, C.* from Supplier C join MDR_MU R on R.MasterDataId = C.SupplierId and R.FailureDate is null and R.IsMaster = 1 join MDG_Employee E on E.MID = R.UserId and E.DirectLeader = @UserId";
             var parm = new[] {new SqlParameter("@UserId", SqlDbType.UniqueIdentifier) {Value = us.UserId}};
-            return SqlHelper.SqlQuery(sql, parm);
+            return SqlQuery(MakeCommand(sql, parm));
         }
 
         /// <summary>
@@ -38,7 +39,7 @@ namespace Insight.WS.Service.Business
             var sql = "select C.* from SupplierInfo C join MDR_MU R on R.MasterDataId = C.SupplierId and R.FailureDate is null and R.UserId = @UserId union ";
             sql += "select C.* from SupplierInfo C join MDR_MU R on R.MasterDataId = C.SupplierId and R.FailureDate is null and R.IsMaster = 1 join MDG_Employee E on E.MID = R.UserId and E.DirectLeader = @UserId";
             var parm = new[] {new SqlParameter("@UserId", SqlDbType.UniqueIdentifier) {Value = us.UserId}};
-            return SqlHelper.SqlQuery(sql, parm);
+            return SqlQuery(MakeCommand(sql, parm));
         }
 
         /// <summary>
@@ -96,7 +97,7 @@ namespace Insight.WS.Service.Business
                 new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = us.UserId},
                 new SqlParameter("@Read", SqlDbType.Int) {Value = 0}
             };
-            cmds.Add(SqlHelper.MakeCommand(sql, parm));
+            cmds.Add(MakeCommand(sql, parm));
 
             sql = "insert MDR_MU (MasterDataId, UserId, IsMaster, EffectiveDate) select @MasterDataId, @UserId, 1, getdate()";
             parm = new[]
@@ -105,9 +106,9 @@ namespace Insight.WS.Service.Business
                 new SqlParameter("@UserId", SqlDbType.UniqueIdentifier) {Value = us.UserId},
                 new SqlParameter("@Read", SqlDbType.Int) {Value = 0}
             };
-            cmds.Add(SqlHelper.MakeCommand(sql, parm));
+            cmds.Add(MakeCommand(sql, parm));
 
-            return SqlHelper.SqlExecute(cmds);
+            return SqlExecute(cmds);
         }
 
         /// <summary>
@@ -145,8 +146,8 @@ namespace Insight.WS.Service.Business
                 new SqlParameter("@Description", d.Description),
                 new SqlParameter("@MID", SqlDbType.UniqueIdentifier) {Value = d.MID}
             };
-            cmds.Add(SqlHelper.MakeCommand(sql, parm));
-            return SqlHelper.SqlExecute(cmds);
+            cmds.Add(MakeCommand(sql, parm));
+            return SqlExecute(cmds);
         }
 
     }

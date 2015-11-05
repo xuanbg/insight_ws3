@@ -10,27 +10,16 @@
 namespace Insight.WS.Server.Common.ORM
 {
     using System;
-    using System.Runtime.Serialization;
     using System.Collections.Generic;
-    
-    [DataContract(IsReference = true)]
-    [KnownType(typeof(ABS_Clearing))]
-    [KnownType(typeof(ImageData))]
     
     public partial class ABS_Clearing_Attachs
     {
-    	[DataMember]
         public System.Guid ID { get; set; }
-    	[DataMember]
         public long SN { get; set; }
-    	[DataMember]
         public System.Guid ClearingId { get; set; }
-    	[DataMember]
         public System.Guid ImageId { get; set; }
     
-    	[DataMember]
         public virtual ABS_Clearing ABS_Clearing { get; set; }
-    	[DataMember]
         public virtual ImageData ImageData { get; set; }
     }
 }

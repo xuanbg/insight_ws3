@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
+using static Insight.WS.Server.Common.SqlHelper;
 
 namespace Insight.WS.Service
 {
@@ -23,15 +23,15 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return null;
 
-            var sql = new StringBuilder("with List as(Select D.ID, max(P.Permission) as Permission from SYS_Report_Definition D ");
-            sql.Append("join Get_PermData('DD46BA9F-A345-4CEC-AE00-26561460E470', @UserId, @DeptId) P on P.OrgId = isnull(D.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = D.CreatorUserId group by D.ID) ");
-            sql.Append("select D.ID, D.CategoryId, case when D.Type = 1 then '组织' else '个人' end as 类型, case D.Mode when 1 then '时段' when 2 then '时点' else '即时' end as 模式, D.Name as 名称, T.Name as 模板, D.DataSource as 数据源, D.[Description] as 备注, L.Permission from SYS_Report_Definition D join List L on L.ID = D.ID join SYS_Report_Templates T on T.ID = D.TemplateId order by D.SN");
+            var sql = "with List as(Select D.ID, max(P.Permission) as Permission from SYS_Report_Definition D ";
+            sql += "join Get_PermData('DD46BA9F-A345-4CEC-AE00-26561460E470', @UserId, @DeptId) P on P.OrgId = isnull(D.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = D.CreatorUserId group by D.ID) ";
+            sql += "select D.ID, D.CategoryId, case when D.Type = 1 then '组织' else '个人' end as 类型, case D.Mode when 1 then '时段' when 2 then '时点' else '即时' end as 模式, D.Name as 名称, T.Name as 模板, D.DataSource as 数据源, D.[Description] as 备注, L.Permission from SYS_Report_Definition D join List L on L.ID = D.ID join SYS_Report_Templates T on T.ID = D.TemplateId order by D.SN";
             var parm = new[]
             {
                 new SqlParameter("@UserId", SqlDbType.UniqueIdentifier) {Value = us.UserId},
                 new SqlParameter("@DeptId", SqlDbType.UniqueIdentifier) {Value = us.DeptId}
             };
-            return SqlHelper.SqlQuery(sql.ToString(), parm);
+            return SqlQuery(MakeCommand(sql, parm));
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace Insight.WS.Service
             if (!OnlineManage.Verification(us)) return null;
 
             const string sql = "select P.ID, P.ReportId, R.Name from SYS_Report_Period P join SYS_Report_Rules R on R.ID = P.RuleId";
-            return SqlHelper.SqlQuery(sql);
+            return SqlQuery(MakeCommand(sql));
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace Insight.WS.Service
             if (!OnlineManage.Verification(us)) return null;
 
             const string sql = "select E.ID, E.ReportId, O.FullName from SYS_Report_Entity E join SYS_Organization O on O.ID = E.OrgId";
-            return SqlHelper.SqlQuery(sql);
+            return SqlQuery(MakeCommand(sql));
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace Insight.WS.Service
             if (!OnlineManage.Verification(us)) return null;
 
             const string sql = "select M.ID, M.EntityId, R.Name from SYS_Report_Member M join SYS_Role R on R.ID = M.RoleId";
-            return SqlHelper.SqlQuery(sql);
+            return SqlQuery(MakeCommand(sql));
         }
 
         /// <summary>
@@ -83,10 +83,10 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return null;
 
-            var sql = new StringBuilder("select R.ID, case when P.ID is null then cast(0 as bit) else cast(1 as bit) end as Selected, Name as 名称, ");
-            sql.Append("cast(Cycle as varchar) + case CycleType when 1 then '年' when 2 then '月' when 3 then '周' when 4 then '日' else '-' end as 周期 ");
-            sql.AppendFormat("from SYS_Report_Rules R left join SYS_Report_Period P on P.RuleId = R.ID and P.ReportId = '{0}'", id);
-            return SqlHelper.SqlQuery(sql.ToString());
+            var sql = "select R.ID, case when P.ID is null then cast(0 as bit) else cast(1 as bit) end as Selected, Name as 名称, ";
+            sql += "cast(Cycle as varchar) + case CycleType when 1 then '年' when 2 then '月' when 3 then '周' when 4 then '日' else '-' end as 周期 ";
+            sql += $"from SYS_Report_Rules R left join SYS_Report_Period P on P.RuleId = R.ID and P.ReportId = '{id}'";
+            return SqlQuery(MakeCommand(sql));
         }
 
         /// <summary>
@@ -99,9 +99,9 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return null;
 
-            var sql = new StringBuilder("select case when E.ID is null then newid() else E.ID end as ID, O.ID as OrgId, O.ParentId, case when E.ID is null then cast(0 as bit) else cast(1 as bit) end as Selected, O.NodeType, O.[Index], O.名称 ");
-            sql.AppendFormat("from Organization O left join SYS_Report_Entity E on E.OrgId = O.ID and E.ReportId = '{0}' where NodeType < 3", id);
-            return SqlHelper.SqlQuery(sql.ToString());
+            var sql = "select case when E.ID is null then newid() else E.ID end as ID, O.ID as OrgId, O.ParentId, case when E.ID is null then cast(0 as bit) else cast(1 as bit) end as Selected, O.NodeType, O.[Index], O.名称 ";
+            sql += $"from Organization O left join SYS_Report_Entity E on E.OrgId = O.ID and E.ReportId = '{id}' where NodeType < 3";
+            return SqlQuery(MakeCommand(sql));
         }
 
         /// <summary>
@@ -114,9 +114,9 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return null;
 
-            var sql = new StringBuilder("select newid() as ID, O.ID as OrgId, R.ID as RoleId, case when M.ID is null then cast(0 as bit) else cast(1 as bit) end as Selected, R.Name as 名称, R.Description as 描述 ");
-            sql.AppendFormat("from SYS_Role R join Organization O on O.NodeType < 3 left join SYS_Report_Entity E on E.OrgId = O.ID and E.ReportId = '{0}' left join SYS_Report_Member M on M.EntityId = E.ID and M.RoleId = R.ID order by R.SN", id);
-            return SqlHelper.SqlQuery(sql.ToString());
+            var sql = "select newid() as ID, O.ID as OrgId, R.ID as RoleId, case when M.ID is null then cast(0 as bit) else cast(1 as bit) end as Selected, R.Name as 名称, R.Description as 描述 ";
+            sql += $"from SYS_Role R join Organization O on O.NodeType < 3 left join SYS_Report_Entity E on E.OrgId = O.ID and E.ReportId = '{id}' left join SYS_Report_Member M on M.EntityId = E.ID and M.RoleId = R.ID order by R.SN";
+            return SqlQuery(MakeCommand(sql));
         }
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace Insight.WS.Service
         /// <returns>可用系统数据源集合</returns>
         public List<string> GetDataSource(Session us)
         {
-            var list = SqlHelper.ConStr.ToList();
+            var list = ConStr.ToList();
             return list.Select(obj => obj.Key).ToList();
         }
 
@@ -149,9 +149,9 @@ namespace Insight.WS.Service
 
             var cmds = new List<SqlCommand>();
 
-            var sql = new StringBuilder("insert SYS_Report_Definition (CategoryId, Name, TemplateId, Mode, Delay, [Type], DataSource, Description, CreatorDeptId, CreatorUserId) ");
-            sql.Append("select @CategoryId, @Name, @TemplateId, @Mode, @Delay, @Type, @DataSource, @Description, @CreatorDeptId, @CreatorUserId;");
-            sql.Append("select ID from SYS_Report_Definition where SN = scope_identity()");
+            var sql = "insert SYS_Report_Definition (CategoryId, Name, TemplateId, Mode, Delay, [Type], DataSource, Description, CreatorDeptId, CreatorUserId) ";
+            sql += "select @CategoryId, @Name, @TemplateId, @Mode, @Delay, @Type, @DataSource, @Description, @CreatorDeptId, @CreatorUserId;";
+            sql += "select ID from SYS_Report_Definition where SN = scope_identity()";
             var parm = new[]
             {
                 new SqlParameter("@CategoryId", SqlDbType.UniqueIdentifier) {Value = def.CategoryId},
@@ -166,11 +166,11 @@ namespace Insight.WS.Service
                 new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = us.UserId},
                 new SqlParameter("@Write", SqlDbType.Int) {Value = 0}
             };
-            cmds.Add(SqlHelper.MakeCommand(sql.ToString(), parm));
+            cmds.Add(MakeCommand(sql, parm));
             cmds.AddRange(InsertRules(def.ID, rdt));
             cmds.AddRange(InsertEntitys(def.ID, edt, mdt));
 
-            return SqlHelper.SqlExecute(cmds);
+            return SqlExecute(cmds);
         }
 
         #endregion
@@ -208,16 +208,16 @@ namespace Insight.WS.Service
                 new SqlParameter("@ID", SqlDbType.UniqueIdentifier) {Value = def.ID},
                 new SqlParameter("@Write", SqlDbType.Int) {Value = 0}
             };
-            cmds.Add(SqlHelper.MakeCommand(sql, parm));
+            cmds.Add(MakeCommand(sql, parm));
 
-            cmds.AddRange(rdl.Select(id => SqlHelper.MakeCommand($"delete SYS_Report_Period where ReportId = '{def.ID}' and RuleId = '{id}'")));
-            cmds.AddRange(edl.Select(id => SqlHelper.MakeCommand($"delete SYS_Report_Entity where ReportId = '{def.ID}' and OrgId = '{id}'")));
-            cmds.AddRange(mdl.Select(id => SqlHelper.MakeCommand($"delete M from SYS_Report_Member M join SYS_Report_Entity E on E.ID = M.EntityId and E.ReportId = '{def.ID}' where RoleId = '{id}'")));
+            cmds.AddRange(rdl.Select(id => MakeCommand($"delete SYS_Report_Period where ReportId = '{def.ID}' and RuleId = '{id}'")));
+            cmds.AddRange(edl.Select(id => MakeCommand($"delete SYS_Report_Entity where ReportId = '{def.ID}' and OrgId = '{id}'")));
+            cmds.AddRange(mdl.Select(id => MakeCommand($"delete M from SYS_Report_Member M join SYS_Report_Entity E on E.ID = M.EntityId and E.ReportId = '{def.ID}' where RoleId = '{id}'")));
 
             cmds.AddRange(InsertRules(def.ID, rdt));
             cmds.AddRange(InsertEntitys(def.ID, edt, mdt));
 
-            return SqlHelper.SqlExecute(cmds);
+            return SqlExecute(cmds);
         }
 
         #endregion
@@ -235,7 +235,7 @@ namespace Insight.WS.Service
             if (!OnlineManage.Verification(us)) return false;
 
             var sql = $"delete SYS_Report_Definition where ID = '{id}'";
-            return SqlHelper.SqlNonQuery(sql) > 0;
+            return SqlNonQuery(MakeCommand(sql)) > 0;
         }
 
         #endregion

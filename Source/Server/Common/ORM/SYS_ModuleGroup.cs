@@ -10,33 +10,24 @@
 namespace Insight.WS.Server.Common.ORM
 {
     using System;
-    using System.Runtime.Serialization;
     using System.Collections.Generic;
-    
-    [DataContract(IsReference = true)]
-    [KnownType(typeof(SYS_Module))]
     
     public partial class SYS_ModuleGroup
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SYS_ModuleGroup()
         {
             this.SYS_Module = new HashSet<SYS_Module>();
         }
     
-    	[DataMember]
         public System.Guid ID { get; set; }
-    	[DataMember]
         public long SN { get; set; }
-    	[DataMember]
         public Nullable<int> Index { get; set; }
-    	[DataMember]
         public string Name { get; set; }
-    	[DataMember]
         public string Description { get; set; }
-    	[DataMember]
         public byte[] Icon { get; set; }
     
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SYS_Module> SYS_Module { get; set; }
     }
 }

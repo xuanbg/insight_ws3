@@ -10,57 +10,30 @@
 namespace Insight.WS.Server.Common.ORM
 {
     using System;
-    using System.Runtime.Serialization;
     using System.Collections.Generic;
-    
-    [DataContract(IsReference = true)]
-    [KnownType(typeof(MasterData))]
-    [KnownType(typeof(MDG_Dictionary))]
-    [KnownType(typeof(SYS_Organization))]
-    [KnownType(typeof(SYS_User))]
     
     public partial class MDG_Material
     {
-    	[DataMember]
         public System.Guid MID { get; set; }
-    	[DataMember]
         public long SN { get; set; }
-    	[DataMember]
         public int Index { get; set; }
-    	[DataMember]
         public string BarCode { get; set; }
-    	[DataMember]
         public string Model { get; set; }
-    	[DataMember]
         public string Size { get; set; }
-    	[DataMember]
         public Nullable<System.Guid> SizeType { get; set; }
-    	[DataMember]
         public Nullable<System.Guid> Unit { get; set; }
-    	[DataMember]
         public Nullable<System.Guid> StorageType { get; set; }
-    	[DataMember]
         public string Description { get; set; }
-    	[DataMember]
         public bool Enable { get; set; }
-    	[DataMember]
         public Nullable<System.Guid> CreatorDeptId { get; set; }
-    	[DataMember]
         public System.Guid CreatorUserId { get; set; }
-    	[DataMember]
         public System.DateTime CreateTime { get; set; }
     
-    	[DataMember]
         public virtual MasterData MasterData { get; set; }
-    	[DataMember]
         public virtual MDG_Dictionary MDG_Dictionary { get; set; }
-    	[DataMember]
         public virtual MDG_Dictionary MDG_Dictionary1 { get; set; }
-    	[DataMember]
         public virtual MDG_Dictionary MDG_Dictionary2 { get; set; }
-    	[DataMember]
         public virtual SYS_Organization SYS_Organization { get; set; }
-    	[DataMember]
         public virtual SYS_User SYS_User { get; set; }
     }
 }

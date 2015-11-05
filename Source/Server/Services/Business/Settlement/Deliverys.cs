@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
+using static Insight.WS.Server.Common.SqlHelper;
 
 namespace Insight.WS.Service.Business
 {
@@ -21,13 +21,13 @@ namespace Insight.WS.Service.Business
         {
             if (!OnlineManage.Verification(us)) return null;
 
-            var sql = new StringBuilder("select convert(varchar(4),getdate(),120) as ID, null as ParentId, 0 as Type, cast(datepart(year , getdate()) as varchar) + '年' as Name union ");
-            sql.Append("select convert(varchar(7),getdate(),120) as ID, convert(varchar(4),getdate(),120) as ParentId, 1 as Type, cast(datepart(month , getdate()) as varchar) + '月' as Name union ");
-            sql.Append("select convert(varchar(10),getdate(),120) as ID, convert(varchar(7),getdate(),120) as ParentId, 2 as Type, cast(datepart(day , getdate()) as varchar) + '日' as Name union ");
-            sql.Append("select distinct convert(varchar(4),CreateTime,120) as ID, null as ParentId, 0 as Type, cast(datepart(year , CreateTime) as varchar) + '年' as Name from ABS_Delivery union ");
-            sql.Append("select distinct convert(varchar(7),CreateTime,120) as ID, convert(varchar(4),CreateTime,120) as ParentId, 1 as Type, cast(datepart(month , CreateTime) as varchar) + '月' as Name from ABS_Delivery union ");
-            sql.Append("select distinct convert(varchar(10),CreateTime,120) as ID, convert(varchar(7),CreateTime,120) as ParentId, 2 as Type, cast(datepart(day , CreateTime) as varchar) + '日' as Name from ABS_Delivery order by ID desc");
-            return SqlHelper.SqlQuery(sql.ToString());
+            var sql = "select convert(varchar(4),getdate(),120) as ID, null as ParentId, 0 as Type, cast(datepart(year , getdate()) as varchar) + '年' as Name union ";
+            sql += "select convert(varchar(7),getdate(),120) as ID, convert(varchar(4),getdate(),120) as ParentId, 1 as Type, cast(datepart(month , getdate()) as varchar) + '月' as Name union ";
+            sql += "select convert(varchar(10),getdate(),120) as ID, convert(varchar(7),getdate(),120) as ParentId, 2 as Type, cast(datepart(day , getdate()) as varchar) + '日' as Name union ";
+            sql += "select distinct convert(varchar(4),CreateTime,120) as ID, null as ParentId, 0 as Type, cast(datepart(year , CreateTime) as varchar) + '年' as Name from ABS_Delivery union ";
+            sql += "select distinct convert(varchar(7),CreateTime,120) as ID, convert(varchar(4),CreateTime,120) as ParentId, 1 as Type, cast(datepart(month , CreateTime) as varchar) + '月' as Name from ABS_Delivery union ";
+            sql += "select distinct convert(varchar(10),CreateTime,120) as ID, convert(varchar(7),CreateTime,120) as ParentId, 2 as Type, cast(datepart(day , CreateTime) as varchar) + '日' as Name from ABS_Delivery order by ID desc";
+            return SqlQuery(MakeCommand(sql));
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Insight.WS.Service.Business
                 new SqlParameter("@DeptId", SqlDbType.UniqueIdentifier) {Value = us.DeptId}
             };
 
-            return SqlHelper.SqlQuery(sql, parm);
+            return SqlQuery(MakeCommand(sql, parm));
         }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace Insight.WS.Service.Business
                 new SqlParameter("@DeptId", SqlDbType.UniqueIdentifier) {Value = us.DeptId}
             };
 
-            return SqlHelper.SqlQuery(sql, parm);
+            return SqlQuery(MakeCommand(sql, parm));
         }
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace Insight.WS.Service.Business
             if (!OnlineManage.Verification(us)) return null;
 
             var sql = $"select * from dbo.Get_GoodsPlan('{code}')";
-            return SqlHelper.SqlQuery(sql);
+            return SqlQuery(MakeCommand(sql));
         }
 
         /// <summary>
@@ -108,7 +108,7 @@ namespace Insight.WS.Service.Business
             if (!OnlineManage.Verification(us)) return null;
 
             var sql = $"select Summary as 摘要, ObjectName as 项目, Units as 单位, Price as 单价, Counts as 数量, Amount as 金额 from ABS_Delivery_Item where DeliveryId = '{cid}'";
-            return SqlHelper.SqlQuery(sql);
+            return SqlQuery(MakeCommand(sql));
         }
 
         /// <summary>
@@ -123,7 +123,7 @@ namespace Insight.WS.Service.Business
 
             var sql = "select I.ID, case I.ImageType when 1 then '收据' when  2 then '发票' when 3 then '付款单' when 4 then '报销单' when 5 then '入库单' when 6 then '出库单' else '附件' end as 类型, I.Code as 编码, I.Name as 名称, I.Expand as 扩展名, ";
             sql += $"M.Name as 密级, I.Pages as 页数, I.Size as 字节数 from ABS_Delivery_Attachs A join ImageData I on I.ID = A.ImageId left join MasterData M on M.ID = I.SecrecyDegree where DeliveryId = '{did}'";
-            return SqlHelper.SqlQuery(sql);
+            return SqlQuery(MakeCommand(sql));
         }
 
         /// <summary>
@@ -155,7 +155,7 @@ namespace Insight.WS.Service.Business
 
             var cmds = new List<SqlCommand> {InsertDelivery(obj)};
             cmds.AddRange(InsertDeliveryDetail(idt));
-            return SqlHelper.SqlExecute(cmds, 0);
+            return SqlExecute(cmds, 0);
         }
 
         /// <summary>
@@ -180,7 +180,7 @@ namespace Insight.WS.Service.Business
                                     new SqlParameter("@ModuleId", SqlDbType.UniqueIdentifier){ Value = mid },
                                     new SqlParameter("@Char", str),
                                     new SqlParameter("@Code", SqlDbType.VarChar) };
-            return SqlHelper.SqlScalar(sql, parm);
+            return SqlScalar(MakeCommand(sql, parm));
         }
 
         /// <summary>
@@ -196,12 +196,12 @@ namespace Insight.WS.Service.Business
             if (GetDelivery(us, bid).PrintTimes == 0)
             {
                 var sql = $"delete ABS_Delivery where ID = '{bid}'";
-                return SqlHelper.SqlNonQuery(sql) > 0;
+                return SqlNonQuery(MakeCommand(sql)) > 0;
             }
             else
             {
                 var sql = $"update ABS_Delivery set Validity = 0 where ID = '{bid}'";
-                return SqlHelper.SqlNonQuery(sql) > 0;
+                return SqlNonQuery(MakeCommand(sql)) > 0;
             }
         }
 

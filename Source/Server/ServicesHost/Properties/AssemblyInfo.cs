@@ -4,8 +4,8 @@ using System.Runtime.InteropServices;
 // 有关程序集的常规信息通过以下
 // 特性集控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("Insight Server")]
-[assembly: AssemblyDescription("Insight WCF服务")]
+[assembly: AssemblyTitle("ServicesHost")]
+[assembly: AssemblyDescription("WCF服务主机")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Insight Software Ltd.")]
 [assembly: AssemblyProduct("Insight Workstation 3")]

@@ -2,9 +2,9 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
+using static Insight.WS.Server.Common.SqlHelper;
 
 namespace Insight.WS.Service
 {
@@ -22,16 +22,16 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return null;
 
-            var sql = new StringBuilder("with List as(Select D.ID, max(P.Permission) as Permission from SYS_Report_Rules D ");
-            sql.Append("join Get_PermData('6C0C486F-E039-4C53-9F36-9FE262FB0D3C', @UserId, @DeptId) P on P.OrgId = isnull(D.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = D.CreatorUserId group by D.ID) ");
-            sql.Append("select D.ID, D.BuiltIn as 预置, D.Name as 名称, cast(D.Cycle as varchar(4)) + case D.CycleType when 1 then '年' when 2 then '月' when 3 then '周' when 4 then '日' else '-' end as 周期, ");
-            sql.Append("D.StartTime as 分期起始, D.[Description] as 备注, D.CreateTime as 创建日期, L.Permission from SYS_Report_Rules D join List L on L.ID = D.ID order by D.SN");
+            var sql = "with List as(Select D.ID, max(P.Permission) as Permission from SYS_Report_Rules D ";
+            sql += "join Get_PermData('6C0C486F-E039-4C53-9F36-9FE262FB0D3C', @UserId, @DeptId) P on P.OrgId = isnull(D.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = D.CreatorUserId group by D.ID) ";
+            sql += "select D.ID, D.BuiltIn as 预置, D.Name as 名称, cast(D.Cycle as varchar(4)) + case D.CycleType when 1 then '年' when 2 then '月' when 3 then '周' when 4 then '日' else '-' end as 周期, ";
+            sql += "D.StartTime as 分期起始, D.[Description] as 备注, D.CreateTime as 创建日期, L.Permission from SYS_Report_Rules D join List L on L.ID = D.ID order by D.SN";
             var parm = new[]
             {
                 new SqlParameter("@UserId", SqlDbType.UniqueIdentifier) {Value = us.UserId},
                 new SqlParameter("@DeptId", SqlDbType.UniqueIdentifier) {Value = us.DeptId}
             };
-            return SqlHelper.SqlQuery(sql.ToString(), parm);
+            return SqlQuery(MakeCommand(sql, parm));
         }
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace Insight.WS.Service
                 new SqlParameter("@CreatorDeptId", SqlDbType.UniqueIdentifier) {Value = us.DeptId},
                 new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = us.UserId}
             };
-            return SqlHelper.SqlScalar(sql, parm);
+            return SqlScalar(MakeCommand(sql, parm));
         }
 
         #endregion
@@ -102,7 +102,7 @@ namespace Insight.WS.Service
                 new SqlParameter("@Description", obj.Description),
                 new SqlParameter("@ID", SqlDbType.UniqueIdentifier) {Value = obj.ID}
             };
-            return SqlHelper.SqlNonQuery(sql, parm) > 0;
+            return SqlNonQuery(MakeCommand(sql, parm)) > 0;
         }
 
         #endregion
@@ -120,7 +120,7 @@ namespace Insight.WS.Service
             if (!OnlineManage.Verification(us)) return false;
 
             var sql = $"delete SYS_Report_Rules where ID = '{id}'";
-            return SqlHelper.SqlNonQuery(sql) > 0;
+            return SqlNonQuery(MakeCommand(sql)) > 0;
         }
 
         #endregion

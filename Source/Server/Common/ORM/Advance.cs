@@ -10,30 +10,18 @@
 namespace Insight.WS.Server.Common.ORM
 {
     using System;
-    using System.Runtime.Serialization;
     using System.Collections.Generic;
-    
-    [DataContract(IsReference = true)]
     
     public partial class Advance
     {
-    	[DataMember]
         public System.Guid ID { get; set; }
-    	[DataMember]
         public System.Guid OwnerId { get; set; }
-    	[DataMember]
         public string AccountNo { get; set; }
-    	[DataMember]
         public Nullable<System.Guid> CardType { get; set; }
-    	[DataMember]
         public Nullable<int> Pri { get; set; }
-    	[DataMember]
         public Nullable<System.Guid> ObjectId { get; set; }
-    	[DataMember]
         public int Type { get; set; }
-    	[DataMember]
         public Nullable<System.DateTime> ValidDate { get; set; }
-    	[DataMember]
         public decimal Amount { get; set; }
     }
 }

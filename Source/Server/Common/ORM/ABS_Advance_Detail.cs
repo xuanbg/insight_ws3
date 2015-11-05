@@ -10,41 +10,27 @@
 namespace Insight.WS.Server.Common.ORM
 {
     using System;
-    using System.Runtime.Serialization;
     using System.Collections.Generic;
-    
-    [DataContract(IsReference = true)]
-    [KnownType(typeof(ABS_Advance))]
-    [KnownType(typeof(ABS_Advance_Record))]
-    [KnownType(typeof(MasterData))]
     
     public partial class ABS_Advance_Detail
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ABS_Advance_Detail()
         {
             this.ABS_Advance_Record = new HashSet<ABS_Advance_Record>();
         }
     
-    	[DataMember]
         public System.Guid ID { get; set; }
-    	[DataMember]
         public long SN { get; set; }
-    	[DataMember]
         public System.Guid AccountId { get; set; }
-    	[DataMember]
         public Nullable<System.Guid> ObjectId { get; set; }
-    	[DataMember]
         public int Type { get; set; }
-    	[DataMember]
         public decimal Amount { get; set; }
-    	[DataMember]
         public Nullable<System.DateTime> ValidDate { get; set; }
     
-    	[DataMember]
         public virtual ABS_Advance ABS_Advance { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ABS_Advance_Record> ABS_Advance_Record { get; set; }
-    	[DataMember]
         public virtual MasterData MasterData { get; set; }
     }
 }

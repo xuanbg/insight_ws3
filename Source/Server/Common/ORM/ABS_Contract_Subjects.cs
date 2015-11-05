@@ -10,64 +10,39 @@
 namespace Insight.WS.Server.Common.ORM
 {
     using System;
-    using System.Runtime.Serialization;
     using System.Collections.Generic;
-    
-    [DataContract(IsReference = true)]
-    [KnownType(typeof(ABS_Contract))]
-    [KnownType(typeof(ABS_Contract_FundPlan))]
-    [KnownType(typeof(ABS_Contract_GoodsPlan))]
-    [KnownType(typeof(BASE_Category))]
-    [KnownType(typeof(MasterData))]
     
     public partial class ABS_Contract_Subjects
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ABS_Contract_Subjects()
         {
             this.ABS_Contract_FundPlan = new HashSet<ABS_Contract_FundPlan>();
             this.ABS_Contract_GoodsPlan = new HashSet<ABS_Contract_GoodsPlan>();
         }
     
-    	[DataMember]
         public System.Guid ID { get; set; }
-    	[DataMember]
         public long SN { get; set; }
-    	[DataMember]
         public System.Guid ContractId { get; set; }
-    	[DataMember]
         public int Direction { get; set; }
-    	[DataMember]
         public int PlanType { get; set; }
-    	[DataMember]
         public Nullable<System.Guid> CategoryId { get; set; }
-    	[DataMember]
         public Nullable<System.Guid> ObjectId { get; set; }
-    	[DataMember]
         public string ObjectName { get; set; }
-    	[DataMember]
         public Nullable<System.DateTime> EffectiveDate { get; set; }
-    	[DataMember]
         public Nullable<System.DateTime> InvalidDate { get; set; }
-    	[DataMember]
         public string Units { get; set; }
-    	[DataMember]
         public Nullable<decimal> Price { get; set; }
-    	[DataMember]
         public Nullable<decimal> Counts { get; set; }
-    	[DataMember]
         public Nullable<decimal> Amount { get; set; }
-    	[DataMember]
         public string Description { get; set; }
     
-    	[DataMember]
         public virtual ABS_Contract ABS_Contract { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ABS_Contract_FundPlan> ABS_Contract_FundPlan { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ABS_Contract_GoodsPlan> ABS_Contract_GoodsPlan { get; set; }
-    	[DataMember]
         public virtual BASE_Category BASE_Category { get; set; }
-    	[DataMember]
         public virtual MasterData MasterData { get; set; }
     }
 }

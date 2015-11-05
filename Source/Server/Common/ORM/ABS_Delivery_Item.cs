@@ -10,39 +10,22 @@
 namespace Insight.WS.Server.Common.ORM
 {
     using System;
-    using System.Runtime.Serialization;
     using System.Collections.Generic;
-    
-    [DataContract(IsReference = true)]
-    [KnownType(typeof(ABS_Delivery))]
-    [KnownType(typeof(MasterData))]
     
     public partial class ABS_Delivery_Item
     {
-    	[DataMember]
         public System.Guid ID { get; set; }
-    	[DataMember]
         public long SN { get; set; }
-    	[DataMember]
         public System.Guid DeliveryId { get; set; }
-    	[DataMember]
         public string Summary { get; set; }
-    	[DataMember]
         public System.Guid ObjectId { get; set; }
-    	[DataMember]
         public string ObjectName { get; set; }
-    	[DataMember]
         public string Units { get; set; }
-    	[DataMember]
         public Nullable<decimal> Price { get; set; }
-    	[DataMember]
         public Nullable<decimal> Counts { get; set; }
-    	[DataMember]
         public decimal Amount { get; set; }
     
-    	[DataMember]
         public virtual ABS_Delivery ABS_Delivery { get; set; }
-    	[DataMember]
         public virtual MasterData MasterData { get; set; }
     }
 }

@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
+using static Insight.WS.Server.Common.SqlHelper;
 
 namespace Insight.WS.Service
 {
@@ -23,7 +24,7 @@ namespace Insight.WS.Service
             if (!OnlineManage.Verification(us)) return null;
 
             const string sql = "select ID, BuiltIn as 内置, Name as 名称, Description as 描述 from SYS_Role order by SN";
-            return SqlHelper.SqlQuery(sql);
+            return SqlQuery(MakeCommand(sql));
         }
 
         /// <summary>
@@ -52,7 +53,7 @@ namespace Insight.WS.Service
             if (!OnlineManage.Verification(us)) return null;
 
             const string sql = "select * from RoleMember order by [Index]";
-            return SqlHelper.SqlQuery(sql);
+            return SqlQuery(MakeCommand(sql));
         }
 
         /// <summary>
@@ -65,7 +66,7 @@ namespace Insight.WS.Service
             if (!OnlineManage.Verification(us)) return null;
 
             const string sql = "select * from RoleUser";
-            return SqlHelper.SqlQuery(sql);
+            return SqlQuery(MakeCommand(sql));
         }
 
         /// <summary>
@@ -78,7 +79,7 @@ namespace Insight.WS.Service
             if (!OnlineManage.Verification(us)) return null;
 
             const string sql = "select * from RoleModulePermit order by [Index]";
-            return SqlHelper.SqlQuery(sql);
+            return SqlQuery(MakeCommand(sql));
         }
 
         /// <summary>
@@ -91,7 +92,7 @@ namespace Insight.WS.Service
             if (!OnlineManage.Verification(us)) return null;
 
             const string sql = "select * from RoleActionPermit order by [Index]";
-            return SqlHelper.SqlQuery(sql);
+            return SqlQuery(MakeCommand(sql));
         }
 
         /// <summary>
@@ -104,7 +105,7 @@ namespace Insight.WS.Service
             if (!OnlineManage.Verification(us)) return null;
 
             const string sql = "select * from RoleDataPermit order by RoleId, Action, [Index]";
-            return SqlHelper.SqlQuery(sql);
+            return SqlQuery(MakeCommand(sql));
         }
 
         /// <summary>
@@ -118,7 +119,7 @@ namespace Insight.WS.Service
             if (!OnlineManage.Verification(us)) return null;
 
             var sql = $"select O.ID, O.ParentId, O.NodeType, O.[Index], O.名称 from Organization O left join SYS_Role_Title T on T.OrgId = O.ID and T.RoleId = '{id}' where T.ID is null";
-            return SqlHelper.SqlQuery(sql);
+            return SqlQuery(MakeCommand(sql));
         }
 
         /// <summary>
@@ -132,7 +133,7 @@ namespace Insight.WS.Service
             if (!OnlineManage.Verification(us)) return null;
 
             var sql = $"select G.ID, G.Name as 名称, G.Description as 描述 from SYS_UserGroup G left join SYS_Role_UserGroup R on R.GroupId = G.ID and R.RoleId = '{id}' where R.ID is null order by G.SN";
-            return SqlHelper.SqlQuery(sql);
+            return SqlQuery(MakeCommand(sql));
         }
 
         /// <summary>
@@ -146,7 +147,7 @@ namespace Insight.WS.Service
             if (!OnlineManage.Verification(us)) return null;
 
             var sql = $"select U.ID, U.Name as 名称, U.LoginName as 登录名, U.Description as 描述 from SYS_User U left join SYS_Role_User R on R.UserId = U.ID and R.RoleId = '{id}' where U.Type > 0 and R.ID is null order by U.SN";
-            return SqlHelper.SqlQuery(sql);
+            return SqlQuery(MakeCommand(sql));
         }
 
         /// <summary>
@@ -160,7 +161,7 @@ namespace Insight.WS.Service
             if (!OnlineManage.Verification(us)) return null;
 
             var sql = $"select * from dbo.Get_RoleAction('{id}') order by [Index]";
-            return SqlHelper.SqlQuery(sql);
+            return SqlQuery(MakeCommand(sql));
         }
 
         /// <summary>
@@ -174,7 +175,7 @@ namespace Insight.WS.Service
             if (!OnlineManage.Verification(us)) return null;
 
             var sql = $"exec Get_RoleData '{id}'";
-            return SqlHelper.SqlQuery(sql);
+            return SqlQuery(MakeCommand(sql));
         }
 
         #endregion
@@ -203,10 +204,10 @@ namespace Insight.WS.Service
                 new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = us.UserId},
                 new SqlParameter("@Write", SqlDbType.Int) {Value = 0}
             };
-            cmds.Add(SqlHelper.MakeCommand(sql, parm));
+            cmds.Add(MakeCommand(sql, parm));
             cmds.AddRange(InsertRoleAction(obj.ID, action, us.UserId));
             cmds.AddRange(InsertRoleRelData(obj.ID, data, us.UserId));
-            return SqlHelper.SqlExecute(cmds);
+            return SqlExecute(cmds);
         }
 
         /// <summary>
@@ -226,7 +227,7 @@ namespace Insight.WS.Service
             cmds.AddRange(InsertRoleTitle(rid, tids, us.UserId));
             cmds.AddRange(InsertRoleGroup(rid, gids, us.UserId));
             cmds.AddRange(InsertRoleUser(rid, uids, us.UserId));
-            return SqlHelper.SqlExecute(cmds);
+            return SqlExecute(cmds);
         }
 
         #endregion
@@ -257,17 +258,17 @@ namespace Insight.WS.Service
                 new SqlParameter("@Description", obj.Description),
                 new SqlParameter("@ID", SqlDbType.UniqueIdentifier) {Value = obj.ID}
             };
-            cmds.Add(SqlHelper.MakeCommand(sql, parm));
+            cmds.Add(MakeCommand(sql, parm));
 
-            adl.ForEach(id => cmds.Add(SqlHelper.MakeCommand($"delete SYS_RolePerm_Action where ID = '{id}'")));
+            adl.ForEach(id => cmds.Add(MakeCommand($"delete SYS_RolePerm_Action where ID = '{id}'")));
             cmds.AddRange(InsertRoleAction(obj.ID, adt, us.UserId));
 
-            ddl.ForEach(id => cmds.Add(SqlHelper.MakeCommand($"delete SYS_RolePerm_Data where ID = '{id}'")));
+            ddl.ForEach(id => cmds.Add(MakeCommand($"delete SYS_RolePerm_Data where ID = '{id}'")));
             cmds.AddRange(InsertRoleRelData(obj.ID, ddt, us.UserId));
 
             //cdl.ForEach(id => cmds.Add(SqlHelper.MakeCommand(String.Format("delete SYS_RolePerm_DataAbs where ID = '{0}'", id))));
 
-            return SqlHelper.SqlExecute(cmds);
+            return SqlExecute(cmds);
         }
 
         #endregion
@@ -285,7 +286,7 @@ namespace Insight.WS.Service
             if (!OnlineManage.Verification(us)) return false;
 
             var sql = $"Delete from SYS_Role where ID = '{id}' and BuiltIn = 0";
-            return SqlHelper.SqlNonQuery(sql) > 0;
+            return SqlNonQuery(MakeCommand(sql)) > 0;
         }
 
         /// <summary>
@@ -300,7 +301,7 @@ namespace Insight.WS.Service
             if (!OnlineManage.Verification(us)) return false;
 
             var sql = $"Delete from {(type == 3 ? "SYS_Role_Title" : (type == 2 ? "SYS_Role_UserGroup" : "SYS_Role_User"))} where ID = '{id}'";
-            return SqlHelper.SqlNonQuery(sql) > 0;
+            return SqlNonQuery(MakeCommand(sql)) > 0;
         }
 
         #endregion

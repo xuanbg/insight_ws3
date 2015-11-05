@@ -26,6 +26,13 @@ namespace Insight.WS.Service
         Session UserLogin(Session us);
 
         /// <summary>
+        /// 获取客户端文件列表
+        /// </summary>
+        /// <returns>FileAttribute List 文件列表</returns>
+        [OperationContract]
+        List<UpdateFile> GetServerList();
+
+        /// <summary>
         /// 根据更新信息获取更新文件
         /// </summary>
         /// <param name="file">更新信息对象实体</param>

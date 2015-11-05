@@ -10,52 +10,11 @@
 namespace Insight.WS.Server.Common.ORM
 {
     using System;
-    using System.Runtime.Serialization;
     using System.Collections.Generic;
-    
-    [DataContract(IsReference = true)]
-    [KnownType(typeof(ABS_Advance))]
-    [KnownType(typeof(ABS_Clearing))]
-    [KnownType(typeof(ABS_Clearing_Check))]
-    [KnownType(typeof(ABS_Contract))]
-    [KnownType(typeof(ABS_Delivery))]
-    [KnownType(typeof(ABS_Storage_Location))]
-    [KnownType(typeof(BASE_Category))]
-    [KnownType(typeof(ImageData))]
-    [KnownType(typeof(MasterData_Merger))]
-    [KnownType(typeof(MDG_Contact))]
-    [KnownType(typeof(MDG_Customer))]
-    [KnownType(typeof(MDG_Dictionary))]
-    [KnownType(typeof(MDG_Employee))]
-    [KnownType(typeof(MDG_Expense))]
-    [KnownType(typeof(MDG_Material))]
-    [KnownType(typeof(MDG_Supplier))]
-    [KnownType(typeof(MDR_MU))]
-    [KnownType(typeof(SYS_Alert_Rules))]
-    [KnownType(typeof(SYS_Allot_Record))]
-    [KnownType(typeof(SYS_Code_Allot))]
-    [KnownType(typeof(SYS_Code_Scheme))]
-    [KnownType(typeof(SYS_ModuleParam))]
-    [KnownType(typeof(SYS_Organization))]
-    [KnownType(typeof(SYS_OrgMember))]
-    [KnownType(typeof(SYS_OrgMerger))]
-    [KnownType(typeof(SYS_Report_Definition))]
-    [KnownType(typeof(SYS_Report_Instances))]
-    [KnownType(typeof(SYS_Report_IU))]
-    [KnownType(typeof(SYS_Report_Rules))]
-    [KnownType(typeof(SYS_Report_Templates))]
-    [KnownType(typeof(SYS_Role))]
-    [KnownType(typeof(SYS_Role_Title))]
-    [KnownType(typeof(SYS_Role_User))]
-    [KnownType(typeof(SYS_Role_UserGroup))]
-    [KnownType(typeof(SYS_RolePerm_Action))]
-    [KnownType(typeof(SYS_RolePerm_Data))]
-    [KnownType(typeof(SYS_RolePerm_DataAbs))]
-    [KnownType(typeof(SYS_UserGroup))]
-    [KnownType(typeof(SYS_UserGroupMember))]
     
     public partial class SYS_User
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SYS_User()
         {
             this.ABS_Advance = new HashSet<ABS_Advance>();
@@ -99,125 +58,112 @@ namespace Insight.WS.Server.Common.ORM
             this.SYS_RolePerm_Action = new HashSet<SYS_RolePerm_Action>();
             this.SYS_RolePerm_Data = new HashSet<SYS_RolePerm_Data>();
             this.SYS_RolePerm_DataAbs = new HashSet<SYS_RolePerm_DataAbs>();
-            this.SYS_UserGroup = new HashSet<SYS_UserGroup>();
             this.SYS_UserGroupMember = new HashSet<SYS_UserGroupMember>();
+            this.SYS_UserGroup = new HashSet<SYS_UserGroup>();
             this.SYS_UserGroupMember1 = new HashSet<SYS_UserGroupMember>();
         }
     
-    	[DataMember]
         public System.Guid ID { get; set; }
-    	[DataMember]
         public long SN { get; set; }
-    	[DataMember]
         public string Name { get; set; }
-    	[DataMember]
         public string LoginName { get; set; }
-    	[DataMember]
         public string Password { get; set; }
-    	[DataMember]
         public string PayPassword { get; set; }
-    	[DataMember]
-        public string Description { get; set; }
-    	[DataMember]
-        public int Type { get; set; }
-    	[DataMember]
-        public bool BuiltIn { get; set; }
-    	[DataMember]
-        public bool Validity { get; set; }
-    	[DataMember]
-        public Nullable<System.Guid> CreatorUserId { get; set; }
-    	[DataMember]
-        public System.DateTime CreateTime { get; set; }
-    	[DataMember]
         public string OpenId { get; set; }
+        public string Description { get; set; }
+        public int Type { get; set; }
+        public bool BuiltIn { get; set; }
+        public bool Validity { get; set; }
+        public Nullable<System.Guid> CreatorUserId { get; set; }
+        public System.DateTime CreateTime { get; set; }
     
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ABS_Advance> ABS_Advance { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ABS_Clearing> ABS_Clearing { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ABS_Clearing_Check> ABS_Clearing_Check { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ABS_Contract> ABS_Contract { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ABS_Delivery> ABS_Delivery { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ABS_Storage_Location> ABS_Storage_Location { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BASE_Category> BASE_Category { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ImageData> ImageData { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MasterData_Merger> MasterData_Merger { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MDG_Contact> MDG_Contact { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MDG_Customer> MDG_Customer { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MDG_Dictionary> MDG_Dictionary { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MDG_Employee> MDG_Employee { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MDG_Expense> MDG_Expense { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MDG_Material> MDG_Material { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MDG_Supplier> MDG_Supplier { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MDR_MU> MDR_MU { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SYS_Alert_Rules> SYS_Alert_Rules { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SYS_Allot_Record> SYS_Allot_Record { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SYS_Allot_Record> SYS_Allot_Record1 { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SYS_Code_Allot> SYS_Code_Allot { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SYS_Code_Allot> SYS_Code_Allot1 { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SYS_Code_Scheme> SYS_Code_Scheme { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SYS_ModuleParam> SYS_ModuleParam { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SYS_Organization> SYS_Organization { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SYS_OrgMember> SYS_OrgMember { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SYS_OrgMember> SYS_OrgMember1 { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SYS_OrgMerger> SYS_OrgMerger { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SYS_Report_Definition> SYS_Report_Definition { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SYS_Report_Instances> SYS_Report_Instances { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SYS_Report_IU> SYS_Report_IU { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SYS_Report_Rules> SYS_Report_Rules { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SYS_Report_Templates> SYS_Report_Templates { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SYS_Role> SYS_Role { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SYS_Role_Title> SYS_Role_Title { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SYS_Role_User> SYS_Role_User { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SYS_Role_User> SYS_Role_User1 { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SYS_Role_UserGroup> SYS_Role_UserGroup { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SYS_RolePerm_Action> SYS_RolePerm_Action { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SYS_RolePerm_Data> SYS_RolePerm_Data { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SYS_RolePerm_DataAbs> SYS_RolePerm_DataAbs { get; set; }
-    	[DataMember]
-        public virtual ICollection<SYS_UserGroup> SYS_UserGroup { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SYS_UserGroupMember> SYS_UserGroupMember { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SYS_UserGroup> SYS_UserGroup { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SYS_UserGroupMember> SYS_UserGroupMember1 { get; set; }
     }
 }

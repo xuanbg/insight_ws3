@@ -10,26 +10,16 @@
 namespace Insight.WS.Server.Common.ORM
 {
     using System;
-    using System.Runtime.Serialization;
     using System.Collections.Generic;
-    
-    [DataContract(IsReference = true)]
     
     public partial class SYS_Interface
     {
-    	[DataMember]
         public System.Guid ID { get; set; }
-    	[DataMember]
         public long SN { get; set; }
-    	[DataMember]
         public string Binding { get; set; }
-    	[DataMember]
         public string Name { get; set; }
-    	[DataMember]
         public string Class { get; set; }
-    	[DataMember]
         public string Interface { get; set; }
-    	[DataMember]
         public string Location { get; set; }
     }
 }

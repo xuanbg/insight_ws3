@@ -10,29 +10,17 @@
 namespace Insight.WS.Server.Common.ORM
 {
     using System;
-    using System.Runtime.Serialization;
     using System.Collections.Generic;
-    
-    [DataContract(IsReference = true)]
-    [KnownType(typeof(MasterData))]
-    [KnownType(typeof(MasterData_Property))]
     
     public partial class MDD_Binary
     {
-    	[DataMember]
         public System.Guid ID { get; set; }
-    	[DataMember]
         public long SN { get; set; }
-    	[DataMember]
         public System.Guid MasterDataId { get; set; }
-    	[DataMember]
         public System.Guid PropertyId { get; set; }
-    	[DataMember]
         public byte[] Value { get; set; }
     
-    	[DataMember]
         public virtual MasterData MasterData { get; set; }
-    	[DataMember]
         public virtual MasterData_Property MasterData_Property { get; set; }
     }
 }

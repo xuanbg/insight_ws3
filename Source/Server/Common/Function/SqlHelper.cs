@@ -9,10 +9,13 @@ namespace Insight.WS.Server.Common
     public class SqlHelper
     {
 
+        /// <summary>
+        /// 系统连结字符串字典
+        /// </summary>
         public static Dictionary<string, string> ConStr;
 
         /// <summary>
-        /// 静态构造函数，初始化系统连结字符串
+        /// 静态构造函数，初始化系统连结字符串字典
         /// </summary>
         static SqlHelper()
         {
@@ -30,48 +33,15 @@ namespace Insight.WS.Server.Common
         /// <summary>
         /// 返回DataTable的带可变参数组查询方法
         /// </summary>
-        /// <param name="sql">sql语句</param>
-        /// <param name="parms">可变长参数组</param>
+        /// <param name="cmd">SqlCommand</param>
+        /// <param name="dataSouc">数据源名称</param>
         /// <returns>DataTable 查询结果集</returns>
-        public static DataTable SqlQuery(string sql, params SqlParameter[] parms)
+        public static DataTable SqlQuery(SqlCommand cmd, string dataSouc = "WSEntities")
         {
-            using (var conn = new SqlConnection(ConStr["WSEntities"]))
+            using (var conn = new SqlConnection(ConStr[dataSouc]))
             {
                 conn.Open();
-                var cmd = MakeCommand(sql, parms);
                 cmd.Connection = conn;
-
-                try
-                {
-                    var table = new DataTable("DataTable");
-                    var adapter = new SqlDataAdapter(cmd);
-                    adapter.Fill(table);
-                    table.PrimaryKey = new[] {table.Columns["ID"]};
-                    return table;
-                }
-                catch (Exception ex)
-                {
-                    Util.LogToEvent(ex.ToString());
-                    return null;
-                }
-            }
-        }
-
-        /// <summary>
-        /// 返回DataTable的带可变参数组查询方法
-        /// </summary>
-        /// <param name="sql">sql语句</param>
-        /// <param name="db">数据库</param>
-        /// <param name="parms">可变长参数组</param>
-        /// <returns>DataTable 查询结果集</returns>
-        public static DataTable SqlQuery(string sql, string db, params SqlParameter[] parms)
-        {
-            using (var conn = new SqlConnection(ConStr[db]))
-            {
-                conn.Open();
-                var cmd = MakeCommand(sql, parms);
-                cmd.Connection = conn;
-
                 try
                 {
                     var table = new DataTable("DataTable");
@@ -91,44 +61,15 @@ namespace Insight.WS.Server.Common
         /// <summary>
         /// 返回受影响行数的方法
         /// </summary>
-        /// <param name="sql">sql语句</param>
-        /// <param name="parms">可变长参数组</param>
+        /// <param name="cmd">SqlCommand</param>
+        /// <param name="dataSouc">数据源名称</param>
         /// <returns>int 受影响行数</returns>
-        public static int SqlNonQuery(string sql, params SqlParameter[] parms)
+        public static int SqlNonQuery(SqlCommand cmd, string dataSouc = "WSEntities")
         {
-            using (var conn = new SqlConnection(ConStr["WSEntities"]))
+            using (var conn = new SqlConnection(ConStr[dataSouc]))
             {
                 conn.Open();
-                var cmd = MakeCommand(sql, parms);
                 cmd.Connection = conn;
-
-                try
-                {
-                    return cmd.ExecuteNonQuery();
-                }
-                catch (Exception ex)
-                {
-                    Util.LogToEvent(ex.ToString());
-                    return -1;
-                }
-            }
-        }
-
-        /// <summary>
-        /// 返回受影响行数的方法
-        /// </summary>
-        /// <param name="sql">sql语句</param>
-        /// <param name="db">数据库</param>
-        /// <param name="parms">可变长参数组</param>
-        /// <returns>int 受影响行数</returns>
-        public static int SqlNonQuery(string sql, string db, params SqlParameter[] parms)
-        {
-            using (var conn = new SqlConnection(ConStr[db]))
-            {
-                conn.Open();
-                var cmd = MakeCommand(sql, parms);
-                cmd.Connection = conn;
-
                 try
                 {
                     return cmd.ExecuteNonQuery();
@@ -144,44 +85,15 @@ namespace Insight.WS.Server.Common
         /// <summary>
         /// 返回第一行第一列内容的方法
         /// </summary>
-        /// <param name="sql">SQL语句</param>
-        /// <param name="parms">可变长参数组</param>
+        /// <param name="cmd">SqlCommand</param>
+        /// <param name="dataSouc">数据源名称</param>
         /// <returns>执行SQL语句后的第一行第一列内容</returns>
-        public static object SqlScalar(string sql, params SqlParameter[] parms)
+        public static object SqlScalar(SqlCommand cmd, string dataSouc = "WSEntities")
         {
-            using (var conn = new SqlConnection(ConStr["WSEntities"]))
+            using (var conn = new SqlConnection(ConStr[dataSouc]))
             {
                 conn.Open();
-                var cmd = MakeCommand(sql, parms);
                 cmd.Connection = conn;
-
-                try
-                {
-                    return cmd.ExecuteScalar();
-                }
-                catch (Exception ex)
-                {
-                    Util.LogToEvent(ex.ToString());
-                    return null;
-                }
-            }
-        }
-
-        /// <summary>
-        /// 返回第一行第一列内容的方法
-        /// </summary>
-        /// <param name="sql">SQL语句</param>
-        /// <param name="db">数据库</param>
-        /// <param name="parms">可变长参数组</param>
-        /// <returns>执行SQL语句后的第一行第一列内容</returns>
-        public static object SqlScalar(string sql, string db, params SqlParameter[] parms)
-        {
-            using (var conn = new SqlConnection(ConStr[db]))
-            {
-                conn.Open();
-                var cmd = MakeCommand(sql, parms);
-                cmd.Connection = conn;
-
                 try
                 {
                     return cmd.ExecuteScalar();
@@ -198,11 +110,11 @@ namespace Insight.WS.Server.Common
         /// 执行多条SQL语句，实现数据库事务。
         /// </summary>
         /// <param name="cmds">多条SQL语句</param>
-        /// <param name="db">数据库</param>		
+        /// <param name="dataSouc">数据源名称</param>		
         /// <returns>bool 执行是否成功</returns>
-        public static bool SqlExecute(IEnumerable<SqlCommand> cmds, string db = "WSEntities")
+        public static bool SqlExecute(IEnumerable<SqlCommand> cmds, string dataSouc = "WSEntities")
         {
-            using (var conn = new SqlConnection(ConStr[db]))
+            using (var conn = new SqlConnection(ConStr[dataSouc]))
             {
                 conn.Open();
                 var ids = new List<object>();
@@ -241,12 +153,12 @@ namespace Insight.WS.Server.Common
         /// 执行多条SQL语句，实现数据库事务。
         /// </summary>
         /// <param name="cmds">多条SQL语句</param>
-        /// <param name="i">返回ID索引位置</param>
-        /// <param name="db">数据库</param>		
+        /// <param name="index">返回ID索引位置</param>
+        /// <param name="dataSouc">数据源名称</param>		
         /// <returns>object 指定索引位置的ID</returns>
-        public static object SqlExecute(IEnumerable<SqlCommand> cmds, int i, string db = "WSEntities")
+        public static object SqlExecute(IEnumerable<SqlCommand> cmds, int index, string dataSouc = "WSEntities")
         {
-            using (var conn = new SqlConnection(ConStr[db]))
+            using (var conn = new SqlConnection(ConStr[dataSouc]))
             {
                 conn.Open();
                 var ids = new List<object>();
@@ -270,7 +182,7 @@ namespace Insight.WS.Server.Common
                         if (ids.Count <= val) ids.Add(obj); else ids[val] = obj;
                     }
                     tran.Commit();
-                    return ids[i];
+                    return ids[index];
                 }
                 catch (Exception ex)
                 {

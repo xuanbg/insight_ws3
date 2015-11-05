@@ -71,6 +71,14 @@ namespace Insight.WS.Service
         DataTable GetReportMember(Session us, Guid id);
 
         /// <summary>
+        /// 获取可用系统数据源
+        /// </summary>
+        /// <param name="us">用户会话</param>
+        /// <returns>可用系统数据源集合</returns>
+        [OperationContract]
+        List<string> GetDataSource(Session us);
+
+        /// <summary>
         /// 新增报表定义
         /// </summary>
         /// <param name="us">用户会话</param>

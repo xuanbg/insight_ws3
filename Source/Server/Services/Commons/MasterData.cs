@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
+using static Insight.WS.Server.Common.SqlHelper;
 
 namespace Insight.WS.Service
 {
@@ -25,7 +25,7 @@ namespace Insight.WS.Service
             if (!OnlineManage.Verification(us)) return false;
 
             var sql = $"update {tab} set [Enable] = 1 where MID = '{id}'";
-            return SqlHelper.SqlNonQuery(sql) > 0;
+            return SqlNonQuery(MakeCommand(sql)) > 0;
         }
 
         /// <summary>
@@ -43,16 +43,16 @@ namespace Insight.WS.Service
             var rest = 0;
 
             var sql = $"Delete From MasterData where ID = '{id}'";
-            cmds.Add(SqlHelper.MakeCommand(sql));
-            if (SqlHelper.SqlExecute(cmds))
+            cmds.Add(MakeCommand(sql));
+            if (SqlExecute(cmds))
             {
                 rest = 1;
             }
             else if (tab != null)
             {
                 cmds.Clear();
-                cmds.Add(SqlHelper.MakeCommand($"update {tab} set [Enable] = 0 where MID = '{id}'"));
-                rest = SqlHelper.SqlExecute(cmds) ? 2 : 0;
+                cmds.Add(MakeCommand($"update {tab} set [Enable] = 0 where MID = '{id}'"));
+                rest = SqlExecute(cmds) ? 2 : 0;
             }
             return rest;
         }
@@ -83,7 +83,7 @@ namespace Insight.WS.Service
             if (id.HasValue) cmds.Add(UpdateFailureDate((Guid)id, obj.EffectiveDate));
 
             var sql = $"select count(*) from MDR_MU where FailureDate is null and MasterDataId = '{obj.MasterDataId}' and UserId = '{obj.UserId}'";
-            if ((int)SqlHelper.SqlScalar(sql) == 0)
+            if ((int)SqlScalar(MakeCommand(sql)) == 0)
             {
                 sql = "insert MDR_MU (MasterDataId, UserId, IsMaster, EffectiveDate) select @MasterDataId, @UserId, @IsMaster, @EffectiveDate";
                 var parm = new[]
@@ -93,9 +93,9 @@ namespace Insight.WS.Service
                     new SqlParameter("@IsMaster", obj.IsMaster),
                     new SqlParameter("@EffectiveDate", obj.EffectiveDate)
                 };
-                cmds.Add(SqlHelper.MakeCommand(sql, parm));
+                cmds.Add(MakeCommand(sql, parm));
             }
-            return SqlHelper.SqlExecute(cmds);
+            return SqlExecute(cmds);
         }
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace Insight.WS.Service
             if (!OnlineManage.Verification(us)) return false;
 
             var cmds = ids.Select(id => UpdateFailureDate(id, DateTime.Now)).ToList();
-            return SqlHelper.SqlExecute(cmds);
+            return SqlExecute(cmds);
         }
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace Insight.WS.Service
                 new SqlParameter("@FailureDate", time),
                 new SqlParameter("@ID", SqlDbType.UniqueIdentifier) {Value = id}
             };
-            return SqlHelper.MakeCommand(sql, parm);
+            return MakeCommand(sql, parm);
         }
 
         /// <summary>
@@ -141,7 +141,7 @@ namespace Insight.WS.Service
 
             var cmds = new List<SqlCommand>
             {
-                SqlHelper.MakeCommand($"update MDG_Customer set [Enable] = 0, Visible = 0 where MID = '{obj.MasterId}'")
+                MakeCommand($"update MDG_Customer set [Enable] = 0, Visible = 0 where MID = '{obj.MasterId}'")
             };
 
             const string sql = "insert MasterData_Merger (MasterId, MergerId, CreatorUserId) select @MasterId, @MergerId, @CreatorUserId";
@@ -151,8 +151,8 @@ namespace Insight.WS.Service
                 new SqlParameter("@MergerId", SqlDbType.UniqueIdentifier) {Value = obj.MergerId},
                 new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = us.UserId}
             };
-            cmds.Add(SqlHelper.MakeCommand(sql, parm));
-            return SqlHelper.SqlExecute(cmds);
+            cmds.Add(MakeCommand(sql, parm));
+            return SqlExecute(cmds);
         }
 
         /// <summary>
@@ -166,17 +166,17 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return null;
 
-            var sql = new StringBuilder("with List as(Select D.ID, max(P.Permission) as Permission from Dictionary D ");
-            sql.Append("join Get_PermData('5C801552-1905-452B-AE7F-E57227BE70B8', @UserId, @DeptId) P on P.OrgId = isnull(D.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = D.CreatorUserId group by D.ID) ");
-            sql.Append("select D.*, case when D.IsData = 0 then 0 else L.Permission end as Permission from Dictionary D ");
-            sql.AppendFormat("join List L on L.ID = D.ID where D.type = @Type {0} order by [Index]", withOutTree ? "and D.IsData = 1" : "");
+            var sql = "with List as(Select D.ID, max(P.Permission) as Permission from Dictionary D ";
+            sql += "join Get_PermData('5C801552-1905-452B-AE7F-E57227BE70B8', @UserId, @DeptId) P on P.OrgId = isnull(D.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = D.CreatorUserId group by D.ID) ";
+            sql += "select D.*, case when D.IsData = 0 then 0 else L.Permission end as Permission from Dictionary D ";
+            sql += $"join List L on L.ID = D.ID where D.type = @Type {(withOutTree ? "and D.IsData = 1" : "")} order by [Index]";
             var parm = new[]
             {
                 new SqlParameter("@Type", type),
                 new SqlParameter("@UserId", SqlDbType.UniqueIdentifier) {Value = us.UserId},
                 new SqlParameter("@DeptId", SqlDbType.UniqueIdentifier) {Value = us.DeptId}
             };
-            return SqlHelper.SqlQuery(sql.ToString(), parm);
+            return SqlQuery(MakeCommand(sql, parm));
         }
 
         /// <summary>
@@ -191,7 +191,7 @@ namespace Insight.WS.Service
             var sql = "select C.* from Contact C join MDR_MU R on R.MasterDataId = C.ParentId and R.FailureDate is null and R.UserId = @UserId union ";
             sql += "select C.* from Contact C join MDR_MU R on R.MasterDataId = C.ParentId and R.FailureDate is null and R.IsMaster = 1 join MDG_Employee E on E.MID = R.UserId and E.DirectLeader = @UserId";
             var parm = new[] {new SqlParameter("@UserId", SqlDbType.UniqueIdentifier) {Value = us.UserId}};
-            return SqlHelper.SqlQuery(sql, parm);
+            return SqlQuery(MakeCommand(sql, parm));
         }
 
         /// <summary>
@@ -206,7 +206,7 @@ namespace Insight.WS.Service
             var sql = "select I.* from ContactInfo I join MasterData C on C.ID = I.MasterDataId join MDR_MU R on R.MasterDataId = C.ParentId and R.FailureDate is null and R.UserId = @UserId union ";
             sql += "select I.* from ContactInfo I join MasterData C on C.ID = I.MasterDataId join MDR_MU R on R.MasterDataId = C.ParentId and R.FailureDate is null and R.IsMaster = 1 join MDG_Employee E on E.MID = R.UserId and E.DirectLeader = @UserId";
             var parm = new[] {new SqlParameter("@UserId", SqlDbType.UniqueIdentifier) {Value = us.UserId}};
-            return SqlHelper.SqlQuery(sql, parm);
+            return SqlQuery(MakeCommand(sql, parm));
         }
 
         /// <summary>
@@ -246,7 +246,7 @@ namespace Insight.WS.Service
             if (!OnlineManage.Verification(us)) return null;
 
             const string sql = "select M.ID, M.Name as 姓名, M.Alias as 登录名 from MasterData M join MDG_Employee E on E.MID = M.ID and E.Status < 3";
-            return SqlHelper.SqlQuery(sql);
+            return SqlQuery(MakeCommand(sql));
         }
 
         /// <summary>
@@ -260,7 +260,7 @@ namespace Insight.WS.Service
             if (!OnlineManage.Verification(us)) return null;
 
             var sql = $"select R.ID, U.Name as 姓名, U.LoginName as 登录账号 from MDR_MU R join SYS_User U on U.ID = R.UserId where R.IsMaster = 0 and R.FailureDate is null and R.MasterDataId = '{id}'";
-            return SqlHelper.SqlQuery(sql);
+            return SqlQuery(MakeCommand(sql));
         }
 
         /// <summary>
@@ -300,10 +300,10 @@ namespace Insight.WS.Service
                 new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = us.UserId},
                 new SqlParameter("@Read", SqlDbType.Int) {Value = 0}
             };
-            cmds.Add(SqlHelper.MakeCommand(sql, parm));
+            cmds.Add(MakeCommand(sql, parm));
 
             cmds.AddRange(MasterDataDAL.InsertContactInfo(Guid.Empty, cdt));
-            return SqlHelper.SqlExecute(cmds);
+            return SqlExecute(cmds);
         }
 
         /// <summary>
@@ -339,11 +339,11 @@ namespace Insight.WS.Service
                 new SqlParameter("@LoginUser", d.LoginUser),
                 new SqlParameter("@MID", SqlDbType.UniqueIdentifier) {Value = d.MID}
             };
-            cmds.Add(SqlHelper.MakeCommand(sql, parm));
+            cmds.Add(MakeCommand(sql, parm));
 
             cmds.AddRange(MasterDataDAL.DeleteContactInfo(cdl));
             cmds.AddRange(MasterDataDAL.InsertContactInfo(m.ID, cdt));
-            return SqlHelper.SqlExecute(cmds);
+            return SqlExecute(cmds);
         }
 
     }

@@ -44,6 +44,7 @@ namespace Insight.WS.Server
 
         protected override void OnStart(string[] args)
         {
+
             // 启动在线用户管理
             // ReSharper disable once UnusedVariable
             var om = new OnlineManage();
@@ -55,14 +56,14 @@ namespace Insight.WS.Server
             // 启动WCF服务主机
             var comp = bool.Parse(Util.GetAppSetting("IsCompres"));
             var address = Util.GetAppSetting("Address");
-            var tcpService = new Services()
+            var tcpService = new Services
             {
                 BaseAddress = new Uri($"net.tcp://{address}:{Util.GetAppSetting("TcpPort")}")
             };
             tcpService.InitTcpBinding(comp);
             Hosts.AddRange(tcpService.StartService("TCP", !comp));
 
-            var httpService = new Services()
+            var httpService = new Services
             {
                 BaseAddress = new Uri($"http://{address}:{Util.GetAppSetting("HttpPort")}")
             };

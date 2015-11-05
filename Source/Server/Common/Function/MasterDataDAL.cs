@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using Insight.WS.Server.Common.ORM;
+using static Insight.WS.Server.Common.SqlHelper;
 
 namespace Insight.WS.Server.Common
 {
@@ -41,7 +42,7 @@ namespace Insight.WS.Server.Common
                 new SqlParameter("@FullName", obj.FullName),
                 new SqlParameter("@Write", SqlDbType.Int) {Value = 0}
             };
-            return SqlHelper.MakeCommand(sql, parm);
+            return MakeCommand(sql, parm);
         }
 
         /// <summary>
@@ -62,7 +63,7 @@ namespace Insight.WS.Server.Common
                 new SqlParameter("@FullName", obj.FullName),
                 new SqlParameter("@ID", SqlDbType.UniqueIdentifier) {Value = obj.ID}
             };
-            return SqlHelper.MakeCommand(sql, parm);
+            return MakeCommand(sql, parm);
         }
 
         /// <summary>
@@ -74,7 +75,7 @@ namespace Insight.WS.Server.Common
         {
             var sql =
                 $"select C.ID, C.InfoTypeId as 联系方式, M.Alias, C.Number as 号码, C.IsMaster as 主要 From MDS_Contact_Info C join MasterData M on M.ID = C.InfoTypeId where C.MasterDataId = '{id}'";
-            return SqlHelper.SqlQuery(sql);
+            return SqlQuery(MakeCommand(sql));
         }
 
         /// <summary>
@@ -94,7 +95,7 @@ namespace Insight.WS.Server.Common
                     new SqlParameter("@Number", row["号码"]), new SqlParameter("@IsMaster", row["主要"]), 
                     new SqlParameter("@Read", SqlDbType.Int) {Value = 0}
                 } into parm
-                select SqlHelper.MakeCommand(sql, parm)).ToList();
+                select MakeCommand(sql, parm)).ToList();
         }
 
         /// <summary>
@@ -105,7 +106,7 @@ namespace Insight.WS.Server.Common
         public static bool DeleteMasterData(Guid id)
         {
             var sql = $"delete MasterData where ID = '{id}'";
-            return SqlHelper.SqlNonQuery(sql) > 0;
+            return SqlNonQuery(MakeCommand(sql)) > 0;
         }
 
         /// <summary>
@@ -115,7 +116,7 @@ namespace Insight.WS.Server.Common
         /// <returns>SqlCommand List SqlCommand集合</returns>
         public static IEnumerable<SqlCommand> DeleteContactInfo(IEnumerable<object> cdl)
         {
-            return cdl.Select(id => SqlHelper.MakeCommand($"delete MDS_Contact_Info where ID = '{id}'")).ToList();
+            return cdl.Select(id => MakeCommand($"delete MDS_Contact_Info where ID = '{id}'")).ToList();
         }
 
         /// <summary>
@@ -125,7 +126,7 @@ namespace Insight.WS.Server.Common
         /// <returns>SqlCommand 对象实体</returns>
         public static SqlCommand ClearMaster(Guid? id)
         {
-            return SqlHelper.MakeCommand(
+            return MakeCommand(
                 $"update D set IsMaster = 0 from MDG_Contact D join MasterData M on M.ID = D.MID where M.ParentId = '{id}'");
         }
 
@@ -137,7 +138,7 @@ namespace Insight.WS.Server.Common
         public static bool HasContact(Guid? id)
         {
             var sql = $"select count(*) from MDG_Contact D join MasterData M on M.ID = D.MID where M.ParentId = '{id}'";
-            return (int)SqlHelper.SqlScalar(sql) > 0;
+            return (int)SqlScalar(MakeCommand(sql)) > 0;
         }
 
     }

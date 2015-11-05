@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using Insight.WS.Server.Common.ORM;
+using static Insight.WS.Server.Common.SqlHelper;
 
 namespace Insight.WS.Server.Common
 {
@@ -108,7 +109,7 @@ namespace Insight.WS.Server.Common
             if (!OnlineManage.Verification(us)) return false;
 
             var sql = $"update SYS_User set Password = '{pw}' where ID = '{us.UserId}' ";
-            if (SqlHelper.SqlNonQuery(sql) <= 0) return false;
+            if (SqlNonQuery(MakeCommand(sql)) <= 0) return false;
 
             OnlineManage.Sessions[us.ID].Signature = pw;
             return true;
@@ -162,9 +163,9 @@ namespace Insight.WS.Server.Common
                 new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = Guid.Empty},
                 new SqlParameter("@Read", SqlDbType.Int) {Value = 0}
             };
-            cmds.Add(SqlHelper.MakeCommand(sql, parm));
+            cmds.Add(MakeCommand(sql, parm));
 
-            return SqlHelper.SqlExecute(cmds);
+            return SqlExecute(cmds);
         }
 
         /// <summary>
@@ -190,7 +191,7 @@ namespace Insight.WS.Server.Common
                 new SqlParameter("@Char", str),
                 new SqlParameter("@Code", SqlDbType.VarChar)
             };
-            return SqlHelper.SqlScalar(sql, parm).ToString();
+            return SqlScalar(MakeCommand(sql, parm)).ToString();
         }
 
         /// <summary>
@@ -261,7 +262,7 @@ namespace Insight.WS.Server.Common
                 new SqlParameter("@CreatorDeptId", SqlDbType.UniqueIdentifier) {Value = img.CreatorDeptId},
                 new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = img.CreatorUserId}, 
                 new SqlParameter("@Id", SqlDbType.UniqueIdentifier) {Value = bid}
-            }).Select(parm => SqlHelper.MakeCommand(sql, parm)).ToList();
+            }).Select(parm => MakeCommand(sql, parm)).ToList();
         }
 
         /// <summary>
@@ -275,7 +276,7 @@ namespace Insight.WS.Server.Common
         {
             using (var context = new WSEntities())
             {
-                var list = context.SYS_Verify_Record.Where(c => !c.Verified && c.Mobile == number && c.Type == type).ToList();
+                var list = context.SYS_Verify_Record.Where(c => c.Mobile == number && c.Type == type && !c.Verified).ToList();
                 if (list.Count == 0 || !(list.Exists(c => c.Code == code && c.FailureTime > DateTime.Now))) return false;
 
                 foreach (var record in list)
@@ -326,7 +327,7 @@ namespace Insight.WS.Server.Common
                 new SqlParameter("@Code", code),
                 new SqlParameter("@FailureTime", DateTime.Now.AddMinutes(time))
             };
-            SqlHelper.SqlNonQuery(sql, parm);
+            SqlNonQuery(MakeCommand(sql, parm));
         }
 
         #endregion

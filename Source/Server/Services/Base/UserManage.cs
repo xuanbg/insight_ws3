@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
+using static Insight.WS.Server.Common.SqlHelper;
 
 namespace Insight.WS.Service
 {
@@ -23,7 +24,7 @@ namespace Insight.WS.Service
             if (!OnlineManage.Verification(us)) return null;
 
             const string sql = "select ID, BuiltIn as 内置, Name as 组名称, Description as 描述 From SYS_UserGroup where Visible = 1 order by SN";
-            return SqlHelper.SqlQuery(sql);
+            return SqlQuery(MakeCommand(sql));
         }
 
         /// <summary>
@@ -52,7 +53,7 @@ namespace Insight.WS.Service
             if (!OnlineManage.Verification(us)) return null;
 
             const string sql = "select ID, BuiltIn as 内置, Name as 名称, LoginName as 登录名, Description as 描述, Case Validity when 1 then '正常' else '封禁' end 状态 From SYS_User where Type > 0 order by SN";
-            return SqlHelper.SqlQuery(sql);
+            return SqlQuery(MakeCommand(sql));
         }
 
         /// <summary>
@@ -81,7 +82,7 @@ namespace Insight.WS.Service
             if (!OnlineManage.Verification(us)) return null;
 
             const string sql = "select M.ID, U.Name as 用户名, U.LoginName as 登录名, U.Description as 描述, M.GroupId, M.UserId from SYS_UserGroupMember M join SYS_User U on U.ID = M.UserId order by U.SN";
-            return SqlHelper.SqlQuery(sql);
+            return SqlQuery(MakeCommand(sql));
         }
 
         /// <summary>
@@ -96,7 +97,7 @@ namespace Insight.WS.Service
 
             var sql = "select U.ID, U.Name as 用户名, U.LoginName as 登录名, U.Description as 描述 from SYS_User U where U.Type > 0 ";
             sql += $"and not exists (select UserId from SYS_UserGroupMember where UserId = U.ID and GroupId = '{id}') order by U.LoginName";
-            return SqlHelper.SqlQuery(sql);
+            return SqlQuery(MakeCommand(sql));
         }
 
         #endregion
@@ -120,7 +121,7 @@ namespace Insight.WS.Service
                 new SqlParameter("@Description", obj.Description),
                 new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = us.UserId}
             };
-            return SqlHelper.SqlScalar(sql, parm);
+            return SqlScalar(MakeCommand(sql, parm));
         }
 
         /// <summary>
@@ -147,7 +148,7 @@ namespace Insight.WS.Service
                 new SqlParameter("@Type", SqlDbType.Int) {Value = 1},
                 new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = Guid.Empty}
             };
-            return SqlHelper.SqlNonQuery(sql, parm) > 0;
+            return SqlNonQuery(MakeCommand(sql, parm)) > 0;
         }
 
         /// <summary>
@@ -167,8 +168,8 @@ namespace Insight.WS.Service
                 new SqlParameter("@GroupId", SqlDbType.UniqueIdentifier) {Value = gid}, 
                 new SqlParameter("@UserId", SqlDbType.UniqueIdentifier) {Value = id}, 
                 new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = us.UserId}
-            }).Select(parm => SqlHelper.MakeCommand(sql, parm)).ToList();
-            return SqlHelper.SqlExecute(cmds);
+            }).Select(parm => MakeCommand(sql, parm)).ToList();
+            return SqlExecute(cmds);
         }
 
         #endregion
@@ -192,7 +193,7 @@ namespace Insight.WS.Service
                 new SqlParameter("@Name", obj.Name),
                 new SqlParameter("@Description", obj.Description)
             };
-            return SqlHelper.SqlNonQuery(sql, parm) > 0;
+            return SqlNonQuery(MakeCommand(sql, parm)) > 0;
         }
 
         /// <summary>
@@ -213,7 +214,7 @@ namespace Insight.WS.Service
                 new SqlParameter("@LoginName", obj.LoginName),
                 new SqlParameter("@Description", obj.Description)
             };
-            return SqlHelper.SqlNonQuery(sql, parm) > 0;
+            return SqlNonQuery(MakeCommand(sql, parm)) > 0;
         }
 
         /// <summary>
@@ -228,7 +229,7 @@ namespace Insight.WS.Service
             if (!OnlineManage.Verification(us)) return false;
 
             var sql = $"update SYS_User set Validity = '{validity}' where ID = '{id}'";
-            if (SqlHelper.SqlNonQuery(sql) > 0)
+            if (SqlNonQuery(MakeCommand(sql)) > 0)
             {
                 OnlineManage.Sessions.Find(s => s.UserId == id).Validity = validity;
                 return true;
@@ -248,7 +249,7 @@ namespace Insight.WS.Service
 
             const string pw = "E10ADC3949BA59ABBE56E057F20F883E";
             var sql = $"update SYS_User set Password = '{pw}' where ID = '{id}'";
-            if (SqlHelper.SqlNonQuery(sql) > 0)
+            if (SqlNonQuery(MakeCommand(sql)) > 0)
             {
                 OnlineManage.Sessions.Find(s => s.UserId == id).Signature = pw;
                 return true;
@@ -271,7 +272,7 @@ namespace Insight.WS.Service
             if (!OnlineManage.Verification(us)) return false;
 
             var sql = $"Delete from SYS_UserGroup where ID = '{id}' and BuiltIn = 0";
-            return SqlHelper.SqlNonQuery(sql) > 0;
+            return SqlNonQuery(MakeCommand(sql)) > 0;
         }
 
         /// <summary>
@@ -285,7 +286,7 @@ namespace Insight.WS.Service
             if (!OnlineManage.Verification(us)) return false;
 
             var sql = $"Delete from SYS_User where ID = '{id}' and BuiltIn = 0";
-            return SqlHelper.SqlNonQuery(sql) > 0;
+            return SqlNonQuery(MakeCommand(sql)) > 0;
         }
 
         /// <summary>
@@ -302,8 +303,8 @@ namespace Insight.WS.Service
             var cmds = ids.Select(id => new[]
             {
                 new SqlParameter("@ID", SqlDbType.UniqueIdentifier) {Value = id}
-            }).Select(parm => SqlHelper.MakeCommand(sql, parm)).ToList();
-            return SqlHelper.SqlExecute(cmds);
+            }).Select(parm => MakeCommand(sql, parm)).ToList();
+            return SqlExecute(cmds);
         }
 
         #endregion

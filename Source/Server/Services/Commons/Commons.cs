@@ -2,21 +2,16 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using System.Windows.Forms;
-using System.Text;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
+using static Insight.WS.Server.Common.SqlHelper;
 
 namespace Insight.WS.Service
 {
 
     public partial class Commons : ICommons
     {
-
-        private string _RootPath;
 
         #region 报表接口
 
@@ -31,16 +26,16 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return null;
 
-            var sql = new StringBuilder("with List as(Select D.ID, max(P.Permission) as Permission from ReportTemplet D ");
-            sql.Append("join Get_PermData('AD0BD296-46F5-46B3-85B9-00B6941343E7', @UserId, @DeptId) P on P.OrgId = isnull(D.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = D.CreatorUserId ");
-            sql.AppendFormat("where D.Alias = '{0}' {1}group by D.ID) ", type, withOutTree ? "and D.IsData = 1 " : "");
-            sql.Append("select D.*, case when D.IsData = 0 then 0 else L.Permission end as Permission from ReportTemplet D join List L on L.ID = D.ID order by D.[Index]");
+            var sql = "with List as(Select D.ID, max(P.Permission) as Permission from ReportTemplet D ";
+            sql += "join Get_PermData('AD0BD296-46F5-46B3-85B9-00B6941343E7', @UserId, @DeptId) P on P.OrgId = isnull(D.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = D.CreatorUserId ";
+            sql += $"where D.Alias = '{type}' {(withOutTree ? "and D.IsData = 1 " : "")}group by D.ID) ";
+            sql += "select D.*, case when D.IsData = 0 then 0 else L.Permission end as Permission from ReportTemplet D join List L on L.ID = D.ID order by D.[Index]";
             var parm = new[]
             {
                 new SqlParameter("@UserId", SqlDbType.UniqueIdentifier) {Value = us.UserId},
                 new SqlParameter("@DeptId", SqlDbType.UniqueIdentifier) {Value = us.DeptId}
             };
-            return SqlHelper.SqlQuery(sql.ToString(), parm);
+            return SqlQuery(MakeCommand(sql, parm));
         }
 
         /// <summary>
@@ -69,7 +64,7 @@ namespace Insight.WS.Service
                         new SqlParameter("ClearingId", SqlDbType.UniqueIdentifier) {Value = oid},
                         new SqlParameter("ImageId", SqlDbType.UniqueIdentifier) {Value = id}
                     };
-                    SqlHelper.SqlQuery(sql, parm);
+                    SqlQuery(MakeCommand(sql, parm));
                 }
             }
             return img;
@@ -109,7 +104,7 @@ namespace Insight.WS.Service
             if (!OnlineManage.Verification(us)) return false;
 
             var cmds = CommonDAL.AddImageDatas(objs, tab, col, bid);
-            return SqlHelper.SqlExecute(cmds);
+            return SqlExecute(cmds);
         }
 
         /// <summary>
@@ -122,7 +117,8 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return false;
 
-            return SqlHelper.SqlNonQuery($"delete ImageData where ID = '{id}'") > 0;
+            var sql = $"delete ImageData where ID = '{id}'";
+            return SqlNonQuery(MakeCommand(sql)) > 0;
         }
 
         #endregion
@@ -142,7 +138,7 @@ namespace Insight.WS.Service
             if (!OnlineManage.Verification(us)) return false;
 
             var sql = $"select count(*) from {tab} where {col} = '{str}'";
-            return (int)SqlHelper.SqlScalar(sql) > 0;
+            return (int)SqlScalar(MakeCommand(sql)) > 0;
         }
 
         /// <summary>
@@ -162,7 +158,7 @@ namespace Insight.WS.Service
             var p = isParent ? "ParentId" : "CategoryId";
             var pn = pid.HasValue ? $"= '{pid}'" : "is null";
             var sql = $"select count(*) from {tab} where {col} = '{str}' and {p} {pn}";
-            return (int)SqlHelper.SqlScalar(sql) > 0;
+            return (int)SqlScalar(MakeCommand(sql)) > 0;
         }
 
         /// <summary>
@@ -179,7 +175,7 @@ namespace Insight.WS.Service
 
             var sql = $"select count(ID) from {tab} where {type} {(id.HasValue ? "= @ID" : "is null")}";
             var parm = new[] {new SqlParameter("@ID", SqlDbType.UniqueIdentifier) {Value = id}};
-            return (int)SqlHelper.SqlScalar(sql, parm);
+            return (int)SqlScalar(MakeCommand(sql, parm));
         }
 
         #endregion
@@ -187,14 +183,33 @@ namespace Insight.WS.Service
         #region 其它接口
 
         /// <summary>
-        /// 获取客户端文件列表
+        /// 获取广告商品列表
         /// </summary>
-        /// <returns>FileAttribute List 文件列表</returns>
-        public List<UpdateFile> GetServerList()
+        /// <param name="us">用户会话</param>
+        /// <returns>广告商品列表</returns>
+        public List<BIZ_Advertiser> GetAdvertisers(Session us)
         {
-            _RootPath = Application.StartupPath + "\\Client";
-            var list = new List<UpdateFile>();
-            return GetLocalList(_RootPath, list);
+            if (!OnlineManage.Verification(us)) return null;
+
+            using (var context = new WSEntities())
+            {
+                return context.BIZ_Advertiser.ToList();
+            }
+        }
+
+        public MDG_EntMember g()
+        {
+            return new MDG_EntMember();
+        }
+
+        public UpdateFile a()
+        {
+            return new UpdateFile();
+        }
+
+        public Advance b()
+        {
+            return new Advance();
         }
 
         /// <summary>
@@ -221,7 +236,7 @@ namespace Insight.WS.Service
             if (!OnlineManage.Verification(us)) return null;
 
             const string sql = "select ID, ParentId, NodeType, [Index], 名称 as Name from Organization";
-            return SqlHelper.SqlQuery(sql);
+            return SqlQuery(MakeCommand(sql));
         }
 
         /// <summary>
@@ -241,7 +256,7 @@ namespace Insight.WS.Service
                 new SqlParameter("@UserId", SqlDbType.UniqueIdentifier) {Value = us.UserId},
                 new SqlParameter("@DeptId", SqlDbType.UniqueIdentifier) {Value = us.DeptId}
             };
-            return SqlHelper.SqlQuery(sql, parm);
+            return SqlQuery(MakeCommand(sql, parm));
         }
 
         /// <summary>
@@ -259,7 +274,7 @@ namespace Insight.WS.Service
             if ((type & 4) == 4) sql += "union select M.ID, M.Name, M.Alias from MasterData M join MDG_Supplier S on S.MID = M.ID ";
             if ((type & 2) == 2) sql += "union select M.ID, M.Name, M.Alias from MasterData M join MDG_Employee E on E.MID = M.ID ";
             if ((type & 1) == 1) sql += "union select M.ID, M.Name, M.Alias from MasterData M join MDG_Contact O on O.MID = M.ID ";
-            return SqlHelper.SqlQuery(sql.Substring(6));
+            return SqlQuery(MakeCommand(sql));
         }
 
         /// <summary>
@@ -280,7 +295,7 @@ namespace Insight.WS.Service
                 new SqlParameter("@UserId", SqlDbType.UniqueIdentifier) {Value = us.UserId},
                 new SqlParameter("@DeptId", SqlDbType.UniqueIdentifier) {Value = us.DeptId}
             };
-            return SqlHelper.SqlQuery(sql, parm);
+            return SqlQuery(MakeCommand(sql, parm));
         }
 
         /// <summary>
@@ -300,7 +315,7 @@ namespace Insight.WS.Service
                 new SqlParameter("@UserId", SqlDbType.UniqueIdentifier) {Value = us.UserId},
                 new SqlParameter("@DeptId", SqlDbType.UniqueIdentifier) {Value = us.DeptId}
             };
-            return SqlHelper.SqlQuery(sql, parm);
+            return SqlQuery(MakeCommand(sql, parm));
         }
 
         /// <summary>
@@ -321,37 +336,10 @@ namespace Insight.WS.Service
                 new SqlParameter("@DeptId", SqlDbType.UniqueIdentifier) {Value = us.DeptId}
             };
 
-            return SqlHelper.SqlQuery(sql, parm);
+            return SqlQuery(MakeCommand(sql, parm));
         }
 
         #endregion
-
-        /// <summary>
-        /// 获取客户端文件列表
-        /// </summary>
-        /// <param name="dir">客户端文件路径</param>
-        /// <param name="list">文件列表</param>
-        /// <returns>FileAttribute List 文件列表</returns>
-        private List<UpdateFile> GetLocalList(string dir, List<UpdateFile> list)
-        {
-            var dirInfo = new DirectoryInfo(dir);
-            list.AddRange(from file in dirInfo.GetFiles()
-                          where ".dll.exe.frl".IndexOf(file.Extension) >= 0
-                          select new UpdateFile
-                          {
-                              Name = file.Name,
-                              Path = file.DirectoryName?.Replace(_RootPath, ""),
-                              FullPath = file.FullName,
-                              Version = FileVersionInfo.GetVersionInfo(file.FullName).FileVersion
-                          });
-
-            var dirs = Directory.GetDirectories(dir);
-            foreach (var path in dirs)
-            {
-                GetLocalList(path, list);
-            }
-            return list;
-        }
 
     }
 }

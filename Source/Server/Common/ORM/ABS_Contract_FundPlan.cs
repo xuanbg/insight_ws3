@@ -10,56 +10,34 @@
 namespace Insight.WS.Server.Common.ORM
 {
     using System;
-    using System.Runtime.Serialization;
     using System.Collections.Generic;
-    
-    [DataContract(IsReference = true)]
-    [KnownType(typeof(ABS_Contract))]
-    [KnownType(typeof(ABS_Contract_FundPerform))]
-    [KnownType(typeof(MDG_Dictionary))]
-    [KnownType(typeof(ABS_Contract_Subjects))]
     
     public partial class ABS_Contract_FundPlan
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ABS_Contract_FundPlan()
         {
             this.ABS_Contract_FundPerform = new HashSet<ABS_Contract_FundPerform>();
         }
     
-    	[DataMember]
         public System.Guid ID { get; set; }
-    	[DataMember]
         public long SN { get; set; }
-    	[DataMember]
         public System.Guid ContractId { get; set; }
-    	[DataMember]
         public Nullable<System.Guid> SubjectsId { get; set; }
-    	[DataMember]
         public Nullable<System.Guid> ParentId { get; set; }
-    	[DataMember]
         public Nullable<System.Guid> CurrencyId { get; set; }
-    	[DataMember]
         public decimal Amount { get; set; }
-    	[DataMember]
         public System.DateTime StartDate { get; set; }
-    	[DataMember]
         public System.DateTime EndDate { get; set; }
-    	[DataMember]
         public Nullable<System.DateTime> Ex_StartDate { get; set; }
-    	[DataMember]
         public Nullable<System.DateTime> Ex_EndDate { get; set; }
-    	[DataMember]
         public string Description { get; set; }
-    	[DataMember]
         public System.DateTime CreateTime { get; set; }
     
-    	[DataMember]
         public virtual ABS_Contract ABS_Contract { get; set; }
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ABS_Contract_FundPerform> ABS_Contract_FundPerform { get; set; }
-    	[DataMember]
         public virtual MDG_Dictionary MDG_Dictionary { get; set; }
-    	[DataMember]
         public virtual ABS_Contract_Subjects ABS_Contract_Subjects { get; set; }
     }
 }

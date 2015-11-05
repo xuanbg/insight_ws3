@@ -10,53 +10,32 @@
 namespace Insight.WS.Server.Common.ORM
 {
     using System;
-    using System.Runtime.Serialization;
     using System.Collections.Generic;
-    
-    [DataContract(IsReference = true)]
-    [KnownType(typeof(ABS_Advance_Detail))]
-    [KnownType(typeof(MDG_Dictionary))]
-    [KnownType(typeof(SYS_Organization))]
-    [KnownType(typeof(SYS_User))]
-    [KnownType(typeof(MasterData))]
     
     public partial class ABS_Advance
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ABS_Advance()
         {
             this.ABS_Advance_Detail = new HashSet<ABS_Advance_Detail>();
         }
     
-    	[DataMember]
         public System.Guid ID { get; set; }
-    	[DataMember]
         public long SN { get; set; }
-    	[DataMember]
         public string AccountNo { get; set; }
-    	[DataMember]
         public Nullable<System.Guid> CardType { get; set; }
-    	[DataMember]
         public System.Guid OwnerId { get; set; }
-    	[DataMember]
         public int Status { get; set; }
-    	[DataMember]
         public string Description { get; set; }
-    	[DataMember]
         public System.Guid CreatorDeptId { get; set; }
-    	[DataMember]
         public System.Guid CreatorUserId { get; set; }
-    	[DataMember]
         public System.DateTime CreateTime { get; set; }
     
-    	[DataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ABS_Advance_Detail> ABS_Advance_Detail { get; set; }
-    	[DataMember]
         public virtual MDG_Dictionary MDG_Dictionary { get; set; }
-    	[DataMember]
         public virtual SYS_Organization SYS_Organization { get; set; }
-    	[DataMember]
         public virtual SYS_User SYS_User { get; set; }
-    	[DataMember]
         public virtual MasterData MasterData { get; set; }
     }
 }

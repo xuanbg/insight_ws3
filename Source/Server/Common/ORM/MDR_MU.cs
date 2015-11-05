@@ -10,33 +10,19 @@
 namespace Insight.WS.Server.Common.ORM
 {
     using System;
-    using System.Runtime.Serialization;
     using System.Collections.Generic;
-    
-    [DataContract(IsReference = true)]
-    [KnownType(typeof(MasterData))]
-    [KnownType(typeof(SYS_User))]
     
     public partial class MDR_MU
     {
-    	[DataMember]
         public System.Guid ID { get; set; }
-    	[DataMember]
         public long SN { get; set; }
-    	[DataMember]
         public bool IsMaster { get; set; }
-    	[DataMember]
         public System.Guid MasterDataId { get; set; }
-    	[DataMember]
         public System.Guid UserId { get; set; }
-    	[DataMember]
         public System.DateTime EffectiveDate { get; set; }
-    	[DataMember]
         public Nullable<System.DateTime> FailureDate { get; set; }
     
-    	[DataMember]
         public virtual MasterData MasterData { get; set; }
-    	[DataMember]
         public virtual SYS_User SYS_User { get; set; }
     }
 }

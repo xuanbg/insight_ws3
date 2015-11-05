@@ -130,27 +130,30 @@ namespace Insight.WS.Server.Common
             {
                 PayType = payId,
                 Code = payCode,
-                Amount = sa
+                Amount = ba
             };
             cmds.Add(InsertPays(pay));
 
             // 结算服务费
-            item = new ABS_Clearing_Item
+            if (sa > 0)
             {
-                Summary = "支付分期服务费",
-                ObjectId = service.ID,
-                ObjectName = service.Name,
-                Units = "元",
-                Amount = sa
-            };
-            cmds.Add(InsertDetail(item));
-            pay = new ABS_Clearing_Pay
-            {
-                PayType = payId,
-                Code = payCode,
-                Amount = sa
-            };
-            cmds.Add(InsertPays(pay));
+                item = new ABS_Clearing_Item
+                {
+                    Summary = "支付分期服务费",
+                    ObjectId = service.ID,
+                    ObjectName = service.Name,
+                    Units = "元",
+                    Amount = sa
+                };
+                cmds.Add(InsertDetail(item));
+                pay = new ABS_Clearing_Pay
+                {
+                    PayType = payId,
+                    Code = payCode,
+                    Amount = sa
+                };
+                cmds.Add(InsertPays(pay));
+            }
 
             // 结算违约金
             if (la > 0)

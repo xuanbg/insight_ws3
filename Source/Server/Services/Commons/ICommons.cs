@@ -112,11 +112,21 @@ namespace Insight.WS.Service
         #region 其它接口
 
         /// <summary>
-        /// 获取客户端文件列表
+        /// 获取广告商品列表
         /// </summary>
-        /// <returns>FileAttribute List 文件列表</returns>
+        /// <param name="us">用户会话</param>
+        /// <returns>广告商品列表</returns>
         [OperationContract]
-        List<UpdateFile> GetServerList();
+        List<BIZ_Advertiser> GetAdvertisers(Session us);
+
+        [OperationContract]
+        MDG_EntMember g();
+
+        [OperationContract]
+        UpdateFile a();
+
+        [OperationContract]
+        Advance b();
 
         /// <summary>
         /// 删除在线用户会话

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
+using static Insight.WS.Server.Common.SqlHelper;
 
 namespace Insight.WS.Service
 {
@@ -20,17 +20,17 @@ namespace Insight.WS.Service
         {
             if (!OnlineManage.Verification(us)) return null;
 
-            var sql = new StringBuilder("with List as(Select D.MID, max(P.Permission) as Permission from MDG_Expense D ");
-            sql.Append("join Get_PermData('993D148D-C062-4850-8D3E-FD4F12814F99', @UserId, @DeptId) P on P.OrgId = isnull(D.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = D.CreatorUserId group by D.MID) ");
-            sql.Append("select M.ID, M.CategoryId, D.[Index], D.BuiltIn as 预置, M.Name as 名称, M.Alias as 简称, M.Code as 编码, U.Name as 单位, D.Price as 单价, D.[Description] as 备注, case D.Enable when 0 then '停用' else '正常' end as 状态, L.Permission from MDG_Expense D ");
-            sql.Append("join List L on L.MID = D.MID join MasterData M on M.ID = D.MID left join MasterData U on U.ID = D.Unit order by D.[Index]");
+            var sql = "with List as(Select D.MID, max(P.Permission) as Permission from MDG_Expense D ";
+            sql += "join Get_PermData('993D148D-C062-4850-8D3E-FD4F12814F99', @UserId, @DeptId) P on P.OrgId = isnull(D.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = D.CreatorUserId group by D.MID) ";
+            sql += "select M.ID, M.CategoryId, D.[Index], D.BuiltIn as 预置, M.Name as 名称, M.Alias as 简称, M.Code as 编码, U.Name as 单位, D.Price as 单价, D.[Description] as 备注, case D.Enable when 0 then '停用' else '正常' end as 状态, L.Permission from MDG_Expense D ";
+            sql += "join List L on L.MID = D.MID join MasterData M on M.ID = D.MID left join MasterData U on U.ID = D.Unit order by D.[Index]";
             var parm = new[]
             {
                 new SqlParameter("@UserId", SqlDbType.UniqueIdentifier) {Value = us.UserId},
                 new SqlParameter("@DeptId", SqlDbType.UniqueIdentifier) {Value = us.DeptId}
             };
 
-            return SqlHelper.SqlQuery(sql.ToString(), parm);
+            return SqlQuery(MakeCommand(sql, parm));
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace Insight.WS.Service
 
             if (i != d.Index)
             {
-                cmds.Add(SqlHelper.MakeCommand(CommonDAL.ChangeIndex("MDG_Expense", i, d.Index, m.CategoryId)));
+                cmds.Add(MakeCommand(CommonDAL.ChangeIndex("MDG_Expense", i, d.Index, m.CategoryId)));
             }
             cmds.Add(MasterDataDAL.AddMasterData(m));
 
@@ -81,9 +81,9 @@ namespace Insight.WS.Service
                 new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = us.UserId},
                 new SqlParameter("@Read", SqlDbType.Int) {Value = 0}
             };
-            cmds.Add(SqlHelper.MakeCommand(sql, parm));
+            cmds.Add(MakeCommand(sql, parm));
 
-            return SqlHelper.SqlExecute(cmds);
+            return SqlExecute(cmds);
         }
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace Insight.WS.Service
 
             var cmds = new List<SqlCommand>
             {
-                SqlHelper.MakeCommand(CommonDAL.ChangeIndex("MDG_Expense", i, d.Index, m.CategoryId)),
+                MakeCommand(CommonDAL.ChangeIndex("MDG_Expense", i, d.Index, m.CategoryId)),
                 MasterDataDAL.UpdateMasterData(m)
             };
 
@@ -113,9 +113,9 @@ namespace Insight.WS.Service
                 new SqlParameter("@Description", d.Description),
                 new SqlParameter("@MID", SqlDbType.UniqueIdentifier) {Value = m.ID}
             };
-            cmds.Add(SqlHelper.MakeCommand(sql, parm));
+            cmds.Add(MakeCommand(sql, parm));
 
-            return SqlHelper.SqlExecute(cmds);
+            return SqlExecute(cmds);
         }
 
         /// <summary>
@@ -134,13 +134,13 @@ namespace Insight.WS.Service
             var data = GetExpense(us, id);
             var sql = $"Delete From MasterData where ID = '{id}'";
 
-            cmds.Add(SqlHelper.MakeCommand(CommonDAL.ChangeIndex("MDG_Expense", data.Index, 99999, obj.CategoryId, false)));
-            cmds.Add(SqlHelper.MakeCommand(sql));
-            if (SqlHelper.SqlExecute(cmds))
+            cmds.Add(MakeCommand(CommonDAL.ChangeIndex("MDG_Expense", data.Index, 99999, obj.CategoryId, false)));
+            cmds.Add(MakeCommand(sql));
+            if (SqlExecute(cmds))
             {
                 return 1;
             }
-            return SqlHelper.SqlExecute(new[] {SqlHelper.MakeCommand($"update MDG_Expense set [Enable] = 0 where MID = '{id}'")}) ? 2 : 0;
+            return SqlExecute(new[] {MakeCommand($"update MDG_Expense set [Enable] = 0 where MID = '{id}'")}) ? 2 : 0;
         }
 
     }

@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using Insight.WS.Server.Common.ORM;
+using static Insight.WS.Server.Common.SqlHelper;
 
 namespace Insight.WS.Server.Common
 {
@@ -40,7 +41,7 @@ namespace Insight.WS.Server.Common
                 new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = us.UserId},
                 new SqlParameter("@Write", SqlDbType.Int) {Value = 0}
             };
-            return SqlHelper.MakeCommand(sql, parm);
+            return MakeCommand(sql, parm);
         }
 
         /// <summary>
@@ -71,7 +72,7 @@ namespace Insight.WS.Server.Common
                 new SqlParameter("@Read", SqlDbType.Int) {Value = 0},
                 new SqlParameter("@Write", SqlDbType.Int) {Value = 1}
             };
-            return SqlHelper.MakeCommand(sql, parm);
+            return MakeCommand(sql, parm);
         }
 
         /// <summary>
@@ -97,7 +98,35 @@ namespace Insight.WS.Server.Common
                 new SqlParameter("@Description", obj.Description),
                 new SqlParameter("@Read", SqlDbType.Int) {Value = 0},
                 new SqlParameter("@Get", SqlDbType.Int) {Value = 1}
-            }).Select(parm => SqlHelper.MakeCommand(sql, parm)).ToList();
+            }).Select(parm => MakeCommand(sql, parm)).ToList();
+        }
+
+        /// <summary>
+        /// 拼装插入契约资金计划的SqlCommand
+        /// </summary>
+        /// <param name="obj">契约资金计划对象</param>
+        /// <returns>SqlCommand</returns>
+        public static SqlCommand AddFundPlan(ABS_Contract_FundPlan obj)
+        {
+            var sql = "insert ABS_Contract_FundPlan (ContractId, SubjectsId, ParentId, CurrencyId, Amount, StartDate, EndDate, Ex_StartDate, Ex_EndDate, Description) ";
+            sql += "select @ContractId, @SubjectsId, @ParentId, @CurrencyId, @Amount, @StartDate, @EndDate, @Ex_StartDate, @Ex_EndDate, @Description ";
+            sql += "select ID from ABS_Contract_FundPlan where SN = scope_identity()";
+            var parm = new[]
+            {
+                new SqlParameter("@ContractId", SqlDbType.UniqueIdentifier) {Value = obj.ContractId},
+                new SqlParameter("@SubjectsId", SqlDbType.UniqueIdentifier) {Value = obj.SubjectsId},
+                new SqlParameter("@ParentId", SqlDbType.UniqueIdentifier) {Value = obj.ParentId},
+                new SqlParameter("@CurrencyId", SqlDbType.UniqueIdentifier) {Value = obj.CurrencyId},
+                new SqlParameter("@Amount", obj.Amount),
+                new SqlParameter("@StartDate", obj.StartDate),
+                new SqlParameter("@EndDate", obj.EndDate),
+                new SqlParameter("@Ex_StartDate", obj.Ex_StartDate),
+                new SqlParameter("@Ex_EndDate", obj.Ex_EndDate),
+                new SqlParameter("@Description", obj.Description),
+                new SqlParameter("@Write", SqlDbType.Int) {Value = 0}
+            };
+                
+            return MakeCommand(sql, parm);
         }
 
         /// <summary>
@@ -108,7 +137,7 @@ namespace Insight.WS.Server.Common
         /// <returns>SqlCommand List</returns>
         public static IEnumerable<SqlCommand> FundPerform(object pid, object amount)
         {
-            var pids = SqlHelper.SqlQuery($"select * from dbo.Get_FundPlanId('{pid}')");
+            var pids = SqlQuery(MakeCommand($"select * from dbo.Get_FundPlanId('{pid}')"));
             const string sql = "insert ABS_Contract_FundPerform (PlanId, ClearingId, Amount) select @PlanId, @ClearingId, @Amount";
             return (from DataRow row in pids.Rows
                 select new[]
@@ -119,7 +148,7 @@ namespace Insight.WS.Server.Common
                     new SqlParameter("@Read", SqlDbType.Int) {Value = 1}
                 }
                 into parm
-                select SqlHelper.MakeCommand(sql, parm)).ToList();
+                select MakeCommand(sql, parm)).ToList();
         }
 
         /// <summary>
@@ -136,7 +165,7 @@ namespace Insight.WS.Server.Common
                 new SqlParameter("@PlanId", SqlDbType.UniqueIdentifier) {Value = obj.PlanId},
                 new SqlParameter("@Amount", obj.Amount),
                 new SqlParameter("@Read", SqlDbType.Int) {Value = 0}
-            }).Select(parm => SqlHelper.MakeCommand(sql, parm)).ToList();
+            }).Select(parm => MakeCommand(sql, parm)).ToList();
         }
 
         /// <summary>
@@ -147,7 +176,7 @@ namespace Insight.WS.Server.Common
         /// <returns>SqlCommand</returns>
         public static List<SqlCommand> GoodsPerform(object pid, object count)
         {
-            var pids = SqlHelper.SqlQuery($"select * from dbo.Get_GoodsPlanId('{pid}')");
+            var pids = SqlQuery(MakeCommand($"select * from dbo.Get_GoodsPlanId('{pid}')"));
             const string sql = "insert ABS_Contract_GoodsPerform (PlanId, DeliveryId, Counts) select @PlanId, @DeliveryId, @Counts";
             return (from DataRow row in pids.Rows
                 select new[]
@@ -158,7 +187,7 @@ namespace Insight.WS.Server.Common
                     new SqlParameter("@Read", SqlDbType.Int) {Value = 1}
                 }
                 into parm
-                select SqlHelper.MakeCommand(sql, parm)).ToList();
+                select MakeCommand(sql, parm)).ToList();
         }
 
     }
