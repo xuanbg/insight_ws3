@@ -53,16 +53,16 @@ namespace Insight.WS.Client.Platform.Report.Dialog
         /// <returns></returns>
         private bool CheckInput()
         {
+            if (trlCategory.EditValue == null)
+            {
+                General.ShowWarning("请选择模板分类！");
+                trlCategory.Focus();
+                return false;
+            }
             if (string.IsNullOrEmpty(txtName.Text.Trim()))
             {
                 General.ShowWarning("请输入模板名称！");
                 txtName.Focus();
-                return false;
-            }
-            if (string.IsNullOrEmpty(trlCategory.Text.Trim()))
-            {
-                General.ShowWarning("请选择模板分类！");
-                trlCategory.Focus();
                 return false;
             }
             if (Commons.NameIsExist((Guid) trlCategory.EditValue, txtName.Text.Trim(), "Name", "SYS_Report_Templates"))
