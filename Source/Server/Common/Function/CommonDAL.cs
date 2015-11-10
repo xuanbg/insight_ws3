@@ -29,11 +29,11 @@ namespace Insight.WS.Server.Common
                 return obj;
             }
 
-            var isSafe = false;
             var pw = obj.Signature;
             var us = OnlineManage.Sessions.Find(s => s.LoginName == obj.LoginName);
             if (us == null)
             {
+                // 第一次登录
                 var user = GetUser(obj.LoginName);
                 if (user == null)
                 {
@@ -45,26 +45,29 @@ namespace Insight.WS.Server.Common
                 obj.OpenId = user.OpenId;
                 obj.UserId = user.ID;
                 obj.UserName = user.Name;
-                obj.Signature = user.Password;
                 obj.FailureCount = 0;
                 obj.Validity = user.Validity;
                 obj.Type = user.Type;
 
-                OnlineManage.Sessions.Add(obj);
                 OnlineManage.SafeMachine.Add(null);
+                OnlineManage.Sessions.Add(obj);
                 us = OnlineManage.Sessions[obj.ID];
             }
             else
             {
-                isSafe = obj.MachineId == OnlineManage.SafeMachine[us.ID];
+                // 已经登录过
                 if (us.SessionId == Guid.Empty)
                 {
+                    // 当前未登录
                     us.SessionId = obj.SessionId;
                     us.MachineId = obj.MachineId;
+                    us.DeptId = obj.DeptId;
+                    us.DeptName = obj.DeptName;
                     us.LoginStatus = LoginResult.Success;
                 }
                 else
                 {
+                    // 当前已登录或未正常退出
                     us.LoginStatus = us.MachineId != obj.MachineId ? LoginResult.Online : LoginResult.Multiple;
                 }
             }
@@ -76,25 +79,27 @@ namespace Insight.WS.Server.Common
                 us.FailureCount = 0;
             }
 
+            var isSafe = obj.MachineId == OnlineManage.SafeMachine[us.ID];
+            us.LastConnect = DateTime.Now;
+
+            // 用户被封禁
             if (!us.Validity)
             {
                 us.LoginStatus = LoginResult.Banned;
-            }
-            else if (us.Signature != pw || (us.FailureCount > 4 && !isSafe))
-            {
-                us.FailureCount += 1;
-                us.LoginStatus = LoginResult.Failure;
-                if (us.MachineId == obj.MachineId)
-                {
-                    us.SessionId = Guid.Empty;
-                }
-            }
-            else
-            {
-                OnlineManage.SafeMachine[us.ID] = us.MachineId;
+                return us;
             }
 
-            us.LastConnect = DateTime.Now;
+            // 登录过程正常（1、通过密码验证；2、在上次成功登录系统的设备上登录，或10分钟内连续登录失败次数未超过5次）
+            if (us.Signature == pw && (isSafe || us.FailureCount < 5))
+            {
+                OnlineManage.SafeMachine[us.ID] = us.MachineId;
+                us.FailureCount = 0;
+                return us;
+            }
+
+            // 登录过程异常
+            us.FailureCount += 1;
+            us.LoginStatus = LoginResult.Failure;
             return us;
         }
 
