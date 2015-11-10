@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -10,7 +8,6 @@ using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Text;
-using Insight.WS.Server.Common.ORM;
 
 namespace Insight.WS.Server.Common
 {
@@ -87,9 +84,9 @@ namespace Insight.WS.Server.Common
         {
             var list = typeof(ImageFormat).GetProperties(BindingFlags.Static | BindingFlags.Public);
             var name = from n in list
-                let format = (ImageFormat) n.GetValue(null, null)
-                where format.Guid.Equals(img.RawFormat.Guid)
-                select n;
+                       let format = (ImageFormat)n.GetValue(null, null)
+                       where format.Guid.Equals(img.RawFormat.Guid)
+                       select n;
             var names = name.ToList();
             return names.Count > 0 ? names[0].Name : "unknown";
         }
@@ -175,6 +172,20 @@ namespace Insight.WS.Server.Common
             myResponseStream.Close();
 
             return retString;
+        }
+
+        /// <summary>
+        /// 动态类型例程
+        /// </summary>
+        public dynamic Demo()
+        {
+            const string sql = "select ID ,Name as num from student";
+            var type = TypeFactory.GetUserType(
+                new PropertyItem("ID", typeof(int)),
+                new PropertyItem("num", typeof(string))
+                );
+
+            return SqlHelper.SqlQuery(type, sql);
         }
 
     }
