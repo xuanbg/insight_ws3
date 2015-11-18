@@ -89,7 +89,8 @@ namespace Insight.WS.Client.Platform.Report
         /// <param name="e"></param>
         private void gdvTemplet_DoubleClick(object sender, EventArgs e)
         {
-            if (gdvTemplet.GetFocusedRow() == null || !_CanEdit) return;
+            var edit = barManager.Items["Design"];
+            if (gdvTemplet.GetFocusedRow() == null || !edit.Enabled) return;
 
             Design();
         }

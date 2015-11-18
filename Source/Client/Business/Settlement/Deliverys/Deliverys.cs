@@ -171,7 +171,8 @@ namespace Insight.WS.Client.Business.Settlement
         /// <param name="e"></param>
         private void gdvReceipts_DoubleClick(object sender, EventArgs e)
         {
-            if (_HasDelivery) ShowReceipt();
+            var edit = barManager.Items["ShowReceipt"];
+            if (edit.Enabled) ShowReceipt();
         }
 
         #endregion

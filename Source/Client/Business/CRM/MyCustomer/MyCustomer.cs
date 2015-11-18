@@ -129,7 +129,8 @@ namespace Insight.WS.Client.Business.CRM
         /// <param name="e"></param>
         private void gdvCustomer_DoubleClick(object sender, EventArgs e)
         {
-            if (_Type > 0) Customer(true);
+            var edit = barManager.Items["EditCustomer"];
+            if (_Type > 0 && edit.Enabled) Customer(true);
         }
 
         private void glvContact_FocusedRowObjectChanged(object sender, FocusedRowObjectChangedEventArgs e)
@@ -145,7 +146,8 @@ namespace Insight.WS.Client.Business.CRM
         /// <param name="e"></param>
         private void glvContact_DoubleClick(object sender, EventArgs e)
         {
-            if (_Type > 0) Contact(true);
+            var edit = barManager.Items["EditContact"];
+            if (_Type > 0 && edit.Enabled) Contact(true);
         }
 
         /// <summary>

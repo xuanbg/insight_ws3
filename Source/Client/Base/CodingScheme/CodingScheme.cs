@@ -74,11 +74,13 @@ namespace Insight.WS.Client.Platform.Base
         /// <param name="e"></param>
         private void gdvScheme_DoubleClick(object sender, EventArgs e)
         {
-            if (!_IsEnable)
+            var enable = barManager.Items["Enable"];
+            var edit = barManager.Items["EditScheme"];
+            if (enable.Enabled)
             {
                 Enable();
             }
-            else if (_CanEdit)
+            else if (edit.Enabled)
             {
                 EditScheme(true);
             }

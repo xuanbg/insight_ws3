@@ -76,7 +76,8 @@ namespace Insight.WS.Client.Platform.Report
         /// <param name="e"></param>
         private void treCategory_DoubleClick(object sender, EventArgs e)
         {
-            if (treCategory.FocusedNode == null) return;
+            var edit = barManager.Items["EditCatalog"];
+            if (treCategory.FocusedNode == null || !edit.Enabled) return;
 
             Catalog(true);
         }
@@ -88,7 +89,8 @@ namespace Insight.WS.Client.Platform.Report
         /// <param name="e"></param>
         private void gdvReport_DoubleClick(object sender, EventArgs e)
         {
-            if (gdvReport.GetFocusedRow() == null || !_CanEdit) return;
+            var edit = barManager.Items["EditReport"];
+            if (gdvReport.GetFocusedRow() == null || !edit.Enabled) return;
 
             EditReport(true);
         }

@@ -61,7 +61,7 @@ namespace Insight.WS.Client.Platform.Base
             var builtIn = (bool)gdvRole.GetFocusedDataRow()["内置"];
             SwitchItemStatus(new Context("DeleteRole", !builtIn), new Context("AddMember", !builtIn));
             _ObjectId = (Guid)gdvRole.GetFocusedDataRow()["ID"];
-            _FilterStr = "RoleId = '" + _ObjectId + "'";
+            _FilterStr = $"RoleId = '{_ObjectId}'";
 
             InitRoleMember();
             InitPermission(tabPermission.SelectedTabPageIndex);
@@ -88,7 +88,8 @@ namespace Insight.WS.Client.Platform.Base
         /// <param name="e"></param>
         private void gdvRole_DoubleClick(object sender, EventArgs e)
         {
-            if (gdvRole.FocusedRowHandle < 0) return;
+            var edit = barManager.Items["EditRole"];
+            if (gdvRole.FocusedRowHandle < 0 || !edit.Enabled) return;
 
             RoleEdit(true);
         }
@@ -120,9 +121,9 @@ namespace Insight.WS.Client.Platform.Base
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void tabPermission_Selected(object sender, TabPageEventArgs e)
+        private void tabPermission_SelectedPageChanged(object sender, TabPageChangedEventArgs e)
         {
-            InitPermission(e.PageIndex);
+            InitPermission(e.Page.TabIndex);
         }
 
         #endregion

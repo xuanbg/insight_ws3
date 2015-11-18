@@ -39,9 +39,8 @@ namespace Insight.WS.Client.Platform.Report
 
         private void gdvRule_DoubleClick(object sender, EventArgs e)
         {
-            if (!_CanEdit) return;
-
-            EditRule(true);
+            var edit = barManager.Items["EditRule"];
+            if (edit.Enabled) EditRule(true);
         }
 
         private void gdvRule_FocusedRowObjectChanged(object sender, FocusedRowObjectChangedEventArgs e)

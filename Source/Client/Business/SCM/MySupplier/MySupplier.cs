@@ -104,7 +104,8 @@ namespace Insight.WS.Client.Business.SCM
         /// <param name="e"></param>
         private void gdvSupplier_DoubleClick(object sender, EventArgs e)
         {
-            if (_IsMySupplier) Supplier(true);
+            var edit = barManager.Items["EditSupplier"];
+            if (edit.Enabled) Supplier(true);
         }
 
         private void glvContact_FocusedRowObjectChanged(object sender, FocusedRowObjectChangedEventArgs e)
@@ -120,7 +121,8 @@ namespace Insight.WS.Client.Business.SCM
         /// <param name="e"></param>
         private void glvContact_DoubleClick(object sender, EventArgs e)
         {
-            if (_IsMySupplier) Contact(true);
+            var edit = barManager.Items["EditContact"];
+            if (edit.Enabled) Contact(true);
         }
 
         /// <summary>

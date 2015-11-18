@@ -68,7 +68,8 @@ namespace Insight.WS.Client.MasterDatas
         /// <param name="e"></param>
         private void treCategory_DoubleClick(object sender, EventArgs e)
         {
-            if (_CanNewCat) Catalog(true);
+            var edit = barManager.Items["NewCatalog"];
+            if (edit.Enabled) Catalog(true);
         }
 
         /// <summary>
@@ -91,11 +92,13 @@ namespace Insight.WS.Client.MasterDatas
         /// <param name="e"></param>
         private void gdvData_DoubleClick(object sender, EventArgs e)
         {
-            if (_CanEnable)
+            var enable = barManager.Items["Enable"];
+            var edit = barManager.Items["EditData"];
+            if (enable.Enabled)
             {
                 Enable();
             }
-            else if (_CanEdit)
+            else if (edit.Enabled)
             {
                 EditData(true);
             }

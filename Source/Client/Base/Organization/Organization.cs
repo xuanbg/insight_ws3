@@ -101,7 +101,8 @@ namespace Insight.WS.Client.Platform.Base
         /// <param name="e"></param>
         private void treOrgList_DoubleClick(object sender, EventArgs e)
         {
-            if (treOrgList.FocusedNode == null) return;
+            var edit = barManager.Items["EditOrg"];
+            if (treOrgList.FocusedNode == null || !edit.Enabled) return;
 
             NodeEdit(true);
         }

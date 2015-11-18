@@ -84,7 +84,8 @@ namespace Insight.WS.Client.Platform.Base
         /// <param name="e"></param>
         private void gdvGroup_DoubleClick(object sender, EventArgs e)
         {
-            if (gdvGroup.GetFocusedRow() == null) return;
+            var edit = barManager.Items["EditGroup"];
+            if (gdvGroup.GetFocusedRow() == null || !edit.Enabled) return;
 
             GroupEdit(true);
         }
@@ -96,7 +97,8 @@ namespace Insight.WS.Client.Platform.Base
         /// <param name="e"></param>
         private void gdvUser_DoubleClick(object sender, EventArgs e)
         {
-            if (gdvUser.GetFocusedRow() == null) return;
+            var edit = barManager.Items["EditUser"];
+            if (gdvUser.GetFocusedRow() == null || !edit.Enabled) return;
 
             UserEdit(true);
         }

@@ -92,7 +92,8 @@ namespace Insight.WS.Client.MasterDatas
         /// <param name="e"></param>
         private void gdvEmployee_DoubleClick(object sender, EventArgs e)
         {
-            if (_CanEdit) EmployeeData(true);
+            var edit = barManager.Items["Edit"];
+            if (edit.Enabled) EmployeeData(true);
         }
 
         /// <summary>
