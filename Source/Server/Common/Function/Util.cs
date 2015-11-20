@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -8,29 +10,13 @@ using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Text;
+using Insight.WS.Server.Common.ORM;
 
 namespace Insight.WS.Server.Common
 {
 
     public class Util
     {
-
-        /// <summary>
-        /// 发送短信
-        /// </summary>
-        /// <param name="number">手机号</param>
-        /// <param name="msg">消息内容</param>
-        public static void SendMessage(string number, string msg)
-        {
-            const string url = "http://116.255.238.184:8888/sms.aspx";
-            const string uid = "2066";
-            const string account = "10690xinfenbao";
-            const string password = "asd456";
-            const string signature = "【信分宝】";
-
-            var post = $"{url}?action=send&userid={uid}&account={account}&password={password}&mobile={number}&content={msg}{signature}&sendTime=&extno=";
-            HttpPost(post, "");
-        }
 
         /// <summary>
         /// 读取配置项的值
@@ -40,6 +26,37 @@ namespace Insight.WS.Server.Common
         public static string GetAppSetting(string key)
         {
             return ConfigurationManager.AppSettings[key];
+        }
+
+        /// <summary>
+        /// 发送短消息
+        /// </summary>
+        /// <param name="number">手机号</param>
+        /// <param name="msg">发送的消息</param>
+        public static void SendMsg(string number, string msg)
+        {
+            string url;
+            string cont;
+            switch (GetAppSetting("Channel"))
+            {
+                case "1":
+                    url = GetAppSetting("surl");
+                    var name = GetAppSetting("sname");
+                    var pwd = GetAppSetting("spwd");
+                    var corpid = GetAppSetting("scorpid");
+                    var prdid = GetAppSetting("sprdid");
+                    cont = $"{url}?sname={name}&spwd={pwd}&scorpid={corpid}&sprdid={prdid}&sdst={number}&smsg={msg}";
+                    break;
+
+                default:
+                    url = GetAppSetting("Url");
+                    var uid = GetAppSetting("UId");
+                    var account = GetAppSetting("Account");
+                    var password = GetAppSetting("Password");
+                    cont = $"{url}?action=send&userid={uid}&account={account}&password={password}&mobile={number}&content={msg}&sendTime=&extno=";
+                    break;
+            }
+            HttpGet(cont, "");
         }
 
         /// <summary>
@@ -84,9 +101,9 @@ namespace Insight.WS.Server.Common
         {
             var list = typeof(ImageFormat).GetProperties(BindingFlags.Static | BindingFlags.Public);
             var name = from n in list
-                       let format = (ImageFormat)n.GetValue(null, null)
-                       where format.Guid.Equals(img.RawFormat.Guid)
-                       select n;
+                let format = (ImageFormat) n.GetValue(null, null)
+                where format.Guid.Equals(img.RawFormat.Guid)
+                select n;
             var names = name.ToList();
             return names.Count > 0 ? names[0].Name : "unknown";
         }
@@ -175,17 +192,38 @@ namespace Insight.WS.Server.Common
         }
 
         /// <summary>
-        /// 动态类型例程
+        /// 初始化密码字典表
         /// </summary>
-        public dynamic Demo()
+        public void InitCode()
         {
-            const string sql = "select ID ,Name as num from student";
-            var type = TypeFactory.GetUserType(
-                new PropertyItem("ID", typeof(int)),
-                new PropertyItem("num", typeof(string))
-                );
+            var list = new List<string>();
+            for (var i = 0; i < 1000; i++)
+            {
+                list.Add(i.ToString("000"));
+            }
 
-            return SqlHelper.SqlQuery(type, sql);
+            var codes = new List<BIZ_CodeContrast>();
+            var rand = new Random(Environment.TickCount);
+            for (var i = 0; i < 1000; i++)
+            {
+                var random = rand.Next(0, 999 - i);
+                var code = new BIZ_CodeContrast
+                {
+                    Source = i.ToString("000"),
+                    Target = list[random]
+                };
+                codes.Add(code);
+                list.RemoveAt(random);
+            }
+
+            const string sql = "insert BIZ_CodeContrast (Source, Target) select @Source, @Target";
+            var cmds = codes.Select(code => new[]
+            {
+                new SqlParameter("@Source", code.Source),
+                new SqlParameter("@Target", code.Target)
+            }).Select(parm => SqlHelper.MakeCommand(sql, parm)).ToList();
+
+            SqlHelper.SqlExecute(cmds);
         }
 
     }

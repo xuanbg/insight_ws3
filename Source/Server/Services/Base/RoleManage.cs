@@ -193,7 +193,7 @@ namespace Insight.WS.Service
         /// <returns>bool 数据插入是否成功</returns>
         public bool AddRole(Session us, SYS_Role obj, DataTable action, DataTable data, DataTable custom)
         {
-            if (!OnlineManage.Verification(us)) return false;
+            if (!OnlineManage.Verification(us, "10B574A2-1A69-4273-87D9-06EDA77B80B6")) return false;
 
             var cmds = new List<SqlCommand>();
             const string sql = "insert SYS_Role (Name, Description, CreatorUserId) select @Name, @Description, @CreatorUserId; select ID from SYS_Role where SN = scope_identity()";
@@ -221,7 +221,7 @@ namespace Insight.WS.Service
         /// <returns>bool 插入是否成功</returns>
         public bool AddRoleMember(Session us, Guid rid, List<Guid> tids, List<Guid> gids, List<Guid> uids)
         {
-            if (!OnlineManage.Verification(us)) return false;
+            if (!OnlineManage.Verification(us, "13D93852-53EC-4A15-AAB2-46C9C48C313A")) return false;
 
             var cmds = new List<SqlCommand>();
             cmds.AddRange(InsertRoleTitle(rid, tids, us.UserId));
@@ -248,7 +248,7 @@ namespace Insight.WS.Service
         /// <returns>bool 数据更新是否成功</returns>
         public bool EditRole(Session us, SYS_Role obj, List<object> adl, List<object> ddl, List<object> cdl, DataTable adt, DataTable ddt, DataTable cdt)
         {
-            if (!OnlineManage.Verification(us)) return false;
+            if (!OnlineManage.Verification(us, "4DC0141D-FE3D-4504-BE70-763028796808")) return false;
 
             var cmds = new List<SqlCommand>();
             const string sql = "update SYS_Role set Name = @Name, Description = @Description where ID = @ID";
@@ -283,7 +283,7 @@ namespace Insight.WS.Service
         /// <returns>bool 是否删除成功</returns>
         public bool DeleteRole(Session us, Guid id)
         {
-            if (!OnlineManage.Verification(us)) return false;
+            if (!OnlineManage.Verification(us, "FBCEE515-8576-4B10-BA68-CF46743D2199")) return false;
 
             var sql = $"Delete from SYS_Role where ID = '{id}' and BuiltIn = 0";
             return SqlNonQuery(MakeCommand(sql)) > 0;
@@ -298,7 +298,7 @@ namespace Insight.WS.Service
         /// <returns>bool 是否删除成功</returns>
         public bool DeleteRoleMember(Session us, int type, Guid id)
         {
-            if (!OnlineManage.Verification(us)) return false;
+            if (!OnlineManage.Verification(us, "2EF4D82B-4A75-4902-BD9E-B63153D093D2")) return false;
 
             var sql = $"Delete from {(type == 3 ? "SYS_Role_Title" : (type == 2 ? "SYS_Role_UserGroup" : "SYS_Role_User"))} where ID = '{id}'";
             return SqlNonQuery(MakeCommand(sql)) > 0;

@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using static Insight.WS.Server.Common.SqlHelper;
 
 namespace Insight.WS.Server.Common
 {
@@ -34,8 +37,8 @@ namespace Insight.WS.Server.Common
         /// <summary>
         /// 会话合法性验证
         /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
+        /// <param name="obj">用户会话</param>
+        /// <returns>bool 是否成功</returns>
         public static bool Verification(Session obj)
         {
             if (obj == null || obj.ID >= Sessions.Count) return false;
@@ -63,6 +66,26 @@ namespace Insight.WS.Server.Common
 
             us.LastConnect = DateTime.Now;
             return result;
+        }
+
+        /// <summary>
+        /// 带鉴权的会话合法性验证
+        /// </summary>
+        /// <param name="obj">用户会话</param>
+        /// <param name="action">需要鉴权的操作ID</param>
+        /// <returns>bool 是否成功</returns>
+        public static bool Verification(Session obj, string action)
+        {
+            if (!Verification(obj)) return false;
+
+            const string sql = "select A.ActionId from Sys_RolePerm_Action A join Get_PermRole(@UserId, @DeptId) R on R.RoleId = A.RoleId and A.ActionId = @ActionId group by A.ActionId having min(A.Action) > 0";
+            var parm = new[]
+            {
+                new SqlParameter("@UserId", SqlDbType.UniqueIdentifier) {Value = obj.UserId},
+                new SqlParameter("@DeptId", SqlDbType.UniqueIdentifier) {Value = obj.DeptId},
+                new SqlParameter("@ActionId", SqlDbType.UniqueIdentifier) {Value = Guid.Parse(action)}
+            };
+            return SqlScalar(MakeCommand(sql, parm)) != null;
         }
 
     }
