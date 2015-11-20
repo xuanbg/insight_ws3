@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
+using static Insight.WS.Server.Common.SqlHelper;
 
 namespace Insight.WS.Service.Business
 {
@@ -71,7 +72,7 @@ namespace Insight.WS.Service.Business
                 new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = obj.CreatorUserId},
                 new SqlParameter("@Write", SqlDbType.Int) {Value = 0}
             };
-            return SqlHelper.MakeCommand(sql, parm);
+            return MakeCommand(sql, parm);
         }
 
         /// <summary>
@@ -103,7 +104,7 @@ namespace Insight.WS.Service.Business
                     new SqlParameter("@Read", SqlDbType.Int) {Value = 0},
                     new SqlParameter("@Write", SqlDbType.Int) {Value = 1}
                 };
-                cmds.Add(SqlHelper.MakeCommand(sql, parm));
+                cmds.Add(MakeCommand(sql, parm));
 
                 var amoumt = (decimal)row["金额"] - (decimal)row["UseAdvance"];
                 if (amoumt > 0) cmds.AddRange(InsertPays(amoumt, pdt));
@@ -131,7 +132,7 @@ namespace Insight.WS.Service.Business
                     new SqlParameter("@Amount", amount > rpa ? rpa : amount),
                     new SqlParameter("@Read", SqlDbType.Int) {Value = 1}
                 };
-                cmds.Add(SqlHelper.MakeCommand(sql, parm));
+                cmds.Add(MakeCommand(sql, parm));
 
                 if (rpa > amount)
                 {
@@ -168,7 +169,7 @@ namespace Insight.WS.Service.Business
                     new SqlParameter("@Write", SqlDbType.Int) {Value = 3}
                 };
                 cmds.Add(QueryAdvanceId(cid));
-                cmds.Add(SqlHelper.MakeCommand(sql, parm));
+                cmds.Add(MakeCommand(sql, parm));
             }
             else
             {
@@ -184,7 +185,7 @@ namespace Insight.WS.Service.Business
                 new SqlParameter("@Read", SqlDbType.Int) {Value = 3},
                 new SqlParameter("@Get", SqlDbType.Int) {Value = 0}
             };
-            cmds.Add(SqlHelper.MakeCommand(sql, parm));
+            cmds.Add(MakeCommand(sql, parm));
             return cmds;
         }
 
@@ -216,7 +217,7 @@ namespace Insight.WS.Service.Business
                     new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = us.UserId},
                     new SqlParameter("@Write", SqlDbType.Int) {Value = 2}
                 };
-                cmds.Add(SqlHelper.MakeCommand(sql, parm));
+                cmds.Add(MakeCommand(sql, parm));
             }
             else
             {
@@ -231,7 +232,7 @@ namespace Insight.WS.Service.Business
                 new SqlParameter("@Read", SqlDbType.Int) {Value = 2}, 
                 new SqlParameter("@Write", SqlDbType.Int) {Value = 3}
             };
-            cmds.Add(SqlHelper.MakeCommand(sql, parm));
+            cmds.Add(MakeCommand(sql, parm));
 
             return cmds;
         }
@@ -250,7 +251,7 @@ namespace Insight.WS.Service.Business
                 new SqlParameter("@DetailId", SqlDbType.UniqueIdentifier) {Value = adv.ID}, 
                 new SqlParameter("@Amount", adv.Amount), 
                 new SqlParameter("@Read", SqlDbType.Int) {Value = 0}
-            }).Select(parm => SqlHelper.MakeCommand(sql, parm)).ToList();
+            }).Select(parm => MakeCommand(sql, parm)).ToList();
         }
 
         /// <summary>
@@ -266,7 +267,7 @@ namespace Insight.WS.Service.Business
                 new SqlParameter("@OwnerId", SqlDbType.UniqueIdentifier) {Value = cid},
                 new SqlParameter("@Write", SqlDbType.Int) {Value = 2}
             };
-            return SqlHelper.MakeCommand(sql, parm);
+            return MakeCommand(sql, parm);
         }
 
         /// <summary>
@@ -305,7 +306,7 @@ namespace Insight.WS.Service.Business
                 new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = obj.CreatorUserId},
                 new SqlParameter("@Write", SqlDbType.Int) {Value = 0}
             };
-            return SqlHelper.MakeCommand(sql, parm);
+            return MakeCommand(sql, parm);
         }
 
         /// <summary>
@@ -328,8 +329,7 @@ namespace Insight.WS.Service.Business
                     new SqlParameter("@Counts", row["数量"]), 
                     new SqlParameter("@Amount", row["金额"]), 
                     new SqlParameter("@Read", SqlDbType.Int) {Value = 0}
-                } into parm
-                    select SqlHelper.MakeCommand(sql, parm)).ToList();
+                } into parm select MakeCommand(sql, parm)).ToList();
         }
 
         #endregion

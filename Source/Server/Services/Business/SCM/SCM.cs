@@ -6,6 +6,7 @@ using System.Linq;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
 using static Insight.WS.Server.Common.SqlHelper;
+using static Insight.WS.Server.Common.OnlineManage;
 
 namespace Insight.WS.Service.Business
 {
@@ -19,7 +20,7 @@ namespace Insight.WS.Service.Business
         /// <returns>DataTable 供应商列表</returns>
         public DataTable GetSuppliers(Session us)
         {
-            if (!OnlineManage.Verification(us)) return null;
+            if (!Verification(us)) return null;
 
             var sql = "select R.ID, case when R.IsMaster = 1 then 0 else 2 end as Type, C.* from Supplier C join MDR_MU R on R.MasterDataId = C.SupplierId and R.FailureDate is null and R.UserId = @UserId union all ";
             sql += "select R.ID, 1 as Type, C.* from Supplier C join MDR_MU R on R.MasterDataId = C.SupplierId and R.FailureDate is null and R.IsMaster = 1 join MDG_Employee E on E.MID = R.UserId and E.DirectLeader = @UserId";
@@ -34,7 +35,7 @@ namespace Insight.WS.Service.Business
         /// <returns>DataTable 供应商详细信息列表</returns>
         public DataTable GetSupplierInfo(Session us)
         {
-            if (!OnlineManage.Verification(us)) return null;
+            if (!Verification(us)) return null;
 
             var sql = "select C.* from SupplierInfo C join MDR_MU R on R.MasterDataId = C.SupplierId and R.FailureDate is null and R.UserId = @UserId union ";
             sql += "select C.* from SupplierInfo C join MDR_MU R on R.MasterDataId = C.SupplierId and R.FailureDate is null and R.IsMaster = 1 join MDG_Employee E on E.MID = R.UserId and E.DirectLeader = @UserId";
@@ -50,7 +51,7 @@ namespace Insight.WS.Service.Business
         /// <returns>MDG_Supplier 供应商对象实体</returns>
         public MDG_Supplier GetSupplier(Session us, Guid id)
         {
-            if (!OnlineManage.Verification(us)) return null;
+            if (!Verification(us)) return null;
 
             using (var context = new WSEntities())
             {
@@ -67,7 +68,7 @@ namespace Insight.WS.Service.Business
         /// <returns>bool 是否成功</returns>
         public bool AddMasterData(Session us, MasterData m, MDG_Supplier d)
         {
-            if (!OnlineManage.Verification(us)) return false;
+            if (!Verification(us, "C772729A-6876-4E29-8B90-A940D4630127")) return false;
 
             var cmds = new List<SqlCommand> {MasterDataDAL.AddMasterData(m)};
 
@@ -120,7 +121,7 @@ namespace Insight.WS.Service.Business
         /// <returns>bool 是否成功</returns>
         public bool UpdateMasterData(Session us, MasterData m, MDG_Supplier d)
         {
-            if (!OnlineManage.Verification(us)) return false;
+            if (!Verification(us, "E4B9A144-FAB4-41EB-B930-3AE7E8559870")) return false;
 
             var cmds = new List<SqlCommand> {MasterDataDAL.UpdateMasterData(m)};
 

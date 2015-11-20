@@ -6,6 +6,7 @@ using System.Linq;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
 using static Insight.WS.Server.Common.SqlHelper;
+using static Insight.WS.Server.Common.OnlineManage;
 
 namespace Insight.WS.Service
 {
@@ -21,7 +22,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 组织机构节点信息结果集</returns>
         public DataTable GetOrgs(Session us)
         {
-            if (!OnlineManage.Verification(us)) return null;
+            if (!Verification(us)) return null;
 
             const string sql = "select * from Organization order by NodeType desc, [Index]";
             return SqlQuery(MakeCommand(sql));
@@ -35,7 +36,7 @@ namespace Insight.WS.Service
         /// <returns>SYS_Organization 节点对象</returns>
         public SYS_Organization GetOrg(Session us, Guid id)
         {
-            if (!OnlineManage.Verification(us)) return null;
+            if (!Verification(us)) return null;
 
             using (var context = new WSEntities())
             {
@@ -50,7 +51,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 节点成员信息结果集</returns>
         public DataTable GetOrgMembers(Session us)
         {
-            if (!OnlineManage.Verification(us)) return null;
+            if (!Verification(us)) return null;
 
             const string sql = "select * from TitleMember";
             return SqlQuery(MakeCommand(sql));
@@ -64,7 +65,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 节点可添加成员信息结果集</returns>
         public DataTable GetOrgMemberBeSides(Session us, Guid id)
         {
-            if (!OnlineManage.Verification(us)) return null;
+            if (!Verification(us)) return null;
 
             var sql = "select U.ID, U.Name as 用户名, U.LoginName as 登录名, U.[Description] as 描述 from SYS_User U left join MDG_Contact C on C.MID = U.ID ";
             sql += $"where not exists (select UserId from SYS_OrgMember where UserId = U.ID and OrgId = '{id}') and C.MID is null ";
@@ -85,7 +86,7 @@ namespace Insight.WS.Service
         /// <returns>object 插入成功返回插入的节点ID；失败返回false</returns>
         public bool AddOrg(Session us, SYS_Organization obj, int index)
         {
-            if (!OnlineManage.Verification(us)) return false;
+            if (!Verification(us, "88AC97EF-52A3-4F7F-8121-4C311206535F")) return false;
 
             var cmds = new List<SqlCommand>();
             var sql = "insert SYS_Organization (ParentId, NodeType, [Index], Code, Name, Alias, FullName, PositionId, CreatorUserId)";
@@ -116,7 +117,7 @@ namespace Insight.WS.Service
         /// <returns>bool 是否插入成功</returns>
         public bool AddOrgMerger(Session us, SYS_OrgMerger obj)
         {
-            if (!OnlineManage.Verification(us)) return false;
+            if (!Verification(us, "DAE7F2C5-E379-4F74-8043-EB616D4A5F8B")) return false;
 
             const string sql = "insert into SYS_OrgMerger ([OrgId], [MergerOrgId], [CreatorUserId]) select @OrgId, @MergerOrgId, @CreatorUserId select ID From SYS_OrgMerger where SN = SCOPE_IDENTITY()";
             var parm = new[]
@@ -137,7 +138,7 @@ namespace Insight.WS.Service
         /// <returns>bool 是否插入成功</returns>
         public bool AddOrgMember(Session us, Guid tid, List<Guid> uids)
         {
-            if (!OnlineManage.Verification(us)) return false;
+            if (!Verification(us, "1F29DDEA-A4D7-4EF9-8136-0D4AFE88CB08")) return false;
 
             const string sql = "insert into SYS_OrgMember ([OrgId], [UserId], [CreatorUserId]) select @OrgId, @UserId, @CreatorUserId";
             var cmds = uids.Select(id => new[]
@@ -162,7 +163,7 @@ namespace Insight.WS.Service
         /// <returns>int 更新成功的记录数量</returns>
         public bool UpdateOrg(Session us, SYS_Organization obj, int index)
         {
-            if (!OnlineManage.Verification(us)) return false;
+            if (!Verification(us, "542D5E28-8102-40C6-9C01-190D13DBF6C6")) return false;
 
             var cmds = new List<SqlCommand>();
 
@@ -191,7 +192,7 @@ namespace Insight.WS.Service
         /// <returns>int 更新成功的记录数量</returns>
         public bool UpdateOrgParentId(Session us, SYS_Organization obj)
         {
-            if (!OnlineManage.Verification(us)) return false;
+            if (!Verification(us, "DB1A4EA2-1B3E-41AD-91FA-A3945AB7D901")) return false;
 
             var org = GetOrg(us, obj.ID);
             var cmds = new List<SqlCommand>();
@@ -222,7 +223,7 @@ namespace Insight.WS.Service
         /// <returns>bool 是否删除成功</returns>
         public bool DeleteOrg(Session us, Guid id)
         {
-            if (!OnlineManage.Verification(us)) return false;
+            if (!Verification(us, "71803766-97FE-4E6E-82DB-D5C90D2B7004")) return false;
 
             var cmds = new List<SqlCommand>();
             var obj = GetOrg(us, id);
@@ -240,7 +241,7 @@ namespace Insight.WS.Service
         /// <returns>bool 是否删除成功</returns>
         public bool DeleteOrgMember(Session us, List<Guid> ids)
         {
-            if (!OnlineManage.Verification(us)) return false;
+            if (!Verification(us, "70AC8EEB-F920-468D-8C8F-2DBA049ADAE9")) return false;
 
             const string sql = "Delete from SYS_OrgMember where ID = @ID";
             var cmds = ids.Select(id => new[]

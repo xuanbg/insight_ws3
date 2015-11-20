@@ -620,9 +620,9 @@
   </wsdl:binding>
   <wsdl:service name="Report">
     <wsdl:port name="CustomBinding_IReport" binding="tns:CustomBinding_IReport">
-      <soap12:address location="net.tcp://localhost:6210/Report" />
+      <soap12:address location="net.tcp://localhost:7210/Report" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:6210/Report</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost:7210/Report</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>

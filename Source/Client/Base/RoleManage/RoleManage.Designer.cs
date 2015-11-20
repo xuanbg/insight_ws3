@@ -273,7 +273,6 @@ namespace Insight.WS.Client.Platform.Base
             this.pagModule,
             this.pagAction,
             this.pagData});
-            this.tabPermission.Selected += new DevExpress.XtraTab.TabPageEventHandler(this.tabPermission_Selected);
             // 
             // pagModule
             // 

@@ -5,6 +5,7 @@ using System.Linq;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
 using static Insight.WS.Server.Common.SqlHelper;
+using static Insight.WS.Server.Common.OnlineManage;
 
 namespace Insight.WS.Service
 {
@@ -20,7 +21,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 分期规则列表</returns>
         public DataTable GetRules(Session us)
         {
-            if (!OnlineManage.Verification(us)) return null;
+            if (!Verification(us)) return null;
 
             var sql = "with List as(Select D.ID, max(P.Permission) as Permission from SYS_Report_Rules D ";
             sql += "join Get_PermData('6C0C486F-E039-4C53-9F36-9FE262FB0D3C', @UserId, @DeptId) P on P.OrgId = isnull(D.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = D.CreatorUserId group by D.ID) ";
@@ -42,7 +43,7 @@ namespace Insight.WS.Service
         /// <returns>SYS_Report_Rules 分期规则对象实体</returns>
         public SYS_Report_Rules GetRule(Session us, Guid id)
         {
-            if (!OnlineManage.Verification(us)) return null;
+            if (!Verification(us)) return null;
 
             using (var context = new WSEntities())
             {
@@ -62,7 +63,7 @@ namespace Insight.WS.Service
         /// <returns>object 返回插入成功记录的ID</returns>
         public object AddRule(Session us, SYS_Report_Rules obj)
         {
-            if (!OnlineManage.Verification(us)) return null;
+            if (!Verification(us, "49CA6A0F-00F8-40F8-ACA4-4879CAC9EB50")) return null;
 
             const string sql = "insert SYS_Report_Rules (Name, CycleType, Cycle, StartTime, [Description], CreatorDeptId, CreatorUserId) select @Name, @CycleType, @Cycle, @StartTime, @Description, @CreatorDeptId, @CreatorUserId; select ID from SYS_Report_Rules where SN = scope_identity()";
             var parm = new[]
@@ -90,7 +91,7 @@ namespace Insight.WS.Service
         /// <returns>bool 是否成功</returns>
         public bool EditRule(Session us, SYS_Report_Rules obj)
         {
-            if (!OnlineManage.Verification(us)) return false;
+            if (!Verification(us, "37A8B851-4A97-4223-902F-2C08C737BA06")) return false;
 
             const string sql = "update SYS_Report_Rules set Name = @Name, CycleType = @CycleType, Cycle = @Cycle, StartTime = @StartTime, [Description] = @Description where ID = @ID";
             var parm = new[]
@@ -117,7 +118,7 @@ namespace Insight.WS.Service
         /// <returns>bool 是否成功</returns>
         public bool DelRule(Session us, Guid id)
         {
-            if (!OnlineManage.Verification(us)) return false;
+            if (!Verification(us, "E4790841-7893-4B28-8D48-AA3F06A42675")) return false;
 
             var sql = $"delete SYS_Report_Rules where ID = '{id}'";
             return SqlNonQuery(MakeCommand(sql)) > 0;

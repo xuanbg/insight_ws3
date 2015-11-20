@@ -6,6 +6,7 @@ using System.Linq;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
 using static Insight.WS.Server.Common.SqlHelper;
+using static Insight.WS.Server.Common.OnlineManage;
 
 namespace Insight.WS.Service
 {
@@ -19,7 +20,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 部门员工列表</returns>
         public DataTable GetEmployees(Session us, Guid oid)
         {
-            if (!OnlineManage.Verification(us)) return null;
+            if (!Verification(us)) return null;
 
             var sql = "with List as (select E.MID, MAX(P.Permission) as Permission from [MDG_Employee] E ";
             sql += "join Get_PermData('9B2CB116-6E3B-4A9F-9279-E3F568514BEE', @UserId, @DeptId) P on P.OrgId = isnull(E.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = E.CreatorUserId group by E.MID) ";
@@ -41,7 +42,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 部门员工列表</returns>
         public DataTable GetEmployeesForName(Session us, string name)
         {
-            if (!OnlineManage.Verification(us)) return null;
+            if (!Verification(us)) return null;
 
             var sql = "with List as (select E.MID, MAX(P.Permission) as Permission from [MDG_Employee] E ";
             sql += "join Get_PermData('9B2CB116-6E3B-4A9F-9279-E3F568514BEE', @UserId, @DeptId) P on P.OrgId = isnull(E.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = E.CreatorUserId group by E.MID) ";
@@ -62,7 +63,7 @@ namespace Insight.WS.Service
         /// <returns>MDG_Employee 员工对象实体</returns>
         public MDG_Employee GetEmployee(Session us, Guid id)
         {
-            if (!OnlineManage.Verification(us)) return null;
+            if (!Verification(us)) return null;
 
             using (var context = new WSEntities())
             {
@@ -78,7 +79,7 @@ namespace Insight.WS.Service
         /// <returns>MDR_ET 职位关系对象实体</returns>
         public MDR_ET GetEmployeeTitle(Session us, Guid id)
         {
-            if (!OnlineManage.Verification(us)) return null;
+            if (!Verification(us)) return null;
 
             using (var context = new WSEntities())
             {
@@ -97,7 +98,7 @@ namespace Insight.WS.Service
         /// <returns>bool 是否成功</returns>
         public bool AddEmployee(Session us, MasterData m, MDG_Employee d, MDR_ET r, DataTable cdt)
         {
-            if (!OnlineManage.Verification(us)) return false;
+            if (!Verification(us, "DC02AD99-674E-4A56-ACDF-2CC0BCA49B57")) return false;
 
             var cmds = new List<SqlCommand> {MasterDataDAL.AddMasterData(m)};
 
@@ -149,7 +150,7 @@ namespace Insight.WS.Service
         /// <returns>bool 是否成功</returns>
         public bool UpdateEmployee(Session us, MasterData m, MDG_Employee d, MDR_ET r, List<object> cdl, DataTable cdt)
         {
-            if (!OnlineManage.Verification(us)) return false;
+            if (!Verification(us, "965562BE-C87E-4869-B94A-97240B24477A")) return false;
 
             var cmds = new List<SqlCommand> {MasterDataDAL.UpdateMasterData(m)};
 
@@ -188,8 +189,7 @@ namespace Insight.WS.Service
         /// <returns>bool 是否更新成功</returns>
         public bool UpdateStatus(Session us, Guid id, int stu)
         {
-            if (!OnlineManage.Verification(us)) return false;
-
+            var action = "6FE79B75-DF9B-4724-B2A1-AC39E83330C0";
             var sql = "update MDG_Employee set Status = @Status where MID = @ID ";
             var parm = new[]
             {
@@ -201,19 +201,25 @@ namespace Insight.WS.Service
             {
                 case 1:
                     parm[1].Value = 2;
+                    action = "A3F99BAC-B15F-4926-862C-5FB2C00EC889";
                     break;
 
                 case 3:
                     sql += "update MDG_Employee set DimissionDate = getdate() where MID = @ID ";
                     sql += "update SYS_User Set Validity = 0 where ID = @ID";
                     parm[1].Value = 3;
+                    action = "28AB022F-D055-4A84-86D4-1C784E7F20D5";
                     break;
 
                 case 4:
                     sql += "update MDG_Employee set DimissionDate = null where MID = @ID ";
                     sql += "update SYS_User Set Validity = 1 where ID = @ID";
+                    action = "6B23B8F1-401B-43B4-9939-7EFD75FAC1B9";
                     break;
             }
+
+            if (!Verification(us, action)) return false;
+
             return SqlNonQuery(MakeCommand(sql, parm)) > 0;
         }
 

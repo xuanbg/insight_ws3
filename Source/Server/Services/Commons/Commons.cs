@@ -6,6 +6,7 @@ using System.Linq;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
 using static Insight.WS.Server.Common.SqlHelper;
+using static Insight.WS.Server.Common.OnlineManage;
 
 namespace Insight.WS.Service
 {
@@ -24,7 +25,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 可用报表模板列表</returns>
         public DataTable GetReportTemplet(Session us, string type, bool withOutTree)
         {
-            if (!OnlineManage.Verification(us)) return null;
+            if (!Verification(us)) return null;
 
             var sql = "with List as(Select D.ID, max(P.Permission) as Permission from ReportTemplet D ";
             sql += "join Get_PermData('AD0BD296-46F5-46B3-85B9-00B6941343E7', @UserId, @DeptId) P on P.OrgId = isnull(D.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = D.CreatorUserId ";
@@ -48,7 +49,7 @@ namespace Insight.WS.Service
         /// <returns>ImageData 电子影像对象实体</returns>
         public ImageData BuildImageData(Session us, Guid oid, Guid tid, ImageData obj)
         {
-            if (!OnlineManage.Verification(us)) return null;
+            if (!Verification(us)) return null;
 
             var img = ReportDAL.BuildImage(oid, tid, us.DeptName, us.UserName, us.DeptId, us.UserId, obj);
             if (obj != null)
@@ -82,7 +83,7 @@ namespace Insight.WS.Service
         /// <returns>ImageData 电子影像对象实体</returns>
         public ImageData GetImageData(Session us, Guid id)
         {
-            if (!OnlineManage.Verification(us)) return null;
+            if (!Verification(us)) return null;
 
             using (var context = new WSEntities())
             {
@@ -101,7 +102,7 @@ namespace Insight.WS.Service
         /// <returns>bool 是否成功</returns>
         public bool SaveImages(Session us, Guid bid, List<ImageData> objs, string tab, string col)
         {
-            if (!OnlineManage.Verification(us)) return false;
+            if (!Verification(us)) return false;
 
             var cmds = CommonDAL.AddImageDatas(objs, tab, col, bid);
             return SqlExecute(cmds);
@@ -115,7 +116,7 @@ namespace Insight.WS.Service
         /// <returns>bool 是否成功</returns>
         public bool DelImageData(Session us, Guid id)
         {
-            if (!OnlineManage.Verification(us)) return false;
+            if (!Verification(us)) return false;
 
             var sql = $"delete ImageData where ID = '{id}'";
             return SqlNonQuery(MakeCommand(sql)) > 0;
@@ -135,7 +136,7 @@ namespace Insight.WS.Service
         /// <returns>bool 内容是否存在</returns>
         public bool NameIsExist(Session us, string tab, string col, string str)
         {
-            if (!OnlineManage.Verification(us)) return false;
+            if (!Verification(us)) return false;
 
             var sql = $"select count(*) from {tab} where {col} = '{str}'";
             return (int)SqlScalar(MakeCommand(sql)) > 0;
@@ -153,7 +154,7 @@ namespace Insight.WS.Service
         /// <returns>bool 内容是否存在</returns>
         public bool NameIsExisting(Session us, Guid? pid, string tab, string col, string str, bool isParent)
         {
-            if (!OnlineManage.Verification(us)) return false;
+            if (!Verification(us)) return false;
 
             var p = isParent ? "ParentId" : "CategoryId";
             var pn = pid.HasValue ? $"= '{pid}'" : "is null";
@@ -171,7 +172,7 @@ namespace Insight.WS.Service
         /// <returns>int 对象数量</returns>
         public int GetObjectCount(Session us, Guid? id, string type, string tab)
         {
-            if (!OnlineManage.Verification(us)) return -1;
+            if (!Verification(us)) return -1;
 
             var sql = $"select count(ID) from {tab} where {type} {(id.HasValue ? "= @ID" : "is null")}";
             var parm = new[] {new SqlParameter("@ID", SqlDbType.UniqueIdentifier) {Value = id}};
@@ -200,9 +201,9 @@ namespace Insight.WS.Service
         /// <returns>bool 是否删除成功</returns>
         public bool DelOnlineUser(Session us, int? sid)
         {
-            if (!OnlineManage.Verification(us)) return false;
+            if (!Verification(us)) return false;
 
-            OnlineManage.Sessions[sid ?? us.ID].SessionId = Guid.Empty;
+            Sessions[sid ?? us.ID].SessionId = Guid.Empty;
             return true;
         }
 
@@ -213,7 +214,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 组织机构列表</returns>
         public DataTable GetOrgTree(Session us)
         {
-            if (!OnlineManage.Verification(us)) return null;
+            if (!Verification(us)) return null;
 
             const string sql = "select ID, ParentId, NodeType, [Index], 名称 as Name from Organization";
             return SqlQuery(MakeCommand(sql));
@@ -226,7 +227,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 编码方案列表</returns>
         public DataTable GetCodeSchemes(Session us)
         {
-            if (!OnlineManage.Verification(us)) return null;
+            if (!Verification(us)) return null;
 
             var sql = "with List as(Select D.ID, max(P.Permission) as Permission from SYS_Code_Scheme D ";
             sql += "join Get_PermData('1E976784-E58C-47C7-AEC5-D92B7B32F122', @UserId, @DeptId) P on P.OrgId = isnull(D.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = D.CreatorUserId group by D.ID) ";
@@ -247,7 +248,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 全部主数据</returns>
         public DataTable GetMasterDatas(Session us, int type)
         {
-            if (!OnlineManage.Verification(us)) return null;
+            if (!Verification(us)) return null;
 
             var sql = "";
             if ((type & 8) == 8) sql += "union select M.ID, M.Name, M.Alias from MasterData M join MDG_Customer C on C.MID = M.ID ";
@@ -264,7 +265,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 收支项目</returns>
         public DataTable GetExpense(Session us)
         {
-            if (!OnlineManage.Verification(us)) return null;
+            if (!Verification(us)) return null;
 
             var sql = "with List as(Select D.MID, max(P.Permission) as Permission from MDG_Expense D ";
             sql += "join Get_PermData('993D148D-C062-4850-8D3E-FD4F12814F99', @UserId, @DeptId) P on P.OrgId = isnull(D.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = D.CreatorUserId group by D.MID) ";
@@ -285,7 +286,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 物资列表</returns>
         public DataTable GetMaterials(Session us)
         {
-            if (!OnlineManage.Verification(us)) return null;
+            if (!Verification(us)) return null;
 
             var sql = "with List as(Select D.MID, max(P.Permission) as Permission from MDG_Material D ";
             sql += "join Get_PermData('993D148D-C062-4850-8D3E-FD4F12814F99', @UserId, @DeptId) P on P.OrgId = isnull(D.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = D.CreatorUserId group by D.MID) ";
@@ -305,7 +306,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 仓库列表</returns>
         public DataTable GetStore(Session us)
         {
-            if (!OnlineManage.Verification(us)) return null;
+            if (!Verification(us)) return null;
 
             var sql = "with List as(select C.ID, max(P.Permission) as Permission from ABS_Storage_Location C ";
             sql += "join Get_PermData('D83D9B83-AA49-4A1D-91E8-727B248AA6F1', @UserId, @DeptId) P on P.OrgId = isnull(C.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = C.CreatorUserId group by C.ID) ";

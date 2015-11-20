@@ -5,6 +5,8 @@ using System.Data.SqlClient;
 using System.Linq;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
+using static Insight.WS.Server.Common.SqlHelper;
+using static Insight.WS.Server.Common.OnlineManage;
 
 namespace Insight.WS.Service
 {
@@ -19,7 +21,7 @@ namespace Insight.WS.Service
         /// <returns>SYS_ModuleParam List 参数集合</returns>
         public List<SYS_ModuleParam> GetModuleParam(Session us, Guid mid)
         {
-            if (!OnlineManage.Verification(us)) return null;
+            if (!Verification(us)) return null;
 
             var ids = new List<Guid>();
             List<SYS_ModuleParam> mps;
@@ -52,7 +54,7 @@ namespace Insight.WS.Service
         /// <returns>SYS_ModuleParam List 参数集合</returns>
         public List<SYS_ModuleParam> GetModuleUserParam(Session us, Guid mid)
         {
-            if (!OnlineManage.Verification(us)) return null;
+            if (!Verification(us)) return null;
 
             using (var context = new WSEntities())
             {
@@ -68,7 +70,7 @@ namespace Insight.WS.Service
         /// <returns>SYS_ModuleParam List 参数集合</returns>
         public List<SYS_ModuleParam> GetModuleDeptParam(Session us, Guid mid)
         {
-            if (!OnlineManage.Verification(us)) return null;
+            if (!Verification(us)) return null;
 
             using (var context = new WSEntities())
             {
@@ -85,7 +87,7 @@ namespace Insight.WS.Service
         /// <returns>bool 是否保存成功</returns>
         public bool SaveModuleParam(Session us, List<SYS_ModuleParam> apl, List<SYS_ModuleParam> upl)
         {
-            if (!OnlineManage.Verification(us)) return false;
+            if (!Verification(us)) return false;
 
             const string sql = "insert SYS_ModuleParam (ModuleId, ParamId, Name, Value, OrgId, UserId, Description) select @ModuleId, @ParamId, @Name, @Value, @OrgId, @UserId, @Description";
             var cmds = apl.Select(p => new[]
@@ -97,9 +99,9 @@ namespace Insight.WS.Service
                 new SqlParameter("@OrgId", SqlDbType.UniqueIdentifier) {Value = p.OrgId}, 
                 new SqlParameter("@UserId", SqlDbType.UniqueIdentifier) {Value = p.UserId},
                 new SqlParameter("@Description", p.Description)
-            }).Select(parm => SqlHelper.MakeCommand(sql, parm)).ToList();
-            cmds.AddRange(upl.Select(p => $"update SYS_ModuleParam set Value = '{p.Value}' where ID = '{p.ID}'").Select(s => SqlHelper.MakeCommand(s)));
-            return SqlHelper.SqlExecute(cmds);
+            }).Select(parm => MakeCommand(sql, parm)).ToList();
+            cmds.AddRange(upl.Select(p => $"update SYS_ModuleParam set Value = '{p.Value}' where ID = '{p.ID}'").Select(s => MakeCommand(s)));
+            return SqlExecute(cmds);
         }
 
     }

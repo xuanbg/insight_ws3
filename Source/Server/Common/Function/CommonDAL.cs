@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using Insight.WS.Server.Common.ORM;
 using static Insight.WS.Server.Common.SqlHelper;
+using static Insight.WS.Server.Common.OnlineManage;
 
 namespace Insight.WS.Server.Common
 {
@@ -23,14 +24,14 @@ namespace Insight.WS.Server.Common
         {
             if (obj == null) return null;
 
-            if (OnlineManage.Sessions.Count >= OnlineManage.MaxAuthorized)
+            if (Sessions.Count >= MaxAuthorized)
             {
                 obj.LoginStatus = LoginResult.Unauthorized;
                 return obj;
             }
 
             var pw = obj.Signature;
-            var us = OnlineManage.Sessions.Find(s => s.LoginName == obj.LoginName);
+            var us = Sessions.Find(s => s.LoginName == obj.LoginName);
             if (us == null)
             {
                 // 第一次登录
@@ -41,7 +42,7 @@ namespace Insight.WS.Server.Common
                     return obj;
                 }
 
-                obj.ID = OnlineManage.Sessions.Count;
+                obj.ID = Sessions.Count;
                 obj.OpenId = user.OpenId;
                 obj.UserId = user.ID;
                 obj.UserName = user.Name;
@@ -49,9 +50,9 @@ namespace Insight.WS.Server.Common
                 obj.Validity = user.Validity;
                 obj.Type = user.Type;
 
-                OnlineManage.SafeMachine.Add(null);
-                OnlineManage.Sessions.Add(obj);
-                us = OnlineManage.Sessions[obj.ID];
+                SafeMachine.Add(null);
+                Sessions.Add(obj);
+                us = Sessions[obj.ID];
             }
             else
             {
@@ -79,7 +80,7 @@ namespace Insight.WS.Server.Common
                 us.FailureCount = 0;
             }
 
-            var isSafe = obj.MachineId == OnlineManage.SafeMachine[us.ID];
+            var isSafe = obj.MachineId == SafeMachine[us.ID];
             us.LastConnect = DateTime.Now;
 
             // 用户被封禁
@@ -92,7 +93,7 @@ namespace Insight.WS.Server.Common
             // 登录过程正常（1、通过密码验证；2、在上次成功登录系统的设备上登录，或10分钟内连续登录失败次数未超过5次）
             if (us.Signature == pw && (isSafe || us.FailureCount < 5))
             {
-                OnlineManage.SafeMachine[us.ID] = us.MachineId;
+                SafeMachine[us.ID] = us.MachineId;
                 us.FailureCount = 0;
                 return us;
             }
@@ -111,12 +112,12 @@ namespace Insight.WS.Server.Common
         /// <returns>bool 是否修改成功</returns>
         public static bool UpdataPassword(Session us, string pw)
         {
-            if (!OnlineManage.Verification(us)) return false;
+            if (!Verification(us)) return false;
 
             var sql = $"update SYS_User set Password = '{pw}' where ID = '{us.UserId}' ";
             if (SqlNonQuery(MakeCommand(sql)) <= 0) return false;
 
-            OnlineManage.Sessions[us.ID].Signature = pw;
+            Sessions[us.ID].Signature = pw;
             return true;
         }
 
@@ -296,39 +297,18 @@ namespace Insight.WS.Server.Common
         /// <summary>
         /// 生成验证码
         /// </summary>
-        /// <param name="sdst">手机号</param>
         /// <param name="type">验证码类型</param>
+        /// <param name="phone">手机号</param>
+        /// <param name="code">验证码</param>
         /// <param name="time">有效时间（分钟）</param>
         /// <returns>string 验证码</returns>
-        public static void GetVerifyCode(string sdst, int type, int time = 30)
+        public static void GetVerifyCode(int type, string phone, string code, int time)
         {
-            var random = new Random(Environment.TickCount);
-            var code = random.Next(100000, 999999).ToString();
-            var smsg = $"您的验证码是：{code}，该验证码{time}分钟内有效！";
-            switch (type)
-            {
-                case 1: // 注册新用户
-                    smsg += "欢迎使用信分宝，开启信用新生活。么么哒";
-                    break;
-
-                case 2: // 重置登录密码
-                    smsg += "亲爱的用户，您正在重置登录密码！如非本人操作，请告知客服";
-                    break;
-
-                case 3: // 重置支付密码
-                    smsg += "亲爱的用户，您正在重置支付密码！如非本人操作，请立即修改登录密码";
-                    break;
-            }
-
-            // 发送短信
-            Util.SendMessage(sdst, smsg);
-
-            // 保存验证码
             const string sql = "insert SYS_Verify_Record (Type, Mobile, Code, FailureTime) select @Type, @Mobile, @Code, @FailureTime";
             var parm = new[]
             {
                 new SqlParameter("@Type", type),
-                new SqlParameter("@Mobile", sdst),
+                new SqlParameter("@Mobile", phone),
                 new SqlParameter("@Code", code),
                 new SqlParameter("@FailureTime", DateTime.Now.AddMinutes(time))
             };

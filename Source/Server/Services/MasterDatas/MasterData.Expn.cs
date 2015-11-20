@@ -6,6 +6,7 @@ using System.Linq;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
 using static Insight.WS.Server.Common.SqlHelper;
+using static Insight.WS.Server.Common.OnlineManage;
 
 namespace Insight.WS.Service
 {
@@ -18,7 +19,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 全部费用项目列表</returns>
         public DataTable GetExpenses(Session us)
         {
-            if (!OnlineManage.Verification(us)) return null;
+            if (!Verification(us)) return null;
 
             var sql = "with List as(Select D.MID, max(P.Permission) as Permission from MDG_Expense D ";
             sql += "join Get_PermData('993D148D-C062-4850-8D3E-FD4F12814F99', @UserId, @DeptId) P on P.OrgId = isnull(D.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = D.CreatorUserId group by D.MID) ";
@@ -41,7 +42,7 @@ namespace Insight.WS.Service
         /// <returns>MDG_Expense 收支项目对象实体</returns>
         public MDG_Expense GetExpense(Session us, Guid id)
         {
-            if (!OnlineManage.Verification(us)) return null;
+            if (!Verification(us)) return null;
 
             using (var context = new WSEntities())
             {
@@ -59,7 +60,7 @@ namespace Insight.WS.Service
         /// <returns>bool 是否成功</returns>
         public bool AddExpense(Session us, MasterData m, MDG_Expense d, int i)
         {
-            if (!OnlineManage.Verification(us)) return false;
+            if (!Verification(us, "FB98FF3F-73B4-4B2D-B669-9B123FFB5556")) return false;
 
             var cmds = new List<SqlCommand>();
 
@@ -96,7 +97,7 @@ namespace Insight.WS.Service
         /// <returns>bool 是否成功</returns>
         public bool UpdateExpense(Session us, MasterData m, MDG_Expense d, int i)
         {
-            if (!OnlineManage.Verification(us)) return false;
+            if (!Verification(us, "C31B8B4E-229F-473E-82A5-FF6A145C75FF")) return false;
 
             var cmds = new List<SqlCommand>
             {
@@ -126,7 +127,7 @@ namespace Insight.WS.Service
         /// <returns>1：删除 2：停用 0：失败</returns>
         public int DelExpense(Session us, Guid id)
         {
-            if (!OnlineManage.Verification(us)) return 0;
+            if (!Verification(us, "2BB1BCB1-CE9C-4AD5-9FF9-80757173289D")) return 0;
 
             var cmds = new List<SqlCommand>();
 

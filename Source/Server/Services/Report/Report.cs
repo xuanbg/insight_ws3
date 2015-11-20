@@ -5,6 +5,8 @@ using System.Data.SqlClient;
 using System.Linq;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
+using static Insight.WS.Server.Common.SqlHelper;
+using static Insight.WS.Server.Common.OnlineManage;
 
 namespace Insight.WS.Service
 {
@@ -25,12 +27,33 @@ namespace Insight.WS.Service
         /// <returns>SYS_Report_Instances 报表实例</returns>
         public SYS_Report_Instances BulidReport(Session us, Guid rid, DateTime? sd, DateTime? ed, string on, Guid oid)
         {
-            return !OnlineManage.Verification(us) ? null : ReportDAL.BulidReport(rid, sd, ed, @on, us.UserName, oid, us.UserId);
+            return !Verification(us) ? null : ReportDAL.BulidReport(rid, sd, ed, @on, us.UserName, oid, us.UserId);
         }
 
         #endregion
 
         #region 私有方法
+
+        /// <summary>
+        /// 增加一个模板
+        /// </summary>
+        /// <param name="us">用户会话</param>
+        /// <param name="obj">SYS_Report_Templates对象实体</param>
+        /// <returns>object 新模板ID</returns>
+        private object AddTemplet(Session us, SYS_Report_Templates obj)
+        {
+            const string sql = "insert SYS_Report_Templates (CategoryId, Name, Content, Description, CreatorDeptId, CreatorUserId) select @CategoryId, @Name, @Content, @Description, @CreatorDeptId, @CreatorUserId; select ID from SYS_Report_Templates where SN = scope_identity()";
+            var parm = new[]
+            {
+                new SqlParameter("@CategoryId", SqlDbType.UniqueIdentifier) {Value = obj.CategoryId},
+                new SqlParameter("@Name", obj.Name),
+                new SqlParameter("@Content", obj.Content),
+                new SqlParameter("@Description", obj.Description),
+                new SqlParameter("@CreatorDeptId", SqlDbType.UniqueIdentifier) {Value = us.DeptId},
+                new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = us.UserId}
+            };
+            return SqlScalar(MakeCommand(sql, parm));
+        }
 
         private IEnumerable<SqlCommand> InsertRules(Guid id, DataTable tab)
         {
@@ -44,7 +67,7 @@ namespace Insight.WS.Service
                     new SqlParameter("@RuleId", SqlDbType.UniqueIdentifier) {Value = row["ID"]},
                     new SqlParameter("@Read", SqlDbType.Int) {Value = 0}
                 };
-                cmds.Add(SqlHelper.MakeCommand(sql, parm));
+                cmds.Add(MakeCommand(sql, parm));
             }
             return cmds;
         }
@@ -65,7 +88,7 @@ namespace Insight.WS.Service
                         new SqlParameter("@Read", SqlDbType.Int) {Value = 0},
                         new SqlParameter("@Write", SqlDbType.Int) {Value = 1}
                     };
-                    cmds.Add(SqlHelper.MakeCommand(sql, parm));
+                    cmds.Add(MakeCommand(sql, parm));
                 }
                 else
                 {
@@ -75,7 +98,7 @@ namespace Insight.WS.Service
                         new SqlParameter("@ID", SqlDbType.UniqueIdentifier) {Value = row["ID"]},
                         new SqlParameter("@Write", SqlDbType.Int) {Value = 1}
                     };
-                    cmds.Add(SqlHelper.MakeCommand(sql, parm));
+                    cmds.Add(MakeCommand(sql, parm));
                 }
                 cmds.AddRange(InsertMembers(mdt.Select($"OrgId = '{row["OrgId"]}'")));
             }
@@ -90,7 +113,7 @@ namespace Insight.WS.Service
                 new SqlParameter("@EntityId", SqlDbType.UniqueIdentifier) {Value = Guid.Empty}, 
                 new SqlParameter("@RoleId", SqlDbType.UniqueIdentifier) {Value = row["RoleId"]}, 
                 new SqlParameter("@Read", SqlDbType.Int) {Value = 1}
-            }).Select(parm => SqlHelper.MakeCommand(sql, parm)).ToList();
+            }).Select(parm => MakeCommand(sql, parm)).ToList();
         }
 
         #endregion

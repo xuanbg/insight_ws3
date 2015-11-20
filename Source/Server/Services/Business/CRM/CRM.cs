@@ -6,6 +6,7 @@ using System.Linq;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
 using static Insight.WS.Server.Common.SqlHelper;
+using static Insight.WS.Server.Common.OnlineManage;
 
 namespace Insight.WS.Service.Business
 {
@@ -19,7 +20,7 @@ namespace Insight.WS.Service.Business
         /// <returns>DataTable 客户列表</returns>
         public DataTable GetCustomers(Session us)
         {
-            if (!OnlineManage.Verification(us)) return null;
+            if (!Verification(us)) return null;
 
             var sql = "select R.ID, case when R.IsMaster = 1 then 2 else 1 end as Type, C.* from Customer C join MDR_MU R on R.MasterDataId = C.CustomerId and R.EffectiveDate < getdate() and R.FailureDate is null and R.UserId = @UserId union all ";
             sql += "select R.ID, 0 as Type, C.* from Customer C join MDR_MU R on R.MasterDataId = C.CustomerId and R.FailureDate is null and R.IsMaster = 1 join MDG_Employee E on E.MID = R.UserId and E.DirectLeader = @UserId";
@@ -34,7 +35,7 @@ namespace Insight.WS.Service.Business
         /// <returns>DataTable 客户详细信息列表</returns>
         public DataTable GetCustomerInfo(Session us)
         {
-            if (!OnlineManage.Verification(us)) return null;
+            if (!Verification(us)) return null;
 
             var sql = "select C.* from CustomerInfo C join MDR_MU R on R.MasterDataId = C.CustomerId and R.FailureDate is null and R.UserId = @UserId union ";
             sql += "select C.* from CustomerInfo C join MDR_MU R on R.MasterDataId = C.CustomerId and R.FailureDate is null and R.IsMaster = 1 join MDG_Employee E on E.MID = R.UserId and E.DirectLeader = @UserId";
@@ -50,7 +51,7 @@ namespace Insight.WS.Service.Business
         /// <returns>MDG_Customer 客户对象实体</returns>
         public MDG_Customer GetCustomer(Session us, Guid id)
         {
-            if (!OnlineManage.Verification(us)) return null;
+            if (!Verification(us)) return null;
 
             using (var context = new WSEntities())
             {
@@ -67,7 +68,7 @@ namespace Insight.WS.Service.Business
         /// <returns>bool 是否成功</returns>
         public bool AddCustomer(Session us, MasterData m, MDG_Customer d)
         {
-            if (!OnlineManage.Verification(us)) return false;
+            if (!Verification(us, "D5843031-446A-45A3-B4A8-94BC34479D8B")) return false;
 
             var cmds = new List<SqlCommand> {MasterDataDAL.AddMasterData(m)};
 
@@ -122,7 +123,7 @@ namespace Insight.WS.Service.Business
         /// <returns>bool 是否成功</returns>
         public bool UpdateCustomer(Session us, MasterData m, MDG_Customer d)
         {
-            if (!OnlineManage.Verification(us)) return false;
+            if (!Verification(us, "713A013D-428D-4B01-9762-B626C103A57A")) return false;
 
             var cmds = new List<SqlCommand> {MasterDataDAL.UpdateMasterData(m)};
 

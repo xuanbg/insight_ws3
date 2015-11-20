@@ -389,7 +389,7 @@ namespace Insight.WS.Client.Platform.Report.Service {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<object>))]
         object CopyTemplet(Insight.WS.Client.Common.Service.Session us, System.Guid tid, Insight.WS.Client.Common.Service.SYS_Report_Templates obj);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReport/AddTemplet", ReplyAction="http://tempuri.org/IReport/AddTempletResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReport/Import", ReplyAction="http://tempuri.org/IReport/ImportResponse")]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.Session))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.LoginResult))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Report_Instances))]
@@ -544,7 +544,7 @@ namespace Insight.WS.Client.Platform.Report.Service {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MasterData>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<string>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<object>))]
-        object AddTemplet(Insight.WS.Client.Common.Service.Session us, Insight.WS.Client.Common.Service.SYS_Report_Templates obj);
+        object Import(Insight.WS.Client.Common.Service.Session us, Insight.WS.Client.Common.Service.SYS_Report_Templates obj);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReport/EditTemplets", ReplyAction="http://tempuri.org/IReport/EditTempletsResponse")]
         bool EditTemplets(Insight.WS.Client.Common.Service.Session us, Insight.WS.Client.Common.Service.SYS_Report_Templates obj);
@@ -840,8 +840,8 @@ namespace Insight.WS.Client.Platform.Report.Service {
             return base.Channel.CopyTemplet(us, tid, obj);
         }
         
-        public object AddTemplet(Insight.WS.Client.Common.Service.Session us, Insight.WS.Client.Common.Service.SYS_Report_Templates obj) {
-            return base.Channel.AddTemplet(us, obj);
+        public object Import(Insight.WS.Client.Common.Service.Session us, Insight.WS.Client.Common.Service.SYS_Report_Templates obj) {
+            return base.Channel.Import(us, obj);
         }
         
         public bool EditTemplets(Insight.WS.Client.Common.Service.Session us, Insight.WS.Client.Common.Service.SYS_Report_Templates obj) {

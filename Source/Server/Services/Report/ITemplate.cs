@@ -44,7 +44,7 @@ namespace Insight.WS.Service
         /// <param name="obj">SYS_Report_Templates对象实体</param>
         /// <returns>object 新模板ID</returns>
         [OperationContract]
-        object AddTemplet(Session us, SYS_Report_Templates obj);
+        object Import(Session us, SYS_Report_Templates obj);
 
         /// <summary>
         /// 根据传入的模板对象实体更新模板信息

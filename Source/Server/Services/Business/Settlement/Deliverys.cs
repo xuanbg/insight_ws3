@@ -6,6 +6,7 @@ using System.Linq;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
 using static Insight.WS.Server.Common.SqlHelper;
+using static Insight.WS.Server.Common.OnlineManage;
 
 namespace Insight.WS.Service.Business
 {
@@ -19,7 +20,7 @@ namespace Insight.WS.Service.Business
         /// <returns>DataTable 结算记录日期列表</returns>
         public DataTable GetDeliveryDate(Session us)
         {
-            if (!OnlineManage.Verification(us)) return null;
+            if (!Verification(us)) return null;
 
             var sql = "select convert(varchar(4),getdate(),120) as ID, null as ParentId, 0 as Type, cast(datepart(year , getdate()) as varchar) + '年' as Name union ";
             sql += "select convert(varchar(7),getdate(),120) as ID, convert(varchar(4),getdate(),120) as ParentId, 1 as Type, cast(datepart(month , getdate()) as varchar) + '月' as Name union ";
@@ -39,7 +40,7 @@ namespace Insight.WS.Service.Business
         /// <returns>DataTable 收款记录</returns>
         public DataTable GetDeliveryForDate(Session us, Guid mid, string date)
         {
-            if (!OnlineManage.Verification(us)) return null;
+            if (!Verification(us)) return null;
 
             var sql = "with List as(select C.ID, max(P.Permission) as Permission from ABS_Delivery C ";
             sql += "join Get_PermData(@ModuleId, @UserId, @DeptId) P on P.OrgId = isnull(C.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = C.CreatorUserId group by C.ID) ";
@@ -66,7 +67,7 @@ namespace Insight.WS.Service.Business
         /// <returns>DataTable 收款记录</returns>
         public DataTable GetDeliveryForName(Session us, Guid mid, string str)
         {
-            if (!OnlineManage.Verification(us)) return null;
+            if (!Verification(us)) return null;
 
             var sql = "with List as(select C.ID, max(P.Permission) as Permission from ABS_Delivery C ";
             sql += "join Get_PermData(@ModuleId, @UserId, @DeptId) P on P.OrgId = isnull(C.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = C.CreatorUserId group by C.ID) ";
@@ -91,7 +92,7 @@ namespace Insight.WS.Service.Business
         /// <returns>DataTable 未履约数据</returns>
         public DataTable Get_GoodsPlan(Session us, object code)
         {
-            if (!OnlineManage.Verification(us)) return null;
+            if (!Verification(us)) return null;
 
             var sql = $"select * from dbo.Get_GoodsPlan('{code}')";
             return SqlQuery(MakeCommand(sql));
@@ -105,7 +106,7 @@ namespace Insight.WS.Service.Business
         /// <returns>DataTable 收费项目列表</returns>
         public DataTable GetDeliveryItem(Session us, Guid cid)
         {
-            if (!OnlineManage.Verification(us)) return null;
+            if (!Verification(us)) return null;
 
             var sql = $"select Summary as 摘要, ObjectName as 项目, Units as 单位, Price as 单价, Counts as 数量, Amount as 金额 from ABS_Delivery_Item where DeliveryId = '{cid}'";
             return SqlQuery(MakeCommand(sql));
@@ -119,7 +120,7 @@ namespace Insight.WS.Service.Business
         /// <returns>DataTable 附件列表</returns>
         public DataTable GetDeliveryAttach(Session us, Guid did)
         {
-            if (!OnlineManage.Verification(us)) return null;
+            if (!Verification(us)) return null;
 
             var sql = "select I.ID, case I.ImageType when 1 then '收据' when  2 then '发票' when 3 then '付款单' when 4 then '报销单' when 5 then '入库单' when 6 then '出库单' else '附件' end as 类型, I.Code as 编码, I.Name as 名称, I.Expand as 扩展名, ";
             sql += $"M.Name as 密级, I.Pages as 页数, I.Size as 字节数 from ABS_Delivery_Attachs A join ImageData I on I.ID = A.ImageId left join MasterData M on M.ID = I.SecrecyDegree where DeliveryId = '{did}'";
@@ -134,7 +135,7 @@ namespace Insight.WS.Service.Business
         /// <returns>ABS_Clearing 结算记录对象实体</returns>
         public ABS_Delivery GetDelivery(Session us, Guid cid)
         {
-            if (!OnlineManage.Verification(us)) return null;
+            if (!Verification(us)) return null;
 
             using (var context = new WSEntities())
             {
@@ -143,15 +144,26 @@ namespace Insight.WS.Service.Business
         }
 
         /// <summary>
-        /// 保存收款记录
+        /// 保存物资结算记录
         /// </summary>
         /// <param name="us">用户会话</param>
-        /// <param name="obj">ABS_Clearing对象实体</param>
-        /// <param name="idt">收款项目列表</param>
-        /// <returns>object 收款记录ID</returns>
+        /// <param name="obj">AddDelivery对象实体</param>
+        /// <param name="idt">项目列表</param>
+        /// <returns>object 记录ID</returns>
         public object AddDelivery(Session us, ABS_Delivery obj, DataTable idt)
         {
-            if (!OnlineManage.Verification(us)) return null;
+            var action = "0D69C79D-6956-4656-8D4A-CD069291BAED";
+            switch (obj.Direction)
+            {
+                case 1:
+                    action = "E7A0E4E7-FB48-4EE6-98A4-1A2F99C07291";
+                    break;
+                case -1:
+                    action = "BD3671C4-3393-4E30-BEE7-F92BBE08181D";
+                    break;
+            }
+
+            if (!Verification(us, action)) return null;
 
             var cmds = new List<SqlCommand> {InsertDelivery(obj)};
             cmds.AddRange(InsertDeliveryDetail(idt));
@@ -169,7 +181,7 @@ namespace Insight.WS.Service.Business
         /// <returns>bool 是否更新成功</returns>
         public object GetDeliveryCode(Session us, Guid sid, Guid bid, Guid mid, string str)
         {
-            if (!OnlineManage.Verification(us)) return false;
+            if (!Verification(us)) return false;
 
             var sql = "exec Get_Code @SchemeId, @DeptId, @UserId, @BusinessId, @ModuleId, @Char, @Code output ";
             sql += "update ABS_Delivery set ReceiptCode = @Code, PrintTimes = 1 where ID = @BusinessId";
@@ -191,7 +203,7 @@ namespace Insight.WS.Service.Business
         /// <returns>bool 是否更新成功</returns>
         public bool DelDelivery(Session us, Guid bid)
         {
-            if (!OnlineManage.Verification(us)) return false;
+            if (!Verification(us, "451D76EA-D60E-42EB-948E-413A210C964F")) return false;
 
             if (GetDelivery(us, bid).PrintTimes == 0)
             {

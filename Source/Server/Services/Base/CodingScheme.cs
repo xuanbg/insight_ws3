@@ -5,6 +5,7 @@ using System.Linq;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
 using static Insight.WS.Server.Common.SqlHelper;
+using static Insight.WS.Server.Common.OnlineManage;
 
 namespace Insight.WS.Service
 {
@@ -20,7 +21,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 编码方案列表</returns>
         public DataTable GetSchemes(Session us)
         {
-            if (!OnlineManage.Verification(us)) return null;
+            if (!Verification(us)) return null;
 
             var sql = "with List as(select S.ID, max(P.Permission) as Permission from SYS_Code_Scheme S ";
             sql += "join Get_PermData('1E976784-E58C-47C7-AEC5-D92B7B32F122', @UserId, @DeptId) P on P.OrgId = isnull(S.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = S.CreatorUserId group by S.ID) ";
@@ -40,7 +41,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 使用记录</returns>
         public DataTable GetSerialRecord(Session us)
         {
-            if (!OnlineManage.Verification(us)) return null;
+            if (!Verification(us)) return null;
 
             const string sql = "select * from SerialRecord";
             return SqlQuery(MakeCommand(sql));
@@ -53,7 +54,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 分配记录</returns>
         public DataTable GetAllotRecord(Session us)
         {
-            if (!OnlineManage.Verification(us)) return null;
+            if (!Verification(us)) return null;
 
             const string sql = "select * from AllotRecord order by SN";
             return SqlQuery(MakeCommand(sql));
@@ -67,7 +68,7 @@ namespace Insight.WS.Service
         /// <returns>SYS_Code_Scheme 编码方案对象实体</returns>
         public SYS_Code_Scheme GetScheme(Session us, Guid id)
         {
-            if (!OnlineManage.Verification(us)) return null;
+            if (!Verification(us)) return null;
 
             using (var context = new WSEntities())
             {
@@ -85,7 +86,7 @@ namespace Insight.WS.Service
         /// <returns>string 业务编码</returns>
         public string GetCodePreview(Session us, Guid sid, string code, string mark)
         {
-            if (!OnlineManage.Verification(us)) return null;
+            if (!Verification(us)) return null;
 
             const string sql = "select dbo.Get_CodePreview(@SchemeId, @DeptId, @UserId, @CodeFormat, @SerialFormat)";
             var parm = new[]
@@ -111,7 +112,7 @@ namespace Insight.WS.Service
         /// <returns>bool 数据是否插入成功</returns>
         public bool AddScheme(Session us, SYS_Code_Scheme obj)
         {
-            if (!OnlineManage.Verification(us)) return false;
+            if (!Verification(us, "073A086E-03A2-4612-89A3-89B6757C61EB")) return false;
 
             const string sql = "insert SYS_Code_Scheme (Name, CodeFormat, SerialFormat, Description, CreatorDeptId, CreatorUserId) select @Name, @CodeFormat, @SerialFormat, @Description, @CreatorDeptId, @CreatorUserId";
             var parm = new[]
@@ -138,7 +139,7 @@ namespace Insight.WS.Service
         /// <returns>bool 是否更新成功</returns>
         public bool UpdateScheme(Session us, SYS_Code_Scheme obj)
         {
-            if (!OnlineManage.Verification(us)) return false;
+            if (!Verification(us, "2FD5E15B-5463-49F4-9706-517AD22654DE")) return false;
 
             const string sql = "update SYS_Code_Scheme set Name = @Name, CodeFormat = @CodeFormat, SerialFormat = @SerialFormat, Description = @Description where ID = @ID";
             var parm = new[]
@@ -160,7 +161,7 @@ namespace Insight.WS.Service
         /// <returns>bool 是否更新成功</returns>
         public bool EnableScheme(Session us, Guid id)
         {
-            if (!OnlineManage.Verification(us)) return false;
+            if (!Verification(us, "8EEDDF19-79B0-4454-B2D7-722DEAF7ECDF")) return false;
 
             var sql = $"update SYS_Code_Scheme set Validity = 1 where ID = '{id}'";
             return SqlNonQuery(MakeCommand(sql)) > 0;
@@ -178,7 +179,7 @@ namespace Insight.WS.Service
         /// <returns>int 0：失败；1、删除成功；2：设置为不可用</returns>
         public int DeleteScheme(Session us, Guid id)
         {
-            if (!OnlineManage.Verification(us)) return 0;
+            if (!Verification(us, "083CBEFA-EEC1-42C9-9C9F-4D5754919789")) return 0;
 
             var sql = $"select count(*) from SYS_ModuleParam where Value = '{id}'";
             var count = (int)SqlScalar(MakeCommand(sql));

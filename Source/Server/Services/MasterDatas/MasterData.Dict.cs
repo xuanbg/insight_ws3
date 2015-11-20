@@ -6,6 +6,7 @@ using System.Linq;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
 using static Insight.WS.Server.Common.SqlHelper;
+using static Insight.WS.Server.Common.OnlineManage;
 
 namespace Insight.WS.Service
 {
@@ -19,7 +20,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 所有字典数据</returns>
         public DataTable GetDictionarys(Session us)
         {
-            if (!OnlineManage.Verification(us)) return null;
+            if (!Verification(us)) return null;
 
             var sql = "with List as(Select D.MID, max(P.Permission) as Permission from MDG_Dictionary D ";
             sql += "join Get_PermData('5C801552-1905-452B-AE7F-E57227BE70B8', @UserId, @DeptId) P on P.OrgId = isnull(D.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = D.CreatorUserId group by D.MID) ";
@@ -42,7 +43,7 @@ namespace Insight.WS.Service
         /// <returns>MDG_Dictionary对象实体</returns>
         public MDG_Dictionary GetDictionary(Session us, Guid id)
         {
-            if (!OnlineManage.Verification(us)) return null;
+            if (!Verification(us)) return null;
 
             using (var context = new WSEntities())
             {
@@ -60,7 +61,7 @@ namespace Insight.WS.Service
         /// <returns>bool 是否成功</returns>
         public bool AddDictionary(Session us, MasterData m, MDG_Dictionary d, int i)
         {
-            if (!OnlineManage.Verification(us)) return false;
+            if (!Verification(us, "7B06DCC7-E47C-409F-9542-850013815112")) return false;
 
             var cmds = new List<SqlCommand>();
 
@@ -96,7 +97,7 @@ namespace Insight.WS.Service
         /// <returns>bool 是否成功</returns>
         public bool UpdateDictionary(Session us, MasterData m, MDG_Dictionary d, int i)
         {
-            if (!OnlineManage.Verification(us)) return false;
+            if (!Verification(us, "3AF9B968-F812-4FD7-BDF1-5FF47D09D77B")) return false;
 
             var cmds = new List<SqlCommand>
             {
@@ -124,7 +125,7 @@ namespace Insight.WS.Service
         /// <returns>1：删除 2：停用 0：失败</returns>
         public int DelDictionary(Session us, Guid id)
         {
-            if (!OnlineManage.Verification(us)) return 0;
+            if (!Verification(us, "33744044-4DBF-4DB8-8DD0-0990E6F6B36B")) return 0;
 
             var cmds = new List<SqlCommand>();
 
