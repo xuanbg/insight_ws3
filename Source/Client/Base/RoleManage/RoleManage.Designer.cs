@@ -38,7 +38,7 @@ namespace Insight.WS.Client.Platform.Base
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            var resources = new System.ComponentModel.ComponentResourceManager(typeof(RoleManage));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RoleManage));
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -185,10 +185,10 @@ namespace Insight.WS.Client.Platform.Base
             // grdRole
             // 
             this.grdRole.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grdRole.Location = new System.Drawing.Point(2, 22);
+            this.grdRole.Location = new System.Drawing.Point(2, 21);
             this.grdRole.MainView = this.gdvRole;
             this.grdRole.Name = "grdRole";
-            this.grdRole.Size = new System.Drawing.Size(746, 271);
+            this.grdRole.Size = new System.Drawing.Size(746, 272);
             this.grdRole.TabIndex = 1;
             this.grdRole.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gdvRole});
@@ -227,10 +227,10 @@ namespace Insight.WS.Client.Platform.Base
             // 
             this.treMember.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.treMember.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treMember.Location = new System.Drawing.Point(2, 22);
+            this.treMember.Location = new System.Drawing.Point(2, 21);
             this.treMember.Name = "treMember";
             this.treMember.OptionsView.ShowColumns = false;
-            this.treMember.Size = new System.Drawing.Size(216, 266);
+            this.treMember.Size = new System.Drawing.Size(216, 267);
             this.treMember.TabIndex = 0;
             this.treMember.FocusedNodeChanged += new DevExpress.XtraTreeList.FocusedNodeChangedEventHandler(this.treMember_FocusedNodeChanged);
             // 
@@ -247,10 +247,10 @@ namespace Insight.WS.Client.Platform.Base
             // grdUser
             // 
             this.grdUser.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grdUser.Location = new System.Drawing.Point(2, 22);
+            this.grdUser.Location = new System.Drawing.Point(2, 21);
             this.grdUser.MainView = this.gdvUser;
             this.grdUser.Name = "grdUser";
-            this.grdUser.Size = new System.Drawing.Size(521, 266);
+            this.grdUser.Size = new System.Drawing.Size(521, 267);
             this.grdUser.TabIndex = 0;
             this.grdUser.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gdvUser});
@@ -273,6 +273,7 @@ namespace Insight.WS.Client.Platform.Base
             this.pagModule,
             this.pagAction,
             this.pagData});
+            this.tabPermission.SelectedPageChanged += new DevExpress.XtraTab.TabPageChangedEventHandler(this.tabPermission_SelectedPageChanged);
             // 
             // pagModule
             // 
