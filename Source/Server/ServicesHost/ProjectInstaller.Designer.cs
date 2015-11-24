@@ -39,9 +39,9 @@
             // 
             // serviceInstaller
             // 
-            this.serviceInstaller.Description = "信分宝接口服务";
-            this.serviceInstaller.DisplayName = "信分宝接口服务";
-            this.serviceInstaller.ServiceName = "XinFenBao Interface Service";
+            this.serviceInstaller.Description = "Insight Workstation 3服务";
+            this.serviceInstaller.DisplayName = "Insight Workstation 3服务";
+            this.serviceInstaller.ServiceName = "Insight Workstation 3 Service";
             this.serviceInstaller.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
             // 
             // ProjectInstaller
