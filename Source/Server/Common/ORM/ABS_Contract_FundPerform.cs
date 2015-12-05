@@ -14,8 +14,8 @@ namespace Insight.WS.Server.Common.ORM
     using System.Collections.Generic;
     
     [DataContract(IsReference = true)]
-    [KnownType(typeof(ABS_Clearing))]
     [KnownType(typeof(ABS_Contract_FundPlan))]
+    [KnownType(typeof(ABS_Clearing))]
     
     public partial class ABS_Contract_FundPerform
     {
@@ -33,8 +33,8 @@ namespace Insight.WS.Server.Common.ORM
         public System.DateTime CreateTime { get; set; }
     
     	[DataMember]
-        public virtual ABS_Clearing ABS_Clearing { get; set; }
-    	[DataMember]
         public virtual ABS_Contract_FundPlan ABS_Contract_FundPlan { get; set; }
+    	[DataMember]
+        public virtual ABS_Clearing ABS_Clearing { get; set; }
     }
 }

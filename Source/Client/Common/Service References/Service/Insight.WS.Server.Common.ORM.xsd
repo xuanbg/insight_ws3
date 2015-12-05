@@ -724,41 +724,6 @@
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="ABS_Storage_Summary" nillable="true" type="tns:ABS_Storage_Summary" />
-  <xs:complexType name="ABS_StockCapital">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="ABS_StockDetail" nillable="true" type="tns:ArrayOfABS_StockDetail" />
-      <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
-      <xs:element minOccurs="0" name="ID" type="ser:guid" />
-      <xs:element minOccurs="0" name="OrgId" nillable="true" type="ser:guid" />
-      <xs:element minOccurs="0" name="SN" type="xs:long" />
-      <xs:element minOccurs="0" name="SYS_Organization" nillable="true" type="tns:SYS_Organization" />
-    </xs:sequence>
-    <xs:attribute ref="ser:Id" />
-    <xs:attribute ref="ser:Ref" />
-  </xs:complexType>
-  <xs:element name="ABS_StockCapital" nillable="true" type="tns:ABS_StockCapital" />
-  <xs:complexType name="ArrayOfABS_StockDetail">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="ABS_StockDetail" nillable="true" type="tns:ABS_StockDetail" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfABS_StockDetail" nillable="true" type="tns:ArrayOfABS_StockDetail" />
-  <xs:complexType name="ABS_StockDetail">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="ABS_Clearing_Pay" nillable="true" type="tns:ABS_Clearing_Pay" />
-      <xs:element minOccurs="0" name="ABS_StockCapital" nillable="true" type="tns:ABS_StockCapital" />
-      <xs:element minOccurs="0" name="AccountId" nillable="true" type="ser:guid" />
-      <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
-      <xs:element minOccurs="0" name="CapitalId" type="ser:guid" />
-      <xs:element minOccurs="0" name="ClearingId" nillable="true" type="ser:guid" />
-      <xs:element minOccurs="0" name="ID" type="ser:guid" />
-      <xs:element minOccurs="0" name="MDG_Dictionary" nillable="true" type="tns:MDG_Dictionary" />
-      <xs:element minOccurs="0" name="SN" type="xs:long" />
-    </xs:sequence>
-    <xs:attribute ref="ser:Id" />
-    <xs:attribute ref="ser:Ref" />
-  </xs:complexType>
-  <xs:element name="ABS_StockDetail" nillable="true" type="tns:ABS_StockDetail" />
   <xs:complexType name="BASE_Category">
     <xs:sequence>
       <xs:element minOccurs="0" name="ABS_Contract_Subjects" nillable="true" type="tns:ArrayOfABS_Contract_Subjects" />
@@ -857,19 +822,41 @@
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="MDG_Customer" nillable="true" type="tns:MDG_Customer" />
-  <xs:complexType name="ABS_Delivery_Attachs">
+  <xs:complexType name="ABS_StockDetail">
     <xs:sequence>
-      <xs:element minOccurs="0" name="ABS_Delivery" nillable="true" type="tns:ABS_Delivery" />
-      <xs:element minOccurs="0" name="DeliveryId" type="ser:guid" />
+      <xs:element minOccurs="0" name="ABS_Clearing_Pay" nillable="true" type="tns:ABS_Clearing_Pay" />
+      <xs:element minOccurs="0" name="ABS_StockCapital" nillable="true" type="tns:ABS_StockCapital" />
+      <xs:element minOccurs="0" name="AccountId" nillable="true" type="ser:guid" />
+      <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="CapitalId" type="ser:guid" />
+      <xs:element minOccurs="0" name="ClearingId" nillable="true" type="ser:guid" />
       <xs:element minOccurs="0" name="ID" type="ser:guid" />
-      <xs:element minOccurs="0" name="ImageData" nillable="true" type="tns:ImageData" />
-      <xs:element minOccurs="0" name="ImageId" type="ser:guid" />
+      <xs:element minOccurs="0" name="MDG_Dictionary" nillable="true" type="tns:MDG_Dictionary" />
       <xs:element minOccurs="0" name="SN" type="xs:long" />
     </xs:sequence>
     <xs:attribute ref="ser:Id" />
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
-  <xs:element name="ABS_Delivery_Attachs" nillable="true" type="tns:ABS_Delivery_Attachs" />
+  <xs:element name="ABS_StockDetail" nillable="true" type="tns:ABS_StockDetail" />
+  <xs:complexType name="ABS_StockCapital">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ABS_StockDetail" nillable="true" type="tns:ArrayOfABS_StockDetail" />
+      <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ID" type="ser:guid" />
+      <xs:element minOccurs="0" name="OrgId" nillable="true" type="ser:guid" />
+      <xs:element minOccurs="0" name="SN" type="xs:long" />
+      <xs:element minOccurs="0" name="SYS_Organization" nillable="true" type="tns:SYS_Organization" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="ABS_StockCapital" nillable="true" type="tns:ABS_StockCapital" />
+  <xs:complexType name="ArrayOfABS_StockDetail">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ABS_StockDetail" nillable="true" type="tns:ABS_StockDetail" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfABS_StockDetail" nillable="true" type="tns:ArrayOfABS_StockDetail" />
   <xs:complexType name="SYS_Module">
     <xs:sequence>
       <xs:element minOccurs="0" name="ApplicationName" nillable="true" type="xs:string" />
@@ -1112,6 +1099,19 @@
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="SYS_Code_Record" nillable="true" type="tns:SYS_Code_Record" />
+  <xs:complexType name="ABS_Delivery_Attachs">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ABS_Delivery" nillable="true" type="tns:ABS_Delivery" />
+      <xs:element minOccurs="0" name="DeliveryId" type="ser:guid" />
+      <xs:element minOccurs="0" name="ID" type="ser:guid" />
+      <xs:element minOccurs="0" name="ImageData" nillable="true" type="tns:ImageData" />
+      <xs:element minOccurs="0" name="ImageId" type="ser:guid" />
+      <xs:element minOccurs="0" name="SN" type="xs:long" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="ABS_Delivery_Attachs" nillable="true" type="tns:ABS_Delivery_Attachs" />
   <xs:complexType name="SYS_ModuleGroup">
     <xs:sequence>
       <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />

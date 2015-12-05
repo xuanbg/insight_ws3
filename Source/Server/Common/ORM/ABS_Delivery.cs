@@ -14,21 +14,21 @@ namespace Insight.WS.Server.Common.ORM
     using System.Collections.Generic;
     
     [DataContract(IsReference = true)]
-    [KnownType(typeof(ABS_Contract_GoodsPerform))]
     [KnownType(typeof(SYS_Organization))]
     [KnownType(typeof(SYS_User))]
     [KnownType(typeof(ABS_Delivery_Item))]
     [KnownType(typeof(ABS_Delivery_Attachs))]
     [KnownType(typeof(ABS_Storage_Location))]
     [KnownType(typeof(MasterData))]
+    [KnownType(typeof(ABS_Contract_GoodsPerform))]
     
     public partial class ABS_Delivery
     {
         public ABS_Delivery()
         {
-            this.ABS_Contract_GoodsPerform = new HashSet<ABS_Contract_GoodsPerform>();
             this.ABS_Delivery_Item = new HashSet<ABS_Delivery_Item>();
             this.ABS_Delivery_Attachs = new HashSet<ABS_Delivery_Attachs>();
+            this.ABS_Contract_GoodsPerform = new HashSet<ABS_Contract_GoodsPerform>();
         }
     
     	[DataMember]
@@ -61,8 +61,6 @@ namespace Insight.WS.Server.Common.ORM
         public System.DateTime CreateTime { get; set; }
     
     	[DataMember]
-        public virtual ICollection<ABS_Contract_GoodsPerform> ABS_Contract_GoodsPerform { get; set; }
-    	[DataMember]
         public virtual SYS_Organization SYS_Organization { get; set; }
     	[DataMember]
         public virtual SYS_User SYS_User { get; set; }
@@ -74,5 +72,7 @@ namespace Insight.WS.Server.Common.ORM
         public virtual ABS_Storage_Location ABS_Storage_Location { get; set; }
     	[DataMember]
         public virtual MasterData MasterData { get; set; }
+    	[DataMember]
+        public virtual ICollection<ABS_Contract_GoodsPerform> ABS_Contract_GoodsPerform { get; set; }
     }
 }

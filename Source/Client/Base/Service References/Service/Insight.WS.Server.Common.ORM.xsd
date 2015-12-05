@@ -1297,7 +1297,7 @@
       <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
       <xs:element minOccurs="0" name="CreatorDeptId" nillable="true" type="ser:guid" />
       <xs:element minOccurs="0" name="CreatorUserId" type="ser:guid" />
-      <xs:element minOccurs="0" name="DataSource" type="xs:int" />
+      <xs:element minOccurs="0" name="DataSource" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Delay" type="xs:int" />
       <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ID" type="ser:guid" />

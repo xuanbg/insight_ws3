@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="InBr9vdHBC2MBk+t5G+dIRdoGmI=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="9eIpXyaoTRL/wwq+hLMehaLeaHI=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="netTcpBinding" name="CustomBinding_IMasterDatas">
       <properties>
@@ -121,10 +121,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="CustomBinding_IMasterDatas" contract="Service.IMasterDatas" bindingType="netTcpBinding" address="net.tcp://localhost:7210/MasterDatas" bindingConfiguration="CustomBinding_IMasterDatas">
+    <endpoint name="CustomBinding_IMasterDatas" contract="Service.IMasterDatas" bindingType="netTcpBinding" address="net.tcp://localhost:6210/MasterDatas" bindingConfiguration="CustomBinding_IMasterDatas">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>net.tcp://localhost:7210/MasterDatas</serializedValue>
+          <serializedValue>net.tcp://localhost:6210/MasterDatas</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

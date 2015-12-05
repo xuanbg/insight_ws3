@@ -14,8 +14,8 @@ namespace Insight.WS.Server.Common.ORM
     using System.Collections.Generic;
     
     [DataContract(IsReference = true)]
-    [KnownType(typeof(ABS_Delivery))]
     [KnownType(typeof(ABS_Contract_GoodsPlan))]
+    [KnownType(typeof(ABS_Delivery))]
     
     public partial class ABS_Contract_GoodsPerform
     {
@@ -33,8 +33,8 @@ namespace Insight.WS.Server.Common.ORM
         public System.DateTime CreateTime { get; set; }
     
     	[DataMember]
-        public virtual ABS_Delivery ABS_Delivery { get; set; }
-    	[DataMember]
         public virtual ABS_Contract_GoodsPlan ABS_Contract_GoodsPlan { get; set; }
+    	[DataMember]
+        public virtual ABS_Delivery ABS_Delivery { get; set; }
     }
 }

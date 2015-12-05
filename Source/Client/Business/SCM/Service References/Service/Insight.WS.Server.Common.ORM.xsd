@@ -55,6 +55,8 @@
       <xs:element minOccurs="0" name="ID" type="ser:guid" />
       <xs:element minOccurs="0" name="ImageData" nillable="true" type="tns:ArrayOfImageData" />
       <xs:element minOccurs="0" name="Index" type="xs:int" />
+      <xs:element minOccurs="0" name="MDE_Member_Address" nillable="true" type="tns:ArrayOfMDE_Member_Address" />
+      <xs:element minOccurs="0" name="MDE_Member_Address1" nillable="true" type="tns:ArrayOfMDE_Member_Address" />
       <xs:element minOccurs="0" name="MDG_Customer" nillable="true" type="tns:ArrayOfMDG_Customer" />
       <xs:element minOccurs="0" name="MDG_Customer1" nillable="true" type="tns:ArrayOfMDG_Customer" />
       <xs:element minOccurs="0" name="MDG_Supplier" nillable="true" type="tns:ArrayOfMDG_Supplier" />
@@ -90,6 +92,7 @@
       <xs:element minOccurs="0" name="ABS_Contract_GoodsPlan" nillable="true" type="tns:ArrayOfABS_Contract_GoodsPlan" />
       <xs:element minOccurs="0" name="Amount" nillable="true" type="xs:decimal" />
       <xs:element minOccurs="0" name="BASE_Category" nillable="true" type="tns:BASE_Category" />
+      <xs:element minOccurs="0" name="BIZ_Product_Snapshot" nillable="true" type="tns:BIZ_Product_Snapshot" />
       <xs:element minOccurs="0" name="CategoryId" nillable="true" type="ser:guid" />
       <xs:element minOccurs="0" name="ContractId" type="ser:guid" />
       <xs:element minOccurs="0" name="Counts" nillable="true" type="xs:decimal" />
@@ -117,6 +120,7 @@
       <xs:element minOccurs="0" name="ABS_Contract_Subjects" nillable="true" type="tns:ArrayOfABS_Contract_Subjects" />
       <xs:element minOccurs="0" name="AgentId" nillable="true" type="ser:guid" />
       <xs:element minOccurs="0" name="AgentName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BIZ_Order" nillable="true" type="tns:BIZ_Order" />
       <xs:element minOccurs="0" name="ContractCode" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
       <xs:element minOccurs="0" name="CreatorDeptId" nillable="true" type="ser:guid" />
@@ -220,10 +224,9 @@
       <xs:element minOccurs="0" name="ABS_Clearing_Attachs" nillable="true" type="tns:ArrayOfABS_Clearing_Attachs" />
       <xs:element minOccurs="0" name="ABS_Clearing_Check" nillable="true" type="tns:ABS_Clearing_Check" />
       <xs:element minOccurs="0" name="ABS_Clearing_Item" nillable="true" type="tns:ArrayOfABS_Clearing_Item" />
-      <xs:element minOccurs="0" name="ABS_Contract_FundPerform" nillable="true" type="tns:ArrayOfABS_Contract_FundPerform" />
       <xs:element minOccurs="0" name="CheckId" nillable="true" type="ser:guid" />
       <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="CreatorDeptId" nillable="true" type="ser:guid" />
+      <xs:element minOccurs="0" name="CreatorDeptId" type="ser:guid" />
       <xs:element minOccurs="0" name="CreatorUserId" type="ser:guid" />
       <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Direction" type="xs:int" />
@@ -318,6 +321,8 @@
       <xs:element minOccurs="0" name="ABS_StockDetail" nillable="true" type="tns:ArrayOfABS_StockDetail" />
       <xs:element minOccurs="0" name="ABS_Storage_Location" nillable="true" type="tns:ArrayOfABS_Storage_Location" />
       <xs:element minOccurs="0" name="ABS_Storage_Summary" nillable="true" type="tns:ArrayOfABS_Storage_Summary" />
+      <xs:element minOccurs="0" name="BIZ_Order" nillable="true" type="tns:ArrayOfBIZ_Order" />
+      <xs:element minOccurs="0" name="BIZ_Order1" nillable="true" type="tns:ArrayOfBIZ_Order" />
       <xs:element minOccurs="0" name="BuiltIn" type="xs:boolean" />
       <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
       <xs:element minOccurs="0" name="CreatorDeptId" nillable="true" type="ser:guid" />
@@ -326,6 +331,7 @@
       <xs:element minOccurs="0" name="Enable" type="xs:boolean" />
       <xs:element minOccurs="0" name="ImageData" nillable="true" type="tns:ArrayOfImageData" />
       <xs:element minOccurs="0" name="Index" type="xs:int" />
+      <xs:element minOccurs="0" name="MDE_Member_Address" nillable="true" type="tns:ArrayOfMDE_Member_Address" />
       <xs:element minOccurs="0" name="MDG_Customer" nillable="true" type="tns:ArrayOfMDG_Customer" />
       <xs:element minOccurs="0" name="MDG_Customer1" nillable="true" type="tns:ArrayOfMDG_Customer" />
       <xs:element minOccurs="0" name="MDG_Customer2" nillable="true" type="tns:ArrayOfMDG_Customer" />
@@ -333,6 +339,8 @@
       <xs:element minOccurs="0" name="MDG_Customer4" nillable="true" type="tns:ArrayOfMDG_Customer" />
       <xs:element minOccurs="0" name="MDG_Customer5" nillable="true" type="tns:ArrayOfMDG_Customer" />
       <xs:element minOccurs="0" name="MDG_Employee" nillable="true" type="tns:ArrayOfMDG_Employee" />
+      <xs:element minOccurs="0" name="MDG_EntMember" nillable="true" type="tns:ArrayOfMDG_EntMember" />
+      <xs:element minOccurs="0" name="MDG_EntMember1" nillable="true" type="tns:ArrayOfMDG_EntMember" />
       <xs:element minOccurs="0" name="MDG_Expense" nillable="true" type="tns:ArrayOfMDG_Expense" />
       <xs:element minOccurs="0" name="MDG_Material" nillable="true" type="tns:ArrayOfMDG_Material" />
       <xs:element minOccurs="0" name="MDG_Material1" nillable="true" type="tns:ArrayOfMDG_Material" />
@@ -389,6 +397,7 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="ABS_Clearing" nillable="true" type="tns:ABS_Clearing" />
       <xs:element minOccurs="0" name="ABS_Clearing_Pay" nillable="true" type="tns:ArrayOfABS_Clearing_Pay" />
+      <xs:element minOccurs="0" name="ABS_Contract_FundPerform" nillable="true" type="tns:ArrayOfABS_Contract_FundPerform" />
       <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
       <xs:element minOccurs="0" name="ClearingId" type="ser:guid" />
       <xs:element minOccurs="0" name="Counts" nillable="true" type="xs:decimal" />
@@ -405,6 +414,51 @@
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="ABS_Clearing_Item" nillable="true" type="tns:ABS_Clearing_Item" />
+  <xs:complexType name="ArrayOfABS_Contract_FundPerform">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ABS_Contract_FundPerform" nillable="true" type="tns:ABS_Contract_FundPerform" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfABS_Contract_FundPerform" nillable="true" type="tns:ArrayOfABS_Contract_FundPerform" />
+  <xs:complexType name="ABS_Contract_FundPerform">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ABS_Clearing_Item" nillable="true" type="tns:ABS_Clearing_Item" />
+      <xs:element minOccurs="0" name="ABS_Contract_FundPlan" nillable="true" type="tns:ABS_Contract_FundPlan" />
+      <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ClearingId" type="ser:guid" />
+      <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ID" type="ser:guid" />
+      <xs:element minOccurs="0" name="PlanId" type="ser:guid" />
+      <xs:element minOccurs="0" name="SN" type="xs:long" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="ABS_Contract_FundPerform" nillable="true" type="tns:ABS_Contract_FundPerform" />
+  <xs:complexType name="ABS_Contract_FundPlan">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ABS_Contract" nillable="true" type="tns:ABS_Contract" />
+      <xs:element minOccurs="0" name="ABS_Contract_FundPerform" nillable="true" type="tns:ArrayOfABS_Contract_FundPerform" />
+      <xs:element minOccurs="0" name="ABS_Contract_Subjects" nillable="true" type="tns:ABS_Contract_Subjects" />
+      <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ContractId" type="ser:guid" />
+      <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CurrencyId" nillable="true" type="ser:guid" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EndDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Ex_EndDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Ex_StartDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ID" type="ser:guid" />
+      <xs:element minOccurs="0" name="MDG_Dictionary" nillable="true" type="tns:MDG_Dictionary" />
+      <xs:element minOccurs="0" name="ParentId" nillable="true" type="ser:guid" />
+      <xs:element minOccurs="0" name="SN" type="xs:long" />
+      <xs:element minOccurs="0" name="StartDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="SubjectsId" nillable="true" type="ser:guid" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="ABS_Contract_FundPlan" nillable="true" type="tns:ABS_Contract_FundPlan" />
   <xs:complexType name="MasterData">
     <xs:sequence>
       <xs:element minOccurs="0" name="ABS_Advance" nillable="true" type="tns:ArrayOfABS_Advance" />
@@ -427,10 +481,17 @@
       <xs:element minOccurs="0" name="MDD_Character" nillable="true" type="tns:ArrayOfMDD_Character" />
       <xs:element minOccurs="0" name="MDD_Date" nillable="true" type="tns:ArrayOfMDD_Date" />
       <xs:element minOccurs="0" name="MDD_Numeric" nillable="true" type="tns:ArrayOfMDD_Numeric" />
+      <xs:element minOccurs="0" name="MDE_Member_Address" nillable="true" type="tns:ArrayOfMDE_Member_Address" />
+      <xs:element minOccurs="0" name="MDE_Member_Card" nillable="true" type="tns:ArrayOfMDE_Member_Card" />
+      <xs:element minOccurs="0" name="MDE_Member_Contact" nillable="true" type="tns:ArrayOfMDE_Member_Contact" />
+      <xs:element minOccurs="0" name="MDE_Member_CreditInfo" nillable="true" type="tns:ArrayOfMDE_Member_CreditInfo" />
+      <xs:element minOccurs="0" name="MDE_Member_Feedback" nillable="true" type="tns:ArrayOfMDE_Member_Feedback" />
+      <xs:element minOccurs="0" name="MDE_Member_Withdrawal" nillable="true" type="tns:ArrayOfMDE_Member_Withdrawal" />
       <xs:element minOccurs="0" name="MDG_Contact" nillable="true" type="tns:MDG_Contact" />
       <xs:element minOccurs="0" name="MDG_Customer" nillable="true" type="tns:MDG_Customer" />
       <xs:element minOccurs="0" name="MDG_Dictionary" nillable="true" type="tns:MDG_Dictionary" />
       <xs:element minOccurs="0" name="MDG_Employee" nillable="true" type="tns:MDG_Employee" />
+      <xs:element minOccurs="0" name="MDG_EntMember" nillable="true" type="tns:MDG_EntMember" />
       <xs:element minOccurs="0" name="MDG_Expense" nillable="true" type="tns:MDG_Expense" />
       <xs:element minOccurs="0" name="MDG_Material" nillable="true" type="tns:MDG_Material" />
       <xs:element minOccurs="0" name="MDG_Supplier" nillable="true" type="tns:MDG_Supplier" />
@@ -474,7 +535,6 @@
   <xs:element name="ArrayOfABS_Delivery" nillable="true" type="tns:ArrayOfABS_Delivery" />
   <xs:complexType name="ABS_Delivery">
     <xs:sequence>
-      <xs:element minOccurs="0" name="ABS_Contract_GoodsPerform" nillable="true" type="tns:ArrayOfABS_Contract_GoodsPerform" />
       <xs:element minOccurs="0" name="ABS_Delivery_Attachs" nillable="true" type="tns:ArrayOfABS_Delivery_Attachs" />
       <xs:element minOccurs="0" name="ABS_Delivery_Item" nillable="true" type="tns:ArrayOfABS_Delivery_Item" />
       <xs:element minOccurs="0" name="ABS_Storage_Location" nillable="true" type="tns:ABS_Storage_Location" />
@@ -500,47 +560,25 @@
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="ABS_Delivery" nillable="true" type="tns:ABS_Delivery" />
-  <xs:complexType name="ArrayOfABS_Contract_GoodsPerform">
+  <xs:complexType name="ArrayOfABS_Delivery_Attachs">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="ABS_Contract_GoodsPerform" nillable="true" type="tns:ABS_Contract_GoodsPerform" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ABS_Delivery_Attachs" nillable="true" type="tns:ABS_Delivery_Attachs" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfABS_Contract_GoodsPerform" nillable="true" type="tns:ArrayOfABS_Contract_GoodsPerform" />
-  <xs:complexType name="ABS_Contract_GoodsPerform">
+  <xs:element name="ArrayOfABS_Delivery_Attachs" nillable="true" type="tns:ArrayOfABS_Delivery_Attachs" />
+  <xs:complexType name="ABS_Delivery_Attachs">
     <xs:sequence>
-      <xs:element minOccurs="0" name="ABS_Contract_GoodsPlan" nillable="true" type="tns:ABS_Contract_GoodsPlan" />
       <xs:element minOccurs="0" name="ABS_Delivery" nillable="true" type="tns:ABS_Delivery" />
-      <xs:element minOccurs="0" name="Counts" nillable="true" type="xs:decimal" />
-      <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="DeliveryId" nillable="true" type="ser:guid" />
+      <xs:element minOccurs="0" name="DeliveryId" type="ser:guid" />
       <xs:element minOccurs="0" name="ID" type="ser:guid" />
-      <xs:element minOccurs="0" name="PlanId" type="ser:guid" />
+      <xs:element minOccurs="0" name="ImageData" nillable="true" type="tns:ImageData" />
+      <xs:element minOccurs="0" name="ImageId" type="ser:guid" />
       <xs:element minOccurs="0" name="SN" type="xs:long" />
     </xs:sequence>
     <xs:attribute ref="ser:Id" />
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
-  <xs:element name="ABS_Contract_GoodsPerform" nillable="true" type="tns:ABS_Contract_GoodsPerform" />
-  <xs:complexType name="ABS_Contract_GoodsPlan">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="ABS_Contract_GoodsPerform" nillable="true" type="tns:ArrayOfABS_Contract_GoodsPerform" />
-      <xs:element minOccurs="0" name="ABS_Contract_Subjects" nillable="true" type="tns:ABS_Contract_Subjects" />
-      <xs:element minOccurs="0" name="Counts" nillable="true" type="xs:decimal" />
-      <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="EndDate" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="Ex_EndDate" nillable="true" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="Ex_StartDate" nillable="true" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="ID" type="ser:guid" />
-      <xs:element minOccurs="0" name="ParentId" nillable="true" type="ser:guid" />
-      <xs:element minOccurs="0" name="SN" type="xs:long" />
-      <xs:element minOccurs="0" name="StartDate" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="SubjectsId" type="ser:guid" />
-    </xs:sequence>
-    <xs:attribute ref="ser:Id" />
-    <xs:attribute ref="ser:Ref" />
-  </xs:complexType>
-  <xs:element name="ABS_Contract_GoodsPlan" nillable="true" type="tns:ABS_Contract_GoodsPlan" />
+  <xs:element name="ABS_Delivery_Attachs" nillable="true" type="tns:ABS_Delivery_Attachs" />
   <xs:complexType name="SYS_Organization">
     <xs:sequence>
       <xs:element minOccurs="0" name="ABS_Advance" nillable="true" type="tns:ArrayOfABS_Advance" />
@@ -553,6 +591,7 @@
       <xs:element minOccurs="0" name="ABS_Storage_Location" nillable="true" type="tns:ArrayOfABS_Storage_Location" />
       <xs:element minOccurs="0" name="Alias" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="BASE_Category" nillable="true" type="tns:ArrayOfBASE_Category" />
+      <xs:element minOccurs="0" name="BIZ_StagePlan" nillable="true" type="tns:ArrayOfBIZ_StagePlan" />
       <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
       <xs:element minOccurs="0" name="CreatorUserId" type="ser:guid" />
@@ -560,11 +599,16 @@
       <xs:element minOccurs="0" name="ID" type="ser:guid" />
       <xs:element minOccurs="0" name="ImageData" nillable="true" type="tns:ArrayOfImageData" />
       <xs:element minOccurs="0" name="Index" type="xs:int" />
+      <xs:element minOccurs="0" name="MDE_Member_Contact" nillable="true" type="tns:ArrayOfMDE_Member_Contact" />
+      <xs:element minOccurs="0" name="MDE_Member_CreditInfo" nillable="true" type="tns:ArrayOfMDE_Member_CreditInfo" />
+      <xs:element minOccurs="0" name="MDE_Member_Feedback" nillable="true" type="tns:ArrayOfMDE_Member_Feedback" />
+      <xs:element minOccurs="0" name="MDE_Member_Withdrawal" nillable="true" type="tns:ArrayOfMDE_Member_Withdrawal" />
       <xs:element minOccurs="0" name="MDG_Contact" nillable="true" type="tns:ArrayOfMDG_Contact" />
       <xs:element minOccurs="0" name="MDG_Customer" nillable="true" type="tns:ArrayOfMDG_Customer" />
       <xs:element minOccurs="0" name="MDG_Dictionary" nillable="true" type="tns:ArrayOfMDG_Dictionary" />
       <xs:element minOccurs="0" name="MDG_Dictionary1" nillable="true" type="tns:MDG_Dictionary" />
       <xs:element minOccurs="0" name="MDG_Employee" nillable="true" type="tns:ArrayOfMDG_Employee" />
+      <xs:element minOccurs="0" name="MDG_EntMember" nillable="true" type="tns:ArrayOfMDG_EntMember" />
       <xs:element minOccurs="0" name="MDG_Expense" nillable="true" type="tns:ArrayOfMDG_Expense" />
       <xs:element minOccurs="0" name="MDG_Material" nillable="true" type="tns:ArrayOfMDG_Material" />
       <xs:element minOccurs="0" name="MDG_Supplier" nillable="true" type="tns:ArrayOfMDG_Supplier" />
@@ -633,6 +677,7 @@
       <xs:element minOccurs="0" name="ABS_Delivery" nillable="true" type="tns:ArrayOfABS_Delivery" />
       <xs:element minOccurs="0" name="ABS_Storage_Location" nillable="true" type="tns:ArrayOfABS_Storage_Location" />
       <xs:element minOccurs="0" name="BASE_Category" nillable="true" type="tns:ArrayOfBASE_Category" />
+      <xs:element minOccurs="0" name="BIZ_StagePlan" nillable="true" type="tns:ArrayOfBIZ_StagePlan" />
       <xs:element minOccurs="0" name="BuiltIn" type="xs:boolean" />
       <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
       <xs:element minOccurs="0" name="CreatorUserId" nillable="true" type="ser:guid" />
@@ -640,19 +685,22 @@
       <xs:element minOccurs="0" name="ID" type="ser:guid" />
       <xs:element minOccurs="0" name="ImageData" nillable="true" type="tns:ArrayOfImageData" />
       <xs:element minOccurs="0" name="LoginName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MDE_Member_Contact" nillable="true" type="tns:ArrayOfMDE_Member_Contact" />
+      <xs:element minOccurs="0" name="MDE_Member_CreditInfo" nillable="true" type="tns:ArrayOfMDE_Member_CreditInfo" />
+      <xs:element minOccurs="0" name="MDE_Member_Feedback" nillable="true" type="tns:ArrayOfMDE_Member_Feedback" />
+      <xs:element minOccurs="0" name="MDE_Member_Withdrawal" nillable="true" type="tns:ArrayOfMDE_Member_Withdrawal" />
       <xs:element minOccurs="0" name="MDG_Contact" nillable="true" type="tns:ArrayOfMDG_Contact" />
       <xs:element minOccurs="0" name="MDG_Customer" nillable="true" type="tns:ArrayOfMDG_Customer" />
       <xs:element minOccurs="0" name="MDG_Dictionary" nillable="true" type="tns:ArrayOfMDG_Dictionary" />
       <xs:element minOccurs="0" name="MDG_Employee" nillable="true" type="tns:ArrayOfMDG_Employee" />
+      <xs:element minOccurs="0" name="MDG_EntMember" nillable="true" type="tns:ArrayOfMDG_EntMember" />
       <xs:element minOccurs="0" name="MDG_Expense" nillable="true" type="tns:ArrayOfMDG_Expense" />
       <xs:element minOccurs="0" name="MDG_Material" nillable="true" type="tns:ArrayOfMDG_Material" />
       <xs:element minOccurs="0" name="MDG_Supplier" nillable="true" type="tns:ArrayOfMDG_Supplier" />
       <xs:element minOccurs="0" name="MDR_MU" nillable="true" type="tns:ArrayOfMDR_MU" />
       <xs:element minOccurs="0" name="MasterData_Merger" nillable="true" type="tns:ArrayOfMasterData_Merger" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="OpenId" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="PayPassword" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="SN" type="xs:long" />
       <xs:element minOccurs="0" name="SYS_Alert_Rules" nillable="true" type="tns:ArrayOfSYS_Alert_Rules" />
       <xs:element minOccurs="0" name="SYS_Allot_Record" nillable="true" type="tns:ArrayOfSYS_Allot_Record" />
@@ -755,43 +803,39 @@
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="ABS_Storage_Summary" nillable="true" type="tns:ABS_Storage_Summary" />
-  <xs:complexType name="ABS_Contract_FundPlan">
+  <xs:complexType name="ABS_Contract_GoodsPlan">
     <xs:sequence>
-      <xs:element minOccurs="0" name="ABS_Contract" nillable="true" type="tns:ABS_Contract" />
-      <xs:element minOccurs="0" name="ABS_Contract_FundPerform" nillable="true" type="tns:ArrayOfABS_Contract_FundPerform" />
+      <xs:element minOccurs="0" name="ABS_Contract_GoodsPerform" nillable="true" type="tns:ArrayOfABS_Contract_GoodsPerform" />
       <xs:element minOccurs="0" name="ABS_Contract_Subjects" nillable="true" type="tns:ABS_Contract_Subjects" />
-      <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
-      <xs:element minOccurs="0" name="ContractId" type="ser:guid" />
+      <xs:element minOccurs="0" name="Counts" nillable="true" type="xs:decimal" />
       <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="CurrencyId" nillable="true" type="ser:guid" />
       <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="EndDate" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Ex_EndDate" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Ex_StartDate" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="ID" type="ser:guid" />
-      <xs:element minOccurs="0" name="MDG_Dictionary" nillable="true" type="tns:MDG_Dictionary" />
       <xs:element minOccurs="0" name="ParentId" nillable="true" type="ser:guid" />
       <xs:element minOccurs="0" name="SN" type="xs:long" />
       <xs:element minOccurs="0" name="StartDate" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="SubjectsId" nillable="true" type="ser:guid" />
+      <xs:element minOccurs="0" name="SubjectsId" type="ser:guid" />
     </xs:sequence>
     <xs:attribute ref="ser:Id" />
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
-  <xs:element name="ABS_Contract_FundPlan" nillable="true" type="tns:ABS_Contract_FundPlan" />
-  <xs:complexType name="ArrayOfABS_Contract_FundPerform">
+  <xs:element name="ABS_Contract_GoodsPlan" nillable="true" type="tns:ABS_Contract_GoodsPlan" />
+  <xs:complexType name="ArrayOfABS_Contract_GoodsPerform">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="ABS_Contract_FundPerform" nillable="true" type="tns:ABS_Contract_FundPerform" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ABS_Contract_GoodsPerform" nillable="true" type="tns:ABS_Contract_GoodsPerform" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfABS_Contract_FundPerform" nillable="true" type="tns:ArrayOfABS_Contract_FundPerform" />
-  <xs:complexType name="ABS_Contract_FundPerform">
+  <xs:element name="ArrayOfABS_Contract_GoodsPerform" nillable="true" type="tns:ArrayOfABS_Contract_GoodsPerform" />
+  <xs:complexType name="ABS_Contract_GoodsPerform">
     <xs:sequence>
-      <xs:element minOccurs="0" name="ABS_Clearing" nillable="true" type="tns:ABS_Clearing" />
-      <xs:element minOccurs="0" name="ABS_Contract_FundPlan" nillable="true" type="tns:ABS_Contract_FundPlan" />
-      <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
-      <xs:element minOccurs="0" name="ClearingId" nillable="true" type="ser:guid" />
+      <xs:element minOccurs="0" name="ABS_Contract_GoodsPlan" nillable="true" type="tns:ABS_Contract_GoodsPlan" />
+      <xs:element minOccurs="0" name="ABS_Delivery_Item" nillable="true" type="tns:ABS_Delivery_Item" />
+      <xs:element minOccurs="0" name="Counts" nillable="true" type="xs:decimal" />
       <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DeliveryId" type="ser:guid" />
       <xs:element minOccurs="0" name="ID" type="ser:guid" />
       <xs:element minOccurs="0" name="PlanId" type="ser:guid" />
       <xs:element minOccurs="0" name="SN" type="xs:long" />
@@ -799,7 +843,27 @@
     <xs:attribute ref="ser:Id" />
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
-  <xs:element name="ABS_Contract_FundPerform" nillable="true" type="tns:ABS_Contract_FundPerform" />
+  <xs:element name="ABS_Contract_GoodsPerform" nillable="true" type="tns:ABS_Contract_GoodsPerform" />
+  <xs:complexType name="ABS_Delivery_Item">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ABS_Contract_GoodsPerform" nillable="true" type="tns:ArrayOfABS_Contract_GoodsPerform" />
+      <xs:element minOccurs="0" name="ABS_Delivery" nillable="true" type="tns:ABS_Delivery" />
+      <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Counts" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="DeliveryId" type="ser:guid" />
+      <xs:element minOccurs="0" name="ID" type="ser:guid" />
+      <xs:element minOccurs="0" name="MasterData" nillable="true" type="tns:MasterData" />
+      <xs:element minOccurs="0" name="ObjectId" type="ser:guid" />
+      <xs:element minOccurs="0" name="ObjectName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Price" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="SN" type="xs:long" />
+      <xs:element minOccurs="0" name="Summary" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Units" nillable="true" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="ABS_Delivery_Item" nillable="true" type="tns:ABS_Delivery_Item" />
   <xs:complexType name="ABS_StockDetail">
     <xs:sequence>
       <xs:element minOccurs="0" name="ABS_Clearing_Pay" nillable="true" type="tns:ABS_Clearing_Pay" />
@@ -821,7 +885,7 @@
       <xs:element minOccurs="0" name="ABS_StockDetail" nillable="true" type="tns:ArrayOfABS_StockDetail" />
       <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
       <xs:element minOccurs="0" name="ID" type="ser:guid" />
-      <xs:element minOccurs="0" name="OrgId" nillable="true" type="ser:guid" />
+      <xs:element minOccurs="0" name="OrgId" type="ser:guid" />
       <xs:element minOccurs="0" name="SN" type="xs:long" />
       <xs:element minOccurs="0" name="SYS_Organization" nillable="true" type="tns:SYS_Organization" />
     </xs:sequence>
@@ -1043,25 +1107,6 @@
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="SYS_Code_Allot" nillable="true" type="tns:SYS_Code_Allot" />
-  <xs:complexType name="ABS_Delivery_Item">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="ABS_Delivery" nillable="true" type="tns:ABS_Delivery" />
-      <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
-      <xs:element minOccurs="0" name="Counts" nillable="true" type="xs:decimal" />
-      <xs:element minOccurs="0" name="DeliveryId" type="ser:guid" />
-      <xs:element minOccurs="0" name="ID" type="ser:guid" />
-      <xs:element minOccurs="0" name="MasterData" nillable="true" type="tns:MasterData" />
-      <xs:element minOccurs="0" name="ObjectId" type="ser:guid" />
-      <xs:element minOccurs="0" name="ObjectName" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Price" nillable="true" type="xs:decimal" />
-      <xs:element minOccurs="0" name="SN" type="xs:long" />
-      <xs:element minOccurs="0" name="Summary" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Units" nillable="true" type="xs:string" />
-    </xs:sequence>
-    <xs:attribute ref="ser:Id" />
-    <xs:attribute ref="ser:Ref" />
-  </xs:complexType>
-  <xs:element name="ABS_Delivery_Item" nillable="true" type="tns:ABS_Delivery_Item" />
   <xs:complexType name="SYS_Code_Record">
     <xs:sequence>
       <xs:element minOccurs="0" name="BusinessId" nillable="true" type="ser:guid" />
@@ -1077,19 +1122,6 @@
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="SYS_Code_Record" nillable="true" type="tns:SYS_Code_Record" />
-  <xs:complexType name="ABS_Delivery_Attachs">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="ABS_Delivery" nillable="true" type="tns:ABS_Delivery" />
-      <xs:element minOccurs="0" name="DeliveryId" type="ser:guid" />
-      <xs:element minOccurs="0" name="ID" type="ser:guid" />
-      <xs:element minOccurs="0" name="ImageData" nillable="true" type="tns:ImageData" />
-      <xs:element minOccurs="0" name="ImageId" type="ser:guid" />
-      <xs:element minOccurs="0" name="SN" type="xs:long" />
-    </xs:sequence>
-    <xs:attribute ref="ser:Id" />
-    <xs:attribute ref="ser:Ref" />
-  </xs:complexType>
-  <xs:element name="ABS_Delivery_Attachs" nillable="true" type="tns:ABS_Delivery_Attachs" />
   <xs:complexType name="SYS_ModuleGroup">
     <xs:sequence>
       <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
@@ -1110,109 +1142,109 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfSYS_Module" nillable="true" type="tns:ArrayOfSYS_Module" />
-  <xs:complexType name="MDG_Customer">
+  <xs:complexType name="BIZ_Order">
     <xs:sequence>
-      <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="BASE_Category" nillable="true" type="tns:BASE_Category" />
-      <xs:element minOccurs="0" name="BASE_Category1" nillable="true" type="tns:BASE_Category" />
-      <xs:element minOccurs="0" name="BusinessScope" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="City" nillable="true" type="ser:guid" />
-      <xs:element minOccurs="0" name="Class" nillable="true" type="ser:guid" />
-      <xs:element minOccurs="0" name="Corporation" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="CreatorDeptId" nillable="true" type="ser:guid" />
-      <xs:element minOccurs="0" name="CreatorUserId" type="ser:guid" />
-      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="District" nillable="true" type="ser:guid" />
-      <xs:element minOccurs="0" name="Enable" type="xs:boolean" />
-      <xs:element minOccurs="0" name="EnterpriseType" nillable="true" type="ser:guid" />
-      <xs:element minOccurs="0" name="IndustryType" nillable="true" type="ser:guid" />
+      <xs:element minOccurs="0" name="ABS_Contract" nillable="true" type="tns:ABS_Contract" />
+      <xs:element minOccurs="0" name="AddressId" nillable="true" type="ser:guid" />
+      <xs:element minOccurs="0" name="BIZ_StagePlan" nillable="true" type="tns:BIZ_StagePlan" />
+      <xs:element minOccurs="0" name="CancelTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FirstPay" type="xs:decimal" />
+      <xs:element minOccurs="0" name="FirstPayChannel" nillable="true" type="ser:guid" />
+      <xs:element minOccurs="0" name="InvoiceInfo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="InvoiceType" type="xs:int" />
+      <xs:element minOccurs="0" name="MDE_Member_Address" nillable="true" type="tns:MDE_Member_Address" />
       <xs:element minOccurs="0" name="MDG_Dictionary" nillable="true" type="tns:MDG_Dictionary" />
       <xs:element minOccurs="0" name="MDG_Dictionary1" nillable="true" type="tns:MDG_Dictionary" />
-      <xs:element minOccurs="0" name="MDG_Dictionary2" nillable="true" type="tns:MDG_Dictionary" />
-      <xs:element minOccurs="0" name="MDG_Dictionary3" nillable="true" type="tns:MDG_Dictionary" />
-      <xs:element minOccurs="0" name="MDG_Dictionary4" nillable="true" type="tns:MDG_Dictionary" />
-      <xs:element minOccurs="0" name="MDG_Dictionary5" nillable="true" type="tns:MDG_Dictionary" />
-      <xs:element minOccurs="0" name="MID" type="ser:guid" />
-      <xs:element minOccurs="0" name="MasterData" nillable="true" type="tns:MasterData" />
-      <xs:element minOccurs="0" name="Phone" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Province" nillable="true" type="ser:guid" />
-      <xs:element minOccurs="0" name="RegisterDate" nillable="true" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="RegisterNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OID" type="ser:guid" />
+      <xs:element minOccurs="0" name="PayStatus" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RefundTime" type="xs:dateTime" />
       <xs:element minOccurs="0" name="SN" type="xs:long" />
-      <xs:element minOccurs="0" name="SYS_Organization" nillable="true" type="tns:SYS_Organization" />
-      <xs:element minOccurs="0" name="SYS_User" nillable="true" type="tns:SYS_User" />
-      <xs:element minOccurs="0" name="Scale" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Staffs" nillable="true" type="xs:int" />
-      <xs:element minOccurs="0" name="State" nillable="true" type="ser:guid" />
-      <xs:element minOccurs="0" name="Statu" nillable="true" type="ser:guid" />
-      <xs:element minOccurs="0" name="TaxNumber" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Visible" type="xs:boolean" />
-      <xs:element minOccurs="0" name="Website" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="ZipCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ShopId" nillable="true" type="ser:guid" />
+      <xs:element minOccurs="0" name="StageAmount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="StagePlan" nillable="true" type="ser:guid" />
     </xs:sequence>
     <xs:attribute ref="ser:Id" />
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
-  <xs:element name="MDG_Customer" nillable="true" type="tns:MDG_Customer" />
-  <xs:complexType name="MDG_Employee">
+  <xs:element name="BIZ_Order" nillable="true" type="tns:BIZ_Order" />
+  <xs:complexType name="BIZ_StagePlan">
     <xs:sequence>
-      <xs:element minOccurs="0" name="ABS_Contract" nillable="true" type="tns:ArrayOfABS_Contract" />
+      <xs:element minOccurs="0" name="BIZ_Order" nillable="true" type="tns:ArrayOfBIZ_Order" />
       <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
       <xs:element minOccurs="0" name="CreatorDeptId" nillable="true" type="ser:guid" />
       <xs:element minOccurs="0" name="CreatorUserId" type="ser:guid" />
+      <xs:element minOccurs="0" name="Default" type="xs:boolean" />
       <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="DimissionDate" nillable="true" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="DirectLeader" nillable="true" type="ser:guid" />
-      <xs:element minOccurs="0" name="EntryDate" nillable="true" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="Gender" nillable="true" type="xs:int" />
-      <xs:element minOccurs="0" name="HomeAddress" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="IdCardNo" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="LoginUser" type="xs:boolean" />
-      <xs:element minOccurs="0" name="MDG_Dictionary" nillable="true" type="tns:MDG_Dictionary" />
-      <xs:element minOccurs="0" name="MDG_Employee1" nillable="true" type="tns:ArrayOfMDG_Employee" />
-      <xs:element minOccurs="0" name="MDG_Employee2" nillable="true" type="tns:MDG_Employee" />
-      <xs:element minOccurs="0" name="MDR_ET" nillable="true" type="tns:ArrayOfMDR_ET" />
-      <xs:element minOccurs="0" name="MID" type="ser:guid" />
-      <xs:element minOccurs="0" name="MasterData" nillable="true" type="tns:MasterData" />
-      <xs:element minOccurs="0" name="OfficeAddress" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Photo" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="EffectiveDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ID" type="ser:guid" />
+      <xs:element minOccurs="0" name="InvalidDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="MDE_Member_Withdrawal" nillable="true" type="tns:ArrayOfMDE_Member_Withdrawal" />
+      <xs:element minOccurs="0" name="Rate" type="xs:decimal" />
       <xs:element minOccurs="0" name="SN" type="xs:long" />
       <xs:element minOccurs="0" name="SYS_Organization" nillable="true" type="tns:SYS_Organization" />
       <xs:element minOccurs="0" name="SYS_User" nillable="true" type="tns:SYS_User" />
-      <xs:element minOccurs="0" name="Status" type="xs:int" />
-      <xs:element minOccurs="0" name="Thumbnail" nillable="true" type="xs:base64Binary" />
-      <xs:element minOccurs="0" name="WorkType" nillable="true" type="ser:guid" />
+      <xs:element minOccurs="0" name="StageNum" type="xs:int" />
+      <xs:element minOccurs="0" name="Validity" type="xs:boolean" />
     </xs:sequence>
     <xs:attribute ref="ser:Id" />
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
-  <xs:element name="MDG_Employee" nillable="true" type="tns:MDG_Employee" />
-  <xs:complexType name="ArrayOfMDG_Employee">
+  <xs:element name="BIZ_StagePlan" nillable="true" type="tns:BIZ_StagePlan" />
+  <xs:complexType name="ArrayOfBIZ_Order">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MDG_Employee" nillable="true" type="tns:MDG_Employee" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="BIZ_Order" nillable="true" type="tns:BIZ_Order" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfMDG_Employee" nillable="true" type="tns:ArrayOfMDG_Employee" />
-  <xs:complexType name="ArrayOfMDR_ET">
+  <xs:element name="ArrayOfBIZ_Order" nillable="true" type="tns:ArrayOfBIZ_Order" />
+  <xs:complexType name="ArrayOfMDE_Member_Withdrawal">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="MDR_ET" nillable="true" type="tns:MDR_ET" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MDE_Member_Withdrawal" nillable="true" type="tns:MDE_Member_Withdrawal" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfMDR_ET" nillable="true" type="tns:ArrayOfMDR_ET" />
-  <xs:complexType name="MDR_ET">
+  <xs:element name="ArrayOfMDE_Member_Withdrawal" nillable="true" type="tns:ArrayOfMDE_Member_Withdrawal" />
+  <xs:complexType name="MDE_Member_Withdrawal">
     <xs:sequence>
-      <xs:element minOccurs="0" name="EmployeeId" type="ser:guid" />
+      <xs:element minOccurs="0" name="BIZ_StagePlan" nillable="true" type="tns:BIZ_StagePlan" />
+      <xs:element minOccurs="0" name="CardId" type="ser:guid" />
+      <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ID" type="ser:guid" />
-      <xs:element minOccurs="0" name="MDG_Employee" nillable="true" type="tns:MDG_Employee" />
+      <xs:element minOccurs="0" name="LoanAmount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="LoanDeptId" nillable="true" type="ser:guid" />
+      <xs:element minOccurs="0" name="LoanTime" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="LoanUserId" nillable="true" type="ser:guid" />
+      <xs:element minOccurs="0" name="MDE_Member_Card" nillable="true" type="tns:MDE_Member_Card" />
+      <xs:element minOccurs="0" name="MasterData" nillable="true" type="tns:MasterData" />
+      <xs:element minOccurs="0" name="MemberId" type="ser:guid" />
       <xs:element minOccurs="0" name="SN" type="xs:long" />
       <xs:element minOccurs="0" name="SYS_Organization" nillable="true" type="tns:SYS_Organization" />
-      <xs:element minOccurs="0" name="TitleId" type="ser:guid" />
+      <xs:element minOccurs="0" name="SYS_User" nillable="true" type="tns:SYS_User" />
+      <xs:element minOccurs="0" name="StagePlanId" type="ser:guid" />
+      <xs:element minOccurs="0" name="Status" type="xs:int" />
     </xs:sequence>
     <xs:attribute ref="ser:Id" />
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
-  <xs:element name="MDR_ET" nillable="true" type="tns:MDR_ET" />
+  <xs:element name="MDE_Member_Withdrawal" nillable="true" type="tns:MDE_Member_Withdrawal" />
+  <xs:complexType name="MDE_Member_Card">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BankName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Default" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ID" type="ser:guid" />
+      <xs:element minOccurs="0" name="MDE_Member_Withdrawal" nillable="true" type="tns:ArrayOfMDE_Member_Withdrawal" />
+      <xs:element minOccurs="0" name="MasterData" nillable="true" type="tns:MasterData" />
+      <xs:element minOccurs="0" name="MemberId" type="ser:guid" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Number" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SN" type="xs:long" />
+      <xs:element minOccurs="0" name="Type" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Validity" type="xs:boolean" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="MDE_Member_Card" nillable="true" type="tns:MDE_Member_Card" />
   <xs:complexType name="SYS_ModuleAction">
     <xs:sequence>
       <xs:element minOccurs="0" name="Alias" nillable="true" type="xs:string" />
@@ -1389,28 +1421,135 @@
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="SYS_Report_IU" nillable="true" type="tns:SYS_Report_IU" />
-  <xs:complexType name="MDG_Expense">
+  <xs:complexType name="MDE_Member_Address">
     <xs:sequence>
-      <xs:element minOccurs="0" name="BuiltIn" type="xs:boolean" />
+      <xs:element minOccurs="0" name="BASE_Category" nillable="true" type="tns:BASE_Category" />
+      <xs:element minOccurs="0" name="BASE_Category1" nillable="true" type="tns:BASE_Category" />
+      <xs:element minOccurs="0" name="BIZ_Order" nillable="true" type="tns:ArrayOfBIZ_Order" />
+      <xs:element minOccurs="0" name="CityId" nillable="true" type="ser:guid" />
+      <xs:element minOccurs="0" name="CountyId" nillable="true" type="ser:guid" />
       <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="CreatorDeptId" nillable="true" type="ser:guid" />
-      <xs:element minOccurs="0" name="CreatorUserId" type="ser:guid" />
+      <xs:element minOccurs="0" name="Default" type="xs:boolean" />
       <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Enable" type="xs:boolean" />
-      <xs:element minOccurs="0" name="Index" type="xs:int" />
+      <xs:element minOccurs="0" name="ID" type="ser:guid" />
       <xs:element minOccurs="0" name="MDG_Dictionary" nillable="true" type="tns:MDG_Dictionary" />
-      <xs:element minOccurs="0" name="MID" type="ser:guid" />
       <xs:element minOccurs="0" name="MasterData" nillable="true" type="tns:MasterData" />
-      <xs:element minOccurs="0" name="Price" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="MemberId" type="ser:guid" />
+      <xs:element minOccurs="0" name="Mobile" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="SN" type="xs:long" />
-      <xs:element minOccurs="0" name="SYS_Organization" nillable="true" type="tns:SYS_Organization" />
-      <xs:element minOccurs="0" name="SYS_User" nillable="true" type="tns:SYS_User" />
-      <xs:element minOccurs="0" name="Unit" nillable="true" type="ser:guid" />
+      <xs:element minOccurs="0" name="StateId" nillable="true" type="ser:guid" />
+      <xs:element minOccurs="0" name="Street" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Validity" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ZipCode" nillable="true" type="xs:string" />
     </xs:sequence>
     <xs:attribute ref="ser:Id" />
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
-  <xs:element name="MDG_Expense" nillable="true" type="tns:MDG_Expense" />
+  <xs:element name="MDE_Member_Address" nillable="true" type="tns:MDE_Member_Address" />
+  <xs:complexType name="MDG_Customer">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BASE_Category" nillable="true" type="tns:BASE_Category" />
+      <xs:element minOccurs="0" name="BASE_Category1" nillable="true" type="tns:BASE_Category" />
+      <xs:element minOccurs="0" name="BusinessScope" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="City" nillable="true" type="ser:guid" />
+      <xs:element minOccurs="0" name="Class" nillable="true" type="ser:guid" />
+      <xs:element minOccurs="0" name="Corporation" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CreatorDeptId" nillable="true" type="ser:guid" />
+      <xs:element minOccurs="0" name="CreatorUserId" type="ser:guid" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="District" nillable="true" type="ser:guid" />
+      <xs:element minOccurs="0" name="Enable" type="xs:boolean" />
+      <xs:element minOccurs="0" name="EnterpriseType" nillable="true" type="ser:guid" />
+      <xs:element minOccurs="0" name="IndustryType" nillable="true" type="ser:guid" />
+      <xs:element minOccurs="0" name="MDG_Dictionary" nillable="true" type="tns:MDG_Dictionary" />
+      <xs:element minOccurs="0" name="MDG_Dictionary1" nillable="true" type="tns:MDG_Dictionary" />
+      <xs:element minOccurs="0" name="MDG_Dictionary2" nillable="true" type="tns:MDG_Dictionary" />
+      <xs:element minOccurs="0" name="MDG_Dictionary3" nillable="true" type="tns:MDG_Dictionary" />
+      <xs:element minOccurs="0" name="MDG_Dictionary4" nillable="true" type="tns:MDG_Dictionary" />
+      <xs:element minOccurs="0" name="MDG_Dictionary5" nillable="true" type="tns:MDG_Dictionary" />
+      <xs:element minOccurs="0" name="MID" type="ser:guid" />
+      <xs:element minOccurs="0" name="MasterData" nillable="true" type="tns:MasterData" />
+      <xs:element minOccurs="0" name="Phone" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Province" nillable="true" type="ser:guid" />
+      <xs:element minOccurs="0" name="RegisterDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="RegisterNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SN" type="xs:long" />
+      <xs:element minOccurs="0" name="SYS_Organization" nillable="true" type="tns:SYS_Organization" />
+      <xs:element minOccurs="0" name="SYS_User" nillable="true" type="tns:SYS_User" />
+      <xs:element minOccurs="0" name="Scale" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Staffs" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="State" nillable="true" type="ser:guid" />
+      <xs:element minOccurs="0" name="Statu" nillable="true" type="ser:guid" />
+      <xs:element minOccurs="0" name="TaxNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Visible" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Website" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZipCode" nillable="true" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="MDG_Customer" nillable="true" type="tns:MDG_Customer" />
+  <xs:complexType name="MDG_Employee">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ABS_Contract" nillable="true" type="tns:ArrayOfABS_Contract" />
+      <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CreatorDeptId" nillable="true" type="ser:guid" />
+      <xs:element minOccurs="0" name="CreatorUserId" type="ser:guid" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DimissionDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DirectLeader" nillable="true" type="ser:guid" />
+      <xs:element minOccurs="0" name="EntryDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Gender" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="HomeAddress" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IdCardNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LoginUser" type="xs:boolean" />
+      <xs:element minOccurs="0" name="MDG_Dictionary" nillable="true" type="tns:MDG_Dictionary" />
+      <xs:element minOccurs="0" name="MDG_Employee1" nillable="true" type="tns:ArrayOfMDG_Employee" />
+      <xs:element minOccurs="0" name="MDG_Employee2" nillable="true" type="tns:MDG_Employee" />
+      <xs:element minOccurs="0" name="MDR_ET" nillable="true" type="tns:ArrayOfMDR_ET" />
+      <xs:element minOccurs="0" name="MID" type="ser:guid" />
+      <xs:element minOccurs="0" name="MasterData" nillable="true" type="tns:MasterData" />
+      <xs:element minOccurs="0" name="OfficeAddress" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Photo" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="SN" type="xs:long" />
+      <xs:element minOccurs="0" name="SYS_Organization" nillable="true" type="tns:SYS_Organization" />
+      <xs:element minOccurs="0" name="SYS_User" nillable="true" type="tns:SYS_User" />
+      <xs:element minOccurs="0" name="Status" type="xs:int" />
+      <xs:element minOccurs="0" name="Thumbnail" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="WorkType" nillable="true" type="ser:guid" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="MDG_Employee" nillable="true" type="tns:MDG_Employee" />
+  <xs:complexType name="ArrayOfMDG_Employee">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MDG_Employee" nillable="true" type="tns:MDG_Employee" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMDG_Employee" nillable="true" type="tns:ArrayOfMDG_Employee" />
+  <xs:complexType name="ArrayOfMDR_ET">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MDR_ET" nillable="true" type="tns:MDR_ET" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMDR_ET" nillable="true" type="tns:ArrayOfMDR_ET" />
+  <xs:complexType name="MDR_ET">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="EmployeeId" type="ser:guid" />
+      <xs:element minOccurs="0" name="ID" type="ser:guid" />
+      <xs:element minOccurs="0" name="MDG_Employee" nillable="true" type="tns:MDG_Employee" />
+      <xs:element minOccurs="0" name="SN" type="xs:long" />
+      <xs:element minOccurs="0" name="SYS_Organization" nillable="true" type="tns:SYS_Organization" />
+      <xs:element minOccurs="0" name="TitleId" type="ser:guid" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="MDR_ET" nillable="true" type="tns:MDR_ET" />
   <xs:complexType name="SYS_Report_Period">
     <xs:sequence>
       <xs:element minOccurs="0" name="ID" type="ser:guid" />
@@ -1472,6 +1611,54 @@
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="SYS_Report_Schedular" nillable="true" type="tns:SYS_Report_Schedular" />
+  <xs:complexType name="MDG_Expense">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BuiltIn" type="xs:boolean" />
+      <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CreatorDeptId" nillable="true" type="ser:guid" />
+      <xs:element minOccurs="0" name="CreatorUserId" type="ser:guid" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Enable" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Index" type="xs:int" />
+      <xs:element minOccurs="0" name="MDG_Dictionary" nillable="true" type="tns:MDG_Dictionary" />
+      <xs:element minOccurs="0" name="MID" type="ser:guid" />
+      <xs:element minOccurs="0" name="MasterData" nillable="true" type="tns:MasterData" />
+      <xs:element minOccurs="0" name="Price" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="SN" type="xs:long" />
+      <xs:element minOccurs="0" name="SYS_Organization" nillable="true" type="tns:SYS_Organization" />
+      <xs:element minOccurs="0" name="SYS_User" nillable="true" type="tns:SYS_User" />
+      <xs:element minOccurs="0" name="Unit" nillable="true" type="ser:guid" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="MDG_Expense" nillable="true" type="tns:MDG_Expense" />
+  <xs:complexType name="SYS_Report_Templates">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BASE_Category" nillable="true" type="tns:BASE_Category" />
+      <xs:element minOccurs="0" name="CategoryId" nillable="true" type="ser:guid" />
+      <xs:element minOccurs="0" name="Content" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CreatorDeptId" nillable="true" type="ser:guid" />
+      <xs:element minOccurs="0" name="CreatorUserId" type="ser:guid" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ID" type="ser:guid" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SN" type="xs:long" />
+      <xs:element minOccurs="0" name="SYS_Organization" nillable="true" type="tns:SYS_Organization" />
+      <xs:element minOccurs="0" name="SYS_Report_Definition" nillable="true" type="tns:ArrayOfSYS_Report_Definition" />
+      <xs:element minOccurs="0" name="SYS_User" nillable="true" type="tns:SYS_User" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="SYS_Report_Templates" nillable="true" type="tns:SYS_Report_Templates" />
+  <xs:complexType name="ArrayOfSYS_Report_Definition">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SYS_Report_Definition" nillable="true" type="tns:SYS_Report_Definition" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSYS_Report_Definition" nillable="true" type="tns:ArrayOfSYS_Report_Definition" />
   <xs:complexType name="MDG_Material">
     <xs:sequence>
       <xs:element minOccurs="0" name="BarCode" nillable="true" type="xs:string" />
@@ -1499,47 +1686,22 @@
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="MDG_Material" nillable="true" type="tns:MDG_Material" />
-  <xs:complexType name="SYS_Report_Templates">
+  <xs:complexType name="SYS_Role_Title">
     <xs:sequence>
-      <xs:element minOccurs="0" name="BASE_Category" nillable="true" type="tns:BASE_Category" />
-      <xs:element minOccurs="0" name="CategoryId" nillable="true" type="ser:guid" />
-      <xs:element minOccurs="0" name="Content" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="CreatorDeptId" nillable="true" type="ser:guid" />
       <xs:element minOccurs="0" name="CreatorUserId" type="ser:guid" />
-      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ID" type="ser:guid" />
-      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OrgId" type="ser:guid" />
+      <xs:element minOccurs="0" name="RoleId" type="ser:guid" />
       <xs:element minOccurs="0" name="SN" type="xs:long" />
       <xs:element minOccurs="0" name="SYS_Organization" nillable="true" type="tns:SYS_Organization" />
-      <xs:element minOccurs="0" name="SYS_Report_Definition" nillable="true" type="tns:ArrayOfSYS_Report_Definition" />
+      <xs:element minOccurs="0" name="SYS_Role" nillable="true" type="tns:SYS_Role" />
       <xs:element minOccurs="0" name="SYS_User" nillable="true" type="tns:SYS_User" />
     </xs:sequence>
     <xs:attribute ref="ser:Id" />
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
-  <xs:element name="SYS_Report_Templates" nillable="true" type="tns:SYS_Report_Templates" />
-  <xs:complexType name="ArrayOfSYS_Report_Definition">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="SYS_Report_Definition" nillable="true" type="tns:SYS_Report_Definition" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfSYS_Report_Definition" nillable="true" type="tns:ArrayOfSYS_Report_Definition" />
-  <xs:complexType name="MDS_Contact_Info">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="ID" type="ser:guid" />
-      <xs:element minOccurs="0" name="InfoTypeId" type="ser:guid" />
-      <xs:element minOccurs="0" name="IsMaster" type="xs:boolean" />
-      <xs:element minOccurs="0" name="MDG_Dictionary" nillable="true" type="tns:MDG_Dictionary" />
-      <xs:element minOccurs="0" name="MasterData" nillable="true" type="tns:MasterData" />
-      <xs:element minOccurs="0" name="MasterDataId" type="ser:guid" />
-      <xs:element minOccurs="0" name="Number" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="SN" type="xs:long" />
-    </xs:sequence>
-    <xs:attribute ref="ser:Id" />
-    <xs:attribute ref="ser:Ref" />
-  </xs:complexType>
-  <xs:element name="MDS_Contact_Info" nillable="true" type="tns:MDS_Contact_Info" />
+  <xs:element name="SYS_Role_Title" nillable="true" type="tns:SYS_Role_Title" />
   <xs:complexType name="SYS_Role_User">
     <xs:sequence>
       <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
@@ -1575,22 +1737,21 @@
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="SYS_ModuleParam" nillable="true" type="tns:SYS_ModuleParam" />
-  <xs:complexType name="MasterData_Merger">
+  <xs:complexType name="MDS_Contact_Info">
     <xs:sequence>
-      <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="CreatorUserId" type="ser:guid" />
       <xs:element minOccurs="0" name="ID" type="ser:guid" />
+      <xs:element minOccurs="0" name="InfoTypeId" type="ser:guid" />
+      <xs:element minOccurs="0" name="IsMaster" type="xs:boolean" />
+      <xs:element minOccurs="0" name="MDG_Dictionary" nillable="true" type="tns:MDG_Dictionary" />
       <xs:element minOccurs="0" name="MasterData" nillable="true" type="tns:MasterData" />
-      <xs:element minOccurs="0" name="MasterData1" nillable="true" type="tns:MasterData" />
-      <xs:element minOccurs="0" name="MasterId" type="ser:guid" />
-      <xs:element minOccurs="0" name="MergerId" type="ser:guid" />
+      <xs:element minOccurs="0" name="MasterDataId" type="ser:guid" />
+      <xs:element minOccurs="0" name="Number" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="SN" type="xs:long" />
-      <xs:element minOccurs="0" name="SYS_User" nillable="true" type="tns:SYS_User" />
     </xs:sequence>
     <xs:attribute ref="ser:Id" />
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
-  <xs:element name="MasterData_Merger" nillable="true" type="tns:MasterData_Merger" />
+  <xs:element name="MDS_Contact_Info" nillable="true" type="tns:MDS_Contact_Info" />
   <xs:complexType name="SYS_Role_UserGroup">
     <xs:sequence>
       <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
@@ -1653,22 +1814,6 @@
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="SYS_UserGroupMember" nillable="true" type="tns:SYS_UserGroupMember" />
-  <xs:complexType name="SYS_Role_Title">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="CreatorUserId" type="ser:guid" />
-      <xs:element minOccurs="0" name="ID" type="ser:guid" />
-      <xs:element minOccurs="0" name="OrgId" type="ser:guid" />
-      <xs:element minOccurs="0" name="RoleId" type="ser:guid" />
-      <xs:element minOccurs="0" name="SN" type="xs:long" />
-      <xs:element minOccurs="0" name="SYS_Organization" nillable="true" type="tns:SYS_Organization" />
-      <xs:element minOccurs="0" name="SYS_Role" nillable="true" type="tns:SYS_Role" />
-      <xs:element minOccurs="0" name="SYS_User" nillable="true" type="tns:SYS_User" />
-    </xs:sequence>
-    <xs:attribute ref="ser:Id" />
-    <xs:attribute ref="ser:Ref" />
-  </xs:complexType>
-  <xs:element name="SYS_Role_Title" nillable="true" type="tns:SYS_Role_Title" />
   <xs:complexType name="SYS_RolePerm_Data">
     <xs:sequence>
       <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
@@ -1687,34 +1832,39 @@
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="SYS_RolePerm_Data" nillable="true" type="tns:SYS_RolePerm_Data" />
-  <xs:complexType name="MDG_Contact">
+  <xs:complexType name="MDG_EntMember">
     <xs:sequence>
-      <xs:element minOccurs="0" name="Birthday" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="AnnualIncome" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Available" type="xs:decimal" />
+      <xs:element minOccurs="0" name="CompanyName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="CreatorDeptId" nillable="true" type="ser:guid" />
-      <xs:element minOccurs="0" name="CreatorUserId" type="ser:guid" />
-      <xs:element minOccurs="0" name="Department" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EducateId" nillable="true" type="ser:guid" />
       <xs:element minOccurs="0" name="Enable" type="xs:boolean" />
-      <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Gender" nillable="true" type="xs:int" />
-      <xs:element minOccurs="0" name="HomeAddress" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="IsMaster" type="xs:boolean" />
-      <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="LoginUser" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IdCardNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IndustryType" nillable="true" type="ser:guid" />
+      <xs:element minOccurs="0" name="Loans" type="xs:decimal" />
+      <xs:element minOccurs="0" name="MDG_Dictionary" nillable="true" type="tns:MDG_Dictionary" />
+      <xs:element minOccurs="0" name="MDG_Dictionary1" nillable="true" type="tns:MDG_Dictionary" />
       <xs:element minOccurs="0" name="MID" type="ser:guid" />
+      <xs:element minOccurs="0" name="Marital" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="MasterData" nillable="true" type="tns:MasterData" />
-      <xs:element minOccurs="0" name="MiddleName" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="OfficeAddress" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Office" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Phone" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Portrait" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="SN" type="xs:long" />
       <xs:element minOccurs="0" name="SYS_Organization" nillable="true" type="tns:SYS_Organization" />
       <xs:element minOccurs="0" name="SYS_User" nillable="true" type="tns:SYS_User" />
-      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Status" type="xs:int" />
+      <xs:element minOccurs="0" name="VerifyDeptId" nillable="true" type="ser:guid" />
+      <xs:element minOccurs="0" name="VerifyTime" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="VerifyUserId" nillable="true" type="ser:guid" />
     </xs:sequence>
     <xs:attribute ref="ser:Id" />
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
-  <xs:element name="MDG_Contact" nillable="true" type="tns:MDG_Contact" />
+  <xs:element name="MDG_EntMember" nillable="true" type="tns:MDG_EntMember" />
   <xs:complexType name="SYS_RolePerm_DataAbs">
     <xs:sequence>
       <xs:element minOccurs="0" name="ID" type="ser:guid" />
@@ -1733,22 +1883,22 @@
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="SYS_RolePerm_DataAbs" nillable="true" type="tns:SYS_RolePerm_DataAbs" />
-  <xs:complexType name="MDR_MU">
+  <xs:complexType name="MasterData_Merger">
     <xs:sequence>
-      <xs:element minOccurs="0" name="EffectiveDate" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="FailureDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CreatorUserId" type="ser:guid" />
       <xs:element minOccurs="0" name="ID" type="ser:guid" />
-      <xs:element minOccurs="0" name="IsMaster" type="xs:boolean" />
       <xs:element minOccurs="0" name="MasterData" nillable="true" type="tns:MasterData" />
-      <xs:element minOccurs="0" name="MasterDataId" type="ser:guid" />
+      <xs:element minOccurs="0" name="MasterData1" nillable="true" type="tns:MasterData" />
+      <xs:element minOccurs="0" name="MasterId" type="ser:guid" />
+      <xs:element minOccurs="0" name="MergerId" type="ser:guid" />
       <xs:element minOccurs="0" name="SN" type="xs:long" />
       <xs:element minOccurs="0" name="SYS_User" nillable="true" type="tns:SYS_User" />
-      <xs:element minOccurs="0" name="UserId" type="ser:guid" />
     </xs:sequence>
     <xs:attribute ref="ser:Id" />
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
-  <xs:element name="MDR_MU" nillable="true" type="tns:MDR_MU" />
+  <xs:element name="MasterData_Merger" nillable="true" type="tns:MasterData_Merger" />
   <xs:complexType name="SYS_Alert_Rules">
     <xs:sequence>
       <xs:element minOccurs="0" name="BASE_Category" nillable="true" type="tns:BASE_Category" />
@@ -1836,6 +1986,135 @@
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="SYS_Alert_Target" nillable="true" type="tns:SYS_Alert_Target" />
+  <xs:complexType name="MDE_Member_Contact">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ID" type="ser:guid" />
+      <xs:element minOccurs="0" name="MasterData" nillable="true" type="tns:MasterData" />
+      <xs:element minOccurs="0" name="MemberId" type="ser:guid" />
+      <xs:element minOccurs="0" name="Mobile" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SN" type="xs:long" />
+      <xs:element minOccurs="0" name="SYS_Organization" nillable="true" type="tns:SYS_Organization" />
+      <xs:element minOccurs="0" name="SYS_User" nillable="true" type="tns:SYS_User" />
+      <xs:element minOccurs="0" name="Status" type="xs:int" />
+      <xs:element minOccurs="0" name="Type" type="xs:int" />
+      <xs:element minOccurs="0" name="VerifyDeptId" nillable="true" type="ser:guid" />
+      <xs:element minOccurs="0" name="VerifyTime" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="VerifyUserId" nillable="true" type="ser:guid" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="MDE_Member_Contact" nillable="true" type="tns:MDE_Member_Contact" />
+  <xs:complexType name="BIZ_Product_Snapshot">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ABS_Contract_Subjects" nillable="true" type="tns:ABS_Contract_Subjects" />
+      <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PackingList" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Parameter" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProductImage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProductName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProductPic1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProductPic2" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProductPic3" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProductPic4" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProductPic5" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProductPrice" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="SID" type="ser:guid" />
+      <xs:element minOccurs="0" name="SN" type="xs:long" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="BIZ_Product_Snapshot" nillable="true" type="tns:BIZ_Product_Snapshot" />
+  <xs:complexType name="MDE_Member_CreditInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ID" type="ser:guid" />
+      <xs:element minOccurs="0" name="Image" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MasterData" nillable="true" type="tns:MasterData" />
+      <xs:element minOccurs="0" name="MemberId" type="ser:guid" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SN" type="xs:long" />
+      <xs:element minOccurs="0" name="SYS_Organization" nillable="true" type="tns:SYS_Organization" />
+      <xs:element minOccurs="0" name="SYS_User" nillable="true" type="tns:SYS_User" />
+      <xs:element minOccurs="0" name="Status" type="xs:int" />
+      <xs:element minOccurs="0" name="Type" type="xs:int" />
+      <xs:element minOccurs="0" name="VerifyDeptId" nillable="true" type="ser:guid" />
+      <xs:element minOccurs="0" name="VerifyTime" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="VerifyUserId" nillable="true" type="ser:guid" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="MDE_Member_CreditInfo" nillable="true" type="tns:MDE_Member_CreditInfo" />
+  <xs:complexType name="MDG_Contact">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Birthday" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CreatorDeptId" nillable="true" type="ser:guid" />
+      <xs:element minOccurs="0" name="CreatorUserId" type="ser:guid" />
+      <xs:element minOccurs="0" name="Department" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Enable" type="xs:boolean" />
+      <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Gender" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="HomeAddress" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsMaster" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LoginUser" type="xs:boolean" />
+      <xs:element minOccurs="0" name="MID" type="ser:guid" />
+      <xs:element minOccurs="0" name="MasterData" nillable="true" type="tns:MasterData" />
+      <xs:element minOccurs="0" name="MiddleName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OfficeAddress" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SN" type="xs:long" />
+      <xs:element minOccurs="0" name="SYS_Organization" nillable="true" type="tns:SYS_Organization" />
+      <xs:element minOccurs="0" name="SYS_User" nillable="true" type="tns:SYS_User" />
+      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="MDG_Contact" nillable="true" type="tns:MDG_Contact" />
+  <xs:complexType name="MDE_Member_Feedback">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AcceptDeptId" nillable="true" type="ser:guid" />
+      <xs:element minOccurs="0" name="AcceptTime" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="AcceptUserId" nillable="true" type="ser:guid" />
+      <xs:element minOccurs="0" name="Complaint" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ID" type="ser:guid" />
+      <xs:element minOccurs="0" name="MasterData" nillable="true" type="tns:MasterData" />
+      <xs:element minOccurs="0" name="MemberId" type="ser:guid" />
+      <xs:element minOccurs="0" name="Reply" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SN" type="xs:long" />
+      <xs:element minOccurs="0" name="SYS_Organization" nillable="true" type="tns:SYS_Organization" />
+      <xs:element minOccurs="0" name="SYS_User" nillable="true" type="tns:SYS_User" />
+      <xs:element minOccurs="0" name="Status" type="xs:int" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="MDE_Member_Feedback" nillable="true" type="tns:MDE_Member_Feedback" />
+  <xs:complexType name="MDR_MU">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="EffectiveDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FailureDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ID" type="ser:guid" />
+      <xs:element minOccurs="0" name="IsMaster" type="xs:boolean" />
+      <xs:element minOccurs="0" name="MasterData" nillable="true" type="tns:MasterData" />
+      <xs:element minOccurs="0" name="MasterDataId" type="ser:guid" />
+      <xs:element minOccurs="0" name="SN" type="xs:long" />
+      <xs:element minOccurs="0" name="SYS_User" nillable="true" type="tns:SYS_User" />
+      <xs:element minOccurs="0" name="UserId" type="ser:guid" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="MDR_MU" nillable="true" type="tns:MDR_MU" />
   <xs:complexType name="SYS_OrgMember">
     <xs:sequence>
       <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
@@ -1934,12 +2213,36 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfSYS_ModuleParam" nillable="true" type="tns:ArrayOfSYS_ModuleParam" />
+  <xs:complexType name="ArrayOfBIZ_StagePlan">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="BIZ_StagePlan" nillable="true" type="tns:BIZ_StagePlan" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfBIZ_StagePlan" nillable="true" type="tns:ArrayOfBIZ_StagePlan" />
   <xs:complexType name="ArrayOfImageData">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="ImageData" nillable="true" type="tns:ImageData" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfImageData" nillable="true" type="tns:ArrayOfImageData" />
+  <xs:complexType name="ArrayOfMDE_Member_Contact">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MDE_Member_Contact" nillable="true" type="tns:MDE_Member_Contact" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMDE_Member_Contact" nillable="true" type="tns:ArrayOfMDE_Member_Contact" />
+  <xs:complexType name="ArrayOfMDE_Member_CreditInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MDE_Member_CreditInfo" nillable="true" type="tns:MDE_Member_CreditInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMDE_Member_CreditInfo" nillable="true" type="tns:ArrayOfMDE_Member_CreditInfo" />
+  <xs:complexType name="ArrayOfMDE_Member_Feedback">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MDE_Member_Feedback" nillable="true" type="tns:MDE_Member_Feedback" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMDE_Member_Feedback" nillable="true" type="tns:ArrayOfMDE_Member_Feedback" />
   <xs:complexType name="ArrayOfMDG_Contact">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="MDG_Contact" nillable="true" type="tns:MDG_Contact" />
@@ -1958,6 +2261,12 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfMDG_Dictionary" nillable="true" type="tns:ArrayOfMDG_Dictionary" />
+  <xs:complexType name="ArrayOfMDG_EntMember">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MDG_EntMember" nillable="true" type="tns:MDG_EntMember" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMDG_EntMember" nillable="true" type="tns:ArrayOfMDG_EntMember" />
   <xs:complexType name="ArrayOfMDG_Expense">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="MDG_Expense" nillable="true" type="tns:MDG_Expense" />
@@ -2048,12 +2357,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfABS_StockCapital" nillable="true" type="tns:ArrayOfABS_StockCapital" />
-  <xs:complexType name="ArrayOfABS_Delivery_Attachs">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="ABS_Delivery_Attachs" nillable="true" type="tns:ABS_Delivery_Attachs" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfABS_Delivery_Attachs" nillable="true" type="tns:ArrayOfABS_Delivery_Attachs" />
   <xs:complexType name="ArrayOfABS_Delivery_Item">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="ABS_Delivery_Item" nillable="true" type="tns:ABS_Delivery_Item" />
@@ -2066,6 +2369,18 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfABS_Storage_Summary" nillable="true" type="tns:ArrayOfABS_Storage_Summary" />
+  <xs:complexType name="ArrayOfMDE_Member_Address">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MDE_Member_Address" nillable="true" type="tns:MDE_Member_Address" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMDE_Member_Address" nillable="true" type="tns:ArrayOfMDE_Member_Address" />
+  <xs:complexType name="ArrayOfMDE_Member_Card">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MDE_Member_Card" nillable="true" type="tns:MDE_Member_Card" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMDE_Member_Card" nillable="true" type="tns:ArrayOfMDE_Member_Card" />
   <xs:complexType name="ArrayOfMDS_Contact_Info">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="MDS_Contact_Info" nillable="true" type="tns:MDS_Contact_Info" />

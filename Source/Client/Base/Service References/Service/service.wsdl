@@ -1057,9 +1057,9 @@
   </wsdl:binding>
   <wsdl:service name="Base">
     <wsdl:port name="CustomBinding_IBase" binding="tns:CustomBinding_IBase">
-      <soap12:address location="net.tcp://localhost:7210/Base" />
+      <soap12:address location="net.tcp://localhost:6210/Base" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:7210/Base</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost:6210/Base</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>

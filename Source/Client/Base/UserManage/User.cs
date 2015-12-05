@@ -149,6 +149,7 @@ namespace Insight.WS.Client.Platform.Base
                 else
                 {
                     _User.ID = Guid.NewGuid();
+                    _User.Password = "E10ADC3949BA59ABBE56E057F20F883E";
                     if (!cli.AddUser(OpenForm.UserSession, _User))
                     {
                         General.ShowError($"新建用户【{_User.LoginName}】失败！");

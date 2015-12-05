@@ -19,8 +19,8 @@ namespace Insight.WS.Server.Common.ORM
     [KnownType(typeof(SYS_User))]
     [KnownType(typeof(SYS_Module))]
     [KnownType(typeof(ImageData))]
-    [KnownType(typeof(MasterData_Property))]
     [KnownType(typeof(MasterData))]
+    [KnownType(typeof(MasterData_Property))]
     [KnownType(typeof(MDG_Customer))]
     [KnownType(typeof(MDG_Supplier))]
     [KnownType(typeof(SYS_Alert_Rules))]
@@ -33,8 +33,8 @@ namespace Insight.WS.Server.Common.ORM
         {
             this.ABS_Contract_Subjects = new HashSet<ABS_Contract_Subjects>();
             this.ImageData = new HashSet<ImageData>();
-            this.MasterData_Property = new HashSet<MasterData_Property>();
             this.MasterData = new HashSet<MasterData>();
+            this.MasterData_Property = new HashSet<MasterData_Property>();
             this.MDG_Customer = new HashSet<MDG_Customer>();
             this.MDG_Customer1 = new HashSet<MDG_Customer>();
             this.MDG_Supplier = new HashSet<MDG_Supplier>();
@@ -84,9 +84,9 @@ namespace Insight.WS.Server.Common.ORM
     	[DataMember]
         public virtual ICollection<ImageData> ImageData { get; set; }
     	[DataMember]
-        public virtual ICollection<MasterData_Property> MasterData_Property { get; set; }
-    	[DataMember]
         public virtual ICollection<MasterData> MasterData { get; set; }
+    	[DataMember]
+        public virtual ICollection<MasterData_Property> MasterData_Property { get; set; }
     	[DataMember]
         public virtual ICollection<MDG_Customer> MDG_Customer { get; set; }
     	[DataMember]

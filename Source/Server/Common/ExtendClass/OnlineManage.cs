@@ -15,7 +15,7 @@ namespace Insight.WS.Server.Common
         public static List<Session> Sessions { get; set; }
 
         /// <summary>
-        /// 合法机器码
+        /// 用户安全设备码列表
         /// </summary>
         public static List<string> SafeMachine { get; set; }
 
@@ -43,29 +43,29 @@ namespace Insight.WS.Server.Common
         {
             if (obj == null || obj.ID >= Sessions.Count) return false;
 
+            // 用户被封禁，不能通过验证
             var us = Sessions[obj.ID];
-            var sm = SafeMachine[obj.ID];
-            var result = false;
+            if (!us.Validity) return false;
 
             // 1天后重置连续失败次数
-            var time = DateTime.Now - us.LastConnect;
-            if (us.FailureCount > 0 && time.TotalDays > 1)
+            if (us.FailureCount > 0 && (DateTime.Now - us.LastConnect).TotalDays > 1)
             {
                 us.FailureCount = 0;
             }
 
-            if ((us.FailureCount > 5 && obj.MachineId != sm) || us.Signature != obj.Signature || !us.Validity)
-            {
-                us.FailureCount += 1;
-            }
-            else
-            {
-                us.FailureCount = 0;
-                result = true;
-            }
-
+            // 连续签名错误超过5次（冒用时），不能通过验证
             us.LastConnect = DateTime.Now;
-            return result;
+            if (us.FailureCount >= 5 && obj.MachineId != SafeMachine[obj.ID]) return false;
+
+            // 签名正确时，通过验证且错误计数清零；不正确则不能通过验证，且连续失败计数累加1次
+            if (us.Signature == obj.Signature)
+            {
+                us.FailureCount = 0;
+                return true;
+            }
+
+            us.FailureCount ++;
+            return false;
         }
 
         /// <summary>
@@ -76,14 +76,19 @@ namespace Insight.WS.Server.Common
         /// <returns>bool 是否成功</returns>
         public static bool Verification(Session obj, string action)
         {
+            Guid actionId;
+            if (!Guid.TryParse(action, out actionId)) return false;
+
+            // 验证会话合法性
             if (!Verification(obj)) return false;
 
+            // 根据传入的操作代码进行鉴权
             const string sql = "select A.ActionId from Sys_RolePerm_Action A join Get_PermRole(@UserId, @DeptId) R on R.RoleId = A.RoleId and A.ActionId = @ActionId group by A.ActionId having min(A.Action) > 0";
             var parm = new[]
             {
                 new SqlParameter("@UserId", SqlDbType.UniqueIdentifier) {Value = obj.UserId},
                 new SqlParameter("@DeptId", SqlDbType.UniqueIdentifier) {Value = obj.DeptId},
-                new SqlParameter("@ActionId", SqlDbType.UniqueIdentifier) {Value = Guid.Parse(action)}
+                new SqlParameter("@ActionId", SqlDbType.UniqueIdentifier) {Value = actionId}
             };
             return SqlScalar(MakeCommand(sql, parm)) != null;
         }

@@ -19,9 +19,9 @@ namespace Insight.WS.Server.Common.ORM
     [KnownType(typeof(SYS_Role_UserGroup))]
     [KnownType(typeof(SYS_Role_Title))]
     [KnownType(typeof(SYS_User))]
-    [KnownType(typeof(SYS_RolePerm_Action))]
     [KnownType(typeof(SYS_RolePerm_Data))]
     [KnownType(typeof(SYS_RolePerm_DataAbs))]
+    [KnownType(typeof(SYS_RolePerm_Action))]
     
     public partial class SYS_Role
     {
@@ -31,9 +31,9 @@ namespace Insight.WS.Server.Common.ORM
             this.SYS_Role_User = new HashSet<SYS_Role_User>();
             this.SYS_Role_UserGroup = new HashSet<SYS_Role_UserGroup>();
             this.SYS_Role_Title = new HashSet<SYS_Role_Title>();
-            this.SYS_RolePerm_Action = new HashSet<SYS_RolePerm_Action>();
             this.SYS_RolePerm_Data = new HashSet<SYS_RolePerm_Data>();
             this.SYS_RolePerm_DataAbs = new HashSet<SYS_RolePerm_DataAbs>();
+            this.SYS_RolePerm_Action = new HashSet<SYS_RolePerm_Action>();
         }
     
     	[DataMember]
@@ -64,10 +64,10 @@ namespace Insight.WS.Server.Common.ORM
     	[DataMember]
         public virtual SYS_User SYS_User { get; set; }
     	[DataMember]
-        public virtual ICollection<SYS_RolePerm_Action> SYS_RolePerm_Action { get; set; }
-    	[DataMember]
         public virtual ICollection<SYS_RolePerm_Data> SYS_RolePerm_Data { get; set; }
     	[DataMember]
         public virtual ICollection<SYS_RolePerm_DataAbs> SYS_RolePerm_DataAbs { get; set; }
+    	[DataMember]
+        public virtual ICollection<SYS_RolePerm_Action> SYS_RolePerm_Action { get; set; }
     }
 }

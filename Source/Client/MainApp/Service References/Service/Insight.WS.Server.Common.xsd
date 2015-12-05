@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="Session">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BaseAddress" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DeptId" nillable="true" type="ser:guid" />
+      <xs:element minOccurs="0" name="DeptName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FailureCount" type="xs:int" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="LastConnect" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="LoginName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LoginStatus" type="tns:LoginResult" />
+      <xs:element minOccurs="0" name="MachineId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SessionId" type="ser:guid" />
+      <xs:element minOccurs="0" name="Signature" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserId" type="ser:guid" />
+      <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Validity" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Session" nillable="true" type="tns:Session" />
+  <xs:simpleType name="LoginResult">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Success" />
+      <xs:enumeration value="Multiple" />
+      <xs:enumeration value="Online" />
+      <xs:enumeration value="Failure" />
+      <xs:enumeration value="Banned" />
+      <xs:enumeration value="NotExist" />
+      <xs:enumeration value="Unauthorized" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="LoginResult" nillable="true" type="tns:LoginResult" />
+  <xs:complexType name="ArrayOfUpdateFile">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UpdateFile" nillable="true" type="tns:UpdateFile" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUpdateFile" nillable="true" type="tns:ArrayOfUpdateFile" />
+  <xs:complexType name="UpdateFile">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FileBytes" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="FullPath" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Path" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Version" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UpdateFile" nillable="true" type="tns:UpdateFile" />
+</xs:schema>

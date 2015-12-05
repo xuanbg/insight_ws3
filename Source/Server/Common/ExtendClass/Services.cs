@@ -21,7 +21,7 @@ namespace Insight.WS.Server.Common
         /// <summary>
         /// 服务基地址
         /// </summary>
-        public Uri BaseAddress { get; set; }
+        public string BaseAddress { get; set; }
 
         /// <summary>
         /// 服务绑定
@@ -158,14 +158,15 @@ namespace Insight.WS.Server.Common
             var asm = Assembly.LoadFrom(path);
             try
             {
-                var host = new ServiceHost(asm.GetType(servinfo.Class), BaseAddress);
+                var address = new Uri(BaseAddress + servinfo.Port);
+                var host = new ServiceHost(asm.GetType(servinfo.Class), address);
                 host.AddServiceEndpoint(asm.GetType(servinfo.Interface), Binding, servinfo.Name);
 
                 var behavior = new ServiceMetadataBehavior();
                 if (servinfo.Binding == "HTTP")
                 {
                     behavior.HttpGetEnabled = true;
-                    behavior.HttpGetUrl = new Uri(BaseAddress, servinfo.Name + "/mex");
+                    behavior.HttpGetUrl = new Uri(address, servinfo.Name + "/mex");
                     host.Description.Behaviors.Add(behavior);
                 }
                 else if (DevelopMode)

@@ -51,8 +51,8 @@ namespace Insight.WS.Server.Common.ORM
     [KnownType(typeof(SYS_RolePerm_Action))]
     [KnownType(typeof(SYS_RolePerm_Data))]
     [KnownType(typeof(SYS_RolePerm_DataAbs))]
-    [KnownType(typeof(SYS_UserGroupMember))]
     [KnownType(typeof(SYS_UserGroup))]
+    [KnownType(typeof(SYS_UserGroupMember))]
     
     public partial class SYS_User
     {
@@ -99,8 +99,8 @@ namespace Insight.WS.Server.Common.ORM
             this.SYS_RolePerm_Action = new HashSet<SYS_RolePerm_Action>();
             this.SYS_RolePerm_Data = new HashSet<SYS_RolePerm_Data>();
             this.SYS_RolePerm_DataAbs = new HashSet<SYS_RolePerm_DataAbs>();
-            this.SYS_UserGroupMember = new HashSet<SYS_UserGroupMember>();
             this.SYS_UserGroup = new HashSet<SYS_UserGroup>();
+            this.SYS_UserGroupMember = new HashSet<SYS_UserGroupMember>();
             this.SYS_UserGroupMember1 = new HashSet<SYS_UserGroupMember>();
         }
     
@@ -117,8 +117,6 @@ namespace Insight.WS.Server.Common.ORM
     	[DataMember]
         public string PayPassword { get; set; }
     	[DataMember]
-        public string OpenId { get; set; }
-    	[DataMember]
         public string Description { get; set; }
     	[DataMember]
         public int Type { get; set; }
@@ -130,6 +128,8 @@ namespace Insight.WS.Server.Common.ORM
         public Nullable<System.Guid> CreatorUserId { get; set; }
     	[DataMember]
         public System.DateTime CreateTime { get; set; }
+    	[DataMember]
+        public string OpenId { get; set; }
     
     	[DataMember]
         public virtual ICollection<ABS_Advance> ABS_Advance { get; set; }
@@ -214,9 +214,9 @@ namespace Insight.WS.Server.Common.ORM
     	[DataMember]
         public virtual ICollection<SYS_RolePerm_DataAbs> SYS_RolePerm_DataAbs { get; set; }
     	[DataMember]
-        public virtual ICollection<SYS_UserGroupMember> SYS_UserGroupMember { get; set; }
-    	[DataMember]
         public virtual ICollection<SYS_UserGroup> SYS_UserGroup { get; set; }
+    	[DataMember]
+        public virtual ICollection<SYS_UserGroupMember> SYS_UserGroupMember { get; set; }
     	[DataMember]
         public virtual ICollection<SYS_UserGroupMember> SYS_UserGroupMember1 { get; set; }
     }

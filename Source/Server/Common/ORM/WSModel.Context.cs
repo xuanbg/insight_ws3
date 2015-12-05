@@ -123,8 +123,8 @@ namespace Insight.WS.Server.Common.ORM
         public virtual DbSet<SYS_UserGroupMember> SYS_UserGroupMember { get; set; }
         public virtual DbSet<SYS_Verify_Record> SYS_Verify_Record { get; set; }
         public virtual DbSet<Advance> Advance { get; set; }
-        public virtual DbSet<ReportSchedular> ReportSchedular { get; set; }
         public virtual DbSet<Dictionary> Dictionary { get; set; }
+        public virtual DbSet<ReportSchedular> ReportSchedular { get; set; }
         public virtual DbSet<ReportTemplet> ReportTemplet { get; set; }
     }
 }

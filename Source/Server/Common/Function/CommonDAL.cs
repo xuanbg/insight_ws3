@@ -30,7 +30,7 @@ namespace Insight.WS.Server.Common
                 return obj;
             }
 
-            var pw = obj.Signature;
+            var signature = obj.Signature;
             var us = Sessions.Find(s => s.LoginName == obj.LoginName);
             if (us == null)
             {
@@ -42,7 +42,9 @@ namespace Insight.WS.Server.Common
                     return obj;
                 }
 
+                // 初始化对象属性
                 obj.ID = Sessions.Count;
+                obj.Signature = Util.GetHash(user.LoginName + user.Password);
                 obj.OpenId = user.OpenId;
                 obj.UserId = user.ID;
                 obj.UserName = user.Name;
@@ -50,9 +52,12 @@ namespace Insight.WS.Server.Common
                 obj.Validity = user.Validity;
                 obj.Type = user.Type;
 
-                SafeMachine.Add(null);
+                // 存入对象列表
                 Sessions.Add(obj);
                 us = Sessions[obj.ID];
+
+                // 存入列表（占位，以保证与Session对象的索引相同）
+                SafeMachine.Add(null);
             }
             else
             {
@@ -73,16 +78,6 @@ namespace Insight.WS.Server.Common
                 }
             }
 
-            // 10分钟后重置连续失败次数
-            var time = DateTime.Now - us.LastConnect;
-            if (us.FailureCount > 0 && time.TotalMinutes > 10)
-            {
-                us.FailureCount = 0;
-            }
-
-            var isSafe = obj.MachineId == SafeMachine[us.ID];
-            us.LastConnect = DateTime.Now;
-
             // 用户被封禁
             if (!us.Validity)
             {
@@ -90,8 +85,15 @@ namespace Insight.WS.Server.Common
                 return us;
             }
 
+            // 10分钟后重置连续失败次数
+            if (us.FailureCount > 0 && (DateTime.Now - us.LastConnect).TotalMinutes > 10)
+            {
+                us.FailureCount = 0;
+            }
+
             // 登录过程正常（1、通过密码验证；2、在上次成功登录系统的设备上登录，或10分钟内连续登录失败次数未超过5次）
-            if (us.Signature == pw && (isSafe || us.FailureCount < 5))
+            us.LastConnect = DateTime.Now;
+            if (us.Signature == signature && (us.FailureCount < 5 || obj.MachineId == SafeMachine[us.ID]))
             {
                 SafeMachine[us.ID] = us.MachineId;
                 us.FailureCount = 0;
@@ -99,7 +101,7 @@ namespace Insight.WS.Server.Common
             }
 
             // 登录过程异常
-            us.FailureCount += 1;
+            us.FailureCount ++;
             us.LoginStatus = LoginResult.Failure;
             return us;
         }
@@ -276,14 +278,17 @@ namespace Insight.WS.Server.Common
         /// </summary>
         /// <param name="number">手机号</param>
         /// <param name="code">验证码</param>
-        /// <param name="type"></param>
+        /// <param name="type">验证码类型</param>
+        /// <param name="action">是否验证即失效</param>
         /// <returns>bool 是否正确</returns>
-        public static bool CodeVerify(string number, string code, int type)
+        public static bool CodeVerify(string number, string code, int type, bool action = true)
         {
             using (var context = new WSEntities())
             {
                 var list = context.SYS_Verify_Record.Where(c => c.Mobile == number && c.Type == type && !c.Verified).ToList();
                 if (list.Count == 0 || !(list.Exists(c => c.Code == code && c.FailureTime > DateTime.Now))) return false;
+
+                if (!action) return true;
 
                 foreach (var record in list)
                 {
@@ -302,7 +307,7 @@ namespace Insight.WS.Server.Common
         /// <param name="code">验证码</param>
         /// <param name="time">有效时间（分钟）</param>
         /// <returns>string 验证码</returns>
-        public static void GetVerifyCode(int type, string phone, string code, int time)
+        public static bool GetVerifyCode(int type, string phone, string code, int time)
         {
             const string sql = "insert SYS_Verify_Record (Type, Mobile, Code, FailureTime) select @Type, @Mobile, @Code, @FailureTime";
             var parm = new[]
@@ -312,7 +317,7 @@ namespace Insight.WS.Server.Common
                 new SqlParameter("@Code", code),
                 new SqlParameter("@FailureTime", DateTime.Now.AddMinutes(time))
             };
-            SqlNonQuery(MakeCommand(sql, parm));
+            return SqlNonQuery(MakeCommand(sql, parm)) > 0;
         }
 
         #endregion

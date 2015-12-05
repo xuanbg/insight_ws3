@@ -20,7 +20,7 @@ namespace Insight.WS.Server.Common
         static SqlHelper()
         {
             var list = ConfigurationManager.ConnectionStrings;
-            ConStr = new Dictionary<string, string> { { "Template", null } };
+            ConStr = new Dictionary<string, string> {{"Template", null}};
             for (var i = 0; i < list.Count; i++)
             {
                 var name = list[i].Name;
@@ -28,18 +28,6 @@ namespace Insight.WS.Server.Common
 
                 ConStr.Add(name, new Entities(name).ConnectionString);
             }
-        }
-
-        /// <summary>
-        /// 返回动态类型的查询方法
-        /// </summary>
-        /// <param name="type">类型</param>
-        /// <param name="sql">查询语句</param>
-        /// <param name="dataSouc">数据源名称</param>
-        /// <returns>dynamic 动态类型</returns>
-        public static dynamic SqlQuery(Type type, string sql, string dataSouc = "WSEntities")
-        {
-            return new Entities(dataSouc).Database.SqlQuery(type, sql);
         }
 
         /// <summary>
@@ -59,11 +47,12 @@ namespace Insight.WS.Server.Common
                     var table = new DataTable("DataTable");
                     var adapter = new SqlDataAdapter(cmd);
                     adapter.Fill(table);
-                    table.PrimaryKey = new[] { table.Columns["ID"] };
+                    table.PrimaryKey = new[] {table.Columns["ID"]};
                     return table;
                 }
                 catch (Exception ex)
                 {
+                    Util.LogToEvent(cmd.CommandText);
                     Util.LogToEvent(ex.ToString());
                     return null;
                 }
@@ -88,6 +77,7 @@ namespace Insight.WS.Server.Common
                 }
                 catch (Exception ex)
                 {
+                    Util.LogToEvent(cmd.CommandText);
                     Util.LogToEvent(ex.ToString());
                     return -1;
                 }
@@ -112,6 +102,7 @@ namespace Insight.WS.Server.Common
                 }
                 catch (Exception ex)
                 {
+                    Util.LogToEvent(cmd.CommandText);
                     Util.LogToEvent(ex.ToString());
                     return null;
                 }
@@ -147,13 +138,12 @@ namespace Insight.WS.Server.Common
                         if (cmd.Parameters.IndexOf("@Write") <= 0) continue;
 
                         var val = (int)cmd.Parameters["@Write"].Value;
-                        if (ids.Count <= val) ids.Add(obj);
-                        else ids[val] = obj;
+                        if (ids.Count <= val) ids.Add(obj); else ids[val] = obj;
                     }
                     tran.Commit();
                     return true;
                 }
-                catch (Exception ex)
+                catch(Exception ex)
                 {
                     Util.LogToEvent(ex.ToString());
                     tran.Rollback();
@@ -192,8 +182,7 @@ namespace Insight.WS.Server.Common
                         if (cmd.Parameters.IndexOf("@Write") <= 0) continue;
 
                         var val = (int)cmd.Parameters["@Write"].Value;
-                        if (ids.Count <= val) ids.Add(obj);
-                        else ids[val] = obj;
+                        if (ids.Count <= val) ids.Add(obj); else ids[val] = obj;
                     }
                     tran.Commit();
                     return ids[index];
@@ -216,8 +205,6 @@ namespace Insight.WS.Server.Common
         public static SqlCommand MakeCommand(string sql, params SqlParameter[] parameters)
         {
             var cmd = new SqlCommand(sql);
-            if (parameters == null) return cmd;
-
             foreach (var p in parameters)
             {
                 if (p.Value == null || p.Value.ToString() == "")

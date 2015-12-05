@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="JatYkzzhrvNVOFbo2s+o+rrc/kQ=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="pMzX99JqKme70WCk/JRD3BrV4/Y=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="netTcpBinding" name="CustomBinding_ILogin">
       <properties>
@@ -121,10 +121,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="CustomBinding_ILogin" contract="Service.ILogin" bindingType="netTcpBinding" address="net.tcp://localhost:6210/Login" bindingConfiguration="CustomBinding_ILogin">
+    <endpoint name="CustomBinding_ILogin" contract="Service.ILogin" bindingType="netTcpBinding" address="net.tcp://localhost:7210/Login" bindingConfiguration="CustomBinding_ILogin">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>net.tcp://localhost:6210/Login</serializedValue>
+          <serializedValue>net.tcp://localhost:7210/Login</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

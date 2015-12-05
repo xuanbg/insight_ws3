@@ -31,5 +31,7 @@ namespace Insight.WS.Server.Common.ORM
         public string Interface { get; set; }
     	[DataMember]
         public string Location { get; set; }
+    	[DataMember]
+        public string Port { get; set; }
     }
 }

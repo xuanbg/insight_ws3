@@ -400,9 +400,6 @@ namespace Insight.WS.Client.Platform.Report.Dialog
             this.cmbDataSource.Name = "cmbDataSource";
             this.cmbDataSource.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cmbDataSource.Properties.Items.AddRange(new object[] {
-            "系统数据源",
-            "模板数据源"});
             this.cmbDataSource.Size = new System.Drawing.Size(115, 20);
             this.cmbDataSource.TabIndex = 8;
             // 

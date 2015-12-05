@@ -65,8 +65,9 @@
     <Reference Include="DevExpress.XtraWizard.v15.1, Version=15.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>False</Private>
     </Reference>
-    <Reference Include="FastReport">
-      <HintPath>..\..\..\Debug\FastReport.dll</HintPath>
+    <Reference Include="FastReport, Version=1.8.46.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Debug\Client\Components\FastReport.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -195,23 +196,23 @@
     <None Include="Properties\DataSources\Insight.WS.Client.Common.Service.SYS_Report_Rules.datasource" />
     <None Include="Properties\DataSources\Insight.WS.Client.Common.Service.SYS_Report_Templates.datasource" />
     <None Include="Properties\DataSources\System.Data.DataTable.datasource" />
-    <None Include="Service References\Service\Arrays1.xsd">
+    <None Include="Service References\Service\Arrays.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\Service\Insight.WS.Server.Common.ORM1.xsd">
+    <None Include="Service References\Service\Insight.WS.Server.Common.ORM.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\Service\Insight.WS.Server.Common1.xsd">
+    <None Include="Service References\Service\Insight.WS.Server.Common.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\Service\service1.wsdl" />
-    <None Include="Service References\Service\service2.xsd">
+    <None Include="Service References\Service\service.wsdl" />
+    <None Include="Service References\Service\service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\Service\service21.xsd">
+    <None Include="Service References\Service\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\Service\System.Data1.xsd">
+    <None Include="Service References\Service\System.Data.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>

@@ -449,9 +449,9 @@
   </wsdl:binding>
   <wsdl:service name="MasterDatas">
     <wsdl:port name="CustomBinding_IMasterDatas" binding="tns:CustomBinding_IMasterDatas">
-      <soap12:address location="net.tcp://localhost:7210/MasterDatas" />
+      <soap12:address location="net.tcp://localhost:6210/MasterDatas" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:7210/MasterDatas</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost:6210/MasterDatas</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>

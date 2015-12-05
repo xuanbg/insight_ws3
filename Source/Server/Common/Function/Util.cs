@@ -7,7 +7,10 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Reflection;
+using System.Security.Cryptography;
 using System.Text;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace Insight.WS.Server.Common
 {
@@ -32,28 +35,73 @@ namespace Insight.WS.Server.Common
         /// <param name="msg">发送的消息</param>
         public static void SendMsg(string number, string msg)
         {
-            string url;
-            string cont;
-            switch (GetAppSetting("Channel"))
+            var channel = GetAppSetting("Channel");
+            var result = HttpGet(MakePostString(number, msg, channel), "");
+            if (channel == "0")
             {
-                case "1":
-                    url = GetAppSetting("surl");
-                    var name = GetAppSetting("sname");
-                    var pwd = GetAppSetting("spwd");
-                    var corpid = GetAppSetting("scorpid");
-                    var prdid = GetAppSetting("sprdid");
-                    cont = $"{url}?sname={name}&spwd={pwd}&scorpid={corpid}&sprdid={prdid}&sdst={number}&smsg={msg}";
-                    break;
+                var returnMsg = Deserialize<returnsms>(result, Encoding.UTF8);
+                if (returnMsg.returnstatus == "Success") return;
 
-                default:
-                    url = GetAppSetting("Url");
-                    var uid = GetAppSetting("UId");
-                    var account = GetAppSetting("Account");
-                    var password = GetAppSetting("Password");
-                    cont = $"{url}?action=send&userid={uid}&account={account}&password={password}&mobile={number}&content={msg}&sendTime=&extno=";
-                    break;
+                HttpGet(MakePostString(number, msg, "1"), "");
             }
-            HttpGet(cont, "");
+            else
+            {
+                var returnMsg = Deserialize<CSubmitState>(result, Encoding.UTF8);
+                if (returnMsg.MsgState == "提交成功") return;
+
+                HttpGet(MakePostString(number, msg, "0"), "");
+            }
+        }
+
+        /// <summary>
+        /// 计算字符串的Hash值
+        /// </summary>
+        /// <param name="str">输入字符串</param>
+        /// <returns>String Hash值</returns>
+        public static string GetHash(string str)
+        {
+            var md5 = MD5.Create();
+            var s = md5.ComputeHash(Encoding.UTF8.GetBytes(str.Trim()));
+            return s.Aggregate("", (current, c) => current + c.ToString("X2"));
+        }
+
+        /// <summary>
+        /// 将一个对象序列化为XML字符串
+        /// </summary>
+        /// <param name="o">要序列化的对象</param>
+        /// <param name="encoding">编码方式</param>
+        /// <returns>序列化产生的XML字符串</returns>
+        public static string Serialize(object o, Encoding encoding)
+        {
+            using (var stream = new MemoryStream())
+            {
+                SerializeInternal(stream, o, encoding);
+
+                stream.Position = 0;
+                using (var reader = new StreamReader(stream, encoding))
+                {
+                    return reader.ReadToEnd();
+                }
+            }
+        }
+
+        /// <summary>
+        /// 从XML字符串中反序列化对象
+        /// </summary>
+        /// <typeparam name="T">结果对象类型</typeparam>
+        /// <param name="s">包含对象的XML字符串</param>
+        /// <param name="encoding">编码方式</param>
+        /// <returns>反序列化得到的对象</returns>
+        public static T Deserialize<T>(string s, Encoding encoding)
+        {
+            using (var ms = new MemoryStream(encoding.GetBytes(s)))
+            {
+                using (var sr = new StreamReader(ms, encoding))
+                {
+                    var mySerializer = new XmlSerializer(typeof(T));
+                    return (T)mySerializer.Deserialize(sr);
+                }
+            }
         }
 
         /// <summary>
@@ -85,6 +133,7 @@ namespace Insight.WS.Server.Common
             catch (Exception ex)
             {
                 LogToEvent(ex.ToString());
+                LogToEvent($"文件写入路径：{path}；字节流：{pic}");
                 return null;
             }
         }
@@ -126,7 +175,7 @@ namespace Insight.WS.Server.Common
         /// <param name="msg">Log消息</param>
         /// <param name="type">Log类型（默认Error）</param>
         /// <param name="source">事件源（默认Insight Workstation 3 Service）</param>
-        public static void LogToEvent(string msg, EventLogEntryType type = EventLogEntryType.Error, string source = "XinFenBao Interface Service")
+        public static void LogToEvent(string msg, EventLogEntryType type = EventLogEntryType.Error, string source = "Insight Workstation 3 Service")
         {
             EventLog.WriteEntry(source, msg, type);
         }
@@ -188,5 +237,55 @@ namespace Insight.WS.Server.Common
             return retString;
         }
 
+        /// <summary>
+        /// 拼装发送验证码的Post字符串
+        /// </summary>
+        /// <param name="number">手机号</param>
+        /// <param name="msg">发送的消息</param>
+        /// <param name="channel">短信通道代号</param>
+        /// <returns>string Post字符串</returns>
+        private static string MakePostString(string number, string msg, string channel)
+        {
+            switch (channel)
+            {
+                case "1":
+                    var name = GetAppSetting("sname");
+                    var pwd = GetAppSetting("spwd");
+                    var corpid = GetAppSetting("scorpid");
+                    var prdid = GetAppSetting("sprdid");
+                    return $"{GetAppSetting("surl")}?sname={name}&spwd={pwd}&scorpid={corpid}&sprdid={prdid}&sdst={number}&smsg={msg}";
+
+                default:
+                    var uid = GetAppSetting("UId");
+                    var account = GetAppSetting("Account");
+                    var password = GetAppSetting("Password");
+                    return $"{GetAppSetting("Url")}?action=send&userid={uid}&account={account}&password={password}&mobile={number}&content={msg}&sendTime=&extno=";
+            }
+        }
+
+        /// <summary>
+        /// 序列化预处理
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <param name="o"></param>
+        /// <param name="encoding"></param>
+        private static void SerializeInternal(Stream stream, object o, Encoding encoding)
+        {
+            var serializer = new XmlSerializer(o.GetType());
+            var settings = new XmlWriterSettings
+            {
+                Indent = true,
+                NewLineChars = "\r\n",
+                Encoding = encoding,
+                IndentChars = "    "
+            };
+
+            using (var writer = XmlWriter.Create(stream, settings))
+            {
+                serializer.Serialize(writer, o);
+            }
+        }
+
     }
+
 }

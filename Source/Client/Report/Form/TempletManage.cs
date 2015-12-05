@@ -262,8 +262,6 @@ namespace Insight.WS.Client.Platform.Report
         /// </summary>
         private void Design()
         {
-            if (ParentForm == null) return;
-
             using (var cli = new ReportClient(Binding, Address))
             {
                 _Template = cli.GetTemplate(UserSession, (Guid)gdvTemplet.GetFocusedDataRow()["ID"]);
@@ -311,7 +309,7 @@ namespace Insight.WS.Client.Platform.Report
             if (open.ShowDialog() != DialogResult.OK) return;
 
             var fullName = open.SafeFileName;
-            _Template.Name = fullName?.Substring(0, fullName.IndexOf(".", StringComparison.Ordinal));
+            _Template.Name = fullName.Substring(0, fullName.IndexOf(".", StringComparison.Ordinal));
             _Template.CategoryId = (Guid)treCategory.FocusedNode.GetValue("ID");
 
             if (Commons.NameIsExist((Guid)_Template.CategoryId, _Template.Name, "Name", "SYS_Report_Templates"))
