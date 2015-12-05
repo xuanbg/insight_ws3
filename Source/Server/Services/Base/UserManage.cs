@@ -253,7 +253,7 @@ namespace Insight.WS.Service
             var sql = $"update SYS_User set Password = '{pw}' where ID = '{id}'";
             if (SqlNonQuery(MakeCommand(sql)) > 0)
             {
-                Sessions.Find(s => s.UserId == id).Signature = pw;
+                Sessions.Find(s => s.UserId == id).Signature = Util.GetHash(us.LoginName.ToUpper() + pw);
                 return true;
             }
             return false;

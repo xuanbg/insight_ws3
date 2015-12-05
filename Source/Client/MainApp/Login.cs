@@ -210,7 +210,7 @@ namespace Insight.WS.Client.MainApp
                 SessionId = _SessionId,
                 MachineId = _MachineId,
                 LoginName = txtUserName.Text.Trim(),
-                Signature = General.GetHash(txtPassWord.Text.Trim()),
+                Signature = General.GetHash(txtUserName.Text.Trim().ToUpper() + General.GetHash(txtPassWord.Text.Trim())),
                 DeptId = (Guid?) lokDepartment.EditValue,
                 DeptName = lokDepartment.EditValue == null ? null : lokDepartment.Text
             };

@@ -107,7 +107,7 @@ namespace Insight.WS.Service
         /// <returns>bool 是否修改成功</returns>
         public bool UpdataPassWord(Session us, string pw)
         {
-            return CommonDAL.UpdataPassword(us, pw);
+            return Verification(us) && CommonDAL.UpdataPassword(us, pw);
         }
 
         #endregion

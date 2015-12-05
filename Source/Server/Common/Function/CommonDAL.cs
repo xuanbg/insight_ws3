@@ -44,7 +44,7 @@ namespace Insight.WS.Server.Common
 
                 // 初始化对象属性
                 obj.ID = Sessions.Count;
-                obj.Signature = Util.GetHash(user.LoginName + user.Password);
+                obj.Signature = Util.GetHash(user.LoginName.ToUpper() + user.Password);
                 obj.OpenId = user.OpenId;
                 obj.UserId = user.ID;
                 obj.UserName = user.Name;
@@ -114,12 +114,15 @@ namespace Insight.WS.Server.Common
         /// <returns>bool 是否修改成功</returns>
         public static bool UpdataPassword(Session us, string pw)
         {
-            if (!Verification(us)) return false;
+            const string sql = "update SYS_User set Password = @Password where ID = @ID";
+            var parm = new[]
+            {
+                new SqlParameter("@ID", SqlDbType.UniqueIdentifier) {Value = us.UserId},
+                new SqlParameter("@Password", pw),
+            };
+            if (SqlNonQuery(MakeCommand(sql, parm)) <= 0) return false;
 
-            var sql = $"update SYS_User set Password = '{pw}' where ID = '{us.UserId}' ";
-            if (SqlNonQuery(MakeCommand(sql)) <= 0) return false;
-
-            Sessions[us.ID].Signature = pw;
+            Sessions[us.ID].Signature = Util.GetHash(us.LoginName.ToUpper() + pw);
             return true;
         }
 

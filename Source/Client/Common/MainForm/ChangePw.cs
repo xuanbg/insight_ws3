@@ -58,7 +58,8 @@ namespace Insight.WS.Client.Common
                 return;
             }
 
-            if (General.GetHash(txtOldPw.Text.Trim()) != MainForm.Session.Signature.ToUpper())
+            var signature = General.GetHash(MainForm.Session.LoginName.ToUpper() + General.GetHash(txtOldPw.Text.Trim()));
+            if (signature != MainForm.Session.Signature)
             {
                 General.ShowError("请输入正确的原密码，否则无法为您更换密码！");
                 txtOldPw.EditValue = null;
@@ -72,7 +73,7 @@ namespace Insight.WS.Client.Common
                 if (cli.UpdataPassWord(MainForm.Session, pw))
                 {
                     General.ShowMessage("更换密码成功！请牢记新密码并使用新密码登录系统。");
-                    MainForm.Session.Signature = pw;
+                    MainForm.Session.Signature = General.GetHash(MainForm.Session.LoginName.ToUpper() + pw);
                     DialogResult = DialogResult.OK;
                 }
                 else
