@@ -26,12 +26,12 @@ namespace Insight.WS.Client.Common
         public static EndpointAddress Address;
         public static Session Session;
 
-        private DataTable _NavGroup;
-        private DataTable _NavItem;
-        private Waiting _Waiting = new Waiting();
-        private List<object> _OpenModules = new List<object>();
-        private string _ShotTime = DateTime.Now.ToLongTimeString();
-        private string _LongTime = DateTime.Now.ToString(CultureInfo.CurrentCulture);
+        private readonly DataTable _NavGroup;
+        private readonly DataTable _NavItem;
+        private readonly Waiting _Waiting = new Waiting();
+        private readonly List<object> _OpenModules = new List<object>();
+        private readonly string _ShotTime = DateTime.Now.ToLongTimeString();
+        private readonly string _LongTime = DateTime.Now.ToString(CultureInfo.CurrentCulture);
         private bool _Expand;
         private int _ItemCount;
 
@@ -93,7 +93,7 @@ namespace Insight.WS.Client.Common
             _OpenModules.ForEach(AddPageMdi);
             _Waiting.Close();
 
-            if (Session.Signature == General.GetHash("123456"))
+            if (Session.Signature == General.GetHash(Session.LoginName.ToUpper() + General.GetHash("123456")))
                 ChangPassWord(null, null);
         }
 

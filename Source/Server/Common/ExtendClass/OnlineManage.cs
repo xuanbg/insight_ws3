@@ -28,7 +28,7 @@ namespace Insight.WS.Server.Common
         /// <returns>Session</returns>
         public static Session GetSession(Session obj)
         {
-            var session = Sessions.SingleOrDefault(s => s.LoginName == obj.LoginName);
+            var session = Sessions.SingleOrDefault(s => string.Equals(s.LoginName, obj.LoginName, StringComparison.CurrentCultureIgnoreCase));
             if (session != null) return session;
 
             if (Sessions.Count >= Convert.ToInt32(Util.GetAppSetting("MaxAuthorized")))
