@@ -2,36 +2,120 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using static Insight.WS.Server.Common.SqlHelper;
 
 namespace Insight.WS.Server.Common
 {
-    public class OnlineManage
+    public static class OnlineManage
     {
 
-        /// <summary>
-        /// 用户会话列表
-        /// </summary>
-        public static List<Session> Sessions { get; set; }
+        private static readonly List<Session> Sessions = new List<Session>();
 
         /// <summary>
-        /// 用户安全设备码列表
+        /// 获取当前在线状态的全部内部用户的Session
         /// </summary>
-        public static List<string> SafeMachine { get; set; }
-
-        /// <summary>
-        /// 最大在线用户数
-        /// </summary>
-        public static int MaxAuthorized { get; set; }
-
-        /// <summary>
-        /// 构造方法
-        /// </summary>
-        public OnlineManage()
+        /// <returns></returns>
+        public static List<Session> GetSessions()
         {
-            Sessions = new List<Session>();
-            SafeMachine = new List<string>();
-            MaxAuthorized = Convert.ToInt32(Util.GetAppSetting("MaxAuthorized"));
+            return Sessions.Where(s => s.Type > 0 && s.SessionId != Guid.Empty).ToList();
+        } 
+
+        /// <summary>
+        /// 获取用户Session
+        /// </summary>
+        /// <param name="obj">传入的用户Session</param>
+        /// <returns>Session</returns>
+        public static Session GetSession(Session obj)
+        {
+            var session = Sessions.SingleOrDefault(s => s.LoginName == obj.LoginName);
+            if (session != null) return session;
+
+            if (Sessions.Count >= Convert.ToInt32(Util.GetAppSetting("MaxAuthorized")))
+            {
+                obj.LoginStatus = LoginResult.Unauthorized;
+                return obj;
+            }
+
+            var user = CommonDAL.GetUser(obj.LoginName);
+            if (user == null)
+            {
+                obj.LoginStatus = LoginResult.NotExist;
+                return obj;
+            }
+
+            // 初始化Session数据并加入缓存
+            session = new Session
+            {
+                ID = Sessions.Count,
+                OpenId = user.OpenId,
+                UserId = user.ID,
+                LoginName = user.LoginName,
+                UserName = user.Name,
+                Type = user.Type,
+                Validity = user.Validity,
+                MachineId = obj.MachineId,
+                BaseAddress = obj.BaseAddress,
+                Signature = Util.GetHash(user.LoginName.ToUpper() + user.Password),
+                FailureCount = 0,
+                LastConnect = DateTime.Now
+            };
+            Sessions.Add(session);
+
+            return session;
+        }
+
+        /// <summary>
+        /// 更新用户Session数据
+        /// </summary>
+        /// <param name="obj">传入的用户Session</param>
+        public static void UpdateSession(Session obj)
+        {
+            var session = Sessions[obj.ID];
+            session.SessionId = obj.SessionId;
+            session.MachineId = obj.MachineId;
+            session.DeptId = obj.DeptId;
+            session.DeptName = obj.DeptName;
+        }
+
+        /// <summary>
+        /// 更新指定用户Session的签名
+        /// </summary>
+        /// <param name="index">索引</param>
+        /// <param name="pw">密码MD5值</param>
+        public static bool UpdateSignature(int index, string pw)
+        {
+            if (index >= Sessions.Count) return false;
+
+            var session = Sessions[index];
+            session.Signature = Util.GetHash(session.LoginName.ToUpper() + pw);
+            return true;
+        }
+
+        /// <summary>
+        /// 重置指定用户Session的登录状态
+        /// </summary>
+        /// <param name="index">索引</param>
+        public static bool ResetLoginStatus(int index)
+        {
+            if (index >= Sessions.Count) return false;
+
+            Sessions[index].SessionId = Guid.Empty;
+            return true;
+        }
+
+        /// <summary>
+        /// 根据用户ID设置用户状态
+        /// </summary>
+        /// <param name="uid">用户ID</param>
+        /// <param name="validity">用户状态</param>
+        public static bool SetUserStatus(Guid uid, bool validity)
+        {
+            var session = Sessions.SingleOrDefault(s => s.UserId == uid);
+            if (session == null) return false;
+
+            session.Validity = validity;
+            return true;
         }
 
         /// <summary>
@@ -43,28 +127,29 @@ namespace Insight.WS.Server.Common
         {
             if (obj == null || obj.ID >= Sessions.Count) return false;
 
+            var session = Sessions[obj.ID];
+
             // 用户被封禁，不能通过验证
-            var us = Sessions[obj.ID];
-            if (!us.Validity) return false;
+            if (!session.Validity) return false;
 
-            // 1天后重置连续失败次数
-            if (us.FailureCount > 0 && (DateTime.Now - us.LastConnect).TotalDays > 1)
+            // 验证签名失败计数清零（距上次用户签名验证时间超过1小时）
+            if (session.FailureCount > 0 && (DateTime.Now - session.LastConnect).TotalHours > 1)
             {
-                us.FailureCount = 0;
+                session.FailureCount = 0;
             }
+            session.LastConnect = DateTime.Now;
 
-            // 连续签名错误超过5次（冒用时），不能通过验证
-            us.LastConnect = DateTime.Now;
-            if (us.FailureCount >= 5 && obj.MachineId != SafeMachine[obj.ID]) return false;
+            // 验证签名失败超过5次（冒用时），不再验证
+            if (session.FailureCount >= 5 && session.MachineId != obj.MachineId) return false;
 
             // 签名正确时，通过验证且错误计数清零；不正确则不能通过验证，且连续失败计数累加1次
-            if (us.Signature == obj.Signature)
+            if (session.Signature == obj.Signature)
             {
-                us.FailureCount = 0;
+                session.FailureCount = 0;
                 return true;
             }
 
-            us.FailureCount ++;
+            session.FailureCount ++;
             return false;
         }
 

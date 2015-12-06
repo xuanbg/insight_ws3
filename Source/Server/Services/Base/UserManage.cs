@@ -231,12 +231,7 @@ namespace Insight.WS.Service
             if (!Verification(us, action)) return false;
 
             var sql = $"update SYS_User set Validity = '{validity}' where ID = '{id}'";
-            if (SqlNonQuery(MakeCommand(sql)) > 0)
-            {
-                Sessions.Find(s => s.UserId == id).Validity = validity;
-                return true;
-            }
-            return false;
+            return SqlNonQuery(MakeCommand(sql)) > 0 && SetUserStatus(id, validity);
         }
 
         /// <summary>
@@ -251,12 +246,7 @@ namespace Insight.WS.Service
 
             const string pw = "E10ADC3949BA59ABBE56E057F20F883E";
             var sql = $"update SYS_User set Password = '{pw}' where ID = '{id}'";
-            if (SqlNonQuery(MakeCommand(sql)) > 0)
-            {
-                Sessions.Find(s => s.UserId == id).Signature = Util.GetHash(us.LoginName.ToUpper() + pw);
-                return true;
-            }
-            return false;
+            return SqlNonQuery(MakeCommand(sql)) > 0 && UpdateSignature(us.ID, pw);
         }
 
         #endregion

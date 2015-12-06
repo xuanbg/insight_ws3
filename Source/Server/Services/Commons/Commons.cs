@@ -201,10 +201,7 @@ namespace Insight.WS.Service
         /// <returns>bool 是否删除成功</returns>
         public bool DelOnlineUser(Session us, int? sid)
         {
-            if (!Verification(us)) return false;
-
-            Sessions[sid ?? us.ID].SessionId = Guid.Empty;
-            return true;
+            return Verification(us) && ResetLoginStatus(sid ?? us.ID);
         }
 
         /// <summary>

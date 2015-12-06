@@ -43,11 +43,6 @@ namespace Insight.WS.Server
 
         protected override void OnStart(string[] args)
         {
-
-            // 启动在线用户管理
-            // ReSharper disable once UnusedVariable
-            var om = new OnlineManage();
-
             // 启动WCF服务主机
             var comp = bool.Parse(Util.GetAppSetting("IsCompres"));
             var address = Util.GetAppSetting("Address");

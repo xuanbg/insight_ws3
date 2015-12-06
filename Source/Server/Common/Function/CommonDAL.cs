@@ -24,59 +24,8 @@ namespace Insight.WS.Server.Common
         {
             if (obj == null) return null;
 
-            if (Sessions.Count >= MaxAuthorized)
-            {
-                obj.LoginStatus = LoginResult.Unauthorized;
-                return obj;
-            }
-
-            var signature = obj.Signature;
-            var us = Sessions.Find(s => s.LoginName == obj.LoginName);
-            if (us == null)
-            {
-                // 第一次登录
-                var user = GetUser(obj.LoginName);
-                if (user == null)
-                {
-                    obj.LoginStatus = LoginResult.NotExist;
-                    return obj;
-                }
-
-                // 初始化对象属性
-                obj.ID = Sessions.Count;
-                obj.Signature = Util.GetHash(user.LoginName.ToUpper() + user.Password);
-                obj.OpenId = user.OpenId;
-                obj.UserId = user.ID;
-                obj.UserName = user.Name;
-                obj.FailureCount = 0;
-                obj.Validity = user.Validity;
-                obj.Type = user.Type;
-
-                // 存入对象列表
-                Sessions.Add(obj);
-                us = Sessions[obj.ID];
-
-                // 存入列表（占位，以保证与Session对象的索引相同）
-                SafeMachine.Add(null);
-            }
-            else
-            {
-                // 已经登录过
-                if (us.SessionId == Guid.Empty)
-                {
-                    // 当前未登录
-                    us.SessionId = obj.SessionId;
-                    us.MachineId = obj.MachineId;
-                    us.DeptId = obj.DeptId;
-                    us.DeptName = obj.DeptName;
-                    us.LoginStatus = LoginResult.Success;
-                }
-                else
-                {
-                    // 当前已登录或未正常退出
-                    us.LoginStatus = us.MachineId != obj.MachineId ? LoginResult.Online : LoginResult.Multiple;
-                }
-            }
+            var us = GetSession(obj);
+            if (us.LoginStatus == LoginResult.Unauthorized || us.LoginStatus == LoginResult.NotExist) return us;
 
             // 用户被封禁
             if (!us.Validity)
@@ -85,24 +34,24 @@ namespace Insight.WS.Server.Common
                 return us;
             }
 
-            // 10分钟后重置连续失败次数
-            if (us.FailureCount > 0 && (DateTime.Now - us.LastConnect).TotalMinutes > 10)
+            // 未通过签名验证
+            if (!Verification(obj))
             {
-                us.FailureCount = 0;
-            }
-
-            // 登录过程正常（1、通过密码验证；2、在上次成功登录系统的设备上登录，或10分钟内连续登录失败次数未超过5次）
-            us.LastConnect = DateTime.Now;
-            if (us.Signature == signature && (us.FailureCount < 5 || obj.MachineId == SafeMachine[us.ID]))
-            {
-                SafeMachine[us.ID] = us.MachineId;
-                us.FailureCount = 0;
+                us.LoginStatus = LoginResult.Failure;
                 return us;
             }
 
-            // 登录过程异常
-            us.FailureCount ++;
-            us.LoginStatus = LoginResult.Failure;
+            // 当前是否已登录或未正常退出
+            if (us.SessionId == Guid.Empty)
+            {
+                UpdateSession(obj);
+                us.LoginStatus = LoginResult.Success;
+            }
+            else
+            {
+                us.LoginStatus = us.MachineId != obj.MachineId ? LoginResult.Online : LoginResult.Multiple;
+            }
+
             return us;
         }
 
@@ -120,10 +69,7 @@ namespace Insight.WS.Server.Common
                 new SqlParameter("@ID", SqlDbType.UniqueIdentifier) {Value = us.UserId},
                 new SqlParameter("@Password", pw),
             };
-            if (SqlNonQuery(MakeCommand(sql, parm)) <= 0) return false;
-
-            Sessions[us.ID].Signature = Util.GetHash(us.LoginName.ToUpper() + pw);
-            return true;
+            return SqlNonQuery(MakeCommand(sql, parm)) > 0 && UpdateSignature(us.ID, pw);
         }
 
         /// <summary>
