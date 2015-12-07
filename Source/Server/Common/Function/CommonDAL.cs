@@ -25,6 +25,7 @@ namespace Insight.WS.Server.Common
             if (obj == null) return null;
 
             var us = GetSession(obj);
+            obj.ID = us.ID;
             if (us.LoginStatus == LoginResult.Unauthorized || us.LoginStatus == LoginResult.NotExist) return us;
 
             // 用户被封禁
