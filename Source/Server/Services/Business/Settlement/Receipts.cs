@@ -187,7 +187,7 @@ namespace Insight.WS.Service.Business
         {
             if (!Verification(us)) return false;
 
-            var code = CommonDAL.GetSerialCode(sid, bid, mid, us.DeptId, us.UserId);
+            var code = DataAccess.GetSerialCode(sid, bid, mid, us.DeptId, us.UserId);
             const string sql = "update ABS_Clearing set ReceiptCode = @Code, PrintTimes = 1 where ID = @BusinessId";
             var parm = new[]
             {
@@ -284,8 +284,8 @@ namespace Insight.WS.Service.Business
                 CreatorUserId = us.UserId
             };
 
-            var img = ReportDAL.BuildImage(Guid.Empty, tid, us.DeptName, us.UserName, us.DeptId, us.UserId, obj);
-            var id = ReportDAL.SaveImage(img);
+            var img = DataAccess.BuildImage(Guid.Empty, tid, us.DeptName, us.UserName, us.DeptId, us.UserId, obj);
+            var id = DataAccess.SaveImage(img);
             var sql = "insert ABS_Clearing_Check (CheckTime, ImageId, CreatorDeptId, CreatorUserId) select getdate(), @ImageId, @CreatorDeptId, @CreatorUserId ";
             sql += "select ID from ABS_Clearing_Check where SN = scope_identity()";
             var parm = new[]

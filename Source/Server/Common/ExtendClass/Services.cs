@@ -104,7 +104,7 @@ namespace Insight.WS.Server.Common
         /// <returns>ServiceHost List 已启动服务主机集合</returns>
         public List<ServiceHost> StartService(string type, bool develop)
         {
-            var tcpService = CommonDAL.GetServiceList(type);
+            var tcpService = DataAccess.GetServiceList(type);
             var hosts = new List<ServiceHost>();
             foreach (var host in tcpService.Select(serv => CreateHost(serv, develop)).Where(host => host != null))
             {

@@ -67,9 +67,9 @@ namespace Insight.WS.Service
 
             if (i != d.Index)
             {
-                cmds.Add(MakeCommand(CommonDAL.ChangeIndex("MDG_Material", i, d.Index, m.CategoryId)));
+                cmds.Add(MakeCommand(DataAccess.ChangeIndex("MDG_Material", i, d.Index, m.CategoryId)));
             }
-            cmds.Add(MasterDataDAL.AddMasterData(m));
+            cmds.Add(DataAccess.AddMasterData(m));
 
             const string sql = "insert MDG_Material (MID, [Index], BarCode, Model, Size, SizeType, Unit, StorageType, [Description], CreatorDeptId, CreatorUserId) select @MID, @Index, @BarCode, @Model, @Size, @SizeType, @StorageType, @Unit, @Description, @CreatorDeptId, @CreatorUserId";
             var parm = new[]
@@ -106,8 +106,8 @@ namespace Insight.WS.Service
 
             var cmds = new List<SqlCommand>
             {
-                MakeCommand(CommonDAL.ChangeIndex("MDG_Material", i, d.Index, m.CategoryId)),
-                MasterDataDAL.UpdateMasterData(m)
+                MakeCommand(DataAccess.ChangeIndex("MDG_Material", i, d.Index, m.CategoryId)),
+                DataAccess.UpdateMasterData(m)
             };
             
             const string sql = "update MDG_Material set [Index] = @Index, BarCode = @BarCode, Model = @Model, Size = @Size, SizeType = @SizeType, Unit = @Unit, StorageType = @StorageType, Description = @Description where MID = @MID";
@@ -140,11 +140,11 @@ namespace Insight.WS.Service
 
             var cmds = new List<SqlCommand>();
 
-            var obj = MasterDataDAL.GetData(id);
+            var obj = DataAccess.GetData(id);
             var data = GetMaterial(us, id);
             var sql = $"Delete From MasterData where ID = '{id}'";
 
-            cmds.Add(MakeCommand(CommonDAL.ChangeIndex("MDG_Material", data.Index, 99999, obj.CategoryId, false)));
+            cmds.Add(MakeCommand(DataAccess.ChangeIndex("MDG_Material", data.Index, 99999, obj.CategoryId, false)));
             cmds.Add(MakeCommand(sql));
             if (SqlExecute(cmds))
             {

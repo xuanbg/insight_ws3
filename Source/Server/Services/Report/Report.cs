@@ -27,7 +27,7 @@ namespace Insight.WS.Service
         /// <returns>SYS_Report_Instances 报表实例</returns>
         public SYS_Report_Instances BulidReport(Session us, Guid rid, DateTime? sd, DateTime? ed, string on, Guid oid)
         {
-            return !Verification(us) ? null : ReportDAL.BulidReport(rid, sd, ed, @on, us.UserName, oid, us.UserId);
+            return !Verification(us) ? null : DataAccess.BulidReport(rid, sd, ed, @on, us.UserName, oid, us.UserId);
         }
 
         #endregion

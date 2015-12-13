@@ -108,7 +108,7 @@ namespace Insight.WS.Service.Business
 
                 var amoumt = (decimal)row["金额"] - (decimal)row["UseAdvance"];
                 if (amoumt > 0) cmds.AddRange(InsertPays(amoumt, pdt));
-                if ((bool)row["IsPlan"]) cmds.AddRange(ContractDAL.FundPerform(row["ID"], row["金额"]));
+                if ((bool)row["IsPlan"]) cmds.AddRange(DataAccess.FundPerform(row["ID"], row["金额"]));
                 if (row["项目"].ToString() == "预付款" && (decimal)row["金额"] > 0 && saveAdvance) cmds.AddRange(InsertAdvance(us, row));
                 if (row["项目"].ToString() == "预付款" && (decimal)row["金额"] < 0) cmds.AddRange(InsertAdvanceRecord(advs));
             }

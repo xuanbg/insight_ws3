@@ -10,51 +10,10 @@ using static Insight.WS.Server.Common.OnlineManage;
 
 namespace Insight.WS.Server.Common
 {
-    public class CommonDAL
+    public partial class DataAccess
     {
 
         #region 公共数据接口
-
-        /// <summary>
-        /// 获取用户登录结果
-        /// </summary>
-        /// <param name="obj">Session对象实体</param>
-        /// <returns>Session对象实体</returns>
-        public static Session UserLogin(Session obj)
-        {
-            if (obj == null) return null;
-
-            var us = GetSession(obj);
-            obj.ID = us.ID;
-            if (us.LoginStatus == LoginResult.Unauthorized || us.LoginStatus == LoginResult.NotExist) return us;
-
-            // 用户被封禁
-            if (!us.Validity)
-            {
-                us.LoginStatus = LoginResult.Banned;
-                return us;
-            }
-
-            // 未通过签名验证
-            if (!Verification(obj))
-            {
-                us.LoginStatus = LoginResult.Failure;
-                return us;
-            }
-
-            // 当前是否已登录或未正常退出
-            if (us.SessionId == Guid.Empty)
-            {
-                UpdateSession(obj);
-                us.LoginStatus = LoginResult.Success;
-            }
-            else
-            {
-                us.LoginStatus = us.MachineId != obj.MachineId ? LoginResult.Online : LoginResult.Multiple;
-            }
-
-            return us;
-        }
 
         /// <summary>
         /// 修改指定用户的密码
@@ -68,7 +27,7 @@ namespace Insight.WS.Server.Common
             var parm = new[]
             {
                 new SqlParameter("@ID", SqlDbType.UniqueIdentifier) {Value = us.UserId},
-                new SqlParameter("@Password", pw),
+                new SqlParameter("@Password", pw)
             };
             return SqlNonQuery(MakeCommand(sql, parm)) > 0 && UpdateSignature(us.ID, pw);
         }
@@ -106,7 +65,7 @@ namespace Insight.WS.Server.Common
             
             // 插入主数据索引
             var md = new MasterData { CategoryId = catId, Code = id, Name = name, Alias = ln };
-            var cmds = new List<SqlCommand> { MasterDataDAL.AddMasterData(md) };
+            var cmds = new List<SqlCommand> { AddMasterData(md) };
 
             // 插入外部用户
             const string sql = "insert SYS_User (ID, Name, LoginName, Password, OpenId, Type, CreatorUserId) select @ID, @Name, @LoginName, @Password, @OpenId, @Type, @CreatorUserId";
@@ -224,32 +183,6 @@ namespace Insight.WS.Server.Common
         }
 
         /// <summary>
-        /// 验证验证码是否正确
-        /// </summary>
-        /// <param name="number">手机号</param>
-        /// <param name="code">验证码</param>
-        /// <param name="type">验证码类型</param>
-        /// <param name="action">是否验证即失效</param>
-        /// <returns>bool 是否正确</returns>
-        public static bool CodeVerify(string number, string code, int type, bool action = true)
-        {
-            using (var context = new WSEntities())
-            {
-                var list = context.SYS_Verify_Record.Where(c => c.Mobile == number && c.Type == type && !c.Verified).ToList();
-                if (list.Count == 0 || !(list.Exists(c => c.Code == code && c.FailureTime > DateTime.Now))) return false;
-
-                if (!action) return true;
-
-                foreach (var record in list)
-                {
-                    record.Verified = true;
-                    record.VerifyTime = DateTime.Now;
-                }
-                return context.SaveChanges() > 0;
-            }
-        }
-
-        /// <summary>
         /// 生成验证码
         /// </summary>
         /// <param name="type">验证码类型</param>
@@ -271,6 +204,5 @@ namespace Insight.WS.Server.Common
         }
 
         #endregion
-
     }
 }

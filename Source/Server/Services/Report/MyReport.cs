@@ -74,7 +74,7 @@ namespace Insight.WS.Service
         /// <returns>SYS_Report_Definition 报表定义对象实体</returns>
         public SYS_Report_Definition GetDefinition(Session us, Guid id)
         {
-            return !Verification(us) ? null : ReportDAL.GetDefinition(id);
+            return !Verification(us) ? null : DataAccess.GetDefinition(id);
         }
 
         /// <summary>

@@ -66,9 +66,9 @@ namespace Insight.WS.Service
 
             if (i != d.Index)
             {
-                cmds.Add(MakeCommand(CommonDAL.ChangeIndex("MDG_Expense", i, d.Index, m.CategoryId)));
+                cmds.Add(MakeCommand(DataAccess.ChangeIndex("MDG_Expense", i, d.Index, m.CategoryId)));
             }
-            cmds.Add(MasterDataDAL.AddMasterData(m));
+            cmds.Add(DataAccess.AddMasterData(m));
 
             const string sql = "insert MDG_Expense (MID, [Index], Unit, Price, [Description], CreatorDeptId, CreatorUserId) select @MID, @Index, @Unit, @Price, @Description, @CreatorDeptId, @CreatorUserId";
             var parm = new[]
@@ -101,8 +101,8 @@ namespace Insight.WS.Service
 
             var cmds = new List<SqlCommand>
             {
-                MakeCommand(CommonDAL.ChangeIndex("MDG_Expense", i, d.Index, m.CategoryId)),
-                MasterDataDAL.UpdateMasterData(m)
+                MakeCommand(DataAccess.ChangeIndex("MDG_Expense", i, d.Index, m.CategoryId)),
+                DataAccess.UpdateMasterData(m)
             };
 
             const string sql = "update MDG_Expense set [Index] = @Index, Unit = @Unit, Price = @Price, Description = @Description where MID = @MID";
@@ -131,11 +131,11 @@ namespace Insight.WS.Service
 
             var cmds = new List<SqlCommand>();
 
-            var obj = MasterDataDAL.GetData(id);
+            var obj = DataAccess.GetData(id);
             var data = GetExpense(us, id);
             var sql = $"Delete From MasterData where ID = '{id}'";
 
-            cmds.Add(MakeCommand(CommonDAL.ChangeIndex("MDG_Expense", data.Index, 99999, obj.CategoryId, false)));
+            cmds.Add(MakeCommand(DataAccess.ChangeIndex("MDG_Expense", data.Index, 99999, obj.CategoryId, false)));
             cmds.Add(MakeCommand(sql));
             if (SqlExecute(cmds))
             {

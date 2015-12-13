@@ -41,7 +41,7 @@ namespace Insight.WS.Service
         /// <returns>SYS_Report_Templates 模板对象实体</returns>
         public SYS_Report_Templates GetTemplate(Session us, Guid id)
         {
-            return !Verification(us) ? null : ReportDAL.GetTemplate(id);
+            return !Verification(us) ? null : DataAccess.GetTemplate(id);
         }
 
         #endregion

@@ -37,7 +37,7 @@ namespace Insight.WS.Server.Common
                 return obj;
             }
 
-            var user = CommonDAL.GetUser(obj.LoginName);
+            var user = DataAccess.GetUser(obj.LoginName);
             if (user == null)
             {
                 obj.LoginStatus = LoginResult.NotExist;

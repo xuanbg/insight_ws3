@@ -104,7 +104,7 @@ namespace Insight.WS.Service
                 new SqlParameter("@PositionId", SqlDbType.UniqueIdentifier) {Value = obj.PositionId},
                 new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = us.UserId}
             };
-            cmds.Add(MakeCommand(CommonDAL.ChangeIndex("SYS_Organization", index, obj.Index, obj.ParentId, false)));
+            cmds.Add(MakeCommand(DataAccess.ChangeIndex("SYS_Organization", index, obj.Index, obj.ParentId, false)));
             cmds.Add(MakeCommand(sql, parm));
             return SqlExecute(cmds);
         }
@@ -179,7 +179,7 @@ namespace Insight.WS.Service
                 new SqlParameter("@PositionId", SqlDbType.UniqueIdentifier) {Value = obj.PositionId}
             };
 
-            cmds.Add(MakeCommand(CommonDAL.ChangeIndex("SYS_Organization", index, obj.Index, obj.ParentId, false)));
+            cmds.Add(MakeCommand(DataAccess.ChangeIndex("SYS_Organization", index, obj.Index, obj.ParentId, false)));
             cmds.Add(MakeCommand(sql, parm));
             return SqlExecute(cmds);
         }
@@ -205,8 +205,8 @@ namespace Insight.WS.Service
                 new SqlParameter("@ParentId", SqlDbType.UniqueIdentifier) {Value = obj.ParentId}
             };
 
-            cmds.Add(MakeCommand(CommonDAL.ChangeIndex("SYS_Organization", 999, obj.Index, obj.ParentId, false)));
-            cmds.Add(MakeCommand(CommonDAL.ChangeIndex("SYS_Organization", org.Index, 999, org.ParentId, false)));
+            cmds.Add(MakeCommand(DataAccess.ChangeIndex("SYS_Organization", 999, obj.Index, obj.ParentId, false)));
+            cmds.Add(MakeCommand(DataAccess.ChangeIndex("SYS_Organization", org.Index, 999, org.ParentId, false)));
             cmds.Add(MakeCommand(sql, parm));
             return SqlExecute(cmds);
         }
@@ -229,7 +229,7 @@ namespace Insight.WS.Service
             var obj = GetOrg(us, id);
             var sql = $"Delete from SYS_Organization where ID = '{id}'";
             cmds.Add(MakeCommand(sql));
-            cmds.Add(MakeCommand(CommonDAL.ChangeIndex("SYS_Organization", obj.Index, 99999, obj.ParentId, false)));
+            cmds.Add(MakeCommand(DataAccess.ChangeIndex("SYS_Organization", obj.Index, 99999, obj.ParentId, false)));
             return SqlExecute(cmds);
         }
 

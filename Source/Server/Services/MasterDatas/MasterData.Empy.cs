@@ -100,7 +100,7 @@ namespace Insight.WS.Service
         {
             if (!Verification(us, "DC02AD99-674E-4A56-ACDF-2CC0BCA49B57")) return false;
 
-            var cmds = new List<SqlCommand> {MasterDataDAL.AddMasterData(m)};
+            var cmds = new List<SqlCommand> {DataAccess.AddMasterData(m)};
 
             var sql = "insert MDG_Employee (MID, Gender, WorkType, IdCardNo, DirectLeader, OfficeAddress, HomeAddress, Photo, Thumbnail, EntryDate, DimissionDate, Description, Status, LoginUser, CreatorDeptId, CreatorUserId) select @MID, @Gender, @WorkType, @IdCardNo, @DirectLeader, @OfficeAddress, @HomeAddress, @Photo, @Thumbnail, @EntryDate, @DimissionDate, @Description, @Status, @LoginUser, @CreatorDeptId, @CreatorUserId";
             var parm = new[]
@@ -134,7 +134,7 @@ namespace Insight.WS.Service
             };
             cmds.Add(MakeCommand(sql, parm));
 
-            cmds.AddRange(MasterDataDAL.InsertContactInfo(Guid.Empty, cdt));
+            cmds.AddRange(DataAccess.InsertContactInfo(Guid.Empty, cdt));
             return SqlExecute(cmds);
         }
 
@@ -152,7 +152,7 @@ namespace Insight.WS.Service
         {
             if (!Verification(us, "965562BE-C87E-4869-B94A-97240B24477A")) return false;
 
-            var cmds = new List<SqlCommand> {MasterDataDAL.UpdateMasterData(m)};
+            var cmds = new List<SqlCommand> {DataAccess.UpdateMasterData(m)};
 
             const string sql = "update MDG_Employee set Gender = @Gender, WorkType = @WorkType, IdCardNo = @IdCardNo, DirectLeader = @DirectLeader, OfficeAddress = @OfficeAddress, HomeAddress = @HomeAddress, Photo = @Photo, Thumbnail = @Thumbnail, EntryDate = @EntryDate, DimissionDate = @DimissionDate, Description = @Description, Status = @Status, LoginUser = @LoginUser where MID = @MID";
             var parm = new[]
@@ -175,8 +175,8 @@ namespace Insight.WS.Service
             cmds.Add(MakeCommand(sql, parm));
             cmds.Add(MakeCommand($"update MDR_ET set TitleId = '{r.TitleId}' where ID = '{r.ID}'"));
 
-            cmds.AddRange(MasterDataDAL.DeleteContactInfo(cdl));
-            cmds.AddRange(MasterDataDAL.InsertContactInfo(m.ID, cdt));
+            cmds.AddRange(DataAccess.DeleteContactInfo(cdl));
+            cmds.AddRange(DataAccess.InsertContactInfo(m.ID, cdt));
             return SqlExecute(cmds);
         }
 

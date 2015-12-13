@@ -61,7 +61,7 @@ namespace Insight.WS.Server
             Hosts.AddRange(httpService.StartService("HTTP", !comp));
 
             // 生成自动报表
-            var tdreportThread = new Thread(delegate () { Finish = ReportDAL.Build(); });
+            var tdreportThread = new Thread(delegate () { Finish = DataAccess.Build(); });
             tdreportThread.Start();
         }
 
@@ -88,7 +88,7 @@ namespace Insight.WS.Server
             if (!Finish) return;
 
             Finish = false;
-            Finish = ReportDAL.Build();
+            Finish = DataAccess.Build();
         }
 
         #endregion

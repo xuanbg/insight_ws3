@@ -67,9 +67,9 @@ namespace Insight.WS.Service
 
             if (i != d.Index)
             {
-                cmds.Add(MakeCommand(CommonDAL.ChangeIndex("MDG_Dictionary", i, d.Index, m.CategoryId)));
+                cmds.Add(MakeCommand(DataAccess.ChangeIndex("MDG_Dictionary", i, d.Index, m.CategoryId)));
             }
-            cmds.Add(MasterDataDAL.AddMasterData(m));
+            cmds.Add(DataAccess.AddMasterData(m));
 
             const string sql = "insert MDG_Dictionary (MID, [Index], [Type], [Description], CreatorDeptId, CreatorUserId) select @MID, @Index, dbo.Get_DictType(@CategoryId), @Description, @CreatorDeptId, @CreatorUserId";
             var parm = new[]
@@ -101,8 +101,8 @@ namespace Insight.WS.Service
 
             var cmds = new List<SqlCommand>
             {
-                MakeCommand(CommonDAL.ChangeIndex("MDG_Dictionary", i, d.Index, m.CategoryId)),
-                MasterDataDAL.UpdateMasterData(m)
+                MakeCommand(DataAccess.ChangeIndex("MDG_Dictionary", i, d.Index, m.CategoryId)),
+                DataAccess.UpdateMasterData(m)
             };
 
             const string sql = "update MDG_Dictionary set [Index] = @Index, Description = @Description where MID = @MID";
@@ -129,11 +129,11 @@ namespace Insight.WS.Service
 
             var cmds = new List<SqlCommand>();
 
-            var obj = MasterDataDAL.GetData(id);
+            var obj = DataAccess.GetData(id);
             var dict = GetDictionary(us, id);
             var sql = $"Delete From MasterData where ID = '{id}'";
 
-            cmds.Add(MakeCommand(CommonDAL.ChangeIndex("MDG_Dictionary", dict.Index, 99999, obj.CategoryId, false)));
+            cmds.Add(MakeCommand(DataAccess.ChangeIndex("MDG_Dictionary", dict.Index, 99999, obj.CategoryId, false)));
             cmds.Add(MakeCommand(sql));
             if (SqlExecute(cmds))
             {

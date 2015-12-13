@@ -70,7 +70,7 @@ namespace Insight.WS.Service.Business
         {
             if (!Verification(us, "C772729A-6876-4E29-8B90-A940D4630127")) return false;
 
-            var cmds = new List<SqlCommand> {MasterDataDAL.AddMasterData(m)};
+            var cmds = new List<SqlCommand> {DataAccess.AddMasterData(m)};
 
             var sql = "insert MDG_Supplier (MID, EnterpriseType, IndustryType, RegisterNumber, TaxNumber, Corporation, RegisterDate, BusinessScope, Scale, Staffs, [State], Province, City, District, [Address], Phone, ZipCode, Website, [Description], CreatorDeptId, CreatorUserId) ";
             sql += "select @MID, @EnterpriseType, @IndustryType, @RegisterNumber, @TaxNumber, @Corporation, @RegisterDate, @BusinessScope, @Scale, @Staffs, ID, @Province, @City, @District, @Address, @Phone, @ZipCode, @Website, @Description, @CreatorDeptId, @CreatorUserId from MasterData where FullName = '中华人民共和国'";
@@ -123,7 +123,7 @@ namespace Insight.WS.Service.Business
         {
             if (!Verification(us, "E4B9A144-FAB4-41EB-B930-3AE7E8559870")) return false;
 
-            var cmds = new List<SqlCommand> {MasterDataDAL.UpdateMasterData(m)};
+            var cmds = new List<SqlCommand> {DataAccess.UpdateMasterData(m)};
 
             const string sql = "update MDG_Supplier set EnterpriseType = @EnterpriseType, IndustryType = @IndustryType, RegisterNumber = @RegisterNumber, TaxNumber = @TaxNumber, Corporation = @Corporation, RegisterDate = @RegisterDate, BusinessScope = @BusinessScope, Scale = @Scale, Staffs = @Staffs, Province = @Province, City = @City, District = @District, [Address] = @Address, Phone = @Phone, ZipCode = @ZipCode, Website = @Website, [Description] = @Description where MID = @MID";
             var parm = new[]

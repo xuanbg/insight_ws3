@@ -66,7 +66,7 @@ namespace Insight.WS.Service
         /// <returns>MasterData 主数据对象实体</returns>
         public MasterData GetMasterData(Session us, Guid id)
         {
-            return !Verification(us) ? null : MasterDataDAL.GetData(id);
+            return !Verification(us) ? null : DataAccess.GetData(id);
         }
 
         /// <summary>
@@ -234,7 +234,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 联系方式列表</returns>
         public DataTable GetContactInfo(Session us, Guid id)
         {
-            return !Verification(us) ? null : MasterDataDAL.GetContactInfo(id);
+            return !Verification(us) ? null : DataAccess.GetContactInfo(id);
         }
 
         /// <summary>
@@ -276,10 +276,10 @@ namespace Insight.WS.Service
         {
             if (!Verification(us)) return false;
 
-            var cmds = new List<SqlCommand> {MasterDataDAL.AddMasterData(m)};
+            var cmds = new List<SqlCommand> {DataAccess.AddMasterData(m)};
 
-            if (d.IsMaster) cmds.Add(MasterDataDAL.ClearMaster(m.ParentId));
-            if (!d.IsMaster && !MasterDataDAL.HasContact(m.ParentId)) d.IsMaster = true;
+            if (d.IsMaster) cmds.Add(DataAccess.ClearMaster(m.ParentId));
+            if (!d.IsMaster && !DataAccess.HasContact(m.ParentId)) d.IsMaster = true;
             var sql = "insert MDG_Contact (MID, LastName, FirstName, MiddleName, Gender, Department, Title, OfficeAddress, HomeAddress, Birthday, [Description], IsMaster, LoginUser, CreatorDeptId, CreatorUserId) ";
             sql += "select @MID, @LastName, @FirstName, @MiddleName, @Gender, @Department, @Title, @OfficeAddress, @HomeAddress, @Birthday, @Description, @IsMaster, @LoginUser, @CreatorDeptId, @CreatorUserId";
             var parm = new[]
@@ -303,7 +303,7 @@ namespace Insight.WS.Service
             };
             cmds.Add(MakeCommand(sql, parm));
 
-            cmds.AddRange(MasterDataDAL.InsertContactInfo(Guid.Empty, cdt));
+            cmds.AddRange(DataAccess.InsertContactInfo(Guid.Empty, cdt));
             return SqlExecute(cmds);
         }
 
@@ -320,9 +320,9 @@ namespace Insight.WS.Service
         {
             if (!Verification(us)) return false;
 
-            var cmds = new List<SqlCommand> {MasterDataDAL.UpdateMasterData(m)};
+            var cmds = new List<SqlCommand> {DataAccess.UpdateMasterData(m)};
 
-            if (d.IsMaster) cmds.Add(MasterDataDAL.ClearMaster(m.ParentId));
+            if (d.IsMaster) cmds.Add(DataAccess.ClearMaster(m.ParentId));
             const string sql = "update MDG_Contact set LastName = @LastName, FirstName = @FirstName, MiddleName = @MiddleName, Gender = @Gender, Department = @Department, Title = @Title, OfficeAddress = @OfficeAddress, HomeAddress = @HomeAddress, Birthday = @Birthday, [Description] = @Description, IsMaster = @IsMaster, LoginUser = @LoginUser where MID = @MID";
             var parm = new[]
             {
@@ -342,8 +342,8 @@ namespace Insight.WS.Service
             };
             cmds.Add(MakeCommand(sql, parm));
 
-            cmds.AddRange(MasterDataDAL.DeleteContactInfo(cdl));
-            cmds.AddRange(MasterDataDAL.InsertContactInfo(m.ID, cdt));
+            cmds.AddRange(DataAccess.DeleteContactInfo(cdl));
+            cmds.AddRange(DataAccess.InsertContactInfo(m.ID, cdt));
             return SqlExecute(cmds);
         }
 

@@ -7,7 +7,7 @@ using Insight.WS.Server.Common.ORM;
 
 namespace Insight.WS.Server.Common
 {
-    public class ClearingDAL
+    public partial class DataAccess
     {
 
         /// <summary>

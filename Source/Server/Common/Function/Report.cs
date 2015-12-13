@@ -11,7 +11,7 @@ using static Insight.WS.Server.Common.SqlHelper;
 
 namespace Insight.WS.Server.Common
 {
-    public class ReportDAL
+    public partial class DataAccess
     {
 
         /// <summary>

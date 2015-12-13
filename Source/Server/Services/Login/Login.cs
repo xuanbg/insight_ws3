@@ -34,7 +34,7 @@ namespace Insight.WS.Service
         /// <returns>Session对象实体</returns>
         public Session UserLogin(Session obj)
         {
-            return CommonDAL.UserLogin(obj);
+            return General.UserLogin(obj);
         }
 
         /// <summary>

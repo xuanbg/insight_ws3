@@ -75,7 +75,7 @@ namespace Insight.WS.Service
                 new SqlParameter("@CreatorDeptId", SqlDbType.UniqueIdentifier) {Value = us.DeptId},
                 new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = us.UserId}
             };
-            cmds.Add(MakeCommand(CommonDAL.ChangeIndex("BASE_Category", index, obj.Index, obj.ParentId, false, obj.ModuleId)));
+            cmds.Add(MakeCommand(DataAccess.ChangeIndex("BASE_Category", index, obj.Index, obj.ParentId, false, obj.ModuleId)));
             cmds.Add(MakeCommand(sql.ToString(), parm));
             return SqlExecute(cmds);
         }
@@ -105,11 +105,11 @@ namespace Insight.WS.Service
                 new SqlParameter("@Description", obj.Description),
                 new SqlParameter("@ID", SqlDbType.UniqueIdentifier) {Value = obj.ID}
             };
-            cmds.Add(MakeCommand(CommonDAL.ChangeIndex("BASE_Category", index, obj.Index, obj.ParentId, false, obj.ModuleId)));
+            cmds.Add(MakeCommand(DataAccess.ChangeIndex("BASE_Category", index, obj.Index, obj.ParentId, false, obj.ModuleId)));
             cmds.Add(MakeCommand(sql.ToString(), parm));
             if (obj.ParentId != oldParentId)
             {
-                cmds.Add(MakeCommand(CommonDAL.ChangeIndex("BASE_Category", oldIndex, 9999, oldParentId, false, obj.ModuleId)));
+                cmds.Add(MakeCommand(DataAccess.ChangeIndex("BASE_Category", oldIndex, 9999, oldParentId, false, obj.ModuleId)));
             }
             return SqlExecute(cmds);
         }
@@ -129,7 +129,7 @@ namespace Insight.WS.Service
             var sql = $"delete BASE_Category where ID = '{id}'";
 
             cmds.Add(MakeCommand(sql));
-            cmds.Add(MakeCommand(CommonDAL.ChangeIndex("BASE_Category", obj.Index, 99999, obj.ParentId, false, obj.ModuleId)));
+            cmds.Add(MakeCommand(DataAccess.ChangeIndex("BASE_Category", obj.Index, 99999, obj.ParentId, false, obj.ModuleId)));
             return SqlExecute(cmds);
         }
 

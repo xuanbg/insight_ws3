@@ -51,10 +51,10 @@ namespace Insight.WS.Service
         {
             if (!Verification(us)) return null;
 
-            var img = ReportDAL.BuildImage(oid, tid, us.DeptName, us.UserName, us.DeptId, us.UserId, obj);
+            var img = DataAccess.BuildImage(oid, tid, us.DeptName, us.UserName, us.DeptId, us.UserId, obj);
             if (obj != null)
             {
-                var id = (Guid)ReportDAL.SaveImage(img);
+                var id = (Guid)DataAccess.SaveImage(img);
                 img.ID = id;
 
                 if (obj.ImageType == 1 || obj.ImageType == 3)
@@ -104,7 +104,7 @@ namespace Insight.WS.Service
         {
             if (!Verification(us)) return false;
 
-            var cmds = CommonDAL.AddImageDatas(objs, tab, col, bid);
+            var cmds = DataAccess.AddImageDatas(objs, tab, col, bid);
             return SqlExecute(cmds);
         }
 
