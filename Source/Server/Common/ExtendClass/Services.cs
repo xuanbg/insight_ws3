@@ -26,37 +26,37 @@ namespace Insight.WS.Server.Common
         /// <summary>
         /// 服务绑定
         /// </summary>
-        public dynamic Binding { get; set; }
+        private dynamic Binding;
 
         /// <summary>
-        /// 服务绑定
+        /// 元数据交换绑定
         /// </summary>
-        public dynamic ExchangeBindings { get; set; }
+        private dynamic ExchangeBindings;
 
         /// <summary>
         /// 最大接收消息大小（字节）
         /// </summary>
-        public int MaxReceivedMessageSize { get; } = 1073741824;
+        private const int MaxReceivedMessageSize = 1073741824;
 
         /// <summary>
         /// 最大数组长度
         /// </summary>
-        public int MaxArrayLength { get; } = 67108864;
+        private const int MaxArrayLength = 67108864;
 
         /// <summary>
         /// 最大字符串长度
         /// </summary>
-        public int MaxStringContentLength { get; } = 67108864;
+        private const int MaxStringContentLength = 67108864;
 
         /// <summary>
         /// 发送超时（秒）
         /// </summary>
-        public int SendTimeout { get; } = 600;
+        private const int SendTimeout = 600;
 
         /// <summary>
         /// 接收超时（秒）
         /// </summary>
-        public int ReceiveTimeout { get; } = 600;
+        private const int ReceiveTimeout = 600;
 
         #endregion
 
@@ -92,7 +92,7 @@ namespace Insight.WS.Server.Common
         /// </summary>
         public void InitHttpBinding()
         {
-            Binding = new BasicHttpBinding();
+            Binding = new WebHttpBinding();
             ExchangeBindings = MetadataExchangeBindings.CreateMexHttpBinding();
         }
 
@@ -104,9 +104,9 @@ namespace Insight.WS.Server.Common
         /// <returns>ServiceHost List 已启动服务主机集合</returns>
         public List<ServiceHost> StartService(string type, bool develop)
         {
-            var tcpService = DataAccess.GetServiceList(type);
+            var service = DataAccess.GetServiceList(type);
             var hosts = new List<ServiceHost>();
-            foreach (var host in tcpService.Select(serv => CreateHost(serv, develop)).Where(host => host != null))
+            foreach (var host in service.Select(serv => CreateHost(serv, develop)).Where(host => host != null))
             {
                 hosts.Add(host);
                 var td = new Thread(() => host.Open());
@@ -160,11 +160,12 @@ namespace Insight.WS.Server.Common
             {
                 var address = new Uri(BaseAddress + servinfo.Port);
                 var host = new ServiceHost(asm.GetType(servinfo.Class), address);
-                host.AddServiceEndpoint(asm.GetType(servinfo.Interface), Binding, servinfo.Name);
+                ServiceEndpoint endpoint = host.AddServiceEndpoint(asm.GetType(servinfo.Interface), Binding, servinfo.Name);
 
                 var behavior = new ServiceMetadataBehavior();
                 if (servinfo.Binding == "HTTP")
                 {
+                    endpoint.Behaviors.Add(new WebHttpBehavior());
                     behavior.HttpGetEnabled = true;
                     behavior.HttpGetUrl = new Uri(address, servinfo.Name + "/mex");
                     host.Description.Behaviors.Add(behavior);

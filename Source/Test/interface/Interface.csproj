@@ -50,8 +50,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Client\Common\Common.csproj">
-      <Project>{7c8ac27e-e640-4403-af4d-5b62c6c55826}</Project>
+    <None Include="Properties\DataSources\Insight.WS.Client.Common.Service.Session.datasource" />
+    <None Include="Properties\DataSources\Insight.WS.Client.Common.Service.SYS_User.datasource" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Server\Common\Common.csproj">
+      <Project>{132ce7b2-a22c-430e-947c-db629960ae7a}</Project>
       <Name>Common</Name>
     </ProjectReference>
   </ItemGroup>

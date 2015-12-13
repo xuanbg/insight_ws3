@@ -24,4 +24,6 @@ select 'TCP', '6210', 'MasterDatas', 'Insight.WS.Service.MasterDatas', 'Insight.
 
 select 'TCP', '6210', 'CRM', 'Insight.WS.Service.Business.CRM', 'Insight.WS.Service.Business.ICRM', 'Services\Business' union all
 select 'TCP', '6210', 'SCM', 'Insight.WS.Service.Business.SCM', 'Insight.WS.Service.Business.ISCM', 'Services\Business' union all
-select 'TCP', '6210', 'Settlement', 'Insight.WS.Service.Business.Settlement', 'Insight.WS.Service.Business.ISettlement', 'Services\Business'
+select 'TCP', '6210', 'Settlement', 'Insight.WS.Service.Business.Settlement', 'Insight.WS.Service.Business.ISettlement', 'Services\Business' union all
+
+select 'HTTP', '6280', 'Interface', 'Insight.WS.Service.SuperDentist.Interface', 'Insight.WS.Service.SuperDentist.IInterface', 'Services\SuperDentist'
