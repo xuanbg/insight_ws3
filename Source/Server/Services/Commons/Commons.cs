@@ -51,7 +51,7 @@ namespace Insight.WS.Service
         {
             if (!Verification(us)) return null;
 
-            var img = DataAccess.BuildImage(oid, tid, us.DeptName, us.UserName, us.DeptId, us.UserId, obj);
+            var img = General.BuildImage(oid, tid, us.DeptName, us.UserName, us.DeptId, us.UserId, obj);
             if (obj != null)
             {
                 var id = (Guid)DataAccess.SaveImage(img);

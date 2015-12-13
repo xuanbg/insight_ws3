@@ -284,7 +284,7 @@ namespace Insight.WS.Service.Business
                 CreatorUserId = us.UserId
             };
 
-            var img = DataAccess.BuildImage(Guid.Empty, tid, us.DeptName, us.UserName, us.DeptId, us.UserId, obj);
+            var img = General.BuildImage(Guid.Empty, tid, us.DeptName, us.UserName, us.DeptId, us.UserId, obj);
             var id = DataAccess.SaveImage(img);
             var sql = "insert ABS_Clearing_Check (CheckTime, ImageId, CreatorDeptId, CreatorUserId) select getdate(), @ImageId, @CreatorDeptId, @CreatorUserId ";
             sql += "select ID from ABS_Clearing_Check where SN = scope_identity()";

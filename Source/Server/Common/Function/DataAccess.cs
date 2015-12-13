@@ -23,13 +23,14 @@ namespace Insight.WS.Server.Common
         /// <returns>bool 是否修改成功</returns>
         public static bool UpdataPassword(Session us, string pw)
         {
-            const string sql = "update SYS_User set Password = @Password where ID = @ID";
-            var parm = new[]
+            using (var context = new WSEntities())
             {
-                new SqlParameter("@ID", SqlDbType.UniqueIdentifier) {Value = us.UserId},
-                new SqlParameter("@Password", pw)
-            };
-            return SqlNonQuery(MakeCommand(sql, parm)) > 0 && UpdateSignature(us.ID, pw);
+                var user = context.SYS_User.SingleOrDefault(u => u.ID == us.UserId);
+                if (user == null) return false;
+
+                user.Password = pw;
+                return context.SaveChanges() > 0 && UpdateSignature(us.ID, pw);
+            }
         }
 
         /// <summary>

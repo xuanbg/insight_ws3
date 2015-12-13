@@ -73,8 +73,7 @@ namespace Insight.WS.Server.Common
         /// <returns>DataTable 联系方式列表</returns>
         public static DataTable GetContactInfo(Guid id)
         {
-            var sql =
-                $"select C.ID, C.InfoTypeId as 联系方式, M.Alias, C.Number as 号码, C.IsMaster as 主要 From MDS_Contact_Info C join MasterData M on M.ID = C.InfoTypeId where C.MasterDataId = '{id}'";
+            var sql = $"select C.ID, C.InfoTypeId as 联系方式, M.Alias, C.Number as 号码, C.IsMaster as 主要 From MDS_Contact_Info C join MasterData M on M.ID = C.InfoTypeId where C.MasterDataId = '{id}'";
             return SqlQuery(MakeCommand(sql));
         }
 
@@ -88,14 +87,14 @@ namespace Insight.WS.Server.Common
         {
             const string sql = "insert MDS_Contact_Info(IsMaster, MasterDataId, InfoTypeId, Number) select @IsMaster, @MasterDataId, @InfoTypeId, @Number";
             return (from DataRow row in dt.Rows
-                select new[]
-                {
-                    new SqlParameter("@MasterDataId", SqlDbType.UniqueIdentifier) {Value = id}, 
-                    new SqlParameter("@InfoTypeId", SqlDbType.UniqueIdentifier) {Value = row["联系方式"]},
-                    new SqlParameter("@Number", row["号码"]), new SqlParameter("@IsMaster", row["主要"]), 
-                    new SqlParameter("@Read", SqlDbType.Int) {Value = 0}
-                } into parm
-                select MakeCommand(sql, parm)).ToList();
+                    select new[]
+                    {
+                        new SqlParameter("@MasterDataId", SqlDbType.UniqueIdentifier) {Value = id}, 
+                        new SqlParameter("@InfoTypeId", SqlDbType.UniqueIdentifier) {Value = row["联系方式"]},
+                        new SqlParameter("@Number", row["号码"]), new SqlParameter("@IsMaster", row["主要"]), 
+                        new SqlParameter("@Read", SqlDbType.Int) {Value = 0}
+                    } into parm
+                    select MakeCommand(sql, parm)).ToList();
         }
 
         /// <summary>
@@ -126,8 +125,7 @@ namespace Insight.WS.Server.Common
         /// <returns>SqlCommand 对象实体</returns>
         public static SqlCommand ClearMaster(Guid? id)
         {
-            return MakeCommand(
-                $"update D set IsMaster = 0 from MDG_Contact D join MasterData M on M.ID = D.MID where M.ParentId = '{id}'");
+            return MakeCommand($"update D set IsMaster = 0 from MDG_Contact D join MasterData M on M.ID = D.MID where M.ParentId = '{id}'");
         }
 
         /// <summary>
