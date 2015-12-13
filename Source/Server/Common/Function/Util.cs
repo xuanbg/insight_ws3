@@ -29,31 +29,6 @@ namespace Insight.WS.Server.Common
         }
 
         /// <summary>
-        /// 发送短消息
-        /// </summary>
-        /// <param name="number">手机号</param>
-        /// <param name="msg">发送的消息</param>
-        public static void SendMsg(string number, string msg)
-        {
-            var channel = GetAppSetting("Channel");
-            var result = HttpGet(MakePostString(number, msg, channel), "");
-            if (channel == "0")
-            {
-                var returnMsg = Deserialize<returnsms>(result, Encoding.UTF8);
-                if (returnMsg.returnstatus == "Success") return;
-
-                HttpGet(MakePostString(number, msg, "1"), "");
-            }
-            else
-            {
-                var returnMsg = Deserialize<CSubmitState>(result, Encoding.UTF8);
-                if (returnMsg.MsgState == "提交成功") return;
-
-                HttpGet(MakePostString(number, msg, "0"), "");
-            }
-        }
-
-        /// <summary>
         /// 计算字符串的Hash值
         /// </summary>
         /// <param name="str">输入字符串</param>
@@ -63,45 +38,6 @@ namespace Insight.WS.Server.Common
             var md5 = MD5.Create();
             var s = md5.ComputeHash(Encoding.UTF8.GetBytes(str.Trim()));
             return s.Aggregate("", (current, c) => current + c.ToString("X2"));
-        }
-
-        /// <summary>
-        /// 将一个对象序列化为XML字符串
-        /// </summary>
-        /// <param name="o">要序列化的对象</param>
-        /// <param name="encoding">编码方式</param>
-        /// <returns>序列化产生的XML字符串</returns>
-        public static string Serialize(object o, Encoding encoding)
-        {
-            using (var stream = new MemoryStream())
-            {
-                SerializeInternal(stream, o, encoding);
-
-                stream.Position = 0;
-                using (var reader = new StreamReader(stream, encoding))
-                {
-                    return reader.ReadToEnd();
-                }
-            }
-        }
-
-        /// <summary>
-        /// 从XML字符串中反序列化对象
-        /// </summary>
-        /// <typeparam name="T">结果对象类型</typeparam>
-        /// <param name="s">包含对象的XML字符串</param>
-        /// <param name="encoding">编码方式</param>
-        /// <returns>反序列化得到的对象</returns>
-        public static T Deserialize<T>(string s, Encoding encoding)
-        {
-            using (var ms = new MemoryStream(encoding.GetBytes(s)))
-            {
-                using (var sr = new StreamReader(ms, encoding))
-                {
-                    var mySerializer = new XmlSerializer(typeof(T));
-                    return (T)mySerializer.Deserialize(sr);
-                }
-            }
         }
 
         /// <summary>
@@ -238,28 +174,41 @@ namespace Insight.WS.Server.Common
         }
 
         /// <summary>
-        /// 拼装发送验证码的Post字符串
+        /// 将一个对象序列化为XML字符串
         /// </summary>
-        /// <param name="number">手机号</param>
-        /// <param name="msg">发送的消息</param>
-        /// <param name="channel">短信通道代号</param>
-        /// <returns>string Post字符串</returns>
-        private static string MakePostString(string number, string msg, string channel)
+        /// <param name="o">要序列化的对象</param>
+        /// <param name="encoding">编码方式</param>
+        /// <returns>序列化产生的XML字符串</returns>
+        public static string Serialize(object o, Encoding encoding)
         {
-            switch (channel)
+            using (var stream = new MemoryStream())
             {
-                case "1":
-                    var name = GetAppSetting("sname");
-                    var pwd = GetAppSetting("spwd");
-                    var corpid = GetAppSetting("scorpid");
-                    var prdid = GetAppSetting("sprdid");
-                    return $"{GetAppSetting("surl")}?sname={name}&spwd={pwd}&scorpid={corpid}&sprdid={prdid}&sdst={number}&smsg={msg}";
+                SerializeInternal(stream, o, encoding);
 
-                default:
-                    var uid = GetAppSetting("UId");
-                    var account = GetAppSetting("Account");
-                    var password = GetAppSetting("Password");
-                    return $"{GetAppSetting("Url")}?action=send&userid={uid}&account={account}&password={password}&mobile={number}&content={msg}&sendTime=&extno=";
+                stream.Position = 0;
+                using (var reader = new StreamReader(stream, encoding))
+                {
+                    return reader.ReadToEnd();
+                }
+            }
+        }
+
+        /// <summary>
+        /// 从XML字符串中反序列化对象
+        /// </summary>
+        /// <typeparam name="T">结果对象类型</typeparam>
+        /// <param name="s">包含对象的XML字符串</param>
+        /// <param name="encoding">编码方式</param>
+        /// <returns>反序列化得到的对象</returns>
+        public static T Deserialize<T>(string s, Encoding encoding)
+        {
+            using (var ms = new MemoryStream(encoding.GetBytes(s)))
+            {
+                using (var sr = new StreamReader(ms, encoding))
+                {
+                    var mySerializer = new XmlSerializer(typeof(T));
+                    return (T)mySerializer.Deserialize(sr);
+                }
             }
         }
 
@@ -285,7 +234,6 @@ namespace Insight.WS.Server.Common
                 serializer.Serialize(writer, o);
             }
         }
-
     }
 
 }

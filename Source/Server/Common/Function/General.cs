@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text;
 using FastReport;
 using Insight.WS.Server.Common.ORM;
 using static Insight.WS.Server.Common.DataAccess;
+using static Insight.WS.Server.Common.Util;
 
 namespace Insight.WS.Server.Common
 {
@@ -86,7 +88,7 @@ namespace Insight.WS.Server.Common
         public static bool BuildReport()
         {
             var time = DateTime.Now;
-            Util.LogToEvent($"报表生成任务已经于{time}启动…", EventLogEntryType.Information);
+            LogToEvent($"报表生成任务已经于{time}启动…", EventLogEntryType.Information);
             var task = GetTask();
             var obj = new List<SYS_Report_Instances>();
             string temp = null;
@@ -103,7 +105,7 @@ namespace Insight.WS.Server.Common
                 obj.Clear();
                 temp = null;
             }
-            Util.LogToEvent($"本次报表生成任务已经于{DateTime.Now}完成！共耗时：{(DateTime.Now - time).Seconds}秒。", EventLogEntryType.Information);
+            LogToEvent($"本次报表生成任务已经于{DateTime.Now}完成！共耗时：{(DateTime.Now - time).Seconds}秒。", EventLogEntryType.Information);
             return true;
         }
 
@@ -192,6 +194,57 @@ namespace Insight.WS.Server.Common
             img.Size = stream.Length;
             img.Image = bytes;
             return img;
+        }
+
+        /// <summary>
+        /// 发送短消息
+        /// </summary>
+        /// <param name="number">手机号</param>
+        /// <param name="msg">发送的消息</param>
+        public static void SendMsg(string number, string msg)
+        {
+            var channel = GetAppSetting("Channel");
+            var result = HttpGet(MakePostString(number, msg, channel), "");
+            if (channel == "0")
+            {
+                var returnMsg = Deserialize<returnsms>(result, Encoding.UTF8);
+                if (returnMsg.returnstatus == "Success") return;
+
+                HttpGet(MakePostString(number, msg, "1"), "");
+            }
+            else
+            {
+                var returnMsg = Deserialize<CSubmitState>(result, Encoding.UTF8);
+                if (returnMsg.MsgState == "提交成功") return;
+
+                HttpGet(MakePostString(number, msg, "0"), "");
+            }
+        }
+
+        /// <summary>
+        /// 拼装发送验证码的Post字符串
+        /// </summary>
+        /// <param name="number">手机号</param>
+        /// <param name="msg">发送的消息</param>
+        /// <param name="channel">短信通道代号</param>
+        /// <returns>string Post字符串</returns>
+        private static string MakePostString(string number, string msg, string channel)
+        {
+            switch (channel)
+            {
+                case "1":
+                    var name = GetAppSetting("sname");
+                    var pwd = GetAppSetting("spwd");
+                    var corpid = GetAppSetting("scorpid");
+                    var prdid = GetAppSetting("sprdid");
+                    return $"{GetAppSetting("surl")}?sname={name}&spwd={pwd}&scorpid={corpid}&sprdid={prdid}&sdst={number}&smsg={msg}";
+
+                default:
+                    var uid = GetAppSetting("UId");
+                    var account = GetAppSetting("Account");
+                    var password = GetAppSetting("Password");
+                    return $"{GetAppSetting("Url")}?action=send&userid={uid}&account={account}&password={password}&mobile={number}&content={msg}&sendTime=&extno=";
+            }
         }
 
     }
