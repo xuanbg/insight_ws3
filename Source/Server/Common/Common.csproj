@@ -86,6 +86,7 @@
   <ItemGroup>
     <Compile Include="ExtendClass\CSubmitState.cs" />
     <Compile Include="ExtendClass\Entities.cs" />
+    <Compile Include="ExtendClass\JsonResult.cs" />
     <Compile Include="ExtendClass\ReturnSMS.cs" />
     <Compile Include="ExtendClass\Services.cs" />
     <Compile Include="ExtendClass\OnlineManage.cs" />

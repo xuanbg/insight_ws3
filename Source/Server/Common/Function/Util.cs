@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
 using System.Drawing;
@@ -9,6 +10,7 @@ using System.Net;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
+using System.Web.Script.Serialization;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -17,6 +19,54 @@ namespace Insight.WS.Server.Common
 
     public class Util
     {
+
+        /// <summary>
+        /// 构建用于接口返回值的Json对象
+        /// </summary>
+        /// <typeparam name="T">传入的对象类型</typeparam>
+        /// <param name="obj">传入的对象</param>
+        /// <param name="message">错误消息</param>
+        /// <param name="code">错误代码</param>
+        /// <returns>JsonResult</returns>
+        public static JsonResult GetJson<T>(T obj, string message = "未找到任何数据", string code = "000")
+        {
+            var result = new JsonResult { Successful = true, Code = code };
+            if (obj == null)
+            {
+                result.Successful = false;
+                result.Code = code;
+                result.Message = message;
+            }
+            else
+            {
+                result.Data = new JavaScriptSerializer().Serialize(obj);
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// 构建用于接口返回值的Json对象
+        /// </summary>
+        /// <typeparam name="T">传入的集合的对象类型</typeparam>
+        /// <param name="objs">传入的对象集合</param>
+        /// <param name="message">错误消息</param>
+        /// <param name="code">错误代码</param>
+        /// <returns>JsonResult</returns>
+        public static JsonResult GetJson<T>(List<T> objs, string message = "未找到任何数据", string code = "000")
+        {
+            var result = new JsonResult { Successful = true, Code = code };
+            if (objs.Count == 0)
+            {
+                result.Successful = false;
+                result.Code = code;
+                result.Message = message;
+            }
+            else
+            {
+                result.Data = new JavaScriptSerializer().Serialize(objs);
+            }
+            return result;
+        }
 
         /// <summary>
         /// 读取配置项的值

@@ -25,37 +25,11 @@ namespace Insight.WS.Service.SuperDentist
 
         public JsonResult GetUsers()
         {
-            var result = new JsonResult {Successful = true, Code = "000"};
             using (var context = new WSEntities())
             {
-                var user = context.SYS_User.FirstOrDefault();
-                if (user == null)
-                {
-                    result.Successful = false;
-                    result.Code = "400";
-                    result.Message = "没有读取到任何SYS_User对象";
-                }
-                else
-                {
-                    result.Data = new JavaScriptSerializer().Serialize(user);
-                }
+                var user = context.SYS_User.ToList();
+                return Util.GetJson(user);
             }
-            return result;
         }
-
-    }
-
-    public class JsonResult
-    {
-        [DataMember]
-        public bool Successful { get ; set;}
-
-        [DataMember]
-        public string Code { get; set; }
-
-        [DataMember]
-        public string Message { get; set; }
-
-        public string Data { get; set; } 
     }
 }
