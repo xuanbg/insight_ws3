@@ -15,7 +15,7 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Session", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Session", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server")]
     [System.SerializableAttribute()]
     public partial class Session : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -299,7 +299,7 @@ namespace Insight.WS.Client.Common.Service {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="LoginResult", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="LoginResult", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server")]
     public enum LoginResult : int {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
@@ -20748,7 +20748,6 @@ namespace Insight.WS.Client.Common.Service {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICommons/UpdateContact", ReplyAction="http://tempuri.org/ICommons/UpdateContactResponse")]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.Session))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.LoginResult))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.UpdateFile))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ImageData))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Clearing_Attachs>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.ABS_Clearing_Attachs))]
@@ -20900,6 +20899,7 @@ namespace Insight.WS.Client.Common.Service {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.ABS_Storage_Summary>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDS_Contact_Info>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.Advance))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.UpdateFile))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<System.Guid>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<object>))]
         bool UpdateContact(Insight.WS.Client.Common.Service.Session us, Insight.WS.Client.Common.Service.MasterData m, Insight.WS.Client.Common.Service.MDG_Contact d, System.Collections.Generic.List<object> cdl, System.Data.DataTable cdt);

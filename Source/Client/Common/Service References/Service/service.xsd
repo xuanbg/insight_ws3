@@ -1,13 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server" />
   <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
   <xs:import namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" />
   <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <xs:element name="GetReportTemplet">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q1:Session" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="us" nillable="true" type="q1:Session" />
         <xs:element minOccurs="0" name="type" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="withOutTree" type="xs:boolean" />
       </xs:sequence>
@@ -36,7 +37,7 @@
   <xs:element name="BuildImageData">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q2:Session" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="us" nillable="true" type="q2:Session" />
         <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="oid" type="q3:guid" />
         <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="tid" type="q4:guid" />
         <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM" minOccurs="0" name="obj" nillable="true" type="q5:ImageData" />
@@ -53,7 +54,7 @@
   <xs:element name="GetImageData">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q7:Session" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="us" nillable="true" type="q7:Session" />
         <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="id" type="q8:guid" />
       </xs:sequence>
     </xs:complexType>
@@ -68,7 +69,7 @@
   <xs:element name="SaveImages">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q10:Session" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="us" nillable="true" type="q10:Session" />
         <xs:element xmlns:q11="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="bid" type="q11:guid" />
         <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM" minOccurs="0" name="objs" nillable="true" type="q12:ArrayOfImageData" />
         <xs:element minOccurs="0" name="tab" nillable="true" type="xs:string" />
@@ -86,7 +87,7 @@
   <xs:element name="DelImageData">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q13:Session" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="us" nillable="true" type="q13:Session" />
         <xs:element xmlns:q14="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="id" type="q14:guid" />
       </xs:sequence>
     </xs:complexType>
@@ -101,7 +102,7 @@
   <xs:element name="NameIsExist">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q15:Session" />
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="us" nillable="true" type="q15:Session" />
         <xs:element minOccurs="0" name="tab" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="col" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="str" nillable="true" type="xs:string" />
@@ -118,7 +119,7 @@
   <xs:element name="NameIsExisting">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q16:Session" />
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="us" nillable="true" type="q16:Session" />
         <xs:element xmlns:q17="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="pid" nillable="true" type="q17:guid" />
         <xs:element minOccurs="0" name="tab" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="col" nillable="true" type="xs:string" />
@@ -137,7 +138,7 @@
   <xs:element name="GetObjectCount">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q18:Session" />
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="us" nillable="true" type="q18:Session" />
         <xs:element xmlns:q19="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="id" nillable="true" type="q19:guid" />
         <xs:element minOccurs="0" name="type" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="tab" nillable="true" type="xs:string" />
@@ -178,7 +179,7 @@
   <xs:element name="DelOnlineUser">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q22:Session" />
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="us" nillable="true" type="q22:Session" />
         <xs:element minOccurs="0" name="sid" nillable="true" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
@@ -193,7 +194,7 @@
   <xs:element name="GetOrgTree">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q23:Session" />
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="us" nillable="true" type="q23:Session" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -220,7 +221,7 @@
   <xs:element name="GetCodeSchemes">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q24:Session" />
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="us" nillable="true" type="q24:Session" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -247,7 +248,7 @@
   <xs:element name="GetMasterDatas">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q25:Session" />
+        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="us" nillable="true" type="q25:Session" />
         <xs:element minOccurs="0" name="type" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
@@ -275,7 +276,7 @@
   <xs:element name="GetExpense">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q26:Session" />
+        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="us" nillable="true" type="q26:Session" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -302,7 +303,7 @@
   <xs:element name="GetMaterials">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q27:Session" />
+        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="us" nillable="true" type="q27:Session" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -329,7 +330,7 @@
   <xs:element name="GetStore">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q28:Session" />
+        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="us" nillable="true" type="q28:Session" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -356,7 +357,7 @@
   <xs:element name="GetCategorys">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q29:Session" />
+        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="us" nillable="true" type="q29:Session" />
         <xs:element xmlns:q30="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="mid" type="q30:guid" />
         <xs:element minOccurs="0" name="getAll" type="xs:boolean" />
         <xs:element minOccurs="0" name="hasAlias" type="xs:boolean" />
@@ -386,7 +387,7 @@
   <xs:element name="GetCategory">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q31:Session" />
+        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="us" nillable="true" type="q31:Session" />
         <xs:element xmlns:q32="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="id" type="q32:guid" />
       </xs:sequence>
     </xs:complexType>
@@ -401,7 +402,7 @@
   <xs:element name="AddCategory">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q34:Session" />
+        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="us" nillable="true" type="q34:Session" />
         <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM" minOccurs="0" name="obj" nillable="true" type="q35:BASE_Category" />
         <xs:element minOccurs="0" name="index" type="xs:int" />
       </xs:sequence>
@@ -417,7 +418,7 @@
   <xs:element name="UpdateCategory">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q36:Session" />
+        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="us" nillable="true" type="q36:Session" />
         <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM" minOccurs="0" name="obj" nillable="true" type="q37:BASE_Category" />
         <xs:element minOccurs="0" name="index" type="xs:int" />
         <xs:element xmlns:q38="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="oldParentId" nillable="true" type="q38:guid" />
@@ -435,7 +436,7 @@
   <xs:element name="DelCategory">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q39="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q39:Session" />
+        <xs:element xmlns:q39="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="us" nillable="true" type="q39:Session" />
         <xs:element xmlns:q40="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="id" type="q40:guid" />
       </xs:sequence>
     </xs:complexType>
@@ -450,7 +451,7 @@
   <xs:element name="GlobalNameIsExisting">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q41="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q41:Session" />
+        <xs:element xmlns:q41="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="us" nillable="true" type="q41:Session" />
         <xs:element xmlns:q42="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="mid" type="q42:guid" />
         <xs:element minOccurs="0" name="col" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="str" nillable="true" type="xs:string" />
@@ -467,7 +468,7 @@
   <xs:element name="LocalNameIsExisting">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q43="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q43:Session" />
+        <xs:element xmlns:q43="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="us" nillable="true" type="q43:Session" />
         <xs:element xmlns:q44="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="mid" type="q44:guid" />
         <xs:element minOccurs="0" name="col" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="str" nillable="true" type="xs:string" />
@@ -485,7 +486,7 @@
   <xs:element name="GetModuleParam">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q46="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q46:Session" />
+        <xs:element xmlns:q46="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="us" nillable="true" type="q46:Session" />
         <xs:element xmlns:q47="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="mid" type="q47:guid" />
       </xs:sequence>
     </xs:complexType>
@@ -500,7 +501,7 @@
   <xs:element name="GetModuleUserParam">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q49="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q49:Session" />
+        <xs:element xmlns:q49="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="us" nillable="true" type="q49:Session" />
         <xs:element xmlns:q50="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="mid" type="q50:guid" />
       </xs:sequence>
     </xs:complexType>
@@ -515,7 +516,7 @@
   <xs:element name="GetModuleDeptParam">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q52="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q52:Session" />
+        <xs:element xmlns:q52="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="us" nillable="true" type="q52:Session" />
         <xs:element xmlns:q53="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="mid" type="q53:guid" />
       </xs:sequence>
     </xs:complexType>
@@ -530,7 +531,7 @@
   <xs:element name="SaveModuleParam">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q55="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q55:Session" />
+        <xs:element xmlns:q55="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="us" nillable="true" type="q55:Session" />
         <xs:element xmlns:q56="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM" minOccurs="0" name="apl" nillable="true" type="q56:ArrayOfSYS_ModuleParam" />
         <xs:element xmlns:q57="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM" minOccurs="0" name="upl" nillable="true" type="q57:ArrayOfSYS_ModuleParam" />
       </xs:sequence>
@@ -546,7 +547,7 @@
   <xs:element name="EnableMasterData">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q58="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q58:Session" />
+        <xs:element xmlns:q58="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="us" nillable="true" type="q58:Session" />
         <xs:element xmlns:q59="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="id" type="q59:guid" />
         <xs:element minOccurs="0" name="tab" nillable="true" type="xs:string" />
       </xs:sequence>
@@ -562,7 +563,7 @@
   <xs:element name="DelMasterData">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q60="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q60:Session" />
+        <xs:element xmlns:q60="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="us" nillable="true" type="q60:Session" />
         <xs:element xmlns:q61="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="id" type="q61:guid" />
         <xs:element minOccurs="0" name="tab" nillable="true" type="xs:string" />
       </xs:sequence>
@@ -578,7 +579,7 @@
   <xs:element name="GetMasterData">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q62="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q62:Session" />
+        <xs:element xmlns:q62="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="us" nillable="true" type="q62:Session" />
         <xs:element xmlns:q63="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="id" type="q63:guid" />
       </xs:sequence>
     </xs:complexType>
@@ -593,7 +594,7 @@
   <xs:element name="Transfer">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q65="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q65:Session" />
+        <xs:element xmlns:q65="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="us" nillable="true" type="q65:Session" />
         <xs:element xmlns:q66="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="id" nillable="true" type="q66:guid" />
         <xs:element xmlns:q67="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM" minOccurs="0" name="obj" nillable="true" type="q67:MDR_MU" />
       </xs:sequence>
@@ -609,7 +610,7 @@
   <xs:element name="UnShare">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q68="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q68:Session" />
+        <xs:element xmlns:q68="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="us" nillable="true" type="q68:Session" />
         <xs:element xmlns:q69="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ids" nillable="true" type="q69:ArrayOfguid" />
       </xs:sequence>
     </xs:complexType>
@@ -624,7 +625,7 @@
   <xs:element name="GetDictionary">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q70="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q70:Session" />
+        <xs:element xmlns:q70="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="us" nillable="true" type="q70:Session" />
         <xs:element minOccurs="0" name="type" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="withOutTree" type="xs:boolean" />
       </xs:sequence>
@@ -653,7 +654,7 @@
   <xs:element name="GetContacts">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q71="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q71:Session" />
+        <xs:element xmlns:q71="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="us" nillable="true" type="q71:Session" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -680,7 +681,7 @@
   <xs:element name="GetContactInfos">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q72="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q72:Session" />
+        <xs:element xmlns:q72="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="us" nillable="true" type="q72:Session" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -707,7 +708,7 @@
   <xs:element name="GetContact">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q73="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q73:Session" />
+        <xs:element xmlns:q73="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="us" nillable="true" type="q73:Session" />
         <xs:element xmlns:q74="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="id" type="q74:guid" />
       </xs:sequence>
     </xs:complexType>
@@ -722,7 +723,7 @@
   <xs:element name="GetContactInfo">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q76="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q76:Session" />
+        <xs:element xmlns:q76="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="us" nillable="true" type="q76:Session" />
         <xs:element xmlns:q77="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="id" type="q77:guid" />
       </xs:sequence>
     </xs:complexType>
@@ -750,7 +751,7 @@
   <xs:element name="GetAllEmployees">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q78="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q78:Session" />
+        <xs:element xmlns:q78="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="us" nillable="true" type="q78:Session" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -777,7 +778,7 @@
   <xs:element name="GetSharing">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q79="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q79:Session" />
+        <xs:element xmlns:q79="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="us" nillable="true" type="q79:Session" />
         <xs:element xmlns:q80="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="id" type="q80:guid" />
       </xs:sequence>
     </xs:complexType>
@@ -805,7 +806,7 @@
   <xs:element name="AddContact">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q81="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q81:Session" />
+        <xs:element xmlns:q81="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="us" nillable="true" type="q81:Session" />
         <xs:element xmlns:q82="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM" minOccurs="0" name="m" nillable="true" type="q82:MasterData" />
         <xs:element xmlns:q83="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM" minOccurs="0" name="d" nillable="true" type="q83:MDG_Contact" />
         <xs:element minOccurs="0" name="cdt" nillable="true">
@@ -835,7 +836,7 @@
   <xs:element name="UpdateContact">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q84="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q84:Session" />
+        <xs:element xmlns:q84="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="us" nillable="true" type="q84:Session" />
         <xs:element xmlns:q85="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM" minOccurs="0" name="m" nillable="true" type="q85:MasterData" />
         <xs:element xmlns:q86="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM" minOccurs="0" name="d" nillable="true" type="q86:MDG_Contact" />
         <xs:element xmlns:q87="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="cdl" nillable="true" type="q87:ArrayOfanyType" />
@@ -866,7 +867,7 @@
   <xs:element name="GetModuleGroup">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q88="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q88:Session" />
+        <xs:element xmlns:q88="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="us" nillable="true" type="q88:Session" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -893,7 +894,7 @@
   <xs:element name="GetUserModule">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q89="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q89:Session" />
+        <xs:element xmlns:q89="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="us" nillable="true" type="q89:Session" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -920,7 +921,7 @@
   <xs:element name="GetModuleInfo">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q90="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q90:Session" />
+        <xs:element xmlns:q90="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="us" nillable="true" type="q90:Session" />
         <xs:element xmlns:q91="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="id" type="q91:guid" />
       </xs:sequence>
     </xs:complexType>
@@ -935,7 +936,7 @@
   <xs:element name="GetAction">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q93="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q93:Session" />
+        <xs:element xmlns:q93="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="us" nillable="true" type="q93:Session" />
         <xs:element xmlns:q94="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="id" type="q94:guid" />
       </xs:sequence>
     </xs:complexType>
@@ -963,7 +964,7 @@
   <xs:element name="UpdataPassWord">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q95="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common" minOccurs="0" name="us" nillable="true" type="q95:Session" />
+        <xs:element xmlns:q95="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="us" nillable="true" type="q95:Session" />
         <xs:element minOccurs="0" name="pw" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
