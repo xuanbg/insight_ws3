@@ -3,20 +3,18 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using static Insight.WS.Server.Common.SqlHelper;
+using static Insight.WS.Server.Util;
 
-namespace Insight.WS.Server.Common
+namespace Insight.WS.Server
 {
-    public static class OnlineManage
+    public class OnlineManage : Interface
     {
-
-        private static readonly List<Session> Sessions = new List<Session>();
 
         /// <summary>
         /// 获取当前在线状态的全部内部用户的Session
         /// </summary>
-        /// <returns></returns>
-        public static List<Session> GetSessions()
+        /// <returns>全部内部用户的Session</returns>
+        public List<Session> GetSessions()
         {
             return Sessions.Where(s => s.Type > 0 && s.SessionId != Guid.Empty).ToList();
         } 
@@ -26,18 +24,12 @@ namespace Insight.WS.Server.Common
         /// </summary>
         /// <param name="obj">传入的用户Session</param>
         /// <returns>Session</returns>
-        public static Session GetSession(Session obj)
+        public Session GetSession(Session obj)
         {
             var session = Sessions.SingleOrDefault(s => string.Equals(s.LoginName, obj.LoginName, StringComparison.CurrentCultureIgnoreCase));
             if (session != null) return session;
 
-            if (Sessions.Count >= Convert.ToInt32(Util.GetAppSetting("MaxAuthorized")))
-            {
-                obj.LoginStatus = LoginResult.Unauthorized;
-                return obj;
-            }
-
-            var user = DataAccess.GetUser(obj.LoginName);
+            var user = GetUser(obj.LoginName);
             if (user == null)
             {
                 obj.LoginStatus = LoginResult.NotExist;
@@ -56,7 +48,7 @@ namespace Insight.WS.Server.Common
                 Validity = user.Validity,
                 MachineId = obj.MachineId,
                 BaseAddress = obj.BaseAddress,
-                Signature = Util.GetHash(user.LoginName.ToUpper() + user.Password),
+                Signature = GetHash(user.LoginName.ToUpper() + user.Password),
                 FailureCount = 0,
                 LastConnect = DateTime.Now
             };
@@ -69,7 +61,7 @@ namespace Insight.WS.Server.Common
         /// 更新用户Session数据
         /// </summary>
         /// <param name="obj">传入的用户Session</param>
-        public static void UpdateSession(Session obj)
+        public void UpdateSession(Session obj)
         {
             var session = Sessions[obj.ID];
             session.SessionId = obj.SessionId;
@@ -83,12 +75,12 @@ namespace Insight.WS.Server.Common
         /// </summary>
         /// <param name="index">索引</param>
         /// <param name="pw">密码MD5值</param>
-        public static bool UpdateSignature(int index, string pw)
+        public bool UpdateSignature(int index, string pw)
         {
             if (index >= Sessions.Count) return false;
 
             var session = Sessions[index];
-            session.Signature = Util.GetHash(session.LoginName.ToUpper() + pw);
+            session.Signature = GetHash(session.LoginName.ToUpper() + pw);
             return true;
         }
 
@@ -96,7 +88,7 @@ namespace Insight.WS.Server.Common
         /// 重置指定用户Session的登录状态
         /// </summary>
         /// <param name="index">索引</param>
-        public static bool ResetLoginStatus(int index)
+        public bool ResetLoginStatus(int index)
         {
             if (index >= Sessions.Count) return false;
 
@@ -109,7 +101,7 @@ namespace Insight.WS.Server.Common
         /// </summary>
         /// <param name="uid">用户ID</param>
         /// <param name="validity">用户状态</param>
-        public static bool SetUserStatus(Guid uid, bool validity)
+        public bool SetUserStatus(Guid uid, bool validity)
         {
             var session = Sessions.SingleOrDefault(s => s.UserId == uid);
             if (session == null) return false;
@@ -123,7 +115,7 @@ namespace Insight.WS.Server.Common
         /// </summary>
         /// <param name="obj">用户会话</param>
         /// <returns>bool 是否成功</returns>
-        public static bool Verification(Session obj)
+        public bool Verification(Session obj)
         {
             if (obj == null || obj.ID >= Sessions.Count) return false;
 
@@ -159,7 +151,7 @@ namespace Insight.WS.Server.Common
         /// <param name="obj">用户会话</param>
         /// <param name="action">需要鉴权的操作ID</param>
         /// <returns>bool 是否成功</returns>
-        public static bool Verification(Session obj, string action)
+        public bool Authorization(Session obj, string action)
         {
             Guid actionId;
             if (!Guid.TryParse(action, out actionId)) return false;

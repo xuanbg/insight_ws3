@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Windows.Forms;
 using Insight.WS.Server.Common;
+using Insight.WS.Server.Common.Service;
 using static Insight.WS.Server.Common.SqlHelper;
 
 namespace Insight.WS.Service

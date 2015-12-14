@@ -4,6 +4,8 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using Insight.WS.Server.Common;
+using Insight.WS.Server.Common.Service;
+using static Insight.WS.Server.Common.General;
 
 namespace Insight.WS.Service
 {
@@ -19,7 +21,7 @@ namespace Insight.WS.Service
         /// <returns>Session List 在线用户列表</returns>
         public List<Session> GetOnlineUser(Session us)
         {
-            return !OnlineManage.Verification(us) ? null : OnlineManage.GetSessions();
+            return !Verification(us) ? null : GetSessions();
         }
 
         #endregion

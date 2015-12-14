@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.ServiceModel;
+using System.ServiceModel.Channels;
 using System.Text;
 using FastReport;
 using Insight.WS.Server.Common.ORM;
+using Insight.WS.Server.Common.Service;
 using static Insight.WS.Server.Common.DataAccess;
 using static Insight.WS.Server.Common.Util;
 
@@ -13,6 +16,8 @@ namespace Insight.WS.Server.Common
 {
     public class General
     {
+        private static readonly Binding Binding = new NetTcpBinding();
+        private static readonly EndpointAddress Address = new EndpointAddress("net.tcp://localhost:6200/VerifyServer");
 
         /// <summary>
         /// 验证验证码是否正确
@@ -49,7 +54,7 @@ namespace Insight.WS.Server.Common
         {
             if (obj == null) return null;
 
-            var us = OnlineManage.GetSession(obj);
+            var us = GetSession(obj);
             obj.ID = us.ID;
             if (us.LoginStatus == LoginResult.Unauthorized || us.LoginStatus == LoginResult.NotExist) return us;
 
@@ -61,7 +66,7 @@ namespace Insight.WS.Server.Common
             }
 
             // 未通过签名验证
-            if (!OnlineManage.Verification(obj))
+            if (!Verification(obj))
             {
                 us.LoginStatus = LoginResult.Failure;
                 return us;
@@ -70,7 +75,7 @@ namespace Insight.WS.Server.Common
             // 当前是否已登录或未正常退出
             if (us.SessionId == Guid.Empty)
             {
-                OnlineManage.UpdateSession(obj);
+                UpdateSession(obj);
                 us.LoginStatus = LoginResult.Success;
             }
             else
@@ -79,6 +84,108 @@ namespace Insight.WS.Server.Common
             }
 
             return us;
+        }
+
+        /// <summary>
+        /// 获取当前在线状态的全部内部用户的Session
+        /// </summary>
+        /// <returns>全部内部用户的Session</returns>
+        public static List<Session> GetSessions()
+        {
+            using (var client = new InterfaceClient(Binding, Address))
+            {
+                return client.GetSessions();
+            }
+        }
+
+        /// <summary>
+        /// 获取验证服务器上的用户会话
+        /// </summary>
+        /// <param name="obj">用户会话</param>
+        /// <returns>Session 用户会话</returns>
+        public static Session GetSession(Session obj)
+        {
+            using (var client = new InterfaceClient(Binding, Address))
+            {
+                return client.GetSession(obj);
+            }
+        }
+
+        /// <summary>
+        /// 更新用户Session数据
+        /// </summary>
+        /// <param name="obj">传入的用户Session</param>
+        public static void UpdateSession(Session obj)
+        {
+            using (var client = new InterfaceClient(Binding, Address))
+            {
+                client.UpdateSession(obj);
+            }
+        }
+
+        /// <summary>
+        /// 更新指定用户Session的签名
+        /// </summary>
+        /// <param name="index">索引</param>
+        /// <param name="pw">密码MD5值</param>
+        public static bool UpdateSignature(int index, string pw)
+        {
+            using (var client = new InterfaceClient(Binding, Address))
+            {
+                return client.UpdateSignature(index, pw);
+            }
+        }
+
+        /// <summary>
+        /// 重置指定用户Session的登录状态
+        /// </summary>
+        /// <param name="index">索引</param>
+        public static bool ResetLoginStatus(int index)
+        {
+            using (var client = new InterfaceClient(Binding, Address))
+            {
+                return client.ResetLoginStatus(index);
+            }
+        }
+
+        /// <summary>
+        /// 根据用户ID设置用户状态
+        /// </summary>
+        /// <param name="uid">用户ID</param>
+        /// <param name="validity">用户状态</param>
+        public static bool SetUserStatus(Guid uid, bool validity)
+        {
+            using (var client = new InterfaceClient(Binding, Address))
+            {
+                return client.SetUserStatus(uid, validity);
+            }
+        }
+
+        /// <summary>
+        /// 会话合法性验证
+        /// </summary>
+        /// <param name="obj">用户会话</param>
+        /// <returns>bool 是否成功</returns>
+        public static bool Verification(Session obj)
+        {
+            using (var client = new InterfaceClient(Binding, Address))
+            {
+                return client.Verification(obj);
+            }
+        }
+
+        /// <summary>
+        /// 带鉴权的会话合法性验证
+        /// </summary>
+        /// <param name="obj">用户会话</param>
+        /// <param name="action">需要鉴权的操作ID</param>
+        /// <returns>bool 是否成功</returns>
+        public static bool Verification(Session obj, string action)
+        {
+            using (var client = new InterfaceClient(Binding, Address))
+            {
+                return client.Authorization(obj, action);
+            }
         }
 
         /// <summary>

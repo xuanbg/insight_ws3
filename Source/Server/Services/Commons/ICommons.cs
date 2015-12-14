@@ -4,6 +4,7 @@ using System.Data;
 using System.ServiceModel;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
+using Insight.WS.Server.Common.Service;
 
 namespace Insight.WS.Service
 {

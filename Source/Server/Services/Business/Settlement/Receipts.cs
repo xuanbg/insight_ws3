@@ -5,8 +5,9 @@ using System.Data.SqlClient;
 using System.Linq;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
+using Insight.WS.Server.Common.Service;
+using static Insight.WS.Server.Common.General;
 using static Insight.WS.Server.Common.SqlHelper;
-using static Insight.WS.Server.Common.OnlineManage;
 
 namespace Insight.WS.Service.Business
 {
@@ -284,7 +285,7 @@ namespace Insight.WS.Service.Business
                 CreatorUserId = us.UserId
             };
 
-            var img = General.BuildImage(Guid.Empty, tid, us.DeptName, us.UserName, us.DeptId, us.UserId, obj);
+            var img = BuildImage(Guid.Empty, tid, us.DeptName, us.UserName, us.DeptId, us.UserId, obj);
             var id = DataAccess.SaveImage(img);
             var sql = "insert ABS_Clearing_Check (CheckTime, ImageId, CreatorDeptId, CreatorUserId) select getdate(), @ImageId, @CreatorDeptId, @CreatorUserId ";
             sql += "select ID from ABS_Clearing_Check where SN = scope_identity()";

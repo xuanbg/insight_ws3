@@ -5,8 +5,9 @@ using System.Data.SqlClient;
 using System.Linq;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
+using Insight.WS.Server.Common.Service;
+using static Insight.WS.Server.Common.General;
 using static Insight.WS.Server.Common.SqlHelper;
-using static Insight.WS.Server.Common.OnlineManage;
 
 namespace Insight.WS.Service
 {
@@ -51,7 +52,7 @@ namespace Insight.WS.Service
         {
             if (!Verification(us)) return null;
 
-            var img = General.BuildImage(oid, tid, us.DeptName, us.UserName, us.DeptId, us.UserId, obj);
+            var img = BuildImage(oid, tid, us.DeptName, us.UserName, us.DeptId, us.UserId, obj);
             if (obj != null)
             {
                 var id = (Guid)DataAccess.SaveImage(img);

@@ -5,8 +5,8 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using Insight.WS.Server.Common.ORM;
+using Insight.WS.Server.Common.Service;
 using static Insight.WS.Server.Common.SqlHelper;
-using static Insight.WS.Server.Common.OnlineManage;
 
 namespace Insight.WS.Server.Common
 {
@@ -29,7 +29,7 @@ namespace Insight.WS.Server.Common
                 if (user == null) return false;
 
                 user.Password = pw;
-                return context.SaveChanges() > 0 && UpdateSignature(us.ID, pw);
+                return context.SaveChanges() > 0 && General.UpdateSignature(us.ID, pw);
             }
         }
 

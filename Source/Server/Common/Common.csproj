@@ -89,7 +89,6 @@
     <Compile Include="ExtendClass\JsonResult.cs" />
     <Compile Include="ExtendClass\ReturnSMS.cs" />
     <Compile Include="ExtendClass\Services.cs" />
-    <Compile Include="ExtendClass\OnlineManage.cs" />
     <Compile Include="Function\DataAccess.cs" />
     <Compile Include="Function\Clearing.cs">
       <DependentUpon>DataAccess.cs</DependentUpon>
@@ -367,9 +366,13 @@
       <DependentUpon>WSModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ExtendClass\Session.cs" />
     <Compile Include="Function\SqlHelper.cs" />
     <Compile Include="ExtendClass\UpdateFile.cs" />
+    <Compile Include="Service References\Service\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -383,6 +386,19 @@
       <DependentUpon>WSModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
+    <None Include="Service References\Service\Insight.WS.Server.Common.Service.Session.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Service\Insight.WS.Server.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Service\service.wsdl" />
+    <None Include="Service References\Service\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Service\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="ORM\WSModel.Context.tt">
@@ -395,8 +411,19 @@
       <DependentUpon>WSModel.edmx</DependentUpon>
       <LastGenOutput>WSModel.cs</LastGenOutput>
     </Content>
+    <None Include="Service References\Service\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\Service\configuration.svcinfo" />
+    <None Include="Service References\Service\configuration91.svcinfo" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\Service\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

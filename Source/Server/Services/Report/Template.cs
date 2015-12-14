@@ -3,8 +3,9 @@ using System.Data;
 using System.Data.SqlClient;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
+using Insight.WS.Server.Common.Service;
+using static Insight.WS.Server.Common.General;
 using static Insight.WS.Server.Common.SqlHelper;
-using static Insight.WS.Server.Common.OnlineManage;
 
 namespace Insight.WS.Service
 {

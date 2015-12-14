@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using System.ServiceModel;
+﻿using System.ServiceModel;
 using System.ServiceModel.Web;
 using Insight.WS.Server.Common;
-using Insight.WS.Server.Common.ORM;
+using Insight.WS.Server.Common.Service;
 
 namespace Insight.WS.Service.SuperDentist
 {
