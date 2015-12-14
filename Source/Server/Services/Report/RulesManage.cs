@@ -21,7 +21,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 分期规则列表</returns>
         public DataTable GetRules(Session us)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             var sql = "with List as(Select D.ID, max(P.Permission) as Permission from SYS_Report_Rules D ";
             sql += "join Get_PermData('6C0C486F-E039-4C53-9F36-9FE262FB0D3C', @UserId, @DeptId) P on P.OrgId = isnull(D.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = D.CreatorUserId group by D.ID) ";
@@ -43,7 +43,7 @@ namespace Insight.WS.Service
         /// <returns>SYS_Report_Rules 分期规则对象实体</returns>
         public SYS_Report_Rules GetRule(Session us, Guid id)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             using (var context = new WSEntities())
             {

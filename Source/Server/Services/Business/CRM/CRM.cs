@@ -21,7 +21,7 @@ namespace Insight.WS.Service.Business
         /// <returns>DataTable 客户列表</returns>
         public DataTable GetCustomers(Session us)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             var sql = "select R.ID, case when R.IsMaster = 1 then 2 else 1 end as Type, C.* from Customer C join MDR_MU R on R.MasterDataId = C.CustomerId and R.EffectiveDate < getdate() and R.FailureDate is null and R.UserId = @UserId union all ";
             sql += "select R.ID, 0 as Type, C.* from Customer C join MDR_MU R on R.MasterDataId = C.CustomerId and R.FailureDate is null and R.IsMaster = 1 join MDG_Employee E on E.MID = R.UserId and E.DirectLeader = @UserId";
@@ -36,7 +36,7 @@ namespace Insight.WS.Service.Business
         /// <returns>DataTable 客户详细信息列表</returns>
         public DataTable GetCustomerInfo(Session us)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             var sql = "select C.* from CustomerInfo C join MDR_MU R on R.MasterDataId = C.CustomerId and R.FailureDate is null and R.UserId = @UserId union ";
             sql += "select C.* from CustomerInfo C join MDR_MU R on R.MasterDataId = C.CustomerId and R.FailureDate is null and R.IsMaster = 1 join MDG_Employee E on E.MID = R.UserId and E.DirectLeader = @UserId";
@@ -52,7 +52,7 @@ namespace Insight.WS.Service.Business
         /// <returns>MDG_Customer 客户对象实体</returns>
         public MDG_Customer GetCustomer(Session us, Guid id)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             using (var context = new WSEntities())
             {

@@ -26,7 +26,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 分类列表</returns>
         public DataTable GetCategorys(Session us, Guid mid, bool getAll, bool hasAlias)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             var str = hasAlias ? "case when Alias is null then '' else '(' + Alias + ')' end" : "''";
             var sql = $"select ID, ParentId, [Index], Name + {str} as Name, Alias, Code, BuiltIn, Visible from BASE_Category where ModuleId = '{mid}'{(getAll ? "" : " and Visible = 1")} order by [Index]";
@@ -41,7 +41,7 @@ namespace Insight.WS.Service
         /// <returns>BASE_Category对象实体</returns>
         public BASE_Category GetCategory(Session us, Guid id)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             using (var context = new WSEntities())
             {
@@ -58,7 +58,7 @@ namespace Insight.WS.Service
         /// <returns>object 插入成功返回新插入记录的ID；插入失败返回false</returns>
         public bool AddCategory(Session us, BASE_Category obj, int index)
         {
-            if (!Verification(us)) return false;
+            if (!SimpleVerifty(us)) return false;
 
             var cmds = new List<SqlCommand>();
             var sql = new StringBuilder("insert BASE_Category (ParentId, ModuleId, [Index], Code, Name, Alias, Description, CreatorDeptId, CreatorUserId)");
@@ -92,7 +92,7 @@ namespace Insight.WS.Service
         /// <returns>object 更新成功返回true；更新失败返回false</returns>
         public bool UpdateCategory(Session us, BASE_Category obj, int index, Guid? oldParentId, int oldIndex)
         {
-            if (!Verification(us)) return false;
+            if (!SimpleVerifty(us)) return false;
 
             var cmds = new List<SqlCommand>();
             var sql = new StringBuilder("update BASE_Category set ParentId = @ParentId, [Index] = @Index, Code = @Code, Name = @Name, Alias = @Alias, Description = @Description where ID = @ID");
@@ -123,7 +123,7 @@ namespace Insight.WS.Service
         /// <returns>bool 是否删除成功</returns>
         public bool DelCategory(Session us, Guid id)
         {
-            if (!Verification(us)) return false;
+            if (!SimpleVerifty(us)) return false;
 
             var cmds = new List<SqlCommand>();
             var obj = GetCategory(us, id);
@@ -144,7 +144,7 @@ namespace Insight.WS.Service
         /// <returns>bool:要比对的名称是否存在</returns>
         public bool GlobalNameIsExisting(Session us, Guid mid, string col, string str)
         {
-            return Verification(us) && NameIsExisting(mid, col, str);
+            return SimpleVerifty(us) && NameIsExisting(mid, col, str);
         }
 
         /// <summary>
@@ -158,7 +158,7 @@ namespace Insight.WS.Service
         /// <returns>bool:要比对的名称是否存在</returns>
         public bool LocalNameIsExisting(Session us, Guid mid, string col, string str, Guid? pid)
         {
-            return Verification(us) && NameIsExisting(mid, "Name", str, pid);
+            return SimpleVerifty(us) && NameIsExisting(mid, "Name", str, pid);
         }
 
         /// <summary>

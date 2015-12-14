@@ -21,7 +21,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 所有字典数据</returns>
         public DataTable GetDictionarys(Session us)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             var sql = "with List as(Select D.MID, max(P.Permission) as Permission from MDG_Dictionary D ";
             sql += "join Get_PermData('5C801552-1905-452B-AE7F-E57227BE70B8', @UserId, @DeptId) P on P.OrgId = isnull(D.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = D.CreatorUserId group by D.MID) ";
@@ -44,7 +44,7 @@ namespace Insight.WS.Service
         /// <returns>MDG_Dictionary对象实体</returns>
         public MDG_Dictionary GetDictionary(Session us, Guid id)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             using (var context = new WSEntities())
             {

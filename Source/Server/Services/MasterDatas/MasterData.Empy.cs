@@ -21,7 +21,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 部门员工列表</returns>
         public DataTable GetEmployees(Session us, Guid oid)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             var sql = "with List as (select E.MID, MAX(P.Permission) as Permission from [MDG_Employee] E ";
             sql += "join Get_PermData('9B2CB116-6E3B-4A9F-9279-E3F568514BEE', @UserId, @DeptId) P on P.OrgId = isnull(E.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = E.CreatorUserId group by E.MID) ";
@@ -43,7 +43,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 部门员工列表</returns>
         public DataTable GetEmployeesForName(Session us, string name)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             var sql = "with List as (select E.MID, MAX(P.Permission) as Permission from [MDG_Employee] E ";
             sql += "join Get_PermData('9B2CB116-6E3B-4A9F-9279-E3F568514BEE', @UserId, @DeptId) P on P.OrgId = isnull(E.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = E.CreatorUserId group by E.MID) ";
@@ -64,7 +64,7 @@ namespace Insight.WS.Service
         /// <returns>MDG_Employee 员工对象实体</returns>
         public MDG_Employee GetEmployee(Session us, Guid id)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             using (var context = new WSEntities())
             {
@@ -80,7 +80,7 @@ namespace Insight.WS.Service
         /// <returns>MDR_ET 职位关系对象实体</returns>
         public MDR_ET GetEmployeeTitle(Session us, Guid id)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             using (var context = new WSEntities())
             {

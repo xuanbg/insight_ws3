@@ -36,6 +36,7 @@
       <xs:enumeration value="Failure" />
       <xs:enumeration value="Banned" />
       <xs:enumeration value="NotExist" />
+      <xs:enumeration value="Offline" />
       <xs:enumeration value="Unauthorized" />
     </xs:restriction>
   </xs:simpleType>

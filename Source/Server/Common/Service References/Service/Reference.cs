@@ -321,7 +321,10 @@ namespace Insight.WS.Server.Common.Service {
         NotExist = 5,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        Unauthorized = 6,
+        Offline = 6,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Unauthorized = 7,
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -347,7 +350,10 @@ namespace Insight.WS.Server.Common.Service {
         bool SetUserStatus(System.Guid uid, bool validity);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Interface/Verification", ReplyAction="http://tempuri.org/Interface/VerificationResponse")]
-        bool Verification(Insight.WS.Server.Common.Service.Session obj);
+        Insight.WS.Server.Common.Service.Session Verification(Insight.WS.Server.Common.Service.Session obj);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Interface/SimpleVerifty", ReplyAction="http://tempuri.org/Interface/SimpleVeriftyResponse")]
+        bool SimpleVerifty(Insight.WS.Server.Common.Service.Session obj);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Interface/Authorization", ReplyAction="http://tempuri.org/Interface/AuthorizationResponse")]
         bool Authorization(Insight.WS.Server.Common.Service.Session obj, string action);
@@ -404,8 +410,12 @@ namespace Insight.WS.Server.Common.Service {
             return base.Channel.SetUserStatus(uid, validity);
         }
         
-        public bool Verification(Insight.WS.Server.Common.Service.Session obj) {
+        public Insight.WS.Server.Common.Service.Session Verification(Insight.WS.Server.Common.Service.Session obj) {
             return base.Channel.Verification(obj);
+        }
+        
+        public bool SimpleVerifty(Insight.WS.Server.Common.Service.Session obj) {
+            return base.Channel.SimpleVerifty(obj);
         }
         
         public bool Authorization(Insight.WS.Server.Common.Service.Session obj, string action) {

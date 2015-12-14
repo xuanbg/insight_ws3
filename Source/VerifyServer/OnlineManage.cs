@@ -32,7 +32,7 @@ namespace Insight.WS.Server
             var user = GetUser(obj.LoginName);
             if (user == null)
             {
-                obj.LoginStatus = LoginResult.NotExist;
+                obj.LoginStatus = LoginResult.Failure;
                 return obj;
             }
 
@@ -115,7 +115,51 @@ namespace Insight.WS.Server
         /// </summary>
         /// <param name="obj">用户会话</param>
         /// <returns>bool 是否成功</returns>
-        public bool Verification(Session obj)
+        public Session Verification(Session obj)
+        {
+            if (obj == null) return null;
+
+            // 不在在线用户列表中（下标溢出）
+            if (obj.ID >= Sessions.Count) return Verify(obj);
+
+            var session = Sessions[obj.ID];
+
+            // 不在在线用户列表中（ID不匹配）
+            if (session.UserId != obj.UserId) return Verify(obj);
+
+            // 用户被封禁
+            if (!session.Validity)
+            {
+                obj.LoginStatus = LoginResult.Banned;
+                return obj;
+            }
+
+            // 验证签名失败计数清零（距上次用户签名验证时间超过1小时）
+            if (session.FailureCount > 0 && (DateTime.Now - session.LastConnect).TotalHours > 1)
+            {
+                session.FailureCount = 0;
+            }
+            session.LastConnect = DateTime.Now;
+
+            // 签名正确时，通过验证且错误计数清零；不正确或验证签名失败超过5次（冒用时）则不能通过验证，且连续失败计数累加1次
+            if (session.Signature == obj.Signature && (session.FailureCount < 5 || session.MachineId == obj.MachineId))
+            {
+                session.FailureCount = 0;
+                session.LoginStatus = LoginResult.Success;
+                return session;
+            }
+
+            session.FailureCount ++;
+            obj.LoginStatus = LoginResult.Failure;
+            return obj;
+        }
+
+        /// <summary>
+        /// 简单会话合法性验证
+        /// </summary>
+        /// <param name="obj">用户会话</param>
+        /// <returns>bool 是否成功</returns>
+        public bool SimpleVerifty(Session obj)
         {
             if (obj == null || obj.ID >= Sessions.Count) return false;
 
@@ -131,17 +175,14 @@ namespace Insight.WS.Server
             }
             session.LastConnect = DateTime.Now;
 
-            // 验证签名失败超过5次（冒用时），不再验证
-            if (session.FailureCount >= 5 && session.MachineId != obj.MachineId) return false;
-
             // 签名正确时，通过验证且错误计数清零；不正确则不能通过验证，且连续失败计数累加1次
-            if (session.Signature == obj.Signature)
+            if (session.Signature == obj.Signature && (session.FailureCount < 5 || session.MachineId == obj.MachineId))
             {
                 session.FailureCount = 0;
                 return true;
             }
 
-            session.FailureCount ++;
+            session.FailureCount++;
             return false;
         }
 
@@ -157,7 +198,7 @@ namespace Insight.WS.Server
             if (!Guid.TryParse(action, out actionId)) return false;
 
             // 验证会话合法性
-            if (!Verification(obj)) return false;
+            if (!SimpleVerifty(obj)) return false;
 
             // 根据传入的操作代码进行鉴权
             const string sql = "select A.ActionId from Sys_RolePerm_Action A join Get_PermRole(@UserId, @DeptId) R on R.RoleId = A.RoleId and A.ActionId = @ActionId group by A.ActionId having min(A.Action) > 0";
@@ -168,6 +209,26 @@ namespace Insight.WS.Server
                 new SqlParameter("@ActionId", SqlDbType.UniqueIdentifier) {Value = actionId}
             };
             return SqlScalar(MakeCommand(sql, parm)) != null;
+        }
+
+        /// <summary>
+        /// 在线用户列表未找到数据时的验证方法
+        /// </summary>
+        /// <param name="obj">用户会话</param>
+        /// <returns>Session 用户会话</returns>
+        private Session Verify(Session obj)
+        {
+            var us = GetSession(obj);
+
+            // 签名一致，登录状态标记为离线，返回在线列表中对象
+            if (us.Signature == obj.Signature)
+            {
+                us.LoginStatus = LoginResult.Offline;
+                return us;
+            }
+
+            obj.LoginStatus = LoginResult.Failure;
+            return obj;
         }
 
     }

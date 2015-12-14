@@ -23,7 +23,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 组织机构节点信息结果集</returns>
         public DataTable GetOrgs(Session us)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             const string sql = "select * from Organization order by NodeType desc, [Index]";
             return SqlQuery(MakeCommand(sql));
@@ -37,7 +37,7 @@ namespace Insight.WS.Service
         /// <returns>SYS_Organization 节点对象</returns>
         public SYS_Organization GetOrg(Session us, Guid id)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             using (var context = new WSEntities())
             {
@@ -52,7 +52,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 节点成员信息结果集</returns>
         public DataTable GetOrgMembers(Session us)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             const string sql = "select * from TitleMember";
             return SqlQuery(MakeCommand(sql));
@@ -66,7 +66,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 节点可添加成员信息结果集</returns>
         public DataTable GetOrgMemberBeSides(Session us, Guid id)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             var sql = "select U.ID, U.Name as 用户名, U.LoginName as 登录名, U.[Description] as 描述 from SYS_User U left join MDG_Contact C on C.MID = U.ID ";
             sql += $"where not exists (select UserId from SYS_OrgMember where UserId = U.ID and OrgId = '{id}') and C.MID is null ";

@@ -21,7 +21,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 编码方案列表</returns>
         public DataTable GetSchemes(Session us)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             var sql = "with List as(select S.ID, max(P.Permission) as Permission from SYS_Code_Scheme S ";
             sql += "join Get_PermData('1E976784-E58C-47C7-AEC5-D92B7B32F122', @UserId, @DeptId) P on P.OrgId = isnull(S.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = S.CreatorUserId group by S.ID) ";
@@ -41,7 +41,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 使用记录</returns>
         public DataTable GetSerialRecord(Session us)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             const string sql = "select * from SerialRecord";
             return SqlQuery(MakeCommand(sql));
@@ -54,7 +54,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 分配记录</returns>
         public DataTable GetAllotRecord(Session us)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             const string sql = "select * from AllotRecord order by SN";
             return SqlQuery(MakeCommand(sql));
@@ -68,7 +68,7 @@ namespace Insight.WS.Service
         /// <returns>SYS_Code_Scheme 编码方案对象实体</returns>
         public SYS_Code_Scheme GetScheme(Session us, Guid id)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             using (var context = new WSEntities())
             {
@@ -86,7 +86,7 @@ namespace Insight.WS.Service
         /// <returns>string 业务编码</returns>
         public string GetCodePreview(Session us, Guid sid, string code, string mark)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             const string sql = "select dbo.Get_CodePreview(@SchemeId, @DeptId, @UserId, @CodeFormat, @SerialFormat)";
             var parm = new[]

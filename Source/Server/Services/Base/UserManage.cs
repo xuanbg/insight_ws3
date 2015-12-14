@@ -22,7 +22,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 全部用户组结果集</returns>
         public DataTable GetGroups(Session us)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             const string sql = "select ID, BuiltIn as 内置, Name as 组名称, Description as 描述 From SYS_UserGroup where Visible = 1 order by SN";
             return SqlQuery(MakeCommand(sql));
@@ -36,7 +36,7 @@ namespace Insight.WS.Service
         /// <returns>SYS_UserGroup 用户组对象</returns>
         public SYS_UserGroup GetGroup(Session us, Guid id)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             using (var context = new WSEntities())
             {
@@ -51,7 +51,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 全部用户结果集</returns>
         public DataTable GetUsers(Session us)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             const string sql = "select ID, BuiltIn as 内置, Name as 名称, LoginName as 登录名, Description as 描述, Case Validity when 1 then '正常' else '封禁' end 状态 From SYS_User where Type > 0 order by SN";
             return SqlQuery(MakeCommand(sql));
@@ -65,7 +65,7 @@ namespace Insight.WS.Service
         /// <returns>SYS_User 用户对象</returns>
         public SYS_User GetUser(Session us, Guid id)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             using (var context = new WSEntities())
             {
@@ -80,7 +80,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 全部用户组成员信息结果集</returns>
         public DataTable GetGroupMembers(Session us)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             const string sql = "select M.ID, U.Name as 用户名, U.LoginName as 登录名, U.Description as 描述, M.GroupId, M.UserId from SYS_UserGroupMember M join SYS_User U on U.ID = M.UserId order by U.SN";
             return SqlQuery(MakeCommand(sql));
@@ -94,7 +94,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 组成员之外所有用户信息结果集</returns>
         public DataTable GetGroupMemberBeSides(Session us, Guid id)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             var sql = "select U.ID, U.Name as 用户名, U.LoginName as 登录名, U.Description as 描述 from SYS_User U where U.Type > 0 ";
             sql += $"and not exists (select UserId from SYS_UserGroupMember where UserId = U.ID and GroupId = '{id}') order by U.LoginName";

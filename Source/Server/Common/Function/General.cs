@@ -56,7 +56,7 @@ namespace Insight.WS.Server.Common
 
             var us = GetSession(obj);
             obj.ID = us.ID;
-            if (us.LoginStatus == LoginResult.Unauthorized || us.LoginStatus == LoginResult.NotExist) return us;
+            if (us.LoginStatus == LoginResult.Failure) return us;
 
             // 用户被封禁
             if (!us.Validity)
@@ -66,7 +66,7 @@ namespace Insight.WS.Server.Common
             }
 
             // 未通过签名验证
-            if (!Verification(obj))
+            if (!SimpleVerifty(obj))
             {
                 us.LoginStatus = LoginResult.Failure;
                 return us;
@@ -162,15 +162,28 @@ namespace Insight.WS.Server.Common
         }
 
         /// <summary>
-        /// 会话合法性验证
+        /// 会话合法性验证，用于持久化客户端
         /// </summary>
         /// <param name="obj">用户会话</param>
         /// <returns>bool 是否成功</returns>
-        public static bool Verification(Session obj)
+        public static Session Verification(Session obj)
         {
             using (var client = new InterfaceClient(Binding, Address))
             {
                 return client.Verification(obj);
+            }
+        }
+
+        /// <summary>
+        /// 简单会话合法性验证，用于非持久化客户端
+        /// </summary>
+        /// <param name="obj">用户会话</param>
+        /// <returns>bool 是否成功</returns>
+        public static bool SimpleVerifty(Session obj)
+        {
+            using (var client = new InterfaceClient(Binding, Address))
+            {
+                return client.SimpleVerifty(obj);
             }
         }
 

@@ -21,7 +21,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 全部物资材料列表</returns>
         public DataTable GetMaterials(Session us)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             var sql = "with List as(Select D.MID, max(P.Permission) as Permission from MDG_Material D ";
             sql += "join Get_PermData('AE251B20-4B82-4754-B404-77CE35F4F57E', @UserId, @DeptId) P on P.OrgId = isnull(D.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = D.CreatorUserId group by D.MID) ";
@@ -44,7 +44,7 @@ namespace Insight.WS.Service
         /// <returns>MDG_Material 物资材料对象实体</returns>
         public MDG_Material GetMaterial(Session us, Guid id)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             using (var context = new WSEntities())
             {

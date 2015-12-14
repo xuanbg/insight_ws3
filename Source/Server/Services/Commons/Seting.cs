@@ -21,7 +21,7 @@ namespace Insight.WS.Service
         /// <returns>SYS_ModuleParam List 参数集合</returns>
         public List<SYS_ModuleParam> GetModuleParam(Session us, Guid mid)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             var ids = new List<Guid>();
             List<SYS_ModuleParam> mps;
@@ -54,7 +54,7 @@ namespace Insight.WS.Service
         /// <returns>SYS_ModuleParam List 参数集合</returns>
         public List<SYS_ModuleParam> GetModuleUserParam(Session us, Guid mid)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             using (var context = new WSEntities())
             {
@@ -70,7 +70,7 @@ namespace Insight.WS.Service
         /// <returns>SYS_ModuleParam List 参数集合</returns>
         public List<SYS_ModuleParam> GetModuleDeptParam(Session us, Guid mid)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             using (var context = new WSEntities())
             {
@@ -87,7 +87,7 @@ namespace Insight.WS.Service
         /// <returns>bool 是否保存成功</returns>
         public bool SaveModuleParam(Session us, List<SYS_ModuleParam> apl, List<SYS_ModuleParam> upl)
         {
-            if (!Verification(us)) return false;
+            if (!SimpleVerifty(us)) return false;
 
             const string sql = "insert SYS_ModuleParam (ModuleId, ParamId, Name, Value, OrgId, UserId, Description) select @ModuleId, @ParamId, @Name, @Value, @OrgId, @UserId, @Description";
             var cmds = apl.Select(p => new[]

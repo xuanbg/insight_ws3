@@ -21,7 +21,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 模板列表</returns>
         public DataTable GetTemplates(Session us)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             var sql = "with List as(Select D.ID, max(P.Permission) as Permission from SYS_Report_Templates D ";
             sql += "join Get_PermData('AD0BD296-46F5-46B3-85B9-00B6941343E7', @UserId, @DeptId) P on P.OrgId = isnull(D.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = D.CreatorUserId group by D.ID) ";
@@ -42,7 +42,7 @@ namespace Insight.WS.Service
         /// <returns>SYS_Report_Templates 模板对象实体</returns>
         public SYS_Report_Templates GetTemplate(Session us, Guid id)
         {
-            return !Verification(us) ? null : DataAccess.GetTemplate(id);
+            return !SimpleVerifty(us) ? null : DataAccess.GetTemplate(id);
         }
 
         #endregion
@@ -109,7 +109,7 @@ namespace Insight.WS.Service
         /// <returns>bool 是否成功</returns>
         public bool UpdateContent(Session us, string content, Guid id)
         {
-            if (!Verification(us)) return false;
+            if (!SimpleVerifty(us)) return false;
 
             const string sql = "update SYS_Report_Templates set Content = @Content where ID = @ID";
             var parm = new[]

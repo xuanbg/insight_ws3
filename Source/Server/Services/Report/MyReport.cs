@@ -22,7 +22,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 可阅读报表</returns>
         public DataTable GetMyReports(Session us)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             var sql = "with List as (select distinct R.ID, R.SN, R.CategoryId, R.Name from SYS_Report_Definition R join SYS_Report_Entity E on E.ReportId = R.ID join SYS_Report_Member M on M.EntityId = E.ID join Get_PermRole(@UserId, @DeptId) P on P.RoleId = M.RoleId) ";
             sql += "select distinct C.ID, C.[Index], C.ParentId, C.Name, cast(0 as bit) as IsData from BASE_Category C join List L on L.CategoryId = C.ID union all select L.ID, L.SN as [Index], L.CategoryId as ParentId, L.Name, cast(1 as bit) as IsData from List L order by [Index]";
@@ -41,7 +41,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 报表实例</returns>
         public DataTable GetInstances(Session us)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             var sql = $"select distinct I.ID, I.Name, I.ReportId, I.CreateTime, R.ID as RID from SYS_Report_Instances I join SYS_Report_IU R on R.InstanceId = I.ID and R.UserId = '{us.UserId}' order by I.CreateTime desc";
             return SqlQuery(MakeCommand(sql));
@@ -55,7 +55,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 可选组织机构列表</returns>
         public DataTable GetMyReportEntitys(Session us, Guid reportId)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             const string sql = "select distinct O.ID, O.FullName from SYS_Report_Entity R join SYS_Report_Member M on M.EntityId = R.ID join Get_PermRole(@UserId, @DeptId) P on P.RoleId = M.RoleId join SYS_Organization O on O.ID = R.OrgId where R.ReportId = @ReportId";
             var parm = new[]
@@ -75,7 +75,7 @@ namespace Insight.WS.Service
         /// <returns>SYS_Report_Definition 报表定义对象实体</returns>
         public SYS_Report_Definition GetDefinition(Session us, Guid id)
         {
-            return !Verification(us) ? null : DataAccess.GetDefinition(id);
+            return !SimpleVerifty(us) ? null : DataAccess.GetDefinition(id);
         }
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace Insight.WS.Service
         /// <returns>SYS_Report_Instances 报表实例</returns>
         public SYS_Report_Instances GetReportInstance(Session us, Guid id)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             using (var context = new WSEntities())
             {

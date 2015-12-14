@@ -20,7 +20,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 全部费用项目列表</returns>
         public DataTable GetExpenses(Session us)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             var sql = "with List as(Select D.MID, max(P.Permission) as Permission from MDG_Expense D ";
             sql += "join Get_PermData('993D148D-C062-4850-8D3E-FD4F12814F99', @UserId, @DeptId) P on P.OrgId = isnull(D.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = D.CreatorUserId group by D.MID) ";
@@ -43,7 +43,7 @@ namespace Insight.WS.Service
         /// <returns>MDG_Expense 收支项目对象实体</returns>
         public MDG_Expense GetExpense(Session us, Guid id)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             using (var context = new WSEntities())
             {

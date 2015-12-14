@@ -59,7 +59,15 @@ namespace Insight.WS.Server
         /// <param name="obj">用户会话</param>
         /// <returns>bool 是否成功</returns>
         [OperationContract]
-        bool Verification(Session obj);
+        Session Verification(Session obj);
+
+        /// <summary>
+        /// 简单会话合法性验证
+        /// </summary>
+        /// <param name="obj">用户会话</param>
+        /// <returns>bool 是否成功</returns>
+        [OperationContract]
+        bool SimpleVerifty(Session obj);
 
         /// <summary>
         /// 带鉴权的会话合法性验证

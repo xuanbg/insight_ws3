@@ -22,7 +22,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 报表信息列表</returns>
         public DataTable GetReports(Session us)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             var sql = "with List as(Select D.ID, max(P.Permission) as Permission from SYS_Report_Definition D ";
             sql += "join Get_PermData('DD46BA9F-A345-4CEC-AE00-26561460E470', @UserId, @DeptId) P on P.OrgId = isnull(D.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = D.CreatorUserId group by D.ID) ";
@@ -42,7 +42,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 分期信息列表</returns>
         public DataTable GetReportRules(Session us)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             const string sql = "select P.ID, P.ReportId, R.Name from SYS_Report_Period P join SYS_Report_Rules R on R.ID = P.RuleId";
             return SqlQuery(MakeCommand(sql));
@@ -55,7 +55,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 统计实体信息列表</returns>
         public DataTable GetReportEntitys(Session us)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             const string sql = "select E.ID, E.ReportId, O.FullName from SYS_Report_Entity E join SYS_Organization O on O.ID = E.OrgId";
             return SqlQuery(MakeCommand(sql));
@@ -68,7 +68,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 报送对象信息列表</returns>
         public DataTable GetReportMembers(Session us)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             const string sql = "select M.ID, M.EntityId, R.Name from SYS_Report_Member M join SYS_Role R on R.ID = M.RoleId";
             return SqlQuery(MakeCommand(sql));
@@ -82,7 +82,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 分期规则列表</returns>
         public DataTable GetReportRule(Session us, Guid id)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             var sql = "select R.ID, case when P.ID is null then cast(0 as bit) else cast(1 as bit) end as Selected, Name as 名称, ";
             sql += "cast(Cycle as varchar) + case CycleType when 1 then '年' when 2 then '月' when 3 then '周' when 4 then '日' else '-' end as 周期 ";
@@ -98,7 +98,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 组织机构列表</returns>
         public DataTable GetReportEntity(Session us, Guid id)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             var sql = "select case when E.ID is null then newid() else E.ID end as ID, O.ID as OrgId, O.ParentId, case when E.ID is null then cast(0 as bit) else cast(1 as bit) end as Selected, O.NodeType, O.[Index], O.名称 ";
             sql += $"from Organization O left join SYS_Report_Entity E on E.OrgId = O.ID and E.ReportId = '{id}' where NodeType < 3";
@@ -113,7 +113,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 成员列表</returns>
         public DataTable GetReportMember(Session us, Guid id)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             var sql = "select newid() as ID, O.ID as OrgId, R.ID as RoleId, case when M.ID is null then cast(0 as bit) else cast(1 as bit) end as Selected, R.Name as 名称, R.Description as 描述 ";
             sql += $"from SYS_Role R join Organization O on O.NodeType < 3 left join SYS_Report_Entity E on E.OrgId = O.ID and E.ReportId = '{id}' left join SYS_Report_Member M on M.EntityId = E.ID and M.RoleId = R.ID order by R.SN";

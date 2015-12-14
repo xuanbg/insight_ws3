@@ -23,7 +23,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 模块组列表</returns>
         public DataTable GetModuleGroup(Session us)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             var sql = "select ID, [Index], Name, Icon from SYS_ModuleGroup where ID in ";
             sql += "(select ModuleGroupId from SYS_Module M join dbo.Get_PermModule(@UserId, @DeptId) P on P.ModuleId = M.ID) ";
@@ -44,7 +44,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 模块列表</returns>
         public DataTable GetUserModule(Session us)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             var sql = "select ModuleGroupId, ID, [Index], ProgramName, MainFrom, ApplicationName, Location, [Default], Icon from SYS_Module M ";
             sql += "join dbo.Get_PermModule(@UserId, @DeptId) P on P.ModuleId = M.ID where M.Validity = 1 order by M.[Index]";
@@ -65,7 +65,7 @@ namespace Insight.WS.Service
         /// <returns>SYS_Module 模块对象实体</returns>
         public SYS_Module GetModuleInfo(Session us, Guid id)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             using (var context = new WSEntities())
             {
@@ -81,7 +81,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 工具栏功能列表</returns>
         public DataTable GetAction(Session us, Guid id)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             var sql = "select A.*, cast(case when PA.ActionId is null then 0 else 1 end as bit) as [Enable] from SYS_ModuleAction A ";
             sql += "left join dbo.Get_PermAction(@ModuleId, @UserId, @DeptId) PA on PA.ActionId = A.ID ";
@@ -108,7 +108,7 @@ namespace Insight.WS.Service
         /// <returns>bool 是否修改成功</returns>
         public bool UpdataPassWord(Session us, string pw)
         {
-            return Verification(us) && DataAccess.UpdataPassword(us, pw);
+            return SimpleVerifty(us) && DataAccess.UpdataPassword(us, pw);
         }
 
         #endregion

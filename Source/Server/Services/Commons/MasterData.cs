@@ -24,7 +24,7 @@ namespace Insight.WS.Service
         /// <returns>bool 是否成功</returns>
         public bool EnableMasterData(Session us, Guid id, string tab)
         {
-            if (!Verification(us)) return false;
+            if (!SimpleVerifty(us)) return false;
 
             var sql = $"update {tab} set [Enable] = 1 where MID = '{id}'";
             return SqlNonQuery(MakeCommand(sql)) > 0;
@@ -39,7 +39,7 @@ namespace Insight.WS.Service
         /// <returns>1：删除 2：停用 0：失败</returns>
         public int DelMasterData(Session us, Guid id, string tab)
         {
-            if (!Verification(us)) return 0;
+            if (!SimpleVerifty(us)) return 0;
 
             var cmds = new List<SqlCommand>();
             var rest = 0;
@@ -67,7 +67,7 @@ namespace Insight.WS.Service
         /// <returns>MasterData 主数据对象实体</returns>
         public MasterData GetMasterData(Session us, Guid id)
         {
-            return !Verification(us) ? null : DataAccess.GetData(id);
+            return !SimpleVerifty(us) ? null : DataAccess.GetData(id);
         }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace Insight.WS.Service
         /// <returns>bool 是否成功</returns>
         public bool Transfer(Session us, Guid? id, MDR_MU obj)
         {
-            if (!Verification(us)) return false;
+            if (!SimpleVerifty(us)) return false;
 
             var cmds = new List<SqlCommand>();
             if (id.HasValue) cmds.Add(UpdateFailureDate((Guid)id, obj.EffectiveDate));
@@ -108,7 +108,7 @@ namespace Insight.WS.Service
         /// <returns>bool 是否成功</returns>
         public bool UnShare(Session us, List<Guid> ids)
         {
-            if (!Verification(us)) return false;
+            if (!SimpleVerifty(us)) return false;
 
             var cmds = ids.Select(id => UpdateFailureDate(id, DateTime.Now)).ToList();
             return SqlExecute(cmds);
@@ -139,7 +139,7 @@ namespace Insight.WS.Service
         /// <returns>bool 是否成功</returns>
         public bool AddMerge(Session us, MasterData_Merger obj)
         {
-            if (!Verification(us)) return false;
+            if (!SimpleVerifty(us)) return false;
 
             var cmds = new List<SqlCommand>
             {
@@ -166,7 +166,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable</returns>
         public DataTable GetDictionary(Session us, string type, bool withOutTree)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             var sql = "with List as(Select D.ID, max(P.Permission) as Permission from Dictionary D ";
             sql += "join Get_PermData('5C801552-1905-452B-AE7F-E57227BE70B8', @UserId, @DeptId) P on P.OrgId = isnull(D.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = D.CreatorUserId group by D.ID) ";
@@ -188,7 +188,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 联系人列表</returns>
         public DataTable GetContacts(Session us)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             var sql = "select C.* from Contact C join MDR_MU R on R.MasterDataId = C.ParentId and R.FailureDate is null and R.UserId = @UserId union ";
             sql += "select C.* from Contact C join MDR_MU R on R.MasterDataId = C.ParentId and R.FailureDate is null and R.IsMaster = 1 join MDG_Employee E on E.MID = R.UserId and E.DirectLeader = @UserId";
@@ -203,7 +203,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 联系方式列表</returns>
         public DataTable GetContactInfos(Session us)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             var sql = "select I.* from ContactInfo I join MasterData C on C.ID = I.MasterDataId join MDR_MU R on R.MasterDataId = C.ParentId and R.FailureDate is null and R.UserId = @UserId union ";
             sql += "select I.* from ContactInfo I join MasterData C on C.ID = I.MasterDataId join MDR_MU R on R.MasterDataId = C.ParentId and R.FailureDate is null and R.IsMaster = 1 join MDG_Employee E on E.MID = R.UserId and E.DirectLeader = @UserId";
@@ -219,7 +219,7 @@ namespace Insight.WS.Service
         /// <returns>MDG_Customer 联系人对象实体</returns>
         public MDG_Contact GetContact(Session us, Guid id)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             using (var context = new WSEntities())
             {
@@ -235,7 +235,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 联系方式列表</returns>
         public DataTable GetContactInfo(Session us, Guid id)
         {
-            return !Verification(us) ? null : DataAccess.GetContactInfo(id);
+            return !SimpleVerifty(us) ? null : DataAccess.GetContactInfo(id);
         }
 
         /// <summary>
@@ -245,7 +245,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 在职员工列表</returns>
         public DataTable GetAllEmployees(Session us)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             const string sql = "select M.ID, M.Name as 姓名, M.Alias as 登录名 from MasterData M join MDG_Employee E on E.MID = M.ID and E.Status < 3";
             return SqlQuery(MakeCommand(sql));
@@ -259,7 +259,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 共享用户列表</returns>
         public DataTable GetSharing(Session us, Guid id)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             var sql = $"select R.ID, U.Name as 姓名, U.LoginName as 登录账号 from MDR_MU R join SYS_User U on U.ID = R.UserId where R.IsMaster = 0 and R.FailureDate is null and R.MasterDataId = '{id}'";
             return SqlQuery(MakeCommand(sql));
@@ -275,7 +275,7 @@ namespace Insight.WS.Service
         /// <returns>bool 是否成功</returns>
         public bool AddContact(Session us, MasterData m, MDG_Contact d, DataTable cdt)
         {
-            if (!Verification(us)) return false;
+            if (!SimpleVerifty(us)) return false;
 
             var cmds = new List<SqlCommand> {DataAccess.AddMasterData(m)};
 
@@ -319,7 +319,7 @@ namespace Insight.WS.Service
         /// <returns>bool 是否成功</returns>
         public bool UpdateContact(Session us, MasterData m, MDG_Contact d, List<object> cdl, DataTable cdt)
         {
-            if (!Verification(us)) return false;
+            if (!SimpleVerifty(us)) return false;
 
             var cmds = new List<SqlCommand> {DataAccess.UpdateMasterData(m)};
 

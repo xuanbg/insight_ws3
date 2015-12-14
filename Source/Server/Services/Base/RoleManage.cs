@@ -22,7 +22,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 角色信息结果集</returns>
         public DataTable GetAllRole(Session us)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             const string sql = "select ID, BuiltIn as 内置, Name as 名称, Description as 描述 from SYS_Role order by SN";
             return SqlQuery(MakeCommand(sql));
@@ -36,7 +36,7 @@ namespace Insight.WS.Service
         /// <returns>SYS_Role 角色对象实体</returns>
         public SYS_Role GetRole(Session us, Guid id)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             using (var context = new WSEntities())
             {
@@ -51,7 +51,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 角色成员信息结果集</returns>
         public DataTable GetRoleMember(Session us)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             const string sql = "select * from RoleMember order by [Index]";
             return SqlQuery(MakeCommand(sql));
@@ -64,7 +64,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 角色成员用户信息结果集</returns>
         public DataTable GetRoleUser(Session us)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             const string sql = "select * from RoleUser";
             return SqlQuery(MakeCommand(sql));
@@ -77,7 +77,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 角色模块权限授权信息结果集</returns>
         public DataTable GetRoleModulePermit(Session us)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             const string sql = "select * from RoleModulePermit order by [Index]";
             return SqlQuery(MakeCommand(sql));
@@ -90,7 +90,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 角色操作权限授权信息结果集</returns>
         public DataTable GetRoleActionPermit(Session us)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             const string sql = "select * from RoleActionPermit order by [Index]";
             return SqlQuery(MakeCommand(sql));
@@ -103,7 +103,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 角色数据权限授权信息结果集</returns>
         public DataTable GetRoleDataPermit(Session us)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             const string sql = "select * from RoleDataPermit order by RoleId, Action, [Index]";
             return SqlQuery(MakeCommand(sql));
@@ -117,7 +117,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 可用的组织机构列表</returns>
         public DataTable GetMemberOfTitle(Session us, Guid id)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             var sql = $"select O.ID, O.ParentId, O.NodeType, O.[Index], O.名称 from Organization O left join SYS_Role_Title T on T.OrgId = O.ID and T.RoleId = '{id}' where T.ID is null";
             return SqlQuery(MakeCommand(sql));
@@ -131,7 +131,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 可用的用户组列表</returns>
         public DataTable GetMemberOfGroup(Session us, Guid id)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             var sql = $"select G.ID, G.Name as 名称, G.Description as 描述 from SYS_UserGroup G left join SYS_Role_UserGroup R on R.GroupId = G.ID and R.RoleId = '{id}' where R.ID is null order by G.SN";
             return SqlQuery(MakeCommand(sql));
@@ -145,7 +145,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 可用的用户列表</returns>
         public DataTable GetMemberOfUser(Session us, Guid id)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             var sql = $"select U.ID, U.Name as 名称, U.LoginName as 登录名, U.Description as 描述 from SYS_User U left join SYS_Role_User R on R.UserId = U.ID and R.RoleId = '{id}' where U.Type > 0 and R.ID is null order by U.SN";
             return SqlQuery(MakeCommand(sql));
@@ -159,7 +159,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 所有功能操作和授权</returns>
         public DataTable GetRoleActions(Session us, Guid id)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             var sql = $"select * from dbo.Get_RoleAction('{id}') order by [Index]";
             return SqlQuery(MakeCommand(sql));
@@ -173,7 +173,7 @@ namespace Insight.WS.Service
         /// <returns>DataTable 所有相对数据权限</returns>
         public DataTable GetRoleRelData(Session us, Guid id)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             var sql = $"exec Get_RoleData '{id}'";
             return SqlQuery(MakeCommand(sql));

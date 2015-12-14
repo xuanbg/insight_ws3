@@ -21,7 +21,7 @@ namespace Insight.WS.Service.Business
         /// <returns>DataTable 结算记录日期列表</returns>
         public DataTable GetClearingDate(Session us)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             var sql = "select convert(varchar(4),getdate(),120) as ID, null as ParentId, 0 as Type, cast(datepart(year , getdate()) as varchar) + '年' as Name union ";
             sql += "select convert(varchar(7),getdate(),120) as ID, convert(varchar(4),getdate(),120) as ParentId, 1 as Type, cast(datepart(month , getdate()) as varchar) + '月' as Name union ";
@@ -41,7 +41,7 @@ namespace Insight.WS.Service.Business
         /// <returns>DataTable 收款记录</returns>
         public DataTable GetReceiptsForDate(Session us, Guid mid, string date)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             var sql = "with List as(select C.ID, max(P.Permission) as Permission from ABS_Clearing C ";
             sql += "join Get_PermData(@ModuleId, @UserId, @DeptId) P on P.OrgId = isnull(C.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = C.CreatorUserId group by C.ID) ";
@@ -68,7 +68,7 @@ namespace Insight.WS.Service.Business
         /// <returns>DataTable 收款记录</returns>
         public DataTable GetReceiptsForName(Session us, Guid mid, string str)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             var sql = "with List as(select C.ID, max(P.Permission) as Permission from ABS_Clearing C ";
             sql += "join Get_PermData(@ModuleId, @UserId, @DeptId) P on P.OrgId = isnull(C.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = C.CreatorUserId group by C.ID) ";
@@ -94,7 +94,7 @@ namespace Insight.WS.Service.Business
         /// <returns>DataTable 未履约数据</returns>
         public DataTable GetFundPlans(Session us, Guid id, int dirt)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             var sql = $"select * from dbo.Get_FundPlan('{id}', {dirt})";
             return SqlQuery(MakeCommand(sql));
@@ -108,7 +108,7 @@ namespace Insight.WS.Service.Business
         /// <returns>Advance List 可用预付款对象实体集合</returns>
         public List<Advance> GetAdvance(Session us, Guid id)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             using (var context = new WSEntities())
             {
@@ -124,7 +124,7 @@ namespace Insight.WS.Service.Business
         /// <returns>ABS_Clearing 结算记录对象实体</returns>
         public ABS_Clearing GetReceipt(Session us, Guid cid)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             using (var context = new WSEntities())
             {
@@ -140,7 +140,7 @@ namespace Insight.WS.Service.Business
         /// <returns>DataTable 收费项目列表</returns>
         public DataTable GetReceiptItem(Session us, Guid cid)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             var sql = $"select Summary as 摘要, ObjectName as 项目, Units as 单位, Price as 单价, Counts as 数量, Amount as 金额 from ABS_Clearing_Item where ClearingId = '{cid}'";
             return SqlQuery(MakeCommand(sql));
@@ -154,7 +154,7 @@ namespace Insight.WS.Service.Business
         /// <returns>DataTable 结算方式列表</returns>
         public DataTable GetReceiptPay(Session us, Guid cid)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             var sql = "select P.Code as 票号, M.Name as 结算方式, sum(P.Amount) as 金额 from ABS_Clearing_Item I join ABS_Clearing_Pay P on P.ClearingItemId = I.ID ";
             sql += $"join MasterData M on M.ID = P.PayType where ClearingId = '{cid}' group by P.Code, M.Name";
@@ -169,7 +169,7 @@ namespace Insight.WS.Service.Business
         /// <returns>DataTable 附件列表</returns>
         public DataTable GetReceiptAttach(Session us, Guid cid)
         {
-            if (!Verification(us)) return null;
+            if (!SimpleVerifty(us)) return null;
 
             var sql = "select I.ID, case I.ImageType when 1 then '单据' else '附件' end as 类型, I.Code as 编码, I.Name as 名称, I.Expand as 扩展名, ";
             sql += $"M.Name as 密级, I.Pages as 页数, I.Size as 字节数 from ABS_Clearing_Attachs A join ImageData I on I.ID = A.ImageId left join MasterData M on M.ID = I.SecrecyDegree where ClearingId = '{cid}'";
@@ -186,7 +186,7 @@ namespace Insight.WS.Service.Business
         /// <returns>bool 是否更新成功</returns>
         public object GetReceiptCode(Session us, Guid sid, Guid bid, Guid mid)
         {
-            if (!Verification(us)) return false;
+            if (!SimpleVerifty(us)) return false;
 
             var code = DataAccess.GetSerialCode(sid, bid, mid, us.DeptId, us.UserId);
             const string sql = "update ABS_Clearing set ReceiptCode = @Code, PrintTimes = 1 where ID = @BusinessId";
