@@ -8,6 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.Web.Script.Serialization;
+
 namespace Insight.WS.Server.Common.Service {
     using System.Runtime.Serialization;
     using System;
@@ -78,7 +80,8 @@ namespace Insight.WS.Server.Common.Service {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int VersionField;
-        
+
+        [ScriptIgnore]
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {

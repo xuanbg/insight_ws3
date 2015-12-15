@@ -17,7 +17,8 @@ namespace Insight.WS.Service.SuperDentist
         /// <returns>Session 用户会话</returns>
         public JsonResult Login(Session us)
         {
-            return new JsonResult();
+            var session = UserLogin(us);
+            return Util.GetJson(session);
         }
 
 

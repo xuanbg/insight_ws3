@@ -19,26 +19,24 @@ namespace Insight.WS.Server.Common
 
     public class Util
     {
-
         /// <summary>
         /// 构建用于接口返回值的Json对象
         /// </summary>
         /// <typeparam name="T">传入的对象类型</typeparam>
         /// <param name="obj">传入的对象</param>
-        /// <param name="message">错误消息</param>
         /// <param name="code">错误代码</param>
+        /// <param name="name"></param>
+        /// <param name="message">错误消息</param>
         /// <returns>JsonResult</returns>
-        public static JsonResult GetJson<T>(T obj, string message = "未找到任何数据", string code = "000")
+        public static JsonResult GetJson<T>(T obj, string code = "404", string name = "ResourceNotFound", string message = "未能读取任何数据")
         {
-            var result = new JsonResult { Successful = true, Code = code };
-            if (obj == null)
+            var result = new JsonResult { Code = code, Name = name, Message = message };
+            if (obj != null)
             {
-                result.Successful = false;
-                result.Code = code;
-                result.Message = message;
-            }
-            else
-            {
+                result.Successful = true;
+                result.Code = "000";
+                result.Name = "Successful";
+                result.Message = "接口调用成功";
                 result.Data = Serialize(obj);
             }
             return result;
@@ -49,20 +47,19 @@ namespace Insight.WS.Server.Common
         /// </summary>
         /// <typeparam name="T">传入的集合的对象类型</typeparam>
         /// <param name="objs">传入的对象集合</param>
-        /// <param name="message">错误消息</param>
         /// <param name="code">错误代码</param>
+        /// <param name="name"></param>
+        /// <param name="message">错误消息</param>
         /// <returns>JsonResult</returns>
-        public static JsonResult GetJson<T>(List<T> objs, string message = "未能读取任何数据", string code = "404")
+        public static JsonResult GetJson<T>(List<T> objs, string code = "404", string name = "ResourceNotFound", string message = "未能读取任何数据")
         {
-            var result = new JsonResult { Successful = true, Code = code };
-            if (objs.Count == 0)
+            var result = new JsonResult { Code = code, Name = name, Message = message};
+            if (objs.Count > 0)
             {
-                result.Successful = false;
-                result.Code = code;
-                result.Message = message;
-            }
-            else
-            {
+                result.Successful = true;
+                result.Code = "000";
+                result.Name = "Successful";
+                result.Message = "接口调用成功";
                 result.Data = Serialize(objs);
             }
             return result;
@@ -176,14 +173,16 @@ namespace Insight.WS.Server.Common
         {
             var cookie = new CookieContainer();
             var request = (HttpWebRequest)WebRequest.Create(url);
+            var buffer = Encoding.UTF8.GetBytes(postDataStr);
             request.Method = "POST";
-            request.ContentType = "application/x-www-form-urlencoded";
-            request.ContentLength = Encoding.UTF8.GetByteCount(postDataStr);
+            request.ContentType = "application/json";
+            request.Accept = "application/json";
+            request.ContentLength = buffer.Length;
             request.CookieContainer = cookie;
 
-            var myStreamWriter = new StreamWriter(request.GetRequestStream());
-            myStreamWriter.Write(postDataStr);
-            myStreamWriter.Close();
+            var stream = request.GetRequestStream();
+            stream.Write(buffer, 0, buffer.Length);
+            stream.Close();
 
             var response = (HttpWebResponse)request.GetResponse();
 
