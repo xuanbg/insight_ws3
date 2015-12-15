@@ -26,6 +26,12 @@ namespace Insight.WS.Client.Common.Service {
         private string BaseAddressField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int ClientTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<System.Guid> DeptIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -44,22 +50,19 @@ namespace Insight.WS.Client.Common.Service {
         private string LoginNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Insight.WS.Client.Common.Service.LoginResult LoginStatusField;
+        private Insight.WS.Client.Common.Service.LoginResult LoginResultField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string MachineIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool OnlineStatusField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string OpenIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Guid SessionIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string SignatureField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int TypeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Guid UserIdField;
@@ -68,7 +71,13 @@ namespace Insight.WS.Client.Common.Service {
         private string UserNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int UserTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool ValidityField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int VersionField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -89,6 +98,32 @@ namespace Insight.WS.Client.Common.Service {
                 if ((object.ReferenceEquals(this.BaseAddressField, value) != true)) {
                     this.BaseAddressField = value;
                     this.RaisePropertyChanged("BaseAddress");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ClientType {
+            get {
+                return this.ClientTypeField;
+            }
+            set {
+                if ((this.ClientTypeField.Equals(value) != true)) {
+                    this.ClientTypeField = value;
+                    this.RaisePropertyChanged("ClientType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Data {
+            get {
+                return this.DataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DataField, value) != true)) {
+                    this.DataField = value;
+                    this.RaisePropertyChanged("Data");
                 }
             }
         }
@@ -172,14 +207,14 @@ namespace Insight.WS.Client.Common.Service {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Insight.WS.Client.Common.Service.LoginResult LoginStatus {
+        public Insight.WS.Client.Common.Service.LoginResult LoginResult {
             get {
-                return this.LoginStatusField;
+                return this.LoginResultField;
             }
             set {
-                if ((this.LoginStatusField.Equals(value) != true)) {
-                    this.LoginStatusField = value;
-                    this.RaisePropertyChanged("LoginStatus");
+                if ((this.LoginResultField.Equals(value) != true)) {
+                    this.LoginResultField = value;
+                    this.RaisePropertyChanged("LoginResult");
                 }
             }
         }
@@ -198,6 +233,19 @@ namespace Insight.WS.Client.Common.Service {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool OnlineStatus {
+            get {
+                return this.OnlineStatusField;
+            }
+            set {
+                if ((this.OnlineStatusField.Equals(value) != true)) {
+                    this.OnlineStatusField = value;
+                    this.RaisePropertyChanged("OnlineStatus");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string OpenId {
             get {
                 return this.OpenIdField;
@@ -211,19 +259,6 @@ namespace Insight.WS.Client.Common.Service {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid SessionId {
-            get {
-                return this.SessionIdField;
-            }
-            set {
-                if ((this.SessionIdField.Equals(value) != true)) {
-                    this.SessionIdField = value;
-                    this.RaisePropertyChanged("SessionId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
         public string Signature {
             get {
                 return this.SignatureField;
@@ -232,19 +267,6 @@ namespace Insight.WS.Client.Common.Service {
                 if ((object.ReferenceEquals(this.SignatureField, value) != true)) {
                     this.SignatureField = value;
                     this.RaisePropertyChanged("Signature");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Type {
-            get {
-                return this.TypeField;
-            }
-            set {
-                if ((this.TypeField.Equals(value) != true)) {
-                    this.TypeField = value;
-                    this.RaisePropertyChanged("Type");
                 }
             }
         }
@@ -276,6 +298,19 @@ namespace Insight.WS.Client.Common.Service {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public int UserType {
+            get {
+                return this.UserTypeField;
+            }
+            set {
+                if ((this.UserTypeField.Equals(value) != true)) {
+                    this.UserTypeField = value;
+                    this.RaisePropertyChanged("UserType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public bool Validity {
             get {
                 return this.ValidityField;
@@ -284,6 +319,19 @@ namespace Insight.WS.Client.Common.Service {
                 if ((this.ValidityField.Equals(value) != true)) {
                     this.ValidityField = value;
                     this.RaisePropertyChanged("Validity");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Version {
+            get {
+                return this.VersionField;
+            }
+            set {
+                if ((this.VersionField.Equals(value) != true)) {
+                    this.VersionField = value;
+                    this.RaisePropertyChanged("Version");
                 }
             }
         }

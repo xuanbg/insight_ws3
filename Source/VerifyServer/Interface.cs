@@ -42,8 +42,9 @@ namespace Insight.WS.Server
         /// 重置指定用户Session的登录状态
         /// </summary>
         /// <param name="index">索引</param>
+        /// <param name="status">在线状态</param>
         [OperationContract]
-        bool ResetLoginStatus(int index);
+        bool SetOnlineStatus(int index, bool status);
 
         /// <summary>
         /// 根据用户ID设置用户状态

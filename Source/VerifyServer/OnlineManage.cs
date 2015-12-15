@@ -16,7 +16,7 @@ namespace Insight.WS.Server
         /// <returns>全部内部用户的Session</returns>
         public List<Session> GetSessions()
         {
-            return Sessions.Where(s => s.Type > 0 && s.SessionId != Guid.Empty).ToList();
+            return Sessions.Where(s => s.UserType > 0 && s.OnlineStatus).ToList();
         } 
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Insight.WS.Server
             var user = GetUser(obj.LoginName);
             if (user == null)
             {
-                obj.LoginStatus = LoginResult.Failure;
+                obj.LoginResult = LoginResult.Failure;
                 return obj;
             }
 
@@ -40,17 +40,17 @@ namespace Insight.WS.Server
             session = new Session
             {
                 ID = Sessions.Count,
-                OpenId = user.OpenId,
                 UserId = user.ID,
-                LoginName = user.LoginName,
                 UserName = user.Name,
-                Type = user.Type,
-                Validity = user.Validity,
-                MachineId = obj.MachineId,
-                BaseAddress = obj.BaseAddress,
+                OpenId = user.OpenId,
+                LoginName = user.LoginName,
                 Signature = GetHash(user.LoginName.ToUpper() + user.Password),
-                FailureCount = 0,
-                LastConnect = DateTime.Now
+                UserType = user.Type,
+                Validity = user.Validity,
+                Version = obj.Version,
+                ClientType = obj.ClientType,
+                MachineId = obj.MachineId,
+                BaseAddress = obj.BaseAddress
             };
             Sessions.Add(session);
 
@@ -64,10 +64,11 @@ namespace Insight.WS.Server
         public void UpdateSession(Session obj)
         {
             var session = Sessions[obj.ID];
-            session.SessionId = obj.SessionId;
-            session.MachineId = obj.MachineId;
             session.DeptId = obj.DeptId;
             session.DeptName = obj.DeptName;
+            session.Version = obj.Version;
+            session.ClientType = obj.ClientType;
+            session.MachineId = obj.MachineId;
         }
 
         /// <summary>
@@ -85,14 +86,15 @@ namespace Insight.WS.Server
         }
 
         /// <summary>
-        /// 重置指定用户Session的登录状态
+        /// 设置指定用户Session的登录状态
         /// </summary>
         /// <param name="index">索引</param>
-        public bool ResetLoginStatus(int index)
+        /// <param name="status">在线状态</param>
+        public bool SetOnlineStatus(int index, bool status)
         {
             if (index >= Sessions.Count) return false;
 
-            Sessions[index].SessionId = Guid.Empty;
+            Sessions[index].OnlineStatus = status;
             return true;
         }
 
@@ -130,7 +132,7 @@ namespace Insight.WS.Server
             // 用户被封禁
             if (!session.Validity)
             {
-                obj.LoginStatus = LoginResult.Banned;
+                obj.LoginResult = LoginResult.Banned;
                 return obj;
             }
 
@@ -145,12 +147,12 @@ namespace Insight.WS.Server
             if (session.Signature == obj.Signature && (session.FailureCount < 5 || session.MachineId == obj.MachineId))
             {
                 session.FailureCount = 0;
-                session.LoginStatus = LoginResult.Success;
-                return session;
+                obj.LoginResult = LoginResult.Success;
+                return obj;
             }
 
             session.FailureCount ++;
-            obj.LoginStatus = LoginResult.Failure;
+            obj.LoginResult = LoginResult.Failure;
             return obj;
         }
 
@@ -223,11 +225,11 @@ namespace Insight.WS.Server
             // 签名一致，登录状态标记为离线，返回在线列表中对象
             if (us.Signature == obj.Signature)
             {
-                us.LoginStatus = LoginResult.Offline;
+                us.LoginResult = LoginResult.NotExist;
                 return us;
             }
 
-            obj.LoginStatus = LoginResult.Failure;
+            obj.LoginResult = LoginResult.Failure;
             return obj;
         }
 

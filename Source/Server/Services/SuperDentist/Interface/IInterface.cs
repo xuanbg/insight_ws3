@@ -12,15 +12,15 @@ namespace Insight.WS.Service.SuperDentist
         /// <summary>
         /// 用户登录
         /// </summary>
-        /// <param name="obj">用户会话</param>
+        /// <param name="us">用户会话</param>
         /// <returns>Session 用户会话</returns>
-        [WebInvoke(UriTemplate = "/Login", ResponseFormat = WebMessageFormat.Json)]
+        [WebInvoke(UriTemplate = "Login", ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
-        Session Login(Session obj);
+        JsonResult Login(Session us);
 
-        [WebGet(UriTemplate = "getusers", ResponseFormat = WebMessageFormat.Json)]
+        [WebInvoke(UriTemplate = "GetUsers", ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
-        JsonResult GetUsers();
+        JsonResult GetUsers(Session us);
 
     }
 

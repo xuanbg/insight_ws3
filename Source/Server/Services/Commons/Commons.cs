@@ -202,7 +202,7 @@ namespace Insight.WS.Service
         /// <returns>bool 是否删除成功</returns>
         public bool DelOnlineUser(Session us, int? sid)
         {
-            return SimpleVerifty(us) && ResetLoginStatus(sid ?? us.ID);
+            return SimpleVerifty(us) && SetOnlineStatus(sid ?? us.ID, false);
         }
 
         /// <summary>

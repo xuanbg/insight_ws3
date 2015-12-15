@@ -10,21 +10,24 @@
   <xs:complexType name="Session">
     <xs:sequence>
       <xs:element minOccurs="0" name="BaseAddress" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ClientType" type="xs:int" />
+      <xs:element minOccurs="0" name="Data" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="DeptId" nillable="true" type="ser:guid" />
       <xs:element minOccurs="0" name="DeptName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="FailureCount" type="xs:int" />
       <xs:element minOccurs="0" name="ID" type="xs:int" />
       <xs:element minOccurs="0" name="LastConnect" type="xs:dateTime" />
       <xs:element minOccurs="0" name="LoginName" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="LoginStatus" type="tns:LoginResult" />
+      <xs:element minOccurs="0" name="LoginResult" type="tns:LoginResult" />
       <xs:element minOccurs="0" name="MachineId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OnlineStatus" type="xs:boolean" />
       <xs:element minOccurs="0" name="OpenId" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="SessionId" type="ser:guid" />
       <xs:element minOccurs="0" name="Signature" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Type" type="xs:int" />
       <xs:element minOccurs="0" name="UserId" type="ser:guid" />
       <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserType" type="xs:int" />
       <xs:element minOccurs="0" name="Validity" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Version" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Session" nillable="true" type="tns:Session" />
@@ -36,7 +39,6 @@
       <xs:enumeration value="Failure" />
       <xs:enumeration value="Banned" />
       <xs:enumeration value="NotExist" />
-      <xs:enumeration value="Offline" />
       <xs:enumeration value="Unauthorized" />
     </xs:restriction>
   </xs:simpleType>

@@ -55,17 +55,18 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="ResetLoginStatus">
+  <xs:element name="SetOnlineStatus">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="index" type="xs:int" />
+        <xs:element minOccurs="0" name="status" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="ResetLoginStatusResponse">
+  <xs:element name="SetOnlineStatusResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="ResetLoginStatusResult" type="xs:boolean" />
+        <xs:element minOccurs="0" name="SetOnlineStatusResult" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

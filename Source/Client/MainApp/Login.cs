@@ -30,7 +30,6 @@ namespace Insight.WS.Client.MainApp
 
         #region 变量声明
 
-        private readonly Guid _SessionId = Guid.NewGuid();
         private readonly string _MachineId = General.GetHash(General.GetCpuId() + General.GetMbId());
         private EndpointAddress _Address;
         private string _BaseAddress;
@@ -206,13 +205,13 @@ namespace Insight.WS.Client.MainApp
             // 初始化Session并登录系统
             Session = new Session
             {
-                BaseAddress = _BaseAddress,
-                SessionId = _SessionId,
-                MachineId = _MachineId,
                 LoginName = txtUserName.Text.Trim(),
                 Signature = General.GetHash(txtUserName.Text.Trim().ToUpper() + General.GetHash(txtPassWord.Text.Trim())),
+                ClientType = 0,
+                MachineId = _MachineId,
                 DeptId = (Guid?) lokDepartment.EditValue,
-                DeptName = lokDepartment.EditValue == null ? null : lokDepartment.Text
+                DeptName = lokDepartment.EditValue == null ? null : lokDepartment.Text,
+                BaseAddress = _BaseAddress
             };
 
             using (var cli = new LoginClient(Binding, _Address))
@@ -220,7 +219,7 @@ namespace Insight.WS.Client.MainApp
                 Session = cli.UserLogin(Session);
             }
 
-            switch (Session.LoginStatus)
+            switch (Session.LoginResult)
             {
                 case LoginResult.Success:
                     Config.SaveUserName(Session.LoginName);

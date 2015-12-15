@@ -16,6 +16,8 @@ namespace Insight.WS.Server.Common
 {
     public class General
     {
+        private static readonly int CompatibleVersion = Convert.ToInt32(GetAppSetting("CompatibleVersion"));
+        private static readonly int UpdateVersion = Convert.ToInt32(GetAppSetting("UpdateVersion"));
         private static readonly Binding Binding = new NetTcpBinding();
         private static readonly EndpointAddress Address = new EndpointAddress("net.tcp://localhost:6200/VerifyServer");
 
@@ -56,34 +58,89 @@ namespace Insight.WS.Server.Common
 
             var us = GetSession(obj);
             obj.ID = us.ID;
-            if (us.LoginStatus == LoginResult.Failure) return us;
+            if (us.LoginResult == LoginResult.Failure) return us;
 
             // 用户被封禁
             if (!us.Validity)
             {
-                us.LoginStatus = LoginResult.Banned;
+                us.LoginResult = LoginResult.Banned;
                 return us;
             }
 
             // 未通过签名验证
             if (!SimpleVerifty(obj))
             {
-                us.LoginStatus = LoginResult.Failure;
+                us.LoginResult = LoginResult.Failure;
                 return us;
             }
 
             // 当前是否已登录或未正常退出
-            if (us.SessionId == Guid.Empty)
+            if (us.OnlineStatus)
             {
-                UpdateSession(obj);
-                us.LoginStatus = LoginResult.Success;
+                us.LoginResult = us.MachineId != obj.MachineId ? LoginResult.Online : LoginResult.Multiple;
             }
             else
             {
-                us.LoginStatus = us.MachineId != obj.MachineId ? LoginResult.Online : LoginResult.Multiple;
+                SetOnlineStatus(us.ID, true);
+                UpdateSession(obj);
+                us.LoginResult = LoginResult.Success;
             }
 
             return us;
+        }
+
+        /// <summary>
+        /// 根据用户身份验证结果返回错误码和错误消息
+        /// </summary>
+        /// <param name="obj">用户会话</param>
+        /// <returns>JsonResult Json接口返回值</returns>
+        public static JsonResult Verify(Session obj)
+        {
+            var result = new JsonResult();
+            if (obj.Version < CompatibleVersion || obj.Version > UpdateVersion)
+            {
+                result.Code = "400";
+                result.Name = "IncompatibleVersions";
+                result.Message = "客户端版本不兼容";
+                return result;
+            }
+
+            var us = Verification(obj);
+            switch (us.LoginResult)
+            {
+                case LoginResult.Success:
+                    result.Successful = true;
+                    result.Code = "000";
+                    result.Name = "Successful";
+                    result.Message = "接口调用成功";
+                    break;
+
+                case LoginResult.NotExist:
+                    result.Code = "406";
+                    result.Name = "SessionExpired";
+                    result.Message = "Session过期，请更新Session后重新发起请求";
+                    result.Data = Serialize(obj);
+                    break;
+
+                case LoginResult.Failure:
+                    result.Code = "401";
+                    result.Name = "SignatureVerifyFailure";
+                    result.Message = "身份验证失败";
+                    break;
+
+                case LoginResult.Banned:
+                    result.Code = "403";
+                    result.Name = "AccountIsDisabled";
+                    result.Message = "当前用户被禁止登录";
+                    break;
+
+                default:
+                    result.Code = "500";
+                    result.Name = "UnknownError";
+                    result.Message = "未知错误";
+                    break;
+            }
+            return result;
         }
 
         /// <summary>
@@ -137,14 +194,15 @@ namespace Insight.WS.Server.Common
         }
 
         /// <summary>
-        /// 重置指定用户Session的登录状态
+        /// 设置指定用户Session的登录状态
         /// </summary>
         /// <param name="index">索引</param>
-        public static bool ResetLoginStatus(int index)
+        /// <param name="status">在线状态</param>
+        public static bool SetOnlineStatus(int index, bool status)
         {
             using (var client = new InterfaceClient(Binding, Address))
             {
-                return client.ResetLoginStatus(index);
+                return client.SetOnlineStatus(index, status);
             }
         }
 

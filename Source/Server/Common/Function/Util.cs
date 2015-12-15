@@ -39,7 +39,7 @@ namespace Insight.WS.Server.Common
             }
             else
             {
-                result.Data = new JavaScriptSerializer().Serialize(obj);
+                result.Data = Serialize(obj);
             }
             return result;
         }
@@ -52,7 +52,7 @@ namespace Insight.WS.Server.Common
         /// <param name="message">错误消息</param>
         /// <param name="code">错误代码</param>
         /// <returns>JsonResult</returns>
-        public static JsonResult GetJson<T>(List<T> objs, string message = "未找到任何数据", string code = "000")
+        public static JsonResult GetJson<T>(List<T> objs, string message = "未能读取任何数据", string code = "404")
         {
             var result = new JsonResult { Successful = true, Code = code };
             if (objs.Count == 0)
@@ -63,7 +63,7 @@ namespace Insight.WS.Server.Common
             }
             else
             {
-                result.Data = new JavaScriptSerializer().Serialize(objs);
+                result.Data = Serialize(objs);
             }
             return result;
         }
@@ -221,6 +221,50 @@ namespace Insight.WS.Server.Common
             myResponseStream.Close();
 
             return retString;
+        }
+
+        /// <summary>
+        /// 将一个对象序列化为Json字符串
+        /// </summary>
+        /// <typeparam name="T">对象类型</typeparam>
+        /// <param name="obj">对象</param>
+        /// <returns>string Json字符串</returns>
+        public static string Serialize<T>(T obj)
+        {
+            return new JavaScriptSerializer().Serialize(obj);
+        }
+
+        /// <summary>
+        /// 将一个集合序列化为Json字符串
+        /// </summary>
+        /// <typeparam name="T">集合类型</typeparam>
+        /// <param name="objs">集合</param>
+        /// <returns>string Json字符串</returns>
+        public static string Serialize<T>(List<T> objs)
+        {
+            return new JavaScriptSerializer().Serialize(objs);
+        }
+
+        /// <summary>
+        /// 将一个Json字符串反序列化为指定类型的对象
+        /// </summary>
+        /// <typeparam name="T">对象类型</typeparam>
+        /// <param name="json">Json字符串</param>
+        /// <returns>T 反序列化的对象</returns>
+        public static T Deserialize<T>(string json)
+        {
+            return new JavaScriptSerializer().Deserialize<T>(json);
+        }
+
+        /// <summary>
+        /// 将一个Json字符串反序列化为指定类型的对象集合
+        /// </summary>
+        /// <typeparam name="T">对象类型</typeparam>
+        /// <param name="json">Json字符串</param>
+        /// <returns>List/<T/> 反序列化的对象集合</returns>
+        public static List<T> DeserializeToList<T>(string json)
+        {
+            return new JavaScriptSerializer().Deserialize<List<T>>(json);
         }
 
         /// <summary>
