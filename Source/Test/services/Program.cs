@@ -28,7 +28,7 @@ namespace Test.Services
             {
                 BaseAddress = $"http://{address}:"
             };
-            httpService.InitHttpBinding();
+            httpService.InitHttpBinding(comp);
             Hosts.AddRange(httpService.StartService("HTTP", !comp));
             //Atom.IntrefaceSync();
 

@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
+using System.ServiceModel.Web;
 using System.Text;
 using FastReport;
 using Insight.WS.Server.Common.ORM;
@@ -90,12 +92,23 @@ namespace Insight.WS.Server.Common
         }
 
         /// <summary>
-        /// 根据用户身份验证结果返回错误码和错误消息
+        /// 校验是否有权限访问
         /// </summary>
-        /// <param name="obj">用户会话</param>
-        /// <returns>JsonResult Json接口返回值</returns>
-        public static JsonResult Verify(Session obj)
+        /// <returns></returns>
+        public static JsonResult Verify()
         {
+            var woc = WebOperationContext.Current;
+            var auth = woc.IncomingRequest.Headers[HttpRequestHeader.Authorization];
+            if (string.IsNullOrEmpty(auth))
+            {
+                woc.OutgoingResponse.StatusCode = HttpStatusCode.Unauthorized;
+                return null;
+            }
+
+            SetResponseParam();
+            var buffer = Convert.FromBase64String(auth);
+            var json = Encoding.UTF8.GetString(buffer);
+            var obj = Deserialize<Session>(json);
             var result = new JsonResult();
             if (obj.Version < CompatibleVersion || obj.Version > UpdateVersion)
             {
@@ -382,20 +395,20 @@ namespace Insight.WS.Server.Common
         public static void SendMsg(string number, string msg)
         {
             var channel = GetAppSetting("Channel");
-            var result = HttpGet(MakePostString(number, msg, channel), "");
+            var result = HttpGet(MakePostString(number, msg, channel));
             if (channel == "0")
             {
                 var returnMsg = Deserialize<returnsms>(result, Encoding.UTF8);
                 if (returnMsg.returnstatus == "Success") return;
 
-                HttpGet(MakePostString(number, msg, "1"), "");
+                HttpGet(MakePostString(number, msg, "1"));
             }
             else
             {
                 var returnMsg = Deserialize<CSubmitState>(result, Encoding.UTF8);
                 if (returnMsg.MsgState == "提交成功") return;
 
-                HttpGet(MakePostString(number, msg, "0"), "");
+                HttpGet(MakePostString(number, msg, "0"));
             }
         }
 

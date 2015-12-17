@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.Web.Script.Serialization;
 using System.Windows.Forms;
-using Insight.WS.Server.Common;
-using Insight.WS.Server.Common.ORM;
-using Insight.WS.Server.Common.Service;
 
 namespace Insight.WS.Test.Interface
 {
@@ -21,15 +18,15 @@ namespace Insight.WS.Test.Interface
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            var us = Login();
-            GetUsers(us);
+            Util.Session = Login();
+            GetUsers();
+            Logout();
         }
 
-        private static void GetUsers(Session us)
+        private static void GetUsers()
         {
             var url = BassAddress + "GetUsers";
-            var data = Util.Serialize(us);
-            var result = Util.HttpPost(url, data);
+            var result = Util.HttpGet(url);
             var obj = Util.Deserialize<JsonResult>(result);
             if (!obj.Successful)
             {
@@ -42,6 +39,13 @@ namespace Insight.WS.Test.Interface
         }
 
 
+        private static void Logout()
+        {
+            var url = BassAddress + "Logout";
+            var data = Util.Serialize(Util.Session.ID);
+            var result = Util.HttpPost(url, data);
+        }
+
         private static Session Login()
         {
             var url = BassAddress + "Login";
@@ -49,10 +53,11 @@ namespace Insight.WS.Test.Interface
             {
                 LoginName = "admin",
                 Signature = Util.GetHash("ADMIN" + Util.GetHash("1")),
-                Version = 10000
+                Version = 10000,
+                MachineId = Util.GetHash("MachineId")
             };
             var data = Util.Serialize(us);
-            var result = Util.HttpPost(url, data);
+            var result = Util.HttpPost(url, data, null);
             var obj = Util.Deserialize<JsonResult>(result);
 
             return !obj.Successful ? null : Util.Deserialize<Session>(obj.Data);

@@ -57,7 +57,7 @@ namespace Insight.WS.Server
             {
                 BaseAddress = $"http://{address}:"
             };
-            httpService.InitHttpBinding();
+            httpService.InitHttpBinding(comp);
             Hosts.AddRange(httpService.StartService("HTTP", !comp));
 
             // 生成自动报表

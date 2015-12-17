@@ -31,9 +31,6 @@ namespace Insight.WS.Server.Common.Service {
         private int ClientTypeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string DataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<System.Guid> DeptIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -114,19 +111,6 @@ namespace Insight.WS.Server.Common.Service {
                 if ((this.ClientTypeField.Equals(value) != true)) {
                     this.ClientTypeField = value;
                     this.RaisePropertyChanged("ClientType");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Data {
-            get {
-                return this.DataField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.DataField, value) != true)) {
-                    this.DataField = value;
-                    this.RaisePropertyChanged("Data");
                 }
             }
         }

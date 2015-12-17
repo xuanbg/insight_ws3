@@ -90,10 +90,24 @@ namespace Insight.WS.Server.Common
         /// <summary>
         /// 初始化基本HTTP服务绑定
         /// </summary>
-        public void InitHttpBinding()
+        /// <param name="isCompres"></param>
+        public void InitHttpBinding(bool isCompres)
         {
-            Binding = new WebHttpBinding();
+            var encoder = new WebMessageEncodingBindingElement { ReaderQuotas = { MaxArrayLength = MaxArrayLength, MaxStringContentLength = MaxStringContentLength } };
+            var transport = new HttpTransportBindingElement { ManualAddressing = true, MaxReceivedMessageSize = MaxReceivedMessageSize, TransferMode = TransferMode.Streamed };
+            Binding = new CustomBinding { SendTimeout = TimeSpan.FromSeconds(SendTimeout), ReceiveTimeout = TimeSpan.FromSeconds(ReceiveTimeout) };
             ExchangeBindings = MetadataExchangeBindings.CreateMexHttpBinding();
+
+            if (isCompres)
+            {
+                encoder.ContentTypeMapper = new TypeMapper();
+                var gZipEncode = new GZipMessageEncodingBindingElement(encoder);
+                Binding.Elements.AddRange(gZipEncode, transport);
+            }
+            else
+            {
+                Binding.Elements.AddRange(encoder, transport);
+            }
         }
 
         /// <summary>
@@ -166,9 +180,12 @@ namespace Insight.WS.Server.Common
                 if (servinfo.Binding == "HTTP")
                 {
                     endpoint.Behaviors.Add(new WebHttpBehavior());
-                    behavior.HttpGetEnabled = true;
-                    behavior.HttpGetUrl = new Uri(address, servinfo.Name + "/mex");
-                    host.Description.Behaviors.Add(behavior);
+                    if (DevelopMode)
+                    {
+                        behavior.HttpGetEnabled = true;
+                        behavior.HttpGetUrl = new Uri(address, servinfo.Name + "/mex");
+                        host.Description.Behaviors.Add(behavior);
+                    }
                 }
                 else if (DevelopMode)
                 {
@@ -188,4 +205,14 @@ namespace Insight.WS.Server.Common
         #endregion
 
     }
+
+    public class TypeMapper : WebContentTypeMapper
+    {
+        public override WebContentFormat GetMessageFormatForContentType(string contentType)
+        {
+            return WebContentFormat.Json;
+        }
+
+    }
+
 }

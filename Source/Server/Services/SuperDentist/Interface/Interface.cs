@@ -1,5 +1,10 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Net;
 using System.ServiceModel;
+using System.ServiceModel.Activation;
+using System.ServiceModel.Web;
+using System.Text;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
 using Insight.WS.Server.Common.Service;
@@ -7,7 +12,8 @@ using static Insight.WS.Server.Common.General;
 
 namespace Insight.WS.Service.SuperDentist
 {
-    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
+    [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
     public class Interface : IInterface
     {
         /// <summary>
@@ -21,11 +27,19 @@ namespace Insight.WS.Service.SuperDentist
             return Util.GetJson(session);
         }
 
-
-        public JsonResult GetUsers(Session us)
+        public JsonResult Logout(int id)
         {
-            var result = Verify(us);
-            if (!result.Successful) return result;
+            var result = Verify();
+            if (result == null || !result.Successful) return result;
+
+            SetOnlineStatus(id, false);
+            return result;
+        }
+
+        public JsonResult GetUsers()
+        {
+            var result = Verify();
+            if (result == null || !result.Successful) return result;
 
             using (var context = new WSEntities())
             {
@@ -33,5 +47,6 @@ namespace Insight.WS.Service.SuperDentist
                 return Util.GetJson(user);
             }
         }
+
     }
 }

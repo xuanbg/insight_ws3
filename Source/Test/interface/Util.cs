@@ -10,21 +10,19 @@ using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Security.Cryptography;
-using System.ServiceModel.Web;
 using System.Text;
 using System.Web.Script.Serialization;
 using System.Xml;
 using System.Xml.Serialization;
-using Insight.WS.Server.Common.Service;
 
-namespace Insight.WS.Server.Common
+namespace Insight.WS.Test.Interface
 {
     
     public class Util
     {
 
         public static Session Session;
-        public static bool Compres = bool.Parse(GetAppSetting("IsCompres"));
+        private static readonly bool Compres = bool.Parse(GetAppSetting("IsCompres"));
 
         /// <summary>
         /// 构建用于接口返回值的Json对象
@@ -37,7 +35,6 @@ namespace Insight.WS.Server.Common
         /// <returns>JsonResult</returns>
         public static JsonResult GetJson<T>(T obj, string code = "404", string name = "ResourceNotFound", string message = "未能读取任何数据")
         {
-            SetResponseParam();
             var result = new JsonResult { Code = code, Name = name, Message = message };
             if (obj != null)
             {
@@ -61,7 +58,6 @@ namespace Insight.WS.Server.Common
         /// <returns>JsonResult</returns>
         public static JsonResult GetJson<T>(List<T> objs, string code = "404", string name = "ResourceNotFound", string message = "未能读取任何数据")
         {
-            SetResponseParam();
             var result = new JsonResult { Code = code, Name = name, Message = message};
             if (objs.Count > 0)
             {
@@ -72,18 +68,6 @@ namespace Insight.WS.Server.Common
                 result.Data = Serialize(objs);
             }
             return result;
-        }
-
-        /// <summary>
-        /// 在启用Gzip压缩时设置Response参数
-        /// </summary>
-        public static void SetResponseParam()
-        {
-            if (!Compres) return;
-
-            var response = WebOperationContext.Current.OutgoingResponse;
-            response.Headers[HttpResponseHeader.ContentEncoding] = "gzip";
-            response.ContentType = "application/x-gzip";
         }
 
         /// <summary>
@@ -193,7 +177,7 @@ namespace Insight.WS.Server.Common
         /// <returns></returns>
         public static string HttpPost(string url, string data = "", string author = "")
         {
-            var request = (HttpWebRequest)WebRequest.Create(url);
+            var request = (HttpWebRequest) WebRequest.Create(url);
             byte[] buffer;
             if (Compres)
             {
@@ -231,7 +215,7 @@ namespace Insight.WS.Server.Common
             var encoding = response.Headers["Content-Encoding"];
             if (encoding != null && encoding.ToLower().Contains("gzip"))
             {
-                responseStream = new GZipStream(responseStream, CompressionMode.Decompress);
+                 responseStream = new GZipStream(responseStream, CompressionMode.Decompress);
             }
 
             using (var reader = new StreamReader(responseStream, Encoding.GetEncoding("utf-8")))
@@ -424,6 +408,133 @@ namespace Insight.WS.Server.Common
                 serializer.Serialize(writer, o);
             }
         }
+    }
+
+    public class SYS_User
+    {
+        public Guid ID { get; set; }
+        public long SN { get; set; }
+        public string Name { get; set; }
+        public string LoginName { get; set; }
+        public string Password { get; set; }
+        public string PayPassword { get; set; }
+        public string Description { get; set; }
+        public int Type { get; set; }
+        public bool BuiltIn { get; set; }
+        public bool Validity { get; set; }
+        public Guid? CreatorUserId { get; set; }
+        public DateTime CreateTime { get; set; }
+        public string OpenId { get; set; }
+
+
+    }
+    public class Session
+    {
+
+        /// <summary>
+        /// 自增ID
+        /// </summary>
+        public int ID { get; set; }
+
+        /// <summary>
+        /// 登录用户ID
+        /// </summary>
+        public Guid UserId { get; set; }
+
+        /// <summary>
+        /// 登录用户名
+        /// </summary>
+        public string UserName { get; set; }
+
+        /// <summary>
+        /// 用户OpenId
+        /// </summary>
+        public string OpenId { get; set; }
+
+        /// <summary>
+        /// 用户账号
+        /// </summary>
+        public string LoginName { get; set; }
+
+        /// <summary>
+        /// 用户签名，用户名（大写）+ 密码MD5值的结果的MD5值
+        /// </summary>
+        public string Signature { get; set; }
+
+        /// <summary>
+        /// 登录部门ID
+        /// </summary>
+        public Guid? DeptId { get; set; }
+
+        /// <summary>
+        /// 登录部门全称
+        /// </summary>
+        public string DeptName { get; set; }
+
+        /// <summary>
+        /// 用户类型
+        /// </summary>
+        public int UserType { get; set; }
+
+        /// <summary>
+        /// 用户状态
+        /// </summary>
+        public bool Validity { get; set; }
+
+        /// <summary>
+        /// 客户端软件版本号
+        /// </summary>
+        public int Version { get; set; }
+
+        /// <summary>
+        /// 客户端类型，0、Desktop；1、Browser；2、iOS；3、Android；4、WindowsPhone；5、Other
+        /// </summary>
+        public int ClientType { get; set; }
+
+        /// <summary>
+        /// 用户机器码
+        /// </summary>
+        public string MachineId { get; set; }
+
+        /// <summary>
+        /// 连续失败次数
+        /// </summary>
+        public int FailureCount { get; set; }
+
+        /// <summary>
+        /// 上次连接时间
+        /// </summary>
+        public DateTime LastConnect { get; set; }
+
+        /// <summary>
+        /// 用户登录结果
+        /// </summary>
+        public LoginResult LoginResult { get; set; }
+
+        /// <summary>
+        /// 用户在线状态
+        /// </summary>
+        public bool OnlineStatus { get; set; }
+
+        /// <summary>
+        /// WCF服务基地址
+        /// </summary>
+        public string BaseAddress { get; set; }
+
+    }
+
+    /// <summary>
+    /// 用户登录结果
+    /// </summary>
+    public enum LoginResult
+    {
+        Success,
+        Multiple,
+        Online,
+        Failure,
+        Banned,
+        NotExist,
+        Unauthorized
     }
 
 }

@@ -279,11 +279,6 @@ namespace Insight.WS.Server
         public bool OnlineStatus { get; set; }
 
         /// <summary>
-        /// 承载数据（Json）
-        /// </summary>
-        public string Data { get; set; }
-
-        /// <summary>
         /// WCF服务基地址
         /// </summary>
         public string BaseAddress { get; set; }
