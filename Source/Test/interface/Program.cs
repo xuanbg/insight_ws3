@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web.Script.Serialization;
 using System.Windows.Forms;
 
@@ -19,40 +21,30 @@ namespace Insight.WS.Test.Interface
             Application.SetCompatibleTextRenderingDefault(false);
 
             Util.Session = Login();
-            GetUsers();
             Logout();
-        }
-
-        private static void GetUsers()
-        {
-            var url = BassAddress + "GetUsers";
-            var result = Util.HttpGet(url);
-            var obj = Util.Deserialize<JsonResult>(result);
-            if (!obj.Successful)
-            {
-                
-            }
-            else
-            {
-                var user = Util.Deserialize<List<SYS_User>>(obj.Data);
-            }
         }
 
 
         private static void Logout()
         {
-            var url = BassAddress + "Logout";
+            var url = BassAddress + "user/logout";
             var data = Util.Serialize(Util.Session.ID);
             var result = Util.HttpPost(url, data);
         }
 
+        /// <summary>
+        /// 用户登录
+        /// </summary>
+        /// <returns>Session</returns>
         private static Session Login()
         {
-            var url = BassAddress + "Login";
+            var mobile = "admin";
+            var password = "1";
+            var url = BassAddress + "user/login";
             var us = new Session
             {
-                LoginName = "admin",
-                Signature = Util.GetHash("ADMIN" + Util.GetHash("1")),
+                LoginName = mobile,
+                Signature = Util.GetHash(mobile.ToUpper() + Util.GetHash(password)),
                 Version = 10000,
                 MachineId = Util.GetHash("MachineId")
             };

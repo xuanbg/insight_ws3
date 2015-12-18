@@ -42,8 +42,8 @@ namespace Insight.WS.Server.Common
             if (obj != null)
             {
                 result.Successful = true;
-                result.Code = "000";
-                result.Name = "Successful";
+                result.Code = "200";
+                result.Name = "OK";
                 result.Message = "接口调用成功";
                 result.Data = Serialize(obj);
             }
@@ -66,8 +66,8 @@ namespace Insight.WS.Server.Common
             if (objs.Count > 0)
             {
                 result.Successful = true;
-                result.Code = "000";
-                result.Name = "Successful";
+                result.Code = "200";
+                result.Name = "OK";
                 result.Message = "接口调用成功";
                 result.Data = Serialize(objs);
             }

@@ -97,18 +97,9 @@ namespace Insight.WS.Server.Common
         /// <returns></returns>
         public static JsonResult Verify()
         {
-            var woc = WebOperationContext.Current;
-            var auth = woc.IncomingRequest.Headers[HttpRequestHeader.Authorization];
-            if (string.IsNullOrEmpty(auth))
-            {
-                woc.OutgoingResponse.StatusCode = HttpStatusCode.Unauthorized;
-                return null;
-            }
+            var obj = GetAuthorization<Session>();
+            if (obj == null) return null;
 
-            SetResponseParam();
-            var buffer = Convert.FromBase64String(auth);
-            var json = Encoding.UTF8.GetString(buffer);
-            var obj = Deserialize<Session>(json);
             var result = new JsonResult();
             if (obj.Version < CompatibleVersion || obj.Version > UpdateVersion)
             {
@@ -123,8 +114,8 @@ namespace Insight.WS.Server.Common
             {
                 case LoginResult.Success:
                     result.Successful = true;
-                    result.Code = "000";
-                    result.Name = "Successful";
+                    result.Code = "200";
+                    result.Name = "OK";
                     result.Message = "接口调用成功";
                     break;
 
@@ -154,6 +145,27 @@ namespace Insight.WS.Server.Common
                     break;
             }
             return result;
+        }
+
+        /// <summary>
+        /// 获取Authorization承载的数据
+        /// </summary>
+        /// <typeparam name="T">数据类型</typeparam>
+        /// <returns>数据对象</returns>
+        public static T GetAuthorization<T>()
+        {
+            var woc = WebOperationContext.Current;
+            var auth = woc.IncomingRequest.Headers[HttpRequestHeader.Authorization];
+            if (string.IsNullOrEmpty(auth))
+            {
+                woc.OutgoingResponse.StatusCode = HttpStatusCode.Unauthorized;
+                return default(T);
+            }
+
+            SetResponseParam();
+            var buffer = Convert.FromBase64String(auth);
+            var json = Encoding.UTF8.GetString(buffer);
+            return Deserialize<T>(json);
         }
 
         /// <summary>

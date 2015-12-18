@@ -1,10 +1,7 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Net;
 using System.ServiceModel;
-using System.ServiceModel.Activation;
 using System.ServiceModel.Web;
-using System.Text;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
 using Insight.WS.Server.Common.Service;
@@ -12,7 +9,6 @@ using static Insight.WS.Server.Common.General;
 
 namespace Insight.WS.Service.SuperDentist
 {
-    [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
     public class Interface : IInterface
     {
@@ -20,13 +16,18 @@ namespace Insight.WS.Service.SuperDentist
         /// 用户登录
         /// </summary>
         /// <param name="us">用户会话</param>
-        /// <returns>Session 用户会话</returns>
+        /// <returns>JsonResult</returns>
         public JsonResult Login(Session us)
         {
             var session = UserLogin(us);
             return Util.GetJson(session);
         }
 
+        /// <summary>
+        /// 注销
+        /// </summary>
+        /// <param name="id">SessionID</param>
+        /// <returns>JsonResult</returns>
         public JsonResult Logout(int id)
         {
             var result = Verify();
@@ -36,17 +37,46 @@ namespace Insight.WS.Service.SuperDentist
             return result;
         }
 
-        public JsonResult GetUsers()
+        /// <summary>
+        /// 用户注册
+        /// </summary>
+        /// <param name="smsCode"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public JsonResult Register(string smsCode, string password)
         {
-            var result = Verify();
-            if (result == null || !result.Successful) return result;
+            var result = new JsonResult {Code = "500", Name = "UnknownError", Message = "未知错误" };
+            var obj = GetAuthorization<Session>();
+            if (!CodeVerify(obj.LoginName, smsCode, 1))
+            {
+                result.Code = "300";
+                result.Name = "";
+                result.Message = "短信验证码错误";
+                return result;
+            }
 
             using (var context = new WSEntities())
             {
-                var user = context.SYS_User.ToList();
-                return Util.GetJson(user);
+                // 验证用户登录名是否已存在
+                var user = context.SYS_User.FirstOrDefault(u => u.LoginName == obj.LoginName);
+                if (user != null)
+                {
+                    result.Code = "300";
+                    result.Name = "";
+                    result.Message = "用户已存在";
+                    return result;
+                }
             }
-        }
 
+            if (DataAccess.AddMember("WeiXin", obj.UserName, obj.LoginName, password, null, obj.OpenId))
+            {
+                result.Successful = true;
+                result.Code = "300";
+                result.Name = "";
+                result.Message = "短信验证码错误";
+                return result;
+            }
+            return result;
+        }
     }
 }

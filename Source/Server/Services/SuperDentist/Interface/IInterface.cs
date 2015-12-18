@@ -13,19 +13,20 @@ namespace Insight.WS.Service.SuperDentist
         /// 用户登录
         /// </summary>
         /// <param name="us">用户会话</param>
-        /// <returns>Session 用户会话</returns>
-        [WebInvoke(Method = "POST", UriTemplate = "Login", ResponseFormat = WebMessageFormat.Json)]
+        /// <returns>JsonResult</returns>
+        [WebInvoke(Method = "POST", UriTemplate = "user/login", ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
         JsonResult Login(Session us);
 
-
-        [WebInvoke(Method = "POST", UriTemplate = "Logout", ResponseFormat = WebMessageFormat.Json)]
+        /// <summary>
+        /// 注销
+        /// </summary>
+        /// <param name="id">SessionID</param>
+        /// <returns>JsonResult</returns>
+        [WebInvoke(Method = "POST", UriTemplate = "user/logout", ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
         JsonResult Logout(int id);
 
-        [WebGet(UriTemplate = "GetUsers", ResponseFormat = WebMessageFormat.Json)]
-        [OperationContract]
-        JsonResult GetUsers();
 
     }
 
