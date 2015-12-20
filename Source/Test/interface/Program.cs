@@ -1,5 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Drawing;
+using System.IO;
+using System.IO.Compression;
+using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web.Script.Serialization;
@@ -20,10 +25,9 @@ namespace Insight.WS.Test.Interface
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            Util.Session = Login();
-            Logout();
+            //Util.Session = Login();
+            //Logout();
         }
-
 
         private static void Logout()
         {

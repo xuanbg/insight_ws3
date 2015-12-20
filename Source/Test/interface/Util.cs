@@ -169,6 +169,23 @@ namespace Insight.WS.Test.Interface
         }
 
         /// <summary>
+        /// Image 转换为 byte[]数组
+        /// </summary>
+        /// <param name="img">图片</param>
+        /// <returns>byte[] 数组</returns>
+        public static byte[] ImageToByteArray(Image img)
+        {
+            if (img == null)
+                return null;
+
+            using (var ms = new MemoryStream())
+            {
+                img.Save(ms, ImageFormat.Png);
+                return ms.ToArray();
+            }
+        }
+
+        /// <summary>
         /// Post数据
         /// </summary>
         /// <param name="url"></param>
@@ -189,6 +206,27 @@ namespace Insight.WS.Test.Interface
                 buffer = Encoding.UTF8.GetBytes(data);
                 request.ContentType = "application/json";
             }
+
+            DateTime dt = new DateTime();
+            dt = DateTime.Now;
+            var start = new DateTime(1970, 1, 1, 0, 0, 0, dt.Kind);
+            long l = Convert.ToInt64((dt - start).TotalSeconds);
+            string md5s = l + "passw0rd!" + 566 + "";
+            string secretkey = Util.GetHash(md5s);
+
+            var header = new WebHeaderCollection
+            {
+                {"userId", "566"},
+                {"password", "E10ADC3949BA59ABBE56E057F20F883E"},
+                {"authentication", "timestamp=" + l + ";secretKey=" + secretkey + ""},
+                {"sysType", "IOS"},
+                {"sysVersion", "1.2.0"},
+                {"uuid", "A6872607-3614-4361-8B10-319D66114309"},
+                {"OSversion", "8.4.1"},
+                {"phoneModel", "iPhone 6 (A1549/A1586)"},
+                {"carrierName", "CU"}
+            };
+            request.Headers.Add(header);
             request.Method = "POST";
             request.ContentLength = buffer.Length;
 
