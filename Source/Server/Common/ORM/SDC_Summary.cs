@@ -14,24 +14,29 @@ namespace Insight.WS.Server.Common.ORM
     using System.Collections.Generic;
     
     [DataContract(IsReference = true)]
+    [KnownType(typeof(SDC_FirstVisit))]
+    [KnownType(typeof(SYS_User))]
     
-    public partial class SYS_Interface
+    public partial class SDC_Summary
     {
     	[DataMember]
         public System.Guid ID { get; set; }
     	[DataMember]
         public long SN { get; set; }
     	[DataMember]
-        public string Binding { get; set; }
+        public Nullable<System.Guid> CaseId { get; set; }
     	[DataMember]
-        public string Port { get; set; }
+        public string Content { get; set; }
     	[DataMember]
-        public string Name { get; set; }
+        public string KeyWord { get; set; }
     	[DataMember]
-        public string Class { get; set; }
+        public System.Guid CreatorUserId { get; set; }
     	[DataMember]
-        public string Interface { get; set; }
+        public System.DateTime CreateTime { get; set; }
+    
     	[DataMember]
-        public string Location { get; set; }
+        public virtual SDC_FirstVisit SDC_FirstVisit { get; set; }
+    	[DataMember]
+        public virtual SYS_User SYS_User { get; set; }
     }
 }

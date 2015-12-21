@@ -53,6 +53,21 @@ namespace Insight.WS.Server.Common.ORM
     [KnownType(typeof(SYS_RolePerm_DataAbs))]
     [KnownType(typeof(SYS_UserGroup))]
     [KnownType(typeof(SYS_UserGroupMember))]
+    [KnownType(typeof(MDE_Favorites))]
+    [KnownType(typeof(MDE_Message))]
+    [KnownType(typeof(SDC_CaseHistory))]
+    [KnownType(typeof(SDC_FirstVisit))]
+    [KnownType(typeof(SDC_Subsequent))]
+    [KnownType(typeof(SDC_Summary))]
+    [KnownType(typeof(SDG_Group))]
+    [KnownType(typeof(SDO_Advertisement))]
+    [KnownType(typeof(SDO_Recommend))]
+    [KnownType(typeof(SDT_Attitude))]
+    [KnownType(typeof(SDT_Comment))]
+    [KnownType(typeof(SDT_Forward))]
+    [KnownType(typeof(SDT_Praise))]
+    [KnownType(typeof(SDT_Topic))]
+    [KnownType(typeof(SDT_Voice))]
     
     public partial class SYS_User
     {
@@ -102,6 +117,23 @@ namespace Insight.WS.Server.Common.ORM
             this.SYS_UserGroup = new HashSet<SYS_UserGroup>();
             this.SYS_UserGroupMember = new HashSet<SYS_UserGroupMember>();
             this.SYS_UserGroupMember1 = new HashSet<SYS_UserGroupMember>();
+            this.MDE_Favorites = new HashSet<MDE_Favorites>();
+            this.MDE_Message = new HashSet<MDE_Message>();
+            this.SDC_CaseHistory = new HashSet<SDC_CaseHistory>();
+            this.SDC_FirstVisit = new HashSet<SDC_FirstVisit>();
+            this.SDC_Subsequent = new HashSet<SDC_Subsequent>();
+            this.SDC_Summary = new HashSet<SDC_Summary>();
+            this.SDG_Group = new HashSet<SDG_Group>();
+            this.SDG_Group1 = new HashSet<SDG_Group>();
+            this.SDG_Group2 = new HashSet<SDG_Group>();
+            this.SDO_Advertisement = new HashSet<SDO_Advertisement>();
+            this.SDO_Recommend = new HashSet<SDO_Recommend>();
+            this.SDT_Attitude = new HashSet<SDT_Attitude>();
+            this.SDT_Comment = new HashSet<SDT_Comment>();
+            this.SDT_Forward = new HashSet<SDT_Forward>();
+            this.SDT_Praise = new HashSet<SDT_Praise>();
+            this.SDT_Topic = new HashSet<SDT_Topic>();
+            this.SDT_Voice = new HashSet<SDT_Voice>();
         }
     
     	[DataMember]
@@ -219,5 +251,39 @@ namespace Insight.WS.Server.Common.ORM
         public virtual ICollection<SYS_UserGroupMember> SYS_UserGroupMember { get; set; }
     	[DataMember]
         public virtual ICollection<SYS_UserGroupMember> SYS_UserGroupMember1 { get; set; }
+    	[DataMember]
+        public virtual ICollection<MDE_Favorites> MDE_Favorites { get; set; }
+    	[DataMember]
+        public virtual ICollection<MDE_Message> MDE_Message { get; set; }
+    	[DataMember]
+        public virtual ICollection<SDC_CaseHistory> SDC_CaseHistory { get; set; }
+    	[DataMember]
+        public virtual ICollection<SDC_FirstVisit> SDC_FirstVisit { get; set; }
+    	[DataMember]
+        public virtual ICollection<SDC_Subsequent> SDC_Subsequent { get; set; }
+    	[DataMember]
+        public virtual ICollection<SDC_Summary> SDC_Summary { get; set; }
+    	[DataMember]
+        public virtual ICollection<SDG_Group> SDG_Group { get; set; }
+    	[DataMember]
+        public virtual ICollection<SDG_Group> SDG_Group1 { get; set; }
+    	[DataMember]
+        public virtual ICollection<SDG_Group> SDG_Group2 { get; set; }
+    	[DataMember]
+        public virtual ICollection<SDO_Advertisement> SDO_Advertisement { get; set; }
+    	[DataMember]
+        public virtual ICollection<SDO_Recommend> SDO_Recommend { get; set; }
+    	[DataMember]
+        public virtual ICollection<SDT_Attitude> SDT_Attitude { get; set; }
+    	[DataMember]
+        public virtual ICollection<SDT_Comment> SDT_Comment { get; set; }
+    	[DataMember]
+        public virtual ICollection<SDT_Forward> SDT_Forward { get; set; }
+    	[DataMember]
+        public virtual ICollection<SDT_Praise> SDT_Praise { get; set; }
+    	[DataMember]
+        public virtual ICollection<SDT_Topic> SDT_Topic { get; set; }
+    	[DataMember]
+        public virtual ICollection<SDT_Voice> SDT_Voice { get; set; }
     }
 }

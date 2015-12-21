@@ -14,24 +14,27 @@ namespace Insight.WS.Server.Common.ORM
     using System.Collections.Generic;
     
     [DataContract(IsReference = true)]
+    [KnownType(typeof(MasterData))]
+    [KnownType(typeof(SDG_Group))]
     
-    public partial class SYS_Interface
+    public partial class SDG_GroupMember
     {
     	[DataMember]
         public System.Guid ID { get; set; }
     	[DataMember]
         public long SN { get; set; }
     	[DataMember]
-        public string Binding { get; set; }
+        public System.Guid GroupId { get; set; }
     	[DataMember]
-        public string Port { get; set; }
+        public System.Guid MemberId { get; set; }
     	[DataMember]
-        public string Name { get; set; }
+        public bool Validity { get; set; }
     	[DataMember]
-        public string Class { get; set; }
+        public System.DateTime CreateTime { get; set; }
+    
     	[DataMember]
-        public string Interface { get; set; }
+        public virtual MasterData MasterData { get; set; }
     	[DataMember]
-        public string Location { get; set; }
+        public virtual SDG_Group SDG_Group { get; set; }
     }
 }

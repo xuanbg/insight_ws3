@@ -40,6 +40,11 @@ namespace Insight.WS.Server.Common.ORM
     [KnownType(typeof(MDS_Contact_Info))]
     [KnownType(typeof(SYS_Alert_Target))]
     [KnownType(typeof(SYS_Alert_Send))]
+    [KnownType(typeof(MDE_Message))]
+    [KnownType(typeof(MDG_Member))]
+    [KnownType(typeof(SDC_FirstVisit))]
+    [KnownType(typeof(SDC_Subsequent))]
+    [KnownType(typeof(SDG_GroupMember))]
     
     public partial class MasterData
     {
@@ -65,6 +70,12 @@ namespace Insight.WS.Server.Common.ORM
             this.MDS_Contact_Info = new HashSet<MDS_Contact_Info>();
             this.SYS_Alert_Target = new HashSet<SYS_Alert_Target>();
             this.SYS_Alert_Send = new HashSet<SYS_Alert_Send>();
+            this.MDE_Message = new HashSet<MDE_Message>();
+            this.SDC_FirstVisit = new HashSet<SDC_FirstVisit>();
+            this.SDC_FirstVisit1 = new HashSet<SDC_FirstVisit>();
+            this.SDC_Subsequent = new HashSet<SDC_Subsequent>();
+            this.SDC_Subsequent1 = new HashSet<SDC_Subsequent>();
+            this.SDG_GroupMember = new HashSet<SDG_GroupMember>();
         }
     
     	[DataMember]
@@ -140,5 +151,19 @@ namespace Insight.WS.Server.Common.ORM
         public virtual ICollection<SYS_Alert_Target> SYS_Alert_Target { get; set; }
     	[DataMember]
         public virtual ICollection<SYS_Alert_Send> SYS_Alert_Send { get; set; }
+    	[DataMember]
+        public virtual ICollection<MDE_Message> MDE_Message { get; set; }
+    	[DataMember]
+        public virtual MDG_Member MDG_Member { get; set; }
+    	[DataMember]
+        public virtual ICollection<SDC_FirstVisit> SDC_FirstVisit { get; set; }
+    	[DataMember]
+        public virtual ICollection<SDC_FirstVisit> SDC_FirstVisit1 { get; set; }
+    	[DataMember]
+        public virtual ICollection<SDC_Subsequent> SDC_Subsequent { get; set; }
+    	[DataMember]
+        public virtual ICollection<SDC_Subsequent> SDC_Subsequent1 { get; set; }
+    	[DataMember]
+        public virtual ICollection<SDG_GroupMember> SDG_GroupMember { get; set; }
     }
 }

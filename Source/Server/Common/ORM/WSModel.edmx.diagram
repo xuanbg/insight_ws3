@@ -62,7 +62,7 @@
         <EntityTypeShape EntityType="WSModel.SYS_Code_Allot" Width="1.5" PointX="38.25" PointY="134.5" />
         <EntityTypeShape EntityType="WSModel.SYS_Code_Record" Width="1.5" PointX="38.25" PointY="120.5" />
         <EntityTypeShape EntityType="WSModel.SYS_Code_Scheme" Width="1.5" PointX="36" PointY="126.875" />
-        <EntityTypeShape EntityType="WSModel.SYS_Interface" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="WSModel.SYS_Interface" Width="1.5" PointX="0.75" PointY="4.25" />
         <EntityTypeShape EntityType="WSModel.SYS_Module" Width="1.5" PointX="3.75" PointY="120" />
         <EntityTypeShape EntityType="WSModel.SYS_ModuleAction" Width="1.5" PointX="3" PointY="153.875" />
         <EntityTypeShape EntityType="WSModel.SYS_ModuleGroup" Width="1.5" PointX="1.5" PointY="121.75" />
@@ -89,7 +89,7 @@
         <EntityTypeShape EntityType="WSModel.SYS_User" Width="1.5" PointX="0.75" PointY="127.625" />
         <EntityTypeShape EntityType="WSModel.SYS_UserGroup" Width="1.5" PointX="3" PointY="172" />
         <EntityTypeShape EntityType="WSModel.SYS_UserGroupMember" Width="1.5" PointX="5.25" PointY="150" />
-        <EntityTypeShape EntityType="WSModel.SYS_Verify_Record" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="WSModel.SYS_Verify_Record" Width="1.5" PointX="2.75" PointY="4.25" />
         <AssociationConnector Association="WSModel.FK__ABS_Advan__CardT__5DC1991A" />
         <AssociationConnector Association="WSModel.FK__ABS_Advan__Creat__609E05C5" />
         <AssociationConnector Association="WSModel.FK__ABS_Advan__Creat__619229FE" />
@@ -289,12 +289,66 @@
         <AssociationConnector Association="WSModel.FK__SYS_UserG__Creat__2FBAD748" />
         <AssociationConnector Association="WSModel.FK__SYS_UserG__UserI__2EC6B30F" />
         <AssociationConnector Association="WSModel.FK__SYS_UserG__Group__2DD28ED6" />
-        <EntityTypeShape EntityType="WSModel.Advance" Width="1.5" PointX="0.75" PointY="4.25" />
-        <EntityTypeShape EntityType="WSModel.Dictionary" Width="1.5" PointX="4.75" PointY="4.25" />
-        <EntityTypeShape EntityType="WSModel.ReportSchedular" Width="1.5" PointX="8.75" PointY="0.75" />
-        <EntityTypeShape EntityType="WSModel.ReportTemplet" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="WSModel.Advance" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="WSModel.Dictionary" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="WSModel.ReportSchedular" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="WSModel.ReportTemplet" Width="1.5" PointX="4.75" PointY="0.75" />
         <AssociationConnector Association="WSModel.FK__ABS_Contr__Clear__2D3E5D50" />
         <AssociationConnector Association="WSModel.FK__ABS_Contr__Deliv__37BBEBC3" />
+        <EntityTypeShape EntityType="WSModel.MDE_Favorites" Width="1.5" PointX="3" PointY="116" />
+        <EntityTypeShape EntityType="WSModel.MDE_Message" Width="1.5" PointX="11.5" PointY="128.875" />
+        <EntityTypeShape EntityType="WSModel.MDG_Member" Width="1.5" PointX="10.5" PointY="123.125" />
+        <EntityTypeShape EntityType="WSModel.SDC_CaseHistory" Width="1.5" PointX="3" PointY="145.5" />
+        <EntityTypeShape EntityType="WSModel.SDC_FirstVisit" Width="1.5" PointX="10.5" PointY="140.875" />
+        <EntityTypeShape EntityType="WSModel.SDC_Subsequent" Width="1.5" PointX="19.75" PointY="125.375" />
+        <EntityTypeShape EntityType="WSModel.SDC_Summary" Width="1.5" PointX="13.75" PointY="128.875" />
+        <EntityTypeShape EntityType="WSModel.SDG_Group" Width="1.5" PointX="3" PointY="162.125" />
+        <EntityTypeShape EntityType="WSModel.SDG_GroupMember" Width="1.5" PointX="13.5" PointY="146.375" />
+        <EntityTypeShape EntityType="WSModel.SDO_Advertisement" Width="1.5" PointX="3" PointY="142.125" />
+        <EntityTypeShape EntityType="WSModel.SDO_Recommend" Width="1.5" PointX="3" PointY="158.25" />
+        <EntityTypeShape EntityType="WSModel.SDT_Attitude" Width="1.5" PointX="35.25" PointY="136.75" />
+        <EntityTypeShape EntityType="WSModel.SDT_Comment" Width="1.5" PointX="30.25" PointY="138.5" />
+        <EntityTypeShape EntityType="WSModel.SDT_Forward" Width="1.5" PointX="18" PointY="146.875" />
+        <EntityTypeShape EntityType="WSModel.SDT_Praise" Width="1.5" PointX="35.5" PointY="140.75" />
+        <EntityTypeShape EntityType="WSModel.SDT_Topic" Width="1.5" PointX="15.75" PointY="147.25" />
+        <EntityTypeShape EntityType="WSModel.SDT_Voice" Width="1.5" PointX="25" PointY="130.75" />
+        <AssociationConnector Association="WSModel.FK__MDE_Messa__Recei__747A15E9" />
+        <AssociationConnector Association="WSModel.FK__MDG_Member__MID__6EC13C93" />
+        <AssociationConnector Association="WSModel.FK__SDC_First__Docto__097532CF" />
+        <AssociationConnector Association="WSModel.FK__SDC_First__Nurse__0A695708" />
+        <AssociationConnector Association="WSModel.FK__SDC_Subse__Docto__11165497" />
+        <AssociationConnector Association="WSModel.FK__SDC_Subse__Nurse__120A78D0" />
+        <AssociationConnector Association="WSModel.FK__SDG_Group__Membe__28EDDE28" />
+        <AssociationConnector Association="WSModel.FK__MDE_Favor__Creat__7C1B37B1" />
+        <AssociationConnector Association="WSModel.FK__MDE_Messa__Creat__76625E5B" />
+        <AssociationConnector Association="WSModel.FK__SDC_CaseH__Creat__03BC5979" />
+        <AssociationConnector Association="WSModel.FK__SDC_First__CaseH__08810E96" />
+        <AssociationConnector Association="WSModel.FK__SDC_First__Creat__0B5D7B41" />
+        <AssociationConnector Association="WSModel.FK__SDC_Subse__CaseI__1022305E" />
+        <AssociationConnector Association="WSModel.FK__SDC_Summa__CaseI__17C35226" />
+        <AssociationConnector Association="WSModel.FK__SDT_Topic__CaseI__2EA6B77E" />
+        <AssociationConnector Association="WSModel.FK__SDT_Voice__CaseI__3DE8FB0E" />
+        <AssociationConnector Association="WSModel.FK__SDC_Subse__Creat__12FE9D09" />
+        <AssociationConnector Association="WSModel.FK__SDC_Summa__Creat__18B7765F" />
+        <AssociationConnector Association="WSModel.FK__SDG_Group__Creat__233504D2" />
+        <AssociationConnector Association="WSModel.FK__SDG_Group__Group__27F9B9EF" />
+        <AssociationConnector Association="WSModel.FK__SDG_Group__Manag__214CBC60" />
+        <AssociationConnector Association="WSModel.FK__SDG_Group__Owner__20589827" />
+        <AssociationConnector Association="WSModel.FK__SDT_Forwa__Group__373BFD7F" />
+        <AssociationConnector Association="WSModel.FK__SDT_Topic__Publi__308EFFF0" />
+        <AssociationConnector Association="WSModel.FK__SDO_Adver__Creat__55C0849F" />
+        <AssociationConnector Association="WSModel.FK__SDO_Recom__Creat__5C6D822E" />
+        <AssociationConnector Association="WSModel.FK__SDT_Attit__Creat__4495F89D" />
+        <AssociationConnector Association="WSModel.FK__SDT_Attit__Voice__43A1D464" />
+        <AssociationConnector Association="WSModel.FK__SDT_Comme__Creat__4A4ED1F3" />
+        <AssociationConnector Association="WSModel.FK__SDT_Comme__Voice__495AADBA" />
+        <AssociationConnector Association="WSModel.FK__SDT_Prais__Comme__4F138710" />
+        <AssociationConnector Association="WSModel.FK__SDT_Forwa__Creat__383021B8" />
+        <AssociationConnector Association="WSModel.FK__SDT_Forwa__Topic__3647D946" />
+        <AssociationConnector Association="WSModel.FK__SDT_Prais__Creat__5007AB49" />
+        <AssociationConnector Association="WSModel.FK__SDT_Topic__Creat__31832429" />
+        <AssociationConnector Association="WSModel.FK__SDT_Voice__Topic__3CF4D6D5" />
+        <AssociationConnector Association="WSModel.FK__SDT_Voice__Creat__3EDD1F47" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

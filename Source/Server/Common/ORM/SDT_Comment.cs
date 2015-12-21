@@ -14,24 +14,37 @@ namespace Insight.WS.Server.Common.ORM
     using System.Collections.Generic;
     
     [DataContract(IsReference = true)]
+    [KnownType(typeof(SYS_User))]
+    [KnownType(typeof(SDT_Voice))]
+    [KnownType(typeof(SDT_Praise))]
     
-    public partial class SYS_Interface
+    public partial class SDT_Comment
     {
+        public SDT_Comment()
+        {
+            this.SDT_Praise = new HashSet<SDT_Praise>();
+        }
+    
     	[DataMember]
         public System.Guid ID { get; set; }
     	[DataMember]
         public long SN { get; set; }
     	[DataMember]
-        public string Binding { get; set; }
+        public System.Guid VoiceId { get; set; }
     	[DataMember]
-        public string Port { get; set; }
+        public string Content { get; set; }
     	[DataMember]
-        public string Name { get; set; }
+        public Nullable<System.DateTime> PublishTime { get; set; }
     	[DataMember]
-        public string Class { get; set; }
+        public System.Guid CreatorUserId { get; set; }
     	[DataMember]
-        public string Interface { get; set; }
+        public System.DateTime CreateTime { get; set; }
+    
     	[DataMember]
-        public string Location { get; set; }
+        public virtual SYS_User SYS_User { get; set; }
+    	[DataMember]
+        public virtual SDT_Voice SDT_Voice { get; set; }
+    	[DataMember]
+        public virtual ICollection<SDT_Praise> SDT_Praise { get; set; }
     }
 }

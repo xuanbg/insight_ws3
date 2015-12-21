@@ -126,5 +126,22 @@ namespace Insight.WS.Server.Common.ORM
         public virtual DbSet<Dictionary> Dictionary { get; set; }
         public virtual DbSet<ReportSchedular> ReportSchedular { get; set; }
         public virtual DbSet<ReportTemplet> ReportTemplet { get; set; }
+        public virtual DbSet<MDE_Favorites> MDE_Favorites { get; set; }
+        public virtual DbSet<MDE_Message> MDE_Message { get; set; }
+        public virtual DbSet<MDG_Member> MDG_Member { get; set; }
+        public virtual DbSet<SDC_CaseHistory> SDC_CaseHistory { get; set; }
+        public virtual DbSet<SDC_FirstVisit> SDC_FirstVisit { get; set; }
+        public virtual DbSet<SDC_Subsequent> SDC_Subsequent { get; set; }
+        public virtual DbSet<SDC_Summary> SDC_Summary { get; set; }
+        public virtual DbSet<SDG_Group> SDG_Group { get; set; }
+        public virtual DbSet<SDG_GroupMember> SDG_GroupMember { get; set; }
+        public virtual DbSet<SDO_Advertisement> SDO_Advertisement { get; set; }
+        public virtual DbSet<SDO_Recommend> SDO_Recommend { get; set; }
+        public virtual DbSet<SDT_Attitude> SDT_Attitude { get; set; }
+        public virtual DbSet<SDT_Comment> SDT_Comment { get; set; }
+        public virtual DbSet<SDT_Forward> SDT_Forward { get; set; }
+        public virtual DbSet<SDT_Praise> SDT_Praise { get; set; }
+        public virtual DbSet<SDT_Topic> SDT_Topic { get; set; }
+        public virtual DbSet<SDT_Voice> SDT_Voice { get; set; }
     }
 }

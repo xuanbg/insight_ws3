@@ -443,6 +443,30 @@
           <Property Name="PropertyId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Value" Type="decimal" Precision="20" Scale="6" />
         </EntityType>
+        <EntityType Name="MDE_Favorites">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SN" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreatorUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MDE_Message">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SN" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReceiveUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SendTime" Type="datetime" />
+          <Property Name="HaveRead" Type="bit" Nullable="false" />
+          <Property Name="CreatorUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="MDG_Contact">
           <Key>
             <PropertyRef Name="MID" />
@@ -571,6 +595,22 @@
           <Property Name="CreatorUserId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="CreateTime" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="MDG_Member">
+          <Key>
+            <PropertyRef Name="MID" />
+          </Key>
+          <Property Name="MID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SN" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Portrait" Type="varchar" MaxLength="64" />
+          <Property Name="Integral" Type="int" Nullable="false" />
+          <Property Name="Beans" Type="int" Nullable="false" />
+          <Property Name="Country" Type="nvarchar" MaxLength="32" />
+          <Property Name="State" Type="nvarchar" MaxLength="32" />
+          <Property Name="City" Type="nvarchar" MaxLength="32" />
+          <Property Name="County" Type="nvarchar" MaxLength="32" />
+          <Property Name="Street" Type="nvarchar" MaxLength="32" />
+          <Property Name="ZipCode" Type="varchar" MaxLength="6" />
+        </EntityType>
         <EntityType Name="MDG_Supplier">
           <Key>
             <PropertyRef Name="MID" />
@@ -632,6 +672,213 @@
           <Property Name="MasterDataId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="InfoTypeId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Number" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SDC_CaseHistory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SN" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PatientName" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="Gender" Type="int" Nullable="false" />
+          <Property Name="Birthday" Type="datetime" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="32" />
+          <Property Name="WeChat" Type="nvarchar" MaxLength="32" />
+          <Property Name="OpenId" Type="nvarchar" MaxLength="32" />
+          <Property Name="Secret" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="128" />
+          <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+          <Property Name="Validity" Type="bit" Nullable="false" />
+          <Property Name="CreatorUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SDC_FirstVisit">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SN" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CaseHistoryId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Complained" Type="nvarchar" MaxLength="64" />
+          <Property Name="MedicalHistory" Type="nvarchar" MaxLength="512" />
+          <Property Name="Previous" Type="nvarchar" MaxLength="128" />
+          <Property Name="Inspection" Type="nvarchar(max)" />
+          <Property Name="UpperJaw" Type="varchar" MaxLength="64" />
+          <Property Name="LowerJaw" Type="varchar" MaxLength="64" />
+          <Property Name="Diagnosis" Type="nvarchar" MaxLength="32" />
+          <Property Name="TherapyPlan" Type="nvarchar" MaxLength="128" />
+          <Property Name="Therapy" Type="nvarchar(max)" />
+          <Property Name="Notify" Type="nvarchar" MaxLength="128" />
+          <Property Name="KeyWord" Type="nvarchar" MaxLength="64" />
+          <Property Name="Description" Type="nvarchar" MaxLength="128" />
+          <Property Name="DoctorId" Type="uniqueidentifier" />
+          <Property Name="NurseId" Type="uniqueidentifier" />
+          <Property Name="CreatorUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SDC_Subsequent">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SN" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CaseId" Type="uniqueidentifier" />
+          <Property Name="MedicalHistory" Type="nvarchar" MaxLength="512" />
+          <Property Name="Inspection" Type="nvarchar(max)" />
+          <Property Name="TherapyPlan" Type="nvarchar" MaxLength="256" />
+          <Property Name="Therapy" Type="nvarchar(max)" />
+          <Property Name="Notify" Type="nvarchar" MaxLength="128" />
+          <Property Name="KeyWord" Type="nvarchar" MaxLength="64" />
+          <Property Name="Description" Type="nvarchar" MaxLength="128" />
+          <Property Name="DoctorId" Type="uniqueidentifier" />
+          <Property Name="NurseId" Type="uniqueidentifier" />
+          <Property Name="CreatorUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SDC_Summary">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SN" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CaseId" Type="uniqueidentifier" />
+          <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="KeyWord" Type="nvarchar" MaxLength="64" />
+          <Property Name="CreatorUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SDG_Group">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SN" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="128" />
+          <Property Name="Icon" Type="varchar" MaxLength="64" />
+          <Property Name="Picture" Type="varchar" MaxLength="64" />
+          <Property Name="Heat" Type="int" Nullable="false" />
+          <Property Name="Topics" Type="int" Nullable="false" />
+          <Property Name="Members" Type="int" Nullable="false" />
+          <Property Name="OwnerUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ManageUserId" Type="uniqueidentifier" />
+          <Property Name="Validity" Type="bit" Nullable="false" />
+          <Property Name="CreatorUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SDG_GroupMember">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SN" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MemberId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Validity" Type="bit" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SDO_Advertisement">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SN" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="Picture" Type="varchar" MaxLength="64" />
+          <Property Name="Url" Type="varchar" MaxLength="64" />
+          <Property Name="Validity" Type="bit" Nullable="false" />
+          <Property Name="CreatorUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SDO_Recommend">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SN" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Picture" Type="varchar" MaxLength="64" />
+          <Property Name="Url" Type="varchar" MaxLength="64" />
+          <Property Name="Fixed" Type="bit" Nullable="false" />
+          <Property Name="Validity" Type="bit" Nullable="false" />
+          <Property Name="CreatorUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SDT_Attitude">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SN" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VoiceId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="CreatorUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SDT_Comment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SN" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VoiceId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Content" Type="nvarchar" MaxLength="512" Nullable="false" />
+          <Property Name="PublishTime" Type="datetime" />
+          <Property Name="CreatorUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SDT_Forward">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SN" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TopicId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="GroupId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreatorUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SDT_Praise">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SN" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CommentId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="CreatorUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SDT_Topic">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SN" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Tags" Type="nvarchar" MaxLength="64" />
+          <Property Name="CaseId" Type="uniqueidentifier" />
+          <Property Name="Private" Type="bit" Nullable="false" />
+          <Property Name="PublishGroupId" Type="uniqueidentifier" />
+          <Property Name="PublishTime" Type="datetime" />
+          <Property Name="CreatorUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SDT_Voice">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SN" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TopicId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CaseId" Type="uniqueidentifier" />
+          <Property Name="PublishTime" Type="datetime" />
+          <Property Name="CreatorUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="SYS_Alert_Message">
           <Key>
@@ -2225,6 +2472,44 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__MDE_Favor__Creat__7C1B37B1">
+          <End Role="SYS_User" Type="Self.SYS_User" Multiplicity="1" />
+          <End Role="MDE_Favorites" Type="Self.MDE_Favorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MDE_Favorites">
+              <PropertyRef Name="CreatorUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MDE_Messa__Creat__76625E5B">
+          <End Role="SYS_User" Type="Self.SYS_User" Multiplicity="1" />
+          <End Role="MDE_Message" Type="Self.MDE_Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MDE_Message">
+              <PropertyRef Name="CreatorUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MDE_Messa__Recei__747A15E9">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MDE_Message" Type="Self.MDE_Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MDE_Message">
+              <PropertyRef Name="ReceiveUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__MDG_Conta__Creat__62CF9BA3">
           <End Role="SYS_Organization" Type="Self.SYS_Organization" Multiplicity="0..1" />
           <End Role="MDG_Contact" Type="Self.MDG_Contact" Multiplicity="*" />
@@ -2621,6 +2906,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__MDG_Member__MID__6EC13C93">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MDG_Member" Type="Self.MDG_Member" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MDG_Member">
+              <PropertyRef Name="MID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__MDG_Suppl__Creat__59463169">
           <End Role="SYS_Organization" Type="Self.SYS_Organization" Multiplicity="0..1" />
           <End Role="MDG_Supplier" Type="Self.MDG_Supplier" Multiplicity="*" />
@@ -2810,6 +3109,420 @@
             </Principal>
             <Dependent Role="MDS_Contact_Info">
               <PropertyRef Name="MasterDataId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDC_CaseH__Creat__03BC5979">
+          <End Role="SYS_User" Type="Self.SYS_User" Multiplicity="1" />
+          <End Role="SDC_CaseHistory" Type="Self.SDC_CaseHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDC_CaseHistory">
+              <PropertyRef Name="CreatorUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDC_First__CaseH__08810E96">
+          <End Role="SDC_CaseHistory" Type="Self.SDC_CaseHistory" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SDC_FirstVisit" Type="Self.SDC_FirstVisit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SDC_CaseHistory">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDC_FirstVisit">
+              <PropertyRef Name="CaseHistoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDC_First__Creat__0B5D7B41">
+          <End Role="SYS_User" Type="Self.SYS_User" Multiplicity="1" />
+          <End Role="SDC_FirstVisit" Type="Self.SDC_FirstVisit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDC_FirstVisit">
+              <PropertyRef Name="CreatorUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDC_First__Docto__097532CF">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
+          <End Role="SDC_FirstVisit" Type="Self.SDC_FirstVisit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDC_FirstVisit">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDC_First__Nurse__0A695708">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
+          <End Role="SDC_FirstVisit" Type="Self.SDC_FirstVisit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDC_FirstVisit">
+              <PropertyRef Name="NurseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDC_Subse__CaseI__1022305E">
+          <End Role="SDC_FirstVisit" Type="Self.SDC_FirstVisit" Multiplicity="0..1" />
+          <End Role="SDC_Subsequent" Type="Self.SDC_Subsequent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SDC_FirstVisit">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDC_Subsequent">
+              <PropertyRef Name="CaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDC_Subse__Creat__12FE9D09">
+          <End Role="SYS_User" Type="Self.SYS_User" Multiplicity="1" />
+          <End Role="SDC_Subsequent" Type="Self.SDC_Subsequent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDC_Subsequent">
+              <PropertyRef Name="CreatorUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDC_Subse__Docto__11165497">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
+          <End Role="SDC_Subsequent" Type="Self.SDC_Subsequent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDC_Subsequent">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDC_Subse__Nurse__120A78D0">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
+          <End Role="SDC_Subsequent" Type="Self.SDC_Subsequent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDC_Subsequent">
+              <PropertyRef Name="NurseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDC_Summa__CaseI__17C35226">
+          <End Role="SDC_FirstVisit" Type="Self.SDC_FirstVisit" Multiplicity="0..1" />
+          <End Role="SDC_Summary" Type="Self.SDC_Summary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SDC_FirstVisit">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDC_Summary">
+              <PropertyRef Name="CaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDC_Summa__Creat__18B7765F">
+          <End Role="SYS_User" Type="Self.SYS_User" Multiplicity="1" />
+          <End Role="SDC_Summary" Type="Self.SDC_Summary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDC_Summary">
+              <PropertyRef Name="CreatorUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDG_Group__Creat__233504D2">
+          <End Role="SYS_User" Type="Self.SYS_User" Multiplicity="1" />
+          <End Role="SDG_Group" Type="Self.SDG_Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDG_Group">
+              <PropertyRef Name="CreatorUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDG_Group__Group__27F9B9EF">
+          <End Role="SDG_Group" Type="Self.SDG_Group" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SDG_GroupMember" Type="Self.SDG_GroupMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SDG_Group">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDG_GroupMember">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDG_Group__Manag__214CBC60">
+          <End Role="SYS_User" Type="Self.SYS_User" Multiplicity="0..1" />
+          <End Role="SDG_Group" Type="Self.SDG_Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDG_Group">
+              <PropertyRef Name="ManageUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDG_Group__Membe__28EDDE28">
+          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SDG_GroupMember" Type="Self.SDG_GroupMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDG_GroupMember">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDG_Group__Owner__20589827">
+          <End Role="SYS_User" Type="Self.SYS_User" Multiplicity="1" />
+          <End Role="SDG_Group" Type="Self.SDG_Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDG_Group">
+              <PropertyRef Name="OwnerUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDO_Adver__Creat__55C0849F">
+          <End Role="SYS_User" Type="Self.SYS_User" Multiplicity="1" />
+          <End Role="SDO_Advertisement" Type="Self.SDO_Advertisement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDO_Advertisement">
+              <PropertyRef Name="CreatorUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDO_Recom__Creat__5C6D822E">
+          <End Role="SYS_User" Type="Self.SYS_User" Multiplicity="1" />
+          <End Role="SDO_Recommend" Type="Self.SDO_Recommend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDO_Recommend">
+              <PropertyRef Name="CreatorUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDT_Attit__Creat__4495F89D">
+          <End Role="SYS_User" Type="Self.SYS_User" Multiplicity="1" />
+          <End Role="SDT_Attitude" Type="Self.SDT_Attitude" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDT_Attitude">
+              <PropertyRef Name="CreatorUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDT_Attit__Voice__43A1D464">
+          <End Role="SDT_Voice" Type="Self.SDT_Voice" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SDT_Attitude" Type="Self.SDT_Attitude" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SDT_Voice">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDT_Attitude">
+              <PropertyRef Name="VoiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDT_Comme__Creat__4A4ED1F3">
+          <End Role="SYS_User" Type="Self.SYS_User" Multiplicity="1" />
+          <End Role="SDT_Comment" Type="Self.SDT_Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDT_Comment">
+              <PropertyRef Name="CreatorUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDT_Comme__Voice__495AADBA">
+          <End Role="SDT_Voice" Type="Self.SDT_Voice" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SDT_Comment" Type="Self.SDT_Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SDT_Voice">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDT_Comment">
+              <PropertyRef Name="VoiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDT_Forwa__Creat__383021B8">
+          <End Role="SYS_User" Type="Self.SYS_User" Multiplicity="1" />
+          <End Role="SDT_Forward" Type="Self.SDT_Forward" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDT_Forward">
+              <PropertyRef Name="CreatorUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDT_Forwa__Group__373BFD7F">
+          <End Role="SDG_Group" Type="Self.SDG_Group" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SDT_Forward" Type="Self.SDT_Forward" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SDG_Group">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDT_Forward">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDT_Forwa__Topic__3647D946">
+          <End Role="SDT_Topic" Type="Self.SDT_Topic" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SDT_Forward" Type="Self.SDT_Forward" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SDT_Topic">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDT_Forward">
+              <PropertyRef Name="TopicId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDT_Prais__Comme__4F138710">
+          <End Role="SDT_Comment" Type="Self.SDT_Comment" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SDT_Praise" Type="Self.SDT_Praise" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SDT_Comment">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDT_Praise">
+              <PropertyRef Name="CommentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDT_Prais__Creat__5007AB49">
+          <End Role="SYS_User" Type="Self.SYS_User" Multiplicity="1" />
+          <End Role="SDT_Praise" Type="Self.SDT_Praise" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDT_Praise">
+              <PropertyRef Name="CreatorUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDT_Topic__CaseI__2EA6B77E">
+          <End Role="SDC_FirstVisit" Type="Self.SDC_FirstVisit" Multiplicity="0..1" />
+          <End Role="SDT_Topic" Type="Self.SDT_Topic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SDC_FirstVisit">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDT_Topic">
+              <PropertyRef Name="CaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDT_Topic__Creat__31832429">
+          <End Role="SYS_User" Type="Self.SYS_User" Multiplicity="1" />
+          <End Role="SDT_Topic" Type="Self.SDT_Topic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDT_Topic">
+              <PropertyRef Name="CreatorUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDT_Topic__Publi__308EFFF0">
+          <End Role="SDG_Group" Type="Self.SDG_Group" Multiplicity="0..1" />
+          <End Role="SDT_Topic" Type="Self.SDT_Topic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SDG_Group">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDT_Topic">
+              <PropertyRef Name="PublishGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDT_Voice__CaseI__3DE8FB0E">
+          <End Role="SDC_FirstVisit" Type="Self.SDC_FirstVisit" Multiplicity="0..1" />
+          <End Role="SDT_Voice" Type="Self.SDT_Voice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SDC_FirstVisit">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDT_Voice">
+              <PropertyRef Name="CaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDT_Voice__Creat__3EDD1F47">
+          <End Role="SYS_User" Type="Self.SYS_User" Multiplicity="1" />
+          <End Role="SDT_Voice" Type="Self.SDT_Voice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDT_Voice">
+              <PropertyRef Name="CreatorUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDT_Voice__Topic__3CF4D6D5">
+          <End Role="SDT_Topic" Type="Self.SDT_Topic" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SDT_Voice" Type="Self.SDT_Voice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SDT_Topic">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDT_Voice">
+              <PropertyRef Name="TopicId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3882,16 +4595,33 @@
           <EntitySet Name="MDD_Character" EntityType="Self.MDD_Character" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MDD_Date" EntityType="Self.MDD_Date" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MDD_Numeric" EntityType="Self.MDD_Numeric" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MDE_Favorites" EntityType="Self.MDE_Favorites" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MDE_Message" EntityType="Self.MDE_Message" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MDG_Contact" EntityType="Self.MDG_Contact" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MDG_Customer" EntityType="Self.MDG_Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MDG_Dictionary" EntityType="Self.MDG_Dictionary" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MDG_Employee" EntityType="Self.MDG_Employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MDG_Expense" EntityType="Self.MDG_Expense" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MDG_Material" EntityType="Self.MDG_Material" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MDG_Member" EntityType="Self.MDG_Member" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MDG_Supplier" EntityType="Self.MDG_Supplier" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MDR_ET" EntityType="Self.MDR_ET" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MDR_MU" EntityType="Self.MDR_MU" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MDS_Contact_Info" EntityType="Self.MDS_Contact_Info" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SDC_CaseHistory" EntityType="Self.SDC_CaseHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SDC_FirstVisit" EntityType="Self.SDC_FirstVisit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SDC_Subsequent" EntityType="Self.SDC_Subsequent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SDC_Summary" EntityType="Self.SDC_Summary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SDG_Group" EntityType="Self.SDG_Group" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SDG_GroupMember" EntityType="Self.SDG_GroupMember" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SDO_Advertisement" EntityType="Self.SDO_Advertisement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SDO_Recommend" EntityType="Self.SDO_Recommend" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SDT_Attitude" EntityType="Self.SDT_Attitude" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SDT_Comment" EntityType="Self.SDT_Comment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SDT_Forward" EntityType="Self.SDT_Forward" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SDT_Praise" EntityType="Self.SDT_Praise" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SDT_Topic" EntityType="Self.SDT_Topic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SDT_Voice" EntityType="Self.SDT_Voice" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SYS_Alert_Message" EntityType="Self.SYS_Alert_Message" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SYS_Alert_Rules" EntityType="Self.SYS_Alert_Rules" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SYS_Alert_Send" EntityType="Self.SYS_Alert_Send" Schema="dbo" store:Type="Tables" />
@@ -4308,6 +5038,18 @@
             <End Role="MasterData_Property" EntitySet="MasterData_Property" />
             <End Role="MDD_Numeric" EntitySet="MDD_Numeric" />
           </AssociationSet>
+          <AssociationSet Name="FK__MDE_Favor__Creat__7C1B37B1" Association="Self.FK__MDE_Favor__Creat__7C1B37B1">
+            <End Role="SYS_User" EntitySet="SYS_User" />
+            <End Role="MDE_Favorites" EntitySet="MDE_Favorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MDE_Messa__Creat__76625E5B" Association="Self.FK__MDE_Messa__Creat__76625E5B">
+            <End Role="SYS_User" EntitySet="SYS_User" />
+            <End Role="MDE_Message" EntitySet="MDE_Message" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MDE_Messa__Recei__747A15E9" Association="Self.FK__MDE_Messa__Recei__747A15E9">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="MDE_Message" EntitySet="MDE_Message" />
+          </AssociationSet>
           <AssociationSet Name="FK__MDG_Conta__Creat__62CF9BA3" Association="Self.FK__MDG_Conta__Creat__62CF9BA3">
             <End Role="SYS_Organization" EntitySet="SYS_Organization" />
             <End Role="MDG_Contact" EntitySet="MDG_Contact" />
@@ -4436,6 +5178,10 @@
             <End Role="MasterData" EntitySet="MasterData" />
             <End Role="MDG_Material" EntitySet="MDG_Material" />
           </AssociationSet>
+          <AssociationSet Name="FK__MDG_Member__MID__6EC13C93" Association="Self.FK__MDG_Member__MID__6EC13C93">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="MDG_Member" EntitySet="MDG_Member" />
+          </AssociationSet>
           <AssociationSet Name="FK__MDG_Suppl__Creat__59463169" Association="Self.FK__MDG_Suppl__Creat__59463169">
             <End Role="SYS_Organization" EntitySet="SYS_Organization" />
             <End Role="MDG_Supplier" EntitySet="MDG_Supplier" />
@@ -4495,6 +5241,138 @@
           <AssociationSet Name="FK__MDS_Conta__Maste__74EE4BDE" Association="Self.FK__MDS_Conta__Maste__74EE4BDE">
             <End Role="MasterData" EntitySet="MasterData" />
             <End Role="MDS_Contact_Info" EntitySet="MDS_Contact_Info" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDC_CaseH__Creat__03BC5979" Association="Self.FK__SDC_CaseH__Creat__03BC5979">
+            <End Role="SYS_User" EntitySet="SYS_User" />
+            <End Role="SDC_CaseHistory" EntitySet="SDC_CaseHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDC_First__CaseH__08810E96" Association="Self.FK__SDC_First__CaseH__08810E96">
+            <End Role="SDC_CaseHistory" EntitySet="SDC_CaseHistory" />
+            <End Role="SDC_FirstVisit" EntitySet="SDC_FirstVisit" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDC_First__Creat__0B5D7B41" Association="Self.FK__SDC_First__Creat__0B5D7B41">
+            <End Role="SYS_User" EntitySet="SYS_User" />
+            <End Role="SDC_FirstVisit" EntitySet="SDC_FirstVisit" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDC_First__Docto__097532CF" Association="Self.FK__SDC_First__Docto__097532CF">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="SDC_FirstVisit" EntitySet="SDC_FirstVisit" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDC_First__Nurse__0A695708" Association="Self.FK__SDC_First__Nurse__0A695708">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="SDC_FirstVisit" EntitySet="SDC_FirstVisit" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDC_Subse__CaseI__1022305E" Association="Self.FK__SDC_Subse__CaseI__1022305E">
+            <End Role="SDC_FirstVisit" EntitySet="SDC_FirstVisit" />
+            <End Role="SDC_Subsequent" EntitySet="SDC_Subsequent" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDC_Subse__Creat__12FE9D09" Association="Self.FK__SDC_Subse__Creat__12FE9D09">
+            <End Role="SYS_User" EntitySet="SYS_User" />
+            <End Role="SDC_Subsequent" EntitySet="SDC_Subsequent" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDC_Subse__Docto__11165497" Association="Self.FK__SDC_Subse__Docto__11165497">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="SDC_Subsequent" EntitySet="SDC_Subsequent" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDC_Subse__Nurse__120A78D0" Association="Self.FK__SDC_Subse__Nurse__120A78D0">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="SDC_Subsequent" EntitySet="SDC_Subsequent" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDC_Summa__CaseI__17C35226" Association="Self.FK__SDC_Summa__CaseI__17C35226">
+            <End Role="SDC_FirstVisit" EntitySet="SDC_FirstVisit" />
+            <End Role="SDC_Summary" EntitySet="SDC_Summary" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDC_Summa__Creat__18B7765F" Association="Self.FK__SDC_Summa__Creat__18B7765F">
+            <End Role="SYS_User" EntitySet="SYS_User" />
+            <End Role="SDC_Summary" EntitySet="SDC_Summary" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDG_Group__Creat__233504D2" Association="Self.FK__SDG_Group__Creat__233504D2">
+            <End Role="SYS_User" EntitySet="SYS_User" />
+            <End Role="SDG_Group" EntitySet="SDG_Group" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDG_Group__Group__27F9B9EF" Association="Self.FK__SDG_Group__Group__27F9B9EF">
+            <End Role="SDG_Group" EntitySet="SDG_Group" />
+            <End Role="SDG_GroupMember" EntitySet="SDG_GroupMember" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDG_Group__Manag__214CBC60" Association="Self.FK__SDG_Group__Manag__214CBC60">
+            <End Role="SYS_User" EntitySet="SYS_User" />
+            <End Role="SDG_Group" EntitySet="SDG_Group" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDG_Group__Membe__28EDDE28" Association="Self.FK__SDG_Group__Membe__28EDDE28">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="SDG_GroupMember" EntitySet="SDG_GroupMember" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDG_Group__Owner__20589827" Association="Self.FK__SDG_Group__Owner__20589827">
+            <End Role="SYS_User" EntitySet="SYS_User" />
+            <End Role="SDG_Group" EntitySet="SDG_Group" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDO_Adver__Creat__55C0849F" Association="Self.FK__SDO_Adver__Creat__55C0849F">
+            <End Role="SYS_User" EntitySet="SYS_User" />
+            <End Role="SDO_Advertisement" EntitySet="SDO_Advertisement" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDO_Recom__Creat__5C6D822E" Association="Self.FK__SDO_Recom__Creat__5C6D822E">
+            <End Role="SYS_User" EntitySet="SYS_User" />
+            <End Role="SDO_Recommend" EntitySet="SDO_Recommend" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDT_Attit__Creat__4495F89D" Association="Self.FK__SDT_Attit__Creat__4495F89D">
+            <End Role="SYS_User" EntitySet="SYS_User" />
+            <End Role="SDT_Attitude" EntitySet="SDT_Attitude" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDT_Attit__Voice__43A1D464" Association="Self.FK__SDT_Attit__Voice__43A1D464">
+            <End Role="SDT_Voice" EntitySet="SDT_Voice" />
+            <End Role="SDT_Attitude" EntitySet="SDT_Attitude" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDT_Comme__Creat__4A4ED1F3" Association="Self.FK__SDT_Comme__Creat__4A4ED1F3">
+            <End Role="SYS_User" EntitySet="SYS_User" />
+            <End Role="SDT_Comment" EntitySet="SDT_Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDT_Comme__Voice__495AADBA" Association="Self.FK__SDT_Comme__Voice__495AADBA">
+            <End Role="SDT_Voice" EntitySet="SDT_Voice" />
+            <End Role="SDT_Comment" EntitySet="SDT_Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDT_Forwa__Creat__383021B8" Association="Self.FK__SDT_Forwa__Creat__383021B8">
+            <End Role="SYS_User" EntitySet="SYS_User" />
+            <End Role="SDT_Forward" EntitySet="SDT_Forward" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDT_Forwa__Group__373BFD7F" Association="Self.FK__SDT_Forwa__Group__373BFD7F">
+            <End Role="SDG_Group" EntitySet="SDG_Group" />
+            <End Role="SDT_Forward" EntitySet="SDT_Forward" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDT_Forwa__Topic__3647D946" Association="Self.FK__SDT_Forwa__Topic__3647D946">
+            <End Role="SDT_Topic" EntitySet="SDT_Topic" />
+            <End Role="SDT_Forward" EntitySet="SDT_Forward" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDT_Prais__Comme__4F138710" Association="Self.FK__SDT_Prais__Comme__4F138710">
+            <End Role="SDT_Comment" EntitySet="SDT_Comment" />
+            <End Role="SDT_Praise" EntitySet="SDT_Praise" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDT_Prais__Creat__5007AB49" Association="Self.FK__SDT_Prais__Creat__5007AB49">
+            <End Role="SYS_User" EntitySet="SYS_User" />
+            <End Role="SDT_Praise" EntitySet="SDT_Praise" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDT_Topic__CaseI__2EA6B77E" Association="Self.FK__SDT_Topic__CaseI__2EA6B77E">
+            <End Role="SDC_FirstVisit" EntitySet="SDC_FirstVisit" />
+            <End Role="SDT_Topic" EntitySet="SDT_Topic" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDT_Topic__Creat__31832429" Association="Self.FK__SDT_Topic__Creat__31832429">
+            <End Role="SYS_User" EntitySet="SYS_User" />
+            <End Role="SDT_Topic" EntitySet="SDT_Topic" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDT_Topic__Publi__308EFFF0" Association="Self.FK__SDT_Topic__Publi__308EFFF0">
+            <End Role="SDG_Group" EntitySet="SDG_Group" />
+            <End Role="SDT_Topic" EntitySet="SDT_Topic" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDT_Voice__CaseI__3DE8FB0E" Association="Self.FK__SDT_Voice__CaseI__3DE8FB0E">
+            <End Role="SDC_FirstVisit" EntitySet="SDC_FirstVisit" />
+            <End Role="SDT_Voice" EntitySet="SDT_Voice" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDT_Voice__Creat__3EDD1F47" Association="Self.FK__SDT_Voice__Creat__3EDD1F47">
+            <End Role="SYS_User" EntitySet="SYS_User" />
+            <End Role="SDT_Voice" EntitySet="SDT_Voice" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDT_Voice__Topic__3CF4D6D5" Association="Self.FK__SDT_Voice__Topic__3CF4D6D5">
+            <End Role="SDT_Topic" EntitySet="SDT_Topic" />
+            <End Role="SDT_Voice" EntitySet="SDT_Voice" />
           </AssociationSet>
           <AssociationSet Name="FK__SYS_Alert__Categ__4D9F7493" Association="Self.FK__SYS_Alert__Categ__4D9F7493">
             <End Role="BASE_Category" EntitySet="BASE_Category" />
@@ -5756,6 +6634,171 @@
             <End Role="ABS_Delivery" EntitySet="ABS_Delivery" />
             <End Role="ABS_Contract_GoodsPerform" EntitySet="ABS_Contract_GoodsPerform" />
           </AssociationSet>
+          <EntitySet Name="MDE_Favorites" EntityType="WSModel.MDE_Favorites" />
+          <EntitySet Name="MDE_Message" EntityType="WSModel.MDE_Message" />
+          <EntitySet Name="MDG_Member" EntityType="WSModel.MDG_Member" />
+          <EntitySet Name="SDC_CaseHistory" EntityType="WSModel.SDC_CaseHistory" />
+          <EntitySet Name="SDC_FirstVisit" EntityType="WSModel.SDC_FirstVisit" />
+          <EntitySet Name="SDC_Subsequent" EntityType="WSModel.SDC_Subsequent" />
+          <EntitySet Name="SDC_Summary" EntityType="WSModel.SDC_Summary" />
+          <EntitySet Name="SDG_Group" EntityType="WSModel.SDG_Group" />
+          <EntitySet Name="SDG_GroupMember" EntityType="WSModel.SDG_GroupMember" />
+          <EntitySet Name="SDO_Advertisement" EntityType="WSModel.SDO_Advertisement" />
+          <EntitySet Name="SDO_Recommend" EntityType="WSModel.SDO_Recommend" />
+          <EntitySet Name="SDT_Attitude" EntityType="WSModel.SDT_Attitude" />
+          <EntitySet Name="SDT_Comment" EntityType="WSModel.SDT_Comment" />
+          <EntitySet Name="SDT_Forward" EntityType="WSModel.SDT_Forward" />
+          <EntitySet Name="SDT_Praise" EntityType="WSModel.SDT_Praise" />
+          <EntitySet Name="SDT_Topic" EntityType="WSModel.SDT_Topic" />
+          <EntitySet Name="SDT_Voice" EntityType="WSModel.SDT_Voice" />
+          <AssociationSet Name="FK__MDE_Messa__Recei__747A15E9" Association="WSModel.FK__MDE_Messa__Recei__747A15E9">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="MDE_Message" EntitySet="MDE_Message" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MDG_Member__MID__6EC13C93" Association="WSModel.FK__MDG_Member__MID__6EC13C93">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="MDG_Member" EntitySet="MDG_Member" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDC_First__Docto__097532CF" Association="WSModel.FK__SDC_First__Docto__097532CF">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="SDC_FirstVisit" EntitySet="SDC_FirstVisit" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDC_First__Nurse__0A695708" Association="WSModel.FK__SDC_First__Nurse__0A695708">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="SDC_FirstVisit" EntitySet="SDC_FirstVisit" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDC_Subse__Docto__11165497" Association="WSModel.FK__SDC_Subse__Docto__11165497">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="SDC_Subsequent" EntitySet="SDC_Subsequent" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDC_Subse__Nurse__120A78D0" Association="WSModel.FK__SDC_Subse__Nurse__120A78D0">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="SDC_Subsequent" EntitySet="SDC_Subsequent" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDG_Group__Membe__28EDDE28" Association="WSModel.FK__SDG_Group__Membe__28EDDE28">
+            <End Role="MasterData" EntitySet="MasterData" />
+            <End Role="SDG_GroupMember" EntitySet="SDG_GroupMember" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MDE_Favor__Creat__7C1B37B1" Association="WSModel.FK__MDE_Favor__Creat__7C1B37B1">
+            <End Role="SYS_User" EntitySet="SYS_User" />
+            <End Role="MDE_Favorites" EntitySet="MDE_Favorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MDE_Messa__Creat__76625E5B" Association="WSModel.FK__MDE_Messa__Creat__76625E5B">
+            <End Role="SYS_User" EntitySet="SYS_User" />
+            <End Role="MDE_Message" EntitySet="MDE_Message" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDC_CaseH__Creat__03BC5979" Association="WSModel.FK__SDC_CaseH__Creat__03BC5979">
+            <End Role="SYS_User" EntitySet="SYS_User" />
+            <End Role="SDC_CaseHistory" EntitySet="SDC_CaseHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDC_First__CaseH__08810E96" Association="WSModel.FK__SDC_First__CaseH__08810E96">
+            <End Role="SDC_CaseHistory" EntitySet="SDC_CaseHistory" />
+            <End Role="SDC_FirstVisit" EntitySet="SDC_FirstVisit" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDC_First__Creat__0B5D7B41" Association="WSModel.FK__SDC_First__Creat__0B5D7B41">
+            <End Role="SYS_User" EntitySet="SYS_User" />
+            <End Role="SDC_FirstVisit" EntitySet="SDC_FirstVisit" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDC_Subse__CaseI__1022305E" Association="WSModel.FK__SDC_Subse__CaseI__1022305E">
+            <End Role="SDC_FirstVisit" EntitySet="SDC_FirstVisit" />
+            <End Role="SDC_Subsequent" EntitySet="SDC_Subsequent" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDC_Summa__CaseI__17C35226" Association="WSModel.FK__SDC_Summa__CaseI__17C35226">
+            <End Role="SDC_FirstVisit" EntitySet="SDC_FirstVisit" />
+            <End Role="SDC_Summary" EntitySet="SDC_Summary" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDT_Topic__CaseI__2EA6B77E" Association="WSModel.FK__SDT_Topic__CaseI__2EA6B77E">
+            <End Role="SDC_FirstVisit" EntitySet="SDC_FirstVisit" />
+            <End Role="SDT_Topic" EntitySet="SDT_Topic" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDT_Voice__CaseI__3DE8FB0E" Association="WSModel.FK__SDT_Voice__CaseI__3DE8FB0E">
+            <End Role="SDC_FirstVisit" EntitySet="SDC_FirstVisit" />
+            <End Role="SDT_Voice" EntitySet="SDT_Voice" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDC_Subse__Creat__12FE9D09" Association="WSModel.FK__SDC_Subse__Creat__12FE9D09">
+            <End Role="SYS_User" EntitySet="SYS_User" />
+            <End Role="SDC_Subsequent" EntitySet="SDC_Subsequent" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDC_Summa__Creat__18B7765F" Association="WSModel.FK__SDC_Summa__Creat__18B7765F">
+            <End Role="SYS_User" EntitySet="SYS_User" />
+            <End Role="SDC_Summary" EntitySet="SDC_Summary" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDG_Group__Creat__233504D2" Association="WSModel.FK__SDG_Group__Creat__233504D2">
+            <End Role="SYS_User" EntitySet="SYS_User" />
+            <End Role="SDG_Group" EntitySet="SDG_Group" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDG_Group__Group__27F9B9EF" Association="WSModel.FK__SDG_Group__Group__27F9B9EF">
+            <End Role="SDG_Group" EntitySet="SDG_Group" />
+            <End Role="SDG_GroupMember" EntitySet="SDG_GroupMember" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDG_Group__Manag__214CBC60" Association="WSModel.FK__SDG_Group__Manag__214CBC60">
+            <End Role="SYS_User" EntitySet="SYS_User" />
+            <End Role="SDG_Group" EntitySet="SDG_Group" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDG_Group__Owner__20589827" Association="WSModel.FK__SDG_Group__Owner__20589827">
+            <End Role="SYS_User" EntitySet="SYS_User" />
+            <End Role="SDG_Group" EntitySet="SDG_Group" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDT_Forwa__Group__373BFD7F" Association="WSModel.FK__SDT_Forwa__Group__373BFD7F">
+            <End Role="SDG_Group" EntitySet="SDG_Group" />
+            <End Role="SDT_Forward" EntitySet="SDT_Forward" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDT_Topic__Publi__308EFFF0" Association="WSModel.FK__SDT_Topic__Publi__308EFFF0">
+            <End Role="SDG_Group" EntitySet="SDG_Group" />
+            <End Role="SDT_Topic" EntitySet="SDT_Topic" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDO_Adver__Creat__55C0849F" Association="WSModel.FK__SDO_Adver__Creat__55C0849F">
+            <End Role="SYS_User" EntitySet="SYS_User" />
+            <End Role="SDO_Advertisement" EntitySet="SDO_Advertisement" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDO_Recom__Creat__5C6D822E" Association="WSModel.FK__SDO_Recom__Creat__5C6D822E">
+            <End Role="SYS_User" EntitySet="SYS_User" />
+            <End Role="SDO_Recommend" EntitySet="SDO_Recommend" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDT_Attit__Creat__4495F89D" Association="WSModel.FK__SDT_Attit__Creat__4495F89D">
+            <End Role="SYS_User" EntitySet="SYS_User" />
+            <End Role="SDT_Attitude" EntitySet="SDT_Attitude" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDT_Attit__Voice__43A1D464" Association="WSModel.FK__SDT_Attit__Voice__43A1D464">
+            <End Role="SDT_Voice" EntitySet="SDT_Voice" />
+            <End Role="SDT_Attitude" EntitySet="SDT_Attitude" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDT_Comme__Creat__4A4ED1F3" Association="WSModel.FK__SDT_Comme__Creat__4A4ED1F3">
+            <End Role="SYS_User" EntitySet="SYS_User" />
+            <End Role="SDT_Comment" EntitySet="SDT_Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDT_Comme__Voice__495AADBA" Association="WSModel.FK__SDT_Comme__Voice__495AADBA">
+            <End Role="SDT_Voice" EntitySet="SDT_Voice" />
+            <End Role="SDT_Comment" EntitySet="SDT_Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDT_Prais__Comme__4F138710" Association="WSModel.FK__SDT_Prais__Comme__4F138710">
+            <End Role="SDT_Comment" EntitySet="SDT_Comment" />
+            <End Role="SDT_Praise" EntitySet="SDT_Praise" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDT_Forwa__Creat__383021B8" Association="WSModel.FK__SDT_Forwa__Creat__383021B8">
+            <End Role="SYS_User" EntitySet="SYS_User" />
+            <End Role="SDT_Forward" EntitySet="SDT_Forward" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDT_Forwa__Topic__3647D946" Association="WSModel.FK__SDT_Forwa__Topic__3647D946">
+            <End Role="SDT_Topic" EntitySet="SDT_Topic" />
+            <End Role="SDT_Forward" EntitySet="SDT_Forward" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDT_Prais__Creat__5007AB49" Association="WSModel.FK__SDT_Prais__Creat__5007AB49">
+            <End Role="SYS_User" EntitySet="SYS_User" />
+            <End Role="SDT_Praise" EntitySet="SDT_Praise" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDT_Topic__Creat__31832429" Association="WSModel.FK__SDT_Topic__Creat__31832429">
+            <End Role="SYS_User" EntitySet="SYS_User" />
+            <End Role="SDT_Topic" EntitySet="SDT_Topic" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDT_Voice__Topic__3CF4D6D5" Association="WSModel.FK__SDT_Voice__Topic__3CF4D6D5">
+            <End Role="SDT_Topic" EntitySet="SDT_Topic" />
+            <End Role="SDT_Voice" EntitySet="SDT_Voice" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SDT_Voice__Creat__3EDD1F47" Association="WSModel.FK__SDT_Voice__Creat__3EDD1F47">
+            <End Role="SYS_User" EntitySet="SYS_User" />
+            <End Role="SDT_Voice" EntitySet="SDT_Voice" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="ABS_Advance_Detail">
           <Key>
@@ -6338,6 +7381,13 @@
           <NavigationProperty Name="MDS_Contact_Info" Relationship="WSModel.FK__MDS_Conta__Maste__1F1A5B2B" FromRole="MasterData" ToRole="MDS_Contact_Info" />
           <NavigationProperty Name="SYS_Alert_Target" Relationship="WSModel.FK__SYS_Alert__Targe__04315AC5" FromRole="MasterData" ToRole="SYS_Alert_Target" />
           <NavigationProperty Name="SYS_Alert_Send" Relationship="WSModel.FK__SYS_Alert__Targe__0EAEE938" FromRole="MasterData" ToRole="SYS_Alert_Send" />
+          <NavigationProperty Name="MDE_Message" Relationship="WSModel.FK__MDE_Messa__Recei__747A15E9" FromRole="MasterData" ToRole="MDE_Message" />
+          <NavigationProperty Name="MDG_Member" Relationship="WSModel.FK__MDG_Member__MID__6EC13C93" FromRole="MasterData" ToRole="MDG_Member" />
+          <NavigationProperty Name="SDC_FirstVisit" Relationship="WSModel.FK__SDC_First__Docto__097532CF" FromRole="MasterData" ToRole="SDC_FirstVisit" />
+          <NavigationProperty Name="SDC_FirstVisit1" Relationship="WSModel.FK__SDC_First__Nurse__0A695708" FromRole="MasterData" ToRole="SDC_FirstVisit" />
+          <NavigationProperty Name="SDC_Subsequent" Relationship="WSModel.FK__SDC_Subse__Docto__11165497" FromRole="MasterData" ToRole="SDC_Subsequent" />
+          <NavigationProperty Name="SDC_Subsequent1" Relationship="WSModel.FK__SDC_Subse__Nurse__120A78D0" FromRole="MasterData" ToRole="SDC_Subsequent" />
+          <NavigationProperty Name="SDG_GroupMember" Relationship="WSModel.FK__SDG_Group__Membe__28EDDE28" FromRole="MasterData" ToRole="SDG_GroupMember" />
         </EntityType>
         <EntityType Name="MasterData_Merger">
           <Key>
@@ -6834,11 +7884,11 @@
           <Property Name="ID" Type="Guid" Nullable="false" />
           <Property Name="SN" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Binding" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="Port" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
           <Property Name="Class" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="Interface" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="Location" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Port" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="SYS_Module">
           <Key>
@@ -7308,6 +8358,23 @@
           <NavigationProperty Name="SYS_UserGroupMember" Relationship="WSModel.FK__SYS_UserG__Creat__2FBAD748" FromRole="SYS_User" ToRole="SYS_UserGroupMember" />
           <NavigationProperty Name="SYS_UserGroupMember1" Relationship="WSModel.FK__SYS_UserG__UserI__2EC6B30F" FromRole="SYS_User" ToRole="SYS_UserGroupMember" />
           <Property Name="OpenId" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="MDE_Favorites" Relationship="WSModel.FK__MDE_Favor__Creat__7C1B37B1" FromRole="SYS_User" ToRole="MDE_Favorites" />
+          <NavigationProperty Name="MDE_Message" Relationship="WSModel.FK__MDE_Messa__Creat__76625E5B" FromRole="SYS_User" ToRole="MDE_Message" />
+          <NavigationProperty Name="SDC_CaseHistory" Relationship="WSModel.FK__SDC_CaseH__Creat__03BC5979" FromRole="SYS_User" ToRole="SDC_CaseHistory" />
+          <NavigationProperty Name="SDC_FirstVisit" Relationship="WSModel.FK__SDC_First__Creat__0B5D7B41" FromRole="SYS_User" ToRole="SDC_FirstVisit" />
+          <NavigationProperty Name="SDC_Subsequent" Relationship="WSModel.FK__SDC_Subse__Creat__12FE9D09" FromRole="SYS_User" ToRole="SDC_Subsequent" />
+          <NavigationProperty Name="SDC_Summary" Relationship="WSModel.FK__SDC_Summa__Creat__18B7765F" FromRole="SYS_User" ToRole="SDC_Summary" />
+          <NavigationProperty Name="SDG_Group" Relationship="WSModel.FK__SDG_Group__Creat__233504D2" FromRole="SYS_User" ToRole="SDG_Group" />
+          <NavigationProperty Name="SDG_Group1" Relationship="WSModel.FK__SDG_Group__Manag__214CBC60" FromRole="SYS_User" ToRole="SDG_Group" />
+          <NavigationProperty Name="SDG_Group2" Relationship="WSModel.FK__SDG_Group__Owner__20589827" FromRole="SYS_User" ToRole="SDG_Group" />
+          <NavigationProperty Name="SDO_Advertisement" Relationship="WSModel.FK__SDO_Adver__Creat__55C0849F" FromRole="SYS_User" ToRole="SDO_Advertisement" />
+          <NavigationProperty Name="SDO_Recommend" Relationship="WSModel.FK__SDO_Recom__Creat__5C6D822E" FromRole="SYS_User" ToRole="SDO_Recommend" />
+          <NavigationProperty Name="SDT_Attitude" Relationship="WSModel.FK__SDT_Attit__Creat__4495F89D" FromRole="SYS_User" ToRole="SDT_Attitude" />
+          <NavigationProperty Name="SDT_Comment" Relationship="WSModel.FK__SDT_Comme__Creat__4A4ED1F3" FromRole="SYS_User" ToRole="SDT_Comment" />
+          <NavigationProperty Name="SDT_Forward" Relationship="WSModel.FK__SDT_Forwa__Creat__383021B8" FromRole="SYS_User" ToRole="SDT_Forward" />
+          <NavigationProperty Name="SDT_Praise" Relationship="WSModel.FK__SDT_Prais__Creat__5007AB49" FromRole="SYS_User" ToRole="SDT_Praise" />
+          <NavigationProperty Name="SDT_Topic" Relationship="WSModel.FK__SDT_Topic__Creat__31832429" FromRole="SYS_User" ToRole="SDT_Topic" />
+          <NavigationProperty Name="SDT_Voice" Relationship="WSModel.FK__SDT_Voice__Creat__3EDD1F47" FromRole="SYS_User" ToRole="SDT_Voice" />
         </EntityType>
         <EntityType Name="SYS_UserGroup">
           <Key>
@@ -9975,6 +11042,769 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="MDE_Favorites">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="SN" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="ObjectId" Type="Guid" Nullable="false" />
+          <Property Name="CreatorUserId" Type="Guid" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="SYS_User" Relationship="WSModel.FK__MDE_Favor__Creat__7C1B37B1" FromRole="MDE_Favorites" ToRole="SYS_User" />
+        </EntityType>
+        <EntityType Name="MDE_Message">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="SN" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReceiveUserId" Type="Guid" Nullable="false" />
+          <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SendTime" Type="DateTime" Precision="3" />
+          <Property Name="HaveRead" Type="Boolean" Nullable="false" />
+          <Property Name="CreatorUserId" Type="Guid" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="MasterData" Relationship="WSModel.FK__MDE_Messa__Recei__747A15E9" FromRole="MDE_Message" ToRole="MasterData" />
+          <NavigationProperty Name="SYS_User" Relationship="WSModel.FK__MDE_Messa__Creat__76625E5B" FromRole="MDE_Message" ToRole="SYS_User" />
+        </EntityType>
+        <EntityType Name="MDG_Member">
+          <Key>
+            <PropertyRef Name="MID" />
+          </Key>
+          <Property Name="MID" Type="Guid" Nullable="false" />
+          <Property Name="SN" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Portrait" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Integral" Type="Int32" Nullable="false" />
+          <Property Name="Beans" Type="Int32" Nullable="false" />
+          <Property Name="Country" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="County" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="Street" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="ZipCode" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="MasterData" Relationship="WSModel.FK__MDG_Member__MID__6EC13C93" FromRole="MDG_Member" ToRole="MasterData" />
+        </EntityType>
+        <EntityType Name="SDC_CaseHistory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="SN" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PatientName" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="Int32" Nullable="false" />
+          <Property Name="Birthday" Type="DateTime" Precision="3" />
+          <Property Name="Phone" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="WeChat" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="OpenId" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="Secret" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Validity" Type="Boolean" Nullable="false" />
+          <Property Name="CreatorUserId" Type="Guid" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="SYS_User" Relationship="WSModel.FK__SDC_CaseH__Creat__03BC5979" FromRole="SDC_CaseHistory" ToRole="SYS_User" />
+          <NavigationProperty Name="SDC_FirstVisit" Relationship="WSModel.FK__SDC_First__CaseH__08810E96" FromRole="SDC_CaseHistory" ToRole="SDC_FirstVisit" />
+        </EntityType>
+        <EntityType Name="SDC_FirstVisit">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="SN" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CaseHistoryId" Type="Guid" Nullable="false" />
+          <Property Name="Complained" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="MedicalHistory" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="Previous" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Inspection" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UpperJaw" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="LowerJaw" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Diagnosis" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="TherapyPlan" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Therapy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Notify" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="KeyWord" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="DoctorId" Type="Guid" />
+          <Property Name="NurseId" Type="Guid" />
+          <Property Name="CreatorUserId" Type="Guid" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="MasterData" Relationship="WSModel.FK__SDC_First__Docto__097532CF" FromRole="SDC_FirstVisit" ToRole="MasterData" />
+          <NavigationProperty Name="MasterData1" Relationship="WSModel.FK__SDC_First__Nurse__0A695708" FromRole="SDC_FirstVisit" ToRole="MasterData" />
+          <NavigationProperty Name="SDC_CaseHistory" Relationship="WSModel.FK__SDC_First__CaseH__08810E96" FromRole="SDC_FirstVisit" ToRole="SDC_CaseHistory" />
+          <NavigationProperty Name="SYS_User" Relationship="WSModel.FK__SDC_First__Creat__0B5D7B41" FromRole="SDC_FirstVisit" ToRole="SYS_User" />
+          <NavigationProperty Name="SDC_Subsequent" Relationship="WSModel.FK__SDC_Subse__CaseI__1022305E" FromRole="SDC_FirstVisit" ToRole="SDC_Subsequent" />
+          <NavigationProperty Name="SDC_Summary" Relationship="WSModel.FK__SDC_Summa__CaseI__17C35226" FromRole="SDC_FirstVisit" ToRole="SDC_Summary" />
+          <NavigationProperty Name="SDT_Topic" Relationship="WSModel.FK__SDT_Topic__CaseI__2EA6B77E" FromRole="SDC_FirstVisit" ToRole="SDT_Topic" />
+          <NavigationProperty Name="SDT_Voice" Relationship="WSModel.FK__SDT_Voice__CaseI__3DE8FB0E" FromRole="SDC_FirstVisit" ToRole="SDT_Voice" />
+        </EntityType>
+        <EntityType Name="SDC_Subsequent">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="SN" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CaseId" Type="Guid" />
+          <Property Name="MedicalHistory" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="Inspection" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TherapyPlan" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Therapy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Notify" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="KeyWord" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="DoctorId" Type="Guid" />
+          <Property Name="NurseId" Type="Guid" />
+          <Property Name="CreatorUserId" Type="Guid" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="MasterData" Relationship="WSModel.FK__SDC_Subse__Docto__11165497" FromRole="SDC_Subsequent" ToRole="MasterData" />
+          <NavigationProperty Name="MasterData1" Relationship="WSModel.FK__SDC_Subse__Nurse__120A78D0" FromRole="SDC_Subsequent" ToRole="MasterData" />
+          <NavigationProperty Name="SDC_FirstVisit" Relationship="WSModel.FK__SDC_Subse__CaseI__1022305E" FromRole="SDC_Subsequent" ToRole="SDC_FirstVisit" />
+          <NavigationProperty Name="SYS_User" Relationship="WSModel.FK__SDC_Subse__Creat__12FE9D09" FromRole="SDC_Subsequent" ToRole="SYS_User" />
+        </EntityType>
+        <EntityType Name="SDC_Summary">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="SN" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CaseId" Type="Guid" />
+          <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="KeyWord" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="CreatorUserId" Type="Guid" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="SDC_FirstVisit" Relationship="WSModel.FK__SDC_Summa__CaseI__17C35226" FromRole="SDC_Summary" ToRole="SDC_FirstVisit" />
+          <NavigationProperty Name="SYS_User" Relationship="WSModel.FK__SDC_Summa__Creat__18B7765F" FromRole="SDC_Summary" ToRole="SYS_User" />
+        </EntityType>
+        <EntityType Name="SDG_Group">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="SN" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Icon" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Picture" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Heat" Type="Int32" Nullable="false" />
+          <Property Name="Topics" Type="Int32" Nullable="false" />
+          <Property Name="Members" Type="Int32" Nullable="false" />
+          <Property Name="OwnerUserId" Type="Guid" Nullable="false" />
+          <Property Name="ManageUserId" Type="Guid" />
+          <Property Name="Validity" Type="Boolean" Nullable="false" />
+          <Property Name="CreatorUserId" Type="Guid" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="SYS_User" Relationship="WSModel.FK__SDG_Group__Creat__233504D2" FromRole="SDG_Group" ToRole="SYS_User" />
+          <NavigationProperty Name="SDG_GroupMember" Relationship="WSModel.FK__SDG_Group__Group__27F9B9EF" FromRole="SDG_Group" ToRole="SDG_GroupMember" />
+          <NavigationProperty Name="SYS_User1" Relationship="WSModel.FK__SDG_Group__Manag__214CBC60" FromRole="SDG_Group" ToRole="SYS_User" />
+          <NavigationProperty Name="SYS_User2" Relationship="WSModel.FK__SDG_Group__Owner__20589827" FromRole="SDG_Group" ToRole="SYS_User" />
+          <NavigationProperty Name="SDT_Forward" Relationship="WSModel.FK__SDT_Forwa__Group__373BFD7F" FromRole="SDG_Group" ToRole="SDT_Forward" />
+          <NavigationProperty Name="SDT_Topic" Relationship="WSModel.FK__SDT_Topic__Publi__308EFFF0" FromRole="SDG_Group" ToRole="SDT_Topic" />
+        </EntityType>
+        <EntityType Name="SDG_GroupMember">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="SN" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupId" Type="Guid" Nullable="false" />
+          <Property Name="MemberId" Type="Guid" Nullable="false" />
+          <Property Name="Validity" Type="Boolean" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="MasterData" Relationship="WSModel.FK__SDG_Group__Membe__28EDDE28" FromRole="SDG_GroupMember" ToRole="MasterData" />
+          <NavigationProperty Name="SDG_Group" Relationship="WSModel.FK__SDG_Group__Group__27F9B9EF" FromRole="SDG_GroupMember" ToRole="SDG_Group" />
+        </EntityType>
+        <EntityType Name="SDO_Advertisement">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="SN" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="Picture" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Url" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Validity" Type="Boolean" Nullable="false" />
+          <Property Name="CreatorUserId" Type="Guid" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="SYS_User" Relationship="WSModel.FK__SDO_Adver__Creat__55C0849F" FromRole="SDO_Advertisement" ToRole="SYS_User" />
+        </EntityType>
+        <EntityType Name="SDO_Recommend">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="SN" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Picture" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Url" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Fixed" Type="Boolean" Nullable="false" />
+          <Property Name="Validity" Type="Boolean" Nullable="false" />
+          <Property Name="CreatorUserId" Type="Guid" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="SYS_User" Relationship="WSModel.FK__SDO_Recom__Creat__5C6D822E" FromRole="SDO_Recommend" ToRole="SYS_User" />
+        </EntityType>
+        <EntityType Name="SDT_Attitude">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="SN" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VoiceId" Type="Guid" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="CreatorUserId" Type="Guid" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="SYS_User" Relationship="WSModel.FK__SDT_Attit__Creat__4495F89D" FromRole="SDT_Attitude" ToRole="SYS_User" />
+          <NavigationProperty Name="SDT_Voice" Relationship="WSModel.FK__SDT_Attit__Voice__43A1D464" FromRole="SDT_Attitude" ToRole="SDT_Voice" />
+        </EntityType>
+        <EntityType Name="SDT_Comment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="SN" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VoiceId" Type="Guid" Nullable="false" />
+          <Property Name="Content" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="PublishTime" Type="DateTime" Precision="3" />
+          <Property Name="CreatorUserId" Type="Guid" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="SYS_User" Relationship="WSModel.FK__SDT_Comme__Creat__4A4ED1F3" FromRole="SDT_Comment" ToRole="SYS_User" />
+          <NavigationProperty Name="SDT_Voice" Relationship="WSModel.FK__SDT_Comme__Voice__495AADBA" FromRole="SDT_Comment" ToRole="SDT_Voice" />
+          <NavigationProperty Name="SDT_Praise" Relationship="WSModel.FK__SDT_Prais__Comme__4F138710" FromRole="SDT_Comment" ToRole="SDT_Praise" />
+        </EntityType>
+        <EntityType Name="SDT_Forward">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="SN" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TopicId" Type="Guid" Nullable="false" />
+          <Property Name="GroupId" Type="Guid" Nullable="false" />
+          <Property Name="CreatorUserId" Type="Guid" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="SDG_Group" Relationship="WSModel.FK__SDT_Forwa__Group__373BFD7F" FromRole="SDT_Forward" ToRole="SDG_Group" />
+          <NavigationProperty Name="SYS_User" Relationship="WSModel.FK__SDT_Forwa__Creat__383021B8" FromRole="SDT_Forward" ToRole="SYS_User" />
+          <NavigationProperty Name="SDT_Topic" Relationship="WSModel.FK__SDT_Forwa__Topic__3647D946" FromRole="SDT_Forward" ToRole="SDT_Topic" />
+        </EntityType>
+        <EntityType Name="SDT_Praise">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="SN" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CommentId" Type="Guid" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="CreatorUserId" Type="Guid" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="SDT_Comment" Relationship="WSModel.FK__SDT_Prais__Comme__4F138710" FromRole="SDT_Praise" ToRole="SDT_Comment" />
+          <NavigationProperty Name="SYS_User" Relationship="WSModel.FK__SDT_Prais__Creat__5007AB49" FromRole="SDT_Praise" ToRole="SYS_User" />
+        </EntityType>
+        <EntityType Name="SDT_Topic">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="SN" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Tags" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="CaseId" Type="Guid" />
+          <Property Name="Private" Type="Boolean" Nullable="false" />
+          <Property Name="PublishGroupId" Type="Guid" />
+          <Property Name="PublishTime" Type="DateTime" Precision="3" />
+          <Property Name="CreatorUserId" Type="Guid" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="SDC_FirstVisit" Relationship="WSModel.FK__SDT_Topic__CaseI__2EA6B77E" FromRole="SDT_Topic" ToRole="SDC_FirstVisit" />
+          <NavigationProperty Name="SDG_Group" Relationship="WSModel.FK__SDT_Topic__Publi__308EFFF0" FromRole="SDT_Topic" ToRole="SDG_Group" />
+          <NavigationProperty Name="SDT_Forward" Relationship="WSModel.FK__SDT_Forwa__Topic__3647D946" FromRole="SDT_Topic" ToRole="SDT_Forward" />
+          <NavigationProperty Name="SYS_User" Relationship="WSModel.FK__SDT_Topic__Creat__31832429" FromRole="SDT_Topic" ToRole="SYS_User" />
+          <NavigationProperty Name="SDT_Voice" Relationship="WSModel.FK__SDT_Voice__Topic__3CF4D6D5" FromRole="SDT_Topic" ToRole="SDT_Voice" />
+        </EntityType>
+        <EntityType Name="SDT_Voice">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="SN" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TopicId" Type="Guid" Nullable="false" />
+          <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CaseId" Type="Guid" />
+          <Property Name="PublishTime" Type="DateTime" Precision="3" />
+          <Property Name="CreatorUserId" Type="Guid" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="SDC_FirstVisit" Relationship="WSModel.FK__SDT_Voice__CaseI__3DE8FB0E" FromRole="SDT_Voice" ToRole="SDC_FirstVisit" />
+          <NavigationProperty Name="SDT_Attitude" Relationship="WSModel.FK__SDT_Attit__Voice__43A1D464" FromRole="SDT_Voice" ToRole="SDT_Attitude" />
+          <NavigationProperty Name="SDT_Comment" Relationship="WSModel.FK__SDT_Comme__Voice__495AADBA" FromRole="SDT_Voice" ToRole="SDT_Comment" />
+          <NavigationProperty Name="SDT_Topic" Relationship="WSModel.FK__SDT_Voice__Topic__3CF4D6D5" FromRole="SDT_Voice" ToRole="SDT_Topic" />
+          <NavigationProperty Name="SYS_User" Relationship="WSModel.FK__SDT_Voice__Creat__3EDD1F47" FromRole="SDT_Voice" ToRole="SYS_User" />
+        </EntityType>
+        <Association Name="FK__MDE_Messa__Recei__747A15E9">
+          <End Type="WSModel.MasterData" Role="MasterData" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="WSModel.MDE_Message" Role="MDE_Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MDE_Message">
+              <PropertyRef Name="ReceiveUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MDG_Member__MID__6EC13C93">
+          <End Type="WSModel.MasterData" Role="MasterData" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="WSModel.MDG_Member" Role="MDG_Member" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MDG_Member">
+              <PropertyRef Name="MID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDC_First__Docto__097532CF">
+          <End Type="WSModel.MasterData" Role="MasterData" Multiplicity="0..1" />
+          <End Type="WSModel.SDC_FirstVisit" Role="SDC_FirstVisit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDC_FirstVisit">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDC_First__Nurse__0A695708">
+          <End Type="WSModel.MasterData" Role="MasterData" Multiplicity="0..1" />
+          <End Type="WSModel.SDC_FirstVisit" Role="SDC_FirstVisit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDC_FirstVisit">
+              <PropertyRef Name="NurseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDC_Subse__Docto__11165497">
+          <End Type="WSModel.MasterData" Role="MasterData" Multiplicity="0..1" />
+          <End Type="WSModel.SDC_Subsequent" Role="SDC_Subsequent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDC_Subsequent">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDC_Subse__Nurse__120A78D0">
+          <End Type="WSModel.MasterData" Role="MasterData" Multiplicity="0..1" />
+          <End Type="WSModel.SDC_Subsequent" Role="SDC_Subsequent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDC_Subsequent">
+              <PropertyRef Name="NurseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDG_Group__Membe__28EDDE28">
+          <End Type="WSModel.MasterData" Role="MasterData" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="WSModel.SDG_GroupMember" Role="SDG_GroupMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterData">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDG_GroupMember">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MDE_Favor__Creat__7C1B37B1">
+          <End Type="WSModel.SYS_User" Role="SYS_User" Multiplicity="1" />
+          <End Type="WSModel.MDE_Favorites" Role="MDE_Favorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MDE_Favorites">
+              <PropertyRef Name="CreatorUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MDE_Messa__Creat__76625E5B">
+          <End Type="WSModel.SYS_User" Role="SYS_User" Multiplicity="1" />
+          <End Type="WSModel.MDE_Message" Role="MDE_Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MDE_Message">
+              <PropertyRef Name="CreatorUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDC_CaseH__Creat__03BC5979">
+          <End Type="WSModel.SYS_User" Role="SYS_User" Multiplicity="1" />
+          <End Type="WSModel.SDC_CaseHistory" Role="SDC_CaseHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDC_CaseHistory">
+              <PropertyRef Name="CreatorUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDC_First__CaseH__08810E96">
+          <End Type="WSModel.SDC_CaseHistory" Role="SDC_CaseHistory" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="WSModel.SDC_FirstVisit" Role="SDC_FirstVisit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SDC_CaseHistory">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDC_FirstVisit">
+              <PropertyRef Name="CaseHistoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDC_First__Creat__0B5D7B41">
+          <End Type="WSModel.SYS_User" Role="SYS_User" Multiplicity="1" />
+          <End Type="WSModel.SDC_FirstVisit" Role="SDC_FirstVisit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDC_FirstVisit">
+              <PropertyRef Name="CreatorUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDC_Subse__CaseI__1022305E">
+          <End Type="WSModel.SDC_FirstVisit" Role="SDC_FirstVisit" Multiplicity="0..1" />
+          <End Type="WSModel.SDC_Subsequent" Role="SDC_Subsequent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SDC_FirstVisit">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDC_Subsequent">
+              <PropertyRef Name="CaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDC_Summa__CaseI__17C35226">
+          <End Type="WSModel.SDC_FirstVisit" Role="SDC_FirstVisit" Multiplicity="0..1" />
+          <End Type="WSModel.SDC_Summary" Role="SDC_Summary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SDC_FirstVisit">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDC_Summary">
+              <PropertyRef Name="CaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDT_Topic__CaseI__2EA6B77E">
+          <End Type="WSModel.SDC_FirstVisit" Role="SDC_FirstVisit" Multiplicity="0..1" />
+          <End Type="WSModel.SDT_Topic" Role="SDT_Topic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SDC_FirstVisit">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDT_Topic">
+              <PropertyRef Name="CaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDT_Voice__CaseI__3DE8FB0E">
+          <End Type="WSModel.SDC_FirstVisit" Role="SDC_FirstVisit" Multiplicity="0..1" />
+          <End Type="WSModel.SDT_Voice" Role="SDT_Voice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SDC_FirstVisit">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDT_Voice">
+              <PropertyRef Name="CaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDC_Subse__Creat__12FE9D09">
+          <End Type="WSModel.SYS_User" Role="SYS_User" Multiplicity="1" />
+          <End Type="WSModel.SDC_Subsequent" Role="SDC_Subsequent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDC_Subsequent">
+              <PropertyRef Name="CreatorUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDC_Summa__Creat__18B7765F">
+          <End Type="WSModel.SYS_User" Role="SYS_User" Multiplicity="1" />
+          <End Type="WSModel.SDC_Summary" Role="SDC_Summary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDC_Summary">
+              <PropertyRef Name="CreatorUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDG_Group__Creat__233504D2">
+          <End Type="WSModel.SYS_User" Role="SYS_User" Multiplicity="1" />
+          <End Type="WSModel.SDG_Group" Role="SDG_Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDG_Group">
+              <PropertyRef Name="CreatorUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDG_Group__Group__27F9B9EF">
+          <End Type="WSModel.SDG_Group" Role="SDG_Group" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="WSModel.SDG_GroupMember" Role="SDG_GroupMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SDG_Group">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDG_GroupMember">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDG_Group__Manag__214CBC60">
+          <End Type="WSModel.SYS_User" Role="SYS_User" Multiplicity="0..1" />
+          <End Type="WSModel.SDG_Group" Role="SDG_Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDG_Group">
+              <PropertyRef Name="ManageUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDG_Group__Owner__20589827">
+          <End Type="WSModel.SYS_User" Role="SYS_User" Multiplicity="1" />
+          <End Type="WSModel.SDG_Group" Role="SDG_Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDG_Group">
+              <PropertyRef Name="OwnerUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDT_Forwa__Group__373BFD7F">
+          <End Type="WSModel.SDG_Group" Role="SDG_Group" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="WSModel.SDT_Forward" Role="SDT_Forward" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SDG_Group">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDT_Forward">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDT_Topic__Publi__308EFFF0">
+          <End Type="WSModel.SDG_Group" Role="SDG_Group" Multiplicity="0..1" />
+          <End Type="WSModel.SDT_Topic" Role="SDT_Topic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SDG_Group">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDT_Topic">
+              <PropertyRef Name="PublishGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDO_Adver__Creat__55C0849F">
+          <End Type="WSModel.SYS_User" Role="SYS_User" Multiplicity="1" />
+          <End Type="WSModel.SDO_Advertisement" Role="SDO_Advertisement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDO_Advertisement">
+              <PropertyRef Name="CreatorUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDO_Recom__Creat__5C6D822E">
+          <End Type="WSModel.SYS_User" Role="SYS_User" Multiplicity="1" />
+          <End Type="WSModel.SDO_Recommend" Role="SDO_Recommend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDO_Recommend">
+              <PropertyRef Name="CreatorUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDT_Attit__Creat__4495F89D">
+          <End Type="WSModel.SYS_User" Role="SYS_User" Multiplicity="1" />
+          <End Type="WSModel.SDT_Attitude" Role="SDT_Attitude" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDT_Attitude">
+              <PropertyRef Name="CreatorUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDT_Attit__Voice__43A1D464">
+          <End Type="WSModel.SDT_Voice" Role="SDT_Voice" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="WSModel.SDT_Attitude" Role="SDT_Attitude" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SDT_Voice">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDT_Attitude">
+              <PropertyRef Name="VoiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDT_Comme__Creat__4A4ED1F3">
+          <End Type="WSModel.SYS_User" Role="SYS_User" Multiplicity="1" />
+          <End Type="WSModel.SDT_Comment" Role="SDT_Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDT_Comment">
+              <PropertyRef Name="CreatorUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDT_Comme__Voice__495AADBA">
+          <End Type="WSModel.SDT_Voice" Role="SDT_Voice" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="WSModel.SDT_Comment" Role="SDT_Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SDT_Voice">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDT_Comment">
+              <PropertyRef Name="VoiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDT_Prais__Comme__4F138710">
+          <End Type="WSModel.SDT_Comment" Role="SDT_Comment" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="WSModel.SDT_Praise" Role="SDT_Praise" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SDT_Comment">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDT_Praise">
+              <PropertyRef Name="CommentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDT_Forwa__Creat__383021B8">
+          <End Type="WSModel.SYS_User" Role="SYS_User" Multiplicity="1" />
+          <End Type="WSModel.SDT_Forward" Role="SDT_Forward" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDT_Forward">
+              <PropertyRef Name="CreatorUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDT_Forwa__Topic__3647D946">
+          <End Type="WSModel.SDT_Topic" Role="SDT_Topic" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="WSModel.SDT_Forward" Role="SDT_Forward" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SDT_Topic">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDT_Forward">
+              <PropertyRef Name="TopicId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDT_Prais__Creat__5007AB49">
+          <End Type="WSModel.SYS_User" Role="SYS_User" Multiplicity="1" />
+          <End Type="WSModel.SDT_Praise" Role="SDT_Praise" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDT_Praise">
+              <PropertyRef Name="CreatorUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDT_Topic__Creat__31832429">
+          <End Type="WSModel.SYS_User" Role="SYS_User" Multiplicity="1" />
+          <End Type="WSModel.SDT_Topic" Role="SDT_Topic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDT_Topic">
+              <PropertyRef Name="CreatorUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDT_Voice__Topic__3CF4D6D5">
+          <End Type="WSModel.SDT_Topic" Role="SDT_Topic" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="WSModel.SDT_Voice" Role="SDT_Voice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SDT_Topic">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDT_Voice">
+              <PropertyRef Name="TopicId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SDT_Voice__Creat__3EDD1F47">
+          <End Type="WSModel.SYS_User" Role="SYS_User" Multiplicity="1" />
+          <End Type="WSModel.SDT_Voice" Role="SDT_Voice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SDT_Voice">
+              <PropertyRef Name="CreatorUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -11223,6 +13053,270 @@
                 <ScalarProperty Name="IsData" ColumnName="IsData" />
                 <ScalarProperty Name="Index" ColumnName="Index" />
                 <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MDE_Favorites">
+            <EntityTypeMapping TypeName="WSModel.MDE_Favorites">
+              <MappingFragment StoreEntitySet="MDE_Favorites">
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreatorUserId" ColumnName="CreatorUserId" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MDE_Message">
+            <EntityTypeMapping TypeName="WSModel.MDE_Message">
+              <MappingFragment StoreEntitySet="MDE_Message">
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreatorUserId" ColumnName="CreatorUserId" />
+                <ScalarProperty Name="HaveRead" ColumnName="HaveRead" />
+                <ScalarProperty Name="SendTime" ColumnName="SendTime" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="ReceiveUserId" ColumnName="ReceiveUserId" />
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MDG_Member">
+            <EntityTypeMapping TypeName="WSModel.MDG_Member">
+              <MappingFragment StoreEntitySet="MDG_Member">
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="County" ColumnName="County" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Beans" ColumnName="Beans" />
+                <ScalarProperty Name="Integral" ColumnName="Integral" />
+                <ScalarProperty Name="Portrait" ColumnName="Portrait" />
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="MID" ColumnName="MID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SDC_CaseHistory">
+            <EntityTypeMapping TypeName="WSModel.SDC_CaseHistory">
+              <MappingFragment StoreEntitySet="SDC_CaseHistory">
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreatorUserId" ColumnName="CreatorUserId" />
+                <ScalarProperty Name="Validity" ColumnName="Validity" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Secret" ColumnName="Secret" />
+                <ScalarProperty Name="OpenId" ColumnName="OpenId" />
+                <ScalarProperty Name="WeChat" ColumnName="WeChat" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="PatientName" ColumnName="PatientName" />
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SDC_FirstVisit">
+            <EntityTypeMapping TypeName="WSModel.SDC_FirstVisit">
+              <MappingFragment StoreEntitySet="SDC_FirstVisit">
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreatorUserId" ColumnName="CreatorUserId" />
+                <ScalarProperty Name="NurseId" ColumnName="NurseId" />
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="KeyWord" ColumnName="KeyWord" />
+                <ScalarProperty Name="Notify" ColumnName="Notify" />
+                <ScalarProperty Name="Therapy" ColumnName="Therapy" />
+                <ScalarProperty Name="TherapyPlan" ColumnName="TherapyPlan" />
+                <ScalarProperty Name="Diagnosis" ColumnName="Diagnosis" />
+                <ScalarProperty Name="LowerJaw" ColumnName="LowerJaw" />
+                <ScalarProperty Name="UpperJaw" ColumnName="UpperJaw" />
+                <ScalarProperty Name="Inspection" ColumnName="Inspection" />
+                <ScalarProperty Name="Previous" ColumnName="Previous" />
+                <ScalarProperty Name="MedicalHistory" ColumnName="MedicalHistory" />
+                <ScalarProperty Name="Complained" ColumnName="Complained" />
+                <ScalarProperty Name="CaseHistoryId" ColumnName="CaseHistoryId" />
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SDC_Subsequent">
+            <EntityTypeMapping TypeName="WSModel.SDC_Subsequent">
+              <MappingFragment StoreEntitySet="SDC_Subsequent">
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreatorUserId" ColumnName="CreatorUserId" />
+                <ScalarProperty Name="NurseId" ColumnName="NurseId" />
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="KeyWord" ColumnName="KeyWord" />
+                <ScalarProperty Name="Notify" ColumnName="Notify" />
+                <ScalarProperty Name="Therapy" ColumnName="Therapy" />
+                <ScalarProperty Name="TherapyPlan" ColumnName="TherapyPlan" />
+                <ScalarProperty Name="Inspection" ColumnName="Inspection" />
+                <ScalarProperty Name="MedicalHistory" ColumnName="MedicalHistory" />
+                <ScalarProperty Name="CaseId" ColumnName="CaseId" />
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SDC_Summary">
+            <EntityTypeMapping TypeName="WSModel.SDC_Summary">
+              <MappingFragment StoreEntitySet="SDC_Summary">
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreatorUserId" ColumnName="CreatorUserId" />
+                <ScalarProperty Name="KeyWord" ColumnName="KeyWord" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="CaseId" ColumnName="CaseId" />
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SDG_Group">
+            <EntityTypeMapping TypeName="WSModel.SDG_Group">
+              <MappingFragment StoreEntitySet="SDG_Group">
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreatorUserId" ColumnName="CreatorUserId" />
+                <ScalarProperty Name="Validity" ColumnName="Validity" />
+                <ScalarProperty Name="ManageUserId" ColumnName="ManageUserId" />
+                <ScalarProperty Name="OwnerUserId" ColumnName="OwnerUserId" />
+                <ScalarProperty Name="Members" ColumnName="Members" />
+                <ScalarProperty Name="Topics" ColumnName="Topics" />
+                <ScalarProperty Name="Heat" ColumnName="Heat" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SDG_GroupMember">
+            <EntityTypeMapping TypeName="WSModel.SDG_GroupMember">
+              <MappingFragment StoreEntitySet="SDG_GroupMember">
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Validity" ColumnName="Validity" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SDO_Advertisement">
+            <EntityTypeMapping TypeName="WSModel.SDO_Advertisement">
+              <MappingFragment StoreEntitySet="SDO_Advertisement">
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreatorUserId" ColumnName="CreatorUserId" />
+                <ScalarProperty Name="Validity" ColumnName="Validity" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SDO_Recommend">
+            <EntityTypeMapping TypeName="WSModel.SDO_Recommend">
+              <MappingFragment StoreEntitySet="SDO_Recommend">
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreatorUserId" ColumnName="CreatorUserId" />
+                <ScalarProperty Name="Validity" ColumnName="Validity" />
+                <ScalarProperty Name="Fixed" ColumnName="Fixed" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SDT_Attitude">
+            <EntityTypeMapping TypeName="WSModel.SDT_Attitude">
+              <MappingFragment StoreEntitySet="SDT_Attitude">
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreatorUserId" ColumnName="CreatorUserId" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="VoiceId" ColumnName="VoiceId" />
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SDT_Comment">
+            <EntityTypeMapping TypeName="WSModel.SDT_Comment">
+              <MappingFragment StoreEntitySet="SDT_Comment">
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreatorUserId" ColumnName="CreatorUserId" />
+                <ScalarProperty Name="PublishTime" ColumnName="PublishTime" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="VoiceId" ColumnName="VoiceId" />
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SDT_Forward">
+            <EntityTypeMapping TypeName="WSModel.SDT_Forward">
+              <MappingFragment StoreEntitySet="SDT_Forward">
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreatorUserId" ColumnName="CreatorUserId" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="TopicId" ColumnName="TopicId" />
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SDT_Praise">
+            <EntityTypeMapping TypeName="WSModel.SDT_Praise">
+              <MappingFragment StoreEntitySet="SDT_Praise">
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreatorUserId" ColumnName="CreatorUserId" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="CommentId" ColumnName="CommentId" />
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SDT_Topic">
+            <EntityTypeMapping TypeName="WSModel.SDT_Topic">
+              <MappingFragment StoreEntitySet="SDT_Topic">
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreatorUserId" ColumnName="CreatorUserId" />
+                <ScalarProperty Name="PublishTime" ColumnName="PublishTime" />
+                <ScalarProperty Name="PublishGroupId" ColumnName="PublishGroupId" />
+                <ScalarProperty Name="Private" ColumnName="Private" />
+                <ScalarProperty Name="CaseId" ColumnName="CaseId" />
+                <ScalarProperty Name="Tags" ColumnName="Tags" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SDT_Voice">
+            <EntityTypeMapping TypeName="WSModel.SDT_Voice">
+              <MappingFragment StoreEntitySet="SDT_Voice">
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreatorUserId" ColumnName="CreatorUserId" />
+                <ScalarProperty Name="PublishTime" ColumnName="PublishTime" />
+                <ScalarProperty Name="CaseId" ColumnName="CaseId" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="TopicId" ColumnName="TopicId" />
+                <ScalarProperty Name="SN" ColumnName="SN" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
