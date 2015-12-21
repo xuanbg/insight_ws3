@@ -133,6 +133,8 @@ CREATE TABLE SDC_FirstVisit(
 [MedicalHistory]   NVARCHAR(512),                                                                                                          --现病史
 [Previous]         NVARCHAR(128),                                                                                                          --既往史
 [Inspection]       NVARCHAR(MAX),                                                                                                          --检查
+[UpperJaw]         VARCHAR(64),                                                                                                            --上颌涂鸦
+[LowerJaw]         VARCHAR(64),                                                                                                            --下颌涂鸦
 [Diagnosis]        NVARCHAR(32),                                                                                                           --诊断
 [TherapyPlan]      NVARCHAR(128),                                                                                                          --治疗计划
 [Therapy]          NVARCHAR(MAX),                                                                                                          --治疗过程记录
@@ -305,6 +307,9 @@ CREATE TABLE SDO_Advertisement(
 [ID]               UNIQUEIDENTIFIER CONSTRAINT IX_SDO_Advertisement PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
 [SN]               BIGINT IDENTITY(1,1),                                                                                                   --自增序列
 [Type]             INT NOT NULL,                                                                                                           --类型：1、首页轮播；2、群组轮播
+[Picture]          VARCHAR(64),                                                                                                            --图片
+[Url]              VARCHAR(64),                                                                                                            --跳转路径
+[Validity]         BIT DEFAULT 0 NOT NULL,                                                                                                 --是否有效：0、无效；1、有效
 [CreatorUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID) NOT NULL,                                                          --创建人ID
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )
@@ -315,6 +320,13 @@ GO
 CREATE TABLE SDO_Recommend(
 [ID]               UNIQUEIDENTIFIER CONSTRAINT IX_SDO_Recommend PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
 [SN]               BIGINT IDENTITY(1,1),                                                                                                   --自增序列
+[Type]             INT NOT NULL,                                                                                                           --类型：1、视频；2、群组；3、话题
+[Title]            NVARCHAR(64) NOT NULL,                                                                                                  --标题
+[Description]      NVARCHAR(MAX),                                                                                                          --描述
+[Picture]          VARCHAR(64),                                                                                                            --图片
+[Url]              VARCHAR(64),                                                                                                            --跳转路径
+[Fixed]            BIT DEFAULT 0 NOT NULL,                                                                                                 --是否置顶：0、否；1、是
+[Validity]         BIT DEFAULT 0 NOT NULL,                                                                                                 --是否有效：0、无效；1、有效
 [CreatorUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID) NOT NULL,                                                          --创建人ID
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )
