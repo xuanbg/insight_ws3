@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
 using Insight.WS.Server.Common.Service;
 using static Insight.WS.Server.Common.General;
@@ -135,21 +136,7 @@ namespace Insight.WS.Service
         {
             if (!Verification(us, "60D5BE64-0102-4189-A999-96EDAD3DA1B5")) return false;
 
-            var sql = "insert SYS_User (ID, Name, LoginName, Password, PayPassword, OpenId, Description, Type, CreatorUserId) ";
-            sql += "select @ID, @Name, @LoginName, @Password, @PayPassword, @OpenId, @Description, @Type, @CreatorUserId";
-            var parm = new[]
-            {
-                new SqlParameter("@ID", SqlDbType.UniqueIdentifier) {Value = Guid.Empty},
-                new SqlParameter("@Name", obj.Name),
-                new SqlParameter("@LoginName", obj.LoginName),
-                new SqlParameter("@Password", obj.Password),
-                new SqlParameter("@PayPassword", obj.PayPassword),
-                new SqlParameter("@OpenId", obj.OpenId),
-                new SqlParameter("@Description", obj.Description),
-                new SqlParameter("@Type", SqlDbType.Int) {Value = 1},
-                new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = Guid.Empty}
-            };
-            return SqlNonQuery(MakeCommand(sql, parm)) > 0;
+            return SqlNonQuery(DataAccess.AddUser(obj)) > 0;
         }
 
         /// <summary>

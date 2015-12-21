@@ -31,7 +31,7 @@ namespace Insight.WS.Server.Common
         /// <param name="type">验证码类型</param>
         /// <param name="action">是否验证即失效</param>
         /// <returns>bool 是否正确</returns>
-        public static bool CodeVerify(string number, string code, int type, bool action = true)
+        public static bool VerifyCode(string number, string code, int type, bool action = true)
         {
             using (var context = new WSEntities())
             {
@@ -120,16 +120,16 @@ namespace Insight.WS.Server.Common
                     break;
 
                 case LoginResult.NotExist:
-                    result.Code = "406";
+                    result.Successful = true;
+                    result.Code = "300";
                     result.Name = "SessionExpired";
-                    result.Message = "Session过期，请更新Session后重新发起请求";
-                    result.Data = Serialize(obj);
+                    result.Message = "Session过期，请更新Session";
                     break;
 
                 case LoginResult.Failure:
                     result.Code = "401";
-                    result.Name = "SignatureVerifyFailure";
-                    result.Message = "身份验证失败";
+                    result.Name = "InvalidAuthenticationInfo";
+                    result.Message = "提供的身份验证信息不正确";
                     break;
 
                 case LoginResult.Banned:

@@ -207,29 +207,8 @@ namespace Insight.WS.Test.Interface
                 request.ContentType = "application/json";
             }
 
-            DateTime dt = new DateTime();
-            dt = DateTime.Now;
-            var start = new DateTime(1970, 1, 1, 0, 0, 0, dt.Kind);
-            long l = Convert.ToInt64((dt - start).TotalSeconds);
-            string md5s = l + "passw0rd!" + 566 + "";
-            string secretkey = Util.GetHash(md5s);
-
-            var header = new WebHeaderCollection
-            {
-                {"userId", "566"},
-                {"password", "E10ADC3949BA59ABBE56E057F20F883E"},
-                {"authentication", "timestamp=" + l + ";secretKey=" + secretkey + ""},
-                {"sysType", "IOS"},
-                {"sysVersion", "1.2.0"},
-                {"uuid", "A6872607-3614-4361-8B10-319D66114309"},
-                {"OSversion", "8.4.1"},
-                {"phoneModel", "iPhone 6 (A1549/A1586)"},
-                {"carrierName", "CU"}
-            };
-            request.Headers.Add(header);
             request.Method = "POST";
             request.ContentLength = buffer.Length;
-
             if (author == "")
             {
                 var json = Serialize(Session);

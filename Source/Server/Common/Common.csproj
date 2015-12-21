@@ -206,6 +206,12 @@
     <Compile Include="ORM\MDD_Numeric.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ORM\MDE_Favorites.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\MDE_Message.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ORM\MDG_Contact.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
@@ -224,6 +230,9 @@
     <Compile Include="ORM\MDG_Material.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ORM\MDG_Member.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ORM\MDG_Supplier.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
@@ -240,6 +249,48 @@
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ORM\ReportTemplet.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\SDC_CaseHistory.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\SDC_FirstVisit.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\SDC_Subsequent.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\SDC_Summary.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\SDG_Group.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\SDG_GroupMember.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\SDO_Advertisement.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\SDO_Recommend.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\SDT_Attitude.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\SDT_Comment.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\SDT_Forward.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\SDT_Praise.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\SDT_Topic.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\SDT_Voice.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ORM\SYS_Alert_Message.cs">
@@ -382,6 +433,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>WSModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="App.Config" />
     <None Include="ORM\WSModel.edmx.diagram">
       <DependentUpon>WSModel.edmx</DependentUpon>
     </None>

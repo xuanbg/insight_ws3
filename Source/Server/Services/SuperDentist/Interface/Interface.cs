@@ -1,17 +1,78 @@
-﻿using System.Linq;
-using System.Net;
+﻿using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
 using System.ServiceModel;
-using System.ServiceModel.Web;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
 using Insight.WS.Server.Common.Service;
 using static Insight.WS.Server.Common.General;
+using static Insight.WS.Server.Common.SqlHelper;
 
 namespace Insight.WS.Service.SuperDentist
 {
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
     public class Interface : IInterface
     {
+
+        /// <summary>
+        /// 用户注册
+        /// </summary>
+        /// <param name="smsCode">短信验证码</param>
+        /// <param name="password">密码MD5值</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult Register(string smsCode, string password)
+        {
+            var result = new JsonResult {Code = "500", Name = "UnknownError", Message = "未知错误" };
+            var obj = GetAuthorization<Session>();
+            var signature = Util.Hash(obj.LoginName.ToUpper() + smsCode + password);
+            if (signature != obj.Signature)
+            {
+                result.Code = "401";
+                result.Name = "InvalidAuthenticationInfo";
+                result.Message = "提供的身份验证信息不正确";
+                return result;
+            }
+
+            SYS_User user;
+            using (var context = new WSEntities())
+            {
+                // 验证用户登录名是否已存在
+                user = context.SYS_User.FirstOrDefault(u => u.LoginName == obj.LoginName);
+                if (user != null)
+                {
+                    result.Code = "409";
+                    result.Name = "AccountAlreadyExists";
+                    result.Message = "用户已存在";
+                    return result;
+                }
+            }
+
+            if (!VerifyCode(obj.LoginName, smsCode, 1))
+            {
+                result.Code = "410";
+                result.Name = "SMSCodeError";
+                result.Message = "短信验证码错误";
+                return result;
+            }
+
+            var md = new MasterData { Name = obj.UserName, Alias = obj.LoginName };
+            user = new SYS_User {Name = obj.UserName, LoginName = obj.LoginName, Password = password, Type = -1};
+            var cmds = new List<SqlCommand> { DataAccess.AddMasterData(md), DataAccess.AddUser(user) };
+            if (!SqlExecute(cmds))
+            {
+                result.Code = "501";
+                result.Name = "DataBaseError";
+                result.Message = "数据写入失败";
+                return result;
+            }
+
+            result.Successful = true;
+            result.Code = "200";
+            result.Name = "OK";
+            result.Message = "接口调用成功";
+            return result;
+        }
+
         /// <summary>
         /// 用户登录
         /// </summary>
@@ -37,46 +98,5 @@ namespace Insight.WS.Service.SuperDentist
             return result;
         }
 
-        /// <summary>
-        /// 用户注册
-        /// </summary>
-        /// <param name="smsCode"></param>
-        /// <param name="password"></param>
-        /// <returns></returns>
-        public JsonResult Register(string smsCode, string password)
-        {
-            var result = new JsonResult {Code = "500", Name = "UnknownError", Message = "未知错误" };
-            var obj = GetAuthorization<Session>();
-            if (!CodeVerify(obj.LoginName, smsCode, 1))
-            {
-                result.Code = "300";
-                result.Name = "";
-                result.Message = "短信验证码错误";
-                return result;
-            }
-
-            using (var context = new WSEntities())
-            {
-                // 验证用户登录名是否已存在
-                var user = context.SYS_User.FirstOrDefault(u => u.LoginName == obj.LoginName);
-                if (user != null)
-                {
-                    result.Code = "300";
-                    result.Name = "";
-                    result.Message = "用户已存在";
-                    return result;
-                }
-            }
-
-            if (DataAccess.AddMember("WeiXin", obj.UserName, obj.LoginName, password, null, obj.OpenId))
-            {
-                result.Successful = true;
-                result.Code = "300";
-                result.Name = "";
-                result.Message = "短信验证码错误";
-                return result;
-            }
-            return result;
-        }
     }
 }

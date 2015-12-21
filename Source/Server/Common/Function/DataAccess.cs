@@ -47,43 +47,15 @@ namespace Insight.WS.Server.Common
         }
 
         /// <summary>
-        /// 写入会员数据
+        /// 获取可用服务列表
         /// </summary>
-        /// <param name="sourec">来源</param>
-        /// <param name="name">姓名</param>
-        /// <param name="ln">登录名</param>
-        /// <param name="pw">登陆密码</param>
-        /// <param name="id">身份证号</param>
-        /// <param name="openid">OpenId</param>
-        /// <returns>bool 是否成功</returns>
-        public static bool AddMember(string sourec, string name, string ln, string pw, string id, string openid)
+        /// <returns></returns>
+        public static IEnumerable<SYS_Interface> GetServiceList(string type)
         {
-            Guid? catId;
             using (var context = new WSEntities())
             {
-                catId = context.BASE_Category.FirstOrDefault(c => c.Alias == sourec)?.ID;
+                return context.SYS_Interface.Where(i => i.Binding == type).ToList();
             }
-            
-            // 插入主数据索引
-            var md = new MasterData { CategoryId = catId, Code = id, Name = name, Alias = ln };
-            var cmds = new List<SqlCommand> { AddMasterData(md) };
-
-            // 插入外部用户
-            const string sql = "insert SYS_User (ID, Name, LoginName, Password, OpenId, Type, CreatorUserId) select @ID, @Name, @LoginName, @Password, @OpenId, @Type, @CreatorUserId";
-            var parm = new[]
-            {
-                new SqlParameter("@ID", SqlDbType.UniqueIdentifier) {Value = Guid.Empty},
-                new SqlParameter("@Name", name),
-                new SqlParameter("@LoginName", ln),
-                new SqlParameter("@Password", pw),
-                new SqlParameter("@OpenId", openid),
-                new SqlParameter("@Type", SqlDbType.Int) {Value = 0},
-                new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = Guid.Empty},
-                new SqlParameter("@Read", SqlDbType.Int) {Value = 0}
-            };
-            cmds.Add(MakeCommand(sql, parm));
-
-            return SqlExecute(cmds);
         }
 
         /// <summary>
@@ -113,20 +85,25 @@ namespace Insight.WS.Server.Common
         }
 
         /// <summary>
-        /// 获取可用服务列表
+        /// 生成验证码
         /// </summary>
-        /// <returns></returns>
-        public static IEnumerable<SYS_Interface> GetServiceList(string type)
+        /// <param name="type">验证码类型</param>
+        /// <param name="phone">手机号</param>
+        /// <param name="code">验证码</param>
+        /// <param name="time">有效时间（分钟）</param>
+        /// <returns>string 验证码</returns>
+        public static bool GetVerifyCode(int type, string phone, string code, int time)
         {
-            using (var context = new WSEntities())
+            const string sql = "insert SYS_Verify_Record (Type, Mobile, Code, FailureTime) select @Type, @Mobile, @Code, @FailureTime";
+            var parm = new[]
             {
-                return context.SYS_Interface.Where(i => i.Binding == type).ToList();
-            }
+                new SqlParameter("@Type", type),
+                new SqlParameter("@Mobile", phone),
+                new SqlParameter("@Code", code),
+                new SqlParameter("@FailureTime", DateTime.Now.AddMinutes(time))
+            };
+            return SqlNonQuery(MakeCommand(sql, parm)) > 0;
         }
-
-        #endregion
-
-        #region 公共业务逻辑
 
         /// <summary>
         /// 根据输入的参数生成调整Index值的SQL命令
@@ -148,6 +125,30 @@ namespace Insight.WS.Server.Common
             sql.AppendFormat("and [Index] {0} {1} ", (oldIndex < newIndex ? ">" : "<"), oldIndex);
             sql.AppendFormat("and [Index] {0} {1}", (oldIndex < newIndex ? "<=" : ">="), newIndex);
             return sql.ToString();
+        }
+
+        /// <summary>
+        /// 拼装插入用户数据的SqlCommand
+        /// </summary>
+        /// <param name="obj">用户对象</param>
+        /// <returns>SqlCommand</returns>
+        public static SqlCommand AddUser(SYS_User obj)
+        {
+            var sql = "insert SYS_User (ID, Name, LoginName, Password, PayPassword, OpenId, Description, Type, CreatorUserId) ";
+            sql += "select @ID, @Name, @LoginName, @Password, @PayPassword, @OpenId, @Description, @Type, @CreatorUserId";
+            var parm = new[]
+            {
+                new SqlParameter("@ID", SqlDbType.UniqueIdentifier) {Value = obj.ID},
+                new SqlParameter("@Name", obj.Name),
+                new SqlParameter("@LoginName", obj.LoginName),
+                new SqlParameter("@Password", obj.Password),
+                new SqlParameter("@PayPassword", obj.PayPassword),
+                new SqlParameter("@OpenId", obj.OpenId),
+                new SqlParameter("@Description", obj.Description),
+                new SqlParameter("@Type", SqlDbType.Int) {Value = obj.Type},
+                new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = obj.CreatorUserId}
+            };
+            return MakeCommand(sql, parm);
         }
 
         /// <summary>
@@ -181,27 +182,6 @@ namespace Insight.WS.Server.Common
                 new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = img.CreatorUserId}, 
                 new SqlParameter("@Id", SqlDbType.UniqueIdentifier) {Value = bid}
             }).Select(parm => MakeCommand(sql, parm)).ToList();
-        }
-
-        /// <summary>
-        /// 生成验证码
-        /// </summary>
-        /// <param name="type">验证码类型</param>
-        /// <param name="phone">手机号</param>
-        /// <param name="code">验证码</param>
-        /// <param name="time">有效时间（分钟）</param>
-        /// <returns>string 验证码</returns>
-        public static bool GetVerifyCode(int type, string phone, string code, int time)
-        {
-            const string sql = "insert SYS_Verify_Record (Type, Mobile, Code, FailureTime) select @Type, @Mobile, @Code, @FailureTime";
-            var parm = new[]
-            {
-                new SqlParameter("@Type", type),
-                new SqlParameter("@Mobile", phone),
-                new SqlParameter("@Code", code),
-                new SqlParameter("@FailureTime", DateTime.Now.AddMinutes(time))
-            };
-            return SqlNonQuery(MakeCommand(sql, parm)) > 0;
         }
 
         #endregion
