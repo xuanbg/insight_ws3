@@ -31,7 +31,8 @@ namespace Insight.WS.Server.Common
         /// <returns>SqlCommand</returns>
         public static SqlCommand AddMasterData(MasterData obj)
         {
-            const string sql = "insert MasterData (ParentId, CategoryId, Code, Name, Alias, FullName) select @ParentId, @CategoryId, @Code, @Name, @Alias, @FullName select ID From MasterData where SN = SCOPE_IDENTITY()";
+            var sql = "insert MasterData (ParentId, CategoryId, Code, Name, Alias, FullName) ";
+            sql += "select @ParentId, @CategoryId, @Code, @Name, @Alias, @FullName select ID From MasterData where SN = SCOPE_IDENTITY()";
             var parm = new[]
             {
                 new SqlParameter("@ParentId", SqlDbType.UniqueIdentifier) {Value = obj.ParentId},
@@ -41,6 +42,32 @@ namespace Insight.WS.Server.Common
                 new SqlParameter("@Alias", obj.Alias),
                 new SqlParameter("@FullName", obj.FullName),
                 new SqlParameter("@Write", SqlDbType.Int) {Value = 0}
+            };
+            return MakeCommand(sql, parm);
+        }
+
+        /// <summary>
+        /// 拼装插入会员信息的SqlCommand
+        /// </summary>
+        /// <param name="obj">会员信息对象实体</param>
+        /// <returns>SqlCommand</returns>
+        public static SqlCommand AddMember(MDG_Member obj)
+        {
+            var sql = "insert MDG_Member (MID, Portrait, Integral, Beans, Country, State, City, County, Street, ZipCode) ";
+            sql += "select @MID, @Portrait, @Integral, @Beans, @Country, @State, @City, @County, @Street, @ZipCode)";
+            var parm = new[]
+            {
+                new SqlParameter("@MID", SqlDbType.UniqueIdentifier) {Value = obj.MID},
+                new SqlParameter("@Portrait", obj.Portrait),
+                new SqlParameter("@Integral", obj.Integral),
+                new SqlParameter("@Beans", obj.Beans),
+                new SqlParameter("@Country", obj.Country),
+                new SqlParameter("@State", obj.State),
+                new SqlParameter("@City", obj.City),
+                new SqlParameter("@County", obj.County),
+                new SqlParameter("@Street", obj.Street),
+                new SqlParameter("@ZipCode", obj.ZipCode),
+                new SqlParameter("@Read", SqlDbType.Int) {Value = 0}
             };
             return MakeCommand(sql, parm);
         }

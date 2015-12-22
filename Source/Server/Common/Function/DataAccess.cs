@@ -146,7 +146,8 @@ namespace Insight.WS.Server.Common
                 new SqlParameter("@OpenId", obj.OpenId),
                 new SqlParameter("@Description", obj.Description),
                 new SqlParameter("@Type", SqlDbType.Int) {Value = obj.Type},
-                new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = obj.CreatorUserId}
+                new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = obj.CreatorUserId},
+                new SqlParameter("@Read", SqlDbType.Int) {Value = 0}
             };
             return MakeCommand(sql, parm);
         }

@@ -33,11 +33,10 @@ namespace Insight.WS.Service.SuperDentist
                 return result;
             }
 
-            SYS_User user;
             using (var context = new WSEntities())
             {
                 // 验证用户登录名是否已存在
-                user = context.SYS_User.FirstOrDefault(u => u.LoginName == obj.LoginName);
+                var user = context.SYS_User.FirstOrDefault(u => u.LoginName == obj.LoginName);
                 if (user != null)
                 {
                     result.Code = "409";
@@ -55,9 +54,12 @@ namespace Insight.WS.Service.SuperDentist
             //    return result;
             //}
 
-            var md = new MasterData { Name = obj.UserName, Alias = obj.LoginName };
-            user = new SYS_User {Name = obj.UserName, LoginName = obj.LoginName, Password = password, Type = -1};
-            var cmds = new List<SqlCommand> { DataAccess.AddMasterData(md), DataAccess.AddUser(user) };
+            var cmds = new List<SqlCommand>
+            {
+                DataAccess.AddMasterData(new MasterData { Name = obj.UserName, Alias = obj.LoginName }),
+                DataAccess.AddMember(new MDG_Member()),
+                DataAccess.AddUser(new SYS_User {Name = obj.UserName, LoginName = obj.LoginName, Password = password, Type = -1})
+            };
             if (!SqlExecute(cmds))
             {
                 result.Code = "501";
@@ -66,11 +68,8 @@ namespace Insight.WS.Service.SuperDentist
                 return result;
             }
 
-            result.Successful = true;
-            result.Code = "200";
-            result.Name = "OK";
-            result.Message = "接口调用成功";
-            return result;
+            obj.Signature = Util.Hash(obj.LoginName.ToUpper() + password);
+            return Util.GetJson(UserLogin(obj));
         }
 
         /// <summary>

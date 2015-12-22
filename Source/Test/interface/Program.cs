@@ -8,6 +8,7 @@ namespace Insight.WS.Test.Interface
     static class Program
     {
         private const string BassAddress = "http://localhost:6280/Interface/";
+        //private const string BassAddress = "http://120.27.142.125:6280/Interface/";
 
         /// <summary>
         /// 应用程序的主入口点。
@@ -15,7 +16,7 @@ namespace Insight.WS.Test.Interface
         [STAThread]
         static void Main()
         {
-            Register();
+            Util.Session = Register();
             Util.Session = Login();
             Logout();
         }
@@ -23,15 +24,17 @@ namespace Insight.WS.Test.Interface
         /// <summary>
         /// 用户注册
         /// </summary>
-        private static void Register()
+        private static Session Register()
         {
-            var url = BassAddress + "user/signup";
+            var url = BassAddress + "user";
+            var mobile = "18600740256";
             var session = new Session
             {
-                LoginName = "18600740257",
+                LoginName = mobile,
                 UserName = "宣炳刚",
-                Signature = Hash("18600740257" + "123456" + Hash("111111")),
+                Signature = Hash(mobile + "123456" + Hash("111111")),
                 Version = 10000,
+                ClientType = 2,
                 MachineId = Hash("MachineId")
             };
             var json = Serialize(session);
@@ -40,6 +43,7 @@ namespace Insight.WS.Test.Interface
             var dict = new Dictionary<string, string> {{"smsCode", "123456"}, {"password", Hash("111111")}};
             var data = Serialize(dict);
             var result = HttpRequest(url, "PUT", author, data);
+            return !result.Successful ? null : Deserialize<Session>(result.Data);
         }
 
         /// <summary>
@@ -48,14 +52,15 @@ namespace Insight.WS.Test.Interface
         /// <returns></returns>
         private static Session Login()
         {
-            var mobile = "admin";
-            var password = "1";
+            var mobile = "18600740257";
+            var password = "111111";
             var url = BassAddress + "user/signin";
             var us = new Session
             {
                 LoginName = mobile,
                 Signature = Hash(mobile.ToUpper() + Hash(password)),
                 Version = 10000,
+                ClientType = 2,
                 MachineId = Hash("MachineId")
             };
             var data = Serialize(us);
@@ -70,7 +75,7 @@ namespace Insight.WS.Test.Interface
         {
             var url = BassAddress + "user/signout";
             var data = Serialize(Util.Session.ID);
-            var result = HttpRequest(url, "POST", data);
+            var result = HttpRequest(url, "POST", "", data);
         }
 
     }
