@@ -7,8 +7,8 @@ namespace Insight.WS.Test.Interface
 {
     static class Program
     {
-        private const string BassAddress = "http://localhost:6280/Interface/";
-        //private const string BassAddress = "http://120.27.142.125:6280/Interface/";
+        //private const string BassAddress = "http://localhost:6280/Interface/";
+        private const string BassAddress = "http://120.27.142.125:6280/Interface/";
 
         /// <summary>
         /// 应用程序的主入口点。
@@ -31,7 +31,7 @@ namespace Insight.WS.Test.Interface
             var session = new Session
             {
                 LoginName = mobile,
-                UserName = "宣炳刚",
+                UserName = "张三",
                 Signature = Hash(mobile + "123456" + Hash("111111")),
                 Version = 10000,
                 ClientType = 2,
@@ -52,13 +52,13 @@ namespace Insight.WS.Test.Interface
         /// <returns></returns>
         private static Session Login()
         {
-            var mobile = "18600740257";
-            var password = "111111";
+            var mobile = "18600740256";
+            var password = Hash("111111");
             var url = BassAddress + "user/signin";
             var us = new Session
             {
                 LoginName = mobile,
-                Signature = Hash(mobile.ToUpper() + Hash(password)),
+                Signature = Hash(mobile.ToUpper() + password),
                 Version = 10000,
                 ClientType = 2,
                 MachineId = Hash("MachineId")

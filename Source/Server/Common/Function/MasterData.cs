@@ -54,7 +54,7 @@ namespace Insight.WS.Server.Common
         public static SqlCommand AddMember(MDG_Member obj)
         {
             var sql = "insert MDG_Member (MID, Portrait, Integral, Beans, Country, State, City, County, Street, ZipCode) ";
-            sql += "select @MID, @Portrait, @Integral, @Beans, @Country, @State, @City, @County, @Street, @ZipCode)";
+            sql += "select @MID, @Portrait, @Integral, @Beans, @Country, @State, @City, @County, @Street, @ZipCode";
             var parm = new[]
             {
                 new SqlParameter("@MID", SqlDbType.UniqueIdentifier) {Value = obj.MID},
