@@ -1,14 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Drawing;
-using System.IO;
-using System.IO.Compression;
-using System.Net;
-using System.Security.Cryptography;
 using System.Text;
-using System.Web.Script.Serialization;
-using System.Windows.Forms;
+using static Insight.WS.Test.Interface.Util;
 
 namespace Insight.WS.Test.Interface
 {
@@ -22,41 +15,62 @@ namespace Insight.WS.Test.Interface
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-
-            //Util.Session = Login();
-            //Logout();
+            Register();
+            Util.Session = Login();
+            Logout();
         }
 
-        private static void Logout()
+        /// <summary>
+        /// 用户注册
+        /// </summary>
+        private static void Register()
         {
-            var url = BassAddress + "user/logout";
-            var data = Util.Serialize(Util.Session.ID);
-            var result = Util.HttpPost(url, data);
+            var url = BassAddress + "user/signup";
+            var session = new Session
+            {
+                LoginName = "18600740257",
+                UserName = "宣炳刚",
+                Signature = Hash("18600740257" + "123456" + Hash("111111")),
+                Version = 10000,
+                MachineId = Hash("MachineId")
+            };
+            var json = Serialize(session);
+            var buff = Encoding.UTF8.GetBytes(json);
+            var author = Convert.ToBase64String(buff);
+            var dict = new Dictionary<string, string> {{"smsCode", "123456"}, {"password", Hash("111111")}};
+            var data = Serialize(dict);
+            var result = HttpRequest(url, "PUT", author, data);
         }
 
         /// <summary>
         /// 用户登录
         /// </summary>
-        /// <returns>Session</returns>
+        /// <returns></returns>
         private static Session Login()
         {
             var mobile = "admin";
             var password = "1";
-            var url = BassAddress + "user/login";
+            var url = BassAddress + "user/signin";
             var us = new Session
             {
                 LoginName = mobile,
-                Signature = Util.GetHash(mobile.ToUpper() + Util.GetHash(password)),
+                Signature = Hash(mobile.ToUpper() + Hash(password)),
                 Version = 10000,
-                MachineId = Util.GetHash("MachineId")
+                MachineId = Hash("MachineId")
             };
-            var data = Util.Serialize(us);
-            var result = Util.HttpPost(url, data, null);
-            var obj = Util.Deserialize<JsonResult>(result);
+            var data = Serialize(us);
+            var result = HttpRequest(url, "POST", null, data);
+            return !result.Successful ? null : Deserialize<Session>(result.Data);
+        }
 
-            return !obj.Successful ? null : Util.Deserialize<Session>(obj.Data);
+        /// <summary>
+        /// 注销
+        /// </summary>
+        private static void Logout()
+        {
+            var url = BassAddress + "user/signout";
+            var data = Serialize(Util.Session.ID);
+            var result = HttpRequest(url, "POST", data);
         }
 
     }

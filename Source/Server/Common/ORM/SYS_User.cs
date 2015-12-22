@@ -68,6 +68,9 @@ namespace Insight.WS.Server.Common.ORM
     [KnownType(typeof(SDT_Praise))]
     [KnownType(typeof(SDT_Topic))]
     [KnownType(typeof(SDT_Voice))]
+    [KnownType(typeof(SDO_Tutorial))]
+    [KnownType(typeof(SDO_TutorialComment))]
+    [KnownType(typeof(SDO_TutorialPraise))]
     
     public partial class SYS_User
     {
@@ -134,6 +137,9 @@ namespace Insight.WS.Server.Common.ORM
             this.SDT_Praise = new HashSet<SDT_Praise>();
             this.SDT_Topic = new HashSet<SDT_Topic>();
             this.SDT_Voice = new HashSet<SDT_Voice>();
+            this.SDO_Tutorial = new HashSet<SDO_Tutorial>();
+            this.SDO_TutorialComment = new HashSet<SDO_TutorialComment>();
+            this.SDO_TutorialPraise = new HashSet<SDO_TutorialPraise>();
         }
     
     	[DataMember]
@@ -285,5 +291,11 @@ namespace Insight.WS.Server.Common.ORM
         public virtual ICollection<SDT_Topic> SDT_Topic { get; set; }
     	[DataMember]
         public virtual ICollection<SDT_Voice> SDT_Voice { get; set; }
+    	[DataMember]
+        public virtual ICollection<SDO_Tutorial> SDO_Tutorial { get; set; }
+    	[DataMember]
+        public virtual ICollection<SDO_TutorialComment> SDO_TutorialComment { get; set; }
+    	[DataMember]
+        public virtual ICollection<SDO_TutorialPraise> SDO_TutorialPraise { get; set; }
     }
 }

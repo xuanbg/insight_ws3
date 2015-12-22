@@ -47,13 +47,13 @@ namespace Insight.WS.Service.SuperDentist
                 }
             }
 
-            if (!VerifyCode(obj.LoginName, smsCode, 1))
-            {
-                result.Code = "410";
-                result.Name = "SMSCodeError";
-                result.Message = "短信验证码错误";
-                return result;
-            }
+            //if (!VerifyCode(obj.LoginName, smsCode, 1))
+            //{
+            //    result.Code = "410";
+            //    result.Name = "SMSCodeError";
+            //    result.Message = "短信验证码错误";
+            //    return result;
+            //}
 
             var md = new MasterData { Name = obj.UserName, Alias = obj.LoginName };
             user = new SYS_User {Name = obj.UserName, LoginName = obj.LoginName, Password = password, Type = -1};

@@ -121,7 +121,6 @@ namespace Insight.WS.Server.Common.ORM
         public virtual DbSet<SYS_User> SYS_User { get; set; }
         public virtual DbSet<SYS_UserGroup> SYS_UserGroup { get; set; }
         public virtual DbSet<SYS_UserGroupMember> SYS_UserGroupMember { get; set; }
-        public virtual DbSet<SYS_Verify_Record> SYS_Verify_Record { get; set; }
         public virtual DbSet<Advance> Advance { get; set; }
         public virtual DbSet<Dictionary> Dictionary { get; set; }
         public virtual DbSet<ReportSchedular> ReportSchedular { get; set; }
@@ -143,5 +142,8 @@ namespace Insight.WS.Server.Common.ORM
         public virtual DbSet<SDT_Praise> SDT_Praise { get; set; }
         public virtual DbSet<SDT_Topic> SDT_Topic { get; set; }
         public virtual DbSet<SDT_Voice> SDT_Voice { get; set; }
+        public virtual DbSet<SDO_Tutorial> SDO_Tutorial { get; set; }
+        public virtual DbSet<SDO_TutorialComment> SDO_TutorialComment { get; set; }
+        public virtual DbSet<SDO_TutorialPraise> SDO_TutorialPraise { get; set; }
     }
 }

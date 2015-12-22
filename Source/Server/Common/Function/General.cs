@@ -22,6 +22,27 @@ namespace Insight.WS.Server.Common
         private static readonly int UpdateVersion = Convert.ToInt32(GetAppSetting("UpdateVersion"));
         private static readonly Binding Binding = new NetTcpBinding();
         private static readonly EndpointAddress Address = new EndpointAddress("net.tcp://localhost:6200/VerifyServer");
+        private static readonly List<VerifyRecord> SmsCodes = new List<VerifyRecord>();
+
+        /// <summary>
+        /// 生成验证码
+        /// </summary>
+        /// <param name="type">验证码类型</param>
+        /// <param name="phone">手机号</param>
+        /// <param name="code">验证码</param>
+        /// <param name="time">有效时间（分钟）</param>
+        /// <returns>string 验证码</returns>
+        public static void GetVerifyCode(int type, string phone, string code, int time)
+        {
+            var record = new VerifyRecord
+            {
+                Type = type,
+                Mobile = phone,
+                Code = code,
+                FailureTime = DateTime.Now.AddMinutes(time)
+            };
+            SmsCodes.Add(record);
+        }
 
         /// <summary>
         /// 验证验证码是否正确
@@ -33,20 +54,12 @@ namespace Insight.WS.Server.Common
         /// <returns>bool 是否正确</returns>
         public static bool VerifyCode(string number, string code, int type, bool action = true)
         {
-            using (var context = new WSEntities())
-            {
-                var list = context.SYS_Verify_Record.Where(c => c.Mobile == number && c.Type == type && !c.Verified).ToList();
-                if (list.Count == 0 || !(list.Exists(c => c.Code == code && c.FailureTime > DateTime.Now))) return false;
+            var list = SmsCodes.Where(c => c.Mobile == number && c.Type == type && c.FailureTime > DateTime.Now).ToList();
+            if (list.Count <= 0) return false;
 
-                if (!action) return true;
+            if (!action) return true;
 
-                foreach (var record in list)
-                {
-                    record.Verified = true;
-                    record.VerifyTime = DateTime.Now;
-                }
-                return context.SaveChanges() > 0;
-            }
+            return SmsCodes.RemoveAll(c => c.Mobile == number && c.Type == type) > 0;
         }
 
         /// <summary>
@@ -397,57 +410,6 @@ namespace Insight.WS.Server.Common
             img.Size = stream.Length;
             img.Image = bytes;
             return img;
-        }
-
-        /// <summary>
-        /// 发送短消息
-        /// </summary>
-        /// <param name="number">手机号</param>
-        /// <param name="msg">发送的消息</param>
-        public static void SendMsg(string number, string msg)
-        {
-            var channel = GetAppSetting("Channel");
-            var result = HttpGet(MakePostString(number, msg, channel));
-            if (channel == "0")
-            {
-                var returnMsg = Deserialize<returnsms>(result, Encoding.UTF8);
-                if (returnMsg.returnstatus == "Success") return;
-
-                HttpGet(MakePostString(number, msg, "1"));
-            }
-            else
-            {
-                var returnMsg = Deserialize<CSubmitState>(result, Encoding.UTF8);
-                if (returnMsg.MsgState == "提交成功") return;
-
-                HttpGet(MakePostString(number, msg, "0"));
-            }
-        }
-
-        /// <summary>
-        /// 拼装发送验证码的Post字符串
-        /// </summary>
-        /// <param name="number">手机号</param>
-        /// <param name="msg">发送的消息</param>
-        /// <param name="channel">短信通道代号</param>
-        /// <returns>string Post字符串</returns>
-        private static string MakePostString(string number, string msg, string channel)
-        {
-            switch (channel)
-            {
-                case "1":
-                    var name = GetAppSetting("sname");
-                    var pwd = GetAppSetting("spwd");
-                    var corpid = GetAppSetting("scorpid");
-                    var prdid = GetAppSetting("sprdid");
-                    return $"{GetAppSetting("surl")}?sname={name}&spwd={pwd}&scorpid={corpid}&sprdid={prdid}&sdst={number}&smsg={msg}";
-
-                default:
-                    var uid = GetAppSetting("UId");
-                    var account = GetAppSetting("Account");
-                    var password = GetAppSetting("Password");
-                    return $"{GetAppSetting("Url")}?action=send&userid={uid}&account={account}&password={password}&mobile={number}&content={msg}&sendTime=&extno=";
-            }
         }
 
     }

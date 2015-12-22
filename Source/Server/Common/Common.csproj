@@ -84,11 +84,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExtendClass\CSubmitState.cs" />
     <Compile Include="ExtendClass\Entities.cs" />
     <Compile Include="ExtendClass\JsonResult.cs" />
-    <Compile Include="ExtendClass\ReturnSMS.cs" />
     <Compile Include="ExtendClass\Services.cs" />
+    <Compile Include="ExtendClass\VerifyRecord.cs" />
     <Compile Include="Function\DataAccess.cs" />
     <Compile Include="Function\Clearing.cs">
       <DependentUpon>DataAccess.cs</DependentUpon>
@@ -275,6 +274,15 @@
     <Compile Include="ORM\SDO_Recommend.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ORM\SDO_Tutorial.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\SDO_TutorialComment.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\SDO_TutorialPraise.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ORM\SDT_Attitude.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
@@ -396,9 +404,6 @@
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ORM\SYS_UserGroupMember.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SYS_Verify_Record.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ORM\WSModel.Context.cs">

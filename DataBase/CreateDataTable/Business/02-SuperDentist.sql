@@ -1,4 +1,13 @@
-﻿IF EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'SDO_Recommend') AND OBJECTPROPERTY(id, N'ISUSERTABLE') = 1)
+﻿IF EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'SDO_TutorialPraise') AND OBJECTPROPERTY(id, N'ISUSERTABLE') = 1)
+DROP TABLE SDO_TutorialPraise
+GO
+IF EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'SDO_TutorialComment') AND OBJECTPROPERTY(id, N'ISUSERTABLE') = 1)
+DROP TABLE SDO_TutorialComment
+GO
+IF EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'SDO_Tutorial') AND OBJECTPROPERTY(id, N'ISUSERTABLE') = 1)
+DROP TABLE SDO_Tutorial
+GO
+IF EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'SDO_Recommend') AND OBJECTPROPERTY(id, N'ISUSERTABLE') = 1)
 DROP TABLE SDO_Recommend
 GO
 IF EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'SDO_Advertisement') AND OBJECTPROPERTY(id, N'ISUSERTABLE') = 1)
@@ -327,6 +336,45 @@ CREATE TABLE SDO_Recommend(
 [Url]              VARCHAR(64),                                                                                                            --跳转路径
 [Fixed]            BIT DEFAULT 0 NOT NULL,                                                                                                 --是否置顶：0、否；1、是
 [Validity]         BIT DEFAULT 0 NOT NULL,                                                                                                 --是否有效：0、无效；1、有效
+[CreatorUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID) NOT NULL,                                                          --创建人ID
+[CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
+)
+GO
+
+/*****视频教程表*****/
+
+CREATE TABLE SDO_Tutorial(
+[ID]               UNIQUEIDENTIFIER CONSTRAINT IX_SDO_Tutorial PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
+[SN]               BIGINT IDENTITY(1,1),                                                                                                   --自增序列
+[Title]            NVARCHAR(64) NOT NULL,                                                                                                  --标题
+[Description]      NVARCHAR(MAX),                                                                                                          --描述
+[Picture]          VARCHAR(64),                                                                                                            --图片
+[Url]              VARCHAR(64),                                                                                                            --视频路径
+[Validity]         BIT DEFAULT 0 NOT NULL,                                                                                                 --是否有效：0、无效；1、有效
+[CreatorUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID) NOT NULL,                                                          --创建人ID
+[CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
+)
+GO
+
+/*****教程评论表*****/
+
+CREATE TABLE SDO_TutorialComment(
+[ID]               UNIQUEIDENTIFIER CONSTRAINT IX_SDO_TutorialComment PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
+[SN]               BIGINT IDENTITY(1,1),                                                                                                   --自增序列
+[TutorialId]       UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SDO_Tutorial(ID) ON DELETE CASCADE NOT NULL,                                    --教程ID
+[Content]          NVARCHAR(512) NOT NULL,                                                                                                 --评论内容
+[PublishTime]      DATETIME,                                                                                                               --发布时间
+[CreatorUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID) NOT NULL,                                                          --创建人ID
+[CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
+)
+GO
+
+/*****评论态度表*****/
+
+CREATE TABLE SDO_TutorialPraise(
+[ID]               UNIQUEIDENTIFIER CONSTRAINT IX_SDO_TutorialPraise PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
+[SN]               BIGINT IDENTITY(1,1),                                                                                                   --自增序列
+[TutorialId]       UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SDO_Tutorial(ID) ON DELETE CASCADE NOT NULL,                                     --评论ID
 [CreatorUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID) NOT NULL,                                                          --创建人ID
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )

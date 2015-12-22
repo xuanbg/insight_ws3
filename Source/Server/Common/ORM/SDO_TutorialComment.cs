@@ -14,26 +14,29 @@ namespace Insight.WS.Server.Common.ORM
     using System.Collections.Generic;
     
     [DataContract(IsReference = true)]
+    [KnownType(typeof(SDO_Tutorial))]
+    [KnownType(typeof(SYS_User))]
     
-    public partial class SYS_Verify_Record
+    public partial class SDO_TutorialComment
     {
     	[DataMember]
         public System.Guid ID { get; set; }
     	[DataMember]
         public long SN { get; set; }
     	[DataMember]
-        public int Type { get; set; }
+        public System.Guid TutorialId { get; set; }
     	[DataMember]
-        public string Mobile { get; set; }
+        public string Content { get; set; }
     	[DataMember]
-        public string Code { get; set; }
+        public Nullable<System.DateTime> PublishTime { get; set; }
     	[DataMember]
-        public bool Verified { get; set; }
-    	[DataMember]
-        public Nullable<System.DateTime> VerifyTime { get; set; }
-    	[DataMember]
-        public Nullable<System.DateTime> FailureTime { get; set; }
+        public System.Guid CreatorUserId { get; set; }
     	[DataMember]
         public System.DateTime CreateTime { get; set; }
+    
+    	[DataMember]
+        public virtual SDO_Tutorial SDO_Tutorial { get; set; }
+    	[DataMember]
+        public virtual SYS_User SYS_User { get; set; }
     }
 }

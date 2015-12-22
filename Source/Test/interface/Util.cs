@@ -85,7 +85,7 @@ namespace Insight.WS.Test.Interface
         /// </summary>
         /// <param name="str">输入字符串</param>
         /// <returns>String Hash值</returns>
-        public static string GetHash(string str)
+        public static string Hash(string str)
         {
             var md5 = MD5.Create();
             var s = md5.ComputeHash(Encoding.UTF8.GetBytes(str.Trim()));
@@ -186,85 +186,66 @@ namespace Insight.WS.Test.Interface
         }
 
         /// <summary>
-        /// Post数据
+        /// HttpRequest方法
         /// </summary>
-        /// <param name="url"></param>
-        /// <param name="data"></param>
-        /// <param name="author"></param>
-        /// <returns></returns>
-        public static string HttpPost(string url, string data = "", string author = "")
+        /// <param name="url">请求的地址</param>
+        /// <param name="method">请求的方法：GET,PUT,POST,DELETE</param>
+        /// <param name="author">接口认证数据</param>
+        /// <param name="data">接口参数</param>
+        /// <returns>JsonResult</returns>
+        public static JsonResult HttpRequest(string url, string method, string author = "", string data = "")
         {
-            var request = (HttpWebRequest) WebRequest.Create(url);
-            byte[] buffer;
-            if (Compres)
+            if (method == "GET") url += (data == "" ? "" : "?") + data;
+            var request = GetWebRequest(url, method, author);
+
+            if (method != "GET")
             {
-                buffer = Compress(Encoding.UTF8.GetBytes(data));
-                request.ContentType = "application/x-gzip";
-            }
-            else
-            {
-                buffer = Encoding.UTF8.GetBytes(data);
-                request.ContentType = "application/json";
+                var buffer = Compres ? Compress(Encoding.UTF8.GetBytes(data)) : Encoding.UTF8.GetBytes(data);
+                request.ContentLength = buffer.Length;
+                using (var stream = request.GetRequestStream())
+                {
+                    stream.Write(buffer, 0, buffer.Length);
+                }
             }
 
-            request.Method = "POST";
-            request.ContentLength = buffer.Length;
-            if (author == "")
-            {
-                var json = Serialize(Session);
-                var buff = Encoding.UTF8.GetBytes(json);
-                author = Convert.ToBase64String(buff);
-            }
-            if (author != null) request.Headers.Add(HttpRequestHeader.Authorization, author);
-            using (var stream = request.GetRequestStream())
-            {
-                stream.Write(buffer, 0, buffer.Length);
-            }
-
-            var response = (HttpWebResponse)request.GetResponse();
-            var responseStream = response.GetResponseStream();
-            if (responseStream == null)
-            {
-                responseStream.Close();
-                return null;
-            }
-
-            var encoding = response.Headers["Content-Encoding"];
-            if (encoding != null && encoding.ToLower().Contains("gzip"))
-            {
-                 responseStream = new GZipStream(responseStream, CompressionMode.Decompress);
-            }
-
-            using (var reader = new StreamReader(responseStream, Encoding.GetEncoding("utf-8")))
-            {
-                var result = reader.ReadToEnd();
-                responseStream.Close();
-                return result;
-            }
+            return GetResponse(request);
         }
 
         /// <summary>
-        /// Get数据
+        /// 获取WebRequest对象
         /// </summary>
-        /// <param name="url">URL</param>
-        /// <param name="data">参数</param>
-        /// <param name="author">用户会话</param>
-        /// <returns>string Json字符串</returns>
-        public static string HttpGet(string url, string data = "", string author = "")
+        /// <param name="url">请求的地址</param>
+        /// <param name="method">请求的方法：GET,PUT,POST,DELETE</param>
+        /// <param name="author">接口认证数据</param>
+        /// <returns>HttpWebRequest</returns>
+        private static HttpWebRequest GetWebRequest(string url, string method, string author)
         {
-            var request = WebRequest.Create(url + (data == "" ? "" : "?") + data);
-            request.Method = "GET";
-            request.ContentType = "text/html;charset=UTF-8";
+            var request = (HttpWebRequest)WebRequest.Create(url);
+            request.Method = method;
+            request.ContentType = Compres ? "application/x-gzip" : "application/json";
             if (author == "")
             {
                 var json = Serialize(Session);
                 var buff = Encoding.UTF8.GetBytes(json);
                 author = Convert.ToBase64String(buff);
             }
-            if (author != null) request.Headers.Add(HttpRequestHeader.Authorization, author);
 
-            var response = request.GetResponse();
+            if (author != null)
+            {
+                request.Headers.Add(HttpRequestHeader.Authorization, author);
+            }
 
+            return request;
+        }
+
+        /// <summary>
+        /// 获取Request响应数据
+        /// </summary>
+        /// <param name="request">WebRequest</param>
+        /// <returns>JsonResult</returns>
+        private static JsonResult GetResponse(WebRequest request)
+        {
+            var response = (HttpWebResponse)request.GetResponse();
             var responseStream = response.GetResponseStream();
             if (responseStream == null)
             {
@@ -277,11 +258,12 @@ namespace Insight.WS.Test.Interface
             {
                 responseStream = new GZipStream(responseStream, CompressionMode.Decompress);
             }
+
             using (var reader = new StreamReader(responseStream, Encoding.GetEncoding("utf-8")))
             {
                 var result = reader.ReadToEnd();
                 responseStream.Close();
-                return result;
+                return Deserialize<JsonResult>(result);
             }
         }
 

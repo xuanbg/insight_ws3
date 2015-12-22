@@ -185,47 +185,46 @@ namespace Insight.WS.Server.Common
         }
 
         /// <summary>
-        /// Post数据
+        /// 获取WebRequest对象
         /// </summary>
-        /// <param name="url"></param>
-        /// <param name="data"></param>
-        /// <param name="author"></param>
-        /// <returns></returns>
-        public static string HttpPost(string url, string data = "", string author = "")
+        /// <param name="url">请求的地址</param>
+        /// <param name="method">请求的方法：GET,PUT,POST,DELETE</param>
+        /// <param name="author">接口认证数据</param>
+        /// <returns>HttpWebRequest</returns>
+        private static HttpWebRequest GetWebRequest(string url, string method, string author)
         {
             var request = (HttpWebRequest)WebRequest.Create(url);
-            byte[] buffer;
-            if (Compres)
-            {
-                buffer = Compress(Encoding.UTF8.GetBytes(data));
-                request.ContentType = "application/x-gzip";
-            }
-            else
-            {
-                buffer = Encoding.UTF8.GetBytes(data);
-                request.ContentType = "application/json";
-            }
-            request.Method = "POST";
-            request.ContentLength = buffer.Length;
-
+            request.Method = method;
+            request.ContentType = Compres ? "application/x-gzip" : "application/json";
             if (author == "")
             {
                 var json = Serialize(Session);
                 var buff = Encoding.UTF8.GetBytes(json);
                 author = Convert.ToBase64String(buff);
             }
-            if (author != null) request.Headers.Add(HttpRequestHeader.Authorization, author);
-            using (var stream = request.GetRequestStream())
+
+            if (author != null)
             {
-                stream.Write(buffer, 0, buffer.Length);
+                request.Headers.Add(HttpRequestHeader.Authorization, author);
             }
 
+            return request;
+        }
+
+        /// <summary>
+        /// 获取Request响应数据，并转换为指定的类型
+        /// </summary>
+        /// <typeparam name="T">要转换的类型</typeparam>
+        /// <param name="request">WebRequest对象</param>
+        /// <returns>T 指定类型的对象</returns>
+        private static T GetResponse<T>(WebRequest request)
+        {
             var response = (HttpWebResponse)request.GetResponse();
             var responseStream = response.GetResponseStream();
             if (responseStream == null)
             {
                 responseStream.Close();
-                return null;
+                return default(T);
             }
 
             var encoding = response.Headers["Content-Encoding"];
@@ -238,49 +237,7 @@ namespace Insight.WS.Server.Common
             {
                 var result = reader.ReadToEnd();
                 responseStream.Close();
-                return result;
-            }
-        }
-
-        /// <summary>
-        /// Get数据
-        /// </summary>
-        /// <param name="url">URL</param>
-        /// <param name="data">参数</param>
-        /// <param name="author">用户会话</param>
-        /// <returns>string Json字符串</returns>
-        public static string HttpGet(string url, string data = "", string author = "")
-        {
-            var request = WebRequest.Create(url + (data == "" ? "" : "?") + data);
-            request.Method = "GET";
-            request.ContentType = "text/html;charset=UTF-8";
-            if (author == "")
-            {
-                var json = Serialize(Session);
-                var buff = Encoding.UTF8.GetBytes(json);
-                author = Convert.ToBase64String(buff);
-            }
-            if (author != null) request.Headers.Add(HttpRequestHeader.Authorization, author);
-
-            var response = request.GetResponse();
-
-            var responseStream = response.GetResponseStream();
-            if (responseStream == null)
-            {
-                responseStream.Close();
-                return null;
-            }
-
-            var encoding = response.Headers["Content-Encoding"];
-            if (encoding != null && encoding.ToLower().Contains("gzip"))
-            {
-                responseStream = new GZipStream(responseStream, CompressionMode.Decompress);
-            }
-            using (var reader = new StreamReader(responseStream, Encoding.GetEncoding("utf-8")))
-            {
-                var result = reader.ReadToEnd();
-                responseStream.Close();
-                return result;
+                return Deserialize<T>(result);
             }
         }
 
