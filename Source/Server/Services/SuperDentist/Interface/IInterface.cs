@@ -38,6 +38,13 @@ namespace Insight.WS.Service.SuperDentist
         [OperationContract]
         JsonResult Logout(int id);
 
+        /// <summary>
+        /// 获取七牛云文件上传Token
+        /// </summary>
+        /// <returns>JsonResult</returns>
+        [WebGet(UriTemplate = "setting/getqiniutoken", ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        JsonResult GetQiniuUploadToken();
 
     }
 

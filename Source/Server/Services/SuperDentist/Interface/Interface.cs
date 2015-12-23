@@ -5,6 +5,7 @@ using System.ServiceModel;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
 using Insight.WS.Server.Common.Service;
+using Qiniu.RS;
 using static Insight.WS.Server.Common.General;
 using static Insight.WS.Server.Common.SqlHelper;
 using static Insight.WS.Server.Common.Util;
@@ -14,6 +15,9 @@ namespace Insight.WS.Service.SuperDentist
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
     public class Interface : IInterface
     {
+        private static readonly string AccessKey = GetAppSetting("AccessKey");
+        private static readonly string SecretKey = GetAppSetting("SecretKey");
+        private static readonly string BucketName = GetAppSetting("Bucket");
 
         /// <summary>
         /// 用户注册
@@ -92,11 +96,27 @@ namespace Insight.WS.Service.SuperDentist
         public JsonResult Logout(int id)
         {
             var result = Verify();
-            if (result == null || !result.Successful) return result;
+            if (!result.Successful) return result;
 
             SetOnlineStatus(id, false);
             return result;
         }
 
+        /// <summary>
+        /// 获取七牛云文件上传Token
+        /// </summary>
+        /// <returns>JsonResult</returns>
+        public JsonResult GetQiniuUploadToken()
+        {
+            var result = Verify(Secret);
+            if (!result.Successful) return result;
+
+            Qiniu.Conf.Config.ACCESS_KEY = AccessKey;
+            Qiniu.Conf.Config.SECRET_KEY = SecretKey;
+            var policy = new PutPolicy(BucketName);
+            var token = policy.Token();
+            result.Data = Serialize(token);
+            return result;
+        }
     }
 }

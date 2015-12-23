@@ -22,7 +22,7 @@ namespace Insight.WS.Server.Common
     
     public class Util
     {
-
+        public const string Secret = "842A381C91CE43A98720825601C22A56";
         public static Session Session;
         public static bool Compres = bool.Parse(GetAppSetting("IsCompres"));
 

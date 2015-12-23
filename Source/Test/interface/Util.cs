@@ -20,9 +20,22 @@ namespace Insight.WS.Test.Interface
     
     public class Util
     {
-
+        public const string Secret = "842A381C91CE43A98720825601C22A56";
         public static Session UserSession;
         private static readonly bool Compres = bool.Parse(GetAppSetting("IsCompres"));
+
+        /// <summary>
+        /// 生成用于接口验证的Authorization字符串
+        /// </summary>
+        /// <typeparam name="T">输入类型</typeparam>
+        /// <param name="obj">用于接口验证的数据对象</param>
+        /// <returns>string 用于接口验证的Authorization字符串</returns>
+        public static string MakeAuth<T>(T obj)
+        {
+            var json = Serialize(obj);
+            var buff = Encoding.UTF8.GetBytes(json);
+            return Convert.ToBase64String(buff);
+        }
 
         /// <summary>
         /// 构建用于接口返回值的Json对象

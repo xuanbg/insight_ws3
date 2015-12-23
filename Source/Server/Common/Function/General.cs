@@ -18,10 +18,19 @@ namespace Insight.WS.Server.Common
 {
     public class General
     {
+        // 最低兼容版本
         private static readonly int CompatibleVersion = Convert.ToInt32(GetAppSetting("CompatibleVersion"));
+
+        // 更新版本
         private static readonly int UpdateVersion = Convert.ToInt32(GetAppSetting("UpdateVersion"));
+
+        // 访问验证服务用的Binding
         private static readonly Binding Binding = new NetTcpBinding();
+
+        // 访问验证服务用的Address
         private static readonly EndpointAddress Address = new EndpointAddress(GetAppSetting("IvsAddress"));
+
+        // 短信验证码的缓存列表
         private static readonly List<VerifyRecord> SmsCodes = new List<VerifyRecord>();
 
         /// <summary>
@@ -107,13 +116,19 @@ namespace Insight.WS.Server.Common
         /// <summary>
         /// 校验是否有权限访问
         /// </summary>
-        /// <returns></returns>
+        /// <returns>JsonResult</returns>
         public static JsonResult Verify()
         {
-            var obj = GetAuthorization<Session>();
-            if (obj == null) return null;
-
             var result = new JsonResult();
+            var obj = GetAuthorization<Session>();
+            if (obj == null)
+            {
+                result.Code = "401";
+                result.Name = "InvalidAuthenticationInfo";
+                result.Message = "提供的身份验证信息不正确";
+                return result;
+            }
+
             if (obj.Version < CompatibleVersion || obj.Version > UpdateVersion)
             {
                 result.Code = "400";
@@ -157,6 +172,29 @@ namespace Insight.WS.Server.Common
                     result.Message = "未知错误";
                     break;
             }
+            return result;
+        }
+
+        /// <summary>
+        /// 校验是否有权限访问
+        /// </summary>
+        /// <returns>JsonResult</returns>
+        public static JsonResult Verify(string rule)
+        {
+            var result = new JsonResult();
+            var obj = GetAuthorization<string>();
+            if (obj == rule)
+            {
+                result.Successful = true;
+                result.Code = "200";
+                result.Name = "OK";
+                result.Message = "接口调用成功";
+                return result;
+            }
+
+            result.Code = "401";
+            result.Name = "InvalidAuthenticationInfo";
+            result.Message = "提供的身份验证信息不正确";
             return result;
         }
 

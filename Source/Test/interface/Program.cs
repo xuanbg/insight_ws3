@@ -17,10 +17,10 @@ namespace Insight.WS.Test.Interface
         static void Main()
         {
             //Util.Session = Register();
-            UserSession = Login();
+            //UserSession = Login();
+            GetToken();
 
-
-            Logout();
+            //Logout();
         }
 
         /// <summary>
@@ -39,9 +39,7 @@ namespace Insight.WS.Test.Interface
                 ClientType = 2,
                 MachineId = Hash("MachineId")
             };
-            var json = Serialize(session);
-            var buff = Encoding.UTF8.GetBytes(json);
-            var author = Convert.ToBase64String(buff);
+            var author = MakeAuth(session);
             var dict = new Dictionary<string, string> {{"smsCode", "123456"}, {"password", Hash("111111")}};
             var data = Serialize(dict);
             var result = HttpRequest(url, "PUT", author, data);
@@ -91,6 +89,23 @@ namespace Insight.WS.Test.Interface
             if (result.Successful)
             {
                 Console.Write($"用户 {UserSession.LoginName} 注销成功");
+                Console.ReadLine();
+            }
+            else
+            {
+                Console.Write(result.Message);
+                Console.ReadLine();
+            }
+        }
+
+        private static void GetToken()
+        {
+            var url = BassAddress + "setting/getqiniutoken";
+            var author = MakeAuth(Secret);
+            var result = HttpRequest(url, "GET", author);
+            if (result.Successful)
+            {
+                Console.Write($"Token: {result.Data}");
                 Console.ReadLine();
             }
             else
