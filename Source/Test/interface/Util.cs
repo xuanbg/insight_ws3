@@ -21,7 +21,7 @@ namespace Insight.WS.Test.Interface
     public class Util
     {
 
-        public static Session Session;
+        public static Session UserSession;
         private static readonly bool Compres = bool.Parse(GetAppSetting("IsCompres"));
 
         /// <summary>
@@ -225,7 +225,7 @@ namespace Insight.WS.Test.Interface
             request.ContentType = Compres ? "application/x-gzip" : "application/json";
             if (author == "")
             {
-                var json = Serialize(Session);
+                var json = Serialize(UserSession);
                 var buff = Encoding.UTF8.GetBytes(json);
                 author = Convert.ToBase64String(buff);
             }

@@ -17,7 +17,7 @@ namespace Insight.WS.Test.Interface
         static void Main()
         {
             //Util.Session = Register();
-            Util.Session = Login();
+            UserSession = Login();
 
 
             Logout();
@@ -54,7 +54,7 @@ namespace Insight.WS.Test.Interface
         /// <returns></returns>
         private static Session Login()
         {
-            var mobile = "18600740254";
+            var mobile = "18600740256";
             var password = Hash("111111");
             var url = BassAddress + "user/signin";
             var us = new Session
@@ -86,11 +86,11 @@ namespace Insight.WS.Test.Interface
         private static void Logout()
         {
             var url = BassAddress + "user/signout";
-            var data = Serialize(Util.Session.ID);
+            var data = Serialize(UserSession.ID);
             var result = HttpRequest(url, "POST", "", data);
             if (result.Successful)
             {
-                Console.Write($"用户 {Util.Session.LoginName} 注销成功");
+                Console.Write($"用户 {UserSession.LoginName} 注销成功");
                 Console.ReadLine();
             }
             else
