@@ -21,7 +21,7 @@ namespace Insight.WS.Server.Common
         private static readonly int CompatibleVersion = Convert.ToInt32(GetAppSetting("CompatibleVersion"));
         private static readonly int UpdateVersion = Convert.ToInt32(GetAppSetting("UpdateVersion"));
         private static readonly Binding Binding = new NetTcpBinding();
-        private static readonly EndpointAddress Address = new EndpointAddress("net.tcp://localhost:6200/VerifyServer");
+        private static readonly EndpointAddress Address = new EndpointAddress(GetAppSetting("IvsAddress"));
         private static readonly List<VerifyRecord> SmsCodes = new List<VerifyRecord>();
 
         /// <summary>
@@ -72,8 +72,7 @@ namespace Insight.WS.Server.Common
             if (obj == null) return null;
 
             var us = GetSession(obj);
-            obj.ID = us.ID;
-            if (us.LoginResult == LoginResult.Failure) return us;
+            if (us == null) return null;
 
             // 用户被封禁
             if (!us.Validity)
@@ -83,6 +82,7 @@ namespace Insight.WS.Server.Common
             }
 
             // 未通过签名验证
+            obj.ID = us.ID;
             if (!SimpleVerifty(obj))
             {
                 us.LoginResult = LoginResult.Failure;

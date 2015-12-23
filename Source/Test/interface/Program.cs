@@ -16,8 +16,10 @@ namespace Insight.WS.Test.Interface
         [STAThread]
         static void Main()
         {
-            Util.Session = Register();
+            //Util.Session = Register();
             Util.Session = Login();
+
+
             Logout();
         }
 
@@ -52,7 +54,7 @@ namespace Insight.WS.Test.Interface
         /// <returns></returns>
         private static Session Login()
         {
-            var mobile = "18600740256";
+            var mobile = "18600740254";
             var password = Hash("111111");
             var url = BassAddress + "user/signin";
             var us = new Session
@@ -65,7 +67,17 @@ namespace Insight.WS.Test.Interface
             };
             var data = Serialize(us);
             var result = HttpRequest(url, "POST", null, data);
-            return !result.Successful ? null : Deserialize<Session>(result.Data);
+            if (result.Successful)
+            {
+                var session = Deserialize<Session>(result.Data);
+                Console.Write($"用户 {mobile} 登录结果：{session.LoginResult}");
+                Console.ReadLine();
+                return session;
+            }
+
+            Console.Write(result.Message);
+            Console.ReadLine();
+            return null;
         }
 
         /// <summary>
@@ -76,39 +88,18 @@ namespace Insight.WS.Test.Interface
             var url = BassAddress + "user/signout";
             var data = Serialize(Util.Session.ID);
             var result = HttpRequest(url, "POST", "", data);
+            if (result.Successful)
+            {
+                Console.Write($"用户 {Util.Session.LoginName} 注销成功");
+                Console.ReadLine();
+            }
+            else
+            {
+                Console.Write(result.Message);
+                Console.ReadLine();
+            }
         }
 
     }
 
-    /// <summary>
-    /// Json接口返回值
-    /// </summary>
-    public class JsonResult
-    {
-        /// <summary>
-        /// 结果
-        /// </summary>
-        public bool Successful { get; set; }
-
-        /// <summary>
-        /// 错误代码
-        /// </summary>
-        public string Code { get; set; }
-
-        /// <summary>
-        /// 错误名
-        /// </summary>
-        public string Name { get; set; }
-
-        /// <summary>
-        /// 错误消息
-        /// </summary>
-        public string Message { get; set; }
-
-        /// <summary>
-        /// 数据
-        /// </summary>
-        public string Data { get; set; }
-
-    }
 }

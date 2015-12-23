@@ -7,6 +7,7 @@ using Insight.WS.Server.Common.ORM;
 using Insight.WS.Server.Common.Service;
 using static Insight.WS.Server.Common.General;
 using static Insight.WS.Server.Common.SqlHelper;
+using static Insight.WS.Server.Common.Util;
 
 namespace Insight.WS.Service.SuperDentist
 {
@@ -24,7 +25,7 @@ namespace Insight.WS.Service.SuperDentist
         {
             var result = new JsonResult {Code = "500", Name = "UnknownError", Message = "未知错误" };
             var obj = GetAuthorization<Session>();
-            var signature = Util.Hash(obj.LoginName.ToUpper() + smsCode + password);
+            var signature = Hash(obj.LoginName.ToUpper() + smsCode + password);
             if (signature != obj.Signature)
             {
                 result.Code = "401";
@@ -68,8 +69,8 @@ namespace Insight.WS.Service.SuperDentist
                 return result;
             }
 
-            obj.Signature = Util.Hash(obj.LoginName.ToUpper() + password);
-            return Util.GetJson(UserLogin(obj));
+            obj.Signature = Hash(obj.LoginName.ToUpper() + password);
+            return GetJson(UserLogin(obj));
         }
 
         /// <summary>
@@ -80,7 +81,7 @@ namespace Insight.WS.Service.SuperDentist
         public JsonResult Login(Session us)
         {
             var session = UserLogin(us);
-            return Util.GetJson(session);
+            return GetJson(session);
         }
 
         /// <summary>

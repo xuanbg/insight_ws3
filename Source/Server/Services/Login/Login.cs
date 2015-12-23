@@ -35,7 +35,11 @@ namespace Insight.WS.Service
         /// <returns>Session对象实体</returns>
         public Session UserLogin(Session obj)
         {
-            return General.UserLogin(obj);
+            var us = General.UserLogin(obj);
+            if (us != null) return us;
+
+            obj.LoginResult = LoginResult.NotExist;
+            return obj;
         }
 
         /// <summary>

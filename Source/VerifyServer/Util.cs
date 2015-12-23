@@ -7,7 +7,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Security.Cryptography;
 using System.ServiceModel;
-using System.ServiceModel.Description;
 using System.Text;
 
 namespace Insight.WS.Server
@@ -58,15 +57,16 @@ namespace Insight.WS.Server
 
         public static void CreateHost()
         {
-            var address = new Uri("net.tcp://localhost:6200");
+            var address = new Uri(GetAppSetting("Address"));
             var binding = new NetTcpBinding();
             Host = new ServiceHost(typeof(OnlineManage), address);
             Host.AddServiceEndpoint(typeof(Interface), binding, "VerifyServer");
 
-            var behavior = new ServiceMetadataBehavior();
-            var ExchangeBindings = MetadataExchangeBindings.CreateMexTcpBinding();
-            Host.Description.Behaviors.Add(behavior);
-            Host.AddServiceEndpoint(typeof(IMetadataExchange), ExchangeBindings, "VerifyServer/mex");
+            // 添加元数据服务
+            //var behavior = new ServiceMetadataBehavior();
+            //var ExchangeBindings = MetadataExchangeBindings.CreateMexTcpBinding();
+            //Host.Description.Behaviors.Add(behavior);
+            //Host.AddServiceEndpoint(typeof(IMetadataExchange), ExchangeBindings, "VerifyServer/mex");
         }
 
         /// <summary>

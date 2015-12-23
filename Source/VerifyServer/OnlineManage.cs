@@ -30,11 +30,7 @@ namespace Insight.WS.Server
             if (session != null) return session;
 
             var user = GetUser(obj.LoginName);
-            if (user == null)
-            {
-                obj.LoginResult = LoginResult.Failure;
-                return obj;
-            }
+            if (user == null) return null;
 
             // 初始化Session数据并加入缓存
             session = new Session
@@ -203,7 +199,9 @@ namespace Insight.WS.Server
             if (!SimpleVerifty(obj)) return false;
 
             // 根据传入的操作代码进行鉴权
-            const string sql = "select A.ActionId from Sys_RolePerm_Action A join Get_PermRole(@UserId, @DeptId) R on R.RoleId = A.RoleId and A.ActionId = @ActionId group by A.ActionId having min(A.Action) > 0";
+            var sql = "select A.ActionId from Sys_RolePerm_Action A join Get_PermRole(@UserId, @DeptId) R ";
+            sql += "on R.RoleId = A.RoleId and A.ActionId = @ActionId ";
+            sql += "group by A.ActionId having min(A.Action) > 0";
             var parm = new[]
             {
                 new SqlParameter("@UserId", SqlDbType.UniqueIdentifier) {Value = obj.UserId},
@@ -222,15 +220,16 @@ namespace Insight.WS.Server
         {
             var us = GetSession(obj);
 
-            // 签名一致，登录状态标记为离线，返回在线列表中对象
-            if (us.Signature == obj.Signature)
+            // 用户不存在或签名不一致，登录状态标记为失败，返回传入对象
+            if (us == null || us.Signature != obj.Signature)
             {
-                us.LoginResult = LoginResult.NotExist;
-                return us;
+                obj.LoginResult = LoginResult.Failure;
+                return obj;
             }
 
-            obj.LoginResult = LoginResult.Failure;
-            return obj;
+            // 登录状态标记为离线，返回在线列表中对象
+            us.LoginResult = LoginResult.NotExist;
+            return us;
         }
 
     }

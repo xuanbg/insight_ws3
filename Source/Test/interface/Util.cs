@@ -409,24 +409,41 @@ namespace Insight.WS.Test.Interface
         }
     }
 
-    public class SYS_User
+    /// <summary>
+    /// Json接口返回值
+    /// </summary>
+    public class JsonResult
     {
-        public Guid ID { get; set; }
-        public long SN { get; set; }
-        public string Name { get; set; }
-        public string LoginName { get; set; }
-        public string Password { get; set; }
-        public string PayPassword { get; set; }
-        public string Description { get; set; }
-        public int Type { get; set; }
-        public bool BuiltIn { get; set; }
-        public bool Validity { get; set; }
-        public Guid? CreatorUserId { get; set; }
-        public DateTime CreateTime { get; set; }
-        public string OpenId { get; set; }
+        /// <summary>
+        /// 结果
+        /// </summary>
+        public bool Successful { get; set; }
 
+        /// <summary>
+        /// 错误代码
+        /// </summary>
+        public string Code { get; set; }
+
+        /// <summary>
+        /// 错误名
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
+        /// 错误消息
+        /// </summary>
+        public string Message { get; set; }
+
+        /// <summary>
+        /// 数据
+        /// </summary>
+        public string Data { get; set; }
 
     }
+
+    /// <summary>
+    /// 用户会话信息
+    /// </summary>
     public class Session
     {
 
