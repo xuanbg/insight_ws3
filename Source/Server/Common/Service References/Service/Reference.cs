@@ -8,6 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.Web.Script.Serialization;
+
 namespace Insight.WS.Server.Common.Service {
     using System.Runtime.Serialization;
     using System;
@@ -76,6 +78,7 @@ namespace Insight.WS.Server.Common.Service {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int VersionField;
         
+        [ScriptIgnore]
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -361,7 +364,7 @@ namespace Insight.WS.Server.Common.Service {
     public interface Interface {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Interface/GetSessions", ReplyAction="http://tempuri.org/Interface/GetSessionsResponse")]
-        System.Collections.Generic.List<Insight.WS.Server.Common.Service.Session> GetSessions();
+        System.Collections.Generic.List<Insight.WS.Server.Common.Service.Session> GetSessions(Insight.WS.Server.Common.Service.Session obj);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Interface/GetSession", ReplyAction="http://tempuri.org/Interface/GetSessionResponse")]
         Insight.WS.Server.Common.Service.Session GetSession(Insight.WS.Server.Common.Service.Session obj);
@@ -370,13 +373,13 @@ namespace Insight.WS.Server.Common.Service {
         void UpdateSession(Insight.WS.Server.Common.Service.Session obj);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Interface/UpdateSignature", ReplyAction="http://tempuri.org/Interface/UpdateSignatureResponse")]
-        bool UpdateSignature(int index, string pw);
+        void UpdateSignature(Insight.WS.Server.Common.Service.Session obj, string signature);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Interface/SetOnlineStatus", ReplyAction="http://tempuri.org/Interface/SetOnlineStatusResponse")]
-        bool SetOnlineStatus(int index, bool status);
+        void SetOnlineStatus(Insight.WS.Server.Common.Service.Session obj);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Interface/SetUserStatus", ReplyAction="http://tempuri.org/Interface/SetUserStatusResponse")]
-        bool SetUserStatus(System.Guid uid, bool validity);
+        bool SetUserStatus(Insight.WS.Server.Common.Service.Session obj, System.Guid uid, bool validity);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Interface/Verification", ReplyAction="http://tempuri.org/Interface/VerificationResponse")]
         Insight.WS.Server.Common.Service.Session Verification(Insight.WS.Server.Common.Service.Session obj);
@@ -415,8 +418,8 @@ namespace Insight.WS.Server.Common.Service {
                 base(binding, remoteAddress) {
         }
         
-        public System.Collections.Generic.List<Insight.WS.Server.Common.Service.Session> GetSessions() {
-            return base.Channel.GetSessions();
+        public System.Collections.Generic.List<Insight.WS.Server.Common.Service.Session> GetSessions(Insight.WS.Server.Common.Service.Session obj) {
+            return base.Channel.GetSessions(obj);
         }
         
         public Insight.WS.Server.Common.Service.Session GetSession(Insight.WS.Server.Common.Service.Session obj) {
@@ -427,16 +430,16 @@ namespace Insight.WS.Server.Common.Service {
             base.Channel.UpdateSession(obj);
         }
         
-        public bool UpdateSignature(int index, string pw) {
-            return base.Channel.UpdateSignature(index, pw);
+        public void UpdateSignature(Insight.WS.Server.Common.Service.Session obj, string signature) {
+            base.Channel.UpdateSignature(obj, signature);
         }
         
-        public bool SetOnlineStatus(int index, bool status) {
-            return base.Channel.SetOnlineStatus(index, status);
+        public void SetOnlineStatus(Insight.WS.Server.Common.Service.Session obj) {
+            base.Channel.SetOnlineStatus(obj);
         }
         
-        public bool SetUserStatus(System.Guid uid, bool validity) {
-            return base.Channel.SetUserStatus(uid, validity);
+        public bool SetUserStatus(Insight.WS.Server.Common.Service.Session obj, System.Guid uid, bool validity) {
+            return base.Channel.SetUserStatus(obj, uid, validity);
         }
         
         public Insight.WS.Server.Common.Service.Session Verification(Insight.WS.Server.Common.Service.Session obj) {

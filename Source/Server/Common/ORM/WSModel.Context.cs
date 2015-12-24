@@ -145,5 +145,6 @@ namespace Insight.WS.Server.Common.ORM
         public virtual DbSet<SDO_Tutorial> SDO_Tutorial { get; set; }
         public virtual DbSet<SDO_TutorialComment> SDO_TutorialComment { get; set; }
         public virtual DbSet<SDO_TutorialPraise> SDO_TutorialPraise { get; set; }
+        public virtual DbSet<MemberInfo> MemberInfo { get; set; }
     }
 }

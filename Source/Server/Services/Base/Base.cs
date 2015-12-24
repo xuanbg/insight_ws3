@@ -21,7 +21,7 @@ namespace Insight.WS.Service
         /// <returns>Session List 在线用户列表</returns>
         public List<Session> GetOnlineUser(Session us)
         {
-            return !SimpleVerifty(us) ? null : GetSessions();
+            return !SimpleVerifty(us) ? null : GetSessions(us);
         }
 
         #endregion

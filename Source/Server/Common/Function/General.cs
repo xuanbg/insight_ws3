@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
-using System.ServiceModel.Web;
-using System.Text;
 using FastReport;
 using Insight.WS.Server.Common.ORM;
 using Insight.WS.Server.Common.Service;
@@ -18,6 +16,8 @@ namespace Insight.WS.Server.Common
 {
     public class General
     {
+        #region 字段
+
         // 最低兼容版本
         private static readonly int CompatibleVersion = Convert.ToInt32(GetAppSetting("CompatibleVersion"));
 
@@ -33,42 +33,84 @@ namespace Insight.WS.Server.Common
         // 短信验证码的缓存列表
         private static readonly List<VerifyRecord> SmsCodes = new List<VerifyRecord>();
 
+        // 用于生成短信验证码的随机数发生器
+        private static readonly Random Random = new Random(Environment.TickCount);
+
+        #endregion
+
+        #region 登录和验证
+
         /// <summary>
         /// 生成验证码
         /// </summary>
         /// <param name="type">验证码类型</param>
-        /// <param name="phone">手机号</param>
-        /// <param name="code">验证码</param>
-        /// <param name="time">有效时间（分钟）</param>
-        /// <returns>string 验证码</returns>
-        public static void GetVerifyCode(int type, string phone, string code, int time)
+        /// <param name="mobile">手机号</param>
+        /// <returns>JsonResult</returns>
+        public static JsonResult GetVerifyCode(int type, string mobile)
         {
-            var record = new VerifyRecord
+            var result = new JsonResult();
+            var code = Random.Next(100000, 999999).ToString();
+            var time = 30;
+            if (type >0 && type <= 3)
+            {
+                // 处理短信内容及发送通道
+                if (type > 1) time = 5;
+                //var message = $"您的验证码是：{code}，请在{time}分钟内使用！";
+            }
+            else
+            {
+                result.Code = "411";
+                result.Name = "UnknownSmsType";
+                result.Message = "未知的验证码类型";
+                return result;
+            }
+
+            var record = SmsCodes.OrderByDescending(r => r.CreateTime).FirstOrDefault(r => r.Mobile == mobile && r.Type == type);
+            if (record != null && (DateTime.Now - record.CreateTime).TotalSeconds < 60)
+            {
+                result.Code = "412";
+                result.Name = "TimeIntervalTooShort";
+                result.Message = "获取验证码时间间隔过短，请稍后再试";
+                return result;
+            }
+
+            // 发送短信
+
+            // 保存验证码以待验证
+            record = new VerifyRecord
             {
                 Type = type,
-                Mobile = phone,
+                Mobile = mobile,
                 Code = code,
-                FailureTime = DateTime.Now.AddMinutes(time)
+                FailureTime = DateTime.Now.AddMinutes(time),
+                CreateTime = DateTime.Now
             };
             SmsCodes.Add(record);
+
+            result.Successful = true;
+            result.Code = "200";
+            result.Name = "OK";
+            result.Message = "接口调用成功";
+            result.Data = Serialize(code);
+            return result;
         }
 
         /// <summary>
         /// 验证验证码是否正确
         /// </summary>
-        /// <param name="number">手机号</param>
+        /// <param name="mobile">手机号</param>
         /// <param name="code">验证码</param>
         /// <param name="type">验证码类型</param>
         /// <param name="action">是否验证即失效</param>
         /// <returns>bool 是否正确</returns>
-        public static bool VerifyCode(string number, string code, int type, bool action = true)
+        public static bool VerifyCode(string mobile, string code, int type, bool action = true)
         {
-            var list = SmsCodes.Where(c => c.Mobile == number && c.Type == type && c.FailureTime > DateTime.Now).ToList();
+            var list = SmsCodes.Where(c => c.Mobile == mobile && c.Type == type && c.FailureTime > DateTime.Now).ToList();
             if (list.Count <= 0) return false;
 
             if (!action) return true;
 
-            return SmsCodes.RemoveAll(c => c.Mobile == number && c.Type == type) > 0;
+            return SmsCodes.RemoveAll(c => c.Mobile == mobile && c.Type == type) > 0;
         }
 
         /// <summary>
@@ -105,16 +147,17 @@ namespace Insight.WS.Server.Common
             }
             else
             {
-                SetOnlineStatus(us.ID, true);
-                UpdateSession(obj);
                 us.LoginResult = LoginResult.Success;
+                us.OnlineStatus = true;
+                SetOnlineStatus(us);
+                UpdateSession(obj);
             }
 
             return us;
         }
 
         /// <summary>
-        /// 校验是否有权限访问
+        /// 通过Session校验是否有权限访问
         /// </summary>
         /// <returns>JsonResult</returns>
         public static JsonResult Verify()
@@ -176,7 +219,7 @@ namespace Insight.WS.Server.Common
         }
 
         /// <summary>
-        /// 校验是否有权限访问
+        /// 通过指定的Rule校验是否有权限访问
         /// </summary>
         /// <returns>JsonResult</returns>
         public static JsonResult Verify(string rule)
@@ -198,140 +241,63 @@ namespace Insight.WS.Server.Common
             return result;
         }
 
-        /// <summary>
-        /// 获取Authorization承载的数据
-        /// </summary>
-        /// <typeparam name="T">数据类型</typeparam>
-        /// <returns>数据对象</returns>
-        public static T GetAuthorization<T>()
-        {
-            var woc = WebOperationContext.Current;
-            var auth = woc.IncomingRequest.Headers[HttpRequestHeader.Authorization];
-            if (string.IsNullOrEmpty(auth))
-            {
-                woc.OutgoingResponse.StatusCode = HttpStatusCode.Unauthorized;
-                return default(T);
-            }
+        #endregion  
 
-            SetResponseParam();
-            var buffer = Convert.FromBase64String(auth);
-            var json = Encoding.UTF8.GetString(buffer);
-            return Deserialize<T>(json);
+        #region 常用方法
+
+        /// <summary>
+        /// 构建用于接口返回值的Json对象
+        /// </summary>
+        /// <typeparam name="T">传入的对象类型</typeparam>
+        /// <param name="obj">传入的对象</param>
+        /// <param name="code">错误代码</param>
+        /// <param name="name"></param>
+        /// <param name="message">错误消息</param>
+        /// <returns>JsonResult</returns>
+        public static JsonResult GetJson<T>(T obj, string code = "404", string name = "ResourceNotFound", string message = "指定的资源不存在")
+        {
+            var result = new JsonResult { Code = code, Name = name, Message = message };
+            if (obj == null) return result;
+
+            result.Successful = true;
+            result.Code = "200";
+            result.Name = "OK";
+            result.Message = "接口调用成功";
+            result.Data = Serialize(obj);
+            return result;
         }
 
         /// <summary>
-        /// 获取当前在线状态的全部内部用户的Session
+        /// 保存图片到image文件夹，通过URL访问
         /// </summary>
-        /// <returns>全部内部用户的Session</returns>
-        public static List<Session> GetSessions()
+        /// <param name="pic">图片字节流</param>
+        /// <param name="catalog">分类</param>
+        /// <param name="name">文件名（可选）</param>
+        /// <returns>string 图片保存路径</returns>
+        public static string SaveImage(byte[] pic, string catalog, string name = null)
         {
-            using (var client = new InterfaceClient(Binding, Address))
+            var path = $"{GetAppSetting("ImageLocal")}\\{catalog}\\";
+            try
             {
-                return client.GetSessions();
-            }
-        }
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
 
-        /// <summary>
-        /// 获取验证服务器上的用户会话
-        /// </summary>
-        /// <param name="obj">用户会话</param>
-        /// <returns>Session 用户会话</returns>
-        public static Session GetSession(Session obj)
-        {
-            using (var client = new InterfaceClient(Binding, Address))
-            {
-                return client.GetSession(obj);
-            }
-        }
+                if (name == null)
+                {
+                    var img = Image.FromStream(new MemoryStream(pic));
+                    name = $"{Guid.NewGuid()}.{GetImageExtension(img)}";
+                }
 
-        /// <summary>
-        /// 更新用户Session数据
-        /// </summary>
-        /// <param name="obj">传入的用户Session</param>
-        public static void UpdateSession(Session obj)
-        {
-            using (var client = new InterfaceClient(Binding, Address))
-            {
-                client.UpdateSession(obj);
+                File.WriteAllBytes(path + name, pic);
+                return $"/{catalog}/{name}";
             }
-        }
-
-        /// <summary>
-        /// 更新指定用户Session的签名
-        /// </summary>
-        /// <param name="index">索引</param>
-        /// <param name="pw">密码MD5值</param>
-        public static bool UpdateSignature(int index, string pw)
-        {
-            using (var client = new InterfaceClient(Binding, Address))
+            catch (Exception ex)
             {
-                return client.UpdateSignature(index, pw);
-            }
-        }
-
-        /// <summary>
-        /// 设置指定用户Session的登录状态
-        /// </summary>
-        /// <param name="index">索引</param>
-        /// <param name="status">在线状态</param>
-        public static bool SetOnlineStatus(int index, bool status)
-        {
-            using (var client = new InterfaceClient(Binding, Address))
-            {
-                return client.SetOnlineStatus(index, status);
-            }
-        }
-
-        /// <summary>
-        /// 根据用户ID设置用户状态
-        /// </summary>
-        /// <param name="uid">用户ID</param>
-        /// <param name="validity">用户状态</param>
-        public static bool SetUserStatus(Guid uid, bool validity)
-        {
-            using (var client = new InterfaceClient(Binding, Address))
-            {
-                return client.SetUserStatus(uid, validity);
-            }
-        }
-
-        /// <summary>
-        /// 会话合法性验证，用于持久化客户端
-        /// </summary>
-        /// <param name="obj">用户会话</param>
-        /// <returns>bool 是否成功</returns>
-        public static Session Verification(Session obj)
-        {
-            using (var client = new InterfaceClient(Binding, Address))
-            {
-                return client.Verification(obj);
-            }
-        }
-
-        /// <summary>
-        /// 简单会话合法性验证，用于非持久化客户端
-        /// </summary>
-        /// <param name="obj">用户会话</param>
-        /// <returns>bool 是否成功</returns>
-        public static bool SimpleVerifty(Session obj)
-        {
-            using (var client = new InterfaceClient(Binding, Address))
-            {
-                return client.SimpleVerifty(obj);
-            }
-        }
-
-        /// <summary>
-        /// 带鉴权的会话合法性验证
-        /// </summary>
-        /// <param name="obj">用户会话</param>
-        /// <param name="action">需要鉴权的操作ID</param>
-        /// <returns>bool 是否成功</returns>
-        public static bool Verification(Session obj, string action)
-        {
-            using (var client = new InterfaceClient(Binding, Address))
-            {
-                return client.Authorization(obj, action);
+                LogToEvent(ex.ToString());
+                LogToEvent($"文件写入路径：{path}；字节流：{pic}");
+                return null;
             }
         }
 
@@ -449,6 +415,130 @@ namespace Insight.WS.Server.Common
             img.Image = bytes;
             return img;
         }
+
+        #endregion
+
+        #region 验证服务调用
+
+        /// <summary>
+        /// 获取当前在线状态的全部内部用户的Session
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns>全部内部用户的Session</returns>
+        public static List<Session> GetSessions(Session obj)
+        {
+            using (var client = new InterfaceClient(Binding, Address))
+            {
+                return client.GetSessions(obj);
+            }
+        }
+
+        /// <summary>
+        /// 获取验证服务器上的用户会话
+        /// </summary>
+        /// <param name="obj">用户会话</param>
+        /// <returns>Session 用户会话</returns>
+        public static Session GetSession(Session obj)
+        {
+            using (var client = new InterfaceClient(Binding, Address))
+            {
+                return client.GetSession(obj);
+            }
+        }
+
+        /// <summary>
+        /// 更新用户Session数据
+        /// </summary>
+        /// <param name="obj">用户会话</param>
+        public static void UpdateSession(Session obj)
+        {
+            using (var client = new InterfaceClient(Binding, Address))
+            {
+                client.UpdateSession(obj);
+            }
+        }
+
+        /// <summary>
+        /// 更新指定用户Session的签名
+        /// </summary>
+        /// <param name="obj">用户会话</param>
+        /// <param name="signature">新的签名</param>
+        public static void UpdateSignature(Session obj, string signature)
+        {
+            using (var client = new InterfaceClient(Binding, Address))
+            {
+                client.UpdateSignature(obj, signature);
+            }
+        }
+
+        /// <summary>
+        /// 设置指定用户Session的登录状态
+        /// </summary>
+        /// <param name="obj">用户会话</param>
+        public static void SetOnlineStatus(Session obj)
+        {
+            using (var client = new InterfaceClient(Binding, Address))
+            {
+                client.SetOnlineStatus(obj);
+            }
+        }
+
+        /// <summary>
+        /// 根据用户ID设置用户状态
+        /// </summary>
+        /// <param name="obj">用户会话</param>
+        /// <param name="uid">用户ID</param>
+        /// <param name="validity">用户状态</param>
+        /// <returns>bool 是否成功</returns>
+        public static bool SetUserStatus(Session obj, Guid uid, bool validity)
+        {
+            using (var client = new InterfaceClient(Binding, Address))
+            {
+                return client.SetUserStatus(obj, uid, validity);
+            }
+        }
+
+        /// <summary>
+        /// 会话合法性验证，用于持久化客户端
+        /// </summary>
+        /// <param name="obj">用户会话</param>
+        /// <returns>bool 是否成功</returns>
+        public static Session Verification(Session obj)
+        {
+            using (var client = new InterfaceClient(Binding, Address))
+            {
+                return client.Verification(obj);
+            }
+        }
+
+        /// <summary>
+        /// 简单会话合法性验证，用于非持久化客户端
+        /// </summary>
+        /// <param name="obj">用户会话</param>
+        /// <returns>bool 是否成功</returns>
+        public static bool SimpleVerifty(Session obj)
+        {
+            using (var client = new InterfaceClient(Binding, Address))
+            {
+                return client.SimpleVerifty(obj);
+            }
+        }
+
+        /// <summary>
+        /// 带鉴权的会话合法性验证
+        /// </summary>
+        /// <param name="obj">用户会话</param>
+        /// <param name="action">需要鉴权的操作ID</param>
+        /// <returns>bool 是否成功</returns>
+        public static bool Verification(Session obj, string action)
+        {
+            using (var client = new InterfaceClient(Binding, Address))
+            {
+                return client.Authorization(obj, action);
+            }
+        }
+
+        #endregion
 
     }
 }

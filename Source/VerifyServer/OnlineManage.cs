@@ -9,28 +9,31 @@ namespace Insight.WS.Server
 {
     public class OnlineManage : Interface
     {
-
         /// <summary>
         /// 获取当前在线状态的全部内部用户的Session
         /// </summary>
+        /// <param name="obj">用户会话</param>
         /// <returns>全部内部用户的Session</returns>
-        public List<Session> GetSessions()
+        public List<Session> GetSessions(Session obj)
         {
             return Sessions.Where(s => s.UserType > 0 && s.OnlineStatus).ToList();
-        } 
+        }
 
         /// <summary>
         /// 获取用户Session
         /// </summary>
-        /// <param name="obj">传入的用户Session</param>
+        /// <param name="obj">用户会话</param>
         /// <returns>Session</returns>
         public Session GetSession(Session obj)
         {
             var session = Sessions.SingleOrDefault(s => string.Equals(s.LoginName, obj.LoginName, StringComparison.CurrentCultureIgnoreCase));
-            if (session != null) return session;
+            if (session != null) return session.Signature == obj.Signature ? session : null;
 
             var user = GetUser(obj.LoginName);
             if (user == null) return null;
+
+            var signature = Hash(user.LoginName.ToUpper() + user.Password);
+            if (signature != obj.Signature) return null;
 
             // 初始化Session数据并加入缓存
             session = new Session
@@ -40,7 +43,7 @@ namespace Insight.WS.Server
                 UserName = user.Name,
                 OpenId = user.OpenId,
                 LoginName = user.LoginName,
-                Signature = GetHash(user.LoginName.ToUpper() + user.Password),
+                Signature = signature,
                 UserType = user.Type,
                 Validity = user.Validity,
                 Version = obj.Version,
@@ -56,7 +59,7 @@ namespace Insight.WS.Server
         /// <summary>
         /// 更新用户Session数据
         /// </summary>
-        /// <param name="obj">传入的用户Session</param>
+        /// <param name="obj">用户会话</param>
         public void UpdateSession(Session obj)
         {
             var session = Sessions[obj.ID];
@@ -70,37 +73,37 @@ namespace Insight.WS.Server
         /// <summary>
         /// 更新指定用户Session的签名
         /// </summary>
-        /// <param name="index">索引</param>
-        /// <param name="pw">密码MD5值</param>
-        public bool UpdateSignature(int index, string pw)
+        /// <param name="obj">用户会话</param>
+        /// <param name="signature">新的签名</param>
+        public void UpdateSignature(Session obj, string signature)
         {
-            if (index >= Sessions.Count) return false;
+            if (!SimpleVerifty(obj)) return;
 
-            var session = Sessions[index];
-            session.Signature = GetHash(session.LoginName.ToUpper() + pw);
-            return true;
+            Sessions[obj.ID].Signature = signature;
         }
 
         /// <summary>
         /// 设置指定用户Session的登录状态
         /// </summary>
-        /// <param name="index">索引</param>
-        /// <param name="status">在线状态</param>
-        public bool SetOnlineStatus(int index, bool status)
+        /// <param name="obj">用户会话</param>
+        public void SetOnlineStatus(Session obj)
         {
-            if (index >= Sessions.Count) return false;
+            if (!SimpleVerifty(obj)) return;
 
-            Sessions[index].OnlineStatus = status;
-            return true;
+            Sessions[obj.ID].OnlineStatus = obj.OnlineStatus;
         }
 
         /// <summary>
         /// 根据用户ID设置用户状态
         /// </summary>
+        /// <param name="obj">操作员的Session</param>
         /// <param name="uid">用户ID</param>
-        /// <param name="validity">用户状态</param>
-        public bool SetUserStatus(Guid uid, bool validity)
+        /// <param name="validity">可用状态</param>
+        /// <returns>bool 是否成功</returns>
+        public bool SetUserStatus(Session obj, Guid uid, bool validity)
         {
+            if (!SimpleVerifty(obj)) return false;
+
             var session = Sessions.SingleOrDefault(s => s.UserId == uid);
             if (session == null) return false;
 
@@ -112,7 +115,7 @@ namespace Insight.WS.Server
         /// 会话合法性验证
         /// </summary>
         /// <param name="obj">用户会话</param>
-        /// <returns>bool 是否成功</returns>
+        /// <returns>Session 用户会话信息</returns>
         public Session Verification(Session obj)
         {
             if (obj == null) return null;

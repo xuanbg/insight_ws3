@@ -83,12 +83,6 @@
   <wsdl:message name="ICommons_b_OutputMessage">
     <wsdl:part name="parameters" element="tns:bResponse" />
   </wsdl:message>
-  <wsdl:message name="ICommons_DelOnlineUser_InputMessage">
-    <wsdl:part name="parameters" element="tns:DelOnlineUser" />
-  </wsdl:message>
-  <wsdl:message name="ICommons_DelOnlineUser_OutputMessage">
-    <wsdl:part name="parameters" element="tns:DelOnlineUserResponse" />
-  </wsdl:message>
   <wsdl:message name="ICommons_GetOrgTree_InputMessage">
     <wsdl:part name="parameters" element="tns:GetOrgTree" />
   </wsdl:message>
@@ -305,6 +299,12 @@
   <wsdl:message name="ICommons_UpdataPassWord_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdataPassWordResponse" />
   </wsdl:message>
+  <wsdl:message name="ICommons_Logout_InputMessage">
+    <wsdl:part name="parameters" element="tns:Logout" />
+  </wsdl:message>
+  <wsdl:message name="ICommons_Logout_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LogoutResponse" />
+  </wsdl:message>
   <wsdl:portType name="ICommons">
     <wsdl:operation name="GetReportTemplet">
       <wsdl:input wsaw:Action="http://tempuri.org/ICommons/GetReportTemplet" message="tns:ICommons_GetReportTemplet_InputMessage" />
@@ -345,10 +345,6 @@
     <wsdl:operation name="b">
       <wsdl:input wsaw:Action="http://tempuri.org/ICommons/b" message="tns:ICommons_b_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICommons/bResponse" message="tns:ICommons_b_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="DelOnlineUser">
-      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/DelOnlineUser" message="tns:ICommons_DelOnlineUser_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/DelOnlineUserResponse" message="tns:ICommons_DelOnlineUser_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetOrgTree">
       <wsdl:input wsaw:Action="http://tempuri.org/ICommons/GetOrgTree" message="tns:ICommons_GetOrgTree_InputMessage" />
@@ -494,6 +490,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ICommons/UpdataPassWord" message="tns:ICommons_UpdataPassWord_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICommons/UpdataPassWordResponse" message="tns:ICommons_UpdataPassWord_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="Logout">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommons/Logout" message="tns:ICommons_Logout_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommons/LogoutResponse" message="tns:ICommons_Logout_OutputMessage" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="CustomBinding_ICommons" type="tns:ICommons">
     <wsp:PolicyReference URI="#CustomBinding_ICommons_policy">
@@ -582,15 +582,6 @@
     </wsdl:operation>
     <wsdl:operation name="b">
       <soap12:operation soapAction="http://tempuri.org/ICommons/b" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="DelOnlineUser">
-      <soap12:operation soapAction="http://tempuri.org/ICommons/DelOnlineUser" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -915,6 +906,15 @@
     </wsdl:operation>
     <wsdl:operation name="UpdataPassWord">
       <soap12:operation soapAction="http://tempuri.org/ICommons/UpdataPassWord" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Logout">
+      <soap12:operation soapAction="http://tempuri.org/ICommons/Logout" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

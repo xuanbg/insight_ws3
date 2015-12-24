@@ -248,6 +248,9 @@
     <Compile Include="ORM\MDS_Contact_Info.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ORM\MemberInfo.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ORM\ReportSchedular.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
@@ -442,7 +445,6 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>WSModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="App.Config" />
     <None Include="ORM\WSModel.edmx.diagram">
       <DependentUpon>WSModel.edmx</DependentUpon>
     </None>

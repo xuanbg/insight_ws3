@@ -58,6 +58,14 @@ namespace Insight.WS.Service
         [OperationContract]
         bool UpdataPassWord(Session us, string pw);
 
+        /// <summary>
+        /// 注销当前用户
+        /// </summary>
+        /// <param name="us">Session对象实体</param>
+        /// <returns>bool 是否成功</returns>
+        [OperationContract]
+        bool Logout(Session us);
+
         #endregion
 
     }

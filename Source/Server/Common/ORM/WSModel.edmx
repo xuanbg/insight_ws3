@@ -1419,6 +1419,20 @@
           <Property Name="CreatorUserId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <!--生成过程中发现错误:
+警告 6002: 表/视图“Insight.dbo.MemberInfo”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="MemberInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Alias" Type="nvarchar" MaxLength="32" />
+          <Property Name="Portrait" Type="varchar" MaxLength="64" />
+          <Property Name="Integral" Type="int" Nullable="false" />
+          <Property Name="Beans" Type="int" Nullable="false" />
+          <Property Name="Unread" Type="int" />
+        </EntityType>
+        <!--生成过程中发现错误:
 警告 6002: 表/视图“Insight.dbo.ReportSchedular”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="ReportSchedular">
           <Key>
@@ -4774,6 +4788,17 @@
     [Dictionary].[CreatorUserId] AS [CreatorUserId]
     FROM [dbo].[Dictionary] AS [Dictionary]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="MemberInfo" EntityType="Self.MemberInfo" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [MemberInfo].[ID] AS [ID], 
+    [MemberInfo].[Name] AS [Name], 
+    [MemberInfo].[Alias] AS [Alias], 
+    [MemberInfo].[Portrait] AS [Portrait], 
+    [MemberInfo].[Integral] AS [Integral], 
+    [MemberInfo].[Beans] AS [Beans], 
+    [MemberInfo].[Unread] AS [Unread]
+    FROM [dbo].[MemberInfo] AS [MemberInfo]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="ReportSchedular" EntityType="Self.ReportSchedular" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [ReportSchedular].[ID] AS [ID], 
@@ -6929,6 +6954,7 @@
             <End Role="SYS_User" EntitySet="SYS_User" />
             <End Role="SDO_TutorialPraise" EntitySet="SDO_TutorialPraise" />
           </AssociationSet>
+          <EntitySet Name="MemberInfo" EntityType="WSModel.MemberInfo" />
           </EntityContainer>
         <EntityType Name="ABS_Advance_Detail">
           <Key>
@@ -12031,6 +12057,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="MemberInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Alias" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="Portrait" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Integral" Type="Int32" Nullable="false" />
+          <Property Name="Beans" Type="Int32" Nullable="false" />
+          <Property Name="Unread" Type="Int32" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -13567,6 +13605,19 @@
                 <ScalarProperty Name="CreatorUserId" ColumnName="CreatorUserId" />
                 <ScalarProperty Name="TutorialId" ColumnName="TutorialId" />
                 <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MemberInfo">
+            <EntityTypeMapping TypeName="WSModel.MemberInfo">
+              <MappingFragment StoreEntitySet="MemberInfo">
+                <ScalarProperty Name="Unread" ColumnName="Unread" />
+                <ScalarProperty Name="Beans" ColumnName="Beans" />
+                <ScalarProperty Name="Integral" ColumnName="Integral" />
+                <ScalarProperty Name="Portrait" ColumnName="Portrait" />
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

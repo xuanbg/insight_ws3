@@ -111,6 +111,20 @@ namespace Insight.WS.Service
             return SimpleVerifty(us) && DataAccess.UpdataPassword(us, pw);
         }
 
+        /// <summary>
+        /// 注销当前用户
+        /// </summary>
+        /// <param name="us">Session对象实体</param>
+        /// <returns>bool 是否成功</returns>
+        public bool Logout(Session us)
+        {
+            if (!SimpleVerifty(us)) return false;
+
+            us.OnlineStatus = false;
+            SetOnlineStatus(us);
+            return true;
+        }
+
         #endregion
 
     }

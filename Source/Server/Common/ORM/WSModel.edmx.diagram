@@ -288,10 +288,10 @@
         <AssociationConnector Association="WSModel.FK__SYS_UserG__Creat__2FBAD748" />
         <AssociationConnector Association="WSModel.FK__SYS_UserG__UserI__2EC6B30F" />
         <AssociationConnector Association="WSModel.FK__SYS_UserG__Group__2DD28ED6" />
-        <EntityTypeShape EntityType="WSModel.Advance" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="WSModel.Dictionary" Width="1.5" PointX="4.75" PointY="0.75" />
-        <EntityTypeShape EntityType="WSModel.ReportSchedular" Width="1.5" PointX="8.75" PointY="0.75" />
-        <EntityTypeShape EntityType="WSModel.ReportTemplet" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="WSModel.Advance" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="WSModel.Dictionary" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="WSModel.ReportSchedular" Width="1.5" PointX="6.75" PointY="3.75" />
+        <EntityTypeShape EntityType="WSModel.ReportTemplet" Width="1.5" PointX="4.75" PointY="3.75" />
         <AssociationConnector Association="WSModel.FK__ABS_Contr__Clear__2D3E5D50" />
         <AssociationConnector Association="WSModel.FK__ABS_Contr__Deliv__37BBEBC3" />
         <EntityTypeShape EntityType="WSModel.MDE_Favorites" Width="1.5" PointX="3" PointY="116" />
@@ -356,6 +356,7 @@
         <AssociationConnector Association="WSModel.FK__SDO_Tutor__Tutor__5D81A1F8" />
         <AssociationConnector Association="WSModel.FK__SDO_Tutor__Creat__58BCECDB" />
         <AssociationConnector Association="WSModel.FK__SDO_Tutor__Creat__5E75C631" />
+        <EntityTypeShape EntityType="WSModel.MemberInfo" Width="1.5" PointX="0.75" PointY="7.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

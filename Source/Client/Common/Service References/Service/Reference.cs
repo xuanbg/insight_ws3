@@ -29,9 +29,6 @@ namespace Insight.WS.Client.Common.Service {
         private int ClientTypeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string DataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<System.Guid> DeptIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -111,19 +108,6 @@ namespace Insight.WS.Client.Common.Service {
                 if ((this.ClientTypeField.Equals(value) != true)) {
                     this.ClientTypeField = value;
                     this.RaisePropertyChanged("ClientType");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Data {
-            get {
-                return this.DataField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.DataField, value) != true)) {
-                    this.DataField = value;
-                    this.RaisePropertyChanged("Data");
                 }
             }
         }
@@ -2780,6 +2764,12 @@ namespace Insight.WS.Client.Common.Service {
         private string LoginNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDE_Favorites> MDE_FavoritesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDE_Message> MDE_MessageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDG_Contact> MDG_ContactField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -2817,6 +2807,60 @@ namespace Insight.WS.Client.Common.Service {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PayPasswordField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDC_CaseHistory> SDC_CaseHistoryField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDC_FirstVisit> SDC_FirstVisitField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDC_Subsequent> SDC_SubsequentField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDC_Summary> SDC_SummaryField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDG_Group> SDG_GroupField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDG_Group> SDG_Group1Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDG_Group> SDG_Group2Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDO_Advertisement> SDO_AdvertisementField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDO_Recommend> SDO_RecommendField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDO_Tutorial> SDO_TutorialField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDO_TutorialComment> SDO_TutorialCommentField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDO_TutorialPraise> SDO_TutorialPraiseField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDT_Attitude> SDT_AttitudeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDT_Comment> SDT_CommentField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDT_Forward> SDT_ForwardField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDT_Praise> SDT_PraiseField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDT_Topic> SDT_TopicField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDT_Voice> SDT_VoiceField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private long SNField;
@@ -3101,6 +3145,32 @@ namespace Insight.WS.Client.Common.Service {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDE_Favorites> MDE_Favorites {
+            get {
+                return this.MDE_FavoritesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MDE_FavoritesField, value) != true)) {
+                    this.MDE_FavoritesField = value;
+                    this.RaisePropertyChanged("MDE_Favorites");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDE_Message> MDE_Message {
+            get {
+                return this.MDE_MessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MDE_MessageField, value) != true)) {
+                    this.MDE_MessageField = value;
+                    this.RaisePropertyChanged("MDE_Message");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDG_Contact> MDG_Contact {
             get {
                 return this.MDG_ContactField;
@@ -3265,6 +3335,240 @@ namespace Insight.WS.Client.Common.Service {
                 if ((object.ReferenceEquals(this.PayPasswordField, value) != true)) {
                     this.PayPasswordField = value;
                     this.RaisePropertyChanged("PayPassword");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDC_CaseHistory> SDC_CaseHistory {
+            get {
+                return this.SDC_CaseHistoryField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDC_CaseHistoryField, value) != true)) {
+                    this.SDC_CaseHistoryField = value;
+                    this.RaisePropertyChanged("SDC_CaseHistory");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDC_FirstVisit> SDC_FirstVisit {
+            get {
+                return this.SDC_FirstVisitField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDC_FirstVisitField, value) != true)) {
+                    this.SDC_FirstVisitField = value;
+                    this.RaisePropertyChanged("SDC_FirstVisit");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDC_Subsequent> SDC_Subsequent {
+            get {
+                return this.SDC_SubsequentField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDC_SubsequentField, value) != true)) {
+                    this.SDC_SubsequentField = value;
+                    this.RaisePropertyChanged("SDC_Subsequent");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDC_Summary> SDC_Summary {
+            get {
+                return this.SDC_SummaryField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDC_SummaryField, value) != true)) {
+                    this.SDC_SummaryField = value;
+                    this.RaisePropertyChanged("SDC_Summary");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDG_Group> SDG_Group {
+            get {
+                return this.SDG_GroupField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDG_GroupField, value) != true)) {
+                    this.SDG_GroupField = value;
+                    this.RaisePropertyChanged("SDG_Group");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDG_Group> SDG_Group1 {
+            get {
+                return this.SDG_Group1Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDG_Group1Field, value) != true)) {
+                    this.SDG_Group1Field = value;
+                    this.RaisePropertyChanged("SDG_Group1");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDG_Group> SDG_Group2 {
+            get {
+                return this.SDG_Group2Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDG_Group2Field, value) != true)) {
+                    this.SDG_Group2Field = value;
+                    this.RaisePropertyChanged("SDG_Group2");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDO_Advertisement> SDO_Advertisement {
+            get {
+                return this.SDO_AdvertisementField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDO_AdvertisementField, value) != true)) {
+                    this.SDO_AdvertisementField = value;
+                    this.RaisePropertyChanged("SDO_Advertisement");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDO_Recommend> SDO_Recommend {
+            get {
+                return this.SDO_RecommendField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDO_RecommendField, value) != true)) {
+                    this.SDO_RecommendField = value;
+                    this.RaisePropertyChanged("SDO_Recommend");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDO_Tutorial> SDO_Tutorial {
+            get {
+                return this.SDO_TutorialField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDO_TutorialField, value) != true)) {
+                    this.SDO_TutorialField = value;
+                    this.RaisePropertyChanged("SDO_Tutorial");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDO_TutorialComment> SDO_TutorialComment {
+            get {
+                return this.SDO_TutorialCommentField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDO_TutorialCommentField, value) != true)) {
+                    this.SDO_TutorialCommentField = value;
+                    this.RaisePropertyChanged("SDO_TutorialComment");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDO_TutorialPraise> SDO_TutorialPraise {
+            get {
+                return this.SDO_TutorialPraiseField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDO_TutorialPraiseField, value) != true)) {
+                    this.SDO_TutorialPraiseField = value;
+                    this.RaisePropertyChanged("SDO_TutorialPraise");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDT_Attitude> SDT_Attitude {
+            get {
+                return this.SDT_AttitudeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDT_AttitudeField, value) != true)) {
+                    this.SDT_AttitudeField = value;
+                    this.RaisePropertyChanged("SDT_Attitude");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDT_Comment> SDT_Comment {
+            get {
+                return this.SDT_CommentField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDT_CommentField, value) != true)) {
+                    this.SDT_CommentField = value;
+                    this.RaisePropertyChanged("SDT_Comment");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDT_Forward> SDT_Forward {
+            get {
+                return this.SDT_ForwardField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDT_ForwardField, value) != true)) {
+                    this.SDT_ForwardField = value;
+                    this.RaisePropertyChanged("SDT_Forward");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDT_Praise> SDT_Praise {
+            get {
+                return this.SDT_PraiseField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDT_PraiseField, value) != true)) {
+                    this.SDT_PraiseField = value;
+                    this.RaisePropertyChanged("SDT_Praise");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDT_Topic> SDT_Topic {
+            get {
+                return this.SDT_TopicField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDT_TopicField, value) != true)) {
+                    this.SDT_TopicField = value;
+                    this.RaisePropertyChanged("SDT_Topic");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDT_Voice> SDT_Voice {
+            get {
+                return this.SDT_VoiceField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDT_VoiceField, value) != true)) {
+                    this.SDT_VoiceField = value;
+                    this.RaisePropertyChanged("SDT_Voice");
                 }
             }
         }
@@ -4764,6 +5068,9 @@ namespace Insight.WS.Client.Common.Service {
         private System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDD_Numeric> MDD_NumericField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDE_Message> MDE_MessageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private Insight.WS.Client.Common.Service.MDG_Contact MDG_ContactField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -4780,6 +5087,9 @@ namespace Insight.WS.Client.Common.Service {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private Insight.WS.Client.Common.Service.MDG_Material MDG_MaterialField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Insight.WS.Client.Common.Service.MDG_Member MDG_MemberField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private Insight.WS.Client.Common.Service.MDG_Supplier MDG_SupplierField;
@@ -4801,6 +5111,21 @@ namespace Insight.WS.Client.Common.Service {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<System.Guid> ParentIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDC_FirstVisit> SDC_FirstVisitField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDC_FirstVisit> SDC_FirstVisit1Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDC_Subsequent> SDC_SubsequentField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDC_Subsequent> SDC_Subsequent1Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDG_GroupMember> SDG_GroupMemberField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private long SNField;
@@ -5082,6 +5407,19 @@ namespace Insight.WS.Client.Common.Service {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDE_Message> MDE_Message {
+            get {
+                return this.MDE_MessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MDE_MessageField, value) != true)) {
+                    this.MDE_MessageField = value;
+                    this.RaisePropertyChanged("MDE_Message");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public Insight.WS.Client.Common.Service.MDG_Contact MDG_Contact {
             get {
                 return this.MDG_ContactField;
@@ -5155,6 +5493,19 @@ namespace Insight.WS.Client.Common.Service {
                 if ((object.ReferenceEquals(this.MDG_MaterialField, value) != true)) {
                     this.MDG_MaterialField = value;
                     this.RaisePropertyChanged("MDG_Material");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Insight.WS.Client.Common.Service.MDG_Member MDG_Member {
+            get {
+                return this.MDG_MemberField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MDG_MemberField, value) != true)) {
+                    this.MDG_MemberField = value;
+                    this.RaisePropertyChanged("MDG_Member");
                 }
             }
         }
@@ -5246,6 +5597,71 @@ namespace Insight.WS.Client.Common.Service {
                 if ((this.ParentIdField.Equals(value) != true)) {
                     this.ParentIdField = value;
                     this.RaisePropertyChanged("ParentId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDC_FirstVisit> SDC_FirstVisit {
+            get {
+                return this.SDC_FirstVisitField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDC_FirstVisitField, value) != true)) {
+                    this.SDC_FirstVisitField = value;
+                    this.RaisePropertyChanged("SDC_FirstVisit");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDC_FirstVisit> SDC_FirstVisit1 {
+            get {
+                return this.SDC_FirstVisit1Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDC_FirstVisit1Field, value) != true)) {
+                    this.SDC_FirstVisit1Field = value;
+                    this.RaisePropertyChanged("SDC_FirstVisit1");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDC_Subsequent> SDC_Subsequent {
+            get {
+                return this.SDC_SubsequentField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDC_SubsequentField, value) != true)) {
+                    this.SDC_SubsequentField = value;
+                    this.RaisePropertyChanged("SDC_Subsequent");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDC_Subsequent> SDC_Subsequent1 {
+            get {
+                return this.SDC_Subsequent1Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDC_Subsequent1Field, value) != true)) {
+                    this.SDC_Subsequent1Field = value;
+                    this.RaisePropertyChanged("SDC_Subsequent1");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDG_GroupMember> SDG_GroupMember {
+            get {
+                return this.SDG_GroupMemberField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDG_GroupMemberField, value) != true)) {
+                    this.SDG_GroupMemberField = value;
+                    this.RaisePropertyChanged("SDG_GroupMember");
                 }
             }
         }
@@ -10242,6 +10658,227 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MDG_Member", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
+    [System.SerializableAttribute()]
+    public partial class MDG_Member : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int BeansField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CityField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CountryField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CountyField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IntegralField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid MIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Insight.WS.Client.Common.Service.MasterData MasterDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PortraitField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long SNField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string StateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string StreetField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ZipCodeField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Beans {
+            get {
+                return this.BeansField;
+            }
+            set {
+                if ((this.BeansField.Equals(value) != true)) {
+                    this.BeansField = value;
+                    this.RaisePropertyChanged("Beans");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string City {
+            get {
+                return this.CityField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CityField, value) != true)) {
+                    this.CityField = value;
+                    this.RaisePropertyChanged("City");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Country {
+            get {
+                return this.CountryField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CountryField, value) != true)) {
+                    this.CountryField = value;
+                    this.RaisePropertyChanged("Country");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string County {
+            get {
+                return this.CountyField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CountyField, value) != true)) {
+                    this.CountyField = value;
+                    this.RaisePropertyChanged("County");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Integral {
+            get {
+                return this.IntegralField;
+            }
+            set {
+                if ((this.IntegralField.Equals(value) != true)) {
+                    this.IntegralField = value;
+                    this.RaisePropertyChanged("Integral");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid MID {
+            get {
+                return this.MIDField;
+            }
+            set {
+                if ((this.MIDField.Equals(value) != true)) {
+                    this.MIDField = value;
+                    this.RaisePropertyChanged("MID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Insight.WS.Client.Common.Service.MasterData MasterData {
+            get {
+                return this.MasterDataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MasterDataField, value) != true)) {
+                    this.MasterDataField = value;
+                    this.RaisePropertyChanged("MasterData");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Portrait {
+            get {
+                return this.PortraitField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PortraitField, value) != true)) {
+                    this.PortraitField = value;
+                    this.RaisePropertyChanged("Portrait");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long SN {
+            get {
+                return this.SNField;
+            }
+            set {
+                if ((this.SNField.Equals(value) != true)) {
+                    this.SNField = value;
+                    this.RaisePropertyChanged("SN");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string State {
+            get {
+                return this.StateField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.StateField, value) != true)) {
+                    this.StateField = value;
+                    this.RaisePropertyChanged("State");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Street {
+            get {
+                return this.StreetField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.StreetField, value) != true)) {
+                    this.StreetField = value;
+                    this.RaisePropertyChanged("Street");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ZipCode {
+            get {
+                return this.ZipCodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ZipCodeField, value) != true)) {
+                    this.ZipCodeField = value;
+                    this.RaisePropertyChanged("ZipCode");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ABS_Contract", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class ABS_Contract : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -12202,6 +12839,195 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MDE_Message", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
+    [System.SerializableAttribute()]
+    public partial class MDE_Message : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ContentField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime CreateTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid CreatorUserIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool HaveReadField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Insight.WS.Client.Common.Service.MasterData MasterDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid ReceiveUserIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long SNField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Insight.WS.Client.Common.Service.SYS_User SYS_UserField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.DateTime> SendTimeField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Content {
+            get {
+                return this.ContentField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ContentField, value) != true)) {
+                    this.ContentField = value;
+                    this.RaisePropertyChanged("Content");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime CreateTime {
+            get {
+                return this.CreateTimeField;
+            }
+            set {
+                if ((this.CreateTimeField.Equals(value) != true)) {
+                    this.CreateTimeField = value;
+                    this.RaisePropertyChanged("CreateTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid CreatorUserId {
+            get {
+                return this.CreatorUserIdField;
+            }
+            set {
+                if ((this.CreatorUserIdField.Equals(value) != true)) {
+                    this.CreatorUserIdField = value;
+                    this.RaisePropertyChanged("CreatorUserId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool HaveRead {
+            get {
+                return this.HaveReadField;
+            }
+            set {
+                if ((this.HaveReadField.Equals(value) != true)) {
+                    this.HaveReadField = value;
+                    this.RaisePropertyChanged("HaveRead");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Insight.WS.Client.Common.Service.MasterData MasterData {
+            get {
+                return this.MasterDataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MasterDataField, value) != true)) {
+                    this.MasterDataField = value;
+                    this.RaisePropertyChanged("MasterData");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid ReceiveUserId {
+            get {
+                return this.ReceiveUserIdField;
+            }
+            set {
+                if ((this.ReceiveUserIdField.Equals(value) != true)) {
+                    this.ReceiveUserIdField = value;
+                    this.RaisePropertyChanged("ReceiveUserId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long SN {
+            get {
+                return this.SNField;
+            }
+            set {
+                if ((this.SNField.Equals(value) != true)) {
+                    this.SNField = value;
+                    this.RaisePropertyChanged("SN");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Insight.WS.Client.Common.Service.SYS_User SYS_User {
+            get {
+                return this.SYS_UserField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SYS_UserField, value) != true)) {
+                    this.SYS_UserField = value;
+                    this.RaisePropertyChanged("SYS_User");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> SendTime {
+            get {
+                return this.SendTimeField;
+            }
+            set {
+                if ((this.SendTimeField.Equals(value) != true)) {
+                    this.SendTimeField = value;
+                    this.RaisePropertyChanged("SendTime");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="MDR_MU", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class MDR_MU : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -12532,6 +13358,941 @@ namespace Insight.WS.Client.Common.Service {
                 if ((object.ReferenceEquals(this.SYS_UserField, value) != true)) {
                     this.SYS_UserField = value;
                     this.RaisePropertyChanged("SYS_User");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SDC_FirstVisit", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
+    [System.SerializableAttribute()]
+    public partial class SDC_FirstVisit : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid CaseHistoryIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ComplainedField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime CreateTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid CreatorUserIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DescriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DiagnosisField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.Guid> DoctorIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string InspectionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string KeyWordField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string LowerJawField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Insight.WS.Client.Common.Service.MasterData MasterDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Insight.WS.Client.Common.Service.MasterData MasterData1Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MedicalHistoryField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NotifyField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.Guid> NurseIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PreviousField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Insight.WS.Client.Common.Service.SDC_CaseHistory SDC_CaseHistoryField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDC_Subsequent> SDC_SubsequentField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDC_Summary> SDC_SummaryField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDT_Topic> SDT_TopicField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDT_Voice> SDT_VoiceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long SNField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Insight.WS.Client.Common.Service.SYS_User SYS_UserField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TherapyField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TherapyPlanField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string UpperJawField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid CaseHistoryId {
+            get {
+                return this.CaseHistoryIdField;
+            }
+            set {
+                if ((this.CaseHistoryIdField.Equals(value) != true)) {
+                    this.CaseHistoryIdField = value;
+                    this.RaisePropertyChanged("CaseHistoryId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Complained {
+            get {
+                return this.ComplainedField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ComplainedField, value) != true)) {
+                    this.ComplainedField = value;
+                    this.RaisePropertyChanged("Complained");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime CreateTime {
+            get {
+                return this.CreateTimeField;
+            }
+            set {
+                if ((this.CreateTimeField.Equals(value) != true)) {
+                    this.CreateTimeField = value;
+                    this.RaisePropertyChanged("CreateTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid CreatorUserId {
+            get {
+                return this.CreatorUserIdField;
+            }
+            set {
+                if ((this.CreatorUserIdField.Equals(value) != true)) {
+                    this.CreatorUserIdField = value;
+                    this.RaisePropertyChanged("CreatorUserId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Description {
+            get {
+                return this.DescriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
+                    this.DescriptionField = value;
+                    this.RaisePropertyChanged("Description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Diagnosis {
+            get {
+                return this.DiagnosisField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DiagnosisField, value) != true)) {
+                    this.DiagnosisField = value;
+                    this.RaisePropertyChanged("Diagnosis");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.Guid> DoctorId {
+            get {
+                return this.DoctorIdField;
+            }
+            set {
+                if ((this.DoctorIdField.Equals(value) != true)) {
+                    this.DoctorIdField = value;
+                    this.RaisePropertyChanged("DoctorId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Inspection {
+            get {
+                return this.InspectionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.InspectionField, value) != true)) {
+                    this.InspectionField = value;
+                    this.RaisePropertyChanged("Inspection");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string KeyWord {
+            get {
+                return this.KeyWordField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.KeyWordField, value) != true)) {
+                    this.KeyWordField = value;
+                    this.RaisePropertyChanged("KeyWord");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string LowerJaw {
+            get {
+                return this.LowerJawField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LowerJawField, value) != true)) {
+                    this.LowerJawField = value;
+                    this.RaisePropertyChanged("LowerJaw");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Insight.WS.Client.Common.Service.MasterData MasterData {
+            get {
+                return this.MasterDataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MasterDataField, value) != true)) {
+                    this.MasterDataField = value;
+                    this.RaisePropertyChanged("MasterData");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Insight.WS.Client.Common.Service.MasterData MasterData1 {
+            get {
+                return this.MasterData1Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MasterData1Field, value) != true)) {
+                    this.MasterData1Field = value;
+                    this.RaisePropertyChanged("MasterData1");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string MedicalHistory {
+            get {
+                return this.MedicalHistoryField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MedicalHistoryField, value) != true)) {
+                    this.MedicalHistoryField = value;
+                    this.RaisePropertyChanged("MedicalHistory");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Notify {
+            get {
+                return this.NotifyField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NotifyField, value) != true)) {
+                    this.NotifyField = value;
+                    this.RaisePropertyChanged("Notify");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.Guid> NurseId {
+            get {
+                return this.NurseIdField;
+            }
+            set {
+                if ((this.NurseIdField.Equals(value) != true)) {
+                    this.NurseIdField = value;
+                    this.RaisePropertyChanged("NurseId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Previous {
+            get {
+                return this.PreviousField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PreviousField, value) != true)) {
+                    this.PreviousField = value;
+                    this.RaisePropertyChanged("Previous");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Insight.WS.Client.Common.Service.SDC_CaseHistory SDC_CaseHistory {
+            get {
+                return this.SDC_CaseHistoryField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDC_CaseHistoryField, value) != true)) {
+                    this.SDC_CaseHistoryField = value;
+                    this.RaisePropertyChanged("SDC_CaseHistory");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDC_Subsequent> SDC_Subsequent {
+            get {
+                return this.SDC_SubsequentField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDC_SubsequentField, value) != true)) {
+                    this.SDC_SubsequentField = value;
+                    this.RaisePropertyChanged("SDC_Subsequent");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDC_Summary> SDC_Summary {
+            get {
+                return this.SDC_SummaryField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDC_SummaryField, value) != true)) {
+                    this.SDC_SummaryField = value;
+                    this.RaisePropertyChanged("SDC_Summary");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDT_Topic> SDT_Topic {
+            get {
+                return this.SDT_TopicField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDT_TopicField, value) != true)) {
+                    this.SDT_TopicField = value;
+                    this.RaisePropertyChanged("SDT_Topic");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDT_Voice> SDT_Voice {
+            get {
+                return this.SDT_VoiceField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDT_VoiceField, value) != true)) {
+                    this.SDT_VoiceField = value;
+                    this.RaisePropertyChanged("SDT_Voice");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long SN {
+            get {
+                return this.SNField;
+            }
+            set {
+                if ((this.SNField.Equals(value) != true)) {
+                    this.SNField = value;
+                    this.RaisePropertyChanged("SN");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Insight.WS.Client.Common.Service.SYS_User SYS_User {
+            get {
+                return this.SYS_UserField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SYS_UserField, value) != true)) {
+                    this.SYS_UserField = value;
+                    this.RaisePropertyChanged("SYS_User");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Therapy {
+            get {
+                return this.TherapyField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TherapyField, value) != true)) {
+                    this.TherapyField = value;
+                    this.RaisePropertyChanged("Therapy");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string TherapyPlan {
+            get {
+                return this.TherapyPlanField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TherapyPlanField, value) != true)) {
+                    this.TherapyPlanField = value;
+                    this.RaisePropertyChanged("TherapyPlan");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string UpperJaw {
+            get {
+                return this.UpperJawField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UpperJawField, value) != true)) {
+                    this.UpperJawField = value;
+                    this.RaisePropertyChanged("UpperJaw");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SDC_Subsequent", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
+    [System.SerializableAttribute()]
+    public partial class SDC_Subsequent : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.Guid> CaseIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime CreateTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid CreatorUserIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DescriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.Guid> DoctorIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string InspectionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string KeyWordField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Insight.WS.Client.Common.Service.MasterData MasterDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Insight.WS.Client.Common.Service.MasterData MasterData1Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MedicalHistoryField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NotifyField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.Guid> NurseIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Insight.WS.Client.Common.Service.SDC_FirstVisit SDC_FirstVisitField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long SNField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Insight.WS.Client.Common.Service.SYS_User SYS_UserField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TherapyField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TherapyPlanField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.Guid> CaseId {
+            get {
+                return this.CaseIdField;
+            }
+            set {
+                if ((this.CaseIdField.Equals(value) != true)) {
+                    this.CaseIdField = value;
+                    this.RaisePropertyChanged("CaseId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime CreateTime {
+            get {
+                return this.CreateTimeField;
+            }
+            set {
+                if ((this.CreateTimeField.Equals(value) != true)) {
+                    this.CreateTimeField = value;
+                    this.RaisePropertyChanged("CreateTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid CreatorUserId {
+            get {
+                return this.CreatorUserIdField;
+            }
+            set {
+                if ((this.CreatorUserIdField.Equals(value) != true)) {
+                    this.CreatorUserIdField = value;
+                    this.RaisePropertyChanged("CreatorUserId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Description {
+            get {
+                return this.DescriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
+                    this.DescriptionField = value;
+                    this.RaisePropertyChanged("Description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.Guid> DoctorId {
+            get {
+                return this.DoctorIdField;
+            }
+            set {
+                if ((this.DoctorIdField.Equals(value) != true)) {
+                    this.DoctorIdField = value;
+                    this.RaisePropertyChanged("DoctorId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Inspection {
+            get {
+                return this.InspectionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.InspectionField, value) != true)) {
+                    this.InspectionField = value;
+                    this.RaisePropertyChanged("Inspection");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string KeyWord {
+            get {
+                return this.KeyWordField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.KeyWordField, value) != true)) {
+                    this.KeyWordField = value;
+                    this.RaisePropertyChanged("KeyWord");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Insight.WS.Client.Common.Service.MasterData MasterData {
+            get {
+                return this.MasterDataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MasterDataField, value) != true)) {
+                    this.MasterDataField = value;
+                    this.RaisePropertyChanged("MasterData");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Insight.WS.Client.Common.Service.MasterData MasterData1 {
+            get {
+                return this.MasterData1Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MasterData1Field, value) != true)) {
+                    this.MasterData1Field = value;
+                    this.RaisePropertyChanged("MasterData1");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string MedicalHistory {
+            get {
+                return this.MedicalHistoryField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MedicalHistoryField, value) != true)) {
+                    this.MedicalHistoryField = value;
+                    this.RaisePropertyChanged("MedicalHistory");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Notify {
+            get {
+                return this.NotifyField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NotifyField, value) != true)) {
+                    this.NotifyField = value;
+                    this.RaisePropertyChanged("Notify");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.Guid> NurseId {
+            get {
+                return this.NurseIdField;
+            }
+            set {
+                if ((this.NurseIdField.Equals(value) != true)) {
+                    this.NurseIdField = value;
+                    this.RaisePropertyChanged("NurseId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Insight.WS.Client.Common.Service.SDC_FirstVisit SDC_FirstVisit {
+            get {
+                return this.SDC_FirstVisitField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDC_FirstVisitField, value) != true)) {
+                    this.SDC_FirstVisitField = value;
+                    this.RaisePropertyChanged("SDC_FirstVisit");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long SN {
+            get {
+                return this.SNField;
+            }
+            set {
+                if ((this.SNField.Equals(value) != true)) {
+                    this.SNField = value;
+                    this.RaisePropertyChanged("SN");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Insight.WS.Client.Common.Service.SYS_User SYS_User {
+            get {
+                return this.SYS_UserField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SYS_UserField, value) != true)) {
+                    this.SYS_UserField = value;
+                    this.RaisePropertyChanged("SYS_User");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Therapy {
+            get {
+                return this.TherapyField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TherapyField, value) != true)) {
+                    this.TherapyField = value;
+                    this.RaisePropertyChanged("Therapy");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string TherapyPlan {
+            get {
+                return this.TherapyPlanField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TherapyPlanField, value) != true)) {
+                    this.TherapyPlanField = value;
+                    this.RaisePropertyChanged("TherapyPlan");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SDG_GroupMember", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
+    [System.SerializableAttribute()]
+    public partial class SDG_GroupMember : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime CreateTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid GroupIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Insight.WS.Client.Common.Service.MasterData MasterDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid MemberIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Insight.WS.Client.Common.Service.SDG_Group SDG_GroupField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long SNField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool ValidityField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime CreateTime {
+            get {
+                return this.CreateTimeField;
+            }
+            set {
+                if ((this.CreateTimeField.Equals(value) != true)) {
+                    this.CreateTimeField = value;
+                    this.RaisePropertyChanged("CreateTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid GroupId {
+            get {
+                return this.GroupIdField;
+            }
+            set {
+                if ((this.GroupIdField.Equals(value) != true)) {
+                    this.GroupIdField = value;
+                    this.RaisePropertyChanged("GroupId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Insight.WS.Client.Common.Service.MasterData MasterData {
+            get {
+                return this.MasterDataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MasterDataField, value) != true)) {
+                    this.MasterDataField = value;
+                    this.RaisePropertyChanged("MasterData");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid MemberId {
+            get {
+                return this.MemberIdField;
+            }
+            set {
+                if ((this.MemberIdField.Equals(value) != true)) {
+                    this.MemberIdField = value;
+                    this.RaisePropertyChanged("MemberId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Insight.WS.Client.Common.Service.SDG_Group SDG_Group {
+            get {
+                return this.SDG_GroupField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDG_GroupField, value) != true)) {
+                    this.SDG_GroupField = value;
+                    this.RaisePropertyChanged("SDG_Group");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long SN {
+            get {
+                return this.SNField;
+            }
+            set {
+                if ((this.SNField.Equals(value) != true)) {
+                    this.SNField = value;
+                    this.RaisePropertyChanged("SN");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Validity {
+            get {
+                return this.ValidityField;
+            }
+            set {
+                if ((this.ValidityField.Equals(value) != true)) {
+                    this.ValidityField = value;
+                    this.RaisePropertyChanged("Validity");
                 }
             }
         }
@@ -16872,6 +18633,3081 @@ namespace Insight.WS.Client.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MDE_Favorites", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
+    [System.SerializableAttribute()]
+    public partial class MDE_Favorites : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime CreateTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid CreatorUserIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid ObjectIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long SNField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Insight.WS.Client.Common.Service.SYS_User SYS_UserField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int TypeField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime CreateTime {
+            get {
+                return this.CreateTimeField;
+            }
+            set {
+                if ((this.CreateTimeField.Equals(value) != true)) {
+                    this.CreateTimeField = value;
+                    this.RaisePropertyChanged("CreateTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid CreatorUserId {
+            get {
+                return this.CreatorUserIdField;
+            }
+            set {
+                if ((this.CreatorUserIdField.Equals(value) != true)) {
+                    this.CreatorUserIdField = value;
+                    this.RaisePropertyChanged("CreatorUserId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid ObjectId {
+            get {
+                return this.ObjectIdField;
+            }
+            set {
+                if ((this.ObjectIdField.Equals(value) != true)) {
+                    this.ObjectIdField = value;
+                    this.RaisePropertyChanged("ObjectId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long SN {
+            get {
+                return this.SNField;
+            }
+            set {
+                if ((this.SNField.Equals(value) != true)) {
+                    this.SNField = value;
+                    this.RaisePropertyChanged("SN");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Insight.WS.Client.Common.Service.SYS_User SYS_User {
+            get {
+                return this.SYS_UserField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SYS_UserField, value) != true)) {
+                    this.SYS_UserField = value;
+                    this.RaisePropertyChanged("SYS_User");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Type {
+            get {
+                return this.TypeField;
+            }
+            set {
+                if ((this.TypeField.Equals(value) != true)) {
+                    this.TypeField = value;
+                    this.RaisePropertyChanged("Type");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SDC_CaseHistory", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
+    [System.SerializableAttribute()]
+    public partial class SDC_CaseHistory : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.DateTime> BirthdayField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime CreateTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid CreatorUserIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DescriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int GenderField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string OpenIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PatientNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PhoneField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDC_FirstVisit> SDC_FirstVisitField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long SNField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Insight.WS.Client.Common.Service.SYS_User SYS_UserField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int SecretField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime UpdateTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool ValidityField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string WeChatField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> Birthday {
+            get {
+                return this.BirthdayField;
+            }
+            set {
+                if ((this.BirthdayField.Equals(value) != true)) {
+                    this.BirthdayField = value;
+                    this.RaisePropertyChanged("Birthday");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime CreateTime {
+            get {
+                return this.CreateTimeField;
+            }
+            set {
+                if ((this.CreateTimeField.Equals(value) != true)) {
+                    this.CreateTimeField = value;
+                    this.RaisePropertyChanged("CreateTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid CreatorUserId {
+            get {
+                return this.CreatorUserIdField;
+            }
+            set {
+                if ((this.CreatorUserIdField.Equals(value) != true)) {
+                    this.CreatorUserIdField = value;
+                    this.RaisePropertyChanged("CreatorUserId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Description {
+            get {
+                return this.DescriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
+                    this.DescriptionField = value;
+                    this.RaisePropertyChanged("Description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Gender {
+            get {
+                return this.GenderField;
+            }
+            set {
+                if ((this.GenderField.Equals(value) != true)) {
+                    this.GenderField = value;
+                    this.RaisePropertyChanged("Gender");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string OpenId {
+            get {
+                return this.OpenIdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.OpenIdField, value) != true)) {
+                    this.OpenIdField = value;
+                    this.RaisePropertyChanged("OpenId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string PatientName {
+            get {
+                return this.PatientNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PatientNameField, value) != true)) {
+                    this.PatientNameField = value;
+                    this.RaisePropertyChanged("PatientName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Phone {
+            get {
+                return this.PhoneField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PhoneField, value) != true)) {
+                    this.PhoneField = value;
+                    this.RaisePropertyChanged("Phone");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDC_FirstVisit> SDC_FirstVisit {
+            get {
+                return this.SDC_FirstVisitField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDC_FirstVisitField, value) != true)) {
+                    this.SDC_FirstVisitField = value;
+                    this.RaisePropertyChanged("SDC_FirstVisit");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long SN {
+            get {
+                return this.SNField;
+            }
+            set {
+                if ((this.SNField.Equals(value) != true)) {
+                    this.SNField = value;
+                    this.RaisePropertyChanged("SN");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Insight.WS.Client.Common.Service.SYS_User SYS_User {
+            get {
+                return this.SYS_UserField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SYS_UserField, value) != true)) {
+                    this.SYS_UserField = value;
+                    this.RaisePropertyChanged("SYS_User");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Secret {
+            get {
+                return this.SecretField;
+            }
+            set {
+                if ((this.SecretField.Equals(value) != true)) {
+                    this.SecretField = value;
+                    this.RaisePropertyChanged("Secret");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime UpdateTime {
+            get {
+                return this.UpdateTimeField;
+            }
+            set {
+                if ((this.UpdateTimeField.Equals(value) != true)) {
+                    this.UpdateTimeField = value;
+                    this.RaisePropertyChanged("UpdateTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Validity {
+            get {
+                return this.ValidityField;
+            }
+            set {
+                if ((this.ValidityField.Equals(value) != true)) {
+                    this.ValidityField = value;
+                    this.RaisePropertyChanged("Validity");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string WeChat {
+            get {
+                return this.WeChatField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.WeChatField, value) != true)) {
+                    this.WeChatField = value;
+                    this.RaisePropertyChanged("WeChat");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SDC_Summary", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
+    [System.SerializableAttribute()]
+    public partial class SDC_Summary : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.Guid> CaseIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ContentField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime CreateTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid CreatorUserIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string KeyWordField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Insight.WS.Client.Common.Service.SDC_FirstVisit SDC_FirstVisitField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long SNField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Insight.WS.Client.Common.Service.SYS_User SYS_UserField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.Guid> CaseId {
+            get {
+                return this.CaseIdField;
+            }
+            set {
+                if ((this.CaseIdField.Equals(value) != true)) {
+                    this.CaseIdField = value;
+                    this.RaisePropertyChanged("CaseId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Content {
+            get {
+                return this.ContentField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ContentField, value) != true)) {
+                    this.ContentField = value;
+                    this.RaisePropertyChanged("Content");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime CreateTime {
+            get {
+                return this.CreateTimeField;
+            }
+            set {
+                if ((this.CreateTimeField.Equals(value) != true)) {
+                    this.CreateTimeField = value;
+                    this.RaisePropertyChanged("CreateTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid CreatorUserId {
+            get {
+                return this.CreatorUserIdField;
+            }
+            set {
+                if ((this.CreatorUserIdField.Equals(value) != true)) {
+                    this.CreatorUserIdField = value;
+                    this.RaisePropertyChanged("CreatorUserId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string KeyWord {
+            get {
+                return this.KeyWordField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.KeyWordField, value) != true)) {
+                    this.KeyWordField = value;
+                    this.RaisePropertyChanged("KeyWord");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Insight.WS.Client.Common.Service.SDC_FirstVisit SDC_FirstVisit {
+            get {
+                return this.SDC_FirstVisitField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDC_FirstVisitField, value) != true)) {
+                    this.SDC_FirstVisitField = value;
+                    this.RaisePropertyChanged("SDC_FirstVisit");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long SN {
+            get {
+                return this.SNField;
+            }
+            set {
+                if ((this.SNField.Equals(value) != true)) {
+                    this.SNField = value;
+                    this.RaisePropertyChanged("SN");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Insight.WS.Client.Common.Service.SYS_User SYS_User {
+            get {
+                return this.SYS_UserField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SYS_UserField, value) != true)) {
+                    this.SYS_UserField = value;
+                    this.RaisePropertyChanged("SYS_User");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SDG_Group", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
+    [System.SerializableAttribute()]
+    public partial class SDG_Group : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime CreateTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid CreatorUserIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DescriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int HeatField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string IconField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.Guid> ManageUserIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int MembersField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid OwnerUserIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PictureField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDG_GroupMember> SDG_GroupMemberField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDT_Forward> SDT_ForwardField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDT_Topic> SDT_TopicField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long SNField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Insight.WS.Client.Common.Service.SYS_User SYS_UserField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Insight.WS.Client.Common.Service.SYS_User SYS_User1Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Insight.WS.Client.Common.Service.SYS_User SYS_User2Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int TopicsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool ValidityField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime CreateTime {
+            get {
+                return this.CreateTimeField;
+            }
+            set {
+                if ((this.CreateTimeField.Equals(value) != true)) {
+                    this.CreateTimeField = value;
+                    this.RaisePropertyChanged("CreateTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid CreatorUserId {
+            get {
+                return this.CreatorUserIdField;
+            }
+            set {
+                if ((this.CreatorUserIdField.Equals(value) != true)) {
+                    this.CreatorUserIdField = value;
+                    this.RaisePropertyChanged("CreatorUserId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Description {
+            get {
+                return this.DescriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
+                    this.DescriptionField = value;
+                    this.RaisePropertyChanged("Description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Heat {
+            get {
+                return this.HeatField;
+            }
+            set {
+                if ((this.HeatField.Equals(value) != true)) {
+                    this.HeatField = value;
+                    this.RaisePropertyChanged("Heat");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Icon {
+            get {
+                return this.IconField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.IconField, value) != true)) {
+                    this.IconField = value;
+                    this.RaisePropertyChanged("Icon");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.Guid> ManageUserId {
+            get {
+                return this.ManageUserIdField;
+            }
+            set {
+                if ((this.ManageUserIdField.Equals(value) != true)) {
+                    this.ManageUserIdField = value;
+                    this.RaisePropertyChanged("ManageUserId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Members {
+            get {
+                return this.MembersField;
+            }
+            set {
+                if ((this.MembersField.Equals(value) != true)) {
+                    this.MembersField = value;
+                    this.RaisePropertyChanged("Members");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid OwnerUserId {
+            get {
+                return this.OwnerUserIdField;
+            }
+            set {
+                if ((this.OwnerUserIdField.Equals(value) != true)) {
+                    this.OwnerUserIdField = value;
+                    this.RaisePropertyChanged("OwnerUserId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Picture {
+            get {
+                return this.PictureField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PictureField, value) != true)) {
+                    this.PictureField = value;
+                    this.RaisePropertyChanged("Picture");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDG_GroupMember> SDG_GroupMember {
+            get {
+                return this.SDG_GroupMemberField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDG_GroupMemberField, value) != true)) {
+                    this.SDG_GroupMemberField = value;
+                    this.RaisePropertyChanged("SDG_GroupMember");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDT_Forward> SDT_Forward {
+            get {
+                return this.SDT_ForwardField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDT_ForwardField, value) != true)) {
+                    this.SDT_ForwardField = value;
+                    this.RaisePropertyChanged("SDT_Forward");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDT_Topic> SDT_Topic {
+            get {
+                return this.SDT_TopicField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDT_TopicField, value) != true)) {
+                    this.SDT_TopicField = value;
+                    this.RaisePropertyChanged("SDT_Topic");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long SN {
+            get {
+                return this.SNField;
+            }
+            set {
+                if ((this.SNField.Equals(value) != true)) {
+                    this.SNField = value;
+                    this.RaisePropertyChanged("SN");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Insight.WS.Client.Common.Service.SYS_User SYS_User {
+            get {
+                return this.SYS_UserField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SYS_UserField, value) != true)) {
+                    this.SYS_UserField = value;
+                    this.RaisePropertyChanged("SYS_User");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Insight.WS.Client.Common.Service.SYS_User SYS_User1 {
+            get {
+                return this.SYS_User1Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SYS_User1Field, value) != true)) {
+                    this.SYS_User1Field = value;
+                    this.RaisePropertyChanged("SYS_User1");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Insight.WS.Client.Common.Service.SYS_User SYS_User2 {
+            get {
+                return this.SYS_User2Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SYS_User2Field, value) != true)) {
+                    this.SYS_User2Field = value;
+                    this.RaisePropertyChanged("SYS_User2");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Topics {
+            get {
+                return this.TopicsField;
+            }
+            set {
+                if ((this.TopicsField.Equals(value) != true)) {
+                    this.TopicsField = value;
+                    this.RaisePropertyChanged("Topics");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Validity {
+            get {
+                return this.ValidityField;
+            }
+            set {
+                if ((this.ValidityField.Equals(value) != true)) {
+                    this.ValidityField = value;
+                    this.RaisePropertyChanged("Validity");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SDO_Advertisement", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
+    [System.SerializableAttribute()]
+    public partial class SDO_Advertisement : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime CreateTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid CreatorUserIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PictureField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long SNField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Insight.WS.Client.Common.Service.SYS_User SYS_UserField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int TypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string UrlField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool ValidityField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime CreateTime {
+            get {
+                return this.CreateTimeField;
+            }
+            set {
+                if ((this.CreateTimeField.Equals(value) != true)) {
+                    this.CreateTimeField = value;
+                    this.RaisePropertyChanged("CreateTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid CreatorUserId {
+            get {
+                return this.CreatorUserIdField;
+            }
+            set {
+                if ((this.CreatorUserIdField.Equals(value) != true)) {
+                    this.CreatorUserIdField = value;
+                    this.RaisePropertyChanged("CreatorUserId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Picture {
+            get {
+                return this.PictureField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PictureField, value) != true)) {
+                    this.PictureField = value;
+                    this.RaisePropertyChanged("Picture");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long SN {
+            get {
+                return this.SNField;
+            }
+            set {
+                if ((this.SNField.Equals(value) != true)) {
+                    this.SNField = value;
+                    this.RaisePropertyChanged("SN");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Insight.WS.Client.Common.Service.SYS_User SYS_User {
+            get {
+                return this.SYS_UserField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SYS_UserField, value) != true)) {
+                    this.SYS_UserField = value;
+                    this.RaisePropertyChanged("SYS_User");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Type {
+            get {
+                return this.TypeField;
+            }
+            set {
+                if ((this.TypeField.Equals(value) != true)) {
+                    this.TypeField = value;
+                    this.RaisePropertyChanged("Type");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Url {
+            get {
+                return this.UrlField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UrlField, value) != true)) {
+                    this.UrlField = value;
+                    this.RaisePropertyChanged("Url");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Validity {
+            get {
+                return this.ValidityField;
+            }
+            set {
+                if ((this.ValidityField.Equals(value) != true)) {
+                    this.ValidityField = value;
+                    this.RaisePropertyChanged("Validity");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SDO_Recommend", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
+    [System.SerializableAttribute()]
+    public partial class SDO_Recommend : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime CreateTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid CreatorUserIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DescriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool FixedField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PictureField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long SNField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Insight.WS.Client.Common.Service.SYS_User SYS_UserField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TitleField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int TypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string UrlField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool ValidityField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime CreateTime {
+            get {
+                return this.CreateTimeField;
+            }
+            set {
+                if ((this.CreateTimeField.Equals(value) != true)) {
+                    this.CreateTimeField = value;
+                    this.RaisePropertyChanged("CreateTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid CreatorUserId {
+            get {
+                return this.CreatorUserIdField;
+            }
+            set {
+                if ((this.CreatorUserIdField.Equals(value) != true)) {
+                    this.CreatorUserIdField = value;
+                    this.RaisePropertyChanged("CreatorUserId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Description {
+            get {
+                return this.DescriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
+                    this.DescriptionField = value;
+                    this.RaisePropertyChanged("Description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Fixed {
+            get {
+                return this.FixedField;
+            }
+            set {
+                if ((this.FixedField.Equals(value) != true)) {
+                    this.FixedField = value;
+                    this.RaisePropertyChanged("Fixed");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Picture {
+            get {
+                return this.PictureField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PictureField, value) != true)) {
+                    this.PictureField = value;
+                    this.RaisePropertyChanged("Picture");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long SN {
+            get {
+                return this.SNField;
+            }
+            set {
+                if ((this.SNField.Equals(value) != true)) {
+                    this.SNField = value;
+                    this.RaisePropertyChanged("SN");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Insight.WS.Client.Common.Service.SYS_User SYS_User {
+            get {
+                return this.SYS_UserField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SYS_UserField, value) != true)) {
+                    this.SYS_UserField = value;
+                    this.RaisePropertyChanged("SYS_User");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Title {
+            get {
+                return this.TitleField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TitleField, value) != true)) {
+                    this.TitleField = value;
+                    this.RaisePropertyChanged("Title");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Type {
+            get {
+                return this.TypeField;
+            }
+            set {
+                if ((this.TypeField.Equals(value) != true)) {
+                    this.TypeField = value;
+                    this.RaisePropertyChanged("Type");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Url {
+            get {
+                return this.UrlField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UrlField, value) != true)) {
+                    this.UrlField = value;
+                    this.RaisePropertyChanged("Url");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Validity {
+            get {
+                return this.ValidityField;
+            }
+            set {
+                if ((this.ValidityField.Equals(value) != true)) {
+                    this.ValidityField = value;
+                    this.RaisePropertyChanged("Validity");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SDO_Tutorial", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
+    [System.SerializableAttribute()]
+    public partial class SDO_Tutorial : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime CreateTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid CreatorUserIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DescriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PictureField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDO_TutorialComment> SDO_TutorialCommentField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDO_TutorialPraise> SDO_TutorialPraiseField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long SNField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Insight.WS.Client.Common.Service.SYS_User SYS_UserField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TitleField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string UrlField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool ValidityField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime CreateTime {
+            get {
+                return this.CreateTimeField;
+            }
+            set {
+                if ((this.CreateTimeField.Equals(value) != true)) {
+                    this.CreateTimeField = value;
+                    this.RaisePropertyChanged("CreateTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid CreatorUserId {
+            get {
+                return this.CreatorUserIdField;
+            }
+            set {
+                if ((this.CreatorUserIdField.Equals(value) != true)) {
+                    this.CreatorUserIdField = value;
+                    this.RaisePropertyChanged("CreatorUserId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Description {
+            get {
+                return this.DescriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
+                    this.DescriptionField = value;
+                    this.RaisePropertyChanged("Description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Picture {
+            get {
+                return this.PictureField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PictureField, value) != true)) {
+                    this.PictureField = value;
+                    this.RaisePropertyChanged("Picture");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDO_TutorialComment> SDO_TutorialComment {
+            get {
+                return this.SDO_TutorialCommentField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDO_TutorialCommentField, value) != true)) {
+                    this.SDO_TutorialCommentField = value;
+                    this.RaisePropertyChanged("SDO_TutorialComment");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDO_TutorialPraise> SDO_TutorialPraise {
+            get {
+                return this.SDO_TutorialPraiseField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDO_TutorialPraiseField, value) != true)) {
+                    this.SDO_TutorialPraiseField = value;
+                    this.RaisePropertyChanged("SDO_TutorialPraise");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long SN {
+            get {
+                return this.SNField;
+            }
+            set {
+                if ((this.SNField.Equals(value) != true)) {
+                    this.SNField = value;
+                    this.RaisePropertyChanged("SN");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Insight.WS.Client.Common.Service.SYS_User SYS_User {
+            get {
+                return this.SYS_UserField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SYS_UserField, value) != true)) {
+                    this.SYS_UserField = value;
+                    this.RaisePropertyChanged("SYS_User");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Title {
+            get {
+                return this.TitleField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TitleField, value) != true)) {
+                    this.TitleField = value;
+                    this.RaisePropertyChanged("Title");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Url {
+            get {
+                return this.UrlField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UrlField, value) != true)) {
+                    this.UrlField = value;
+                    this.RaisePropertyChanged("Url");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Validity {
+            get {
+                return this.ValidityField;
+            }
+            set {
+                if ((this.ValidityField.Equals(value) != true)) {
+                    this.ValidityField = value;
+                    this.RaisePropertyChanged("Validity");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SDO_TutorialComment", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
+    [System.SerializableAttribute()]
+    public partial class SDO_TutorialComment : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ContentField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime CreateTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid CreatorUserIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.DateTime> PublishTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Insight.WS.Client.Common.Service.SDO_Tutorial SDO_TutorialField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long SNField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Insight.WS.Client.Common.Service.SYS_User SYS_UserField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid TutorialIdField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Content {
+            get {
+                return this.ContentField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ContentField, value) != true)) {
+                    this.ContentField = value;
+                    this.RaisePropertyChanged("Content");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime CreateTime {
+            get {
+                return this.CreateTimeField;
+            }
+            set {
+                if ((this.CreateTimeField.Equals(value) != true)) {
+                    this.CreateTimeField = value;
+                    this.RaisePropertyChanged("CreateTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid CreatorUserId {
+            get {
+                return this.CreatorUserIdField;
+            }
+            set {
+                if ((this.CreatorUserIdField.Equals(value) != true)) {
+                    this.CreatorUserIdField = value;
+                    this.RaisePropertyChanged("CreatorUserId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> PublishTime {
+            get {
+                return this.PublishTimeField;
+            }
+            set {
+                if ((this.PublishTimeField.Equals(value) != true)) {
+                    this.PublishTimeField = value;
+                    this.RaisePropertyChanged("PublishTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Insight.WS.Client.Common.Service.SDO_Tutorial SDO_Tutorial {
+            get {
+                return this.SDO_TutorialField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDO_TutorialField, value) != true)) {
+                    this.SDO_TutorialField = value;
+                    this.RaisePropertyChanged("SDO_Tutorial");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long SN {
+            get {
+                return this.SNField;
+            }
+            set {
+                if ((this.SNField.Equals(value) != true)) {
+                    this.SNField = value;
+                    this.RaisePropertyChanged("SN");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Insight.WS.Client.Common.Service.SYS_User SYS_User {
+            get {
+                return this.SYS_UserField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SYS_UserField, value) != true)) {
+                    this.SYS_UserField = value;
+                    this.RaisePropertyChanged("SYS_User");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid TutorialId {
+            get {
+                return this.TutorialIdField;
+            }
+            set {
+                if ((this.TutorialIdField.Equals(value) != true)) {
+                    this.TutorialIdField = value;
+                    this.RaisePropertyChanged("TutorialId");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SDO_TutorialPraise", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
+    [System.SerializableAttribute()]
+    public partial class SDO_TutorialPraise : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime CreateTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid CreatorUserIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Insight.WS.Client.Common.Service.SDO_Tutorial SDO_TutorialField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long SNField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Insight.WS.Client.Common.Service.SYS_User SYS_UserField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid TutorialIdField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime CreateTime {
+            get {
+                return this.CreateTimeField;
+            }
+            set {
+                if ((this.CreateTimeField.Equals(value) != true)) {
+                    this.CreateTimeField = value;
+                    this.RaisePropertyChanged("CreateTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid CreatorUserId {
+            get {
+                return this.CreatorUserIdField;
+            }
+            set {
+                if ((this.CreatorUserIdField.Equals(value) != true)) {
+                    this.CreatorUserIdField = value;
+                    this.RaisePropertyChanged("CreatorUserId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Insight.WS.Client.Common.Service.SDO_Tutorial SDO_Tutorial {
+            get {
+                return this.SDO_TutorialField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDO_TutorialField, value) != true)) {
+                    this.SDO_TutorialField = value;
+                    this.RaisePropertyChanged("SDO_Tutorial");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long SN {
+            get {
+                return this.SNField;
+            }
+            set {
+                if ((this.SNField.Equals(value) != true)) {
+                    this.SNField = value;
+                    this.RaisePropertyChanged("SN");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Insight.WS.Client.Common.Service.SYS_User SYS_User {
+            get {
+                return this.SYS_UserField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SYS_UserField, value) != true)) {
+                    this.SYS_UserField = value;
+                    this.RaisePropertyChanged("SYS_User");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid TutorialId {
+            get {
+                return this.TutorialIdField;
+            }
+            set {
+                if ((this.TutorialIdField.Equals(value) != true)) {
+                    this.TutorialIdField = value;
+                    this.RaisePropertyChanged("TutorialId");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SDT_Attitude", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
+    [System.SerializableAttribute()]
+    public partial class SDT_Attitude : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime CreateTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid CreatorUserIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Insight.WS.Client.Common.Service.SDT_Voice SDT_VoiceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long SNField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Insight.WS.Client.Common.Service.SYS_User SYS_UserField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int TypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid VoiceIdField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime CreateTime {
+            get {
+                return this.CreateTimeField;
+            }
+            set {
+                if ((this.CreateTimeField.Equals(value) != true)) {
+                    this.CreateTimeField = value;
+                    this.RaisePropertyChanged("CreateTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid CreatorUserId {
+            get {
+                return this.CreatorUserIdField;
+            }
+            set {
+                if ((this.CreatorUserIdField.Equals(value) != true)) {
+                    this.CreatorUserIdField = value;
+                    this.RaisePropertyChanged("CreatorUserId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Insight.WS.Client.Common.Service.SDT_Voice SDT_Voice {
+            get {
+                return this.SDT_VoiceField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDT_VoiceField, value) != true)) {
+                    this.SDT_VoiceField = value;
+                    this.RaisePropertyChanged("SDT_Voice");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long SN {
+            get {
+                return this.SNField;
+            }
+            set {
+                if ((this.SNField.Equals(value) != true)) {
+                    this.SNField = value;
+                    this.RaisePropertyChanged("SN");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Insight.WS.Client.Common.Service.SYS_User SYS_User {
+            get {
+                return this.SYS_UserField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SYS_UserField, value) != true)) {
+                    this.SYS_UserField = value;
+                    this.RaisePropertyChanged("SYS_User");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Type {
+            get {
+                return this.TypeField;
+            }
+            set {
+                if ((this.TypeField.Equals(value) != true)) {
+                    this.TypeField = value;
+                    this.RaisePropertyChanged("Type");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid VoiceId {
+            get {
+                return this.VoiceIdField;
+            }
+            set {
+                if ((this.VoiceIdField.Equals(value) != true)) {
+                    this.VoiceIdField = value;
+                    this.RaisePropertyChanged("VoiceId");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SDT_Comment", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
+    [System.SerializableAttribute()]
+    public partial class SDT_Comment : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ContentField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime CreateTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid CreatorUserIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.DateTime> PublishTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDT_Praise> SDT_PraiseField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Insight.WS.Client.Common.Service.SDT_Voice SDT_VoiceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long SNField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Insight.WS.Client.Common.Service.SYS_User SYS_UserField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid VoiceIdField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Content {
+            get {
+                return this.ContentField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ContentField, value) != true)) {
+                    this.ContentField = value;
+                    this.RaisePropertyChanged("Content");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime CreateTime {
+            get {
+                return this.CreateTimeField;
+            }
+            set {
+                if ((this.CreateTimeField.Equals(value) != true)) {
+                    this.CreateTimeField = value;
+                    this.RaisePropertyChanged("CreateTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid CreatorUserId {
+            get {
+                return this.CreatorUserIdField;
+            }
+            set {
+                if ((this.CreatorUserIdField.Equals(value) != true)) {
+                    this.CreatorUserIdField = value;
+                    this.RaisePropertyChanged("CreatorUserId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> PublishTime {
+            get {
+                return this.PublishTimeField;
+            }
+            set {
+                if ((this.PublishTimeField.Equals(value) != true)) {
+                    this.PublishTimeField = value;
+                    this.RaisePropertyChanged("PublishTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDT_Praise> SDT_Praise {
+            get {
+                return this.SDT_PraiseField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDT_PraiseField, value) != true)) {
+                    this.SDT_PraiseField = value;
+                    this.RaisePropertyChanged("SDT_Praise");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Insight.WS.Client.Common.Service.SDT_Voice SDT_Voice {
+            get {
+                return this.SDT_VoiceField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDT_VoiceField, value) != true)) {
+                    this.SDT_VoiceField = value;
+                    this.RaisePropertyChanged("SDT_Voice");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long SN {
+            get {
+                return this.SNField;
+            }
+            set {
+                if ((this.SNField.Equals(value) != true)) {
+                    this.SNField = value;
+                    this.RaisePropertyChanged("SN");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Insight.WS.Client.Common.Service.SYS_User SYS_User {
+            get {
+                return this.SYS_UserField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SYS_UserField, value) != true)) {
+                    this.SYS_UserField = value;
+                    this.RaisePropertyChanged("SYS_User");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid VoiceId {
+            get {
+                return this.VoiceIdField;
+            }
+            set {
+                if ((this.VoiceIdField.Equals(value) != true)) {
+                    this.VoiceIdField = value;
+                    this.RaisePropertyChanged("VoiceId");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SDT_Forward", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
+    [System.SerializableAttribute()]
+    public partial class SDT_Forward : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime CreateTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid CreatorUserIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid GroupIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Insight.WS.Client.Common.Service.SDG_Group SDG_GroupField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Insight.WS.Client.Common.Service.SDT_Topic SDT_TopicField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long SNField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Insight.WS.Client.Common.Service.SYS_User SYS_UserField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid TopicIdField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime CreateTime {
+            get {
+                return this.CreateTimeField;
+            }
+            set {
+                if ((this.CreateTimeField.Equals(value) != true)) {
+                    this.CreateTimeField = value;
+                    this.RaisePropertyChanged("CreateTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid CreatorUserId {
+            get {
+                return this.CreatorUserIdField;
+            }
+            set {
+                if ((this.CreatorUserIdField.Equals(value) != true)) {
+                    this.CreatorUserIdField = value;
+                    this.RaisePropertyChanged("CreatorUserId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid GroupId {
+            get {
+                return this.GroupIdField;
+            }
+            set {
+                if ((this.GroupIdField.Equals(value) != true)) {
+                    this.GroupIdField = value;
+                    this.RaisePropertyChanged("GroupId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Insight.WS.Client.Common.Service.SDG_Group SDG_Group {
+            get {
+                return this.SDG_GroupField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDG_GroupField, value) != true)) {
+                    this.SDG_GroupField = value;
+                    this.RaisePropertyChanged("SDG_Group");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Insight.WS.Client.Common.Service.SDT_Topic SDT_Topic {
+            get {
+                return this.SDT_TopicField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDT_TopicField, value) != true)) {
+                    this.SDT_TopicField = value;
+                    this.RaisePropertyChanged("SDT_Topic");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long SN {
+            get {
+                return this.SNField;
+            }
+            set {
+                if ((this.SNField.Equals(value) != true)) {
+                    this.SNField = value;
+                    this.RaisePropertyChanged("SN");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Insight.WS.Client.Common.Service.SYS_User SYS_User {
+            get {
+                return this.SYS_UserField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SYS_UserField, value) != true)) {
+                    this.SYS_UserField = value;
+                    this.RaisePropertyChanged("SYS_User");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid TopicId {
+            get {
+                return this.TopicIdField;
+            }
+            set {
+                if ((this.TopicIdField.Equals(value) != true)) {
+                    this.TopicIdField = value;
+                    this.RaisePropertyChanged("TopicId");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SDT_Praise", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
+    [System.SerializableAttribute()]
+    public partial class SDT_Praise : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid CommentIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime CreateTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid CreatorUserIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Insight.WS.Client.Common.Service.SDT_Comment SDT_CommentField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long SNField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Insight.WS.Client.Common.Service.SYS_User SYS_UserField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int TypeField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid CommentId {
+            get {
+                return this.CommentIdField;
+            }
+            set {
+                if ((this.CommentIdField.Equals(value) != true)) {
+                    this.CommentIdField = value;
+                    this.RaisePropertyChanged("CommentId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime CreateTime {
+            get {
+                return this.CreateTimeField;
+            }
+            set {
+                if ((this.CreateTimeField.Equals(value) != true)) {
+                    this.CreateTimeField = value;
+                    this.RaisePropertyChanged("CreateTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid CreatorUserId {
+            get {
+                return this.CreatorUserIdField;
+            }
+            set {
+                if ((this.CreatorUserIdField.Equals(value) != true)) {
+                    this.CreatorUserIdField = value;
+                    this.RaisePropertyChanged("CreatorUserId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Insight.WS.Client.Common.Service.SDT_Comment SDT_Comment {
+            get {
+                return this.SDT_CommentField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDT_CommentField, value) != true)) {
+                    this.SDT_CommentField = value;
+                    this.RaisePropertyChanged("SDT_Comment");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long SN {
+            get {
+                return this.SNField;
+            }
+            set {
+                if ((this.SNField.Equals(value) != true)) {
+                    this.SNField = value;
+                    this.RaisePropertyChanged("SN");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Insight.WS.Client.Common.Service.SYS_User SYS_User {
+            get {
+                return this.SYS_UserField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SYS_UserField, value) != true)) {
+                    this.SYS_UserField = value;
+                    this.RaisePropertyChanged("SYS_User");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Type {
+            get {
+                return this.TypeField;
+            }
+            set {
+                if ((this.TypeField.Equals(value) != true)) {
+                    this.TypeField = value;
+                    this.RaisePropertyChanged("Type");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SDT_Topic", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
+    [System.SerializableAttribute()]
+    public partial class SDT_Topic : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.Guid> CaseIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime CreateTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid CreatorUserIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DescriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool PrivateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.Guid> PublishGroupIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.DateTime> PublishTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Insight.WS.Client.Common.Service.SDC_FirstVisit SDC_FirstVisitField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Insight.WS.Client.Common.Service.SDG_Group SDG_GroupField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDT_Forward> SDT_ForwardField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDT_Voice> SDT_VoiceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long SNField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Insight.WS.Client.Common.Service.SYS_User SYS_UserField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TagsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TitleField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.Guid> CaseId {
+            get {
+                return this.CaseIdField;
+            }
+            set {
+                if ((this.CaseIdField.Equals(value) != true)) {
+                    this.CaseIdField = value;
+                    this.RaisePropertyChanged("CaseId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime CreateTime {
+            get {
+                return this.CreateTimeField;
+            }
+            set {
+                if ((this.CreateTimeField.Equals(value) != true)) {
+                    this.CreateTimeField = value;
+                    this.RaisePropertyChanged("CreateTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid CreatorUserId {
+            get {
+                return this.CreatorUserIdField;
+            }
+            set {
+                if ((this.CreatorUserIdField.Equals(value) != true)) {
+                    this.CreatorUserIdField = value;
+                    this.RaisePropertyChanged("CreatorUserId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Description {
+            get {
+                return this.DescriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
+                    this.DescriptionField = value;
+                    this.RaisePropertyChanged("Description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Private {
+            get {
+                return this.PrivateField;
+            }
+            set {
+                if ((this.PrivateField.Equals(value) != true)) {
+                    this.PrivateField = value;
+                    this.RaisePropertyChanged("Private");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.Guid> PublishGroupId {
+            get {
+                return this.PublishGroupIdField;
+            }
+            set {
+                if ((this.PublishGroupIdField.Equals(value) != true)) {
+                    this.PublishGroupIdField = value;
+                    this.RaisePropertyChanged("PublishGroupId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> PublishTime {
+            get {
+                return this.PublishTimeField;
+            }
+            set {
+                if ((this.PublishTimeField.Equals(value) != true)) {
+                    this.PublishTimeField = value;
+                    this.RaisePropertyChanged("PublishTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Insight.WS.Client.Common.Service.SDC_FirstVisit SDC_FirstVisit {
+            get {
+                return this.SDC_FirstVisitField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDC_FirstVisitField, value) != true)) {
+                    this.SDC_FirstVisitField = value;
+                    this.RaisePropertyChanged("SDC_FirstVisit");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Insight.WS.Client.Common.Service.SDG_Group SDG_Group {
+            get {
+                return this.SDG_GroupField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDG_GroupField, value) != true)) {
+                    this.SDG_GroupField = value;
+                    this.RaisePropertyChanged("SDG_Group");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDT_Forward> SDT_Forward {
+            get {
+                return this.SDT_ForwardField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDT_ForwardField, value) != true)) {
+                    this.SDT_ForwardField = value;
+                    this.RaisePropertyChanged("SDT_Forward");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDT_Voice> SDT_Voice {
+            get {
+                return this.SDT_VoiceField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDT_VoiceField, value) != true)) {
+                    this.SDT_VoiceField = value;
+                    this.RaisePropertyChanged("SDT_Voice");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long SN {
+            get {
+                return this.SNField;
+            }
+            set {
+                if ((this.SNField.Equals(value) != true)) {
+                    this.SNField = value;
+                    this.RaisePropertyChanged("SN");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Insight.WS.Client.Common.Service.SYS_User SYS_User {
+            get {
+                return this.SYS_UserField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SYS_UserField, value) != true)) {
+                    this.SYS_UserField = value;
+                    this.RaisePropertyChanged("SYS_User");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Tags {
+            get {
+                return this.TagsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TagsField, value) != true)) {
+                    this.TagsField = value;
+                    this.RaisePropertyChanged("Tags");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Title {
+            get {
+                return this.TitleField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TitleField, value) != true)) {
+                    this.TitleField = value;
+                    this.RaisePropertyChanged("Title");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SDT_Voice", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
+    [System.SerializableAttribute()]
+    public partial class SDT_Voice : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.Guid> CaseIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ContentField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime CreateTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid CreatorUserIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.DateTime> PublishTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Insight.WS.Client.Common.Service.SDC_FirstVisit SDC_FirstVisitField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDT_Attitude> SDT_AttitudeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDT_Comment> SDT_CommentField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Insight.WS.Client.Common.Service.SDT_Topic SDT_TopicField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long SNField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Insight.WS.Client.Common.Service.SYS_User SYS_UserField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid TopicIdField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.Guid> CaseId {
+            get {
+                return this.CaseIdField;
+            }
+            set {
+                if ((this.CaseIdField.Equals(value) != true)) {
+                    this.CaseIdField = value;
+                    this.RaisePropertyChanged("CaseId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Content {
+            get {
+                return this.ContentField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ContentField, value) != true)) {
+                    this.ContentField = value;
+                    this.RaisePropertyChanged("Content");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime CreateTime {
+            get {
+                return this.CreateTimeField;
+            }
+            set {
+                if ((this.CreateTimeField.Equals(value) != true)) {
+                    this.CreateTimeField = value;
+                    this.RaisePropertyChanged("CreateTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid CreatorUserId {
+            get {
+                return this.CreatorUserIdField;
+            }
+            set {
+                if ((this.CreatorUserIdField.Equals(value) != true)) {
+                    this.CreatorUserIdField = value;
+                    this.RaisePropertyChanged("CreatorUserId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> PublishTime {
+            get {
+                return this.PublishTimeField;
+            }
+            set {
+                if ((this.PublishTimeField.Equals(value) != true)) {
+                    this.PublishTimeField = value;
+                    this.RaisePropertyChanged("PublishTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Insight.WS.Client.Common.Service.SDC_FirstVisit SDC_FirstVisit {
+            get {
+                return this.SDC_FirstVisitField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDC_FirstVisitField, value) != true)) {
+                    this.SDC_FirstVisitField = value;
+                    this.RaisePropertyChanged("SDC_FirstVisit");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDT_Attitude> SDT_Attitude {
+            get {
+                return this.SDT_AttitudeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDT_AttitudeField, value) != true)) {
+                    this.SDT_AttitudeField = value;
+                    this.RaisePropertyChanged("SDT_Attitude");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDT_Comment> SDT_Comment {
+            get {
+                return this.SDT_CommentField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDT_CommentField, value) != true)) {
+                    this.SDT_CommentField = value;
+                    this.RaisePropertyChanged("SDT_Comment");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Insight.WS.Client.Common.Service.SDT_Topic SDT_Topic {
+            get {
+                return this.SDT_TopicField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SDT_TopicField, value) != true)) {
+                    this.SDT_TopicField = value;
+                    this.RaisePropertyChanged("SDT_Topic");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long SN {
+            get {
+                return this.SNField;
+            }
+            set {
+                if ((this.SNField.Equals(value) != true)) {
+                    this.SNField = value;
+                    this.RaisePropertyChanged("SN");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Insight.WS.Client.Common.Service.SYS_User SYS_User {
+            get {
+                return this.SYS_UserField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SYS_UserField, value) != true)) {
+                    this.SYS_UserField = value;
+                    this.RaisePropertyChanged("SYS_User");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid TopicId {
+            get {
+                return this.TopicIdField;
+            }
+            set {
+                if ((this.TopicIdField.Equals(value) != true)) {
+                    this.TopicIdField = value;
+                    this.RaisePropertyChanged("TopicId");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="SYS_Report_IU", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server.Common.ORM", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class SYS_Report_IU : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -20700,9 +25536,6 @@ namespace Insight.WS.Client.Common.Service {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICommons/b", ReplyAction="http://tempuri.org/ICommons/bResponse")]
         Insight.WS.Client.Common.Service.Advance b();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICommons/DelOnlineUser", ReplyAction="http://tempuri.org/ICommons/DelOnlineUserResponse")]
-        bool DelOnlineUser(Insight.WS.Client.Common.Service.Session us, System.Nullable<int> sid);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICommons/GetOrgTree", ReplyAction="http://tempuri.org/ICommons/GetOrgTreeResponse")]
         System.Data.DataTable GetOrgTree(Insight.WS.Client.Common.Service.Session us);
         
@@ -20911,7 +25744,39 @@ namespace Insight.WS.Client.Common.Service {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Alert_Send))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_Alert_Target))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_OrgMember))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDE_Message))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SYS_OrgMerger))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDG_Member))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.MDE_Favorites))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SDC_FirstVisit))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SDC_CaseHistory))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDC_FirstVisit>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SDC_Subsequent))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SDC_Summary))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SDG_Group))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDG_GroupMember>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SDG_GroupMember))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SDT_Topic))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDT_Forward>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SDT_Forward))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SDT_Voice))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDT_Attitude>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SDT_Attitude))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SDT_Comment))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDT_Praise>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SDT_Praise))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SDO_Advertisement))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SDO_Recommend))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SDO_Tutorial))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDO_TutorialComment>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SDO_TutorialComment))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Insight.WS.Client.Common.Service.SDO_TutorialPraise))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDO_TutorialPraise>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDT_Comment>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDT_Voice>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDT_Topic>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDC_Subsequent>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDC_Summary>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Alert_Target>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_RolePerm_Data>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_RolePerm_DataAbs>))]
@@ -20927,12 +25792,19 @@ namespace Insight.WS.Client.Common.Service {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MasterData>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Alert_Rules>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Report_Templates>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDE_Favorites>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDE_Message>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDG_Contact>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDG_Dictionary>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDG_Expense>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDG_Material>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MDR_MU>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.MasterData_Merger>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDC_CaseHistory>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDG_Group>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDO_Advertisement>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDO_Recommend>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SDO_Tutorial>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_Code_Scheme>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_OrgMember>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<Insight.WS.Client.Common.Service.SYS_OrgMerger>))]
@@ -20966,6 +25838,9 @@ namespace Insight.WS.Client.Common.Service {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICommons/UpdataPassWord", ReplyAction="http://tempuri.org/ICommons/UpdataPassWordResponse")]
         bool UpdataPassWord(Insight.WS.Client.Common.Service.Session us, string pw);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICommons/Logout", ReplyAction="http://tempuri.org/ICommons/LogoutResponse")]
+        bool Logout(Insight.WS.Client.Common.Service.Session us);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -21033,10 +25908,6 @@ namespace Insight.WS.Client.Common.Service {
         
         public Insight.WS.Client.Common.Service.Advance b() {
             return base.Channel.b();
-        }
-        
-        public bool DelOnlineUser(Insight.WS.Client.Common.Service.Session us, System.Nullable<int> sid) {
-            return base.Channel.DelOnlineUser(us, sid);
         }
         
         public System.Data.DataTable GetOrgTree(Insight.WS.Client.Common.Service.Session us) {
@@ -21181,6 +26052,10 @@ namespace Insight.WS.Client.Common.Service {
         
         public bool UpdataPassWord(Insight.WS.Client.Common.Service.Session us, string pw) {
             return base.Channel.UpdataPassWord(us, pw);
+        }
+        
+        public bool Logout(Insight.WS.Client.Common.Service.Session us) {
+            return base.Channel.Logout(us);
         }
     }
 }

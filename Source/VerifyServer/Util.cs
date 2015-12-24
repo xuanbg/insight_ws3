@@ -97,7 +97,7 @@ namespace Insight.WS.Server
         /// </summary>
         /// <param name="str">输入字符串</param>
         /// <returns>String Hash值</returns>
-        public static string GetHash(string str)
+        public static string Hash(string str)
         {
             var md5 = MD5.Create();
             var s = md5.ComputeHash(Encoding.UTF8.GetBytes(str.Trim()));

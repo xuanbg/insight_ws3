@@ -30,7 +30,7 @@ namespace Insight.WS.Test.Interface
         /// <typeparam name="T">输入类型</typeparam>
         /// <param name="obj">用于接口验证的数据对象</param>
         /// <returns>string 用于接口验证的Authorization字符串</returns>
-        public static string MakeAuth<T>(T obj)
+        public static string Base64<T>(T obj)
         {
             var json = Serialize(obj);
             var buff = Encoding.UTF8.GetBytes(json);
@@ -206,7 +206,7 @@ namespace Insight.WS.Test.Interface
         /// <param name="author">接口认证数据</param>
         /// <param name="data">接口参数</param>
         /// <returns>JsonResult</returns>
-        public static JsonResult HttpRequest(string url, string method, string author = "", string data = "")
+        public static JsonResult HttpRequest(string url, string method, string author, string data = "")
         {
             if (method == "GET") url += (data == "" ? "" : "?") + data;
             var request = GetWebRequest(url, method, author);
@@ -236,13 +236,6 @@ namespace Insight.WS.Test.Interface
             var request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = method;
             request.ContentType = Compres ? "application/x-gzip" : "application/json";
-            if (author == "")
-            {
-                var json = Serialize(UserSession);
-                var buff = Encoding.UTF8.GetBytes(json);
-                author = Convert.ToBase64String(buff);
-            }
-
             if (author != null)
             {
                 request.Headers.Add(HttpRequestHeader.Authorization, author);

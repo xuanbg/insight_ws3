@@ -218,7 +218,7 @@ namespace Insight.WS.Service
             if (!Verification(us, action)) return false;
 
             var sql = $"update SYS_User set Validity = '{validity}' where ID = '{id}'";
-            return SqlNonQuery(MakeCommand(sql)) > 0 && SetUserStatus(id, validity);
+            return SqlNonQuery(MakeCommand(sql)) > 0 && SetUserStatus(us, id, validity);
         }
 
         /// <summary>
@@ -231,9 +231,9 @@ namespace Insight.WS.Service
         {
             if (!Verification(us, "26481E60-0917-49B4-BBAA-2265E71E7B3F")) return false;
 
-            const string pw = "E10ADC3949BA59ABBE56E057F20F883E";
-            var sql = $"update SYS_User set Password = '{pw}' where ID = '{id}'";
-            return SqlNonQuery(MakeCommand(sql)) > 0 && UpdateSignature(us.ID, pw);
+            var pw = Util.Hash("123456");
+            var os = new Session {UserId = id};
+            return DataAccess.UpdataPassword(os, pw);
         }
 
         #endregion

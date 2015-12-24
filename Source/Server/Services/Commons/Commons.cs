@@ -195,17 +195,6 @@ namespace Insight.WS.Service
         }
 
         /// <summary>
-        /// 删除在线用户会话
-        /// </summary>
-        /// <param name="us">Session对象实体</param>
-        /// <param name="sid">要删除Session的ID</param>
-        /// <returns>bool 是否删除成功</returns>
-        public bool DelOnlineUser(Session us, int? sid)
-        {
-            return SimpleVerifty(us) && SetOnlineStatus(sid ?? us.ID, false);
-        }
-
-        /// <summary>
         /// 获取组织机构列表
         /// </summary>
         /// <param name="us">用户会话对象实体</param>

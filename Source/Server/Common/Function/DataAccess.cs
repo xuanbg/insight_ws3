@@ -28,21 +28,14 @@ namespace Insight.WS.Server.Common
                 var user = context.SYS_User.SingleOrDefault(u => u.ID == us.UserId);
                 if (user == null) return false;
 
+                us.UserId = user.ID;
+                us.Signature = Util.Hash(user.LoginName.ToUpper() + user.Password);
                 user.Password = pw;
-                return context.SaveChanges() > 0 && General.UpdateSignature(us.ID, pw);
-            }
-        }
+                if (context.SaveChanges() <= 0) return false;
 
-        /// <summary>
-        /// 根据用户登录名获取用户对象实体
-        /// </summary>
-        /// <param name="str">用户登录名</param>
-        /// <returns>SYS_User 用户对象实体</returns>
-        public static SYS_User GetUser(string str)
-        {
-            using (var context = new WSEntities())
-            {
-                return context.SYS_User.SingleOrDefault(s => s.LoginName == str);
+                var signature = Util.Hash(user.LoginName.ToUpper() + pw);
+                General.UpdateSignature(us, signature);
+                return true;
             }
         }
 
@@ -82,27 +75,6 @@ namespace Insight.WS.Server.Common
                 new SqlParameter("@Code", SqlDbType.VarChar)
             };
             return SqlScalar(MakeCommand(sql, parm)).ToString();
-        }
-
-        /// <summary>
-        /// 生成验证码
-        /// </summary>
-        /// <param name="type">验证码类型</param>
-        /// <param name="phone">手机号</param>
-        /// <param name="code">验证码</param>
-        /// <param name="time">有效时间（分钟）</param>
-        /// <returns>string 验证码</returns>
-        public static bool GetVerifyCode(int type, string phone, string code, int time)
-        {
-            const string sql = "insert SYS_Verify_Record (Type, Mobile, Code, FailureTime) select @Type, @Mobile, @Code, @FailureTime";
-            var parm = new[]
-            {
-                new SqlParameter("@Type", type),
-                new SqlParameter("@Mobile", phone),
-                new SqlParameter("@Code", code),
-                new SqlParameter("@FailureTime", DateTime.Now.AddMinutes(time))
-            };
-            return SqlNonQuery(MakeCommand(sql, parm)) > 0;
         }
 
         /// <summary>
