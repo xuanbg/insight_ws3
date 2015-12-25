@@ -44,8 +44,9 @@ namespace Insight.WS.Verify
         /// <returns>bool 是否正确</returns>
         public bool VerifyCode(string mobile, string code, int type, bool remove)
         {
-            var list = SmsCodes.Where(c => c.Mobile == mobile && c.Type == type && c.FailureTime > DateTime.Now).ToList();
-            if (list.Count == 0) return false;
+            SmsCodes.RemoveAll(c => c.FailureTime < DateTime.Now);
+            var record = SmsCodes.FirstOrDefault(c => c.Mobile == mobile && c.Code == code && c.Type == type);
+            if (record == null) return false;
 
             if (!remove) return true;
 
