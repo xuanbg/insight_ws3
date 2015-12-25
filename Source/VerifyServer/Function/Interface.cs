@@ -30,27 +30,20 @@ namespace Insight.WS.Verify
         bool VerifyCode(string mobile, string code, int type, bool remove = true);
 
         /// <summary>
+        /// 用户登录
+        /// </summary>
+        /// <param name="obj">用户会话</param>
+        /// <returns>Session</returns>
+        [OperationContract]
+        Session UserLogin(Session obj);
+
+        /// <summary>
         /// 获取当前在线状态的全部内部用户的Session
         /// </summary>
         /// <param name="obj">用户会话</param>
         /// <returns>全部内部用户的Session</returns>
         [OperationContract]
         List<Session> GetSessions(Session obj);
-
-        /// <summary>
-        /// 获取用户Session
-        /// </summary>
-        /// <param name="obj">用户会话</param>
-        /// <returns>Session</returns>
-        [OperationContract]
-        Session GetSession(Session obj);
-
-        /// <summary>
-        /// 更新用户Session数据
-        /// </summary>
-        /// <param name="obj">用户会话</param>
-        [OperationContract]
-        void UpdateSession(Session obj);
 
         /// <summary>
         /// 更新指定用户Session的签名

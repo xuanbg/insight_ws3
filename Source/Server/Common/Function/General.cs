@@ -31,50 +31,7 @@ namespace Insight.WS.Server.Common
 
         #endregion
 
-        #region 登录和验证
-
-        /// <summary>
-        /// 获取用户登录结果
-        /// </summary>
-        /// <param name="obj">Session对象实体</param>
-        /// <returns>Session对象实体</returns>
-        public static Session UserLogin(Session obj)
-        {
-            if (obj == null) return null;
-
-            var us = GetSession(obj);
-            if (us == null) return null;
-
-            // 用户被封禁
-            if (!us.Validity)
-            {
-                us.LoginResult = LoginResult.Banned;
-                return us;
-            }
-
-            // 未通过签名验证
-            obj.ID = us.ID;
-            if (!SimpleVerifty(obj))
-            {
-                us.LoginResult = LoginResult.Failure;
-                return us;
-            }
-
-            // 当前是否已登录或未正常退出
-            if (us.OnlineStatus)
-            {
-                us.LoginResult = us.MachineId != obj.MachineId ? LoginResult.Online : LoginResult.Multiple;
-            }
-            else
-            {
-                us.LoginResult = LoginResult.Success;
-                us.OnlineStatus = true;
-                SetOnlineStatus(us);
-                UpdateSession(obj);
-            }
-
-            return us;
-        }
+        #region 接口验证
 
         /// <summary>
         /// 通过Session校验是否有权限访问
@@ -320,6 +277,19 @@ namespace Insight.WS.Server.Common
         }
 
         /// <summary>
+        /// 获取验证服务器上的用户会话
+        /// </summary>
+        /// <param name="obj">用户会话</param>
+        /// <returns>Session 用户会话</returns>
+        public static Session UserLogin(Session obj)
+        {
+            using (var client = new InterfaceClient(Binding, Address))
+            {
+                return client.UserLogin(obj);
+            }
+        }
+
+        /// <summary>
         /// 获取当前在线状态的全部内部用户的Session
         /// </summary>
         /// <param name="obj"></param>
@@ -329,31 +299,6 @@ namespace Insight.WS.Server.Common
             using (var client = new InterfaceClient(Binding, Address))
             {
                 return client.GetSessions(obj);
-            }
-        }
-
-        /// <summary>
-        /// 获取验证服务器上的用户会话
-        /// </summary>
-        /// <param name="obj">用户会话</param>
-        /// <returns>Session 用户会话</returns>
-        public static Session GetSession(Session obj)
-        {
-            using (var client = new InterfaceClient(Binding, Address))
-            {
-                return client.GetSession(obj);
-            }
-        }
-
-        /// <summary>
-        /// 更新用户Session数据
-        /// </summary>
-        /// <param name="obj">用户会话</param>
-        public static void UpdateSession(Session obj)
-        {
-            using (var client = new InterfaceClient(Binding, Address))
-            {
-                client.UpdateSession(obj);
             }
         }
 

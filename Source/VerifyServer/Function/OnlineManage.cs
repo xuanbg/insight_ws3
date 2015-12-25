@@ -54,6 +54,49 @@ namespace Insight.WS.Verify
         }
 
         /// <summary>
+        /// 获取用户登录结果
+        /// </summary>
+        /// <param name="obj">Session对象实体</param>
+        /// <returns>Session对象实体</returns>
+        public Session UserLogin(Session obj)
+        {
+            if (obj == null) return null;
+
+            var session = GetSession(obj);
+            if (session == null) return null;
+
+            // 用户被封禁
+            if (!session.Validity)
+            {
+                obj.LoginResult = LoginResult.Banned;
+                return obj;
+            }
+
+            // 未通过签名验证
+            obj.ID = session.ID;
+            if (!SimpleVerifty(obj))
+            {
+                obj.LoginResult = LoginResult.Failure;
+                return obj;
+            }
+
+            // 当前是否已登录或未正常退出
+            if (session.OnlineStatus)
+            {
+                session.LoginResult = session.MachineId != obj.MachineId ? LoginResult.Online : LoginResult.Multiple;
+            }
+            else
+            {
+                session.LoginResult = LoginResult.Success;
+                session.OnlineStatus = true;
+                SetOnlineStatus(session);
+                UpdateSession(obj);
+            }
+
+            return session;
+        }
+
+        /// <summary>
         /// 获取当前在线状态的全部内部用户的Session
         /// </summary>
         /// <param name="obj">用户会话</param>
@@ -61,57 +104,6 @@ namespace Insight.WS.Verify
         public List<Session> GetSessions(Session obj)
         {
             return Sessions.Where(s => s.UserType > 0 && s.OnlineStatus).ToList();
-        }
-
-        /// <summary>
-        /// 获取用户Session
-        /// </summary>
-        /// <param name="obj">用户会话</param>
-        /// <returns>Session</returns>
-        public Session GetSession(Session obj)
-        {
-            var session = Sessions.SingleOrDefault(s => string.Equals(s.LoginName, obj.LoginName, StringComparison.CurrentCultureIgnoreCase));
-            if (session != null) return session.Signature == obj.Signature ? session : null;
-
-            var user = GetUser(obj.LoginName);
-            if (user == null) return null;
-
-            var signature = Hash(user.LoginName.ToUpper() + user.Password);
-            if (signature != obj.Signature) return null;
-
-            // 初始化Session数据并加入缓存
-            session = new Session
-            {
-                ID = Sessions.Count,
-                UserId = user.ID,
-                UserName = user.Name,
-                OpenId = user.OpenId,
-                LoginName = user.LoginName,
-                Signature = signature,
-                UserType = user.Type,
-                Validity = user.Validity,
-                Version = obj.Version,
-                ClientType = obj.ClientType,
-                MachineId = obj.MachineId,
-                BaseAddress = obj.BaseAddress
-            };
-            Sessions.Add(session);
-
-            return session;
-        }
-
-        /// <summary>
-        /// 更新用户Session数据
-        /// </summary>
-        /// <param name="obj">用户会话</param>
-        public void UpdateSession(Session obj)
-        {
-            var session = Sessions[obj.ID];
-            session.DeptId = obj.DeptId;
-            session.DeptName = obj.DeptName;
-            session.Version = obj.Version;
-            session.ClientType = obj.ClientType;
-            session.MachineId = obj.MachineId;
         }
 
         /// <summary>
@@ -259,6 +251,20 @@ namespace Insight.WS.Verify
         }
 
         /// <summary>
+        /// 更新用户Session数据
+        /// </summary>
+        /// <param name="obj">用户会话</param>
+        private void UpdateSession(Session obj)
+        {
+            var session = Sessions[obj.ID];
+            session.DeptId = obj.DeptId;
+            session.DeptName = obj.DeptName;
+            session.Version = obj.Version;
+            session.ClientType = obj.ClientType;
+            session.MachineId = obj.MachineId;
+        }
+
+        /// <summary>
         /// 在线用户列表未找到数据时的验证方法
         /// </summary>
         /// <param name="obj">用户会话</param>
@@ -277,6 +283,42 @@ namespace Insight.WS.Verify
             // 登录状态标记为离线，返回在线列表中对象
             us.LoginResult = LoginResult.NotExist;
             return us;
+        }
+
+        /// <summary>
+        /// 获取用户Session
+        /// </summary>
+        /// <param name="obj">用户会话</param>
+        /// <returns>Session</returns>
+        private Session GetSession(Session obj)
+        {
+            var session = Sessions.SingleOrDefault(s => string.Equals(s.LoginName, obj.LoginName, StringComparison.CurrentCultureIgnoreCase));
+            if (session != null) return session;
+
+            var user = GetUser(obj.LoginName);
+            if (user == null) return null;
+
+
+            // 初始化Session数据并加入缓存
+            var signature = Hash(user.LoginName.ToUpper() + user.Password);
+            session = new Session
+            {
+                ID = Sessions.Count,
+                UserId = user.ID,
+                UserName = user.Name,
+                OpenId = user.OpenId,
+                LoginName = user.LoginName,
+                Signature = signature,
+                UserType = user.Type,
+                Validity = user.Validity,
+                Version = obj.Version,
+                ClientType = obj.ClientType,
+                MachineId = obj.MachineId,
+                BaseAddress = obj.BaseAddress
+            };
+            Sessions.Add(session);
+
+            return session;
         }
 
     }

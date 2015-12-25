@@ -364,16 +364,13 @@ namespace Insight.WS.Server.Common.Service {
         string GetCode(int type, string mobile, int time);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Interface/VerifyCode", ReplyAction="http://tempuri.org/Interface/VerifyCodeResponse")]
-        bool VerifyCode(string mobile, string code, int type, bool action);
+        bool VerifyCode(string mobile, string code, int type, bool remove);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Interface/UserLogin", ReplyAction="http://tempuri.org/Interface/UserLoginResponse")]
+        Insight.WS.Server.Common.Service.Session UserLogin(Insight.WS.Server.Common.Service.Session obj);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Interface/GetSessions", ReplyAction="http://tempuri.org/Interface/GetSessionsResponse")]
         System.Collections.Generic.List<Insight.WS.Server.Common.Service.Session> GetSessions(Insight.WS.Server.Common.Service.Session obj);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Interface/GetSession", ReplyAction="http://tempuri.org/Interface/GetSessionResponse")]
-        Insight.WS.Server.Common.Service.Session GetSession(Insight.WS.Server.Common.Service.Session obj);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Interface/UpdateSession", ReplyAction="http://tempuri.org/Interface/UpdateSessionResponse")]
-        void UpdateSession(Insight.WS.Server.Common.Service.Session obj);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Interface/UpdateSignature", ReplyAction="http://tempuri.org/Interface/UpdateSignatureResponse")]
         void UpdateSignature(Insight.WS.Server.Common.Service.Session obj, string signature);
@@ -425,20 +422,16 @@ namespace Insight.WS.Server.Common.Service {
             return base.Channel.GetCode(type, mobile, time);
         }
         
-        public bool VerifyCode(string mobile, string code, int type, bool action) {
-            return base.Channel.VerifyCode(mobile, code, type, action);
+        public bool VerifyCode(string mobile, string code, int type, bool remove) {
+            return base.Channel.VerifyCode(mobile, code, type, remove);
+        }
+        
+        public Insight.WS.Server.Common.Service.Session UserLogin(Insight.WS.Server.Common.Service.Session obj) {
+            return base.Channel.UserLogin(obj);
         }
         
         public System.Collections.Generic.List<Insight.WS.Server.Common.Service.Session> GetSessions(Insight.WS.Server.Common.Service.Session obj) {
             return base.Channel.GetSessions(obj);
-        }
-        
-        public Insight.WS.Server.Common.Service.Session GetSession(Insight.WS.Server.Common.Service.Session obj) {
-            return base.Channel.GetSession(obj);
-        }
-        
-        public void UpdateSession(Insight.WS.Server.Common.Service.Session obj) {
-            base.Channel.UpdateSession(obj);
         }
         
         public void UpdateSignature(Insight.WS.Server.Common.Service.Session obj, string signature) {
