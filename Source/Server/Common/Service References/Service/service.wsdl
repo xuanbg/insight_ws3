@@ -37,9 +37,21 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import namespace="http://tempuri.org/" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Verify" />
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="Interface_GetCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCode" />
+  </wsdl:message>
+  <wsdl:message name="Interface_GetCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="Interface_VerifyCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:VerifyCode" />
+  </wsdl:message>
+  <wsdl:message name="Interface_VerifyCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:VerifyCodeResponse" />
+  </wsdl:message>
   <wsdl:message name="Interface_GetSessions_InputMessage">
     <wsdl:part name="parameters" element="tns:GetSessions" />
   </wsdl:message>
@@ -95,6 +107,14 @@
     <wsdl:part name="parameters" element="tns:AuthorizationResponse" />
   </wsdl:message>
   <wsdl:portType name="Interface">
+    <wsdl:operation name="GetCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/Interface/GetCode" message="tns:Interface_GetCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Interface/GetCodeResponse" message="tns:Interface_GetCode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/Interface/VerifyCode" message="tns:Interface_VerifyCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Interface/VerifyCodeResponse" message="tns:Interface_VerifyCode_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetSessions">
       <wsdl:input wsaw:Action="http://tempuri.org/Interface/GetSessions" message="tns:Interface_GetSessions_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/Interface/GetSessionsResponse" message="tns:Interface_GetSessions_OutputMessage" />
@@ -136,6 +156,24 @@
     <wsp:PolicyReference URI="#NetTcpBinding_Interface_policy">
     </wsp:PolicyReference>
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="GetCode">
+      <soap12:operation soapAction="http://tempuri.org/Interface/GetCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyCode">
+      <soap12:operation soapAction="http://tempuri.org/Interface/VerifyCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetSessions">
       <soap12:operation soapAction="http://tempuri.org/Interface/GetSessions" style="document" />
       <wsdl:input>

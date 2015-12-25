@@ -2,11 +2,32 @@
 using System.Collections.Generic;
 using System.ServiceModel;
 
-namespace Insight.WS.Server
+namespace Insight.WS.Verify
 {
     [ServiceContract]
     interface Interface
     {
+
+        /// <summary>
+        /// 获取验证码
+        /// </summary>
+        /// <param name="type">验证类型</param>
+        /// <param name="mobile">手机号</param>
+        /// <param name="time">过期时间（分钟）</param>
+        /// <returns>string 验证码</returns>
+        [OperationContract]
+        string GetCode(int type, string mobile, int time = 30);
+
+        /// <summary>
+        /// 验证验证码是否正确
+        /// </summary>
+        /// <param name="mobile">手机号</param>
+        /// <param name="code">验证码</param>
+        /// <param name="type">验证码类型</param>
+        /// <param name="remove">是否验证成功后删除记录</param>
+        /// <returns>bool 是否正确</returns>
+        [OperationContract]
+        bool VerifyCode(string mobile, string code, int type, bool remove = true);
 
         /// <summary>
         /// 获取当前在线状态的全部内部用户的Session

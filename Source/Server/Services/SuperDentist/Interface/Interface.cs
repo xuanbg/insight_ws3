@@ -35,37 +35,19 @@ namespace Insight.WS.Service.SuperDentist
         /// <returns>JsonResult</returns>
         public JsonResult Register(string smsCode, string password)
         {
-            var result = new JsonResult {Code = "500", Name = "UnknownError", Message = "未知错误" };
+            var result = new JsonResult();
             var obj = GetAuthorization<Session>();
             var signature = Hash(obj.LoginName.ToUpper() + smsCode + password);
-            if (signature != obj.Signature)
-            {
-                result.Code = "401";
-                result.Name = "InvalidAuthenticationInfo";
-                result.Message = "提供的身份验证信息不正确";
-                return result;
-            }
+            if (signature != obj.Signature) return result.InvalidAuth();
 
             using (var context = new WSEntities())
             {
                 // 验证用户登录名是否已存在
                 var user = context.SYS_User.FirstOrDefault(u => u.LoginName == obj.LoginName);
-                if (user != null)
-                {
-                    result.Code = "409";
-                    result.Name = "AccountAlreadyExists";
-                    result.Message = "用户已存在";
-                    return result;
-                }
+                if (user != null) return result.AccountExists();
             }
 
-            if (!VerifyCode(obj.LoginName, smsCode, 1))
-            {
-                result.Code = "410";
-                result.Name = "SMSCodeError";
-                result.Message = "短信验证码错误";
-                return result;
-            }
+            if (!VerifyCode(obj.LoginName, smsCode, 1)) return result.SMSCodeError();
 
             var cmds = new List<SqlCommand>
             {
@@ -73,13 +55,7 @@ namespace Insight.WS.Service.SuperDentist
                 DataAccess.AddMember(new MDG_Member()),
                 DataAccess.AddUser(new SYS_User {Name = obj.UserName, LoginName = obj.LoginName, Password = password, Type = -1})
             };
-            if (!SqlExecute(cmds))
-            {
-                result.Code = "501";
-                result.Name = "DataBaseError";
-                result.Message = "写入数据失败";
-                return result;
-            }
+            if (!SqlExecute(cmds)) return result.DataBaseError();
 
             obj.Signature = Hash(obj.LoginName.ToUpper() + password);
             return GetJson(UserLogin(obj));
@@ -123,12 +99,7 @@ namespace Insight.WS.Service.SuperDentist
             if (!result.Successful) return result;
 
             var us = GetAuthorization<Session>();
-            if (DataAccess.UpdataPassword(us, password)) return result;
-
-            result.Code = "407";
-            result.Name = "DataNotUpdate";
-            result.Message = "未更新任何数据";
-            return result;
+            return DataAccess.UpdataPassword(us, password) ? result : result.NotUpdate();
         }
 
         /// <summary>
@@ -139,49 +110,26 @@ namespace Insight.WS.Service.SuperDentist
         /// <returns>JsonResult</returns>
         public JsonResult ResetPassword(string smsCode, string password)
         {
-            var result = new JsonResult { Code = "500", Name = "UnknownError", Message = "未知错误" };
+            var result = new JsonResult();
             var obj = GetAuthorization<Session>();
             var signature = Hash(obj.LoginName.ToUpper() + smsCode + password);
-            if (signature != obj.Signature)
-            {
-                result.Code = "401";
-                result.Name = "InvalidAuthenticationInfo";
-                result.Message = "提供的身份验证信息不正确";
-                return result;
-            }
+            if (signature != obj.Signature) return result.InvalidAuth();
 
             // 验证用户是否存在
             using (var context = new WSEntities())
             {
                 var user = context.SYS_User.SingleOrDefault(u => u.LoginName == obj.LoginName);
-                if (user == null)
-                {
-                    result.Code = "404";
-                    result.Name = "AccountNotExists";
-                    result.Message = "指定的资源不存在";
-                    return result;
-                }
+                if (user == null) return result.NotFound();
+
                 obj.UserId = user.ID;
             }
 
-            if (!VerifyCode(obj.LoginName, smsCode, 2))
-            {
-                result.Code = "410";
-                result.Name = "SMSCodeError";
-                result.Message = "短信验证码错误";
-                return result;
-            }
+            if (!VerifyCode(obj.LoginName, smsCode, 2)) return result.SMSCodeError();
 
-            if (DataAccess.UpdataPassword(obj, password))
-            {
-                obj.Signature = Hash(obj.LoginName.ToUpper() + password);
-                return GetJson(UserLogin(obj));
-            }
+            if (!DataAccess.UpdataPassword(obj, password)) return result.NotUpdate();
 
-            result.Code = "407";
-            result.Name = "DataNotUpdate";
-            result.Message = "未更新任何数据";
-            return result;
+            obj.Signature = Hash(obj.LoginName.ToUpper() + password);
+            return GetJson(UserLogin(obj));
         }
 
         /// <summary>
@@ -195,7 +143,7 @@ namespace Insight.WS.Service.SuperDentist
             if (!result.Successful) return result;
 
             Guid uid;
-            if (!Guid.TryParse(id, out uid)) return InvalidGuid();
+            if (!Guid.TryParse(id, out uid)) return result.InvalidGuid();
 
             using (var context = new WSEntities())
             {
@@ -235,7 +183,19 @@ namespace Insight.WS.Service.SuperDentist
         public JsonResult GetSmsVerifyCode(string id, int type, string mobile)
         {
             var result = Verify(Secret);
-            return !result.Successful ? result : GetVerifyCode(type, mobile);
+            if (!result.Successful) return result;
+
+            switch (type)
+            {
+                case 1:
+                    return SmsCode.GetRegisterCode(mobile);
+
+                case 2:
+                    return SmsCode.GetResetPasswordCode(mobile);
+
+                default:
+                    return result.UnknownSmsType();
+            }
         }
 
         #endregion

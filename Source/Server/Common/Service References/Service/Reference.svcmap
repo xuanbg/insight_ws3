@@ -26,7 +26,7 @@
     <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="9a14c1d7-3db6-4bbd-8e8b-74c849ba2970" SourceId="1" SourceUrl="net.tcp://localhost:6200/VerifyServer/mex" />
     <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="86c0272a-946e-4909-b194-180784442d57" SourceId="1" SourceUrl="net.tcp://localhost:6200/VerifyServer/mex" />
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="5ec9e942-5df9-4e60-9018-2af8fa66bb84" SourceId="1" SourceUrl="net.tcp://localhost:6200/VerifyServer/mex" />
-    <MetadataFile FileName="Insight.WS.Server.xsd" MetadataType="Schema" ID="c921bb7c-0ea2-405c-b81e-5e9ca200bd35" SourceId="1" SourceUrl="net.tcp://localhost:6200/VerifyServer/mex" />
+    <MetadataFile FileName="Insight.WS.Verify.xsd" MetadataType="Schema" ID="bd80497b-1856-4f77-bf22-9ef3df5c9934" SourceId="1" SourceUrl="net.tcp://localhost:6200/VerifyServer/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

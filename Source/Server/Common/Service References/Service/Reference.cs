@@ -8,8 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.Web.Script.Serialization;
-
 namespace Insight.WS.Server.Common.Service {
     using System.Runtime.Serialization;
     using System;
@@ -17,7 +15,7 @@ namespace Insight.WS.Server.Common.Service {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Session", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Session", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Verify")]
     [System.SerializableAttribute()]
     public partial class Session : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -78,7 +76,6 @@ namespace Insight.WS.Server.Common.Service {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int VersionField;
         
-        [ScriptIgnore]
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -334,7 +331,7 @@ namespace Insight.WS.Server.Common.Service {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="LoginResult", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="LoginResult", Namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Verify")]
     public enum LoginResult : int {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
@@ -362,6 +359,12 @@ namespace Insight.WS.Server.Common.Service {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Service.Interface")]
     public interface Interface {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Interface/GetCode", ReplyAction="http://tempuri.org/Interface/GetCodeResponse")]
+        string GetCode(int type, string mobile, int time);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Interface/VerifyCode", ReplyAction="http://tempuri.org/Interface/VerifyCodeResponse")]
+        bool VerifyCode(string mobile, string code, int type, bool action);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Interface/GetSessions", ReplyAction="http://tempuri.org/Interface/GetSessionsResponse")]
         System.Collections.Generic.List<Insight.WS.Server.Common.Service.Session> GetSessions(Insight.WS.Server.Common.Service.Session obj);
@@ -416,6 +419,14 @@ namespace Insight.WS.Server.Common.Service {
         
         public InterfaceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
+        }
+        
+        public string GetCode(int type, string mobile, int time) {
+            return base.Channel.GetCode(type, mobile, time);
+        }
+        
+        public bool VerifyCode(string mobile, string code, int type, bool action) {
+            return base.Channel.VerifyCode(mobile, code, type, action);
         }
         
         public System.Collections.Generic.List<Insight.WS.Server.Common.Service.Session> GetSessions(Insight.WS.Server.Common.Service.Session obj) {

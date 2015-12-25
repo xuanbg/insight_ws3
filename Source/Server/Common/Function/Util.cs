@@ -223,9 +223,18 @@ namespace Insight.WS.Server.Common
             }
 
             SetResponseParam();
-            var buffer = Convert.FromBase64String(auth);
-            var json = Encoding.UTF8.GetString(buffer);
-            return Deserialize<T>(json);
+            try
+            {
+                var buffer = Convert.FromBase64String(auth);
+                var json = Encoding.UTF8.GetString(buffer);
+                return Deserialize<T>(json);
+            }
+            catch (Exception ex)
+            {
+                LogToEvent(ex.ToString());
+                woc.OutgoingResponse.StatusCode = HttpStatusCode.Unauthorized;
+                return default(T);
+            }
         }
 
         /// <summary>
@@ -341,22 +350,6 @@ namespace Insight.WS.Server.Common
             day = (day - mod + n + (mod > n ? 10 : 0)) % 30;
 
             return DateTime.Parse(date.ToString("yyyy-MM-dd").Substring(0, 8) + day.ToString("00")).AddMonths(date.Day > 20 + n ? 1 : 0);
-        }
-
-        /// <summary>
-        /// Guid转换失败返回信息
-        /// </summary>
-        /// <returns>JsonResult</returns>
-        public static JsonResult InvalidGuid()
-        {
-            var result = new JsonResult
-            {
-                Successful = false,
-                Code = "406",
-                Name = "InvalidGUID",
-                Message = "非法的GUID"
-            };
-            return result;
         }
 
         #endregion

@@ -1,39 +1,72 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Server" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/Insight.WS.Verify" />
   <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:element name="GetCode">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="type" type="xs:int" />
+        <xs:element minOccurs="0" name="mobile" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="time" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCodeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetCodeResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VerifyCode">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="mobile" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="code" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="type" type="xs:int" />
+        <xs:element minOccurs="0" name="action" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VerifyCodeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="VerifyCodeResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetSessions">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="obj" nillable="true" type="q1:Session" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Insight.WS.Verify" minOccurs="0" name="obj" nillable="true" type="q1:Session" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetSessionsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="GetSessionsResult" nillable="true" type="q2:ArrayOfSession" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Insight.WS.Verify" minOccurs="0" name="GetSessionsResult" nillable="true" type="q2:ArrayOfSession" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetSession">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="obj" nillable="true" type="q3:Session" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Insight.WS.Verify" minOccurs="0" name="obj" nillable="true" type="q3:Session" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetSessionResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="GetSessionResult" nillable="true" type="q4:Session" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Insight.WS.Verify" minOccurs="0" name="GetSessionResult" nillable="true" type="q4:Session" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateSession">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="obj" nillable="true" type="q5:Session" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Insight.WS.Verify" minOccurs="0" name="obj" nillable="true" type="q5:Session" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -45,7 +78,7 @@
   <xs:element name="UpdateSignature">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="obj" nillable="true" type="q6:Session" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Insight.WS.Verify" minOccurs="0" name="obj" nillable="true" type="q6:Session" />
         <xs:element minOccurs="0" name="signature" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
@@ -58,7 +91,7 @@
   <xs:element name="SetOnlineStatus">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="obj" nillable="true" type="q7:Session" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Insight.WS.Verify" minOccurs="0" name="obj" nillable="true" type="q7:Session" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -70,7 +103,7 @@
   <xs:element name="SetUserStatus">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="obj" nillable="true" type="q8:Session" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Insight.WS.Verify" minOccurs="0" name="obj" nillable="true" type="q8:Session" />
         <xs:element xmlns:q9="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="uid" type="q9:guid" />
         <xs:element minOccurs="0" name="validity" type="xs:boolean" />
       </xs:sequence>
@@ -86,21 +119,21 @@
   <xs:element name="Verification">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="obj" nillable="true" type="q10:Session" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Insight.WS.Verify" minOccurs="0" name="obj" nillable="true" type="q10:Session" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="VerificationResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="VerificationResult" nillable="true" type="q11:Session" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Insight.WS.Verify" minOccurs="0" name="VerificationResult" nillable="true" type="q11:Session" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SimpleVerifty">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="obj" nillable="true" type="q12:Session" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Insight.WS.Verify" minOccurs="0" name="obj" nillable="true" type="q12:Session" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -114,7 +147,7 @@
   <xs:element name="Authorization">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Insight.WS.Server" minOccurs="0" name="obj" nillable="true" type="q13:Session" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Insight.WS.Verify" minOccurs="0" name="obj" nillable="true" type="q13:Session" />
         <xs:element minOccurs="0" name="action" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>

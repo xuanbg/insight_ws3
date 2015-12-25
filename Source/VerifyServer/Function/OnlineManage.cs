@@ -3,12 +3,55 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using static Insight.WS.Server.Util;
+using static Insight.WS.Verify.Util;
 
-namespace Insight.WS.Server
+namespace Insight.WS.Verify
 {
     public class OnlineManage : Interface
     {
+        /// <summary>
+        /// 获取验证码
+        /// </summary>
+        /// <param name="type">验证类型</param>
+        /// <param name="mobile">手机号</param>
+        /// <param name="time">过期时间（分钟）</param>
+        /// <returns>string 验证码</returns>
+        public string GetCode(int type, string mobile, int time)
+        {
+            var record = SmsCodes.OrderByDescending(r => r.CreateTime).FirstOrDefault(r => r.Mobile == mobile && r.Type == type);
+            if (record != null && (DateTime.Now - record.CreateTime).TotalSeconds < 60) return null;
+
+            var code = Util.Random.Next(100000, 999999).ToString();
+            record = new VerifyRecord
+            {
+                Type = type,
+                Mobile = mobile,
+                Code = code,
+                FailureTime = DateTime.Now.AddMinutes(time),
+                CreateTime = DateTime.Now
+            };
+            SmsCodes.Add(record);
+            return code;
+        }
+
+        /// <summary>
+        /// 验证验证码是否正确
+        /// </summary>
+        /// <param name="mobile">手机号</param>
+        /// <param name="code">验证码</param>
+        /// <param name="type">验证码类型</param>
+        /// <param name="remove">是否验证成功后删除记录</param>
+        /// <returns>bool 是否正确</returns>
+        public bool VerifyCode(string mobile, string code, int type, bool remove)
+        {
+            var list = SmsCodes.Where(c => c.Mobile == mobile && c.Type == type && c.FailureTime > DateTime.Now).ToList();
+            if (list.Count == 0) return false;
+
+            if (!remove) return true;
+
+            return SmsCodes.RemoveAll(c => c.Mobile == mobile && c.Type == type) > 0;
+        }
+
         /// <summary>
         /// 获取当前在线状态的全部内部用户的Session
         /// </summary>

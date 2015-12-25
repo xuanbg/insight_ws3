@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using FastReport;
@@ -30,88 +29,9 @@ namespace Insight.WS.Server.Common
         // 访问验证服务用的Address
         private static readonly EndpointAddress Address = new EndpointAddress(GetAppSetting("IvsAddress"));
 
-        // 短信验证码的缓存列表
-        private static readonly List<VerifyRecord> SmsCodes = new List<VerifyRecord>();
-
-        // 用于生成短信验证码的随机数发生器
-        private static readonly Random Random = new Random(Environment.TickCount);
-
         #endregion
 
         #region 登录和验证
-
-        /// <summary>
-        /// 生成验证码
-        /// </summary>
-        /// <param name="type">验证码类型</param>
-        /// <param name="mobile">手机号</param>
-        /// <returns>JsonResult</returns>
-        public static JsonResult GetVerifyCode(int type, string mobile)
-        {
-            var result = new JsonResult();
-            var code = Random.Next(100000, 999999).ToString();
-            var time = 30;
-            if (type >0 && type <= 3)
-            {
-                // 处理短信内容及发送通道
-                if (type > 1) time = 5;
-                //var message = $"您的验证码是：{code}，请在{time}分钟内使用！";
-            }
-            else
-            {
-                result.Code = "411";
-                result.Name = "UnknownSmsType";
-                result.Message = "未知的验证码类型";
-                return result;
-            }
-
-            var record = SmsCodes.OrderByDescending(r => r.CreateTime).FirstOrDefault(r => r.Mobile == mobile && r.Type == type);
-            if (record != null && (DateTime.Now - record.CreateTime).TotalSeconds < 60)
-            {
-                result.Code = "412";
-                result.Name = "TimeIntervalTooShort";
-                result.Message = "获取验证码时间间隔过短，请稍后再试";
-                return result;
-            }
-
-            // 发送短信
-
-            // 保存验证码以待验证
-            record = new VerifyRecord
-            {
-                Type = type,
-                Mobile = mobile,
-                Code = code,
-                FailureTime = DateTime.Now.AddMinutes(time),
-                CreateTime = DateTime.Now
-            };
-            SmsCodes.Add(record);
-
-            result.Successful = true;
-            result.Code = "200";
-            result.Name = "OK";
-            result.Message = "接口调用成功";
-            result.Data = Serialize(code);
-            return result;
-        }
-
-        /// <summary>
-        /// 验证验证码是否正确
-        /// </summary>
-        /// <param name="mobile">手机号</param>
-        /// <param name="code">验证码</param>
-        /// <param name="type">验证码类型</param>
-        /// <param name="action">是否验证即失效</param>
-        /// <returns>bool 是否正确</returns>
-        public static bool VerifyCode(string mobile, string code, int type, bool action = true)
-        {
-            var list = SmsCodes.Where(c => c.Mobile == mobile && c.Type == type && c.FailureTime > DateTime.Now).ToList();
-            if (list.Count <= 0) return false;
-
-            if (!action) return true;
-
-            return SmsCodes.RemoveAll(c => c.Mobile == mobile && c.Type == type) > 0;
-        }
 
         /// <summary>
         /// 获取用户登录结果
@@ -164,58 +84,28 @@ namespace Insight.WS.Server.Common
         {
             var result = new JsonResult();
             var obj = GetAuthorization<Session>();
-            if (obj == null)
-            {
-                result.Code = "401";
-                result.Name = "InvalidAuthenticationInfo";
-                result.Message = "提供的身份验证信息不正确";
-                return result;
-            }
+            if (obj == null) return result.InvalidAuth();
 
-            if (obj.Version < CompatibleVersion || obj.Version > UpdateVersion)
-            {
-                result.Code = "400";
-                result.Name = "IncompatibleVersions";
-                result.Message = "客户端版本不兼容";
-                return result;
-            }
+            if (obj.Version < CompatibleVersion || obj.Version > UpdateVersion) return result.Incompatible();
 
             var us = Verification(obj);
             switch (us.LoginResult)
             {
                 case LoginResult.Success:
-                    result.Successful = true;
-                    result.Code = "200";
-                    result.Name = "OK";
-                    result.Message = "接口调用成功";
-                    break;
+                    return result.Success();
 
                 case LoginResult.NotExist:
-                    result.Successful = true;
-                    result.Code = "300";
-                    result.Name = "SessionExpired";
-                    result.Message = "Session过期，请更新Session";
-                    break;
+                    return result.Expired();
 
                 case LoginResult.Failure:
-                    result.Code = "401";
-                    result.Name = "InvalidAuthenticationInfo";
-                    result.Message = "提供的身份验证信息不正确";
-                    break;
+                    return result.InvalidAuth();
 
                 case LoginResult.Banned:
-                    result.Code = "403";
-                    result.Name = "AccountIsDisabled";
-                    result.Message = "当前用户被禁止登录";
-                    break;
+                    return result.Disabled();
 
                 default:
-                    result.Code = "500";
-                    result.Name = "UnknownError";
-                    result.Message = "未知错误";
-                    break;
+                    return result;
             }
-            return result;
         }
 
         /// <summary>
@@ -226,19 +116,7 @@ namespace Insight.WS.Server.Common
         {
             var result = new JsonResult();
             var obj = GetAuthorization<string>();
-            if (obj == rule)
-            {
-                result.Successful = true;
-                result.Code = "200";
-                result.Name = "OK";
-                result.Message = "接口调用成功";
-                return result;
-            }
-
-            result.Code = "401";
-            result.Name = "InvalidAuthenticationInfo";
-            result.Message = "提供的身份验证信息不正确";
-            return result;
+            return obj != rule ? result.InvalidAuth() : result.Success();
         }
 
         #endregion  
@@ -250,21 +128,11 @@ namespace Insight.WS.Server.Common
         /// </summary>
         /// <typeparam name="T">传入的对象类型</typeparam>
         /// <param name="obj">传入的对象</param>
-        /// <param name="code">错误代码</param>
-        /// <param name="name"></param>
-        /// <param name="message">错误消息</param>
         /// <returns>JsonResult</returns>
-        public static JsonResult GetJson<T>(T obj, string code = "404", string name = "ResourceNotFound", string message = "指定的资源不存在")
+        public static JsonResult GetJson<T>(T obj)
         {
-            var result = new JsonResult { Code = code, Name = name, Message = message };
-            if (obj == null) return result;
-
-            result.Successful = true;
-            result.Code = "200";
-            result.Name = "OK";
-            result.Message = "接口调用成功";
-            result.Data = Serialize(obj);
-            return result;
+            var result = new JsonResult();
+            return obj == null ? result.NotFound() : result.Success(Serialize(obj));
         }
 
         /// <summary>
@@ -419,6 +287,37 @@ namespace Insight.WS.Server.Common
         #endregion
 
         #region 验证服务调用
+
+        /// <summary>
+        /// 获取验证码
+        /// </summary>
+        /// <param name="type">验证类型</param>
+        /// <param name="mobile">手机号</param>
+        /// <param name="time">过期时间（分钟）</param>
+        /// <returns>string 验证码</returns>
+        public static string GetCode(int type, string mobile, int time = 30)
+        {
+            using (var client = new InterfaceClient(Binding, Address))
+            {
+                return client.GetCode(type, mobile, time);
+            }
+        }
+
+        /// <summary>
+        /// 验证验证码是否正确
+        /// </summary>
+        /// <param name="mobile">手机号</param>
+        /// <param name="code">验证码</param>
+        /// <param name="type">验证码类型</param>
+        /// <param name="action">是否验证成功后删除记录</param>
+        /// <returns>bool 是否正确</returns>
+        public static bool VerifyCode(string mobile, string code, int type, bool action = true)
+        {
+            using (var client = new InterfaceClient(Binding, Address))
+            {
+                return client.VerifyCode(mobile, code, type, action);
+            }
+        }
 
         /// <summary>
         /// 获取当前在线状态的全部内部用户的Session

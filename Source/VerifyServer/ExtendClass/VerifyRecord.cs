@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Insight.WS.Server.Common
+namespace Insight.WS.Verify
 {
     public class VerifyRecord
     {

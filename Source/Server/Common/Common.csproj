@@ -91,7 +91,7 @@
     <Compile Include="ExtendClass\Entities.cs" />
     <Compile Include="ExtendClass\JsonResult.cs" />
     <Compile Include="ExtendClass\Services.cs" />
-    <Compile Include="ExtendClass\VerifyRecord.cs" />
+    <Compile Include="Function\SmsCode.cs" />
     <Compile Include="Function\DataAccess.cs" />
     <Compile Include="Function\Clearing.cs">
       <DependentUpon>DataAccess.cs</DependentUpon>
@@ -452,7 +452,7 @@
     <None Include="Service References\Service\Insight.WS.Server.Common.Service.Session.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\Service\Insight.WS.Server.xsd">
+    <None Include="Service References\Service\Insight.WS.Verify.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\Service\service.wsdl" />
