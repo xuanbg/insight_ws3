@@ -25,18 +25,18 @@ namespace Insight.WS.Service.SuperDentist
         /// <summary>
         /// 用户登录
         /// </summary>
-        /// <param name="us">用户会话</param>
+        /// <param name="session">用户会话</param>
         /// <returns>JsonResult</returns>
-        [WebInvoke(Method = "POST", UriTemplate = "user/signin", ResponseFormat = WebMessageFormat.Json)]
+        [WebInvoke(Method = "POST", UriTemplate = "user/signin", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         [OperationContract]
-        JsonResult Login(Session us);
+        JsonResult Login(Session session);
 
         /// <summary>
         /// 注销
         /// </summary>
         /// <param name="id">SessionID</param>
         /// <returns>JsonResult</returns>
-        [WebInvoke(Method = "POST", UriTemplate = "user/signout", ResponseFormat = WebMessageFormat.Json)]
+        [WebInvoke(Method = "POST", UriTemplate = "user/signout", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         [OperationContract]
         JsonResult Logout(int id);
 
@@ -45,7 +45,7 @@ namespace Insight.WS.Service.SuperDentist
         /// </summary>
         /// <param name="password">新登录密码MD5值</param>
         /// <returns>JsonResult</returns>
-        [WebInvoke(Method = "POST", UriTemplate = "user/change", ResponseFormat = WebMessageFormat.Json)]
+        [WebInvoke(Method = "POST", UriTemplate = "user/change", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         [OperationContract]
         JsonResult ChangePassword(string password);
 

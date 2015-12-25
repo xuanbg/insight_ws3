@@ -64,12 +64,12 @@ namespace Insight.WS.Service.SuperDentist
         /// <summary>
         /// 用户登录
         /// </summary>
-        /// <param name="us">用户会话</param>
+        /// <param name="session">用户会话</param>
         /// <returns>JsonResult</returns>
-        public JsonResult Login(Session us)
+        public JsonResult Login(Session session)
         {
-            var session = UserLogin(us);
-            return GetJson(session);
+            var us = UserLogin(session);
+            return GetJson(us);
         }
 
         /// <summary>

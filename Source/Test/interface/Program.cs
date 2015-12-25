@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using static Insight.WS.Test.Interface.Util;
 
 namespace Insight.WS.Test.Interface
 {
     static class Program
     {
-        private const string BassAddress = "http://localhost:6280/Interface/";
-        //private const string BassAddress = "http://120.27.142.125:6280/Interface/";
+        //private const string BassAddress = "http://localhost:6280/Interface/";
+        private const string BassAddress = "http://120.27.142.125:6280/Interface/";
 
         /// <summary>
         /// 应用程序的主入口点。
@@ -18,9 +19,9 @@ namespace Insight.WS.Test.Interface
             var mobile = "18600740251";
             //Register(GetSmsVerifyCode("1", mobile), mobile);
             //GetToken();
-            //ResetPassword(GetSmsVerifyCode("2", mobile), mobile, "123456");
-            UserSession = Login(mobile, "111111");
-            //ChangePassword("111111");
+            ResetPassword(GetSmsVerifyCode("2", mobile), mobile, "123456");
+            UserSession = Login(mobile, "123456");
+            ChangePassword("111111");
             GetMemberInfo();
             Logout();
         }
@@ -47,7 +48,8 @@ namespace Insight.WS.Test.Interface
         {
             var url = BassAddress + "user/change";
             var author = Base64(UserSession);
-            var data = Serialize(Hash(password));
+            var dict = new Dictionary<string, string> {{ "password", Hash(password) } };
+            var data = Serialize(dict);
             var result = HttpRequest(url, "POST", author, data);
             if (result.Successful)
             {
@@ -156,7 +158,8 @@ namespace Insight.WS.Test.Interface
                 ClientType = 2,
                 MachineId = Hash("MachineId")
             };
-            var data = Serialize(us);
+            var dict = new Dictionary<string, Session> { { "session", us } };
+            var data = Serialize(dict);
             var result = HttpRequest(url, "POST", null, data);
             if (result.Successful)
             {
@@ -178,7 +181,8 @@ namespace Insight.WS.Test.Interface
         {
             var url = BassAddress + "user/signout";
             var author = Base64(UserSession);
-            var data = Serialize(UserSession.ID);
+            var dict = new Dictionary<string, int> {{"id", UserSession.ID}};
+            var data = Serialize(dict);
             var result = HttpRequest(url, "POST", author, data);
             if (result.Successful)
             {
