@@ -137,6 +137,7 @@ namespace Insight.WS.Verify
             var user = GetUser(id);
             if (user == null) return false;
 
+            session.LoginName = user.LoginName;
             session.UserName = user.Name;
             session.UserType = user.Type;
             session.OpenId = user.OpenId;

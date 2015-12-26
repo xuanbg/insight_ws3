@@ -202,7 +202,7 @@ namespace Insight.WS.Service
                 new SqlParameter("@LoginName", obj.LoginName),
                 new SqlParameter("@Description", obj.Description)
             };
-            return SqlNonQuery(MakeCommand(sql, parm)) > 0;
+            return SqlNonQuery(MakeCommand(sql, parm)) > 0 && UpdateUserInfo(us, obj.ID);
         }
 
         /// <summary>

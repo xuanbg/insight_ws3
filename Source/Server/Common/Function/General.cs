@@ -325,7 +325,7 @@ namespace Insight.WS.Server.Common
         /// <param name="obj">用户会话</param>
         /// <param name="uid">用户ID</param>
         /// <returns>bool 是否成功</returns>
-        public static bool SetUserInfo(Session obj, Guid uid)
+        public static bool UpdateUserInfo(Session obj, Guid uid)
         {
             using (var client = new InterfaceClient(Binding, Address))
             {
