@@ -232,8 +232,7 @@ namespace Insight.WS.Service
             if (!Verification(us, "26481E60-0917-49B4-BBAA-2265E71E7B3F")) return false;
 
             var pw = Util.Hash("123456");
-            var os = new Session {UserId = id};
-            return DataAccess.UpdataPassword(os, pw);
+            return UpdateSignature(us, id, pw);
         }
 
         #endregion

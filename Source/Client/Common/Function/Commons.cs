@@ -87,15 +87,16 @@ namespace Insight.WS.Client.Common
         }
 
         /// <summary>
-        /// 删除在线用户会话
+        /// 设置指定用户的状态为离线
         /// </summary>
         /// <param name="us"></param>
+        /// <param name="id"></param>
         /// <returns>bool 是否删除成功</returns>
-        public static bool DelOnlineUser(Session us)
+        public static bool DelOnlineUser(Session us, Guid id)
         {
             using (var cli = new CommonsClient(MainForm.Binding, MainForm.Address))
             {
-                return cli.Logout(us);
+                return cli.Logout(us, id);
             }
         }
 

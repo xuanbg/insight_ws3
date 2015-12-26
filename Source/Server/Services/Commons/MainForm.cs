@@ -2,7 +2,6 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
 using Insight.WS.Server.Common.Service;
 using static Insight.WS.Server.Common.General;
@@ -108,20 +107,20 @@ namespace Insight.WS.Service
         /// <returns>bool 是否修改成功</returns>
         public bool UpdataPassWord(Session us, string pw)
         {
-            return SimpleVerifty(us) && DataAccess.UpdataPassword(us, pw);
+            return SimpleVerifty(us) && UpdateSignature(us, us.UserId, pw);
         }
 
         /// <summary>
-        /// 注销当前用户
+        /// 设置指定用户的状态为离线
         /// </summary>
         /// <param name="us">Session对象实体</param>
+        /// <param name="id">用户ID</param>
         /// <returns>bool 是否成功</returns>
-        public bool Logout(Session us)
+        public bool Logout(Session us, Guid id)
         {
             if (!SimpleVerifty(us)) return false;
 
-            us.OnlineStatus = false;
-            SetOnlineStatus(us);
+            SetUserOffline(us, id);
             return true;
         }
 

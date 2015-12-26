@@ -70,11 +70,17 @@
   <wsdl:message name="Interface_UpdateSignature_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdateSignatureResponse" />
   </wsdl:message>
-  <wsdl:message name="Interface_SetOnlineStatus_InputMessage">
-    <wsdl:part name="parameters" element="tns:SetOnlineStatus" />
+  <wsdl:message name="Interface_UpdateUserInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUserInfo" />
   </wsdl:message>
-  <wsdl:message name="Interface_SetOnlineStatus_OutputMessage">
-    <wsdl:part name="parameters" element="tns:SetOnlineStatusResponse" />
+  <wsdl:message name="Interface_UpdateUserInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUserInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="Interface_SetUserOffline_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetUserOffline" />
+  </wsdl:message>
+  <wsdl:message name="Interface_SetUserOffline_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetUserOfflineResponse" />
   </wsdl:message>
   <wsdl:message name="Interface_SetUserStatus_InputMessage">
     <wsdl:part name="parameters" element="tns:SetUserStatus" />
@@ -82,23 +88,23 @@
   <wsdl:message name="Interface_SetUserStatus_OutputMessage">
     <wsdl:part name="parameters" element="tns:SetUserStatusResponse" />
   </wsdl:message>
+  <wsdl:message name="Interface_Authorization_InputMessage">
+    <wsdl:part name="parameters" element="tns:Authorization" />
+  </wsdl:message>
+  <wsdl:message name="Interface_Authorization_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AuthorizationResponse" />
+  </wsdl:message>
   <wsdl:message name="Interface_Verification_InputMessage">
     <wsdl:part name="parameters" element="tns:Verification" />
   </wsdl:message>
   <wsdl:message name="Interface_Verification_OutputMessage">
     <wsdl:part name="parameters" element="tns:VerificationResponse" />
   </wsdl:message>
-  <wsdl:message name="Interface_SimpleVerifty_InputMessage">
-    <wsdl:part name="parameters" element="tns:SimpleVerifty" />
+  <wsdl:message name="Interface_SimpleVerification_InputMessage">
+    <wsdl:part name="parameters" element="tns:SimpleVerification" />
   </wsdl:message>
-  <wsdl:message name="Interface_SimpleVerifty_OutputMessage">
-    <wsdl:part name="parameters" element="tns:SimpleVeriftyResponse" />
-  </wsdl:message>
-  <wsdl:message name="Interface_Authorization_InputMessage">
-    <wsdl:part name="parameters" element="tns:Authorization" />
-  </wsdl:message>
-  <wsdl:message name="Interface_Authorization_OutputMessage">
-    <wsdl:part name="parameters" element="tns:AuthorizationResponse" />
+  <wsdl:message name="Interface_SimpleVerification_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SimpleVerificationResponse" />
   </wsdl:message>
   <wsdl:portType name="Interface">
     <wsdl:operation name="GetCode">
@@ -121,25 +127,29 @@
       <wsdl:input wsaw:Action="http://tempuri.org/Interface/UpdateSignature" message="tns:Interface_UpdateSignature_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/Interface/UpdateSignatureResponse" message="tns:Interface_UpdateSignature_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="SetOnlineStatus">
-      <wsdl:input wsaw:Action="http://tempuri.org/Interface/SetOnlineStatus" message="tns:Interface_SetOnlineStatus_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/Interface/SetOnlineStatusResponse" message="tns:Interface_SetOnlineStatus_OutputMessage" />
+    <wsdl:operation name="UpdateUserInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/Interface/UpdateUserInfo" message="tns:Interface_UpdateUserInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Interface/UpdateUserInfoResponse" message="tns:Interface_UpdateUserInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetUserOffline">
+      <wsdl:input wsaw:Action="http://tempuri.org/Interface/SetUserOffline" message="tns:Interface_SetUserOffline_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Interface/SetUserOfflineResponse" message="tns:Interface_SetUserOffline_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="SetUserStatus">
       <wsdl:input wsaw:Action="http://tempuri.org/Interface/SetUserStatus" message="tns:Interface_SetUserStatus_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/Interface/SetUserStatusResponse" message="tns:Interface_SetUserStatus_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="Authorization">
+      <wsdl:input wsaw:Action="http://tempuri.org/Interface/Authorization" message="tns:Interface_Authorization_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Interface/AuthorizationResponse" message="tns:Interface_Authorization_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="Verification">
       <wsdl:input wsaw:Action="http://tempuri.org/Interface/Verification" message="tns:Interface_Verification_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/Interface/VerificationResponse" message="tns:Interface_Verification_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="SimpleVerifty">
-      <wsdl:input wsaw:Action="http://tempuri.org/Interface/SimpleVerifty" message="tns:Interface_SimpleVerifty_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/Interface/SimpleVeriftyResponse" message="tns:Interface_SimpleVerifty_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="Authorization">
-      <wsdl:input wsaw:Action="http://tempuri.org/Interface/Authorization" message="tns:Interface_Authorization_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/Interface/AuthorizationResponse" message="tns:Interface_Authorization_OutputMessage" />
+    <wsdl:operation name="SimpleVerification">
+      <wsdl:input wsaw:Action="http://tempuri.org/Interface/SimpleVerification" message="tns:Interface_SimpleVerification_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Interface/SimpleVerificationResponse" message="tns:Interface_SimpleVerification_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_Interface" type="tns:Interface">
@@ -191,8 +201,17 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="SetOnlineStatus">
-      <soap12:operation soapAction="http://tempuri.org/Interface/SetOnlineStatus" style="document" />
+    <wsdl:operation name="UpdateUserInfo">
+      <soap12:operation soapAction="http://tempuri.org/Interface/UpdateUserInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetUserOffline">
+      <soap12:operation soapAction="http://tempuri.org/Interface/SetUserOffline" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -209,6 +228,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="Authorization">
+      <soap12:operation soapAction="http://tempuri.org/Interface/Authorization" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="Verification">
       <soap12:operation soapAction="http://tempuri.org/Interface/Verification" style="document" />
       <wsdl:input>
@@ -218,17 +246,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="SimpleVerifty">
-      <soap12:operation soapAction="http://tempuri.org/Interface/SimpleVerifty" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="Authorization">
-      <soap12:operation soapAction="http://tempuri.org/Interface/Authorization" style="document" />
+    <wsdl:operation name="SimpleVerification">
+      <soap12:operation soapAction="http://tempuri.org/Interface/SimpleVerification" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

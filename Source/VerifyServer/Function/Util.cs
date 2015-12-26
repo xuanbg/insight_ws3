@@ -94,6 +94,19 @@ namespace Insight.WS.Verify
         }
 
         /// <summary>
+        /// 根据用户登录名获取用户对象实体
+        /// </summary>
+        /// <param name="id">用户ID</param>
+        /// <returns>SYS_User 用户对象实体</returns>
+        public static SYS_User GetUser(Guid id)
+        {
+            using (var context = new WSEntities())
+            {
+                return context.SYS_User.SingleOrDefault(u => u.ID == id);
+            }
+        }
+
+        /// <summary>
         /// 读取配置项的值
         /// </summary>
         /// <param name="key">配置项</param>

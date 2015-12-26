@@ -63,36 +63,21 @@ namespace Insight.WS.Verify
             if (obj == null) return null;
 
             var session = GetSession(obj);
-            if (session == null) return null;
-
-            // 用户被封禁
-            if (!session.Validity)
+            if (session.OnlineStatus && session.MachineId == obj.MachineId)
             {
-                obj.LoginResult = LoginResult.Banned;
+                // 当前已登录或未正常退出，标记为在线
+                obj.LoginResult = LoginResult.Online;
                 return obj;
             }
 
-            // 未通过签名验证
-            obj.ID = session.ID;
-            if (!SimpleVerifty(obj))
-            {
-                obj.LoginResult = LoginResult.Failure;
-                return obj;
-            }
+            Verify(session, obj);
+            if (obj.LoginResult.GetHashCode() > 1) return obj;
 
-            // 当前是否已登录或未正常退出
-            if (session.OnlineStatus)
-            {
-                session.LoginResult = session.MachineId != obj.MachineId ? LoginResult.Online : LoginResult.Multiple;
-            }
-            else
-            {
-                session.LoginResult = LoginResult.Success;
-                session.OnlineStatus = true;
-                SetOnlineStatus(session);
-                UpdateSession(obj);
-            }
-
+            session.DeptId = obj.DeptId;
+            session.DeptName = obj.DeptName;
+            session.Version = obj.Version;
+            session.ClientType = obj.ClientType;
+            session.MachineId = obj.MachineId;
             return session;
         }
 
@@ -110,23 +95,68 @@ namespace Insight.WS.Verify
         /// 更新指定用户Session的签名
         /// </summary>
         /// <param name="obj">用户会话</param>
-        /// <param name="signature">新的签名</param>
-        public void UpdateSignature(Session obj, string signature)
+        /// <param name="id">用户ID</param>
+        /// <param name="pw">用户新密码</param>
+        /// <returns>bool 是否成功</returns>
+        public bool UpdateSignature(Session obj, Guid id, string pw)
         {
-            if (!SimpleVerifty(obj)) return;
+            if (!SimpleVerification(obj)) return false;
 
-            Sessions[obj.ID].Signature = signature;
+            using (var context = new WSEntities())
+            {
+                // 更新数据库
+                var user = context.SYS_User.SingleOrDefault(u => u.ID == id);
+                if (user == null) return false;
+
+                if (user.Password == pw) return true;
+
+                user.Password = pw;
+                if (context.SaveChanges() <= 0) return false;
+
+                // 更新缓存
+                var session = Sessions.SingleOrDefault(s => s.UserId == id);
+                if (session != null) session.Signature = Hash(user.LoginName.ToUpper() + pw);
+
+                return true;
+            }
         }
 
         /// <summary>
-        /// 设置指定用户Session的登录状态
+        /// 根据用户ID更新用户信息
+        /// </summary>
+        /// <param name="obj">操作员的Session</param>
+        /// <param name="id">用户ID</param>
+        /// <returns>bool 是否成功</returns>
+        public bool UpdateUserInfo(Session obj, Guid id)
+        {
+            if (!SimpleVerification(obj)) return false;
+
+            var session = Sessions.SingleOrDefault(s => s.UserId == id);
+            if (session == null) return true;
+
+            var user = GetUser(id);
+            if (user == null) return false;
+
+            session.UserName = user.Name;
+            session.UserType = user.Type;
+            session.OpenId = user.OpenId;
+            return true;
+        }
+
+        /// <summary>
+        /// 设置指定用户的登录状态为离线
         /// </summary>
         /// <param name="obj">用户会话</param>
-        public void SetOnlineStatus(Session obj)
+        /// <param name="id">用户ID</param>
+        /// <returns>bool 是否成功</returns>
+        public bool SetUserOffline(Session obj, Guid id)
         {
-            if (!SimpleVerifty(obj)) return;
+            if (!SimpleVerification(obj)) return false;
 
-            Sessions[obj.ID].OnlineStatus = obj.OnlineStatus;
+            var session = Sessions.SingleOrDefault(s => s.UserId == id);
+            if (session != null) session.OnlineStatus = false;
+
+            return true;
         }
 
         /// <summary>
@@ -138,89 +168,12 @@ namespace Insight.WS.Verify
         /// <returns>bool 是否成功</returns>
         public bool SetUserStatus(Session obj, Guid uid, bool validity)
         {
-            if (!SimpleVerifty(obj)) return false;
+            if (!SimpleVerification(obj)) return false;
 
             var session = Sessions.SingleOrDefault(s => s.UserId == uid);
-            if (session == null) return false;
+            if (session != null) session.Validity = validity;
 
-            session.Validity = validity;
             return true;
-        }
-
-        /// <summary>
-        /// 会话合法性验证
-        /// </summary>
-        /// <param name="obj">用户会话</param>
-        /// <returns>Session 用户会话信息</returns>
-        public Session Verification(Session obj)
-        {
-            if (obj == null) return null;
-
-            // 不在在线用户列表中（下标溢出）
-            if (obj.ID >= Sessions.Count) return Verify(obj);
-
-            var session = Sessions[obj.ID];
-
-            // 不在在线用户列表中（ID不匹配）
-            if (session.UserId != obj.UserId) return Verify(obj);
-
-            // 用户被封禁
-            if (!session.Validity)
-            {
-                obj.LoginResult = LoginResult.Banned;
-                return obj;
-            }
-
-            // 验证签名失败计数清零（距上次用户签名验证时间超过1小时）
-            if (session.FailureCount > 0 && (DateTime.Now - session.LastConnect).TotalHours > 1)
-            {
-                session.FailureCount = 0;
-            }
-            session.LastConnect = DateTime.Now;
-
-            // 签名正确时，通过验证且错误计数清零；不正确或验证签名失败超过5次（冒用时）则不能通过验证，且连续失败计数累加1次
-            if (session.Signature == obj.Signature && (session.FailureCount < 5 || session.MachineId == obj.MachineId))
-            {
-                session.FailureCount = 0;
-                obj.LoginResult = LoginResult.Success;
-                return obj;
-            }
-
-            session.FailureCount ++;
-            obj.LoginResult = LoginResult.Failure;
-            return obj;
-        }
-
-        /// <summary>
-        /// 简单会话合法性验证
-        /// </summary>
-        /// <param name="obj">用户会话</param>
-        /// <returns>bool 是否成功</returns>
-        public bool SimpleVerifty(Session obj)
-        {
-            if (obj == null || obj.ID >= Sessions.Count) return false;
-
-            var session = Sessions[obj.ID];
-
-            // 用户被封禁，不能通过验证
-            if (!session.Validity) return false;
-
-            // 验证签名失败计数清零（距上次用户签名验证时间超过1小时）
-            if (session.FailureCount > 0 && (DateTime.Now - session.LastConnect).TotalHours > 1)
-            {
-                session.FailureCount = 0;
-            }
-            session.LastConnect = DateTime.Now;
-
-            // 签名正确时，通过验证且错误计数清零；不正确则不能通过验证，且连续失败计数累加1次
-            if (session.Signature == obj.Signature && (session.FailureCount < 5 || session.MachineId == obj.MachineId))
-            {
-                session.FailureCount = 0;
-                return true;
-            }
-
-            session.FailureCount++;
-            return false;
         }
 
         /// <summary>
@@ -235,7 +188,7 @@ namespace Insight.WS.Verify
             if (!Guid.TryParse(action, out actionId)) return false;
 
             // 验证会话合法性
-            if (!SimpleVerifty(obj)) return false;
+            if (!SimpleVerification(obj)) return false;
 
             // 根据传入的操作代码进行鉴权
             var sql = "select A.ActionId from Sys_RolePerm_Action A join Get_PermRole(@UserId, @DeptId) R ";
@@ -251,42 +204,106 @@ namespace Insight.WS.Verify
         }
 
         /// <summary>
-        /// 更新用户Session数据
+        /// 会话合法性验证
         /// </summary>
         /// <param name="obj">用户会话</param>
-        private void UpdateSession(Session obj)
+        /// <returns>Session 用户会话信息</returns>
+        public Session Verification(Session obj)
         {
+            if (obj == null) return null;
+
+            // 不在在线用户列表中（下标溢出），重新获取Session再比较
+            if (obj.ID >= Sessions.Count) return Verify(GetSession(obj), obj);
+
+            // 如用户ID匹配，直接比较。否则重新获取Session。
             var session = Sessions[obj.ID];
-            session.DeptId = obj.DeptId;
-            session.DeptName = obj.DeptName;
-            session.Version = obj.Version;
-            session.ClientType = obj.ClientType;
-            session.MachineId = obj.MachineId;
+            return Verify(session.UserId == obj.UserId ? session : GetSession(obj), obj);
         }
 
         /// <summary>
-        /// 在线用户列表未找到数据时的验证方法
+        /// 简单会话合法性验证
         /// </summary>
         /// <param name="obj">用户会话</param>
-        /// <returns>Session 用户会话</returns>
-        private Session Verify(Session obj)
+        /// <returns>bool 是否成功</returns>
+        public bool SimpleVerification(Session obj)
         {
-            var us = GetSession(obj);
+            if (obj == null) return false;
 
-            // 用户不存在或签名不一致，登录状态标记为失败，返回传入对象
-            if (us == null || us.Signature != obj.Signature)
+            // 不在在线用户列表中（下标溢出），重新获取Session再比较
+            if (obj.ID >= Sessions.Count) return SimpleVerifty(GetSession(obj), obj);
+
+            // 如用户ID匹配，直接比较。否则重新获取Session
+            var session = Sessions[obj.ID];
+            return SimpleVerifty(session.UserId == obj.UserId ? session : GetSession(obj), obj);
+        }
+
+        /// <summary>
+        /// 比较Session
+        /// </summary>
+        /// <param name="basis">服务端的Session</param>
+        /// <param name="obj">传入的Session</param>
+        /// <returns>Session 用户会话</returns>
+        private Session Verify(Session basis, Session obj)
+        {
+            // 用户被封禁
+            if (!basis.Validity)
             {
+                obj.LoginResult = LoginResult.Banned;
+                return obj;
+            }
+
+            // 验证签名失败计数清零（距上次用户签名验证时间超过1小时）
+            if (basis.FailureCount > 0 && (DateTime.Now - basis.LastConnect).TotalHours > 1)
+            {
+                basis.FailureCount = 0;
+            }
+            basis.LastConnect = DateTime.Now;
+
+            // 签名不正确或验证签名失败超过5次（冒用时）则不能通过验证，且连续失败计数累加1次
+            if (basis.Signature != obj.Signature || (basis.FailureCount >= 5 && basis.MachineId != obj.MachineId))
+            {
+                basis.FailureCount++;
                 obj.LoginResult = LoginResult.Failure;
                 return obj;
             }
 
-            // 登录状态标记为离线，返回在线列表中对象
-            us.LoginResult = LoginResult.NotExist;
-            return us;
+            basis.OnlineStatus = true;
+            basis.FailureCount = 0;
+            obj.LoginResult = basis.MachineId != obj.MachineId ? LoginResult.Multiple : LoginResult.Success;
+            return obj;
         }
 
         /// <summary>
-        /// 获取用户Session
+        /// 比较Session，返回布尔值
+        /// </summary>
+        /// <param name="basis">服务端的Session</param>
+        /// <param name="obj">传入的Session</param>
+        /// <returns>bool 比较结果</returns>
+        private bool SimpleVerifty(Session basis, Session obj)
+        {
+            // 用户被封禁，不能通过验证
+            if (!basis.Validity) return false;
+
+            // 验证签名失败计数清零（距上次用户签名验证时间超过1小时）
+            if (basis.FailureCount > 0 && (DateTime.Now - basis.LastConnect).TotalHours > 1)
+            {
+                basis.FailureCount = 0;
+            }
+            basis.LastConnect = DateTime.Now;
+
+            // 签名正确时，通过验证且错误计数清零；不正确则不能通过验证，且连续失败计数累加1次
+            if (basis.Signature == obj.Signature && (basis.FailureCount < 5 || basis.MachineId == obj.MachineId))
+            {
+                basis.FailureCount = 0;
+                return true;
+            }
+
+            basis.FailureCount++;
+            return false;
+        }
+
+        /// <summary>
+        /// 根据用户登录名获取用户Session
         /// </summary>
         /// <param name="obj">用户会话</param>
         /// <returns>Session</returns>

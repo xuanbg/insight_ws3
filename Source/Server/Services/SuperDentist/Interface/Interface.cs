@@ -83,9 +83,7 @@ namespace Insight.WS.Service.SuperDentist
             if (!result.Successful) return result;
 
             var us = GetAuthorization<Session>();
-            us.OnlineStatus = false;
-            SetOnlineStatus(us);
-            return result;
+            return SetUserOffline(us, us.UserId) ? result : result.NotFound();
         }
 
         /// <summary>
@@ -99,7 +97,7 @@ namespace Insight.WS.Service.SuperDentist
             if (!result.Successful) return result;
 
             var us = GetAuthorization<Session>();
-            return DataAccess.UpdataPassword(us, password) ? result : result.NotUpdate();
+            return UpdateSignature(us, us.UserId, password) ? result : result.NotFound();
         }
 
         /// <summary>
@@ -122,11 +120,12 @@ namespace Insight.WS.Service.SuperDentist
                 if (user == null) return result.NotFound();
 
                 obj.UserId = user.ID;
+                obj.Signature = Hash(user.LoginName.ToUpper() + user.Password);
             }
 
             if (!VerifyCode(obj.LoginName, smsCode, 2)) return result.SMSCodeError();
 
-            if (!DataAccess.UpdataPassword(obj, password)) return result.NotUpdate();
+            if (!UpdateSignature(obj, obj.UserId, password)) return result.DataBaseError();
 
             obj.Signature = Hash(obj.LoginName.ToUpper() + password);
             return GetJson(UserLogin(obj));

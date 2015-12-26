@@ -26,7 +26,7 @@
     <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="f379de18-46c2-4765-87be-5e81c024a8e2" SourceId="1" SourceUrl="net.tcp://localhost:6210/Commons/mex" />
     <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="1390b9b9-d03f-4f50-8366-7cf36cb90cf1" SourceId="1" SourceUrl="net.tcp://localhost:6210/Commons/mex" />
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="68bb1611-e4e1-424f-a2bd-24e4354154db" SourceId="1" SourceUrl="net.tcp://localhost:6210/Commons/mex" />
-    <MetadataFile FileName="Insight.WS.Server.xsd" MetadataType="Schema" ID="5525d326-9ff5-4e9b-8fd2-1860bfb5f7ba" SourceId="1" SourceUrl="net.tcp://localhost:6210/Commons/mex" />
+    <MetadataFile FileName="Insight.WS.Verify.xsd" MetadataType="Schema" ID="aeac54ad-d292-46f2-9032-a0b4dfbbc6ef" SourceId="1" SourceUrl="net.tcp://localhost:6210/Commons/mex" />
     <MetadataFile FileName="System.Data.xsd" MetadataType="Schema" ID="0dda6487-72c6-40bf-931d-e3e911a434d2" SourceId="1" SourceUrl="net.tcp://localhost:6210/Commons/mex" />
     <MetadataFile FileName="Insight.WS.Server.Common.ORM.xsd" MetadataType="Schema" ID="5b876278-42d9-43eb-859f-60d30569c777" SourceId="1" SourceUrl="net.tcp://localhost:6210/Commons/mex" />
     <MetadataFile FileName="Insight.WS.Server.Common.xsd" MetadataType="Schema" ID="929f0a4a-6eca-42d1-9a07-c35af7112cd3" SourceId="1" SourceUrl="net.tcp://localhost:6210/Commons/mex" />

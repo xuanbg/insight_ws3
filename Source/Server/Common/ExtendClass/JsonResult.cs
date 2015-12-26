@@ -58,6 +58,19 @@
         }
 
         /// <summary>
+        /// 返回用户多地登录（202）的错误信息
+        /// </summary>
+        /// <returns>JsonResult</returns>
+        public JsonResult Multiple()
+        {
+            Successful = true;
+            Code = "202";
+            Name = "MultipleLogin";
+            Message = "用户已在其他设备登录";
+            return this;
+        }
+
+        /// <summary>
         /// 返回接口调用成功，但Session过期（300）的成功信息
         /// </summary>
         /// <param name="data">承载的数据（可选）</param>

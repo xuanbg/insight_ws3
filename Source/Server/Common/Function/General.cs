@@ -51,6 +51,9 @@ namespace Insight.WS.Server.Common
                 case LoginResult.Success:
                     return result.Success();
 
+                case LoginResult.Multiple:
+                    return result.Multiple();
+
                 case LoginResult.NotExist:
                     return result.Expired();
 
@@ -306,24 +309,40 @@ namespace Insight.WS.Server.Common
         /// 更新指定用户Session的签名
         /// </summary>
         /// <param name="obj">用户会话</param>
-        /// <param name="signature">新的签名</param>
-        public static void UpdateSignature(Session obj, string signature)
+        /// <param name="id">用户ID</param>
+        /// <param name="pw">新的密码</param>
+        public static bool UpdateSignature(Session obj, Guid id, string pw)
         {
             using (var client = new InterfaceClient(Binding, Address))
             {
-                client.UpdateSignature(obj, signature);
+                return client.UpdateSignature(obj, id, pw);
             }
         }
 
         /// <summary>
-        /// 设置指定用户Session的登录状态
+        /// 根据用户ID更新Session用户信息
         /// </summary>
         /// <param name="obj">用户会话</param>
-        public static void SetOnlineStatus(Session obj)
+        /// <param name="uid">用户ID</param>
+        /// <returns>bool 是否成功</returns>
+        public static bool SetUserInfo(Session obj, Guid uid)
         {
             using (var client = new InterfaceClient(Binding, Address))
             {
-                client.SetOnlineStatus(obj);
+                return client.UpdateUserInfo(obj, uid);
+            }
+        }
+
+        /// <summary>
+        /// 设置指定用户的登录状态为离线
+        /// </summary>
+        /// <param name="obj">用户会话</param>
+        /// <param name="id"></param>
+        public static bool SetUserOffline(Session obj, Guid id)
+        {
+            using (var client = new InterfaceClient(Binding, Address))
+            {
+                return client.SetUserOffline(obj, id);
             }
         }
 
@@ -339,6 +358,20 @@ namespace Insight.WS.Server.Common
             using (var client = new InterfaceClient(Binding, Address))
             {
                 return client.SetUserStatus(obj, uid, validity);
+            }
+        }
+
+        /// <summary>
+        /// 带鉴权的会话合法性验证
+        /// </summary>
+        /// <param name="obj">用户会话</param>
+        /// <param name="action">需要鉴权的操作ID</param>
+        /// <returns>bool 是否成功</returns>
+        public static bool Verification(Session obj, string action)
+        {
+            using (var client = new InterfaceClient(Binding, Address))
+            {
+                return client.Authorization(obj, action);
             }
         }
 
@@ -364,21 +397,7 @@ namespace Insight.WS.Server.Common
         {
             using (var client = new InterfaceClient(Binding, Address))
             {
-                return client.SimpleVerifty(obj);
-            }
-        }
-
-        /// <summary>
-        /// 带鉴权的会话合法性验证
-        /// </summary>
-        /// <param name="obj">用户会话</param>
-        /// <param name="action">需要鉴权的操作ID</param>
-        /// <returns>bool 是否成功</returns>
-        public static bool Verification(Session obj, string action)
-        {
-            using (var client = new InterfaceClient(Binding, Address))
-            {
-                return client.Authorization(obj, action);
+                return client.SimpleVerification(obj);
             }
         }
 

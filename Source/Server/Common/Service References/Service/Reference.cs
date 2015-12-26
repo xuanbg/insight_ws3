@@ -8,6 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.Web.Script.Serialization;
+
 namespace Insight.WS.Server.Common.Service {
     using System.Runtime.Serialization;
     using System;
@@ -76,6 +78,7 @@ namespace Insight.WS.Server.Common.Service {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int VersionField;
         
+        [ScriptIgnore]
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -373,22 +376,25 @@ namespace Insight.WS.Server.Common.Service {
         System.Collections.Generic.List<Insight.WS.Server.Common.Service.Session> GetSessions(Insight.WS.Server.Common.Service.Session obj);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Interface/UpdateSignature", ReplyAction="http://tempuri.org/Interface/UpdateSignatureResponse")]
-        void UpdateSignature(Insight.WS.Server.Common.Service.Session obj, string signature);
+        bool UpdateSignature(Insight.WS.Server.Common.Service.Session obj, System.Guid id, string pw);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Interface/SetOnlineStatus", ReplyAction="http://tempuri.org/Interface/SetOnlineStatusResponse")]
-        void SetOnlineStatus(Insight.WS.Server.Common.Service.Session obj);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Interface/UpdateUserInfo", ReplyAction="http://tempuri.org/Interface/UpdateUserInfoResponse")]
+        bool UpdateUserInfo(Insight.WS.Server.Common.Service.Session obj, System.Guid id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Interface/SetUserOffline", ReplyAction="http://tempuri.org/Interface/SetUserOfflineResponse")]
+        bool SetUserOffline(Insight.WS.Server.Common.Service.Session obj, System.Guid id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Interface/SetUserStatus", ReplyAction="http://tempuri.org/Interface/SetUserStatusResponse")]
         bool SetUserStatus(Insight.WS.Server.Common.Service.Session obj, System.Guid uid, bool validity);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Interface/Authorization", ReplyAction="http://tempuri.org/Interface/AuthorizationResponse")]
+        bool Authorization(Insight.WS.Server.Common.Service.Session obj, string action);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Interface/Verification", ReplyAction="http://tempuri.org/Interface/VerificationResponse")]
         Insight.WS.Server.Common.Service.Session Verification(Insight.WS.Server.Common.Service.Session obj);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Interface/SimpleVerifty", ReplyAction="http://tempuri.org/Interface/SimpleVeriftyResponse")]
-        bool SimpleVerifty(Insight.WS.Server.Common.Service.Session obj);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Interface/Authorization", ReplyAction="http://tempuri.org/Interface/AuthorizationResponse")]
-        bool Authorization(Insight.WS.Server.Common.Service.Session obj, string action);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Interface/SimpleVerification", ReplyAction="http://tempuri.org/Interface/SimpleVerificationResponse")]
+        bool SimpleVerification(Insight.WS.Server.Common.Service.Session obj);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -434,28 +440,32 @@ namespace Insight.WS.Server.Common.Service {
             return base.Channel.GetSessions(obj);
         }
         
-        public void UpdateSignature(Insight.WS.Server.Common.Service.Session obj, string signature) {
-            base.Channel.UpdateSignature(obj, signature);
+        public bool UpdateSignature(Insight.WS.Server.Common.Service.Session obj, System.Guid id, string pw) {
+            return base.Channel.UpdateSignature(obj, id, pw);
         }
         
-        public void SetOnlineStatus(Insight.WS.Server.Common.Service.Session obj) {
-            base.Channel.SetOnlineStatus(obj);
+        public bool UpdateUserInfo(Insight.WS.Server.Common.Service.Session obj, System.Guid id) {
+            return base.Channel.UpdateUserInfo(obj, id);
+        }
+        
+        public bool SetUserOffline(Insight.WS.Server.Common.Service.Session obj, System.Guid id) {
+            return base.Channel.SetUserOffline(obj, id);
         }
         
         public bool SetUserStatus(Insight.WS.Server.Common.Service.Session obj, System.Guid uid, bool validity) {
             return base.Channel.SetUserStatus(obj, uid, validity);
         }
         
+        public bool Authorization(Insight.WS.Server.Common.Service.Session obj, string action) {
+            return base.Channel.Authorization(obj, action);
+        }
+        
         public Insight.WS.Server.Common.Service.Session Verification(Insight.WS.Server.Common.Service.Session obj) {
             return base.Channel.Verification(obj);
         }
         
-        public bool SimpleVerifty(Insight.WS.Server.Common.Service.Session obj) {
-            return base.Channel.SimpleVerifty(obj);
-        }
-        
-        public bool Authorization(Insight.WS.Server.Common.Service.Session obj, string action) {
-            return base.Channel.Authorization(obj, action);
+        public bool SimpleVerification(Insight.WS.Server.Common.Service.Session obj) {
+            return base.Channel.SimpleVerification(obj);
         }
     }
 }

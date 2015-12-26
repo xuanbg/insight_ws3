@@ -49,16 +49,27 @@ namespace Insight.WS.Verify
         /// 更新指定用户Session的签名
         /// </summary>
         /// <param name="obj">用户会话</param>
-        /// <param name="signature"></param>
+        /// <param name="id">用户ID</param>
+        /// <param name="pw">用户新密码</param>
         [OperationContract]
-        void UpdateSignature(Session obj, string signature);
+        bool UpdateSignature(Session obj, Guid id, string pw);
+
+        /// <summary>
+        /// 根据用户ID更新用户信息
+        /// </summary>
+        /// <param name="obj">操作员的Session</param>
+        /// <param name="id">用户ID</param>
+        /// <returns>bool 是否成功</returns>
+        [OperationContract]
+        bool UpdateUserInfo(Session obj, Guid id);
 
         /// <summary>
         /// 重置指定用户Session的登录状态
         /// </summary>
         /// <param name="obj">用户会话</param>
+        /// <param name="id">用户ID</param>
         [OperationContract]
-        void SetOnlineStatus(Session obj);
+        bool SetUserOffline(Session obj, Guid id);
 
         /// <summary>
         /// 根据用户ID设置用户状态
@@ -69,6 +80,15 @@ namespace Insight.WS.Verify
         /// <returns>bool 是否成功</returns>
         [OperationContract]
         bool SetUserStatus(Session obj, Guid uid, bool validity);
+
+        /// <summary>
+        /// 带鉴权的会话合法性验证
+        /// </summary>
+        /// <param name="obj">用户会话</param>
+        /// <param name="action">需要鉴权的操作ID</param>
+        /// <returns>bool 是否成功</returns>
+        [OperationContract]
+        bool Authorization(Session obj, string action);
 
         /// <summary>
         /// 会话合法性验证
@@ -84,16 +104,7 @@ namespace Insight.WS.Verify
         /// <param name="obj">用户会话</param>
         /// <returns>bool 是否成功</returns>
         [OperationContract]
-        bool SimpleVerifty(Session obj);
-
-        /// <summary>
-        /// 带鉴权的会话合法性验证
-        /// </summary>
-        /// <param name="obj">用户会话</param>
-        /// <param name="action">需要鉴权的操作ID</param>
-        /// <returns>bool 是否成功</returns>
-        [OperationContract]
-        bool Authorization(Session obj, string action);
+        bool SimpleVerification(Session obj);
 
     }
 }
