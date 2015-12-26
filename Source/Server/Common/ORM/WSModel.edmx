@@ -913,6 +913,7 @@
           <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
           <Property Name="CaseId" Type="uniqueidentifier" />
           <Property Name="PublishTime" Type="datetime" />
+          <Property Name="Recommend" Type="bit" Nullable="false" />
           <Property Name="CreatorUserId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="CreateTime" Type="datetime" Nullable="false" />
         </EntityType>
@@ -1423,6 +1424,9 @@
         <EntityType Name="MemberInfo">
           <Key>
             <PropertyRef Name="ID" />
+            
+            
+            
           </Key>
           <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="64" Nullable="false" />
@@ -2508,7 +2512,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__MDE_Favor__Creat__6CF8EFB2">
+        <Association Name="FK__MDE_Favor__Creat__049B6F19">
           <End Role="SYS_User" Type="Self.SYS_User" Multiplicity="1" />
           <End Role="MDE_Favorites" Type="Self.MDE_Favorites" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2520,7 +2524,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__MDE_Messa__Creat__6740165C">
+        <Association Name="FK__MDE_Messa__Creat__7EE295C3">
           <End Role="SYS_User" Type="Self.SYS_User" Multiplicity="1" />
           <End Role="MDE_Message" Type="Self.MDE_Message" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2532,7 +2536,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__MDE_Messa__Recei__6557CDEA">
+        <Association Name="FK__MDE_Messa__Recei__7CFA4D51">
           <End Role="MasterData" Type="Self.MasterData" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -2942,7 +2946,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__MDG_Member__MID__5F9EF494">
+        <Association Name="FK__MDG_Member__MID__774173FB">
           <End Role="MasterData" Type="Self.MasterData" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -3148,7 +3152,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDC_CaseH__Creat__749A117A">
+        <Association Name="FK__SDC_CaseH__Creat__0C3C90E1">
           <End Role="SYS_User" Type="Self.SYS_User" Multiplicity="1" />
           <End Role="SDC_CaseHistory" Type="Self.SDC_CaseHistory" Multiplicity="*" />
           <ReferentialConstraint>
@@ -3160,7 +3164,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDC_First__CaseH__795EC697">
+        <Association Name="FK__SDC_First__CaseH__110145FE">
           <End Role="SDC_CaseHistory" Type="Self.SDC_CaseHistory" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -3174,7 +3178,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDC_First__Creat__7C3B3342">
+        <Association Name="FK__SDC_First__Creat__13DDB2A9">
           <End Role="SYS_User" Type="Self.SYS_User" Multiplicity="1" />
           <End Role="SDC_FirstVisit" Type="Self.SDC_FirstVisit" Multiplicity="*" />
           <ReferentialConstraint>
@@ -3186,7 +3190,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDC_First__Docto__7A52EAD0">
+        <Association Name="FK__SDC_First__Docto__11F56A37">
           <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
           <End Role="SDC_FirstVisit" Type="Self.SDC_FirstVisit" Multiplicity="*" />
           <ReferentialConstraint>
@@ -3198,7 +3202,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDC_First__Nurse__7B470F09">
+        <Association Name="FK__SDC_First__Nurse__12E98E70">
           <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
           <End Role="SDC_FirstVisit" Type="Self.SDC_FirstVisit" Multiplicity="*" />
           <ReferentialConstraint>
@@ -3210,7 +3214,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDC_Subse__CaseI__00FFE85F">
+        <Association Name="FK__SDC_Subse__CaseI__18A267C6">
           <End Role="SDC_FirstVisit" Type="Self.SDC_FirstVisit" Multiplicity="0..1" />
           <End Role="SDC_Subsequent" Type="Self.SDC_Subsequent" Multiplicity="*" />
           <ReferentialConstraint>
@@ -3222,7 +3226,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDC_Subse__Creat__03DC550A">
+        <Association Name="FK__SDC_Subse__Creat__1B7ED471">
           <End Role="SYS_User" Type="Self.SYS_User" Multiplicity="1" />
           <End Role="SDC_Subsequent" Type="Self.SDC_Subsequent" Multiplicity="*" />
           <ReferentialConstraint>
@@ -3234,7 +3238,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDC_Subse__Docto__01F40C98">
+        <Association Name="FK__SDC_Subse__Docto__19968BFF">
           <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
           <End Role="SDC_Subsequent" Type="Self.SDC_Subsequent" Multiplicity="*" />
           <ReferentialConstraint>
@@ -3246,7 +3250,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDC_Subse__Nurse__02E830D1">
+        <Association Name="FK__SDC_Subse__Nurse__1A8AB038">
           <End Role="MasterData" Type="Self.MasterData" Multiplicity="0..1" />
           <End Role="SDC_Subsequent" Type="Self.SDC_Subsequent" Multiplicity="*" />
           <ReferentialConstraint>
@@ -3258,7 +3262,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDC_Summa__CaseI__08A10A27">
+        <Association Name="FK__SDC_Summa__CaseI__2043898E">
           <End Role="SDC_FirstVisit" Type="Self.SDC_FirstVisit" Multiplicity="0..1" />
           <End Role="SDC_Summary" Type="Self.SDC_Summary" Multiplicity="*" />
           <ReferentialConstraint>
@@ -3270,7 +3274,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDC_Summa__Creat__09952E60">
+        <Association Name="FK__SDC_Summa__Creat__2137ADC7">
           <End Role="SYS_User" Type="Self.SYS_User" Multiplicity="1" />
           <End Role="SDC_Summary" Type="Self.SDC_Summary" Multiplicity="*" />
           <ReferentialConstraint>
@@ -3282,7 +3286,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDG_Group__Creat__1412BCD3">
+        <Association Name="FK__SDG_Group__Creat__2BB53C3A">
           <End Role="SYS_User" Type="Self.SYS_User" Multiplicity="1" />
           <End Role="SDG_Group" Type="Self.SDG_Group" Multiplicity="*" />
           <ReferentialConstraint>
@@ -3294,7 +3298,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDG_Group__Group__18D771F0">
+        <Association Name="FK__SDG_Group__Group__3079F157">
           <End Role="SDG_Group" Type="Self.SDG_Group" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -3308,7 +3312,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDG_Group__Manag__122A7461">
+        <Association Name="FK__SDG_Group__Manag__29CCF3C8">
           <End Role="SYS_User" Type="Self.SYS_User" Multiplicity="0..1" />
           <End Role="SDG_Group" Type="Self.SDG_Group" Multiplicity="*" />
           <ReferentialConstraint>
@@ -3320,7 +3324,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDG_Group__Membe__19CB9629">
+        <Association Name="FK__SDG_Group__Membe__316E1590">
           <End Role="MasterData" Type="Self.MasterData" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -3334,7 +3338,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDG_Group__Owner__11365028">
+        <Association Name="FK__SDG_Group__Owner__28D8CF8F">
           <End Role="SYS_User" Type="Self.SYS_User" Multiplicity="1" />
           <End Role="SDG_Group" Type="Self.SDG_Group" Multiplicity="*" />
           <ReferentialConstraint>
@@ -3346,7 +3350,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDO_Adver__Creat__469E3CA0">
+        <Association Name="FK__SDO_Adver__Creat__5F34E040">
           <End Role="SYS_User" Type="Self.SYS_User" Multiplicity="1" />
           <End Role="SDO_Advertisement" Type="Self.SDO_Advertisement" Multiplicity="*" />
           <ReferentialConstraint>
@@ -3358,7 +3362,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDO_Recom__Creat__4D4B3A2F">
+        <Association Name="FK__SDO_Recom__Creat__65E1DDCF">
           <End Role="SYS_User" Type="Self.SYS_User" Multiplicity="1" />
           <End Role="SDO_Recommend" Type="Self.SDO_Recommend" Multiplicity="*" />
           <ReferentialConstraint>
@@ -3370,7 +3374,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDO_Tutor__Creat__53041385">
+        <Association Name="FK__SDO_Tutor__Creat__6B9AB725">
           <End Role="SYS_User" Type="Self.SYS_User" Multiplicity="1" />
           <End Role="SDO_Tutorial" Type="Self.SDO_Tutorial" Multiplicity="*" />
           <ReferentialConstraint>
@@ -3382,7 +3386,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDO_Tutor__Creat__58BCECDB">
+        <Association Name="FK__SDO_Tutor__Creat__7153907B">
           <End Role="SYS_User" Type="Self.SYS_User" Multiplicity="1" />
           <End Role="SDO_TutorialComment" Type="Self.SDO_TutorialComment" Multiplicity="*" />
           <ReferentialConstraint>
@@ -3394,7 +3398,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDO_Tutor__Creat__5E75C631">
+        <Association Name="FK__SDO_Tutor__Creat__770C69D1">
           <End Role="SYS_User" Type="Self.SYS_User" Multiplicity="1" />
           <End Role="SDO_TutorialPraise" Type="Self.SDO_TutorialPraise" Multiplicity="*" />
           <ReferentialConstraint>
@@ -3406,7 +3410,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDO_Tutor__Tutor__57C8C8A2">
+        <Association Name="FK__SDO_Tutor__Tutor__705F6C42">
           <End Role="SDO_Tutorial" Type="Self.SDO_Tutorial" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -3420,7 +3424,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDO_Tutor__Tutor__5D81A1F8">
+        <Association Name="FK__SDO_Tutor__Tutor__76184598">
           <End Role="SDO_Tutorial" Type="Self.SDO_Tutorial" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -3434,7 +3438,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDT_Attit__Creat__3573B09E">
+        <Association Name="FK__SDT_Attit__Creat__4E0A543E">
           <End Role="SYS_User" Type="Self.SYS_User" Multiplicity="1" />
           <End Role="SDT_Attitude" Type="Self.SDT_Attitude" Multiplicity="*" />
           <ReferentialConstraint>
@@ -3446,7 +3450,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDT_Attit__Voice__347F8C65">
+        <Association Name="FK__SDT_Attit__Voice__4D163005">
           <End Role="SDT_Voice" Type="Self.SDT_Voice" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -3460,7 +3464,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDT_Comme__Creat__3B2C89F4">
+        <Association Name="FK__SDT_Comme__Creat__53C32D94">
           <End Role="SYS_User" Type="Self.SYS_User" Multiplicity="1" />
           <End Role="SDT_Comment" Type="Self.SDT_Comment" Multiplicity="*" />
           <ReferentialConstraint>
@@ -3472,7 +3476,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDT_Comme__Voice__3A3865BB">
+        <Association Name="FK__SDT_Comme__Voice__52CF095B">
           <End Role="SDT_Voice" Type="Self.SDT_Voice" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -3486,7 +3490,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDT_Forwa__Creat__290DD9B9">
+        <Association Name="FK__SDT_Forwa__Creat__40B05920">
           <End Role="SYS_User" Type="Self.SYS_User" Multiplicity="1" />
           <End Role="SDT_Forward" Type="Self.SDT_Forward" Multiplicity="*" />
           <ReferentialConstraint>
@@ -3498,7 +3502,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDT_Forwa__Group__2819B580">
+        <Association Name="FK__SDT_Forwa__Group__3FBC34E7">
           <End Role="SDG_Group" Type="Self.SDG_Group" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -3512,7 +3516,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDT_Forwa__Topic__27259147">
+        <Association Name="FK__SDT_Forwa__Topic__3EC810AE">
           <End Role="SDT_Topic" Type="Self.SDT_Topic" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -3526,7 +3530,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDT_Prais__Comme__3FF13F11">
+        <Association Name="FK__SDT_Prais__Comme__5887E2B1">
           <End Role="SDT_Comment" Type="Self.SDT_Comment" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -3540,7 +3544,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDT_Prais__Creat__40E5634A">
+        <Association Name="FK__SDT_Prais__Creat__597C06EA">
           <End Role="SYS_User" Type="Self.SYS_User" Multiplicity="1" />
           <End Role="SDT_Praise" Type="Self.SDT_Praise" Multiplicity="*" />
           <ReferentialConstraint>
@@ -3552,7 +3556,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDT_Topic__CaseI__1F846F7F">
+        <Association Name="FK__SDT_Topic__CaseI__3726EEE6">
           <End Role="SDC_FirstVisit" Type="Self.SDC_FirstVisit" Multiplicity="0..1" />
           <End Role="SDT_Topic" Type="Self.SDT_Topic" Multiplicity="*" />
           <ReferentialConstraint>
@@ -3564,7 +3568,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDT_Topic__Creat__2260DC2A">
+        <Association Name="FK__SDT_Topic__Creat__3A035B91">
           <End Role="SYS_User" Type="Self.SYS_User" Multiplicity="1" />
           <End Role="SDT_Topic" Type="Self.SDT_Topic" Multiplicity="*" />
           <ReferentialConstraint>
@@ -3576,7 +3580,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDT_Topic__Publi__216CB7F1">
+        <Association Name="FK__SDT_Topic__Publi__390F3758">
           <End Role="SDG_Group" Type="Self.SDG_Group" Multiplicity="0..1" />
           <End Role="SDT_Topic" Type="Self.SDT_Topic" Multiplicity="*" />
           <ReferentialConstraint>
@@ -3588,7 +3592,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDT_Voice__CaseI__2EC6B30F">
+        <Association Name="FK__SDT_Voice__CaseI__46693276">
           <End Role="SDC_FirstVisit" Type="Self.SDC_FirstVisit" Multiplicity="0..1" />
           <End Role="SDT_Voice" Type="Self.SDT_Voice" Multiplicity="*" />
           <ReferentialConstraint>
@@ -3600,7 +3604,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDT_Voice__Creat__2FBAD748">
+        <Association Name="FK__SDT_Voice__Creat__48517AE8">
           <End Role="SYS_User" Type="Self.SYS_User" Multiplicity="1" />
           <End Role="SDT_Voice" Type="Self.SDT_Voice" Multiplicity="*" />
           <ReferentialConstraint>
@@ -3612,7 +3616,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDT_Voice__Topic__2DD28ED6">
+        <Association Name="FK__SDT_Voice__Topic__45750E3D">
           <End Role="SDT_Topic" Type="Self.SDT_Topic" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -5151,15 +5155,15 @@
             <End Role="MasterData_Property" EntitySet="MasterData_Property" />
             <End Role="MDD_Numeric" EntitySet="MDD_Numeric" />
           </AssociationSet>
-          <AssociationSet Name="FK__MDE_Favor__Creat__6CF8EFB2" Association="Self.FK__MDE_Favor__Creat__6CF8EFB2">
+          <AssociationSet Name="FK__MDE_Favor__Creat__049B6F19" Association="Self.FK__MDE_Favor__Creat__049B6F19">
             <End Role="SYS_User" EntitySet="SYS_User" />
             <End Role="MDE_Favorites" EntitySet="MDE_Favorites" />
           </AssociationSet>
-          <AssociationSet Name="FK__MDE_Messa__Creat__6740165C" Association="Self.FK__MDE_Messa__Creat__6740165C">
+          <AssociationSet Name="FK__MDE_Messa__Creat__7EE295C3" Association="Self.FK__MDE_Messa__Creat__7EE295C3">
             <End Role="SYS_User" EntitySet="SYS_User" />
             <End Role="MDE_Message" EntitySet="MDE_Message" />
           </AssociationSet>
-          <AssociationSet Name="FK__MDE_Messa__Recei__6557CDEA" Association="Self.FK__MDE_Messa__Recei__6557CDEA">
+          <AssociationSet Name="FK__MDE_Messa__Recei__7CFA4D51" Association="Self.FK__MDE_Messa__Recei__7CFA4D51">
             <End Role="MasterData" EntitySet="MasterData" />
             <End Role="MDE_Message" EntitySet="MDE_Message" />
           </AssociationSet>
@@ -5291,7 +5295,7 @@
             <End Role="MasterData" EntitySet="MasterData" />
             <End Role="MDG_Material" EntitySet="MDG_Material" />
           </AssociationSet>
-          <AssociationSet Name="FK__MDG_Member__MID__5F9EF494" Association="Self.FK__MDG_Member__MID__5F9EF494">
+          <AssociationSet Name="FK__MDG_Member__MID__774173FB" Association="Self.FK__MDG_Member__MID__774173FB">
             <End Role="MasterData" EntitySet="MasterData" />
             <End Role="MDG_Member" EntitySet="MDG_Member" />
           </AssociationSet>
@@ -5355,155 +5359,155 @@
             <End Role="MasterData" EntitySet="MasterData" />
             <End Role="MDS_Contact_Info" EntitySet="MDS_Contact_Info" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDC_CaseH__Creat__749A117A" Association="Self.FK__SDC_CaseH__Creat__749A117A">
+          <AssociationSet Name="FK__SDC_CaseH__Creat__0C3C90E1" Association="Self.FK__SDC_CaseH__Creat__0C3C90E1">
             <End Role="SYS_User" EntitySet="SYS_User" />
             <End Role="SDC_CaseHistory" EntitySet="SDC_CaseHistory" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDC_First__CaseH__795EC697" Association="Self.FK__SDC_First__CaseH__795EC697">
+          <AssociationSet Name="FK__SDC_First__CaseH__110145FE" Association="Self.FK__SDC_First__CaseH__110145FE">
             <End Role="SDC_CaseHistory" EntitySet="SDC_CaseHistory" />
             <End Role="SDC_FirstVisit" EntitySet="SDC_FirstVisit" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDC_First__Creat__7C3B3342" Association="Self.FK__SDC_First__Creat__7C3B3342">
+          <AssociationSet Name="FK__SDC_First__Creat__13DDB2A9" Association="Self.FK__SDC_First__Creat__13DDB2A9">
             <End Role="SYS_User" EntitySet="SYS_User" />
             <End Role="SDC_FirstVisit" EntitySet="SDC_FirstVisit" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDC_First__Docto__7A52EAD0" Association="Self.FK__SDC_First__Docto__7A52EAD0">
+          <AssociationSet Name="FK__SDC_First__Docto__11F56A37" Association="Self.FK__SDC_First__Docto__11F56A37">
             <End Role="MasterData" EntitySet="MasterData" />
             <End Role="SDC_FirstVisit" EntitySet="SDC_FirstVisit" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDC_First__Nurse__7B470F09" Association="Self.FK__SDC_First__Nurse__7B470F09">
+          <AssociationSet Name="FK__SDC_First__Nurse__12E98E70" Association="Self.FK__SDC_First__Nurse__12E98E70">
             <End Role="MasterData" EntitySet="MasterData" />
             <End Role="SDC_FirstVisit" EntitySet="SDC_FirstVisit" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDC_Subse__CaseI__00FFE85F" Association="Self.FK__SDC_Subse__CaseI__00FFE85F">
+          <AssociationSet Name="FK__SDC_Subse__CaseI__18A267C6" Association="Self.FK__SDC_Subse__CaseI__18A267C6">
             <End Role="SDC_FirstVisit" EntitySet="SDC_FirstVisit" />
             <End Role="SDC_Subsequent" EntitySet="SDC_Subsequent" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDC_Subse__Creat__03DC550A" Association="Self.FK__SDC_Subse__Creat__03DC550A">
+          <AssociationSet Name="FK__SDC_Subse__Creat__1B7ED471" Association="Self.FK__SDC_Subse__Creat__1B7ED471">
             <End Role="SYS_User" EntitySet="SYS_User" />
             <End Role="SDC_Subsequent" EntitySet="SDC_Subsequent" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDC_Subse__Docto__01F40C98" Association="Self.FK__SDC_Subse__Docto__01F40C98">
+          <AssociationSet Name="FK__SDC_Subse__Docto__19968BFF" Association="Self.FK__SDC_Subse__Docto__19968BFF">
             <End Role="MasterData" EntitySet="MasterData" />
             <End Role="SDC_Subsequent" EntitySet="SDC_Subsequent" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDC_Subse__Nurse__02E830D1" Association="Self.FK__SDC_Subse__Nurse__02E830D1">
+          <AssociationSet Name="FK__SDC_Subse__Nurse__1A8AB038" Association="Self.FK__SDC_Subse__Nurse__1A8AB038">
             <End Role="MasterData" EntitySet="MasterData" />
             <End Role="SDC_Subsequent" EntitySet="SDC_Subsequent" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDC_Summa__CaseI__08A10A27" Association="Self.FK__SDC_Summa__CaseI__08A10A27">
+          <AssociationSet Name="FK__SDC_Summa__CaseI__2043898E" Association="Self.FK__SDC_Summa__CaseI__2043898E">
             <End Role="SDC_FirstVisit" EntitySet="SDC_FirstVisit" />
             <End Role="SDC_Summary" EntitySet="SDC_Summary" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDC_Summa__Creat__09952E60" Association="Self.FK__SDC_Summa__Creat__09952E60">
+          <AssociationSet Name="FK__SDC_Summa__Creat__2137ADC7" Association="Self.FK__SDC_Summa__Creat__2137ADC7">
             <End Role="SYS_User" EntitySet="SYS_User" />
             <End Role="SDC_Summary" EntitySet="SDC_Summary" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDG_Group__Creat__1412BCD3" Association="Self.FK__SDG_Group__Creat__1412BCD3">
+          <AssociationSet Name="FK__SDG_Group__Creat__2BB53C3A" Association="Self.FK__SDG_Group__Creat__2BB53C3A">
             <End Role="SYS_User" EntitySet="SYS_User" />
             <End Role="SDG_Group" EntitySet="SDG_Group" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDG_Group__Group__18D771F0" Association="Self.FK__SDG_Group__Group__18D771F0">
+          <AssociationSet Name="FK__SDG_Group__Group__3079F157" Association="Self.FK__SDG_Group__Group__3079F157">
             <End Role="SDG_Group" EntitySet="SDG_Group" />
             <End Role="SDG_GroupMember" EntitySet="SDG_GroupMember" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDG_Group__Manag__122A7461" Association="Self.FK__SDG_Group__Manag__122A7461">
+          <AssociationSet Name="FK__SDG_Group__Manag__29CCF3C8" Association="Self.FK__SDG_Group__Manag__29CCF3C8">
             <End Role="SYS_User" EntitySet="SYS_User" />
             <End Role="SDG_Group" EntitySet="SDG_Group" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDG_Group__Membe__19CB9629" Association="Self.FK__SDG_Group__Membe__19CB9629">
+          <AssociationSet Name="FK__SDG_Group__Membe__316E1590" Association="Self.FK__SDG_Group__Membe__316E1590">
             <End Role="MasterData" EntitySet="MasterData" />
             <End Role="SDG_GroupMember" EntitySet="SDG_GroupMember" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDG_Group__Owner__11365028" Association="Self.FK__SDG_Group__Owner__11365028">
+          <AssociationSet Name="FK__SDG_Group__Owner__28D8CF8F" Association="Self.FK__SDG_Group__Owner__28D8CF8F">
             <End Role="SYS_User" EntitySet="SYS_User" />
             <End Role="SDG_Group" EntitySet="SDG_Group" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDO_Adver__Creat__469E3CA0" Association="Self.FK__SDO_Adver__Creat__469E3CA0">
+          <AssociationSet Name="FK__SDO_Adver__Creat__5F34E040" Association="Self.FK__SDO_Adver__Creat__5F34E040">
             <End Role="SYS_User" EntitySet="SYS_User" />
             <End Role="SDO_Advertisement" EntitySet="SDO_Advertisement" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDO_Recom__Creat__4D4B3A2F" Association="Self.FK__SDO_Recom__Creat__4D4B3A2F">
+          <AssociationSet Name="FK__SDO_Recom__Creat__65E1DDCF" Association="Self.FK__SDO_Recom__Creat__65E1DDCF">
             <End Role="SYS_User" EntitySet="SYS_User" />
             <End Role="SDO_Recommend" EntitySet="SDO_Recommend" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDO_Tutor__Creat__53041385" Association="Self.FK__SDO_Tutor__Creat__53041385">
+          <AssociationSet Name="FK__SDO_Tutor__Creat__6B9AB725" Association="Self.FK__SDO_Tutor__Creat__6B9AB725">
             <End Role="SYS_User" EntitySet="SYS_User" />
             <End Role="SDO_Tutorial" EntitySet="SDO_Tutorial" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDO_Tutor__Creat__58BCECDB" Association="Self.FK__SDO_Tutor__Creat__58BCECDB">
+          <AssociationSet Name="FK__SDO_Tutor__Creat__7153907B" Association="Self.FK__SDO_Tutor__Creat__7153907B">
             <End Role="SYS_User" EntitySet="SYS_User" />
             <End Role="SDO_TutorialComment" EntitySet="SDO_TutorialComment" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDO_Tutor__Creat__5E75C631" Association="Self.FK__SDO_Tutor__Creat__5E75C631">
+          <AssociationSet Name="FK__SDO_Tutor__Creat__770C69D1" Association="Self.FK__SDO_Tutor__Creat__770C69D1">
             <End Role="SYS_User" EntitySet="SYS_User" />
             <End Role="SDO_TutorialPraise" EntitySet="SDO_TutorialPraise" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDO_Tutor__Tutor__57C8C8A2" Association="Self.FK__SDO_Tutor__Tutor__57C8C8A2">
+          <AssociationSet Name="FK__SDO_Tutor__Tutor__705F6C42" Association="Self.FK__SDO_Tutor__Tutor__705F6C42">
             <End Role="SDO_Tutorial" EntitySet="SDO_Tutorial" />
             <End Role="SDO_TutorialComment" EntitySet="SDO_TutorialComment" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDO_Tutor__Tutor__5D81A1F8" Association="Self.FK__SDO_Tutor__Tutor__5D81A1F8">
+          <AssociationSet Name="FK__SDO_Tutor__Tutor__76184598" Association="Self.FK__SDO_Tutor__Tutor__76184598">
             <End Role="SDO_Tutorial" EntitySet="SDO_Tutorial" />
             <End Role="SDO_TutorialPraise" EntitySet="SDO_TutorialPraise" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDT_Attit__Creat__3573B09E" Association="Self.FK__SDT_Attit__Creat__3573B09E">
+          <AssociationSet Name="FK__SDT_Attit__Creat__4E0A543E" Association="Self.FK__SDT_Attit__Creat__4E0A543E">
             <End Role="SYS_User" EntitySet="SYS_User" />
             <End Role="SDT_Attitude" EntitySet="SDT_Attitude" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDT_Attit__Voice__347F8C65" Association="Self.FK__SDT_Attit__Voice__347F8C65">
+          <AssociationSet Name="FK__SDT_Attit__Voice__4D163005" Association="Self.FK__SDT_Attit__Voice__4D163005">
             <End Role="SDT_Voice" EntitySet="SDT_Voice" />
             <End Role="SDT_Attitude" EntitySet="SDT_Attitude" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDT_Comme__Creat__3B2C89F4" Association="Self.FK__SDT_Comme__Creat__3B2C89F4">
+          <AssociationSet Name="FK__SDT_Comme__Creat__53C32D94" Association="Self.FK__SDT_Comme__Creat__53C32D94">
             <End Role="SYS_User" EntitySet="SYS_User" />
             <End Role="SDT_Comment" EntitySet="SDT_Comment" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDT_Comme__Voice__3A3865BB" Association="Self.FK__SDT_Comme__Voice__3A3865BB">
+          <AssociationSet Name="FK__SDT_Comme__Voice__52CF095B" Association="Self.FK__SDT_Comme__Voice__52CF095B">
             <End Role="SDT_Voice" EntitySet="SDT_Voice" />
             <End Role="SDT_Comment" EntitySet="SDT_Comment" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDT_Forwa__Creat__290DD9B9" Association="Self.FK__SDT_Forwa__Creat__290DD9B9">
+          <AssociationSet Name="FK__SDT_Forwa__Creat__40B05920" Association="Self.FK__SDT_Forwa__Creat__40B05920">
             <End Role="SYS_User" EntitySet="SYS_User" />
             <End Role="SDT_Forward" EntitySet="SDT_Forward" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDT_Forwa__Group__2819B580" Association="Self.FK__SDT_Forwa__Group__2819B580">
+          <AssociationSet Name="FK__SDT_Forwa__Group__3FBC34E7" Association="Self.FK__SDT_Forwa__Group__3FBC34E7">
             <End Role="SDG_Group" EntitySet="SDG_Group" />
             <End Role="SDT_Forward" EntitySet="SDT_Forward" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDT_Forwa__Topic__27259147" Association="Self.FK__SDT_Forwa__Topic__27259147">
+          <AssociationSet Name="FK__SDT_Forwa__Topic__3EC810AE" Association="Self.FK__SDT_Forwa__Topic__3EC810AE">
             <End Role="SDT_Topic" EntitySet="SDT_Topic" />
             <End Role="SDT_Forward" EntitySet="SDT_Forward" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDT_Prais__Comme__3FF13F11" Association="Self.FK__SDT_Prais__Comme__3FF13F11">
+          <AssociationSet Name="FK__SDT_Prais__Comme__5887E2B1" Association="Self.FK__SDT_Prais__Comme__5887E2B1">
             <End Role="SDT_Comment" EntitySet="SDT_Comment" />
             <End Role="SDT_Praise" EntitySet="SDT_Praise" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDT_Prais__Creat__40E5634A" Association="Self.FK__SDT_Prais__Creat__40E5634A">
+          <AssociationSet Name="FK__SDT_Prais__Creat__597C06EA" Association="Self.FK__SDT_Prais__Creat__597C06EA">
             <End Role="SYS_User" EntitySet="SYS_User" />
             <End Role="SDT_Praise" EntitySet="SDT_Praise" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDT_Topic__CaseI__1F846F7F" Association="Self.FK__SDT_Topic__CaseI__1F846F7F">
+          <AssociationSet Name="FK__SDT_Topic__CaseI__3726EEE6" Association="Self.FK__SDT_Topic__CaseI__3726EEE6">
             <End Role="SDC_FirstVisit" EntitySet="SDC_FirstVisit" />
             <End Role="SDT_Topic" EntitySet="SDT_Topic" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDT_Topic__Creat__2260DC2A" Association="Self.FK__SDT_Topic__Creat__2260DC2A">
+          <AssociationSet Name="FK__SDT_Topic__Creat__3A035B91" Association="Self.FK__SDT_Topic__Creat__3A035B91">
             <End Role="SYS_User" EntitySet="SYS_User" />
             <End Role="SDT_Topic" EntitySet="SDT_Topic" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDT_Topic__Publi__216CB7F1" Association="Self.FK__SDT_Topic__Publi__216CB7F1">
+          <AssociationSet Name="FK__SDT_Topic__Publi__390F3758" Association="Self.FK__SDT_Topic__Publi__390F3758">
             <End Role="SDG_Group" EntitySet="SDG_Group" />
             <End Role="SDT_Topic" EntitySet="SDT_Topic" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDT_Voice__CaseI__2EC6B30F" Association="Self.FK__SDT_Voice__CaseI__2EC6B30F">
+          <AssociationSet Name="FK__SDT_Voice__CaseI__46693276" Association="Self.FK__SDT_Voice__CaseI__46693276">
             <End Role="SDC_FirstVisit" EntitySet="SDC_FirstVisit" />
             <End Role="SDT_Voice" EntitySet="SDT_Voice" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDT_Voice__Creat__2FBAD748" Association="Self.FK__SDT_Voice__Creat__2FBAD748">
+          <AssociationSet Name="FK__SDT_Voice__Creat__48517AE8" Association="Self.FK__SDT_Voice__Creat__48517AE8">
             <End Role="SYS_User" EntitySet="SYS_User" />
             <End Role="SDT_Voice" EntitySet="SDT_Voice" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDT_Voice__Topic__2DD28ED6" Association="Self.FK__SDT_Voice__Topic__2DD28ED6">
+          <AssociationSet Name="FK__SDT_Voice__Topic__45750E3D" Association="Self.FK__SDT_Voice__Topic__45750E3D">
             <End Role="SDT_Topic" EntitySet="SDT_Topic" />
             <End Role="SDT_Voice" EntitySet="SDT_Voice" />
           </AssociationSet>
@@ -11483,6 +11487,7 @@
           <NavigationProperty Name="SDT_Comment" Relationship="WSModel.FK__SDT_Comme__Voice__495AADBA" FromRole="SDT_Voice" ToRole="SDT_Comment" />
           <NavigationProperty Name="SDT_Topic" Relationship="WSModel.FK__SDT_Voice__Topic__3CF4D6D5" FromRole="SDT_Voice" ToRole="SDT_Topic" />
           <NavigationProperty Name="SYS_User" Relationship="WSModel.FK__SDT_Voice__Creat__3EDD1F47" FromRole="SDT_Voice" ToRole="SYS_User" />
+          <Property Name="Recommend" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK__MDE_Messa__Recei__747A15E9">
           <End Type="WSModel.MasterData" Role="MasterData" Multiplicity="1">
@@ -13559,6 +13564,7 @@
           <EntitySetMapping Name="SDT_Voice">
             <EntityTypeMapping TypeName="WSModel.SDT_Voice">
               <MappingFragment StoreEntitySet="SDT_Voice">
+                <ScalarProperty Name="Recommend" ColumnName="Recommend" />
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="CreatorUserId" ColumnName="CreatorUserId" />
                 <ScalarProperty Name="PublishTime" ColumnName="PublishTime" />

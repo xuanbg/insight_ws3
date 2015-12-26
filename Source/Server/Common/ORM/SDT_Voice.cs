@@ -44,6 +44,8 @@ namespace Insight.WS.Server.Common.ORM
         public System.Guid CreatorUserId { get; set; }
     	[DataMember]
         public System.DateTime CreateTime { get; set; }
+    	[DataMember]
+        public bool Recommend { get; set; }
     
     	[DataMember]
         public virtual SDC_FirstVisit SDC_FirstVisit { get; set; }

@@ -266,6 +266,7 @@ CREATE TABLE SDT_Voice(
 [Content]          NVARCHAR(MAX) NOT NULL,                                                                                                 --发言内容
 [CaseId]           UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SDC_FirstVisit(ID),                                                             --病例ID
 [PublishTime]      DATETIME,                                                                                                               --发布时间
+[Recommend]        BIT DEFAULT 0 NOT NULL,                                                                                                 --是否推荐发言：0、否；1、是
 [CreatorUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID) NOT NULL,                                                          --创建人ID
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )
