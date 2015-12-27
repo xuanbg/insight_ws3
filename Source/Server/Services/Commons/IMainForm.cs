@@ -62,10 +62,10 @@ namespace Insight.WS.Service
         /// 设置指定用户的状态为离线
         /// </summary>
         /// <param name="us">Session对象实体</param>
-        /// <param name="id"></param>
+        /// <param name="account">用户账号</param>
         /// <returns>bool 是否成功</returns>
         [OperationContract]
-        bool Logout(Session us, Guid id);
+        bool Logout(Session us, string account);
 
         #endregion
 

@@ -65,11 +65,46 @@ namespace Insight.WS.Verify
 
         #region 静态公共方法
 
+        /// <summary>
+        /// 根据用户账号获取用户Session
+        /// </summary>
+        /// <param name="obj">用户会话</param>
+        /// <returns>Session</returns>
+        public static Session GetSession(Session obj)
+        {
+            // 先在缓存中根据用户账号查找，找到即返回结果
+            var session = Sessions.SingleOrDefault(s => string.Equals(s.LoginName, obj.LoginName, StringComparison.CurrentCultureIgnoreCase));
+            if (session != null) return session;
+
+            // 未在缓存中找到结果时，再在数据库中根据用户账号查找用户；
+            // 找到后根据用户信息初始化Session数据、加入缓存并返回结果，否则返回null。
+            var user = GetUser(obj.LoginName);
+            if (user == null) return null;
+
+            session = new Session
+            {
+                ID = Sessions.Count,
+                UserId = user.ID,
+                UserName = user.Name,
+                OpenId = user.OpenId,
+                LoginName = user.LoginName,
+                Signature = Hash(user.LoginName.ToUpper() + user.Password),
+                UserType = user.Type,
+                Validity = user.Validity,
+                Version = obj.Version,
+                ClientType = obj.ClientType,
+                MachineId = obj.MachineId,
+                BaseAddress = obj.BaseAddress
+            };
+            Sessions.Add(session);
+            return session;
+        }
+
         public static void CreateHost()
         {
             var address = new Uri(GetAppSetting("Address"));
             var binding = new NetTcpBinding();
-            Host = new ServiceHost(typeof(OnlineManage), address);
+            Host = new ServiceHost(typeof(SessionManage), address);
             Host.AddServiceEndpoint(typeof(Interface), binding, "VerifyServer");
             if (GetAppSetting("Mode") != "debug") return;
 

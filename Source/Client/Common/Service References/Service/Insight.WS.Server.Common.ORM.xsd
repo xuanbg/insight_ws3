@@ -2168,6 +2168,7 @@
       <xs:element minOccurs="0" name="CreatorUserId" type="ser:guid" />
       <xs:element minOccurs="0" name="ID" type="ser:guid" />
       <xs:element minOccurs="0" name="PublishTime" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Recommend" type="xs:boolean" />
       <xs:element minOccurs="0" name="SDC_FirstVisit" nillable="true" type="tns:SDC_FirstVisit" />
       <xs:element minOccurs="0" name="SDT_Attitude" nillable="true" type="tns:ArrayOfSDT_Attitude" />
       <xs:element minOccurs="0" name="SDT_Comment" nillable="true" type="tns:ArrayOfSDT_Comment" />

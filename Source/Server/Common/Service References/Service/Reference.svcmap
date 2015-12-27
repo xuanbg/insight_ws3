@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="4f0f648c-2978-4498-9f71-d4621f6db6c1" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="f9c0bb9a-a6da-4eba-b933-3a5197e8e2bf" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <EnableDataBinding>true</EnableDataBinding>
@@ -23,10 +23,10 @@
     <MetadataSource Address="net.tcp://localhost:6200/VerifyServer/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="17e8a9f0-854f-4d1e-ae1b-82cb564cf606" SourceId="1" SourceUrl="net.tcp://localhost:6200/VerifyServer/mex" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="b8a7bcd8-bf89-4c4a-8a58-7b722a48ff4a" SourceId="1" SourceUrl="net.tcp://localhost:6200/VerifyServer/mex" />
-    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="87680392-0e3a-47a1-b887-8cbf391437b9" SourceId="1" SourceUrl="net.tcp://localhost:6200/VerifyServer/mex" />
-    <MetadataFile FileName="Insight.WS.Verify.xsd" MetadataType="Schema" ID="232f35b7-9601-4be1-8915-c8ac1648c6af" SourceId="1" SourceUrl="net.tcp://localhost:6200/VerifyServer/mex" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="9c7af385-863f-4623-a60f-07753020b5c0" SourceId="1" SourceUrl="net.tcp://localhost:6200/VerifyServer/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="a050fdd6-dcc5-44ce-acfc-eb50deb23119" SourceId="1" SourceUrl="net.tcp://localhost:6200/VerifyServer/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="4d38f458-3fd1-4016-9175-692e93631942" SourceId="1" SourceUrl="net.tcp://localhost:6200/VerifyServer/mex" />
+    <MetadataFile FileName="Insight.WS.Verify.xsd" MetadataType="Schema" ID="353c84bd-723d-4ee1-b005-e3bd9a037204" SourceId="1" SourceUrl="net.tcp://localhost:6200/VerifyServer/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

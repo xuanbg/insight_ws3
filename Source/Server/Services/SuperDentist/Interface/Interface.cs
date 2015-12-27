@@ -83,7 +83,7 @@ namespace Insight.WS.Service.SuperDentist
             if (!result.Successful) return result;
 
             var us = GetAuthorization<Session>();
-            return SetUserOffline(us, us.UserId) ? result : result.NotFound();
+            return SetUserOffline(us, us.LoginName) ? result : result.NotFound();
         }
 
         /// <summary>

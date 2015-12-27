@@ -259,7 +259,7 @@ namespace Insight.WS.Server.Common
         {
             using (var client = new InterfaceClient(Binding, Address))
             {
-                return client.GetCode(type, mobile, time);
+                return client.NewCode(type, mobile, time);
             }
         }
 
@@ -337,12 +337,12 @@ namespace Insight.WS.Server.Common
         /// 设置指定用户的登录状态为离线
         /// </summary>
         /// <param name="obj">用户会话</param>
-        /// <param name="id"></param>
-        public static bool SetUserOffline(Session obj, Guid id)
+        /// <param name="account">用户账号</param>
+        public static bool SetUserOffline(Session obj, string account)
         {
             using (var client = new InterfaceClient(Binding, Address))
             {
-                return client.SetUserOffline(obj, id);
+                return client.SetUserOffline(obj, account);
             }
         }
 

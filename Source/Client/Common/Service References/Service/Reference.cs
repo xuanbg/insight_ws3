@@ -21497,6 +21497,9 @@ namespace Insight.WS.Client.Common.Service {
         private System.Nullable<System.DateTime> PublishTimeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool RecommendField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private Insight.WS.Client.Common.Service.SDC_FirstVisit SDC_FirstVisitField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -21601,6 +21604,19 @@ namespace Insight.WS.Client.Common.Service {
                 if ((this.PublishTimeField.Equals(value) != true)) {
                     this.PublishTimeField = value;
                     this.RaisePropertyChanged("PublishTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Recommend {
+            get {
+                return this.RecommendField;
+            }
+            set {
+                if ((this.RecommendField.Equals(value) != true)) {
+                    this.RecommendField = value;
+                    this.RaisePropertyChanged("Recommend");
                 }
             }
         }
@@ -25840,7 +25856,7 @@ namespace Insight.WS.Client.Common.Service {
         bool UpdataPassWord(Insight.WS.Client.Common.Service.Session us, string pw);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICommons/Logout", ReplyAction="http://tempuri.org/ICommons/LogoutResponse")]
-        bool Logout(Insight.WS.Client.Common.Service.Session us, System.Guid id);
+        bool Logout(Insight.WS.Client.Common.Service.Session us, string account);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -26054,8 +26070,8 @@ namespace Insight.WS.Client.Common.Service {
             return base.Channel.UpdataPassWord(us, pw);
         }
         
-        public bool Logout(Insight.WS.Client.Common.Service.Session us, System.Guid id) {
-            return base.Channel.Logout(us, id);
+        public bool Logout(Insight.WS.Client.Common.Service.Session us, string account) {
+            return base.Channel.Logout(us, account);
         }
     }
 }

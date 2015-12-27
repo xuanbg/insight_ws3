@@ -57,8 +57,9 @@
   <ItemGroup>
     <Compile Include="ExtendClass\Entities.cs" />
     <Compile Include="ExtendClass\Session.cs" />
+    <Compile Include="ExtendClass\Verify.cs" />
     <Compile Include="Function\Interface.cs" />
-    <Compile Include="Function\OnlineManage.cs" />
+    <Compile Include="Function\SessionManage.cs" />
     <Compile Include="ProjectInstaller.cs">
       <SubType>Component</SubType>
     </Compile>
