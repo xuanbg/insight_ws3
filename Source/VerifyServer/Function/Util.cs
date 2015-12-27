@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Security.Cryptography;
@@ -27,11 +26,6 @@ namespace Insight.WS.Verify
         public static ServiceHost Host;
 
         /// <summary>
-        /// 系统连结字符串字典
-        /// </summary>
-        public static Dictionary<string, string> ConStr;
-
-        /// <summary>
         /// 短信验证码的缓存列表
         /// </summary>
         public static readonly List<VerifyRecord> SmsCodes = new List<VerifyRecord>();
@@ -40,26 +34,6 @@ namespace Insight.WS.Verify
         /// 用于生成短信验证码的随机数发生器
         /// </summary>
         public static readonly Random Random = new Random(Environment.TickCount);
-
-        #endregion
-
-        #region 静态构造方法
-
-        /// <summary>
-        /// 静态构造函数，初始化系统连结字符串字典
-        /// </summary>
-        static Util()
-        {
-            var list = ConfigurationManager.ConnectionStrings;
-            ConStr = new Dictionary<string, string> { { "Template", null } };
-            for (var i = 0; i < list.Count; i++)
-            {
-                var name = list[i].Name;
-                if (name.Contains("Local")) continue;
-
-                ConStr.Add(name, new Entities(name).ConnectionString);
-            }
-        }
 
         #endregion
 
@@ -129,7 +103,7 @@ namespace Insight.WS.Verify
         }
 
         /// <summary>
-        /// 根据用户登录名获取用户对象实体
+        /// 根据用户ID获取用户对象实体
         /// </summary>
         /// <param name="id">用户ID</param>
         /// <returns>SYS_User 用户对象实体</returns>
@@ -138,6 +112,20 @@ namespace Insight.WS.Verify
             using (var context = new WSEntities())
             {
                 return context.SYS_User.SingleOrDefault(u => u.ID == id);
+            }
+        }
+
+        /// <summary>
+        /// 根据操作ID返回鉴权结果
+        /// </summary>
+        /// <param name="obj">用于会话</param>
+        /// <param name="id">操作ID</param>
+        /// <returns>SYS_User 用户对象实体</returns>
+        public static bool Authority(Session obj, Guid id)
+        {
+            using (var context = new WSEntities())
+            {
+                return context.Authority(obj.UserId, obj.DeptId, id).Any();
             }
         }
 
@@ -168,55 +156,10 @@ namespace Insight.WS.Verify
         /// </summary>
         /// <param name="msg">Log消息</param>
         /// <param name="type">Log类型（默认Error）</param>
-        /// <param name="source">事件源（默认Insight Workstation 3 Service）</param>
+        /// <param name="source">事件源（默认Insight VerifyServer Service）</param>
         public static void LogToEvent(string msg, EventLogEntryType type = EventLogEntryType.Error, string source = "Insight VerifyServer Service")
         {
             EventLog.WriteEntry(source, msg, type);
-        }
-
-        /// <summary>
-        /// 返回第一行第一列内容的方法
-        /// </summary>
-        /// <param name="cmd">SqlCommand</param>
-        /// <param name="dataSouc">数据源名称</param>
-        /// <returns>执行SQL语句后的第一行第一列内容</returns>
-        public static object SqlScalar(SqlCommand cmd, string dataSouc = "WSEntities")
-        {
-            using (var conn = new SqlConnection(ConStr[dataSouc]))
-            {
-                conn.Open();
-                cmd.Connection = conn;
-                try
-                {
-                    return cmd.ExecuteScalar();
-                }
-                catch (Exception ex)
-                {
-                    LogToEvent(cmd.CommandText);
-                    LogToEvent(ex.ToString());
-                    return null;
-                }
-            }
-        }
-
-        /// <summary>
-        /// 组装SqlCommand对象
-        /// </summary>
-        /// <param name="sql">sql命令</param>
-        /// <param name="parameters">可变长参数组</param>
-        /// <returns>SqlCommand 组装完成的SqlCommand对象</returns>
-        public static SqlCommand MakeCommand(string sql, params SqlParameter[] parameters)
-        {
-            var cmd = new SqlCommand(sql);
-            foreach (var p in parameters)
-            {
-                if (p.Value == null || p.Value.ToString() == "")
-                {
-                    p.Value = DBNull.Value;
-                }
-                cmd.Parameters.Add(p);
-            }
-            return cmd;
         }
 
     }

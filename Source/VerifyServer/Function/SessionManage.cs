@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 using static Insight.WS.Verify.Util;
 
@@ -100,20 +98,7 @@ namespace Insight.WS.Verify
             Guid actionId;
             if (!Guid.TryParse(action, out actionId)) return false;
 
-            // 验证会话合法性
-            if (!SimpleVerification(obj)) return false;
-
-            // 根据传入的操作代码进行鉴权
-            var sql = "select A.ActionId from Sys_RolePerm_Action A join Get_PermRole(@UserId, @DeptId) R ";
-            sql += "on R.RoleId = A.RoleId and A.ActionId = @ActionId ";
-            sql += "group by A.ActionId having min(A.Action) > 0";
-            var parm = new[]
-            {
-                new SqlParameter("@UserId", SqlDbType.UniqueIdentifier) {Value = obj.UserId},
-                new SqlParameter("@DeptId", SqlDbType.UniqueIdentifier) {Value = obj.DeptId},
-                new SqlParameter("@ActionId", SqlDbType.UniqueIdentifier) {Value = actionId}
-            };
-            return SqlScalar(MakeCommand(sql, parm)) != null;
+            return SimpleVerification(obj) && Authority(obj, actionId);
         }
 
         /// <summary>
