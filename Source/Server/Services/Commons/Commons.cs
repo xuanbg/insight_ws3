@@ -242,7 +242,7 @@ namespace Insight.WS.Service
             if ((type & 4) == 4) sql += "union select M.ID, M.Name, M.Alias from MasterData M join MDG_Supplier S on S.MID = M.ID ";
             if ((type & 2) == 2) sql += "union select M.ID, M.Name, M.Alias from MasterData M join MDG_Employee E on E.MID = M.ID ";
             if ((type & 1) == 1) sql += "union select M.ID, M.Name, M.Alias from MasterData M join MDG_Contact O on O.MID = M.ID ";
-            return SqlQuery(MakeCommand(sql));
+            return SqlQuery(MakeCommand(sql.Substring(6)));
         }
 
         /// <summary>
