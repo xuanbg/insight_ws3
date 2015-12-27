@@ -15,7 +15,6 @@ namespace Insight.WS.Server.Common.ORM
     
     [DataContract(IsReference = true)]
     [KnownType(typeof(SDC_FirstVisit))]
-    [KnownType(typeof(SDG_Group))]
     [KnownType(typeof(SDT_Forward))]
     [KnownType(typeof(SYS_User))]
     [KnownType(typeof(SDT_Voice))]
@@ -43,8 +42,6 @@ namespace Insight.WS.Server.Common.ORM
     	[DataMember]
         public bool Private { get; set; }
     	[DataMember]
-        public Nullable<System.Guid> PublishGroupId { get; set; }
-    	[DataMember]
         public Nullable<System.DateTime> PublishTime { get; set; }
     	[DataMember]
         public System.Guid CreatorUserId { get; set; }
@@ -53,8 +50,6 @@ namespace Insight.WS.Server.Common.ORM
     
     	[DataMember]
         public virtual SDC_FirstVisit SDC_FirstVisit { get; set; }
-    	[DataMember]
-        public virtual SDG_Group SDG_Group { get; set; }
     	[DataMember]
         public virtual ICollection<SDT_Forward> SDT_Forward { get; set; }
     	[DataMember]

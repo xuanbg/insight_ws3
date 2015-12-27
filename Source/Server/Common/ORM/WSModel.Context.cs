@@ -13,6 +13,7 @@ namespace Insight.WS.Server.Common.ORM
     using System.Data.Entity.Core.Objects;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Linq;
     
     public partial class WSEntities : DbContext
     {
@@ -146,5 +147,20 @@ namespace Insight.WS.Server.Common.ORM
         public virtual DbSet<SDO_TutorialComment> SDO_TutorialComment { get; set; }
         public virtual DbSet<SDO_TutorialPraise> SDO_TutorialPraise { get; set; }
         public virtual DbSet<MemberInfo> MemberInfo { get; set; }
+        public virtual DbSet<TopicList> TopicList { get; set; }
+    
+        [DbFunction("WSEntities", "GetTopic")]
+        public virtual IQueryable<GetTopic_Result> GetTopic(Nullable<System.Guid> userId, Nullable<System.Guid> topicId)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(System.Guid));
+    
+            var topicIdParameter = topicId.HasValue ?
+                new ObjectParameter("TopicId", topicId) :
+                new ObjectParameter("TopicId", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<GetTopic_Result>("[WSEntities].[GetTopic](@UserId, @TopicId)", userIdParameter, topicIdParameter);
+        }
     }
 }

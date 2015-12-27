@@ -173,6 +173,9 @@
     <Compile Include="ORM\Dictionary.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ORM\GetTopic_Result.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ORM\ImageData.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
@@ -399,6 +402,9 @@
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ORM\SYS_UserGroupMember.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\TopicList.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ORM\WSModel.Context.cs">

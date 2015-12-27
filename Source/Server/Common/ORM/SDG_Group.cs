@@ -17,7 +17,6 @@ namespace Insight.WS.Server.Common.ORM
     [KnownType(typeof(SYS_User))]
     [KnownType(typeof(SDG_GroupMember))]
     [KnownType(typeof(SDT_Forward))]
-    [KnownType(typeof(SDT_Topic))]
     
     public partial class SDG_Group
     {
@@ -25,7 +24,6 @@ namespace Insight.WS.Server.Common.ORM
         {
             this.SDG_GroupMember = new HashSet<SDG_GroupMember>();
             this.SDT_Forward = new HashSet<SDT_Forward>();
-            this.SDT_Topic = new HashSet<SDT_Topic>();
         }
     
     	[DataMember]
@@ -67,7 +65,5 @@ namespace Insight.WS.Server.Common.ORM
         public virtual SYS_User SYS_User2 { get; set; }
     	[DataMember]
         public virtual ICollection<SDT_Forward> SDT_Forward { get; set; }
-    	[DataMember]
-        public virtual ICollection<SDT_Topic> SDT_Topic { get; set; }
     }
 }

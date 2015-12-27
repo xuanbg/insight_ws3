@@ -238,7 +238,6 @@ CREATE TABLE SDT_Topic(
 [Tags]             NVARCHAR(64),                                                                                                           --话题标签
 [CaseId]           UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SDC_FirstVisit(ID),                                                             --病例ID
 [Private]          BIT DEFAULT 0 NOT NULL,                                                                                                 --是否私有：0、公开，访客可读，可转发；1、私有，访客不可读，不可转发
-[PublishGroupId]   UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SDG_Group(ID),                                                                  --发布群组ID
 [PublishTime]      DATETIME,                                                                                                               --发布时间
 [CreatorUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID) NOT NULL,                                                          --创建人ID
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间

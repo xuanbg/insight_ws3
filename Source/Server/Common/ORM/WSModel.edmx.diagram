@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="9cf27559fc704ac58e993c2ab56b5771" Name="Diagram1" ZoomLevel="94">
+      <Diagram DiagramId="9cf27559fc704ac58e993c2ab56b5771" Name="Diagram1" ZoomLevel="97">
         <EntityTypeShape EntityType="WSModel.ABS_Advance" Width="1.5" PointX="3" PointY="132" IsExpanded="true" />
         <EntityTypeShape EntityType="WSModel.ABS_Advance_Detail" Width="1.5" PointX="19.5" PointY="121.625" />
         <EntityTypeShape EntityType="WSModel.ABS_Advance_Record" Width="1.5" PointX="28.75" PointY="123.875" />
@@ -334,7 +334,6 @@
         <AssociationConnector Association="WSModel.FK__SDG_Group__Manag__214CBC60" />
         <AssociationConnector Association="WSModel.FK__SDG_Group__Owner__20589827" />
         <AssociationConnector Association="WSModel.FK__SDT_Forwa__Group__373BFD7F" />
-        <AssociationConnector Association="WSModel.FK__SDT_Topic__Publi__308EFFF0" />
         <AssociationConnector Association="WSModel.FK__SDO_Adver__Creat__55C0849F" />
         <AssociationConnector Association="WSModel.FK__SDO_Recom__Creat__5C6D822E" />
         <AssociationConnector Association="WSModel.FK__SDT_Attit__Creat__4495F89D" />
@@ -357,6 +356,7 @@
         <AssociationConnector Association="WSModel.FK__SDO_Tutor__Creat__58BCECDB" />
         <AssociationConnector Association="WSModel.FK__SDO_Tutor__Creat__5E75C631" />
         <EntityTypeShape EntityType="WSModel.MemberInfo" Width="1.5" PointX="0.75" PointY="7.75" />
+        <EntityTypeShape EntityType="WSModel.TopicList" Width="1.5" PointX="2.75" PointY="7.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

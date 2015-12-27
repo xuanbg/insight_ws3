@@ -898,7 +898,6 @@
           <Property Name="Tags" Type="nvarchar" MaxLength="64" />
           <Property Name="CaseId" Type="uniqueidentifier" />
           <Property Name="Private" Type="bit" Nullable="false" />
-          <Property Name="PublishGroupId" Type="uniqueidentifier" />
           <Property Name="PublishTime" Type="datetime" />
           <Property Name="CreatorUserId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="CreateTime" Type="datetime" Nullable="false" />
@@ -1477,6 +1476,24 @@
           <Property Name="Alias" Type="nvarchar" MaxLength="16" />
           <Property Name="CreatorDeptId" Type="uniqueidentifier" />
           <Property Name="CreatorUserId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Insight.dbo.TopicList”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="TopicList">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="GroupId" Type="uniqueidentifier" />
+          <Property Name="TopicId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Private" Type="bit" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="VoiceId" Type="uniqueidentifier" />
+          <Property Name="Content" Type="nvarchar(max)" />
+          <Property Name="MemberId" Type="uniqueidentifier" />
+          <Property Name="Portrait" Type="varchar" MaxLength="64" />
+          <Property Name="Agrees" Type="int" />
+          <Property Name="PublishTime" Type="datetime" />
         </EntityType>
         <Association Name="FK__ABS_Advan__Accou__3D3402A0">
           <End Role="ABS_Advance" Type="Self.ABS_Advance" Multiplicity="1">
@@ -3580,18 +3597,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDT_Topic__Publi__390F3758">
-          <End Role="SDG_Group" Type="Self.SDG_Group" Multiplicity="0..1" />
-          <End Role="SDT_Topic" Type="Self.SDT_Topic" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SDG_Group">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="SDT_Topic">
-              <PropertyRef Name="PublishGroupId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__SDT_Voice__CaseI__46693276">
           <End Role="SDC_FirstVisit" Type="Self.SDC_FirstVisit" Multiplicity="0..1" />
           <End Role="SDT_Voice" Type="Self.SDT_Voice" Multiplicity="*" />
@@ -4666,6 +4671,23 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="GetTopic" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="TopicId" Type="uniqueidentifier" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+                <Property Name="Title" Type="nvarchar" MaxLength="64" Nullable="false" />
+                <Property Name="Description" Type="nvarchar(max)" />
+                <Property Name="CaseId" Type="uniqueidentifier" />
+                <Property Name="Private" Type="bit" Nullable="false" />
+                <Property Name="PublishTime" Type="datetime" />
+                <Property Name="IsCare" Type="bit" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
         <EntityContainer Name="WSModelStoreContainer">
           <EntitySet Name="ABS_Advance" EntityType="Self.ABS_Advance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ABS_Advance_Detail" EntityType="Self.ABS_Advance_Detail" Schema="dbo" store:Type="Tables" />
@@ -4830,6 +4852,21 @@
     [ReportTemplet].[CreatorDeptId] AS [CreatorDeptId], 
     [ReportTemplet].[CreatorUserId] AS [CreatorUserId]
     FROM [dbo].[ReportTemplet] AS [ReportTemplet]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="TopicList" EntityType="Self.TopicList" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [TopicList].[ID] AS [ID], 
+    [TopicList].[GroupId] AS [GroupId], 
+    [TopicList].[TopicId] AS [TopicId], 
+    [TopicList].[Private] AS [Private], 
+    [TopicList].[Title] AS [Title], 
+    [TopicList].[VoiceId] AS [VoiceId], 
+    [TopicList].[Content] AS [Content], 
+    [TopicList].[MemberId] AS [MemberId], 
+    [TopicList].[Portrait] AS [Portrait], 
+    [TopicList].[Agrees] AS [Agrees], 
+    [TopicList].[PublishTime] AS [PublishTime]
+    FROM [dbo].[TopicList] AS [TopicList]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK__ABS_Advan__Accou__3D3402A0" Association="Self.FK__ABS_Advan__Accou__3D3402A0">
             <End Role="ABS_Advance" EntitySet="ABS_Advance" />
@@ -5493,10 +5530,6 @@
           </AssociationSet>
           <AssociationSet Name="FK__SDT_Topic__Creat__3A035B91" Association="Self.FK__SDT_Topic__Creat__3A035B91">
             <End Role="SYS_User" EntitySet="SYS_User" />
-            <End Role="SDT_Topic" EntitySet="SDT_Topic" />
-          </AssociationSet>
-          <AssociationSet Name="FK__SDT_Topic__Publi__390F3758" Association="Self.FK__SDT_Topic__Publi__390F3758">
-            <End Role="SDG_Group" EntitySet="SDG_Group" />
             <End Role="SDT_Topic" EntitySet="SDT_Topic" />
           </AssociationSet>
           <AssociationSet Name="FK__SDT_Voice__CaseI__46693276" Association="Self.FK__SDT_Voice__CaseI__46693276">
@@ -6879,10 +6912,6 @@
             <End Role="SDG_Group" EntitySet="SDG_Group" />
             <End Role="SDT_Forward" EntitySet="SDT_Forward" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDT_Topic__Publi__308EFFF0" Association="WSModel.FK__SDT_Topic__Publi__308EFFF0">
-            <End Role="SDG_Group" EntitySet="SDG_Group" />
-            <End Role="SDT_Topic" EntitySet="SDT_Topic" />
-          </AssociationSet>
           <AssociationSet Name="FK__SDO_Adver__Creat__55C0849F" Association="WSModel.FK__SDO_Adver__Creat__55C0849F">
             <End Role="SYS_User" EntitySet="SYS_User" />
             <End Role="SDO_Advertisement" EntitySet="SDO_Advertisement" />
@@ -6959,6 +6988,11 @@
             <End Role="SDO_TutorialPraise" EntitySet="SDO_TutorialPraise" />
           </AssociationSet>
           <EntitySet Name="MemberInfo" EntityType="WSModel.MemberInfo" />
+          <EntitySet Name="TopicList" EntityType="WSModel.TopicList" />
+          <FunctionImport Name="GetTopic" IsComposable="true" ReturnType="Collection(WSModel.GetTopic_Result)">
+            <Parameter Name="UserId" Mode="In" Type="Guid" />
+            <Parameter Name="TopicId" Mode="In" Type="Guid" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="ABS_Advance_Detail">
           <Key>
@@ -11348,7 +11382,6 @@
           <NavigationProperty Name="SYS_User1" Relationship="WSModel.FK__SDG_Group__Manag__214CBC60" FromRole="SDG_Group" ToRole="SYS_User" />
           <NavigationProperty Name="SYS_User2" Relationship="WSModel.FK__SDG_Group__Owner__20589827" FromRole="SDG_Group" ToRole="SYS_User" />
           <NavigationProperty Name="SDT_Forward" Relationship="WSModel.FK__SDT_Forwa__Group__373BFD7F" FromRole="SDG_Group" ToRole="SDT_Forward" />
-          <NavigationProperty Name="SDT_Topic" Relationship="WSModel.FK__SDT_Topic__Publi__308EFFF0" FromRole="SDG_Group" ToRole="SDT_Topic" />
         </EntityType>
         <EntityType Name="SDG_GroupMember">
           <Key>
@@ -11460,12 +11493,10 @@
           <Property Name="Tags" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="CaseId" Type="Guid" />
           <Property Name="Private" Type="Boolean" Nullable="false" />
-          <Property Name="PublishGroupId" Type="Guid" />
           <Property Name="PublishTime" Type="DateTime" Precision="3" />
           <Property Name="CreatorUserId" Type="Guid" Nullable="false" />
           <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="SDC_FirstVisit" Relationship="WSModel.FK__SDT_Topic__CaseI__2EA6B77E" FromRole="SDT_Topic" ToRole="SDC_FirstVisit" />
-          <NavigationProperty Name="SDG_Group" Relationship="WSModel.FK__SDT_Topic__Publi__308EFFF0" FromRole="SDT_Topic" ToRole="SDG_Group" />
           <NavigationProperty Name="SDT_Forward" Relationship="WSModel.FK__SDT_Forwa__Topic__3647D946" FromRole="SDT_Topic" ToRole="SDT_Forward" />
           <NavigationProperty Name="SYS_User" Relationship="WSModel.FK__SDT_Topic__Creat__31832429" FromRole="SDT_Topic" ToRole="SYS_User" />
           <NavigationProperty Name="SDT_Voice" Relationship="WSModel.FK__SDT_Voice__Topic__3CF4D6D5" FromRole="SDT_Topic" ToRole="SDT_Voice" />
@@ -11777,18 +11808,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDT_Topic__Publi__308EFFF0">
-          <End Type="WSModel.SDG_Group" Role="SDG_Group" Multiplicity="0..1" />
-          <End Type="WSModel.SDT_Topic" Role="SDT_Topic" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SDG_Group">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="SDT_Topic">
-              <PropertyRef Name="PublishGroupId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__SDO_Adver__Creat__55C0849F">
           <End Type="WSModel.SYS_User" Role="SYS_User" Multiplicity="1" />
           <End Type="WSModel.SDO_Advertisement" Role="SDO_Advertisement" Multiplicity="*" />
@@ -12074,6 +12093,31 @@
           <Property Name="Beans" Type="Int32" Nullable="false" />
           <Property Name="Unread" Type="Int32" />
         </EntityType>
+        <EntityType Name="TopicList">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="GroupId" Type="Guid" />
+          <Property Name="TopicId" Type="Guid" Nullable="false" />
+          <Property Name="Private" Type="Boolean" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="VoiceId" Type="Guid" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MemberId" Type="Guid" />
+          <Property Name="Portrait" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Agrees" Type="Int32" />
+          <Property Name="PublishTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <ComplexType Name="GetTopic_Result">
+          <Property Type="Guid" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="64" />
+          <Property Type="String" Name="Description" Nullable="true" />
+          <Property Type="Guid" Name="CaseId" Nullable="true" />
+          <Property Type="Boolean" Name="Private" Nullable="false" />
+          <Property Type="DateTime" Name="PublishTime" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="IsCare" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -13550,7 +13594,6 @@
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="CreatorUserId" ColumnName="CreatorUserId" />
                 <ScalarProperty Name="PublishTime" ColumnName="PublishTime" />
-                <ScalarProperty Name="PublishGroupId" ColumnName="PublishGroupId" />
                 <ScalarProperty Name="Private" ColumnName="Private" />
                 <ScalarProperty Name="CaseId" ColumnName="CaseId" />
                 <ScalarProperty Name="Tags" ColumnName="Tags" />
@@ -13628,6 +13671,36 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="TopicList">
+            <EntityTypeMapping TypeName="WSModel.TopicList">
+              <MappingFragment StoreEntitySet="TopicList">
+                <ScalarProperty Name="PublishTime" ColumnName="PublishTime" />
+                <ScalarProperty Name="Agrees" ColumnName="Agrees" />
+                <ScalarProperty Name="Portrait" ColumnName="Portrait" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="VoiceId" ColumnName="VoiceId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Private" ColumnName="Private" />
+                <ScalarProperty Name="TopicId" ColumnName="TopicId" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetTopic" FunctionName="WSModel.Store.GetTopic">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WSModel.GetTopic_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CaseId" ColumnName="CaseId" />
+                <ScalarProperty Name="Private" ColumnName="Private" />
+                <ScalarProperty Name="PublishTime" ColumnName="PublishTime" />
+                <ScalarProperty Name="IsCare" ColumnName="IsCare" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
