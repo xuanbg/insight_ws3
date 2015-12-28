@@ -8,7 +8,7 @@ GO
 CREATE VIEW MemberInfo
 AS
 
-select D.ID, D.Name, D.Alias, M.Portrait, M.Integral, M.Beans, S.Unread
+select D.ID, D.Name, D.Alias, M.Signature, M.Portrait, M.Integral, M.Beans, S.Unread
 from MasterData D
 join MDG_Member M on M.MID = D.ID
 left join (
