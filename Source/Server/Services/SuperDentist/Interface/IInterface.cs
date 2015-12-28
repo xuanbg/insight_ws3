@@ -34,11 +34,10 @@ namespace Insight.WS.Service.SuperDentist
         /// <summary>
         /// 注销
         /// </summary>
-        /// <param name="id">SessionID</param>
         /// <returns>JsonResult</returns>
         [WebInvoke(Method = "POST", UriTemplate = "user/signout", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         [OperationContract]
-        JsonResult Logout(int id);
+        JsonResult Logout();
 
         /// <summary>
         /// 修改登录密码

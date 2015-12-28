@@ -19,13 +19,13 @@ namespace Insight.WS.Test.Interface
             //var buffer = Convert.FromBase64String("eyJNYWNoaW5lSWQiOiI4MjlGRTcwOTE5MzEwMTVFM0IxNTJFMkNGQ0MxMEQ5QyIsIlVzZXJUeXBlIjotMSwiRGVwdElkIjpudWxsLCJDbGllbnRUeXBlIjoyLCJJRCI6MCwiTG9naW5SZXN1bHQiOjEsIlVzZXJJZCI6IjU5NjdmMGMzLWMwYWEtZTUxMS05NDBkLWU4NGE0ZGNmYTY5MCIsIlVzZXJOYW1lIjoieW9uZyIsIkZhaWx1cmVDb3VudCI6MiwiTG9naW5OYW1lIjoiMTg2MjgwNzA3MzkiLCJFeHRlbnNpb25EYXRhIjp7fSwiT25saW5lU3RhdHVzIjp0cnVlLCJPcGVuSWQiOm51bGwsIlZlcnNpb24iOjEwMDAsIlZhbGlkaXR5Ijp0cnVlLCJCYXNlQWRkcmVzcyI6bnVsbCwiU2lnbmF0dXJlIjoiQkMxMENEMzIyNzhCRkYyRjU0MTkyRTY1NTY0OTZDRDMiLCJEZXB0TmFtZSI6bnVsbCwiTGFzdENvbm5lY3QiOiJcL0RhdGUoMTQ1MTAyMzU2OTc4NilcLyJ9");
             //var json = Encoding.UTF8.GetString(buffer);
             //var obj = Deserialize<Session>(json);
-            var mobile = "18600740255";
-            //Register(GetSmsVerifyCode("1", mobile), mobile);
             //GetToken();
-            //ResetPassword(GetSmsVerifyCode("2", mobile), mobile, "123456");
-            UserSession = Login(mobile, "111111");
-            //ChangePassword("111111");
+            var mobile = "18600740251";
+            //UserSession = Register(GetSmsVerifyCode("1", mobile), mobile);
+            //UserSession = ResetPassword(GetSmsVerifyCode("2", mobile), mobile, "123456");
+            UserSession = Login(mobile, "123456");
             GetMemberInfo();
+            //ChangePassword("111111");
             Logout();
         }
 
@@ -123,7 +123,7 @@ namespace Insight.WS.Test.Interface
             var session = new Session
             {
                 LoginName = mobile,
-                UserName = "李四",
+                UserName = "张三",
                 Signature = Hash(mobile.ToUpper() + code + Hash("111111")),
                 Version = 10000,
                 ClientType = 2,

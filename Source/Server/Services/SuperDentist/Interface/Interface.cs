@@ -75,9 +75,8 @@ namespace Insight.WS.Service.SuperDentist
         /// <summary>
         /// 注销
         /// </summary>
-        /// <param name="id">SessionID</param>
         /// <returns>JsonResult</returns>
-        public JsonResult Logout(int id)
+        public JsonResult Logout()
         {
             var result = Verify();
             if (!result.Successful) return result;
