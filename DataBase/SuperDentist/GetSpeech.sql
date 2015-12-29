@@ -15,7 +15,8 @@ RETURN
 
 select S.ID, T.Title, S.Content, S.CaseId,
 M.MID as MemberId, D.Name, M.Signature, M.Portrait,
-isnull(A.Agrees, 0) as Agrees, isnull(A.Praise, 0) as Praise, isnull(C.Comments, 0) as Comments,
+isnull(A.Agrees, 0) as Agrees, isnull(A.Opposes, 0) as Opposes,
+isnull(A.Praises, 0) as Praises, isnull(C.Comments, 0) as Comments,
 isnull(A.IsAgrees, 0) as IsAgrees, isnull(A.IsOppose, 0) as IsOppose,
 isnull(A.IsPraise, 0) as IsPraise, isnull(A.IsReport, 0) as IsReport,
 cast(case when F.ID is null then 0 else 1 end as bit) as IsCare, S.PublishTime
@@ -26,7 +27,8 @@ join MDG_Member M on M.MID = S.CreatorUserId
 left join (
   select SpeechId,
   sum(case Type when 1 then 1 else 0 end) as Agrees,
-  sum(case Type when 3 then 1 else 0 end) as Praise,
+  sum(case Type when 2 then 1 else 0 end) as Opposes,
+  sum(case Type when 3 then 1 else 0 end) as Praises,
   cast(sum(case when Type = 1 and CreatorUserId = @UserId then 1 else 0 end) as bit) as IsAgrees,
   cast(sum(case when Type = 2 and CreatorUserId = @UserId then 1 else 0 end) as bit) as IsOppose,
   cast(sum(case when Type = 3 and CreatorUserId = @UserId then 1 else 0 end) as bit) as IsPraise,

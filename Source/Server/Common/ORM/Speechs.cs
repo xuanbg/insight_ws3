@@ -15,28 +15,26 @@ namespace Insight.WS.Server.Common.ORM
     
     [DataContract(IsReference = true)]
     
-    public partial class TopicList
+    public partial class Speechs
     {
     	[DataMember]
         public System.Guid ID { get; set; }
     	[DataMember]
-        public Nullable<System.Guid> GroupId { get; set; }
-    	[DataMember]
         public System.Guid TopicId { get; set; }
-    	[DataMember]
-        public bool Private { get; set; }
-    	[DataMember]
-        public string Title { get; set; }
-    	[DataMember]
-        public Nullable<System.Guid> VoiceId { get; set; }
     	[DataMember]
         public string Content { get; set; }
     	[DataMember]
-        public Nullable<System.Guid> MemberId { get; set; }
+        public bool Recommend { get; set; }
+    	[DataMember]
+        public System.Guid MemberId { get; set; }
+    	[DataMember]
+        public string Name { get; set; }
+    	[DataMember]
+        public string Signature { get; set; }
     	[DataMember]
         public string Portrait { get; set; }
     	[DataMember]
-        public Nullable<int> Agrees { get; set; }
+        public int Agrees { get; set; }
     	[DataMember]
         public Nullable<System.DateTime> PublishTime { get; set; }
     }

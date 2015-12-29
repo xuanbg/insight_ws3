@@ -300,7 +300,7 @@
     <Compile Include="ORM\Speech.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ORM\SpeechList.cs">
+    <Compile Include="ORM\Speechs.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ORM\SYS_Alert_Message.cs">
@@ -411,7 +411,7 @@
     <Compile Include="ORM\Topic.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ORM\TopicList.cs">
+    <Compile Include="ORM\Topics.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ORM\WSModel.Context.cs">
@@ -446,6 +446,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>WSModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="App.Config" />
     <None Include="ORM\WSModel.edmx.diagram">
       <DependentUpon>WSModel.edmx</DependentUpon>
     </None>

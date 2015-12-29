@@ -350,8 +350,8 @@
         <AssociationConnector Association="WSModel.FK__SDO_Tutor__Creat__58BCECDB" />
         <AssociationConnector Association="WSModel.FK__SDO_Tutor__Creat__5E75C631" />
         <EntityTypeShape EntityType="WSModel.MemberInfo" Width="1.5" PointX="0.75" PointY="7.75" />
-        <EntityTypeShape EntityType="WSModel.TopicList" Width="1.5" PointX="2.75" PointY="7.75" />
-        <EntityTypeShape EntityType="WSModel.SpeechList" Width="1.5" PointX="5.375" PointY="7.75" />
+        <EntityTypeShape EntityType="WSModel.Speechs" Width="1.5" PointX="2.75" PointY="7.75" />
+        <EntityTypeShape EntityType="WSModel.Topics" Width="1.5" PointX="4.75" PointY="7.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

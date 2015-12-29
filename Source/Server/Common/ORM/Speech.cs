@@ -23,7 +23,6 @@ namespace Insight.WS.Server.Common.ORM
         public string Signature { get; set; }
         public string Portrait { get; set; }
         public int Agrees { get; set; }
-        public int Praise { get; set; }
         public int Comments { get; set; }
         public bool IsAgrees { get; set; }
         public bool IsOppose { get; set; }
@@ -31,5 +30,7 @@ namespace Insight.WS.Server.Common.ORM
         public bool IsReport { get; set; }
         public Nullable<bool> IsCare { get; set; }
         public Nullable<System.DateTime> PublishTime { get; set; }
+        public int Opposes { get; set; }
+        public int Praises { get; set; }
     }
 }

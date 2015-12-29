@@ -76,7 +76,7 @@ namespace Insight.WS.Server.Common
         {
             var result = new JsonResult();
             var obj = GetAuthorization<string>();
-            return obj != rule ? result.InvalidAuth() : result.Success();
+            return obj != Hash(rule) ? result.InvalidAuth() : result.Success();
         }
 
         #endregion  

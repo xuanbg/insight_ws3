@@ -1,16 +1,16 @@
-IF EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'TopicList') AND OBJECTPROPERTY(id, N'ISVIEW') = 1)
-DROP VIEW TopicList
+IF EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'Topics') AND OBJECTPROPERTY(id, N'ISVIEW') = 1)
+DROP VIEW Topics
 GO
 
 
 /*****视图：查询话题列表*****/
 
-CREATE VIEW TopicList
+CREATE VIEW Topics
 AS
 
 select case when F.ID is null then newid() else F.ID end as ID, 
        F.GroupId, T.ID as TopicId, T.Private, 
-	   T.Title, S.ID as VoiceId, S.Content, 
+	   T.Title, S.ID as SpeechId, S.Content, 
 	   S.MID as MemberId, S.Portrait, S.Agrees, T.PublishTime
 from SDT_Topic T
 left join SDT_Forward F on F.TopicId = T.ID

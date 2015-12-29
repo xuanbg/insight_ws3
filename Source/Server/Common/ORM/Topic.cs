@@ -21,5 +21,6 @@ namespace Insight.WS.Server.Common.ORM
         public bool Private { get; set; }
         public Nullable<System.DateTime> PublishTime { get; set; }
         public Nullable<bool> IsCare { get; set; }
+        public Nullable<bool> IsSpeeched { get; set; }
     }
 }

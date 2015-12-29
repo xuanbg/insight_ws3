@@ -170,8 +170,8 @@ namespace Insight.WS.Service.SuperDentist
             using (var context = new WSEntities())
             {
                 var topics = gp.Relust.HasValue
-                    ? context.TopicList.SingleOrDefault(m => m.GroupId == gp.Relust)
-                    : context.TopicList.SingleOrDefault(m => !m.Private);
+                    ? context.Topics.Where(m => m.GroupId == gp.Relust)
+                    : context.Topics.Where(m => !m.Private);
                 return GetJson(topics);
             }
         }
@@ -184,7 +184,7 @@ namespace Insight.WS.Service.SuperDentist
         /// <returns>JsonResult</returns>
         public JsonResult GetTopic(string id, string mid)
         {
-            var result = Verify(Secret);
+            var result = Verify(id.ToUpper() + Secret);
             if (!result.Successful) return result;
 
             Guid tid;
@@ -207,7 +207,7 @@ namespace Insight.WS.Service.SuperDentist
         /// <returns>JsonResult</returns>
         public JsonResult GetSpeechs(string id)
         {
-            var result = Verify(Secret);
+            var result = Verify(id.ToUpper() + Secret);
             if (!result.Successful) return result;
 
             Guid tid;
@@ -215,7 +215,7 @@ namespace Insight.WS.Service.SuperDentist
 
             using (var context = new WSEntities())
             {
-                var topic = context.SpeechList.Where(s=> s.TopicId == tid);
+                var topic = context.Speechs.Where(s=> s.TopicId == tid);
                 return GetJson(topic);
             }
         }
@@ -228,7 +228,7 @@ namespace Insight.WS.Service.SuperDentist
         /// <returns>JsonResult</returns>
         public JsonResult GetSpeech(string id, string mid)
         {
-            var result = Verify(Secret);
+            var result = Verify(id.ToUpper() + Secret);
             if (!result.Successful) return result;
 
             Guid sid;
@@ -252,7 +252,7 @@ namespace Insight.WS.Service.SuperDentist
         /// <returns>JsonResult</returns>
         public JsonResult GetComments(string id, string mid)
         {
-            var result = Verify(Secret);
+            var result = Verify(id.ToUpper() + Secret);
             if (!result.Successful) return result;
 
             Guid sid;

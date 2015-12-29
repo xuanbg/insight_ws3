@@ -38,85 +38,49 @@ namespace Insight.WS.Test.Interface
         {
             var url = BassAddress + "topic/gettopics";
             var data = $"gid={""}";
-            var author = Base64(Secret);
+            var author = Base64(Hash(Secret));
             var result = HttpRequest(url, "GET", author, data);
-            if (result.Successful)
-            {
-                Console.Write($"Result: {result.Data}");
-                Console.ReadLine();
-                return;
-            }
-
-            Console.Write(result.Message);
-            Console.ReadLine();
+            PutResult(result);
         }
 
         private static void GetComments()
         {
             var url = BassAddress + "topic/getcomments";
-            var data = $"id={"BEB1EA06-61AD-E511-9C5B-ACBC3278616E"}&mid={UserSession?.UserId}";
-            var author = Base64(Secret);
+            var id = "BEB1EA06-61AD-E511-9C5B-ACBC3278616E";
+            var data = $"id={id}&mid={UserSession?.UserId}";
+            var author = Base64(Hash(id.ToUpper() + Secret));
             var result = HttpRequest(url, "GET", author, data);
-            if (result.Successful)
-            {
-                Console.Write($"Result: {result.Data}");
-                Console.ReadLine();
-                return;
-            }
-
-            Console.Write(result.Message);
-            Console.ReadLine();
+            PutResult(result);
         }
 
         private static void GetSpeech()
         {
             var url = BassAddress + "topic/getspeech";
+            var id = "BEB1EA06-61AD-E511-9C5B-ACBC3278616E";
             var data = $"id={"BEB1EA06-61AD-E511-9C5B-ACBC3278616E"}&mid={UserSession?.UserId}";
-            var author = Base64(Secret);
+            var author = Base64(Hash(id.ToUpper() + Secret));
             var result = HttpRequest(url, "GET", author, data);
-            if (result.Successful)
-            {
-                Console.Write($"Result: {result.Data}");
-                Console.ReadLine();
-                return;
-            }
-
-            Console.Write(result.Message);
-            Console.ReadLine();
+            PutResult(result);
         }
 
         private static void GetSpeechs()
         {
             var url = BassAddress + "topic/getspeechs";
-            var data = $"id={"0F187AC1-5FAC-E511-9C5A-ACBC3278616E"}";
-            var author = Base64(Secret);
+            var id = "0F187AC1-5FAC-E511-9C5A-ACBC3278616E";
+            var data = $"id={id}";
+            var author = Base64(Hash(id.ToUpper() + Secret));
             var result = HttpRequest(url, "GET", author, data);
-            if (result.Successful)
-            {
-                Console.Write($"Result: {result.Data}");
-                Console.ReadLine();
-                return;
-            }
-
-            Console.Write(result.Message);
-            Console.ReadLine();
+            PutResult(result);
         }
 
         private static void GetTopic()
         {
             var url = BassAddress + "topic/gettopic";
-            var data = $"id={"0F187AC1-5FAC-E511-9C5A-ACBC3278616E"}&mid={UserSession?.UserId}";
-            var author = Base64(Secret);
+            var id = "0F187AC1-5FAC-E511-9C5A-ACBC3278616E";
+            var data = $"id={id}&mid={UserSession?.UserId}";
+            var author = Base64(Hash(id.ToUpper() + Secret));
             var result = HttpRequest(url, "GET", author, data);
-            if (result.Successful)
-            {
-                Console.Write($"Result: {result.Data}");
-                Console.ReadLine();
-                return;
-            }
-
-            Console.Write(result.Message);
-            Console.ReadLine();
+            PutResult(result);
         }
 
         private static void GetMemberInfo()
@@ -126,15 +90,7 @@ namespace Insight.WS.Test.Interface
             var data = $"id={id}";
             var author = Base64(UserSession);
             var result = HttpRequest(url, "GET", author, data);
-            if (result.Successful)
-            {
-                Console.Write(result.Data);
-                Console.ReadLine();
-                return;
-            }
-
-            Console.Write(result.Message);
-            Console.ReadLine();
+            PutResult(result);
         }
 
         private static void ChangePassword(string password)
@@ -279,14 +235,13 @@ namespace Insight.WS.Test.Interface
             var result = HttpRequest(url, "POST", author, data);
             if (result.Successful)
             {
-                Console.Write($"用户 {UserSession.LoginName} 注销成功");
+                Console.Write($"用户{UserSession.LoginName}注销成功！");
                 Console.ReadLine();
+                return;
             }
-            else
-            {
-                Console.Write(result.Message);
-                Console.ReadLine();
-            }
+
+            Console.Write(result.Message);
+            Console.ReadLine();
         }
 
         private static void GetToken()
@@ -294,16 +249,20 @@ namespace Insight.WS.Test.Interface
             var url = BassAddress + "setting/getqiniutoken";
             var author = Base64(Secret);
             var result = HttpRequest(url, "GET", author);
+            PutResult(result);
+        }
+
+        private static void PutResult(JsonResult result)
+        {
             if (result.Successful)
             {
-                Console.Write($"Token: {result.Data}");
+                Console.Write($"Result: {result.Data}");
                 Console.ReadLine();
+                return;
             }
-            else
-            {
-                Console.Write(result.Message);
-                Console.ReadLine();
-            }
+
+            Console.Write(result.Message);
+            Console.ReadLine();
         }
 
     }

@@ -1,11 +1,11 @@
-IF EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'SpeechList') AND OBJECTPROPERTY(id, N'ISVIEW') = 1)
-DROP VIEW SpeechList
+IF EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'Speechs') AND OBJECTPROPERTY(id, N'ISVIEW') = 1)
+DROP VIEW Speechs
 GO
 
 
 /*****视图：查询发言列表*****/
 
-CREATE VIEW SpeechList
+CREATE VIEW Speechs
 AS
 
 select S.ID, S.TopicId, S.Content, S.Recommend,

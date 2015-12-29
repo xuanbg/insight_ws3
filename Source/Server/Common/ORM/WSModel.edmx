@@ -1471,16 +1471,16 @@
           <Property Name="CreatorUserId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <!--生成过程中发现错误:
-警告 6002: 表/视图“Insight.dbo.SpeechList”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
-        <EntityType Name="SpeechList">
+警告 6002: 表/视图“Insight.dbo.Speechs”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="Speechs">
           <Key>
             <PropertyRef Name="ID" />
-            <PropertyRef Name="TopicId" />
-            <PropertyRef Name="Content" />
-            <PropertyRef Name="Recommend" />
-            <PropertyRef Name="MemberId" />
-            <PropertyRef Name="Name" />
-            <PropertyRef Name="Agrees" />
+            
+            
+            
+            
+            
+            
           </Key>
           <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="TopicId" Type="uniqueidentifier" Nullable="false" />
@@ -1494,8 +1494,8 @@
           <Property Name="PublishTime" Type="datetime" />
         </EntityType>
         <!--生成过程中发现错误:
-警告 6002: 表/视图“Insight.dbo.TopicList”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
-        <EntityType Name="TopicList">
+警告 6002: 表/视图“Insight.dbo.Topics”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="Topics">
           <Key>
             
             
@@ -1507,7 +1507,7 @@
           <Property Name="TopicId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Private" Type="bit" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="64" Nullable="false" />
-          <Property Name="VoiceId" Type="uniqueidentifier" />
+          <Property Name="SpeechId" Type="uniqueidentifier" />
           <Property Name="Content" Type="nvarchar(max)" />
           <Property Name="MemberId" Type="uniqueidentifier" />
           <Property Name="Portrait" Type="varchar" MaxLength="64" />
@@ -4670,7 +4670,8 @@
                 <Property Name="Signature" Type="nvarchar" MaxLength="32" />
                 <Property Name="Portrait" Type="varchar" MaxLength="64" />
                 <Property Name="Agrees" Type="int" Nullable="false" />
-                <Property Name="Praise" Type="int" Nullable="false" />
+                <Property Name="Opposes" Type="int" Nullable="false" />
+                <Property Name="Praises" Type="int" Nullable="false" />
                 <Property Name="Comments" Type="int" Nullable="false" />
                 <Property Name="IsAgrees" Type="bit" Nullable="false" />
                 <Property Name="IsOppose" Type="bit" Nullable="false" />
@@ -4865,34 +4866,34 @@
     [ReportTemplet].[CreatorUserId] AS [CreatorUserId]
     FROM [dbo].[ReportTemplet] AS [ReportTemplet]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="SpeechList" EntityType="Self.SpeechList" store:Type="Views" store:Schema="dbo">
+          <EntitySet Name="Speechs" EntityType="Self.Speechs" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [SpeechList].[ID] AS [ID], 
-    [SpeechList].[TopicId] AS [TopicId], 
-    [SpeechList].[Content] AS [Content], 
-    [SpeechList].[Recommend] AS [Recommend], 
-    [SpeechList].[MemberId] AS [MemberId], 
-    [SpeechList].[Name] AS [Name], 
-    [SpeechList].[Signature] AS [Signature], 
-    [SpeechList].[Portrait] AS [Portrait], 
-    [SpeechList].[Agrees] AS [Agrees], 
-    [SpeechList].[PublishTime] AS [PublishTime]
-    FROM [dbo].[SpeechList] AS [SpeechList]</DefiningQuery>
+    [Speechs].[ID] AS [ID], 
+    [Speechs].[TopicId] AS [TopicId], 
+    [Speechs].[Content] AS [Content], 
+    [Speechs].[Recommend] AS [Recommend], 
+    [Speechs].[MemberId] AS [MemberId], 
+    [Speechs].[Name] AS [Name], 
+    [Speechs].[Signature] AS [Signature], 
+    [Speechs].[Portrait] AS [Portrait], 
+    [Speechs].[Agrees] AS [Agrees], 
+    [Speechs].[PublishTime] AS [PublishTime]
+    FROM [dbo].[Speechs] AS [Speechs]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="TopicList" EntityType="Self.TopicList" store:Type="Views" store:Schema="dbo">
+          <EntitySet Name="Topics" EntityType="Self.Topics" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [TopicList].[ID] AS [ID], 
-    [TopicList].[GroupId] AS [GroupId], 
-    [TopicList].[TopicId] AS [TopicId], 
-    [TopicList].[Private] AS [Private], 
-    [TopicList].[Title] AS [Title], 
-    [TopicList].[VoiceId] AS [VoiceId], 
-    [TopicList].[Content] AS [Content], 
-    [TopicList].[MemberId] AS [MemberId], 
-    [TopicList].[Portrait] AS [Portrait], 
-    [TopicList].[Agrees] AS [Agrees], 
-    [TopicList].[PublishTime] AS [PublishTime]
-    FROM [dbo].[TopicList] AS [TopicList]</DefiningQuery>
+    [Topics].[ID] AS [ID], 
+    [Topics].[GroupId] AS [GroupId], 
+    [Topics].[TopicId] AS [TopicId], 
+    [Topics].[Private] AS [Private], 
+    [Topics].[Title] AS [Title], 
+    [Topics].[SpeechId] AS [SpeechId], 
+    [Topics].[Content] AS [Content], 
+    [Topics].[MemberId] AS [MemberId], 
+    [Topics].[Portrait] AS [Portrait], 
+    [Topics].[Agrees] AS [Agrees], 
+    [Topics].[PublishTime] AS [PublishTime]
+    FROM [dbo].[Topics] AS [Topics]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK__ABS_Advan__Accou__3D3402A0" Association="Self.FK__ABS_Advan__Accou__3D3402A0">
             <End Role="ABS_Advance" EntitySet="ABS_Advance" />
@@ -6973,12 +6974,10 @@
             <End Role="SDO_TutorialPraise" EntitySet="SDO_TutorialPraise" />
           </AssociationSet>
           <EntitySet Name="MemberInfo" EntityType="WSModel.MemberInfo" />
-          <EntitySet Name="TopicList" EntityType="WSModel.TopicList" />
           <FunctionImport Name="GetTopic" IsComposable="true" ReturnType="Collection(WSModel.Topic)">
             <Parameter Name="TopicId" Mode="In" Type="Guid" />
             <Parameter Name="UserId" Mode="In" Type="Guid" />
           </FunctionImport>
-          <EntitySet Name="SpeechList" EntityType="WSModel.SpeechList" />
           <FunctionImport Name="Authority" IsComposable="true" ReturnType="Collection(Guid)">
             <Parameter Name="UserId" Mode="In" Type="Guid" />
             <Parameter Name="DeptId" Mode="In" Type="Guid" />
@@ -6992,6 +6991,8 @@
             <Parameter Name="SpeechId" Mode="In" Type="Guid" />
             <Parameter Name="UserId" Mode="In" Type="Guid" />
           </FunctionImport>
+          <EntitySet Name="Speechs" EntityType="WSModel.Speechs" />
+          <EntitySet Name="Topics" EntityType="WSModel.Topics" />
           </EntityContainer>
         <EntityType Name="ABS_Advance_Detail">
           <Key>
@@ -12009,22 +12010,6 @@
           <Property Name="Unread" Type="Int32" />
           <Property Name="Signature" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="TopicList">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Guid" Nullable="false" />
-          <Property Name="GroupId" Type="Guid" />
-          <Property Name="TopicId" Type="Guid" Nullable="false" />
-          <Property Name="Private" Type="Boolean" Nullable="false" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Name="VoiceId" Type="Guid" />
-          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="MemberId" Type="Guid" />
-          <Property Name="Portrait" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="Agrees" Type="Int32" />
-          <Property Name="PublishTime" Type="DateTime" Precision="3" />
-        </EntityType>
         <ComplexType Name="Topic">
           <Property Type="Guid" Name="ID" Nullable="false" />
           <Property Type="String" Name="Title" Nullable="false" MaxLength="64" />
@@ -12033,28 +12018,8 @@
           <Property Type="Boolean" Name="Private" Nullable="false" />
           <Property Type="DateTime" Name="PublishTime" Nullable="true" Precision="23" />
           <Property Type="Boolean" Name="IsCare" Nullable="true" />
+          <Property Type="Boolean" Name="IsSpeeched" Nullable="true" />
         </ComplexType>
-        <EntityType Name="SpeechList">
-          <Key>
-            <PropertyRef Name="ID" />
-            <PropertyRef Name="TopicId" />
-            <PropertyRef Name="Content" />
-            <PropertyRef Name="Recommend" />
-            <PropertyRef Name="MemberId" />
-            <PropertyRef Name="Name" />
-            <PropertyRef Name="Agrees" />
-          </Key>
-          <Property Name="ID" Type="Guid" Nullable="false" />
-          <Property Name="TopicId" Type="Guid" Nullable="false" />
-          <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Recommend" Type="Boolean" Nullable="false" />
-          <Property Name="MemberId" Type="Guid" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Name="Signature" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-          <Property Name="Portrait" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="Agrees" Type="Int32" Nullable="false" />
-          <Property Name="PublishTime" Type="DateTime" Precision="3" />
-        </EntityType>
         <ComplexType Name="Comments">
           <Property Type="Guid" Name="ID" Nullable="false" />
           <Property Type="String" Name="Content" Nullable="false" MaxLength="512" />
@@ -12076,7 +12041,6 @@
           <Property Type="String" Name="Signature" Nullable="true" MaxLength="32" />
           <Property Type="String" Name="Portrait" Nullable="true" MaxLength="64" />
           <Property Type="Int32" Name="Agrees" Nullable="false" />
-          <Property Type="Int32" Name="Praise" Nullable="false" />
           <Property Type="Int32" Name="Comments" Nullable="false" />
           <Property Type="Boolean" Name="IsAgrees" Nullable="false" />
           <Property Type="Boolean" Name="IsOppose" Nullable="false" />
@@ -12084,7 +12048,40 @@
           <Property Type="Boolean" Name="IsReport" Nullable="false" />
           <Property Type="Boolean" Name="IsCare" Nullable="true" />
           <Property Type="DateTime" Name="PublishTime" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="Opposes" Nullable="false" />
+          <Property Type="Int32" Name="Praises" Nullable="false" />
         </ComplexType>
+        <EntityType Name="Speechs">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="TopicId" Type="Guid" Nullable="false" />
+          <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Recommend" Type="Boolean" Nullable="false" />
+          <Property Name="MemberId" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Signature" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="Portrait" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Agrees" Type="Int32" Nullable="false" />
+          <Property Name="PublishTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Topics">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="GroupId" Type="Guid" />
+          <Property Name="TopicId" Type="Guid" Nullable="false" />
+          <Property Name="Private" Type="Boolean" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="SpeechId" Type="Guid" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MemberId" Type="Guid" />
+          <Property Name="Portrait" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Agrees" Type="Int32" />
+          <Property Name="PublishTime" Type="DateTime" Precision="3" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -13630,23 +13627,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TopicList">
-            <EntityTypeMapping TypeName="WSModel.TopicList">
-              <MappingFragment StoreEntitySet="TopicList">
-                <ScalarProperty Name="PublishTime" ColumnName="PublishTime" />
-                <ScalarProperty Name="Agrees" ColumnName="Agrees" />
-                <ScalarProperty Name="Portrait" ColumnName="Portrait" />
-                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
-                <ScalarProperty Name="Content" ColumnName="Content" />
-                <ScalarProperty Name="VoiceId" ColumnName="VoiceId" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Private" ColumnName="Private" />
-                <ScalarProperty Name="TopicId" ColumnName="TopicId" />
-                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="GetTopic" FunctionName="WSModel.Store.GetTopic">
             <ResultMapping>
               <ComplexTypeMapping TypeName="WSModel.Topic">
@@ -13657,25 +13637,10 @@
                 <ScalarProperty Name="Private" ColumnName="Private" />
                 <ScalarProperty Name="PublishTime" ColumnName="PublishTime" />
                 <ScalarProperty Name="IsCare" ColumnName="IsCare" />
+                <ScalarProperty Name="IsSpeeched" ColumnName="IsSpeeched" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="SpeechList">
-            <EntityTypeMapping TypeName="WSModel.SpeechList">
-              <MappingFragment StoreEntitySet="SpeechList">
-                <ScalarProperty Name="PublishTime" ColumnName="PublishTime" />
-                <ScalarProperty Name="Agrees" ColumnName="Agrees" />
-                <ScalarProperty Name="Portrait" ColumnName="Portrait" />
-                <ScalarProperty Name="Signature" ColumnName="Signature" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
-                <ScalarProperty Name="Recommend" ColumnName="Recommend" />
-                <ScalarProperty Name="Content" ColumnName="Content" />
-                <ScalarProperty Name="TopicId" ColumnName="TopicId" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="Authority" FunctionName="WSModel.Store.Authority" />
           <FunctionImportMapping FunctionImportName="GetComments" FunctionName="WSModel.Store.GetComments">
             <ResultMapping>
@@ -13704,7 +13669,6 @@
                 <ScalarProperty Name="Signature" ColumnName="Signature" />
                 <ScalarProperty Name="Portrait" ColumnName="Portrait" />
                 <ScalarProperty Name="Agrees" ColumnName="Agrees" />
-                <ScalarProperty Name="Praise" ColumnName="Praise" />
                 <ScalarProperty Name="Comments" ColumnName="Comments" />
                 <ScalarProperty Name="IsAgrees" ColumnName="IsAgrees" />
                 <ScalarProperty Name="IsOppose" ColumnName="IsOppose" />
@@ -13712,9 +13676,44 @@
                 <ScalarProperty Name="IsReport" ColumnName="IsReport" />
                 <ScalarProperty Name="IsCare" ColumnName="IsCare" />
                 <ScalarProperty Name="PublishTime" ColumnName="PublishTime" />
+                <ScalarProperty Name="Opposes" ColumnName="Opposes" />
+                <ScalarProperty Name="Praises" ColumnName="Praises" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="Speechs">
+            <EntityTypeMapping TypeName="WSModel.Speechs">
+              <MappingFragment StoreEntitySet="Speechs">
+                <ScalarProperty Name="PublishTime" ColumnName="PublishTime" />
+                <ScalarProperty Name="Agrees" ColumnName="Agrees" />
+                <ScalarProperty Name="Portrait" ColumnName="Portrait" />
+                <ScalarProperty Name="Signature" ColumnName="Signature" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="Recommend" ColumnName="Recommend" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="TopicId" ColumnName="TopicId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Topics">
+            <EntityTypeMapping TypeName="WSModel.Topics">
+              <MappingFragment StoreEntitySet="Topics">
+                <ScalarProperty Name="PublishTime" ColumnName="PublishTime" />
+                <ScalarProperty Name="Agrees" ColumnName="Agrees" />
+                <ScalarProperty Name="Portrait" ColumnName="Portrait" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="SpeechId" ColumnName="SpeechId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Private" ColumnName="Private" />
+                <ScalarProperty Name="TopicId" ColumnName="TopicId" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
