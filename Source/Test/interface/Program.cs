@@ -7,7 +7,7 @@ namespace Insight.WS.Test.Interface
 {
     static class Program
     {
-        private const string BassAddress = "http://localhost:6280/Interface/";
+        private const string BassAddress = "http://localhost:6280/AppService/";
         //private const string BassAddress = "http://120.27.142.125:6280/Interface/";
 
         /// <summary>
@@ -24,9 +24,99 @@ namespace Insight.WS.Test.Interface
             //UserSession = Register(GetSmsVerifyCode("1", mobile), mobile);
             //UserSession = ResetPassword(GetSmsVerifyCode("2", mobile), mobile, "123456");
             UserSession = Login(mobile, "123456");
-            GetMemberInfo();
+            //GetMemberInfo();
+            GetTopics();
+            GetTopic();
+            GetSpeechs();
+            GetSpeech();
+            GetComments();
             //ChangePassword("111111");
             Logout();
+        }
+
+        private static void GetTopics()
+        {
+            var url = BassAddress + "topic/gettopics";
+            var data = $"gid={""}";
+            var author = Base64(Secret);
+            var result = HttpRequest(url, "GET", author, data);
+            if (result.Successful)
+            {
+                Console.Write($"Result: {result.Data}");
+                Console.ReadLine();
+                return;
+            }
+
+            Console.Write(result.Message);
+            Console.ReadLine();
+        }
+
+        private static void GetComments()
+        {
+            var url = BassAddress + "topic/getcomments";
+            var data = $"id={"BEB1EA06-61AD-E511-9C5B-ACBC3278616E"}&mid={UserSession?.UserId}";
+            var author = Base64(Secret);
+            var result = HttpRequest(url, "GET", author, data);
+            if (result.Successful)
+            {
+                Console.Write($"Result: {result.Data}");
+                Console.ReadLine();
+                return;
+            }
+
+            Console.Write(result.Message);
+            Console.ReadLine();
+        }
+
+        private static void GetSpeech()
+        {
+            var url = BassAddress + "topic/getspeech";
+            var data = $"id={"BEB1EA06-61AD-E511-9C5B-ACBC3278616E"}&mid={UserSession?.UserId}";
+            var author = Base64(Secret);
+            var result = HttpRequest(url, "GET", author, data);
+            if (result.Successful)
+            {
+                Console.Write($"Result: {result.Data}");
+                Console.ReadLine();
+                return;
+            }
+
+            Console.Write(result.Message);
+            Console.ReadLine();
+        }
+
+        private static void GetSpeechs()
+        {
+            var url = BassAddress + "topic/getspeechs";
+            var data = $"id={"0F187AC1-5FAC-E511-9C5A-ACBC3278616E"}";
+            var author = Base64(Secret);
+            var result = HttpRequest(url, "GET", author, data);
+            if (result.Successful)
+            {
+                Console.Write($"Result: {result.Data}");
+                Console.ReadLine();
+                return;
+            }
+
+            Console.Write(result.Message);
+            Console.ReadLine();
+        }
+
+        private static void GetTopic()
+        {
+            var url = BassAddress + "topic/gettopic";
+            var data = $"id={"0F187AC1-5FAC-E511-9C5A-ACBC3278616E"}&mid={UserSession?.UserId}";
+            var author = Base64(Secret);
+            var result = HttpRequest(url, "GET", author, data);
+            if (result.Successful)
+            {
+                Console.Write($"Result: {result.Data}");
+                Console.ReadLine();
+                return;
+            }
+
+            Console.Write(result.Message);
+            Console.ReadLine();
         }
 
         private static void GetMemberInfo()

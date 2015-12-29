@@ -602,6 +602,7 @@
           <Property Name="MID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="SN" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Portrait" Type="varchar" MaxLength="64" />
+          <Property Name="Signature" Type="nvarchar" MaxLength="32" />
           <Property Name="Integral" Type="int" Nullable="false" />
           <Property Name="Beans" Type="int" Nullable="false" />
           <Property Name="Country" Type="nvarchar" MaxLength="32" />
@@ -828,6 +829,7 @@
           <Property Name="SN" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TutorialId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Content" Type="nvarchar" MaxLength="512" Nullable="false" />
+          <Property Name="Validity" Type="bit" Nullable="false" />
           <Property Name="PublishTime" Type="datetime" />
           <Property Name="CreatorUserId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="CreateTime" Type="datetime" Nullable="false" />
@@ -848,8 +850,9 @@
           </Key>
           <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="SN" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="VoiceId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SpeechId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="128" />
           <Property Name="CreatorUserId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="CreateTime" Type="datetime" Nullable="false" />
         </EntityType>
@@ -859,8 +862,9 @@
           </Key>
           <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="SN" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="VoiceId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SpeechId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Content" Type="nvarchar" MaxLength="512" Nullable="false" />
+          <Property Name="Validity" Type="bit" Nullable="false" />
           <Property Name="PublishTime" Type="datetime" />
           <Property Name="CreatorUserId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="CreateTime" Type="datetime" Nullable="false" />
@@ -884,6 +888,7 @@
           <Property Name="SN" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CommentId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="128" />
           <Property Name="CreatorUserId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="CreateTime" Type="datetime" Nullable="false" />
         </EntityType>
@@ -898,21 +903,8 @@
           <Property Name="Tags" Type="nvarchar" MaxLength="64" />
           <Property Name="CaseId" Type="uniqueidentifier" />
           <Property Name="Private" Type="bit" Nullable="false" />
+          <Property Name="Validity" Type="bit" Nullable="false" />
           <Property Name="PublishTime" Type="datetime" />
-          <Property Name="CreatorUserId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="CreateTime" Type="datetime" Nullable="false" />
-        </EntityType>
-        <EntityType Name="SDT_Voice">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="SN" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TopicId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="CaseId" Type="uniqueidentifier" />
-          <Property Name="PublishTime" Type="datetime" />
-          <Property Name="Recommend" Type="bit" Nullable="false" />
           <Property Name="CreatorUserId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="CreateTime" Type="datetime" Nullable="false" />
         </EntityType>
@@ -1430,6 +1422,7 @@
           <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="64" Nullable="false" />
           <Property Name="Alias" Type="nvarchar" MaxLength="32" />
+          <Property Name="Signature" Type="nvarchar" MaxLength="32" />
           <Property Name="Portrait" Type="varchar" MaxLength="64" />
           <Property Name="Integral" Type="int" Nullable="false" />
           <Property Name="Beans" Type="int" Nullable="false" />
@@ -1478,9 +1471,35 @@
           <Property Name="CreatorUserId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <!--生成过程中发现错误:
+警告 6002: 表/视图“Insight.dbo.SpeechList”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="SpeechList">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="TopicId" />
+            <PropertyRef Name="Content" />
+            <PropertyRef Name="Recommend" />
+            <PropertyRef Name="MemberId" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Agrees" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TopicId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Recommend" Type="bit" Nullable="false" />
+          <Property Name="MemberId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Signature" Type="nvarchar" MaxLength="32" />
+          <Property Name="Portrait" Type="varchar" MaxLength="64" />
+          <Property Name="Agrees" Type="int" Nullable="false" />
+          <Property Name="PublishTime" Type="datetime" />
+        </EntityType>
+        <!--生成过程中发现错误:
 警告 6002: 表/视图“Insight.dbo.TopicList”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="TopicList">
           <Key>
+            
+            
+            
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
@@ -3367,7 +3386,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDO_Adver__Creat__5F34E040">
+        <Association Name="FK__SDO_Adver__Creat__55766BDC">
           <End Role="SYS_User" Type="Self.SYS_User" Multiplicity="1" />
           <End Role="SDO_Advertisement" Type="Self.SDO_Advertisement" Multiplicity="*" />
           <ReferentialConstraint>
@@ -3379,7 +3398,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDO_Recom__Creat__65E1DDCF">
+        <Association Name="FK__SDO_Recom__Creat__5C23696B">
           <End Role="SYS_User" Type="Self.SYS_User" Multiplicity="1" />
           <End Role="SDO_Recommend" Type="Self.SDO_Recommend" Multiplicity="*" />
           <ReferentialConstraint>
@@ -3391,7 +3410,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDO_Tutor__Creat__6B9AB725">
+        <Association Name="FK__SDO_Tutor__Creat__61DC42C1">
           <End Role="SYS_User" Type="Self.SYS_User" Multiplicity="1" />
           <End Role="SDO_Tutorial" Type="Self.SDO_Tutorial" Multiplicity="*" />
           <ReferentialConstraint>
@@ -3403,7 +3422,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDO_Tutor__Creat__7153907B">
+        <Association Name="FK__SDO_Tutor__Creat__73FAF2FC">
           <End Role="SYS_User" Type="Self.SYS_User" Multiplicity="1" />
           <End Role="SDO_TutorialComment" Type="Self.SDO_TutorialComment" Multiplicity="*" />
           <ReferentialConstraint>
@@ -3415,7 +3434,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDO_Tutor__Creat__770C69D1">
+        <Association Name="FK__SDO_Tutor__Creat__79B3CC52">
           <End Role="SYS_User" Type="Self.SYS_User" Multiplicity="1" />
           <End Role="SDO_TutorialPraise" Type="Self.SDO_TutorialPraise" Multiplicity="*" />
           <ReferentialConstraint>
@@ -3427,7 +3446,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDO_Tutor__Tutor__705F6C42">
+        <Association Name="FK__SDO_Tutor__Tutor__7212AA8A">
           <End Role="SDO_Tutorial" Type="Self.SDO_Tutorial" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -3441,7 +3460,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDO_Tutor__Tutor__76184598">
+        <Association Name="FK__SDO_Tutor__Tutor__78BFA819">
           <End Role="SDO_Tutorial" Type="Self.SDO_Tutorial" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -3455,7 +3474,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDT_Attit__Creat__4E0A543E">
+        <Association Name="FK__SDT_Attit__Creat__0ADE5854">
           <End Role="SYS_User" Type="Self.SYS_User" Multiplicity="1" />
           <End Role="SDT_Attitude" Type="Self.SDT_Attitude" Multiplicity="*" />
           <ReferentialConstraint>
@@ -3467,21 +3486,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDT_Attit__Voice__4D163005">
-          <End Role="SDT_Voice" Type="Self.SDT_Voice" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="SDT_Attitude" Type="Self.SDT_Attitude" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SDT_Voice">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="SDT_Attitude">
-              <PropertyRef Name="VoiceId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__SDT_Comme__Creat__53C32D94">
+        <Association Name="FK__SDT_Comme__Creat__118B55E3">
           <End Role="SYS_User" Type="Self.SYS_User" Multiplicity="1" />
           <End Role="SDT_Comment" Type="Self.SDT_Comment" Multiplicity="*" />
           <ReferentialConstraint>
@@ -3493,21 +3498,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDT_Comme__Voice__52CF095B">
-          <End Role="SDT_Voice" Type="Self.SDT_Voice" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="SDT_Comment" Type="Self.SDT_Comment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SDT_Voice">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="SDT_Comment">
-              <PropertyRef Name="VoiceId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__SDT_Forwa__Creat__40B05920">
+        <Association Name="FK__SDT_Forwa__Creat__35099C4A">
           <End Role="SYS_User" Type="Self.SYS_User" Multiplicity="1" />
           <End Role="SDT_Forward" Type="Self.SDT_Forward" Multiplicity="*" />
           <ReferentialConstraint>
@@ -3519,7 +3510,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDT_Forwa__Group__3FBC34E7">
+        <Association Name="FK__SDT_Forwa__Group__34157811">
           <End Role="SDG_Group" Type="Self.SDG_Group" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -3533,7 +3524,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDT_Forwa__Topic__3EC810AE">
+        <Association Name="FK__SDT_Forwa__Topic__332153D8">
           <End Role="SDT_Topic" Type="Self.SDT_Topic" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -3547,7 +3538,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDT_Prais__Comme__5887E2B1">
+        <Association Name="FK__SDT_Prais__Comme__16500B00">
           <End Role="SDT_Comment" Type="Self.SDT_Comment" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -3561,7 +3552,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDT_Prais__Creat__597C06EA">
+        <Association Name="FK__SDT_Prais__Creat__17442F39">
           <End Role="SYS_User" Type="Self.SYS_User" Multiplicity="1" />
           <End Role="SDT_Praise" Type="Self.SDT_Praise" Multiplicity="*" />
           <ReferentialConstraint>
@@ -3594,44 +3585,6 @@
             </Principal>
             <Dependent Role="SDT_Topic">
               <PropertyRef Name="CreatorUserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__SDT_Voice__CaseI__46693276">
-          <End Role="SDC_FirstVisit" Type="Self.SDC_FirstVisit" Multiplicity="0..1" />
-          <End Role="SDT_Voice" Type="Self.SDT_Voice" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SDC_FirstVisit">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="SDT_Voice">
-              <PropertyRef Name="CaseId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__SDT_Voice__Creat__48517AE8">
-          <End Role="SYS_User" Type="Self.SYS_User" Multiplicity="1" />
-          <End Role="SDT_Voice" Type="Self.SDT_Voice" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SYS_User">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="SDT_Voice">
-              <PropertyRef Name="CreatorUserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__SDT_Voice__Topic__45750E3D">
-          <End Role="SDT_Topic" Type="Self.SDT_Topic" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="SDT_Voice" Type="Self.SDT_Voice" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SDT_Topic">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="SDT_Voice">
-              <PropertyRef Name="TopicId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4671,9 +4624,67 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="GetTopic" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+        <Function Name="Authority" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="DeptId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="ActionId" Type="uniqueidentifier" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="ActionId" Type="uniqueidentifier" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="GetComments" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SpeechId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="UserId" Type="uniqueidentifier" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+                <Property Name="Content" Type="nvarchar" MaxLength="512" Nullable="false" />
+                <Property Name="MemberId" Type="uniqueidentifier" Nullable="false" />
+                <Property Name="Name" Type="nvarchar" MaxLength="64" Nullable="false" />
+                <Property Name="Portrait" Type="varchar" MaxLength="64" />
+                <Property Name="Praise" Type="int" Nullable="false" />
+                <Property Name="IsPraise" Type="bit" Nullable="false" />
+                <Property Name="IsReport" Type="bit" Nullable="false" />
+                <Property Name="PublishTime" Type="datetime" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="GetSpeech" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SpeechId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="UserId" Type="uniqueidentifier" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+                <Property Name="Title" Type="nvarchar" MaxLength="64" Nullable="false" />
+                <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
+                <Property Name="CaseId" Type="uniqueidentifier" />
+                <Property Name="MemberId" Type="uniqueidentifier" Nullable="false" />
+                <Property Name="Name" Type="nvarchar" MaxLength="64" Nullable="false" />
+                <Property Name="Signature" Type="nvarchar" MaxLength="32" />
+                <Property Name="Portrait" Type="varchar" MaxLength="64" />
+                <Property Name="Agrees" Type="int" Nullable="false" />
+                <Property Name="Praise" Type="int" Nullable="false" />
+                <Property Name="Comments" Type="int" Nullable="false" />
+                <Property Name="IsAgrees" Type="bit" Nullable="false" />
+                <Property Name="IsOppose" Type="bit" Nullable="false" />
+                <Property Name="IsPraise" Type="bit" Nullable="false" />
+                <Property Name="IsReport" Type="bit" Nullable="false" />
+                <Property Name="IsCare" Type="bit" />
+                <Property Name="PublishTime" Type="datetime" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="GetTopic" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="TopicId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="UserId" Type="uniqueidentifier" Mode="In" />
           <ReturnType>
             <CollectionType>
               <RowType>
@@ -4683,6 +4694,7 @@
                 <Property Name="CaseId" Type="uniqueidentifier" />
                 <Property Name="Private" Type="bit" Nullable="false" />
                 <Property Name="PublishTime" Type="datetime" />
+                <Property Name="IsSpeeched" Type="bit" />
                 <Property Name="IsCare" Type="bit" />
               </RowType>
             </CollectionType>
@@ -4750,7 +4762,6 @@
           <EntitySet Name="SDT_Forward" EntityType="Self.SDT_Forward" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SDT_Praise" EntityType="Self.SDT_Praise" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SDT_Topic" EntityType="Self.SDT_Topic" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="SDT_Voice" EntityType="Self.SDT_Voice" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SYS_Alert_Message" EntityType="Self.SYS_Alert_Message" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SYS_Alert_Rules" EntityType="Self.SYS_Alert_Rules" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SYS_Alert_Send" EntityType="Self.SYS_Alert_Send" Schema="dbo" store:Type="Tables" />
@@ -4819,6 +4830,7 @@
     [MemberInfo].[ID] AS [ID], 
     [MemberInfo].[Name] AS [Name], 
     [MemberInfo].[Alias] AS [Alias], 
+    [MemberInfo].[Signature] AS [Signature], 
     [MemberInfo].[Portrait] AS [Portrait], 
     [MemberInfo].[Integral] AS [Integral], 
     [MemberInfo].[Beans] AS [Beans], 
@@ -4852,6 +4864,20 @@
     [ReportTemplet].[CreatorDeptId] AS [CreatorDeptId], 
     [ReportTemplet].[CreatorUserId] AS [CreatorUserId]
     FROM [dbo].[ReportTemplet] AS [ReportTemplet]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="SpeechList" EntityType="Self.SpeechList" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SpeechList].[ID] AS [ID], 
+    [SpeechList].[TopicId] AS [TopicId], 
+    [SpeechList].[Content] AS [Content], 
+    [SpeechList].[Recommend] AS [Recommend], 
+    [SpeechList].[MemberId] AS [MemberId], 
+    [SpeechList].[Name] AS [Name], 
+    [SpeechList].[Signature] AS [Signature], 
+    [SpeechList].[Portrait] AS [Portrait], 
+    [SpeechList].[Agrees] AS [Agrees], 
+    [SpeechList].[PublishTime] AS [PublishTime]
+    FROM [dbo].[SpeechList] AS [SpeechList]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="TopicList" EntityType="Self.TopicList" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -5460,67 +5486,59 @@
             <End Role="SYS_User" EntitySet="SYS_User" />
             <End Role="SDG_Group" EntitySet="SDG_Group" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDO_Adver__Creat__5F34E040" Association="Self.FK__SDO_Adver__Creat__5F34E040">
+          <AssociationSet Name="FK__SDO_Adver__Creat__55766BDC" Association="Self.FK__SDO_Adver__Creat__55766BDC">
             <End Role="SYS_User" EntitySet="SYS_User" />
             <End Role="SDO_Advertisement" EntitySet="SDO_Advertisement" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDO_Recom__Creat__65E1DDCF" Association="Self.FK__SDO_Recom__Creat__65E1DDCF">
+          <AssociationSet Name="FK__SDO_Recom__Creat__5C23696B" Association="Self.FK__SDO_Recom__Creat__5C23696B">
             <End Role="SYS_User" EntitySet="SYS_User" />
             <End Role="SDO_Recommend" EntitySet="SDO_Recommend" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDO_Tutor__Creat__6B9AB725" Association="Self.FK__SDO_Tutor__Creat__6B9AB725">
+          <AssociationSet Name="FK__SDO_Tutor__Creat__61DC42C1" Association="Self.FK__SDO_Tutor__Creat__61DC42C1">
             <End Role="SYS_User" EntitySet="SYS_User" />
             <End Role="SDO_Tutorial" EntitySet="SDO_Tutorial" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDO_Tutor__Creat__7153907B" Association="Self.FK__SDO_Tutor__Creat__7153907B">
+          <AssociationSet Name="FK__SDO_Tutor__Creat__73FAF2FC" Association="Self.FK__SDO_Tutor__Creat__73FAF2FC">
             <End Role="SYS_User" EntitySet="SYS_User" />
             <End Role="SDO_TutorialComment" EntitySet="SDO_TutorialComment" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDO_Tutor__Creat__770C69D1" Association="Self.FK__SDO_Tutor__Creat__770C69D1">
+          <AssociationSet Name="FK__SDO_Tutor__Creat__79B3CC52" Association="Self.FK__SDO_Tutor__Creat__79B3CC52">
             <End Role="SYS_User" EntitySet="SYS_User" />
             <End Role="SDO_TutorialPraise" EntitySet="SDO_TutorialPraise" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDO_Tutor__Tutor__705F6C42" Association="Self.FK__SDO_Tutor__Tutor__705F6C42">
+          <AssociationSet Name="FK__SDO_Tutor__Tutor__7212AA8A" Association="Self.FK__SDO_Tutor__Tutor__7212AA8A">
             <End Role="SDO_Tutorial" EntitySet="SDO_Tutorial" />
             <End Role="SDO_TutorialComment" EntitySet="SDO_TutorialComment" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDO_Tutor__Tutor__76184598" Association="Self.FK__SDO_Tutor__Tutor__76184598">
+          <AssociationSet Name="FK__SDO_Tutor__Tutor__78BFA819" Association="Self.FK__SDO_Tutor__Tutor__78BFA819">
             <End Role="SDO_Tutorial" EntitySet="SDO_Tutorial" />
             <End Role="SDO_TutorialPraise" EntitySet="SDO_TutorialPraise" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDT_Attit__Creat__4E0A543E" Association="Self.FK__SDT_Attit__Creat__4E0A543E">
+          <AssociationSet Name="FK__SDT_Attit__Creat__0ADE5854" Association="Self.FK__SDT_Attit__Creat__0ADE5854">
             <End Role="SYS_User" EntitySet="SYS_User" />
             <End Role="SDT_Attitude" EntitySet="SDT_Attitude" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDT_Attit__Voice__4D163005" Association="Self.FK__SDT_Attit__Voice__4D163005">
-            <End Role="SDT_Voice" EntitySet="SDT_Voice" />
-            <End Role="SDT_Attitude" EntitySet="SDT_Attitude" />
-          </AssociationSet>
-          <AssociationSet Name="FK__SDT_Comme__Creat__53C32D94" Association="Self.FK__SDT_Comme__Creat__53C32D94">
+          <AssociationSet Name="FK__SDT_Comme__Creat__118B55E3" Association="Self.FK__SDT_Comme__Creat__118B55E3">
             <End Role="SYS_User" EntitySet="SYS_User" />
             <End Role="SDT_Comment" EntitySet="SDT_Comment" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDT_Comme__Voice__52CF095B" Association="Self.FK__SDT_Comme__Voice__52CF095B">
-            <End Role="SDT_Voice" EntitySet="SDT_Voice" />
-            <End Role="SDT_Comment" EntitySet="SDT_Comment" />
-          </AssociationSet>
-          <AssociationSet Name="FK__SDT_Forwa__Creat__40B05920" Association="Self.FK__SDT_Forwa__Creat__40B05920">
+          <AssociationSet Name="FK__SDT_Forwa__Creat__35099C4A" Association="Self.FK__SDT_Forwa__Creat__35099C4A">
             <End Role="SYS_User" EntitySet="SYS_User" />
             <End Role="SDT_Forward" EntitySet="SDT_Forward" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDT_Forwa__Group__3FBC34E7" Association="Self.FK__SDT_Forwa__Group__3FBC34E7">
+          <AssociationSet Name="FK__SDT_Forwa__Group__34157811" Association="Self.FK__SDT_Forwa__Group__34157811">
             <End Role="SDG_Group" EntitySet="SDG_Group" />
             <End Role="SDT_Forward" EntitySet="SDT_Forward" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDT_Forwa__Topic__3EC810AE" Association="Self.FK__SDT_Forwa__Topic__3EC810AE">
+          <AssociationSet Name="FK__SDT_Forwa__Topic__332153D8" Association="Self.FK__SDT_Forwa__Topic__332153D8">
             <End Role="SDT_Topic" EntitySet="SDT_Topic" />
             <End Role="SDT_Forward" EntitySet="SDT_Forward" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDT_Prais__Comme__5887E2B1" Association="Self.FK__SDT_Prais__Comme__5887E2B1">
+          <AssociationSet Name="FK__SDT_Prais__Comme__16500B00" Association="Self.FK__SDT_Prais__Comme__16500B00">
             <End Role="SDT_Comment" EntitySet="SDT_Comment" />
             <End Role="SDT_Praise" EntitySet="SDT_Praise" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDT_Prais__Creat__597C06EA" Association="Self.FK__SDT_Prais__Creat__597C06EA">
+          <AssociationSet Name="FK__SDT_Prais__Creat__17442F39" Association="Self.FK__SDT_Prais__Creat__17442F39">
             <End Role="SYS_User" EntitySet="SYS_User" />
             <End Role="SDT_Praise" EntitySet="SDT_Praise" />
           </AssociationSet>
@@ -5531,18 +5549,6 @@
           <AssociationSet Name="FK__SDT_Topic__Creat__3A035B91" Association="Self.FK__SDT_Topic__Creat__3A035B91">
             <End Role="SYS_User" EntitySet="SYS_User" />
             <End Role="SDT_Topic" EntitySet="SDT_Topic" />
-          </AssociationSet>
-          <AssociationSet Name="FK__SDT_Voice__CaseI__46693276" Association="Self.FK__SDT_Voice__CaseI__46693276">
-            <End Role="SDC_FirstVisit" EntitySet="SDC_FirstVisit" />
-            <End Role="SDT_Voice" EntitySet="SDT_Voice" />
-          </AssociationSet>
-          <AssociationSet Name="FK__SDT_Voice__Creat__48517AE8" Association="Self.FK__SDT_Voice__Creat__48517AE8">
-            <End Role="SYS_User" EntitySet="SYS_User" />
-            <End Role="SDT_Voice" EntitySet="SDT_Voice" />
-          </AssociationSet>
-          <AssociationSet Name="FK__SDT_Voice__Topic__45750E3D" Association="Self.FK__SDT_Voice__Topic__45750E3D">
-            <End Role="SDT_Topic" EntitySet="SDT_Topic" />
-            <End Role="SDT_Voice" EntitySet="SDT_Voice" />
           </AssociationSet>
           <AssociationSet Name="FK__SYS_Alert__Categ__4D9F7493" Association="Self.FK__SYS_Alert__Categ__4D9F7493">
             <End Role="BASE_Category" EntitySet="BASE_Category" />
@@ -6819,7 +6825,6 @@
           <EntitySet Name="SDT_Forward" EntityType="WSModel.SDT_Forward" />
           <EntitySet Name="SDT_Praise" EntityType="WSModel.SDT_Praise" />
           <EntitySet Name="SDT_Topic" EntityType="WSModel.SDT_Topic" />
-          <EntitySet Name="SDT_Voice" EntityType="WSModel.SDT_Voice" />
           <AssociationSet Name="FK__MDE_Messa__Recei__747A15E9" Association="WSModel.FK__MDE_Messa__Recei__747A15E9">
             <End Role="MasterData" EntitySet="MasterData" />
             <End Role="MDE_Message" EntitySet="MDE_Message" />
@@ -6880,10 +6885,6 @@
             <End Role="SDC_FirstVisit" EntitySet="SDC_FirstVisit" />
             <End Role="SDT_Topic" EntitySet="SDT_Topic" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDT_Voice__CaseI__3DE8FB0E" Association="WSModel.FK__SDT_Voice__CaseI__3DE8FB0E">
-            <End Role="SDC_FirstVisit" EntitySet="SDC_FirstVisit" />
-            <End Role="SDT_Voice" EntitySet="SDT_Voice" />
-          </AssociationSet>
           <AssociationSet Name="FK__SDC_Subse__Creat__12FE9D09" Association="WSModel.FK__SDC_Subse__Creat__12FE9D09">
             <End Role="SYS_User" EntitySet="SYS_User" />
             <End Role="SDC_Subsequent" EntitySet="SDC_Subsequent" />
@@ -6924,16 +6925,8 @@
             <End Role="SYS_User" EntitySet="SYS_User" />
             <End Role="SDT_Attitude" EntitySet="SDT_Attitude" />
           </AssociationSet>
-          <AssociationSet Name="FK__SDT_Attit__Voice__43A1D464" Association="WSModel.FK__SDT_Attit__Voice__43A1D464">
-            <End Role="SDT_Voice" EntitySet="SDT_Voice" />
-            <End Role="SDT_Attitude" EntitySet="SDT_Attitude" />
-          </AssociationSet>
           <AssociationSet Name="FK__SDT_Comme__Creat__4A4ED1F3" Association="WSModel.FK__SDT_Comme__Creat__4A4ED1F3">
             <End Role="SYS_User" EntitySet="SYS_User" />
-            <End Role="SDT_Comment" EntitySet="SDT_Comment" />
-          </AssociationSet>
-          <AssociationSet Name="FK__SDT_Comme__Voice__495AADBA" Association="WSModel.FK__SDT_Comme__Voice__495AADBA">
-            <End Role="SDT_Voice" EntitySet="SDT_Voice" />
             <End Role="SDT_Comment" EntitySet="SDT_Comment" />
           </AssociationSet>
           <AssociationSet Name="FK__SDT_Prais__Comme__4F138710" Association="WSModel.FK__SDT_Prais__Comme__4F138710">
@@ -6955,14 +6948,6 @@
           <AssociationSet Name="FK__SDT_Topic__Creat__31832429" Association="WSModel.FK__SDT_Topic__Creat__31832429">
             <End Role="SYS_User" EntitySet="SYS_User" />
             <End Role="SDT_Topic" EntitySet="SDT_Topic" />
-          </AssociationSet>
-          <AssociationSet Name="FK__SDT_Voice__Topic__3CF4D6D5" Association="WSModel.FK__SDT_Voice__Topic__3CF4D6D5">
-            <End Role="SDT_Topic" EntitySet="SDT_Topic" />
-            <End Role="SDT_Voice" EntitySet="SDT_Voice" />
-          </AssociationSet>
-          <AssociationSet Name="FK__SDT_Voice__Creat__3EDD1F47" Association="WSModel.FK__SDT_Voice__Creat__3EDD1F47">
-            <End Role="SYS_User" EntitySet="SYS_User" />
-            <End Role="SDT_Voice" EntitySet="SDT_Voice" />
           </AssociationSet>
           <EntitySet Name="SDO_Tutorial" EntityType="WSModel.SDO_Tutorial" />
           <EntitySet Name="SDO_TutorialComment" EntityType="WSModel.SDO_TutorialComment" />
@@ -6989,9 +6974,23 @@
           </AssociationSet>
           <EntitySet Name="MemberInfo" EntityType="WSModel.MemberInfo" />
           <EntitySet Name="TopicList" EntityType="WSModel.TopicList" />
-          <FunctionImport Name="GetTopic" IsComposable="true" ReturnType="Collection(WSModel.GetTopic_Result)">
-            <Parameter Name="UserId" Mode="In" Type="Guid" />
+          <FunctionImport Name="GetTopic" IsComposable="true" ReturnType="Collection(WSModel.Topic)">
             <Parameter Name="TopicId" Mode="In" Type="Guid" />
+            <Parameter Name="UserId" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <EntitySet Name="SpeechList" EntityType="WSModel.SpeechList" />
+          <FunctionImport Name="Authority" IsComposable="true" ReturnType="Collection(Guid)">
+            <Parameter Name="UserId" Mode="In" Type="Guid" />
+            <Parameter Name="DeptId" Mode="In" Type="Guid" />
+            <Parameter Name="ActionId" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="GetComments" IsComposable="true" ReturnType="Collection(WSModel.Comments)">
+            <Parameter Name="SpeechId" Mode="In" Type="Guid" />
+            <Parameter Name="UserId" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="GetSpeech" IsComposable="true" ReturnType="Collection(WSModel.Speech)">
+            <Parameter Name="SpeechId" Mode="In" Type="Guid" />
+            <Parameter Name="UserId" Mode="In" Type="Guid" />
           </FunctionImport>
           </EntityContainer>
         <EntityType Name="ABS_Advance_Detail">
@@ -8568,7 +8567,6 @@
           <NavigationProperty Name="SDT_Forward" Relationship="WSModel.FK__SDT_Forwa__Creat__383021B8" FromRole="SYS_User" ToRole="SDT_Forward" />
           <NavigationProperty Name="SDT_Praise" Relationship="WSModel.FK__SDT_Prais__Creat__5007AB49" FromRole="SYS_User" ToRole="SDT_Praise" />
           <NavigationProperty Name="SDT_Topic" Relationship="WSModel.FK__SDT_Topic__Creat__31832429" FromRole="SYS_User" ToRole="SDT_Topic" />
-          <NavigationProperty Name="SDT_Voice" Relationship="WSModel.FK__SDT_Voice__Creat__3EDD1F47" FromRole="SYS_User" ToRole="SDT_Voice" />
           <NavigationProperty Name="SDO_Tutorial" Relationship="WSModel.FK__SDO_Tutor__Creat__53041385" FromRole="SYS_User" ToRole="SDO_Tutorial" />
           <NavigationProperty Name="SDO_TutorialComment" Relationship="WSModel.FK__SDO_Tutor__Creat__58BCECDB" FromRole="SYS_User" ToRole="SDO_TutorialComment" />
           <NavigationProperty Name="SDO_TutorialPraise" Relationship="WSModel.FK__SDO_Tutor__Creat__5E75C631" FromRole="SYS_User" ToRole="SDO_TutorialPraise" />
@@ -11268,6 +11266,7 @@
           <Property Name="Street" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
           <Property Name="ZipCode" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="MasterData" Relationship="WSModel.FK__MDG_Member__MID__6EC13C93" FromRole="MDG_Member" ToRole="MasterData" />
+          <Property Name="Signature" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="SDC_CaseHistory">
           <Key>
@@ -11320,7 +11319,6 @@
           <NavigationProperty Name="SDC_Subsequent" Relationship="WSModel.FK__SDC_Subse__CaseI__1022305E" FromRole="SDC_FirstVisit" ToRole="SDC_Subsequent" />
           <NavigationProperty Name="SDC_Summary" Relationship="WSModel.FK__SDC_Summa__CaseI__17C35226" FromRole="SDC_FirstVisit" ToRole="SDC_Summary" />
           <NavigationProperty Name="SDT_Topic" Relationship="WSModel.FK__SDT_Topic__CaseI__2EA6B77E" FromRole="SDC_FirstVisit" ToRole="SDT_Topic" />
-          <NavigationProperty Name="SDT_Voice" Relationship="WSModel.FK__SDT_Voice__CaseI__3DE8FB0E" FromRole="SDC_FirstVisit" ToRole="SDT_Voice" />
         </EntityType>
         <EntityType Name="SDC_Subsequent">
           <Key>
@@ -11433,12 +11431,12 @@
           </Key>
           <Property Name="ID" Type="Guid" Nullable="false" />
           <Property Name="SN" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="VoiceId" Type="Guid" Nullable="false" />
           <Property Name="Type" Type="Int32" Nullable="false" />
           <Property Name="CreatorUserId" Type="Guid" Nullable="false" />
           <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="SYS_User" Relationship="WSModel.FK__SDT_Attit__Creat__4495F89D" FromRole="SDT_Attitude" ToRole="SYS_User" />
-          <NavigationProperty Name="SDT_Voice" Relationship="WSModel.FK__SDT_Attit__Voice__43A1D464" FromRole="SDT_Attitude" ToRole="SDT_Voice" />
+          <Property Name="SpeechId" Type="Guid" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="SDT_Comment">
           <Key>
@@ -11446,14 +11444,14 @@
           </Key>
           <Property Name="ID" Type="Guid" Nullable="false" />
           <Property Name="SN" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="VoiceId" Type="Guid" Nullable="false" />
           <Property Name="Content" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Name="PublishTime" Type="DateTime" Precision="3" />
           <Property Name="CreatorUserId" Type="Guid" Nullable="false" />
           <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="SYS_User" Relationship="WSModel.FK__SDT_Comme__Creat__4A4ED1F3" FromRole="SDT_Comment" ToRole="SYS_User" />
-          <NavigationProperty Name="SDT_Voice" Relationship="WSModel.FK__SDT_Comme__Voice__495AADBA" FromRole="SDT_Comment" ToRole="SDT_Voice" />
           <NavigationProperty Name="SDT_Praise" Relationship="WSModel.FK__SDT_Prais__Comme__4F138710" FromRole="SDT_Comment" ToRole="SDT_Praise" />
+          <Property Name="SpeechId" Type="Guid" Nullable="false" />
+          <Property Name="Validity" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="SDT_Forward">
           <Key>
@@ -11481,6 +11479,7 @@
           <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="SDT_Comment" Relationship="WSModel.FK__SDT_Prais__Comme__4F138710" FromRole="SDT_Praise" ToRole="SDT_Comment" />
           <NavigationProperty Name="SYS_User" Relationship="WSModel.FK__SDT_Prais__Creat__5007AB49" FromRole="SDT_Praise" ToRole="SYS_User" />
+          <Property Name="Description" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="SDT_Topic">
           <Key>
@@ -11499,26 +11498,7 @@
           <NavigationProperty Name="SDC_FirstVisit" Relationship="WSModel.FK__SDT_Topic__CaseI__2EA6B77E" FromRole="SDT_Topic" ToRole="SDC_FirstVisit" />
           <NavigationProperty Name="SDT_Forward" Relationship="WSModel.FK__SDT_Forwa__Topic__3647D946" FromRole="SDT_Topic" ToRole="SDT_Forward" />
           <NavigationProperty Name="SYS_User" Relationship="WSModel.FK__SDT_Topic__Creat__31832429" FromRole="SDT_Topic" ToRole="SYS_User" />
-          <NavigationProperty Name="SDT_Voice" Relationship="WSModel.FK__SDT_Voice__Topic__3CF4D6D5" FromRole="SDT_Topic" ToRole="SDT_Voice" />
-        </EntityType>
-        <EntityType Name="SDT_Voice">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Guid" Nullable="false" />
-          <Property Name="SN" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TopicId" Type="Guid" Nullable="false" />
-          <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CaseId" Type="Guid" />
-          <Property Name="PublishTime" Type="DateTime" Precision="3" />
-          <Property Name="CreatorUserId" Type="Guid" Nullable="false" />
-          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="SDC_FirstVisit" Relationship="WSModel.FK__SDT_Voice__CaseI__3DE8FB0E" FromRole="SDT_Voice" ToRole="SDC_FirstVisit" />
-          <NavigationProperty Name="SDT_Attitude" Relationship="WSModel.FK__SDT_Attit__Voice__43A1D464" FromRole="SDT_Voice" ToRole="SDT_Attitude" />
-          <NavigationProperty Name="SDT_Comment" Relationship="WSModel.FK__SDT_Comme__Voice__495AADBA" FromRole="SDT_Voice" ToRole="SDT_Comment" />
-          <NavigationProperty Name="SDT_Topic" Relationship="WSModel.FK__SDT_Voice__Topic__3CF4D6D5" FromRole="SDT_Voice" ToRole="SDT_Topic" />
-          <NavigationProperty Name="SYS_User" Relationship="WSModel.FK__SDT_Voice__Creat__3EDD1F47" FromRole="SDT_Voice" ToRole="SYS_User" />
-          <Property Name="Recommend" Type="Boolean" Nullable="false" />
+          <Property Name="Validity" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK__MDE_Messa__Recei__747A15E9">
           <End Type="WSModel.MasterData" Role="MasterData" Multiplicity="1">
@@ -11708,18 +11688,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDT_Voice__CaseI__3DE8FB0E">
-          <End Type="WSModel.SDC_FirstVisit" Role="SDC_FirstVisit" Multiplicity="0..1" />
-          <End Type="WSModel.SDT_Voice" Role="SDT_Voice" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SDC_FirstVisit">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="SDT_Voice">
-              <PropertyRef Name="CaseId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__SDC_Subse__Creat__12FE9D09">
           <End Type="WSModel.SYS_User" Role="SYS_User" Multiplicity="1" />
           <End Type="WSModel.SDC_Subsequent" Role="SDC_Subsequent" Multiplicity="*" />
@@ -11844,20 +11812,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDT_Attit__Voice__43A1D464">
-          <End Type="WSModel.SDT_Voice" Role="SDT_Voice" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="WSModel.SDT_Attitude" Role="SDT_Attitude" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SDT_Voice">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="SDT_Attitude">
-              <PropertyRef Name="VoiceId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__SDT_Comme__Creat__4A4ED1F3">
           <End Type="WSModel.SYS_User" Role="SYS_User" Multiplicity="1" />
           <End Type="WSModel.SDT_Comment" Role="SDT_Comment" Multiplicity="*" />
@@ -11867,20 +11821,6 @@
             </Principal>
             <Dependent Role="SDT_Comment">
               <PropertyRef Name="CreatorUserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__SDT_Comme__Voice__495AADBA">
-          <End Type="WSModel.SDT_Voice" Role="SDT_Voice" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="WSModel.SDT_Comment" Role="SDT_Comment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SDT_Voice">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="SDT_Comment">
-              <PropertyRef Name="VoiceId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -11948,32 +11888,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SDT_Voice__Topic__3CF4D6D5">
-          <End Type="WSModel.SDT_Topic" Role="SDT_Topic" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="WSModel.SDT_Voice" Role="SDT_Voice" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SDT_Topic">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="SDT_Voice">
-              <PropertyRef Name="TopicId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__SDT_Voice__Creat__3EDD1F47">
-          <End Type="WSModel.SYS_User" Role="SYS_User" Multiplicity="1" />
-          <End Type="WSModel.SDT_Voice" Role="SDT_Voice" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SYS_User">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="SDT_Voice">
-              <PropertyRef Name="CreatorUserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="SDO_Tutorial">
           <Key>
             <PropertyRef Name="ID" />
@@ -12004,6 +11918,7 @@
           <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="SDO_Tutorial" Relationship="WSModel.FK__SDO_Tutor__Tutor__57C8C8A2" FromRole="SDO_TutorialComment" ToRole="SDO_Tutorial" />
           <NavigationProperty Name="SYS_User" Relationship="WSModel.FK__SDO_Tutor__Creat__58BCECDB" FromRole="SDO_TutorialComment" ToRole="SYS_User" />
+          <Property Name="Validity" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="SDO_TutorialPraise">
           <Key>
@@ -12092,6 +12007,7 @@
           <Property Name="Integral" Type="Int32" Nullable="false" />
           <Property Name="Beans" Type="Int32" Nullable="false" />
           <Property Name="Unread" Type="Int32" />
+          <Property Name="Signature" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="TopicList">
           <Key>
@@ -12109,7 +12025,7 @@
           <Property Name="Agrees" Type="Int32" />
           <Property Name="PublishTime" Type="DateTime" Precision="3" />
         </EntityType>
-        <ComplexType Name="GetTopic_Result">
+        <ComplexType Name="Topic">
           <Property Type="Guid" Name="ID" Nullable="false" />
           <Property Type="String" Name="Title" Nullable="false" MaxLength="64" />
           <Property Type="String" Name="Description" Nullable="true" />
@@ -12117,6 +12033,57 @@
           <Property Type="Boolean" Name="Private" Nullable="false" />
           <Property Type="DateTime" Name="PublishTime" Nullable="true" Precision="23" />
           <Property Type="Boolean" Name="IsCare" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="SpeechList">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="TopicId" />
+            <PropertyRef Name="Content" />
+            <PropertyRef Name="Recommend" />
+            <PropertyRef Name="MemberId" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Agrees" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="TopicId" Type="Guid" Nullable="false" />
+          <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Recommend" Type="Boolean" Nullable="false" />
+          <Property Name="MemberId" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Signature" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="Portrait" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Agrees" Type="Int32" Nullable="false" />
+          <Property Name="PublishTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <ComplexType Name="Comments">
+          <Property Type="Guid" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Content" Nullable="false" MaxLength="512" />
+          <Property Type="Guid" Name="MemberId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="64" />
+          <Property Type="String" Name="Portrait" Nullable="true" MaxLength="64" />
+          <Property Type="Int32" Name="Praise" Nullable="false" />
+          <Property Type="Boolean" Name="IsPraise" Nullable="false" />
+          <Property Type="Boolean" Name="IsReport" Nullable="false" />
+          <Property Type="DateTime" Name="PublishTime" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="Speech">
+          <Property Type="Guid" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="64" />
+          <Property Type="String" Name="Content" Nullable="false" />
+          <Property Type="Guid" Name="CaseId" Nullable="true" />
+          <Property Type="Guid" Name="MemberId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="64" />
+          <Property Type="String" Name="Signature" Nullable="true" MaxLength="32" />
+          <Property Type="String" Name="Portrait" Nullable="true" MaxLength="64" />
+          <Property Type="Int32" Name="Agrees" Nullable="false" />
+          <Property Type="Int32" Name="Praise" Nullable="false" />
+          <Property Type="Int32" Name="Comments" Nullable="false" />
+          <Property Type="Boolean" Name="IsAgrees" Nullable="false" />
+          <Property Type="Boolean" Name="IsOppose" Nullable="false" />
+          <Property Type="Boolean" Name="IsPraise" Nullable="false" />
+          <Property Type="Boolean" Name="IsReport" Nullable="false" />
+          <Property Type="Boolean" Name="IsCare" Nullable="true" />
+          <Property Type="DateTime" Name="PublishTime" Nullable="true" Precision="23" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -13384,6 +13351,7 @@
           <EntitySetMapping Name="MDG_Member">
             <EntityTypeMapping TypeName="WSModel.MDG_Member">
               <MappingFragment StoreEntitySet="MDG_Member">
+                <ScalarProperty Name="Signature" ColumnName="Signature" />
                 <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
                 <ScalarProperty Name="Street" ColumnName="Street" />
                 <ScalarProperty Name="County" ColumnName="County" />
@@ -13542,10 +13510,11 @@
           <EntitySetMapping Name="SDT_Attitude">
             <EntityTypeMapping TypeName="WSModel.SDT_Attitude">
               <MappingFragment StoreEntitySet="SDT_Attitude">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="SpeechId" ColumnName="SpeechId" />
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="CreatorUserId" ColumnName="CreatorUserId" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="VoiceId" ColumnName="VoiceId" />
                 <ScalarProperty Name="SN" ColumnName="SN" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
@@ -13554,11 +13523,12 @@
           <EntitySetMapping Name="SDT_Comment">
             <EntityTypeMapping TypeName="WSModel.SDT_Comment">
               <MappingFragment StoreEntitySet="SDT_Comment">
+                <ScalarProperty Name="Validity" ColumnName="Validity" />
+                <ScalarProperty Name="SpeechId" ColumnName="SpeechId" />
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="CreatorUserId" ColumnName="CreatorUserId" />
                 <ScalarProperty Name="PublishTime" ColumnName="PublishTime" />
                 <ScalarProperty Name="Content" ColumnName="Content" />
-                <ScalarProperty Name="VoiceId" ColumnName="VoiceId" />
                 <ScalarProperty Name="SN" ColumnName="SN" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
@@ -13579,6 +13549,7 @@
           <EntitySetMapping Name="SDT_Praise">
             <EntityTypeMapping TypeName="WSModel.SDT_Praise">
               <MappingFragment StoreEntitySet="SDT_Praise">
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="CreatorUserId" ColumnName="CreatorUserId" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
@@ -13591,6 +13562,7 @@
           <EntitySetMapping Name="SDT_Topic">
             <EntityTypeMapping TypeName="WSModel.SDT_Topic">
               <MappingFragment StoreEntitySet="SDT_Topic">
+                <ScalarProperty Name="Validity" ColumnName="Validity" />
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="CreatorUserId" ColumnName="CreatorUserId" />
                 <ScalarProperty Name="PublishTime" ColumnName="PublishTime" />
@@ -13599,21 +13571,6 @@
                 <ScalarProperty Name="Tags" ColumnName="Tags" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="SN" ColumnName="SN" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SDT_Voice">
-            <EntityTypeMapping TypeName="WSModel.SDT_Voice">
-              <MappingFragment StoreEntitySet="SDT_Voice">
-                <ScalarProperty Name="Recommend" ColumnName="Recommend" />
-                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-                <ScalarProperty Name="CreatorUserId" ColumnName="CreatorUserId" />
-                <ScalarProperty Name="PublishTime" ColumnName="PublishTime" />
-                <ScalarProperty Name="CaseId" ColumnName="CaseId" />
-                <ScalarProperty Name="Content" ColumnName="Content" />
-                <ScalarProperty Name="TopicId" ColumnName="TopicId" />
                 <ScalarProperty Name="SN" ColumnName="SN" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
@@ -13637,6 +13594,7 @@
           <EntitySetMapping Name="SDO_TutorialComment">
             <EntityTypeMapping TypeName="WSModel.SDO_TutorialComment">
               <MappingFragment StoreEntitySet="SDO_TutorialComment">
+                <ScalarProperty Name="Validity" ColumnName="Validity" />
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="CreatorUserId" ColumnName="CreatorUserId" />
                 <ScalarProperty Name="PublishTime" ColumnName="PublishTime" />
@@ -13661,6 +13619,7 @@
           <EntitySetMapping Name="MemberInfo">
             <EntityTypeMapping TypeName="WSModel.MemberInfo">
               <MappingFragment StoreEntitySet="MemberInfo">
+                <ScalarProperty Name="Signature" ColumnName="Signature" />
                 <ScalarProperty Name="Unread" ColumnName="Unread" />
                 <ScalarProperty Name="Beans" ColumnName="Beans" />
                 <ScalarProperty Name="Integral" ColumnName="Integral" />
@@ -13690,7 +13649,7 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="GetTopic" FunctionName="WSModel.Store.GetTopic">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="WSModel.GetTopic_Result">
+              <ComplexTypeMapping TypeName="WSModel.Topic">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -13698,6 +13657,61 @@
                 <ScalarProperty Name="Private" ColumnName="Private" />
                 <ScalarProperty Name="PublishTime" ColumnName="PublishTime" />
                 <ScalarProperty Name="IsCare" ColumnName="IsCare" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="SpeechList">
+            <EntityTypeMapping TypeName="WSModel.SpeechList">
+              <MappingFragment StoreEntitySet="SpeechList">
+                <ScalarProperty Name="PublishTime" ColumnName="PublishTime" />
+                <ScalarProperty Name="Agrees" ColumnName="Agrees" />
+                <ScalarProperty Name="Portrait" ColumnName="Portrait" />
+                <ScalarProperty Name="Signature" ColumnName="Signature" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="Recommend" ColumnName="Recommend" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="TopicId" ColumnName="TopicId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Authority" FunctionName="WSModel.Store.Authority" />
+          <FunctionImportMapping FunctionImportName="GetComments" FunctionName="WSModel.Store.GetComments">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WSModel.Comments">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Portrait" ColumnName="Portrait" />
+                <ScalarProperty Name="Praise" ColumnName="Praise" />
+                <ScalarProperty Name="IsPraise" ColumnName="IsPraise" />
+                <ScalarProperty Name="IsReport" ColumnName="IsReport" />
+                <ScalarProperty Name="PublishTime" ColumnName="PublishTime" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetSpeech" FunctionName="WSModel.Store.GetSpeech">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WSModel.Speech">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="CaseId" ColumnName="CaseId" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Signature" ColumnName="Signature" />
+                <ScalarProperty Name="Portrait" ColumnName="Portrait" />
+                <ScalarProperty Name="Agrees" ColumnName="Agrees" />
+                <ScalarProperty Name="Praise" ColumnName="Praise" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="IsAgrees" ColumnName="IsAgrees" />
+                <ScalarProperty Name="IsOppose" ColumnName="IsOppose" />
+                <ScalarProperty Name="IsPraise" ColumnName="IsPraise" />
+                <ScalarProperty Name="IsReport" ColumnName="IsReport" />
+                <ScalarProperty Name="IsCare" ColumnName="IsCare" />
+                <ScalarProperty Name="PublishTime" ColumnName="PublishTime" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -40,6 +40,8 @@ namespace Insight.WS.Server.Common.ORM
         public string Street { get; set; }
     	[DataMember]
         public string ZipCode { get; set; }
+    	[DataMember]
+        public string Signature { get; set; }
     
     	[DataMember]
         public virtual MasterData MasterData { get; set; }

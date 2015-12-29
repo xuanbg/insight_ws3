@@ -77,6 +77,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExtendClass\Entities.cs" />
+    <Compile Include="ExtendClass\GuidParse.cs" />
     <Compile Include="ExtendClass\JsonResult.cs" />
     <Compile Include="ExtendClass\Services.cs" />
     <Compile Include="Function\SmsCode.cs" />
@@ -170,10 +171,10 @@
     <Compile Include="ORM\BASE_Category.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ORM\Dictionary.cs">
+    <Compile Include="ORM\Comments.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ORM\GetTopic_Result.cs">
+    <Compile Include="ORM\Dictionary.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ORM\ImageData.cs">
@@ -296,7 +297,10 @@
     <Compile Include="ORM\SDT_Topic.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ORM\SDT_Voice.cs">
+    <Compile Include="ORM\Speech.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\SpeechList.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ORM\SYS_Alert_Message.cs">
@@ -402,6 +406,9 @@
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ORM\SYS_UserGroupMember.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\Topic.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ORM\TopicList.cs">

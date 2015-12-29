@@ -281,6 +281,7 @@ CREATE TABLE SDT_Attitude(
 [SN]               BIGINT IDENTITY(1,1),                                                                                                   --自增序列
 [SpeechId]         UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SDT_Speech(ID) ON DELETE CASCADE NOT NULL,                                      --发言ID
 [Type]             INT NOT NULL,                                                                                                           --类型：1、赞同；2、反对；3、赞；4、没有帮助
+[Description]      NVARCHAR(128),                                                                                                          --描述
 [CreatorUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID) NOT NULL,                                                          --创建人ID
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )
@@ -307,6 +308,7 @@ CREATE TABLE SDT_Praise(
 [SN]               BIGINT IDENTITY(1,1),                                                                                                   --自增序列
 [CommentId]        UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SDT_Comment(ID) ON DELETE CASCADE NOT NULL,                                     --评论ID
 [Type]             INT NOT NULL,                                                                                                           --类型：1、赞；2、举报
+[Description]      NVARCHAR(128),                                                                                                          --描述
 [CreatorUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID) NOT NULL,                                                          --创建人ID
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )

@@ -31,5 +31,7 @@ namespace Insight.WS.Server.Common.ORM
         public int Beans { get; set; }
     	[DataMember]
         public Nullable<int> Unread { get; set; }
+    	[DataMember]
+        public string Signature { get; set; }
     }
 }

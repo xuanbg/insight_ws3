@@ -15,7 +15,7 @@ RETURN
 
 select S.ID, T.Title, S.Content, S.CaseId,
 M.MID as MemberId, D.Name, M.Signature, M.Portrait,
-isnull(A.Agrees, 0) as Agrees, isnull(A.Praise, 0) as Praise,
+isnull(A.Agrees, 0) as Agrees, isnull(A.Praise, 0) as Praise, isnull(C.Comments, 0) as Comments,
 isnull(A.IsAgrees, 0) as IsAgrees, isnull(A.IsOppose, 0) as IsOppose,
 isnull(A.IsPraise, 0) as IsPraise, isnull(A.IsReport, 0) as IsReport,
 cast(case when F.ID is null then 0 else 1 end as bit) as IsCare, S.PublishTime
@@ -37,6 +37,7 @@ left join (
   select SpeechId, count(0) as Comments
   from SDT_Comment
   where Validity = 1
+    and PublishTime is not null
   group by SpeechId) C on C.SpeechId = S.ID
 left join MDE_Favorites F on F.ObjectId = S.ID
   and F.CreatorUserId = @UserId

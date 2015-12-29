@@ -12,14 +12,16 @@ namespace Insight.WS.Server.Common.ORM
     using System;
     using System.Runtime.Serialization;
     
-    public partial class GetTopic_Result
+    public partial class Comments
     {
         public System.Guid ID { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public Nullable<System.Guid> CaseId { get; set; }
-        public bool Private { get; set; }
+        public string Content { get; set; }
+        public System.Guid MemberId { get; set; }
+        public string Name { get; set; }
+        public string Portrait { get; set; }
+        public int Praise { get; set; }
+        public bool IsPraise { get; set; }
+        public bool IsReport { get; set; }
         public Nullable<System.DateTime> PublishTime { get; set; }
-        public Nullable<bool> IsCare { get; set; }
     }
 }

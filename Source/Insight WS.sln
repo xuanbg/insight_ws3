@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Business", "Business", "{DB801584-D27C-42B4-AF70-811E3DC67A6B}"
 EndProject
@@ -57,7 +57,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsightServer", "Server\Ins
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SuperDentist", "SuperDentist", "{03655FCA-D8C2-4984-A165-23534E3AE429}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interface", "Server\Services\SuperDentist\Interface\Interface.csproj", "{D74D3938-953F-4A68-BDD1-B9500734256C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppService", "Server\Services\SuperDentist\Interface\AppService.csproj", "{D74D3938-953F-4A68-BDD1-B9500734256C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "VerifyServer", "VerifyServer", "{A4360BC5-35E0-49B8-8D70-AA7190EC6EA9}"
 EndProject

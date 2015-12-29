@@ -67,7 +67,6 @@ namespace Insight.WS.Server.Common.ORM
     [KnownType(typeof(SDT_Forward))]
     [KnownType(typeof(SDT_Praise))]
     [KnownType(typeof(SDT_Topic))]
-    [KnownType(typeof(SDT_Voice))]
     [KnownType(typeof(SDO_Tutorial))]
     [KnownType(typeof(SDO_TutorialComment))]
     [KnownType(typeof(SDO_TutorialPraise))]
@@ -136,7 +135,6 @@ namespace Insight.WS.Server.Common.ORM
             this.SDT_Forward = new HashSet<SDT_Forward>();
             this.SDT_Praise = new HashSet<SDT_Praise>();
             this.SDT_Topic = new HashSet<SDT_Topic>();
-            this.SDT_Voice = new HashSet<SDT_Voice>();
             this.SDO_Tutorial = new HashSet<SDO_Tutorial>();
             this.SDO_TutorialComment = new HashSet<SDO_TutorialComment>();
             this.SDO_TutorialPraise = new HashSet<SDO_TutorialPraise>();
@@ -289,8 +287,6 @@ namespace Insight.WS.Server.Common.ORM
         public virtual ICollection<SDT_Praise> SDT_Praise { get; set; }
     	[DataMember]
         public virtual ICollection<SDT_Topic> SDT_Topic { get; set; }
-    	[DataMember]
-        public virtual ICollection<SDT_Voice> SDT_Voice { get; set; }
     	[DataMember]
         public virtual ICollection<SDO_Tutorial> SDO_Tutorial { get; set; }
     	[DataMember]

@@ -31,6 +31,8 @@ namespace Insight.WS.Server.Common.ORM
         public System.Guid CreatorUserId { get; set; }
     	[DataMember]
         public System.DateTime CreateTime { get; set; }
+    	[DataMember]
+        public string Description { get; set; }
     
     	[DataMember]
         public virtual SDT_Comment SDT_Comment { get; set; }

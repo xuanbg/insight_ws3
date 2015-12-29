@@ -33,6 +33,8 @@ namespace Insight.WS.Server.Common.ORM
         public System.Guid CreatorUserId { get; set; }
     	[DataMember]
         public System.DateTime CreateTime { get; set; }
+    	[DataMember]
+        public bool Validity { get; set; }
     
     	[DataMember]
         public virtual SDO_Tutorial SDO_Tutorial { get; set; }

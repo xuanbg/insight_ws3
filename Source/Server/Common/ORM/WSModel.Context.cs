@@ -142,25 +142,71 @@ namespace Insight.WS.Server.Common.ORM
         public virtual DbSet<SDT_Forward> SDT_Forward { get; set; }
         public virtual DbSet<SDT_Praise> SDT_Praise { get; set; }
         public virtual DbSet<SDT_Topic> SDT_Topic { get; set; }
-        public virtual DbSet<SDT_Voice> SDT_Voice { get; set; }
         public virtual DbSet<SDO_Tutorial> SDO_Tutorial { get; set; }
         public virtual DbSet<SDO_TutorialComment> SDO_TutorialComment { get; set; }
         public virtual DbSet<SDO_TutorialPraise> SDO_TutorialPraise { get; set; }
         public virtual DbSet<MemberInfo> MemberInfo { get; set; }
         public virtual DbSet<TopicList> TopicList { get; set; }
+        public virtual DbSet<SpeechList> SpeechList { get; set; }
     
         [DbFunction("WSEntities", "GetTopic")]
-        public virtual IQueryable<GetTopic_Result> GetTopic(Nullable<System.Guid> userId, Nullable<System.Guid> topicId)
+        public virtual IQueryable<Topic> GetTopic(Nullable<System.Guid> topicId, Nullable<System.Guid> userId)
+        {
+            var topicIdParameter = topicId.HasValue ?
+                new ObjectParameter("TopicId", topicId) :
+                new ObjectParameter("TopicId", typeof(System.Guid));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<Topic>("[WSEntities].[GetTopic](@TopicId, @UserId)", topicIdParameter, userIdParameter);
+        }
+    
+        [DbFunction("WSEntities", "Authority")]
+        public virtual IQueryable<Nullable<System.Guid>> Authority(Nullable<System.Guid> userId, Nullable<System.Guid> deptId, Nullable<System.Guid> actionId)
         {
             var userIdParameter = userId.HasValue ?
                 new ObjectParameter("UserId", userId) :
                 new ObjectParameter("UserId", typeof(System.Guid));
     
-            var topicIdParameter = topicId.HasValue ?
-                new ObjectParameter("TopicId", topicId) :
-                new ObjectParameter("TopicId", typeof(System.Guid));
+            var deptIdParameter = deptId.HasValue ?
+                new ObjectParameter("DeptId", deptId) :
+                new ObjectParameter("DeptId", typeof(System.Guid));
     
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<GetTopic_Result>("[WSEntities].[GetTopic](@UserId, @TopicId)", userIdParameter, topicIdParameter);
+            var actionIdParameter = actionId.HasValue ?
+                new ObjectParameter("ActionId", actionId) :
+                new ObjectParameter("ActionId", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<Nullable<System.Guid>>("[WSEntities].[Authority](@UserId, @DeptId, @ActionId)", userIdParameter, deptIdParameter, actionIdParameter);
+        }
+    
+        [DbFunction("WSEntities", "GetComments")]
+        public virtual IQueryable<Comments> GetComments(Nullable<System.Guid> speechId, Nullable<System.Guid> userId)
+        {
+            var speechIdParameter = speechId.HasValue ?
+                new ObjectParameter("SpeechId", speechId) :
+                new ObjectParameter("SpeechId", typeof(System.Guid));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<Comments>("[WSEntities].[GetComments](@SpeechId, @UserId)", speechIdParameter, userIdParameter);
+        }
+    
+        [DbFunction("WSEntities", "GetSpeech")]
+        public virtual IQueryable<Speech> GetSpeech(Nullable<System.Guid> speechId, Nullable<System.Guid> userId)
+        {
+            var speechIdParameter = speechId.HasValue ?
+                new ObjectParameter("SpeechId", speechId) :
+                new ObjectParameter("SpeechId", typeof(System.Guid));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<Speech>("[WSEntities].[GetSpeech](@SpeechId, @UserId)", speechIdParameter, userIdParameter);
         }
     }
 }
