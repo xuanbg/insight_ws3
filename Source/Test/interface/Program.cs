@@ -7,8 +7,8 @@ namespace Insight.WS.Test.Interface
 {
     static class Program
     {
-        private const string BassAddress = "http://localhost:6280/AppService/";
-        //private const string BassAddress = "http://120.27.142.125:6280/Interface/";
+        //private const string BassAddress = "http://localhost:6280/AppService/";
+        private const string BassAddress = "http://120.27.142.125:6280/AppService/";
 
         /// <summary>
         /// 应用程序的主入口点。
@@ -16,6 +16,7 @@ namespace Insight.WS.Test.Interface
         [STAThread]
         static void Main()
         {
+
             //var buffer = Convert.FromBase64String("eyJNYWNoaW5lSWQiOiI4MjlGRTcwOTE5MzEwMTVFM0IxNTJFMkNGQ0MxMEQ5QyIsIlVzZXJUeXBlIjotMSwiRGVwdElkIjpudWxsLCJDbGllbnRUeXBlIjoyLCJJRCI6MCwiTG9naW5SZXN1bHQiOjEsIlVzZXJJZCI6IjU5NjdmMGMzLWMwYWEtZTUxMS05NDBkLWU4NGE0ZGNmYTY5MCIsIlVzZXJOYW1lIjoieW9uZyIsIkZhaWx1cmVDb3VudCI6MiwiTG9naW5OYW1lIjoiMTg2MjgwNzA3MzkiLCJFeHRlbnNpb25EYXRhIjp7fSwiT25saW5lU3RhdHVzIjp0cnVlLCJPcGVuSWQiOm51bGwsIlZlcnNpb24iOjEwMDAsIlZhbGlkaXR5Ijp0cnVlLCJCYXNlQWRkcmVzcyI6bnVsbCwiU2lnbmF0dXJlIjoiQkMxMENEMzIyNzhCRkYyRjU0MTkyRTY1NTY0OTZDRDMiLCJEZXB0TmFtZSI6bnVsbCwiTGFzdENvbm5lY3QiOiJcL0RhdGUoMTQ1MTAyMzU2OTc4NilcLyJ9");
             //var json = Encoding.UTF8.GetString(buffer);
             //var obj = Deserialize<Session>(json);
@@ -24,12 +25,14 @@ namespace Insight.WS.Test.Interface
             //UserSession = Register(GetSmsVerifyCode("1", mobile), mobile);
             //UserSession = ResetPassword(GetSmsVerifyCode("2", mobile), mobile, "123456");
             UserSession = Login(mobile, "123456");
+            var tid = "22e524f6-01ae-e511-940d-e84a4dcfa690";
+            var sid = "DAF72552-02AE-E511-940D-E84A4DCFA690";
             //GetMemberInfo();
             GetTopics();
-            GetTopic();
-            GetSpeechs();
-            GetSpeech();
-            GetComments();
+            GetTopic(tid);
+            GetSpeechs(tid);
+            GetSpeech(sid);
+            GetComments(sid);
             //ChangePassword("111111");
             Logout();
         }
@@ -43,40 +46,36 @@ namespace Insight.WS.Test.Interface
             PutResult(result);
         }
 
-        private static void GetComments()
+        private static void GetTopic(string id)
         {
-            var url = BassAddress + "topic/getcomments";
-            var id = "BEB1EA06-61AD-E511-9C5B-ACBC3278616E";
+            var url = BassAddress + "topic/gettopic";
             var data = $"id={id}&mid={UserSession?.UserId}";
             var author = Base64(Hash(id.ToUpper() + Secret));
             var result = HttpRequest(url, "GET", author, data);
             PutResult(result);
         }
 
-        private static void GetSpeech()
-        {
-            var url = BassAddress + "topic/getspeech";
-            var id = "BEB1EA06-61AD-E511-9C5B-ACBC3278616E";
-            var data = $"id={"BEB1EA06-61AD-E511-9C5B-ACBC3278616E"}&mid={UserSession?.UserId}";
-            var author = Base64(Hash(id.ToUpper() + Secret));
-            var result = HttpRequest(url, "GET", author, data);
-            PutResult(result);
-        }
-
-        private static void GetSpeechs()
+        private static void GetSpeechs(string id)
         {
             var url = BassAddress + "topic/getspeechs";
-            var id = "0F187AC1-5FAC-E511-9C5A-ACBC3278616E";
             var data = $"id={id}";
             var author = Base64(Hash(id.ToUpper() + Secret));
             var result = HttpRequest(url, "GET", author, data);
             PutResult(result);
         }
 
-        private static void GetTopic()
+        private static void GetSpeech(string id)
         {
-            var url = BassAddress + "topic/gettopic";
-            var id = "0F187AC1-5FAC-E511-9C5A-ACBC3278616E";
+            var url = BassAddress + "topic/getspeech";
+            var data = $"id={id}&mid={UserSession?.UserId}";
+            var author = Base64(Hash(id.ToUpper() + Secret));
+            var result = HttpRequest(url, "GET", author, data);
+            PutResult(result);
+        }
+
+        private static void GetComments(string id)
+        {
+            var url = BassAddress + "topic/getcomments";
             var data = $"id={id}&mid={UserSession?.UserId}";
             var author = Base64(Hash(id.ToUpper() + Secret));
             var result = HttpRequest(url, "GET", author, data);
@@ -144,7 +143,7 @@ namespace Insight.WS.Test.Interface
         {
             var url = BassAddress + "setting/getverifycode";
             var data = $"id=&type={type}&mobile={mobile}";
-            var author = Base64(Secret);
+            var author = Base64(Hash(Secret));
             var result = HttpRequest(url, "GET", author, data);
             if (result.Successful)
             {
@@ -169,7 +168,7 @@ namespace Insight.WS.Test.Interface
             var session = new Session
             {
                 LoginName = mobile,
-                UserName = "张三",
+                UserName = "xbg",
                 Signature = Hash(mobile.ToUpper() + code + Hash("111111")),
                 Version = 10000,
                 ClientType = 2,
@@ -247,7 +246,7 @@ namespace Insight.WS.Test.Interface
         private static void GetToken()
         {
             var url = BassAddress + "setting/getqiniutoken";
-            var author = Base64(Secret);
+            var author = Base64(Hash(Secret));
             var result = HttpRequest(url, "GET", author);
             PutResult(result);
         }

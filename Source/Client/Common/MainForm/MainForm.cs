@@ -22,6 +22,7 @@ namespace Insight.WS.Client.Common
 
         #region 变量声明
 
+        public static string BaseAddress;
         public static CustomBinding Binding;
         public static EndpointAddress Address;
         public static Session Session;
@@ -44,7 +45,8 @@ namespace Insight.WS.Client.Common
         /// </summary>
         /// <param name="session"></param>
         /// <param name="binding"></param>
-        public MainForm(Session session, CustomBinding binding)
+        /// <param name="address"></param>
+        public MainForm(Session session, CustomBinding binding, string address)
         {
             _Waiting.Show();
             _Waiting.Refresh();
@@ -52,9 +54,10 @@ namespace Insight.WS.Client.Common
 
             InitializeComponent();
 
+            BaseAddress = address;
             Session = session;
             Binding = binding;
-            Address = new EndpointAddress(Session.BaseAddress + "Commons");
+            Address = new EndpointAddress(BaseAddress + "Commons");
 
             // 初始化界面
             Res.LoadLocale("Components\\Chinese (Simplified).frl");
@@ -221,6 +224,12 @@ namespace Insight.WS.Client.Common
 
             var asm = Assembly.LoadFrom(path);
             var mdi = (MdiBase) asm.CreateInstance(mod.MainFrom);
+            if (mdi == null)
+            {
+                General.ShowError($"对不起，{mod.ApplicationName}模块无法加载！\r\n您的应用程序中缺少{mod.ApplicationName}组件。");
+                return;
+            }
+
             mdi.Icon = Icon.FromHandle(new Bitmap(new MemoryStream(mod.Icon)).GetHicon());
             mdi.MdiParent = this;
             mdi.Name = mid.ToString();
@@ -228,7 +237,7 @@ namespace Insight.WS.Client.Common
             mdi.ModuleId = mod.ID;
             mdi.UserSession = Session;
             mdi.Binding = Binding;
-            mdi.Address = new EndpointAddress(Session.BaseAddress + mod.ProgramName);
+            mdi.Address = new EndpointAddress(BaseAddress + mod.ProgramName);
             mdi.Show();
 
             bprMain.Visibility = BarItemVisibility.Never;

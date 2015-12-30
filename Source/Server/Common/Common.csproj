@@ -95,6 +95,7 @@
     <Compile Include="Function\MasterData.cs">
       <DependentUpon>DataAccess.cs</DependentUpon>
     </Compile>
+    <Compile Include="Function\TypeFactory.cs" />
     <Compile Include="Function\Util.cs" />
     <Compile Include="ORM\ABS_Advance.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
@@ -446,7 +447,6 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>WSModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="App.Config" />
     <None Include="ORM\WSModel.edmx.diagram">
       <DependentUpon>WSModel.edmx</DependentUpon>
     </None>

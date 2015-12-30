@@ -15,6 +15,7 @@ namespace Insight.WS.Client.MainApp
         #region 变量声明
 
         private static CustomBinding _Binding;
+        private static readonly string _BaseAddress = $"net.tcp://{Config.BaseAddress()}:{Config.Port()}/";
 
         #endregion
 
@@ -49,7 +50,7 @@ namespace Insight.WS.Client.MainApp
             switch (result)
             {
                 case DialogResult.OK:
-                    Application.Run(new MainForm(login.Session, _Binding));
+                    Application.Run(new MainForm(login.Session, _Binding, _BaseAddress));
                     break;
 
                 case DialogResult.Cancel:

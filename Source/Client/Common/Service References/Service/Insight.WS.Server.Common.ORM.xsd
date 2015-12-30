@@ -648,7 +648,6 @@
       <xs:element minOccurs="0" name="SDT_Forward" nillable="true" type="tns:ArrayOfSDT_Forward" />
       <xs:element minOccurs="0" name="SDT_Praise" nillable="true" type="tns:ArrayOfSDT_Praise" />
       <xs:element minOccurs="0" name="SDT_Topic" nillable="true" type="tns:ArrayOfSDT_Topic" />
-      <xs:element minOccurs="0" name="SDT_Voice" nillable="true" type="tns:ArrayOfSDT_Voice" />
       <xs:element minOccurs="0" name="SN" type="xs:long" />
       <xs:element minOccurs="0" name="SYS_Alert_Rules" nillable="true" type="tns:ArrayOfSYS_Alert_Rules" />
       <xs:element minOccurs="0" name="SYS_Allot_Record" nillable="true" type="tns:ArrayOfSYS_Allot_Record" />
@@ -1941,6 +1940,7 @@
       <xs:element minOccurs="0" name="MasterData" nillable="true" type="tns:MasterData" />
       <xs:element minOccurs="0" name="Portrait" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="SN" type="xs:long" />
+      <xs:element minOccurs="0" name="Signature" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="State" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Street" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ZipCode" nillable="true" type="xs:string" />
@@ -1986,7 +1986,6 @@
       <xs:element minOccurs="0" name="SDC_Subsequent" nillable="true" type="tns:ArrayOfSDC_Subsequent" />
       <xs:element minOccurs="0" name="SDC_Summary" nillable="true" type="tns:ArrayOfSDC_Summary" />
       <xs:element minOccurs="0" name="SDT_Topic" nillable="true" type="tns:ArrayOfSDT_Topic" />
-      <xs:element minOccurs="0" name="SDT_Voice" nillable="true" type="tns:ArrayOfSDT_Voice" />
       <xs:element minOccurs="0" name="SN" type="xs:long" />
       <xs:element minOccurs="0" name="SYS_User" nillable="true" type="tns:SYS_User" />
       <xs:element minOccurs="0" name="Therapy" nillable="true" type="xs:string" />
@@ -2082,7 +2081,6 @@
       <xs:element minOccurs="0" name="Picture" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="SDG_GroupMember" nillable="true" type="tns:ArrayOfSDG_GroupMember" />
       <xs:element minOccurs="0" name="SDT_Forward" nillable="true" type="tns:ArrayOfSDT_Forward" />
-      <xs:element minOccurs="0" name="SDT_Topic" nillable="true" type="tns:ArrayOfSDT_Topic" />
       <xs:element minOccurs="0" name="SN" type="xs:long" />
       <xs:element minOccurs="0" name="SYS_User" nillable="true" type="tns:SYS_User" />
       <xs:element minOccurs="0" name="SYS_User1" nillable="true" type="tns:SYS_User" />
@@ -2123,16 +2121,14 @@
       <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ID" type="ser:guid" />
       <xs:element minOccurs="0" name="Private" type="xs:boolean" />
-      <xs:element minOccurs="0" name="PublishGroupId" nillable="true" type="ser:guid" />
       <xs:element minOccurs="0" name="PublishTime" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="SDC_FirstVisit" nillable="true" type="tns:SDC_FirstVisit" />
-      <xs:element minOccurs="0" name="SDG_Group" nillable="true" type="tns:SDG_Group" />
       <xs:element minOccurs="0" name="SDT_Forward" nillable="true" type="tns:ArrayOfSDT_Forward" />
-      <xs:element minOccurs="0" name="SDT_Voice" nillable="true" type="tns:ArrayOfSDT_Voice" />
       <xs:element minOccurs="0" name="SN" type="xs:long" />
       <xs:element minOccurs="0" name="SYS_User" nillable="true" type="tns:SYS_User" />
       <xs:element minOccurs="0" name="Tags" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Validity" type="xs:boolean" />
     </xs:sequence>
     <xs:attribute ref="ser:Id" />
     <xs:attribute ref="ser:Ref" />
@@ -2160,86 +2156,6 @@
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="SDT_Forward" nillable="true" type="tns:SDT_Forward" />
-  <xs:complexType name="SDT_Voice">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="CaseId" nillable="true" type="ser:guid" />
-      <xs:element minOccurs="0" name="Content" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="CreatorUserId" type="ser:guid" />
-      <xs:element minOccurs="0" name="ID" type="ser:guid" />
-      <xs:element minOccurs="0" name="PublishTime" nillable="true" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="Recommend" type="xs:boolean" />
-      <xs:element minOccurs="0" name="SDC_FirstVisit" nillable="true" type="tns:SDC_FirstVisit" />
-      <xs:element minOccurs="0" name="SDT_Attitude" nillable="true" type="tns:ArrayOfSDT_Attitude" />
-      <xs:element minOccurs="0" name="SDT_Comment" nillable="true" type="tns:ArrayOfSDT_Comment" />
-      <xs:element minOccurs="0" name="SDT_Topic" nillable="true" type="tns:SDT_Topic" />
-      <xs:element minOccurs="0" name="SN" type="xs:long" />
-      <xs:element minOccurs="0" name="SYS_User" nillable="true" type="tns:SYS_User" />
-      <xs:element minOccurs="0" name="TopicId" type="ser:guid" />
-    </xs:sequence>
-    <xs:attribute ref="ser:Id" />
-    <xs:attribute ref="ser:Ref" />
-  </xs:complexType>
-  <xs:element name="SDT_Voice" nillable="true" type="tns:SDT_Voice" />
-  <xs:complexType name="ArrayOfSDT_Attitude">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="SDT_Attitude" nillable="true" type="tns:SDT_Attitude" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfSDT_Attitude" nillable="true" type="tns:ArrayOfSDT_Attitude" />
-  <xs:complexType name="SDT_Attitude">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="CreatorUserId" type="ser:guid" />
-      <xs:element minOccurs="0" name="ID" type="ser:guid" />
-      <xs:element minOccurs="0" name="SDT_Voice" nillable="true" type="tns:SDT_Voice" />
-      <xs:element minOccurs="0" name="SN" type="xs:long" />
-      <xs:element minOccurs="0" name="SYS_User" nillable="true" type="tns:SYS_User" />
-      <xs:element minOccurs="0" name="Type" type="xs:int" />
-      <xs:element minOccurs="0" name="VoiceId" type="ser:guid" />
-    </xs:sequence>
-    <xs:attribute ref="ser:Id" />
-    <xs:attribute ref="ser:Ref" />
-  </xs:complexType>
-  <xs:element name="SDT_Attitude" nillable="true" type="tns:SDT_Attitude" />
-  <xs:complexType name="SDT_Comment">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Content" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="CreatorUserId" type="ser:guid" />
-      <xs:element minOccurs="0" name="ID" type="ser:guid" />
-      <xs:element minOccurs="0" name="PublishTime" nillable="true" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="SDT_Praise" nillable="true" type="tns:ArrayOfSDT_Praise" />
-      <xs:element minOccurs="0" name="SDT_Voice" nillable="true" type="tns:SDT_Voice" />
-      <xs:element minOccurs="0" name="SN" type="xs:long" />
-      <xs:element minOccurs="0" name="SYS_User" nillable="true" type="tns:SYS_User" />
-      <xs:element minOccurs="0" name="VoiceId" type="ser:guid" />
-    </xs:sequence>
-    <xs:attribute ref="ser:Id" />
-    <xs:attribute ref="ser:Ref" />
-  </xs:complexType>
-  <xs:element name="SDT_Comment" nillable="true" type="tns:SDT_Comment" />
-  <xs:complexType name="ArrayOfSDT_Praise">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="SDT_Praise" nillable="true" type="tns:SDT_Praise" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfSDT_Praise" nillable="true" type="tns:ArrayOfSDT_Praise" />
-  <xs:complexType name="SDT_Praise">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="CommentId" type="ser:guid" />
-      <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="CreatorUserId" type="ser:guid" />
-      <xs:element minOccurs="0" name="ID" type="ser:guid" />
-      <xs:element minOccurs="0" name="SDT_Comment" nillable="true" type="tns:SDT_Comment" />
-      <xs:element minOccurs="0" name="SN" type="xs:long" />
-      <xs:element minOccurs="0" name="SYS_User" nillable="true" type="tns:SYS_User" />
-      <xs:element minOccurs="0" name="Type" type="xs:int" />
-    </xs:sequence>
-    <xs:attribute ref="ser:Id" />
-    <xs:attribute ref="ser:Ref" />
-  </xs:complexType>
-  <xs:element name="SDT_Praise" nillable="true" type="tns:SDT_Praise" />
   <xs:complexType name="SDO_Advertisement">
     <xs:sequence>
       <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
@@ -2275,6 +2191,60 @@
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="SDO_Recommend" nillable="true" type="tns:SDO_Recommend" />
+  <xs:complexType name="SDT_Attitude">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CreatorUserId" type="ser:guid" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ID" type="ser:guid" />
+      <xs:element minOccurs="0" name="SN" type="xs:long" />
+      <xs:element minOccurs="0" name="SYS_User" nillable="true" type="tns:SYS_User" />
+      <xs:element minOccurs="0" name="SpeechId" type="ser:guid" />
+      <xs:element minOccurs="0" name="Type" type="xs:int" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="SDT_Attitude" nillable="true" type="tns:SDT_Attitude" />
+  <xs:complexType name="SDT_Comment">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Content" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CreatorUserId" type="ser:guid" />
+      <xs:element minOccurs="0" name="ID" type="ser:guid" />
+      <xs:element minOccurs="0" name="PublishTime" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="SDT_Praise" nillable="true" type="tns:ArrayOfSDT_Praise" />
+      <xs:element minOccurs="0" name="SN" type="xs:long" />
+      <xs:element minOccurs="0" name="SYS_User" nillable="true" type="tns:SYS_User" />
+      <xs:element minOccurs="0" name="SpeechId" type="ser:guid" />
+      <xs:element minOccurs="0" name="Validity" type="xs:boolean" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="SDT_Comment" nillable="true" type="tns:SDT_Comment" />
+  <xs:complexType name="ArrayOfSDT_Praise">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SDT_Praise" nillable="true" type="tns:SDT_Praise" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSDT_Praise" nillable="true" type="tns:ArrayOfSDT_Praise" />
+  <xs:complexType name="SDT_Praise">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CommentId" type="ser:guid" />
+      <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CreatorUserId" type="ser:guid" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ID" type="ser:guid" />
+      <xs:element minOccurs="0" name="SDT_Comment" nillable="true" type="tns:SDT_Comment" />
+      <xs:element minOccurs="0" name="SN" type="xs:long" />
+      <xs:element minOccurs="0" name="SYS_User" nillable="true" type="tns:SYS_User" />
+      <xs:element minOccurs="0" name="Type" type="xs:int" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="SDT_Praise" nillable="true" type="tns:SDT_Praise" />
   <xs:complexType name="SDO_Tutorial">
     <xs:sequence>
       <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
@@ -2311,6 +2281,7 @@
       <xs:element minOccurs="0" name="SN" type="xs:long" />
       <xs:element minOccurs="0" name="SYS_User" nillable="true" type="tns:SYS_User" />
       <xs:element minOccurs="0" name="TutorialId" type="ser:guid" />
+      <xs:element minOccurs="0" name="Validity" type="xs:boolean" />
     </xs:sequence>
     <xs:attribute ref="ser:Id" />
     <xs:attribute ref="ser:Ref" />
@@ -2336,24 +2307,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfSDO_TutorialPraise" nillable="true" type="tns:ArrayOfSDO_TutorialPraise" />
-  <xs:complexType name="ArrayOfSDT_Comment">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="SDT_Comment" nillable="true" type="tns:SDT_Comment" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfSDT_Comment" nillable="true" type="tns:ArrayOfSDT_Comment" />
-  <xs:complexType name="ArrayOfSDT_Voice">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="SDT_Voice" nillable="true" type="tns:SDT_Voice" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfSDT_Voice" nillable="true" type="tns:ArrayOfSDT_Voice" />
-  <xs:complexType name="ArrayOfSDT_Topic">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="SDT_Topic" nillable="true" type="tns:SDT_Topic" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfSDT_Topic" nillable="true" type="tns:ArrayOfSDT_Topic" />
   <xs:complexType name="ArrayOfSDC_Subsequent">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="SDC_Subsequent" nillable="true" type="tns:SDC_Subsequent" />
@@ -2366,6 +2319,12 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfSDC_Summary" nillable="true" type="tns:ArrayOfSDC_Summary" />
+  <xs:complexType name="ArrayOfSDT_Topic">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SDT_Topic" nillable="true" type="tns:SDT_Topic" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSDT_Topic" nillable="true" type="tns:ArrayOfSDT_Topic" />
   <xs:complexType name="ArrayOfSYS_Alert_Target">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="SYS_Alert_Target" nillable="true" type="tns:SYS_Alert_Target" />
@@ -2534,6 +2493,18 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfSDO_Tutorial" nillable="true" type="tns:ArrayOfSDO_Tutorial" />
+  <xs:complexType name="ArrayOfSDT_Attitude">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SDT_Attitude" nillable="true" type="tns:SDT_Attitude" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSDT_Attitude" nillable="true" type="tns:ArrayOfSDT_Attitude" />
+  <xs:complexType name="ArrayOfSDT_Comment">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SDT_Comment" nillable="true" type="tns:SDT_Comment" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSDT_Comment" nillable="true" type="tns:ArrayOfSDT_Comment" />
   <xs:complexType name="ArrayOfSYS_Code_Scheme">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="SYS_Code_Scheme" nillable="true" type="tns:SYS_Code_Scheme" />

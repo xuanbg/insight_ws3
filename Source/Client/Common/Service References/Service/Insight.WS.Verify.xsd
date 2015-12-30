@@ -3,7 +3,6 @@
   <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
   <xs:complexType name="Session">
     <xs:sequence>
-      <xs:element minOccurs="0" name="BaseAddress" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ClientType" type="xs:int" />
       <xs:element minOccurs="0" name="DeptId" nillable="true" type="ser:guid" />
       <xs:element minOccurs="0" name="DeptName" nillable="true" type="xs:string" />

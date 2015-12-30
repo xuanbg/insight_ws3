@@ -25,9 +25,6 @@ namespace Insight.WS.Server.Common.Service {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string BaseAddressField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int ClientTypeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -86,19 +83,6 @@ namespace Insight.WS.Server.Common.Service {
             }
             set {
                 this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string BaseAddress {
-            get {
-                return this.BaseAddressField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.BaseAddressField, value) != true)) {
-                    this.BaseAddressField = value;
-                    this.RaisePropertyChanged("BaseAddress");
-                }
             }
         }
         

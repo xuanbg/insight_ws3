@@ -83,19 +83,14 @@ namespace Insight.WS.Verify
         public DateTime LastConnect { get; set; }
 
         /// <summary>
-        /// 用户登录结果
-        /// </summary>
-        public LoginResult LoginResult { get; set; }
-
-        /// <summary>
         /// 用户在线状态
         /// </summary>
         public bool OnlineStatus { get; set; }
 
         /// <summary>
-        /// WCF服务基地址
+        /// 用户登录结果
         /// </summary>
-        public string BaseAddress { get; set; }
+        public LoginResult LoginResult { get; set; }
 
     }
 

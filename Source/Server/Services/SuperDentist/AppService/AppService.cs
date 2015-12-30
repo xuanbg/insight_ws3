@@ -215,8 +215,8 @@ namespace Insight.WS.Service.SuperDentist
 
             using (var context = new WSEntities())
             {
-                var topic = context.Speechs.Where(s=> s.TopicId == tid);
-                return GetJson(topic);
+                var speechs = context.Speechs.Where(s=> s.TopicId == tid);
+                return GetJson(speechs);
             }
         }
 
@@ -239,8 +239,8 @@ namespace Insight.WS.Service.SuperDentist
 
             using (var context = new WSEntities())
             {
-                var topic = context.GetSpeech(sid, gp.Relust);
-                return GetJson(topic);
+                var speech = context.GetSpeech(sid, gp.Relust);
+                return GetJson(speech);
             }
         }
 
@@ -263,8 +263,8 @@ namespace Insight.WS.Service.SuperDentist
 
             using (var context = new WSEntities())
             {
-                var topic = context.GetComments(sid, gp.Relust);
-                return GetJson(topic);
+                var comments = context.GetComments(sid, gp.Relust);
+                return GetJson(comments);
             }
         }
 

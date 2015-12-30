@@ -30,9 +30,9 @@ namespace Insight.WS.Client.MainApp
 
         #region 变量声明
 
+        private readonly string _BaseAddress = $"net.tcp://{Config.BaseAddress()}:{Config.Port()}/";
         private readonly string _MachineId = General.GetHash(General.GetCpuId() + General.GetMbId());
         private EndpointAddress _Address;
-        private string _BaseAddress;
         private bool _CanConnect;
         private bool _Restart;
 
@@ -93,7 +93,6 @@ namespace Insight.WS.Client.MainApp
             ShowProgress("获取文件更新列表…");
 
             // 初始化EndpointAddress参数
-            _BaseAddress = $"net.tcp://{Config.BaseAddress()}:{Config.Port()}/";
             _Address = new EndpointAddress(_BaseAddress + "Login");
 
             // 获取服务器上的客户端文件列表
@@ -211,7 +210,6 @@ namespace Insight.WS.Client.MainApp
                 MachineId = _MachineId,
                 DeptId = (Guid?) lokDepartment.EditValue,
                 DeptName = lokDepartment.EditValue == null ? null : lokDepartment.Text,
-                BaseAddress = _BaseAddress
             };
 
             using (var cli = new LoginClient(Binding, _Address))
@@ -226,7 +224,7 @@ namespace Insight.WS.Client.MainApp
                     DialogResult = DialogResult.OK;
                     break;
 
-                case LoginResult.Multiple:
+                case LoginResult.Online:
                     var proc = Process.GetProcessesByName(Process.GetCurrentProcess().ProcessName);
                     if (proc.Length > 1)
                     {
@@ -246,7 +244,7 @@ namespace Insight.WS.Client.MainApp
                     txtPassWord.Focus();
                     break;
 
-                case LoginResult.Online:
+                case LoginResult.Multiple:
                     General.ShowWarning("对不起，该用户已在其他设备登录！\r\n在该用户退出系统前，您不能登录系统。");
                     break;
 

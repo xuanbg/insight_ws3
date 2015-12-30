@@ -67,8 +67,7 @@ namespace Insight.WS.Verify
                 Validity = user.Validity,
                 Version = obj.Version,
                 ClientType = obj.ClientType,
-                MachineId = obj.MachineId,
-                BaseAddress = obj.BaseAddress
+                MachineId = obj.MachineId
             };
             Sessions.Add(session);
             return session;
