@@ -251,25 +251,39 @@ namespace Insight.WS.Test.Interface
         /// <returns>JsonResult</returns>
         private static JsonResult GetResponse(WebRequest request)
         {
-            var response = (HttpWebResponse)request.GetResponse();
-            var responseStream = response.GetResponseStream();
-            if (responseStream == null)
+            try
             {
-                responseStream.Close();
-                return null;
-            }
+                var response = (HttpWebResponse) request.GetResponse();
+                var responseStream = response.GetResponseStream();
+                if (responseStream == null)
+                {
+                    responseStream.Close();
+                    return null;
+                }
 
-            var encoding = response.Headers["Content-Encoding"];
-            if (encoding != null && encoding.ToLower().Contains("gzip"))
-            {
-                responseStream = new GZipStream(responseStream, CompressionMode.Decompress);
-            }
+                var encoding = response.Headers["Content-Encoding"];
+                if (encoding != null && encoding.ToLower().Contains("gzip"))
+                {
+                    responseStream = new GZipStream(responseStream, CompressionMode.Decompress);
+                }
 
-            using (var reader = new StreamReader(responseStream, Encoding.GetEncoding("utf-8")))
+                using (var reader = new StreamReader(responseStream, Encoding.GetEncoding("utf-8")))
+                {
+                    var result = reader.ReadToEnd();
+                    responseStream.Close();
+                    return Deserialize<JsonResult>(result);
+                }
+
+            }
+            catch (Exception ex)
             {
-                var result = reader.ReadToEnd();
-                responseStream.Close();
-                return Deserialize<JsonResult>(result);
+                var result = new JsonResult
+                {
+                    Code = "400",
+                    Name = "BadRequest",
+                    Message = ex.ToString()
+                };
+                return result;
             }
         }
 

@@ -148,6 +148,7 @@ namespace Insight.WS.Server.Common.ORM
         public virtual DbSet<MemberInfo> MemberInfo { get; set; }
         public virtual DbSet<Speechs> Speechs { get; set; }
         public virtual DbSet<Topics> Topics { get; set; }
+        public virtual DbSet<SDT_Speech> SDT_Speech { get; set; }
     
         [DbFunction("WSEntities", "GetTopic")]
         public virtual IQueryable<Topic> GetTopic(Nullable<System.Guid> topicId, Nullable<System.Guid> userId)

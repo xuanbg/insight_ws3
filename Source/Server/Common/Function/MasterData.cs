@@ -47,32 +47,6 @@ namespace Insight.WS.Server.Common
         }
 
         /// <summary>
-        /// 拼装插入会员信息的SqlCommand
-        /// </summary>
-        /// <param name="obj">会员信息对象实体</param>
-        /// <returns>SqlCommand</returns>
-        public static SqlCommand AddMember(MDG_Member obj)
-        {
-            var sql = "insert MDG_Member (MID, Portrait, Integral, Beans, Country, State, City, County, Street, ZipCode) ";
-            sql += "select @MID, @Portrait, @Integral, @Beans, @Country, @State, @City, @County, @Street, @ZipCode";
-            var parm = new[]
-            {
-                new SqlParameter("@MID", SqlDbType.UniqueIdentifier) {Value = obj.MID},
-                new SqlParameter("@Portrait", obj.Portrait),
-                new SqlParameter("@Integral", obj.Integral),
-                new SqlParameter("@Beans", obj.Beans),
-                new SqlParameter("@Country", obj.Country),
-                new SqlParameter("@State", obj.State),
-                new SqlParameter("@City", obj.City),
-                new SqlParameter("@County", obj.County),
-                new SqlParameter("@Street", obj.Street),
-                new SqlParameter("@ZipCode", obj.ZipCode),
-                new SqlParameter("@Read", SqlDbType.Int) {Value = 0}
-            };
-            return MakeCommand(sql, parm);
-        }
-
-        /// <summary>
         /// 拼装更新主数据索引的SqlCommand
         /// </summary>
         /// <param name="obj">主数据对象实体</param>
@@ -165,6 +139,5 @@ namespace Insight.WS.Server.Common
             var sql = $"select count(*) from MDG_Contact D join MasterData M on M.ID = D.MID where M.ParentId = '{id}'";
             return (int)SqlScalar(MakeCommand(sql)) > 0;
         }
-
     }
 }

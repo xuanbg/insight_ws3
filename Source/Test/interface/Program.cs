@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Insight.WS.Test.Interface.Entity;
 using static Insight.WS.Test.Interface.Util;
 
 namespace Insight.WS.Test.Interface
 {
     static class Program
     {
-        //private const string BassAddress = "http://localhost:6280/AppService/";
-        private const string BassAddress = "http://120.27.142.125:6280/AppService/";
+        private const string BassAddress = "http://localhost:6280/AppService/";
+        //private const string BassAddress = "http://120.27.142.125:6280/AppService/";
 
         /// <summary>
         /// 应用程序的主入口点。
@@ -25,9 +26,17 @@ namespace Insight.WS.Test.Interface
             //UserSession = Register(GetSmsVerifyCode("1", mobile), mobile);
             //UserSession = ResetPassword(GetSmsVerifyCode("2", mobile), mobile, "123456");
             UserSession = Login(mobile, "123456");
-            var tid = "22e524f6-01ae-e511-940d-e84a4dcfa690";
-            var sid = "DAF72552-02AE-E511-940D-E84A4DCFA690";
-            //GetMemberInfo();
+            var tid = "79A1F72C-CCAE-E511-9C5E-ACBC3278616E";
+            var sid = "7CA1F72C-CCAE-E511-9C5E-ACBC3278616E";
+            var cid = "7DA1F72C-CCAE-E511-9C5E-ACBC3278616E";
+            GetMemberInfo();
+            AddTopic();
+            AddFavorites(tid, 2);
+            ForwardTopic(tid);
+            AddSpeech(tid);
+            AddAttitude(sid, 1);
+            AddComment(sid);
+            AddPraise(cid, 1);
             GetTopics();
             GetTopic(tid);
             GetSpeechs(tid);
@@ -35,6 +44,124 @@ namespace Insight.WS.Test.Interface
             GetComments(sid);
             //ChangePassword("111111");
             Logout();
+        }
+
+        private static string AddTopic()
+        {
+            var url = BassAddress + "topic";
+            var topic = new SDT_Topic
+            {
+                Title = "我是测试话题",
+                Description = "在把美美的自拍照晒到社交媒体之前，大部分人都有着不可缺少的一步，那就是利用修图软件对图片进行美化。",
+                PublishTime = DateTime.Now,
+                CreatorUserId = UserSession.UserId
+            };
+            var dict = new Dictionary<string, SDT_Topic> { { "topic", topic } };
+            var data = Serialize(dict);
+            var author = Base64(UserSession);
+            var result = HttpRequest(url, "PUT", author, data);
+            PutResult(result);
+            return result.Data;
+        }
+
+        private static void AddFavorites(string tid, int type)
+        {
+            var url = BassAddress + "user/favorite";
+            var favorite = new MDE_Favorites
+            {
+                Type = type,
+                ObjectId = Guid.Parse(tid),
+                CreatorUserId = UserSession.UserId
+            };
+            var dict = new Dictionary<string, MDE_Favorites> { { "favorites", favorite } };
+            var data = Serialize(dict);
+            var author = Base64(UserSession);
+            var result = HttpRequest(url, "PUT", author, data);
+            PutResult(result);
+        }
+
+        private static void ForwardTopic(string tid)
+        {
+            var url = BassAddress + "topic/forward";
+            var forward = new SDT_Forward
+            {
+                TopicId = Guid.Parse(tid),
+                GroupId = Guid.Empty,
+                CreatorUserId = UserSession.UserId
+            };
+            var dict = new Dictionary<string, SDT_Forward> { { "forward", forward } };
+            var data = Serialize(dict);
+            var author = Base64(UserSession);
+            var result = HttpRequest(url, "PUT", author, data);
+            PutResult(result);
+        }
+
+        private static string AddSpeech(string tid)
+        {
+            var url = BassAddress + "topic/speech";
+            var speech = new SDT_Speech
+            {
+                TopicId = Guid.Parse(tid),
+                Content = "马上进入新的一年2016了，来点轻松点的内容吧。",
+                PublishTime = DateTime.Now,
+                CreatorUserId = UserSession.UserId
+            };
+            var dict = new Dictionary<string, SDT_Speech> { { "speech", speech } };
+            var data = Serialize(dict);
+            var author = Base64(UserSession);
+            var result = HttpRequest(url, "PUT", author, data);
+            PutResult(result);
+            return result.Data;
+        }
+
+        private static void AddAttitude(string sid, int type)
+        {
+            var url = BassAddress + "topic/speech/attitude";
+            var attitude = new SDT_Attitude
+            {
+                SpeechId = Guid.Parse(sid),
+                Type = type,
+                CreatorUserId = UserSession.UserId
+            };
+            var dict = new Dictionary<string, SDT_Attitude> { { "attitude", attitude } };
+            var data = Serialize(dict);
+            var author = Base64(UserSession);
+            var result = HttpRequest(url, "PUT", author, data);
+            PutResult(result);
+        }
+
+        private static string AddComment(string sid)
+        {
+            var url = BassAddress + "topic/speech/comment";
+            var comment = new SDT_Comment
+            {
+                SpeechId = Guid.Parse(sid),
+                Content = "AQS里面的CLH队列是CLH同步锁的一种变形",
+                PublishTime = DateTime.Now,
+                CreatorUserId = UserSession.UserId
+            };
+            var dict = new Dictionary<string, SDT_Comment> { { "comment", comment } };
+            var data = Serialize(dict);
+            var author = Base64(UserSession);
+            var result = HttpRequest(url, "PUT", author, data);
+            PutResult(result);
+            return result.Data;
+        }
+
+        private static void AddPraise(string cid, int type)
+        {
+            var url = BassAddress + "topic/speech/comment/praise";
+            var praise = new SDT_Praise
+            {
+                CommentId = Guid.Parse(cid),
+                Type = type,
+                CreatorUserId = UserSession.UserId
+            };
+            var dict = new Dictionary<string, SDT_Praise> { { "praise", praise } };
+            var data = Serialize(dict);
+            var author = Base64(UserSession);
+            var result = HttpRequest(url, "PUT", author, data);
+            PutResult(result);
         }
 
         private static void GetTopics()

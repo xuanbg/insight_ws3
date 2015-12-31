@@ -20,6 +20,7 @@ namespace Insight.WS.Server.Common.ORM
     [KnownType(typeof(SDC_Subsequent))]
     [KnownType(typeof(SDC_Summary))]
     [KnownType(typeof(SDT_Topic))]
+    [KnownType(typeof(SDT_Speech))]
     
     public partial class SDC_FirstVisit
     {
@@ -28,6 +29,7 @@ namespace Insight.WS.Server.Common.ORM
             this.SDC_Subsequent = new HashSet<SDC_Subsequent>();
             this.SDC_Summary = new HashSet<SDC_Summary>();
             this.SDT_Topic = new HashSet<SDT_Topic>();
+            this.SDT_Speech = new HashSet<SDT_Speech>();
         }
     
     	[DataMember]
@@ -83,5 +85,7 @@ namespace Insight.WS.Server.Common.ORM
         public virtual ICollection<SDC_Summary> SDC_Summary { get; set; }
     	[DataMember]
         public virtual ICollection<SDT_Topic> SDT_Topic { get; set; }
+    	[DataMember]
+        public virtual ICollection<SDT_Speech> SDT_Speech { get; set; }
     }
 }

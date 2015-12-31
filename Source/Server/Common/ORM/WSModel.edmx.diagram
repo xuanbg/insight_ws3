@@ -352,6 +352,12 @@
         <EntityTypeShape EntityType="WSModel.MemberInfo" Width="1.5" PointX="0.75" PointY="7.75" />
         <EntityTypeShape EntityType="WSModel.Speechs" Width="1.5" PointX="2.75" PointY="7.75" />
         <EntityTypeShape EntityType="WSModel.Topics" Width="1.5" PointX="4.75" PointY="7.75" />
+        <EntityTypeShape EntityType="WSModel.SDT_Speech" Width="1.5" PointX="25" PointY="130.5" />
+        <AssociationConnector Association="WSModel.FK__SDT_Speec__CaseI__1CC7FE65" />
+        <AssociationConnector Association="WSModel.FK__SDT_Attit__Speec__2469202D" />
+        <AssociationConnector Association="WSModel.FK__SDT_Comme__Speec__2A21F983" />
+        <AssociationConnector Association="WSModel.FK__SDT_Speec__Creat__1FA46B10" />
+        <AssociationConnector Association="WSModel.FK__SDT_Speec__Topic__1BD3DA2C" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

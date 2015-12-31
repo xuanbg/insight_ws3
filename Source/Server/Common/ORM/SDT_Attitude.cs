@@ -15,6 +15,7 @@ namespace Insight.WS.Server.Common.ORM
     
     [DataContract(IsReference = true)]
     [KnownType(typeof(SYS_User))]
+    [KnownType(typeof(SDT_Speech))]
     
     public partial class SDT_Attitude
     {
@@ -35,5 +36,7 @@ namespace Insight.WS.Server.Common.ORM
     
     	[DataMember]
         public virtual SYS_User SYS_User { get; set; }
+    	[DataMember]
+        public virtual SDT_Speech SDT_Speech { get; set; }
     }
 }

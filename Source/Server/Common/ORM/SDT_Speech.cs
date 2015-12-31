@@ -15,16 +15,17 @@ namespace Insight.WS.Server.Common.ORM
     
     [DataContract(IsReference = true)]
     [KnownType(typeof(SDC_FirstVisit))]
-    [KnownType(typeof(SDT_Forward))]
+    [KnownType(typeof(SDT_Attitude))]
+    [KnownType(typeof(SDT_Comment))]
     [KnownType(typeof(SYS_User))]
-    [KnownType(typeof(SDT_Speech))]
+    [KnownType(typeof(SDT_Topic))]
     
-    public partial class SDT_Topic
+    public partial class SDT_Speech
     {
-        public SDT_Topic()
+        public SDT_Speech()
         {
-            this.SDT_Forward = new HashSet<SDT_Forward>();
-            this.SDT_Speech = new HashSet<SDT_Speech>();
+            this.SDT_Attitude = new HashSet<SDT_Attitude>();
+            this.SDT_Comment = new HashSet<SDT_Comment>();
         }
     
     	[DataMember]
@@ -32,31 +33,31 @@ namespace Insight.WS.Server.Common.ORM
     	[DataMember]
         public long SN { get; set; }
     	[DataMember]
-        public string Title { get; set; }
+        public System.Guid TopicId { get; set; }
     	[DataMember]
-        public string Description { get; set; }
-    	[DataMember]
-        public string Tags { get; set; }
+        public string Content { get; set; }
     	[DataMember]
         public Nullable<System.Guid> CaseId { get; set; }
     	[DataMember]
-        public bool Private { get; set; }
+        public bool Recommend { get; set; }
+    	[DataMember]
+        public bool Validity { get; set; }
     	[DataMember]
         public Nullable<System.DateTime> PublishTime { get; set; }
     	[DataMember]
         public System.Guid CreatorUserId { get; set; }
     	[DataMember]
         public System.DateTime CreateTime { get; set; }
-    	[DataMember]
-        public bool Validity { get; set; }
     
     	[DataMember]
         public virtual SDC_FirstVisit SDC_FirstVisit { get; set; }
     	[DataMember]
-        public virtual ICollection<SDT_Forward> SDT_Forward { get; set; }
+        public virtual ICollection<SDT_Attitude> SDT_Attitude { get; set; }
+    	[DataMember]
+        public virtual ICollection<SDT_Comment> SDT_Comment { get; set; }
     	[DataMember]
         public virtual SYS_User SYS_User { get; set; }
     	[DataMember]
-        public virtual ICollection<SDT_Speech> SDT_Speech { get; set; }
+        public virtual SDT_Topic SDT_Topic { get; set; }
     }
 }

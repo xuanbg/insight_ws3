@@ -16,6 +16,7 @@ namespace Insight.WS.Server.Common.ORM
     [DataContract(IsReference = true)]
     [KnownType(typeof(SYS_User))]
     [KnownType(typeof(SDT_Praise))]
+    [KnownType(typeof(SDT_Speech))]
     
     public partial class SDT_Comment
     {
@@ -45,5 +46,7 @@ namespace Insight.WS.Server.Common.ORM
         public virtual SYS_User SYS_User { get; set; }
     	[DataMember]
         public virtual ICollection<SDT_Praise> SDT_Praise { get; set; }
+    	[DataMember]
+        public virtual SDT_Speech SDT_Speech { get; set; }
     }
 }

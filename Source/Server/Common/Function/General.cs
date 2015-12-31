@@ -96,6 +96,18 @@ namespace Insight.WS.Server.Common
         }
 
         /// <summary>
+        /// 构建用于接口返回值的Json对象
+        /// </summary>
+        /// <typeparam name="T">传入的对象类型</typeparam>
+        /// <param name="objs">传入的对象集合</param>
+        /// <returns>JsonResult</returns>
+        public static JsonResult GetJson<T>(List<T> objs)
+        {
+            var result = new JsonResult();
+            return objs.Count == 0 ? result.NotFound() : result.Success(Serialize(objs));
+        }
+
+        /// <summary>
         /// 保存图片到image文件夹，通过URL访问
         /// </summary>
         /// <param name="pic">图片字节流</param>

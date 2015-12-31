@@ -10,6 +10,7 @@ using Qiniu.RS;
 using static Insight.WS.Server.Common.General;
 using static Insight.WS.Server.Common.SqlHelper;
 using static Insight.WS.Server.Common.Util;
+using static Insight.WS.Service.SuperDentist.DataAccess;
 
 namespace Insight.WS.Service.SuperDentist
 {
@@ -51,9 +52,9 @@ namespace Insight.WS.Service.SuperDentist
 
             var cmds = new List<SqlCommand>
             {
-                DataAccess.AddMasterData(new MasterData { Name = obj.UserName, Alias = obj.LoginName }),
-                DataAccess.AddMember(new MDG_Member()),
-                DataAccess.AddUser(new SYS_User {Name = obj.UserName, LoginName = obj.LoginName, Password = password, Type = -1})
+                Server.Common.DataAccess.AddMasterData(new MasterData { Name = obj.UserName, Alias = obj.LoginName }),
+                InsertData(new MDG_Member()),
+                Server.Common.DataAccess.AddUser(new SYS_User {Name = obj.UserName, LoginName = obj.LoginName, Password = password, Type = -1})
             };
             if (!SqlExecute(cmds)) return result.DataBaseError();
 
@@ -150,6 +151,21 @@ namespace Insight.WS.Service.SuperDentist
             }
         }
 
+        /// <summary>
+        /// 收藏
+        /// </summary>
+        /// <param name="favorites">收藏数据对象</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult Favorite(MDE_Favorites favorites)
+        {
+            var result = Verify();
+            if (!result.Successful) return result;
+
+            var cmd = InsertData(favorites);
+            var id = SqlScalar(cmd);
+            return id == null ? result.DataBaseError() : result.Success(id.ToString());
+        }
+
         #endregion
 
         #region Topic
@@ -170,8 +186,8 @@ namespace Insight.WS.Service.SuperDentist
             using (var context = new WSEntities())
             {
                 var topics = gp.Relust.HasValue
-                    ? context.Topics.Where(m => m.GroupId == gp.Relust)
-                    : context.Topics.Where(m => !m.Private);
+                    ? context.Topics.Where(m => m.GroupId == gp.Relust).ToList()
+                    : context.Topics.Where(m => !m.Private).ToList();
                 return GetJson(topics);
             }
         }
@@ -195,7 +211,7 @@ namespace Insight.WS.Service.SuperDentist
 
             using (var context = new WSEntities())
             {
-                var topic = context.GetTopic(tid, gp.Relust);
+                var topic = context.GetTopic(tid, gp.Relust).FirstOrDefault();
                 return GetJson(topic);
             }
         }
@@ -215,7 +231,7 @@ namespace Insight.WS.Service.SuperDentist
 
             using (var context = new WSEntities())
             {
-                var speechs = context.Speechs.Where(s=> s.TopicId == tid);
+                var speechs = context.Speechs.Where(s=> s.TopicId == tid).ToList();
                 return GetJson(speechs);
             }
         }
@@ -239,7 +255,7 @@ namespace Insight.WS.Service.SuperDentist
 
             using (var context = new WSEntities())
             {
-                var speech = context.GetSpeech(sid, gp.Relust);
+                var speech = context.GetSpeech(sid, gp.Relust).FirstOrDefault();
                 return GetJson(speech);
             }
         }
@@ -263,9 +279,111 @@ namespace Insight.WS.Service.SuperDentist
 
             using (var context = new WSEntities())
             {
-                var comments = context.GetComments(sid, gp.Relust);
+                var comments = context.GetComments(sid, gp.Relust).ToList();
                 return GetJson(comments);
             }
+        }
+
+        /// <summary>
+        /// 新增话题
+        /// </summary>
+        /// <param name="topic">话题数据对象</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult AddTopic(SDT_Topic topic)
+        {
+            var result = Verify();
+            if (!result.Successful) return result;
+
+            var cmd = InsertData(topic);
+            var id = SqlScalar(cmd);
+            return id == null ? result.DataBaseError() : result.Success(id.ToString());
+        }
+
+        /// <summary>
+        /// 转载话题
+        /// </summary>
+        /// <param name="forward">话题转载数据对象</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult ForwardTopic(SDT_Forward forward)
+        {
+            var result = Verify();
+            if (!result.Successful) return result;
+
+            var cmd = InsertData(forward);
+            return SqlNonQuery(cmd) > 0 ? result : result.DataBaseError();
+        }
+
+        /// <summary>
+        /// 新增发言
+        /// </summary>
+        /// <param name="speech">发言数据对象</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult AddSpeech(SDT_Speech speech)
+        {
+            var result = Verify();
+            if (!result.Successful) return result;
+
+            var cmd = InsertData(speech);
+            var id = SqlScalar(cmd);
+            return id == null ? result.DataBaseError() : result.Success(id.ToString());
+        }
+
+        /// <summary>
+        /// 新增发言态度
+        /// </summary>
+        /// <param name="attitude">发言态度数据对象</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult AddAttitude(SDT_Attitude attitude)
+        {
+            var result = Verify();
+            if (!result.Successful) return result;
+
+            if (attitude.Type < 3)
+            {
+                var t = 3 - attitude.Type;
+                using (var context = new WSEntities())
+                {
+                    var att = context.SDT_Attitude.SingleOrDefault(a => a.Type == t && a.CreatorUserId == attitude.CreatorUserId);
+                    if (att != null)
+                    {
+                        att.Type = attitude.Type;
+                        return context.SaveChanges() > 0 ? result : result.DataBaseError();
+                    }
+                }
+            }
+
+            var cmd = InsertData(attitude);
+            return SqlNonQuery(cmd) > 0 ? result : result.DataBaseError();
+        }
+
+        /// <summary>
+        /// 新增评论
+        /// </summary>
+        /// <param name="comment">评论数据对象</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult AddComment(SDT_Comment comment)
+        {
+            var result = Verify();
+            if (!result.Successful) return result;
+
+            var cmd = InsertData(comment);
+            var id = SqlScalar(cmd);
+            return id == null ? result.DataBaseError() : result.Success(id.ToString());
+        }
+
+        /// <summary>
+        /// 新增评论态度
+        /// </summary>
+        /// <param name="praise">评论数据对象</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult AddPraise(SDT_Praise praise)
+        {
+            var result = Verify();
+            if (!result.Successful) return result;
+
+            var cmd = InsertData(praise);
+            var id = SqlScalar(cmd);
+            return id == null ? result.DataBaseError() : result.Success(id.ToString());
         }
 
         #endregion

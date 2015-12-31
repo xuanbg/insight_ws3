@@ -1,6 +1,7 @@
 ﻿using System.ServiceModel;
 using System.ServiceModel.Web;
 using Insight.WS.Server.Common;
+using Insight.WS.Server.Common.ORM;
 using Insight.WS.Server.Common.Service;
 
 namespace Insight.WS.Service.SuperDentist
@@ -67,6 +68,15 @@ namespace Insight.WS.Service.SuperDentist
         [OperationContract]
         JsonResult GetMemberInfo(string id);
 
+        /// <summary>
+        /// 收藏
+        /// </summary>
+        /// <param name="favorites">收藏数据对象</param>
+        /// <returns>JsonResult</returns>
+        [WebInvoke(Method = "PUT", UriTemplate = "user/favorite", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [OperationContract]
+        JsonResult Favorite(MDE_Favorites favorites);
+
         #endregion
 
         #region Topic
@@ -118,6 +128,60 @@ namespace Insight.WS.Service.SuperDentist
         [WebGet(UriTemplate = "topic/getcomments?id={id}&mid={mid}", ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
         JsonResult GetComments(string id, string mid);
+
+        /// <summary>
+        /// 新增话题
+        /// </summary>
+        /// <param name="topic">话题数据对象</param>
+        /// <returns>JsonResult</returns>
+        [WebInvoke(Method = "PUT", UriTemplate = "topic", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [OperationContract]
+        JsonResult AddTopic(SDT_Topic topic);
+
+        /// <summary>
+        /// 转载话题
+        /// </summary>
+        /// <param name="forward">话题转载数据对象</param>
+        /// <returns>JsonResult</returns>
+        [WebInvoke(Method = "PUT", UriTemplate = "topic/forward", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [OperationContract]
+        JsonResult ForwardTopic(SDT_Forward forward);
+
+        /// <summary>
+        /// 新增发言
+        /// </summary>
+        /// <param name="speech">发言数据对象</param>
+        /// <returns>JsonResult</returns>
+        [WebInvoke(Method = "PUT", UriTemplate = "topic/speech", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [OperationContract]
+        JsonResult AddSpeech(SDT_Speech speech);
+
+        /// <summary>
+        /// 新增发言态度
+        /// </summary>
+        /// <param name="attitude">发言态度数据对象</param>
+        /// <returns>JsonResult</returns>
+        [WebInvoke(Method = "PUT", UriTemplate = "topic/speech/attitude", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [OperationContract]
+        JsonResult AddAttitude(SDT_Attitude attitude);
+
+        /// <summary>
+        /// 新增评论
+        /// </summary>
+        /// <param name="comment">评论数据对象</param>
+        /// <returns>JsonResult</returns>
+        [WebInvoke(Method = "PUT", UriTemplate = "topic/speech/comment", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [OperationContract]
+        JsonResult AddComment(SDT_Comment comment);
+
+        /// <summary>
+        /// 新增评论态度
+        /// </summary>
+        /// <param name="praise">评论数据对象</param>
+        /// <returns>JsonResult</returns>
+        [WebInvoke(Method = "PUT", UriTemplate = "topic/speech/comment/praise", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [OperationContract]
+        JsonResult AddPraise(SDT_Praise praise);
 
         #endregion
 

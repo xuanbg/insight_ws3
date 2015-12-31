@@ -180,12 +180,11 @@ namespace Insight.WS.Server.Common
                 if (servinfo.Binding == "HTTP")
                 {
                     endpoint.Behaviors.Add(new WebHttpBehavior());
-                    if (DevelopMode)
-                    {
-                        behavior.HttpGetEnabled = true;
-                        behavior.HttpGetUrl = new Uri(address, servinfo.Name + "/mex");
-                        host.Description.Behaviors.Add(behavior);
-                    }
+                    if (!DevelopMode) return host;
+
+                    behavior.HttpGetEnabled = true;
+                    behavior.HttpGetUrl = new Uri(address, servinfo.Name + "/mex");
+                    host.Description.Behaviors.Add(behavior);
                 }
                 else if (DevelopMode)
                 {

@@ -295,6 +295,9 @@
     <Compile Include="ORM\SDT_Praise.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ORM\SDT_Speech.cs">
+      <DependentUpon>WSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ORM\SDT_Topic.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
