@@ -14,7 +14,7 @@ using static Insight.WS.Service.SuperDentist.DataAccess;
 
 namespace Insight.WS.Service.SuperDentist
 {
-    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession)]
     public class AppService : Interface
     {
 
@@ -166,6 +166,29 @@ namespace Insight.WS.Service.SuperDentist
             return id == null ? result.DataBaseError() : result.Success(id.ToString());
         }
 
+        /// <summary>
+        /// 删除收藏
+        /// </summary>
+        /// <param name="id">收藏记录ID</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult RemoveFavorite(string id)
+        {
+            var result = Verify();
+            if (!result.Successful) return result;
+
+            var gp = new GuidParse(id);
+            if (!gp.Successful) return result.InvalidGuid();
+
+            using (var context = new WSEntities())
+            {
+                var favorite = context.MDE_Favorites.SingleOrDefault(f => f.ID == gp.Relust);
+                if (favorite == null) return result.NotFound();
+
+                context.MDE_Favorites.Remove(favorite);
+                return context.SaveChanges() > 0 ? result : result.DataBaseError();
+            }
+        }
+
         #endregion
 
         #region Topic
@@ -189,6 +212,67 @@ namespace Insight.WS.Service.SuperDentist
                     ? context.Topics.Where(m => m.GroupId == gp.Relust).ToList()
                     : context.Topics.Where(m => !m.Private).ToList();
                 return GetJson(topics);
+            }
+        }
+
+        /// <summary>
+        /// 新增话题
+        /// </summary>
+        /// <param name="topic">话题数据对象</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult AddTopic(SDT_Topic topic)
+        {
+            var result = Verify();
+            if (!result.Successful) return result;
+
+            var cmd = InsertData(topic);
+            var id = SqlScalar(cmd);
+            return id == null ? result.DataBaseError() : result.Success(id.ToString());
+        }
+
+        /// <summary>
+        /// 删除话题
+        /// </summary>
+        /// <param name="id">话题ID</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult RemovTopic(string id)
+        {
+            var result = Verify();
+            if (!result.Successful) return result;
+
+            var gp = new GuidParse(id);
+            if (!gp.Successful) return result.InvalidGuid();
+
+            using (var context = new WSEntities())
+            {
+                var topic = context.SDT_Topic.SingleOrDefault(t => t.ID == gp.Relust);
+                if (topic == null) return result.NotFound();
+
+                topic.Validity = false;
+                return context.SaveChanges() > 0 ? result : result.DataBaseError();
+            }
+        }
+
+        /// <summary>
+        /// 编辑话题
+        /// </summary>
+        /// <param name="topic">话题数据对象</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult EditTopic(SDT_Topic topic)
+        {
+            var result = Verify();
+            if (!result.Successful) return result;
+
+            using (var context = new WSEntities())
+            {
+                var data = context.SDT_Topic.SingleOrDefault(t => t.ID == topic.ID);
+                if (data == null) return result.NotFound();
+
+                data.Title = topic.Title;
+                data.Description = topic.Description;
+                data.Tags = topic.Tags;
+                data.CaseId = topic.CaseId;
+                return context.SaveChanges() > 0 ? result : result.DataBaseError();
             }
         }
 
@@ -217,6 +301,24 @@ namespace Insight.WS.Service.SuperDentist
         }
 
         /// <summary>
+        /// 转载话题
+        /// </summary>
+        /// <param name="forward">话题转载数据对象</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult ForwardTopic(SDT_Forward forward)
+        {
+            var result = Verify();
+            if (!result.Successful) return result;
+
+            var cmd = InsertData(forward);
+            return SqlNonQuery(cmd) > 0 ? result : result.DataBaseError();
+        }
+
+        #endregion
+
+        #region Speech
+
+        /// <summary>
         /// 获取发言列表
         /// </summary>
         /// <param name="id">话题ID</param>
@@ -233,6 +335,65 @@ namespace Insight.WS.Service.SuperDentist
             {
                 var speechs = context.Speechs.Where(s=> s.TopicId == tid).ToList();
                 return GetJson(speechs);
+            }
+        }
+
+        /// <summary>
+        /// 新增发言
+        /// </summary>
+        /// <param name="speech">发言数据对象</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult AddSpeech(SDT_Speech speech)
+        {
+            var result = Verify();
+            if (!result.Successful) return result;
+
+            var cmd = InsertData(speech);
+            var id = SqlScalar(cmd);
+            return id == null ? result.DataBaseError() : result.Success(id.ToString());
+        }
+
+        /// <summary>
+        /// 删除发言
+        /// </summary>
+        /// <param name="id">发言ID</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult RemoveSpeech(string id)
+        {
+            var result = Verify();
+            if (!result.Successful) return result;
+
+            var gp = new GuidParse(id);
+            if (!gp.Successful) return result.InvalidGuid();
+
+            using (var context = new WSEntities())
+            {
+                var speech = context.SDT_Speech.SingleOrDefault(s => s.ID == gp.Relust);
+                if (speech == null) return result.NotFound();
+
+                speech.Validity = false;
+                return context.SaveChanges() > 0 ? result : result.DataBaseError();
+            }
+        }
+
+        /// <summary>
+        /// 编辑发言
+        /// </summary>
+        /// <param name="speech">发言数据对象</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult EditSpeech(SDT_Speech speech)
+        {
+            var result = Verify();
+            if (!result.Successful) return result;
+
+            using (var context = new WSEntities())
+            {
+                var data = context.SDT_Speech.SingleOrDefault(t => t.ID == speech.ID);
+                if (data == null) return result.NotFound();
+
+                data.Content = speech.Content;
+                data.CaseId = speech.CaseId;
+                return context.SaveChanges() > 0 ? result : result.DataBaseError();
             }
         }
 
@@ -261,74 +422,6 @@ namespace Insight.WS.Service.SuperDentist
         }
 
         /// <summary>
-        /// 获取发言评论列表
-        /// </summary>
-        /// <param name="id">发言ID</param>
-        /// <param name="mid">会员ID（可选）</param>
-        /// <returns>JsonResult</returns>
-        public JsonResult GetComments(string id, string mid)
-        {
-            var result = Verify(id.ToUpper() + Secret);
-            if (!result.Successful) return result;
-
-            Guid sid;
-            if (!Guid.TryParse(id, out sid)) return result.InvalidGuid();
-
-            var gp = new GuidParse(mid);
-            if (!gp.Successful) return result.InvalidGuid();
-
-            using (var context = new WSEntities())
-            {
-                var comments = context.GetComments(sid, gp.Relust).ToList();
-                return GetJson(comments);
-            }
-        }
-
-        /// <summary>
-        /// 新增话题
-        /// </summary>
-        /// <param name="topic">话题数据对象</param>
-        /// <returns>JsonResult</returns>
-        public JsonResult AddTopic(SDT_Topic topic)
-        {
-            var result = Verify();
-            if (!result.Successful) return result;
-
-            var cmd = InsertData(topic);
-            var id = SqlScalar(cmd);
-            return id == null ? result.DataBaseError() : result.Success(id.ToString());
-        }
-
-        /// <summary>
-        /// 转载话题
-        /// </summary>
-        /// <param name="forward">话题转载数据对象</param>
-        /// <returns>JsonResult</returns>
-        public JsonResult ForwardTopic(SDT_Forward forward)
-        {
-            var result = Verify();
-            if (!result.Successful) return result;
-
-            var cmd = InsertData(forward);
-            return SqlNonQuery(cmd) > 0 ? result : result.DataBaseError();
-        }
-
-        /// <summary>
-        /// 新增发言
-        /// </summary>
-        /// <param name="speech">发言数据对象</param>
-        /// <returns>JsonResult</returns>
-        public JsonResult AddSpeech(SDT_Speech speech)
-        {
-            var result = Verify();
-            if (!result.Successful) return result;
-
-            var cmd = InsertData(speech);
-            var id = SqlScalar(cmd);
-            return id == null ? result.DataBaseError() : result.Success(id.ToString());
-        }
-
-        /// <summary>
         /// 新增发言态度
         /// </summary>
         /// <param name="attitude">发言态度数据对象</param>
@@ -354,6 +447,34 @@ namespace Insight.WS.Service.SuperDentist
 
             var cmd = InsertData(attitude);
             return SqlNonQuery(cmd) > 0 ? result : result.DataBaseError();
+        }
+
+        #endregion
+
+        #region Comment
+
+        /// <summary>
+        /// 获取发言评论列表
+        /// </summary>
+        /// <param name="id">发言ID</param>
+        /// <param name="mid">会员ID（可选）</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult GetComments(string id, string mid)
+        {
+            var result = Verify(id.ToUpper() + Secret);
+            if (!result.Successful) return result;
+
+            Guid sid;
+            if (!Guid.TryParse(id, out sid)) return result.InvalidGuid();
+
+            var gp = new GuidParse(mid);
+            if (!gp.Successful) return result.InvalidGuid();
+
+            using (var context = new WSEntities())
+            {
+                var comments = context.GetComments(sid, gp.Relust).ToList();
+                return GetJson(comments);
+            }
         }
 
         /// <summary>
