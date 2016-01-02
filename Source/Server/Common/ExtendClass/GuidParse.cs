@@ -13,7 +13,7 @@ namespace Insight.WS.Server.Common
         /// <summary>
         /// 转换成功后的结果
         /// </summary>
-        public Guid? Relust;
+        public Guid? Guid;
 
         /// <summary>
         /// 将一个字符串转换为可为空的GUID
@@ -24,8 +24,8 @@ namespace Insight.WS.Server.Common
             if (string.IsNullOrEmpty(str)) return;
 
             Guid guid;
-            Successful = Guid.TryParse(str, out guid);
-            if (Successful) Relust = guid;
+            Successful = System.Guid.TryParse(str, out guid);
+            if (Successful) Guid = guid;
         }
 
     }

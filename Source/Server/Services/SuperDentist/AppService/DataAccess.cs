@@ -55,6 +55,26 @@ namespace Insight.WS.Service.SuperDentist
         }
 
         /// <summary>
+        /// 生成插入收藏记录的SqlCommand
+        /// </summary>
+        /// <param name="obj">MDE_Favorites</param>
+        /// <returns>SqlCommand</returns>
+        public static SqlCommand InsertData(MDE_Message obj)
+        {
+            var sql = "insert MDE_Message (ReceiveUserId, Content, SendTime, CreatorUserId) ";
+            sql += "select @ReceiveUserId, @Content, @SendTime, @CreatorUserId;";
+            sql += "select ID From MDE_Message where SN = SCOPE_IDENTITY()";
+            var parm = new[]
+            {
+                new SqlParameter("@ReceiveUserId", SqlDbType.UniqueIdentifier) {Value = obj.ReceiveUserId},
+                new SqlParameter("@Content", obj.Content),
+                new SqlParameter("@SendTime", obj.SendTime),
+                new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = obj.CreatorUserId},
+            };
+            return MakeCommand(sql, parm);
+        }
+
+        /// <summary>
         /// 生成插入话题记录的SqlCommand
         /// </summary>
         /// <param name="obj">SDT_Topic</param>

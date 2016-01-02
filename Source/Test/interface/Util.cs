@@ -38,52 +38,6 @@ namespace Insight.WS.Test.Interface
         }
 
         /// <summary>
-        /// 构建用于接口返回值的Json对象
-        /// </summary>
-        /// <typeparam name="T">传入的对象类型</typeparam>
-        /// <param name="obj">传入的对象</param>
-        /// <param name="code">错误代码</param>
-        /// <param name="name"></param>
-        /// <param name="message">错误消息</param>
-        /// <returns>JsonResult</returns>
-        public static JsonResult GetJson<T>(T obj, string code = "404", string name = "ResourceNotFound", string message = "未能读取任何数据")
-        {
-            var result = new JsonResult { Code = code, Name = name, Message = message };
-            if (obj != null)
-            {
-                result.Successful = true;
-                result.Code = "000";
-                result.Name = "Successful";
-                result.Message = "接口调用成功";
-                result.Data = Serialize(obj);
-            }
-            return result;
-        }
-
-        /// <summary>
-        /// 构建用于接口返回值的Json对象
-        /// </summary>
-        /// <typeparam name="T">传入的集合的对象类型</typeparam>
-        /// <param name="objs">传入的对象集合</param>
-        /// <param name="code">错误代码</param>
-        /// <param name="name"></param>
-        /// <param name="message">错误消息</param>
-        /// <returns>JsonResult</returns>
-        public static JsonResult GetJson<T>(List<T> objs, string code = "404", string name = "ResourceNotFound", string message = "未能读取任何数据")
-        {
-            var result = new JsonResult { Code = code, Name = name, Message = message};
-            if (objs.Count > 0)
-            {
-                result.Successful = true;
-                result.Code = "000";
-                result.Name = "Successful";
-                result.Message = "接口调用成功";
-                result.Data = Serialize(objs);
-            }
-            return result;
-        }
-
-        /// <summary>
         /// 读取配置项的值
         /// </summary>
         /// <param name="key">配置项</param>

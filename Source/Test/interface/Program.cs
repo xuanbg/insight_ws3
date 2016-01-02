@@ -22,15 +22,17 @@ namespace Insight.WS.Test.Interface
             //var json = Encoding.UTF8.GetString(buffer);
             //var obj = Deserialize<Session>(json);
             //GetToken();
+            GetSimilarTopics();
+            GetRelateTopics();
             var mobile = "18600740252";
             //UserSession = Register(GetSmsVerifyCode("1", mobile), mobile);
             //UserSession = ResetPassword(GetSmsVerifyCode("2", mobile), mobile, "123456");
-            UserSession = Login(mobile, "123456");
+            //UserSession = Login(mobile, "123456");
             //var tid = "79A1F72C-CCAE-E511-9C5E-ACBC3278616E";
             //var sid = "7CA1F72C-CCAE-E511-9C5E-ACBC3278616E";
             //var cid = "7DA1F72C-CCAE-E511-9C5E-ACBC3278616E";
             //GetMemberInfo();
-            AddTopic();
+            //AddTopic();
             //AddFavorites(tid, 2);
             //ForwardTopic(tid);
             //AddSpeech(tid);
@@ -43,7 +45,27 @@ namespace Insight.WS.Test.Interface
             //GetSpeech(sid);
             //GetComments(sid);
             //ChangePassword("111111");
-            Logout();
+            //Logout();
+        }
+
+        private static void GetSimilarTopics()
+        {
+            var url = BassAddress + "simtopics";
+            var title = "大王龋齿";
+            var data = $"title={title}";
+            var author = Base64(Hash(title + Secret));
+            var result = HttpRequest(url, "GET", author, data);
+            PutResult(result);
+        }
+
+        private static void GetRelateTopics()
+        {
+            var url = BassAddress + "reltopics";
+            var tags = "龋齿";
+            var data = $"tags={tags}";
+            var author = Base64(Hash(tags + Secret));
+            var result = HttpRequest(url, "GET", author, data);
+            PutResult(result);
         }
 
         private static string AddTopic()

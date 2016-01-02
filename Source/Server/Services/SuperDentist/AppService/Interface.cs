@@ -11,7 +11,7 @@ namespace Insight.WS.Service.SuperDentist
     public interface Interface
     {
 
-        #region User
+        #region User 8
 
         /// <summary>
         /// 用户注册
@@ -60,13 +60,45 @@ namespace Insight.WS.Service.SuperDentist
         JsonResult ResetPassword(string smsCode, string password);
 
         /// <summary>
+        /// 获取会员列表
+        /// </summary>
+        /// <param name="name">昵称</param>
+        /// <returns>JsonResult</returns>
+        [WebGet(UriTemplate = "user/members?name={name}", ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        JsonResult GetMembers(string name);
+
+        /// <summary>
+        /// 编辑会员信息
+        /// </summary>
+        /// <param name="member">会员信息数据对象</param>
+        /// <returns>JsonResult</returns>
+        [WebInvoke(Method = "POST", UriTemplate = "user/member", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [OperationContract]
+        JsonResult SetMemberInfo(MDG_Member member);
+
+        /// <summary>
         /// 获取会员信息
         /// </summary>
         /// <param name="id">会员ID</param>
         /// <returns>JsonResult</returns>
-        [WebGet(UriTemplate = "user/memberinfo?id={id}", ResponseFormat = WebMessageFormat.Json)]
+        [WebGet(UriTemplate = "user/member?id={id}", ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
         JsonResult GetMemberInfo(string id);
+
+        #endregion
+
+        #region Favorite 3
+
+        /// <summary>
+        /// 获取收藏列表
+        /// </summary>
+        /// <param name="id">会员ID</param>
+        /// <param name="type">收藏类型</param>
+        /// <returns>JsonResult</returns>
+        [WebGet(UriTemplate = "user/favorites?id={id}&type={type}", ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        JsonResult GetFavorites(string id, int type);
 
         /// <summary>
         /// 收藏
@@ -88,7 +120,48 @@ namespace Insight.WS.Service.SuperDentist
 
         #endregion
 
-        #region Topic
+        #region Message 4
+
+        /// <summary>
+        /// 获取私信列表
+        /// </summary>
+        /// <param name="id">通信对象ID</param>
+        /// <param name="mid">会员ID</param>
+        /// <returns>JsonResult</returns>
+        [WebGet(UriTemplate = "user/messages?id={id}&mid={mid}", ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        JsonResult GetMessages(string id, string mid);
+
+        /// <summary>
+        /// 写私信
+        /// </summary>
+        /// <param name="message">私信数据对象</param>
+        /// <returns>JsonResult</returns>
+        [WebInvoke(Method = "PUT", UriTemplate = "user/message", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [OperationContract]
+        JsonResult AddMessage(MDE_Message message);
+
+        /// <summary>
+        /// 删除私信
+        /// </summary>
+        /// <param name="id">私信ID</param>
+        /// <returns>JsonResult</returns>
+        [WebInvoke(Method = "DELETE", UriTemplate = "user/message", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [OperationContract]
+        JsonResult RemoveMessage(string id);
+
+        /// <summary>
+        /// 发送私信
+        /// </summary>
+        /// <param name="id">私信ID</param>
+        /// <returns>JsonResult</returns>
+        [WebInvoke(Method = "POST", UriTemplate = "user/message", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [OperationContract]
+        JsonResult SendMessage(string id);
+
+        #endregion
+
+        #region Topic 8
 
         /// <summary>
         /// 获取话题列表
@@ -98,6 +171,24 @@ namespace Insight.WS.Service.SuperDentist
         [WebGet(UriTemplate = "topics?gid={gid}", ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
         JsonResult GetTopics(string gid);
+
+        /// <summary>
+        /// 获取相关话题列表
+        /// </summary>
+        /// <param name="tags">话题标签</param>
+        /// <returns>JsonResult</returns>
+        [WebGet(UriTemplate = "reltopics?tags={tags}", ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        JsonResult GetRelateTopics(string tags);
+
+        /// <summary>
+        /// 获取相似话题列表
+        /// </summary>
+        /// <param name="title">话题标题</param>
+        /// <returns>JsonResult</returns>
+        [WebGet(UriTemplate = "simtopics?title={title}", ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        JsonResult GetSimilarTopics(string title);
 
         /// <summary>
         /// 新增话题
@@ -147,7 +238,7 @@ namespace Insight.WS.Service.SuperDentist
 
         #endregion
 
-        #region Speech
+        #region Speech 6
 
         /// <summary>
         /// 获取发言列表
@@ -206,7 +297,7 @@ namespace Insight.WS.Service.SuperDentist
 
         #endregion
 
-        #region Comment
+        #region Comment 5
 
         /// <summary>
         /// 获取发言评论列表
@@ -228,9 +319,27 @@ namespace Insight.WS.Service.SuperDentist
         JsonResult AddComment(SDT_Comment comment);
 
         /// <summary>
+        /// 删除评论
+        /// </summary>
+        /// <param name="id">评论ID</param>
+        /// <returns>JsonResult</returns>
+        [WebInvoke(Method = "DELETE", UriTemplate = "topic/speech/comment", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [OperationContract]
+        JsonResult RemoveComment(string id);
+
+        /// <summary>
+        /// 编辑评论
+        /// </summary>
+        /// <param name="comment">评论数据对象</param>
+        /// <returns>JsonResult</returns>
+        [WebInvoke(Method = "POST", UriTemplate = "topic/speech/comment", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [OperationContract]
+        JsonResult EditComment(SDT_Comment comment);
+
+        /// <summary>
         /// 新增评论态度
         /// </summary>
-        /// <param name="praise">评论数据对象</param>
+        /// <param name="praise">评论数据态度对象</param>
         /// <returns>JsonResult</returns>
         [WebInvoke(Method = "PUT", UriTemplate = "topic/speech/comment/praise", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         [OperationContract]
@@ -238,7 +347,15 @@ namespace Insight.WS.Service.SuperDentist
 
         #endregion
 
-        #region Setting
+        #region Setting 3
+
+        /// <summary>
+        /// 获取话题可用标签
+        /// </summary>
+        /// <returns>JsonResult</returns>
+        [WebGet(UriTemplate = "setting/tags", ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        JsonResult GetTopicTags();
 
         /// <summary>
         /// 获取七牛云文件上传Token

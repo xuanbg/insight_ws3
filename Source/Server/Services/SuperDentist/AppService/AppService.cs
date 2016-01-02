@@ -14,7 +14,7 @@ using static Insight.WS.Service.SuperDentist.DataAccess;
 
 namespace Insight.WS.Service.SuperDentist
 {
-    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession)]
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
     public class AppService : Interface
     {
 
@@ -59,7 +59,7 @@ namespace Insight.WS.Service.SuperDentist
             if (!SqlExecute(cmds)) return result.DataBaseError();
 
             obj.Signature = Hash(obj.LoginName.ToUpper() + password);
-            return GetJson(UserLogin(obj));
+            return result.Success(Serialize(obj));
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace Insight.WS.Service.SuperDentist
         public JsonResult Login(Session session)
         {
             var us = UserLogin(session);
-            return GetJson(us);
+            return new JsonResult().Success(Serialize(us));
         }
 
         /// <summary>
@@ -128,7 +128,51 @@ namespace Insight.WS.Service.SuperDentist
             if (!UpdateSignature(obj, obj.UserId, password)) return result.DataBaseError();
 
             obj.Signature = Hash(obj.LoginName.ToUpper() + password);
-            return GetJson(UserLogin(obj));
+            return result.Success(Serialize(obj));
+        }
+
+        /// <summary>
+        /// 获取会员列表
+        /// </summary>
+        /// <param name="name">昵称</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult GetMembers(string name)
+        {
+            var result = Verify();
+            if (!result.Successful) return result;
+
+            using (var context = new WSEntities())
+            {
+                var members = context.MemberInfo.Where(m => m.Name.Contains(name)).ToList();
+                return result.Success(Serialize(members));
+            }
+        }
+
+        /// <summary>
+        /// 编辑会员信息
+        /// </summary>
+        /// <param name="member">会员信息数据对象</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult SetMemberInfo(MDG_Member member)
+        {
+            var result = Verify();
+            if (!result.Successful) return result;
+
+            using (var context = new WSEntities())
+            {
+                var data = context.MDG_Member.SingleOrDefault(m => m.MID == member.MID);
+                if (data == null) return result.NotFound();
+
+                data.Portrait = member.Portrait;
+                data.Signature = member.Signature;
+                data.Country = member.Country;
+                data.State = member.State;
+                data.City = member.City;
+                data.County = member.County;
+                data.Street = member.Street;
+                data.ZipCode = member.ZipCode;
+                return context.SaveChanges() > 0 ? result : result.DataBaseError();
+            }
         }
 
         /// <summary>
@@ -148,6 +192,31 @@ namespace Insight.WS.Service.SuperDentist
             {
                 var member = context.MemberInfo.SingleOrDefault(m => m.ID == uid);
                 return GetJson(member);
+            }
+        }
+
+        #endregion
+
+        #region Favorite
+
+        /// <summary>
+        /// 获取收藏列表
+        /// </summary>
+        /// <param name="id">会员ID</param>
+        /// <param name="type">收藏类型</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult GetFavorites(string id, int type)
+        {
+            var result = Verify();
+            if (!result.Successful) return result;
+
+            Guid uid;
+            if (!Guid.TryParse(id, out uid)) return result.InvalidGuid();
+
+            using (var context = new WSEntities())
+            {
+                var favorites = context.MDE_Favorites.Where(f => f.CreatorUserId == uid && f.Type == type);
+                return result.Success(Serialize(favorites));
             }
         }
 
@@ -176,15 +245,109 @@ namespace Insight.WS.Service.SuperDentist
             var result = Verify();
             if (!result.Successful) return result;
 
-            var gp = new GuidParse(id);
-            if (!gp.Successful) return result.InvalidGuid();
+            Guid fid;
+            if (!Guid.TryParse(id, out fid)) return result.InvalidGuid();
 
             using (var context = new WSEntities())
             {
-                var favorite = context.MDE_Favorites.SingleOrDefault(f => f.ID == gp.Relust);
+                var favorite = context.MDE_Favorites.SingleOrDefault(f => f.ID == fid);
                 if (favorite == null) return result.NotFound();
 
                 context.MDE_Favorites.Remove(favorite);
+                return context.SaveChanges() > 0 ? result : result.DataBaseError();
+            }
+        }
+
+        #endregion
+
+        #region Message
+
+        /// <summary>
+        /// 获取私信列表
+        /// </summary>
+        /// <param name="id">通信对象ID</param>
+        /// <param name="mid">会员ID</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult GetMessages(string id, string mid)
+        {
+            var result = Verify();
+            if (!result.Successful) return result;
+
+            Guid rid;
+            if (!Guid.TryParse(id, out rid)) return result.InvalidGuid();
+
+            Guid uid;
+            if (!Guid.TryParse(mid, out uid)) return result.InvalidGuid();
+
+            using (var context = new WSEntities())
+            {
+                var messages = context.MDE_Message.Where(m => m.CreatorUserId == uid && m.ReceiveUserId == rid);
+                foreach (var message in messages)
+                {
+                    message.HaveRead = true;
+                }
+
+                return context.SaveChanges() > 0 ? result.Success(Serialize(messages)) : result.DataBaseError();
+            }
+        }
+
+        /// <summary>
+        /// 写私信
+        /// </summary>
+        /// <param name="message">私信数据对象</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult AddMessage(MDE_Message message)
+        {
+            var result = Verify();
+            if (!result.Successful) return result;
+
+            var cmd = InsertData(message);
+            var id = SqlScalar(cmd);
+            return id == null ? result.DataBaseError() : result.Success(id.ToString());
+        }
+
+        /// <summary>
+        /// 删除私信
+        /// </summary>
+        /// <param name="id">私信ID</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult RemoveMessage(string id)
+        {
+            var result = Verify();
+            if (!result.Successful) return result;
+
+            Guid mid;
+            if (!Guid.TryParse(id, out mid)) return result.InvalidGuid();
+
+            using (var context = new WSEntities())
+            {
+                var message = context.MDE_Message.SingleOrDefault(f => f.ID == mid);
+                if (message == null) return result.NotFound();
+
+                context.MDE_Message.Remove(message);
+                return context.SaveChanges() > 0 ? result : result.DataBaseError();
+            }
+        }
+
+        /// <summary>
+        /// 发送私信
+        /// </summary>
+        /// <param name="id">私信ID</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult SendMessage(string id)
+        {
+            var result = Verify();
+            if (!result.Successful) return result;
+
+            Guid mid;
+            if (!Guid.TryParse(id, out mid)) return result.InvalidGuid();
+
+            using (var context = new WSEntities())
+            {
+                var message = context.MDE_Message.SingleOrDefault(t => t.ID == mid);
+                if (message == null) return result.NotFound();
+
+                message.SendTime = DateTime.Now;
                 return context.SaveChanges() > 0 ? result : result.DataBaseError();
             }
         }
@@ -208,10 +371,65 @@ namespace Insight.WS.Service.SuperDentist
 
             using (var context = new WSEntities())
             {
-                var topics = gp.Relust.HasValue
-                    ? context.Topics.Where(m => m.GroupId == gp.Relust).ToList()
+                var topics = gp.Guid.HasValue
+                    ? context.Topics.Where(m => m.GroupId == gp.Guid).ToList()
                     : context.Topics.Where(m => !m.Private).ToList();
-                return GetJson(topics);
+                return result.Success(Serialize(topics));
+            }
+        }
+
+        /// <summary>
+        /// 获取相关话题列表
+        /// </summary>
+        /// <param name="tags">话题标签</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult GetRelateTopics(string tags)
+        {
+            var result = Verify(tags + Secret);
+            if (!result.Successful) return result;
+
+            var taglist = tags.Split(Convert.ToChar(","));
+            var topics = new List<SDT_Topic>();
+            using (var context = new WSEntities())
+            {
+                foreach (var tag in taglist)
+                {
+                    var list = context.SDT_Topic.Where(t => t.Tags.Contains(tag));
+                    topics.AddRange(list);
+                }
+                var group = topics.GroupBy(t => t.ID).Select(l => new { ID = l.Key, Count = l.Count() });
+                var order = group.OrderByDescending(l => l.Count).Select(id => id.ID).Take(20);
+                var simtopics = context.Topics.Join(order, t => t.TopicId, o => o, (t, o) => t).ToList();
+                return result.Success(Serialize(simtopics));
+            }
+        }
+
+        /// <summary>
+        /// 获取相似话题列表
+        /// </summary>
+        /// <param name="title">话题标题</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult GetSimilarTopics(string title)
+        {
+            var result = Verify(title + Secret);
+            if (!result.Successful) return result;
+
+            var topics = new List<SDT_Topic>();
+            using (var context = new WSEntities())
+            {
+                var cate = context.BASE_Category.Single(c => c.Alias == "Tags");
+                var tags = context.MasterData.Where(m => m.CategoryId == cate.ID).Select(m => m.Name);
+                foreach (var tag in tags)
+                {
+                    if (!title.Contains(tag)) continue;
+
+                    var list = context.SDT_Topic.Where(t => t.Tags.Contains(tag));
+                    topics.AddRange(list);
+                }
+                var group = topics.GroupBy(t => t.ID).Select(l => new { ID = l.Key, Count = l.Count() });
+                var order = group.OrderByDescending(l => l.Count).Select(id => id.ID).Take(20);
+                var simtopics = context.Topics.Join(order, t => t.TopicId, o => o, (t, o) => t).ToList();
+                return result.Success(Serialize(simtopics));
             }
         }
 
@@ -240,12 +458,12 @@ namespace Insight.WS.Service.SuperDentist
             var result = Verify();
             if (!result.Successful) return result;
 
-            var gp = new GuidParse(id);
-            if (!gp.Successful) return result.InvalidGuid();
+            Guid tid;
+            if (!Guid.TryParse(id, out tid)) return result.InvalidGuid();
 
             using (var context = new WSEntities())
             {
-                var topic = context.SDT_Topic.SingleOrDefault(t => t.ID == gp.Relust);
+                var topic = context.SDT_Topic.SingleOrDefault(t => t.ID == tid);
                 if (topic == null) return result.NotFound();
 
                 topic.Validity = false;
@@ -295,7 +513,7 @@ namespace Insight.WS.Service.SuperDentist
 
             using (var context = new WSEntities())
             {
-                var topic = context.GetTopic(tid, gp.Relust).FirstOrDefault();
+                var topic = context.GetTopic(tid, gp.Guid).FirstOrDefault();
                 return GetJson(topic);
             }
         }
@@ -334,7 +552,7 @@ namespace Insight.WS.Service.SuperDentist
             using (var context = new WSEntities())
             {
                 var speechs = context.Speechs.Where(s=> s.TopicId == tid).ToList();
-                return GetJson(speechs);
+                return result.Success(Serialize(speechs));
             }
         }
 
@@ -363,12 +581,12 @@ namespace Insight.WS.Service.SuperDentist
             var result = Verify();
             if (!result.Successful) return result;
 
-            var gp = new GuidParse(id);
-            if (!gp.Successful) return result.InvalidGuid();
+            Guid sid;
+            if (!Guid.TryParse(id, out sid)) return result.InvalidGuid();
 
             using (var context = new WSEntities())
             {
-                var speech = context.SDT_Speech.SingleOrDefault(s => s.ID == gp.Relust);
+                var speech = context.SDT_Speech.SingleOrDefault(s => s.ID == sid);
                 if (speech == null) return result.NotFound();
 
                 speech.Validity = false;
@@ -416,7 +634,7 @@ namespace Insight.WS.Service.SuperDentist
 
             using (var context = new WSEntities())
             {
-                var speech = context.GetSpeech(sid, gp.Relust).FirstOrDefault();
+                var speech = context.GetSpeech(sid, gp.Guid).FirstOrDefault();
                 return GetJson(speech);
             }
         }
@@ -472,8 +690,8 @@ namespace Insight.WS.Service.SuperDentist
 
             using (var context = new WSEntities())
             {
-                var comments = context.GetComments(sid, gp.Relust).ToList();
-                return GetJson(comments);
+                var comments = context.GetComments(sid, gp.Guid).ToList();
+                return result.Success(Serialize(comments));
             }
         }
 
@@ -493,6 +711,49 @@ namespace Insight.WS.Service.SuperDentist
         }
 
         /// <summary>
+        /// 删除评论
+        /// </summary>
+        /// <param name="id">评论ID</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult RemoveComment(string id)
+        {
+            var result = Verify();
+            if (!result.Successful) return result;
+
+            Guid cid;
+            if (!Guid.TryParse(id, out cid)) return result.InvalidGuid();
+
+            using (var context = new WSEntities())
+            {
+                var comment = context.SDT_Comment.SingleOrDefault(s => s.ID == cid);
+                if (comment == null) return result.NotFound();
+
+                comment.Validity = false;
+                return context.SaveChanges() > 0 ? result : result.DataBaseError();
+            }
+        }
+
+        /// <summary>
+        /// 编辑评论
+        /// </summary>
+        /// <param name="comment">评论数据对象</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult EditComment(SDT_Comment comment)
+        {
+            var result = Verify();
+            if (!result.Successful) return result;
+
+            using (var context = new WSEntities())
+            {
+                var data = context.SDT_Comment.SingleOrDefault(s => s.ID == comment.ID);
+                if (data == null) return result.NotFound();
+
+                data.Content = comment.Content;
+                return context.SaveChanges() > 0 ? result : result.DataBaseError();
+            }
+        }
+
+        /// <summary>
         /// 新增评论态度
         /// </summary>
         /// <param name="praise">评论数据对象</param>
@@ -505,6 +766,23 @@ namespace Insight.WS.Service.SuperDentist
             var cmd = InsertData(praise);
             var id = SqlScalar(cmd);
             return id == null ? result.DataBaseError() : result.Success(id.ToString());
+        }
+
+        /// <summary>
+        /// 获取话题可用标签
+        /// </summary>
+        /// <returns>JsonResult</returns>
+        public JsonResult GetTopicTags()
+        {
+            var result = Verify(Secret);
+            if (!result.Successful) return result;
+
+            using (var context = new WSEntities())
+            {
+                var cate = context.BASE_Category.Single(c => c.Alias == "Tags");
+                var data = context.MasterData.Where(m => m.CategoryId == cate.ID).ToList();
+                return result.Success(Serialize(data));
+            }
         }
 
         #endregion
@@ -524,8 +802,7 @@ namespace Insight.WS.Service.SuperDentist
             Qiniu.Conf.Config.SECRET_KEY = SecretKey;
             var policy = new PutPolicy(BucketName);
             var token = policy.Token();
-            result.Data = Serialize(token);
-            return result;
+            return result.Success(Serialize(token));
         }
 
         /// <summary>

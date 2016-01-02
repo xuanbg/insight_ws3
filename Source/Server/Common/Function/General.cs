@@ -15,6 +15,7 @@ namespace Insight.WS.Server.Common
 {
     public class General
     {
+
         #region 字段
 
         // 最低兼容版本
@@ -93,18 +94,6 @@ namespace Insight.WS.Server.Common
         {
             var result = new JsonResult();
             return obj == null ? result.NotFound() : result.Success(Serialize(obj));
-        }
-
-        /// <summary>
-        /// 构建用于接口返回值的Json对象
-        /// </summary>
-        /// <typeparam name="T">传入的对象类型</typeparam>
-        /// <param name="objs">传入的对象集合</param>
-        /// <returns>JsonResult</returns>
-        public static JsonResult GetJson<T>(List<T> objs)
-        {
-            var result = new JsonResult();
-            return objs.Count == 0 ? result.NotFound() : result.Success(Serialize(objs));
         }
 
         /// <summary>

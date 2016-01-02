@@ -424,8 +424,8 @@ CREATE TRIGGER MDG_Contact_Insert ON MDG_Contact AFTER INSERT AS
 BEGIN
 SET NOCOUNT ON
 
-INSERT SYS_User (ID, Name, LoginName, Description, CreatorUserId)
-  select MD.ID, MD.Name, MD.Alias, MD.FullName, TI.CreatorUserId
+INSERT SYS_User (ID, Name, LoginName, Description, Type, CreatorUserId)
+  select MD.ID, MD.Name, MD.Alias, MD.FullName, 2, TI.CreatorUserId
   from Inserted TI
   join MasterData MD on MD.ID = TI.MID
     and TI.LoginUser = 1
@@ -440,8 +440,8 @@ CREATE TRIGGER MDG_Contact_Update ON MDG_Contact AFTER UPDATE AS
 BEGIN
 SET NOCOUNT ON
 
-INSERT SYS_User (ID, Name, LoginName, Description, CreatorUserId)
-  select MD.ID, MD.Name, MD.Alias, MD.FullName, TI.CreatorUserId
+INSERT SYS_User (ID, Name, LoginName, Description, Type, CreatorUserId)
+  select MD.ID, MD.Name, MD.Alias, MD.FullName, 2, TI.CreatorUserId
   from Inserted TI
   join MasterData MD on MD.ID = TI.MID
     and TI.LoginUser = 1
@@ -465,8 +465,8 @@ CREATE TRIGGER MDG_Employee_Insert ON MDG_Employee AFTER INSERT AS
 BEGIN
 SET NOCOUNT ON
 
-INSERT SYS_User (ID, Name, LoginName, Description, CreatorUserId)
-  select MID, MD.Name, MD.Alias, md.FullName, TI.CreatorUserId
+INSERT SYS_User (ID, Name, LoginName, Description, Type, CreatorUserId)
+  select MID, MD.Name, MD.Alias, md.FullName, 1, TI.CreatorUserId
   from Inserted TI
   join MasterData MD on MD.ID = TI.MID
     and TI.LoginUser = 1

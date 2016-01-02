@@ -58,7 +58,8 @@ select ID, @ModuleId, 6, N'存储方式', 'Storage', BuiltIn, Visible from BASE_Cate
 select ID, @ModuleId, 7, N'岗位', 'Position', BuiltIn, Visible from BASE_Category where Alias = 'Business' union all
 select ID, @ModuleId, 8, N'工种', 'WorkType', BuiltIn, Visible from BASE_Category where Alias = 'Business' union all
 select ID, @ModuleId, 9, N'客户类型', 'CustomerClass', BuiltIn, Visible from BASE_Category where Alias = 'Business' union all
-select ID, @ModuleId, 10, N'客户状态', 'CustomerStatu', BuiltIn, Visible from BASE_Category where Alias = 'Business'
+select ID, @ModuleId, 10, N'客户状态', 'CustomerStatu', BuiltIn, Visible from BASE_Category where Alias = 'Business' union all
+select ID, @ModuleId, 11, N'话题标签', 'Tags', BuiltIn, Visible from BASE_Category where Alias = 'Business'
 
 /*****初始化主数据分类（字典）*****/
 
