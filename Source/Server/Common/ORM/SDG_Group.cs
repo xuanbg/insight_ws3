@@ -41,10 +41,6 @@ namespace Insight.WS.Server.Common.ORM
     	[DataMember]
         public int Heat { get; set; }
     	[DataMember]
-        public int Topics { get; set; }
-    	[DataMember]
-        public int Members { get; set; }
-    	[DataMember]
         public System.Guid OwnerUserId { get; set; }
     	[DataMember]
         public Nullable<System.Guid> ManageUserId { get; set; }

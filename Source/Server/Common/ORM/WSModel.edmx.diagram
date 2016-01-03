@@ -358,6 +358,7 @@
         <AssociationConnector Association="WSModel.FK__SDT_Comme__Speec__2A21F983" />
         <AssociationConnector Association="WSModel.FK__SDT_Speec__Creat__1FA46B10" />
         <AssociationConnector Association="WSModel.FK__SDT_Speec__Topic__1BD3DA2C" />
+        <EntityTypeShape EntityType="WSModel.Groups" Width="1.5" PointX="7.375" PointY="7.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

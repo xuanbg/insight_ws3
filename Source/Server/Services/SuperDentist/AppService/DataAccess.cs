@@ -55,7 +55,7 @@ namespace Insight.WS.Service.SuperDentist
         }
 
         /// <summary>
-        /// 生成插入收藏记录的SqlCommand
+        /// 生成插入私信记录的SqlCommand
         /// </summary>
         /// <param name="obj">MDE_Favorites</param>
         /// <returns>SqlCommand</returns>
@@ -70,6 +70,48 @@ namespace Insight.WS.Service.SuperDentist
                 new SqlParameter("@Content", obj.Content),
                 new SqlParameter("@SendTime", obj.SendTime),
                 new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = obj.CreatorUserId},
+            };
+            return MakeCommand(sql, parm);
+        }
+
+        /// <summary>
+        /// 生成插入群组记录的SqlCommand
+        /// </summary>
+        /// <param name="obj">SDG_Group</param>
+        /// <returns>SqlCommand</returns>
+        public static SqlCommand InsertData(SDG_Group obj)
+        {
+            var sql = "insert SDG_Group (Name, Description, Icon, Picture, Heat, OwnerUserId, ManageUserId, CreatorUserId) ";
+            sql += "select @Name, @Description, @Icon, @Picture, @Heat, @OwnerUserId, @ManageUserId, @CreatorUserId;";
+            sql += "select ID From SDG_Group where SN = SCOPE_IDENTITY()";
+            var parm = new[]
+            {
+                new SqlParameter("@Name", obj.Name),
+                new SqlParameter("@Description", obj.Description),
+                new SqlParameter("@Icon", obj.Icon),
+                new SqlParameter("@Picture", obj.Picture),
+                new SqlParameter("@Heat", obj.Heat),
+                new SqlParameter("@OwnerUserId", SqlDbType.UniqueIdentifier) {Value = obj.OwnerUserId},
+                new SqlParameter("@ManageUserId", SqlDbType.UniqueIdentifier) {Value = obj.ManageUserId},
+                new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = obj.CreatorUserId},
+            };
+            return MakeCommand(sql, parm);
+        }
+
+        /// <summary>
+        /// 生成插入群组成员记录的SqlCommand
+        /// </summary>
+        /// <param name="obj">SDG_GroupMember</param>
+        /// <returns>SqlCommand</returns>
+        public static SqlCommand InsertData(SDG_GroupMember obj)
+        {
+            var sql = "insert SDG_GroupMember (GroupId, MemberId) ";
+            sql += "select @GroupId, @MemberId;";
+            sql += "select ID From SDG_GroupMember where SN = SCOPE_IDENTITY()";
+            var parm = new[]
+            {
+                new SqlParameter("@GroupId", SqlDbType.UniqueIdentifier) {Value = obj.GroupId},
+                new SqlParameter("@MemberId", SqlDbType.UniqueIdentifier) {Value = obj.MemberId},
             };
             return MakeCommand(sql, parm);
         }

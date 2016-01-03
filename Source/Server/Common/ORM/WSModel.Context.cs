@@ -149,6 +149,7 @@ namespace Insight.WS.Server.Common.ORM
         public virtual DbSet<Speechs> Speechs { get; set; }
         public virtual DbSet<Topics> Topics { get; set; }
         public virtual DbSet<SDT_Speech> SDT_Speech { get; set; }
+        public virtual DbSet<Groups> Groups { get; set; }
     
         [DbFunction("WSEntities", "GetTopic")]
         public virtual IQueryable<Topic> GetTopic(Nullable<System.Guid> topicId, Nullable<System.Guid> userId)
@@ -208,6 +209,16 @@ namespace Insight.WS.Server.Common.ORM
                 new ObjectParameter("UserId", typeof(System.Guid));
     
             return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<Speech>("[WSEntities].[GetSpeech](@SpeechId, @UserId)", speechIdParameter, userIdParameter);
+        }
+    
+        [DbFunction("WSEntities", "GetGroups")]
+        public virtual IQueryable<Group> GetGroups(Nullable<System.Guid> userId)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<Group>("[WSEntities].[GetGroups](@UserId)", userIdParameter);
         }
     }
 }

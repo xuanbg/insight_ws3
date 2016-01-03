@@ -199,7 +199,7 @@ namespace Insight.WS.Test.Interface
         {
             var url = BassAddress + "topic";
             var data = $"id={id}&mid={UserSession?.UserId}";
-            var author = Base64(Hash(id.ToUpper() + Secret));
+            var author = Base64(Hash(id + Secret));
             var result = HttpRequest(url, "GET", author, data);
             PutResult(result);
         }
@@ -208,7 +208,7 @@ namespace Insight.WS.Test.Interface
         {
             var url = BassAddress + "topic/speechs";
             var data = $"id={id}";
-            var author = Base64(Hash(id.ToUpper() + Secret));
+            var author = Base64(Hash(id + Secret));
             var result = HttpRequest(url, "GET", author, data);
             PutResult(result);
         }
@@ -217,7 +217,7 @@ namespace Insight.WS.Test.Interface
         {
             var url = BassAddress + "topic/speech";
             var data = $"id={id}&mid={UserSession?.UserId}";
-            var author = Base64(Hash(id.ToUpper() + Secret));
+            var author = Base64(Hash(id + Secret));
             var result = HttpRequest(url, "GET", author, data);
             PutResult(result);
         }
@@ -226,7 +226,7 @@ namespace Insight.WS.Test.Interface
         {
             var url = BassAddress + "topic/speech/comments";
             var data = $"id={id}&mid={UserSession?.UserId}";
-            var author = Base64(Hash(id.ToUpper() + Secret));
+            var author = Base64(Hash(id + Secret));
             var result = HttpRequest(url, "GET", author, data);
             PutResult(result);
         }

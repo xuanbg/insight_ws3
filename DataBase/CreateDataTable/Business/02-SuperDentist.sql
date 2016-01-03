@@ -204,8 +204,6 @@ CREATE TABLE SDG_Group(
 [Icon]             VARCHAR(64),                                                                                                            --群图标
 [Picture]          VARCHAR(64),                                                                                                            --群图片
 [Heat]             INT DEFAULT 0 NOT NULL,                                                                                                 --热度
-[Topics]           INT DEFAULT 0 NOT NULL,                                                                                                 --话题数
-[Members]          INT DEFAULT 0 NOT NULL,                                                                                                 --成员数
 [OwnerUserId]      UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID) NOT NULL,                                                          --群主ID
 [ManageUserId]     UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID),                                                                   --群管理员ID
 [Validity]         BIT DEFAULT 1 NOT NULL,                                                                                                 --是否有效：0、无效；1、有效

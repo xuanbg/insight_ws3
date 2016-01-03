@@ -13,6 +13,7 @@ namespace Insight.WS.Server.Common.ORM
     using System.Runtime.Serialization;
     using System.Collections.Generic;
     
+    [DataContract(IsReference = true)]
     [KnownType(typeof(SDC_FirstVisit))]
     [KnownType(typeof(SDT_Attitude))]
     [KnownType(typeof(SDT_Comment))]

@@ -228,6 +228,19 @@
             return this;
         }
 
+        /// <summary>
+        /// 返回数据已存在（502）的错误信息
+        /// </summary>
+        /// <returns>JsonResult</returns>
+        public JsonResult DataAlreadyExists()
+        {
+            Successful = false;
+            Code = "502";
+            Name = "DataAlreadyExists";
+            Message = "数据已存在";
+            return this;
+        }
+
         #endregion
 
     }

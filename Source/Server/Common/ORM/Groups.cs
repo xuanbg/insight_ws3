@@ -14,30 +14,30 @@ namespace Insight.WS.Server.Common.ORM
     using System.Collections.Generic;
     
     [DataContract(IsReference = true)]
-    [KnownType(typeof(SDG_Group))]
-    [KnownType(typeof(SYS_User))]
-    [KnownType(typeof(SDT_Topic))]
     
-    public partial class SDT_Forward
+    public partial class Groups
     {
     	[DataMember]
         public System.Guid ID { get; set; }
     	[DataMember]
-        public long SN { get; set; }
+        public string Name { get; set; }
     	[DataMember]
-        public System.Guid TopicId { get; set; }
+        public string Description { get; set; }
     	[DataMember]
-        public System.Guid GroupId { get; set; }
+        public string Icon { get; set; }
     	[DataMember]
-        public System.Guid CreatorUserId { get; set; }
+        public string Picture { get; set; }
     	[DataMember]
-        public System.DateTime CreateTime { get; set; }
-    
+        public int Heat { get; set; }
     	[DataMember]
-        public virtual SDG_Group SDG_Group { get; set; }
+        public int Topics { get; set; }
     	[DataMember]
-        public virtual SYS_User SYS_User { get; set; }
+        public int Members { get; set; }
     	[DataMember]
-        public virtual SDT_Topic SDT_Topic { get; set; }
+        public int Favorites { get; set; }
+    	[DataMember]
+        public System.Guid OwnerUserId { get; set; }
+    	[DataMember]
+        public Nullable<System.Guid> ManageUserId { get; set; }
     }
 }

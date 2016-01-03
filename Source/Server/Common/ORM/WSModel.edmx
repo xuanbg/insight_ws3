@@ -759,8 +759,6 @@
           <Property Name="Icon" Type="varchar" MaxLength="64" />
           <Property Name="Picture" Type="varchar" MaxLength="64" />
           <Property Name="Heat" Type="int" Nullable="false" />
-          <Property Name="Topics" Type="int" Nullable="false" />
-          <Property Name="Members" Type="int" Nullable="false" />
           <Property Name="OwnerUserId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ManageUserId" Type="uniqueidentifier" />
           <Property Name="Validity" Type="bit" Nullable="false" />
@@ -1424,6 +1422,30 @@
           <Property Name="BuiltIn" Type="bit" />
           <Property Name="CreatorDeptId" Type="uniqueidentifier" />
           <Property Name="CreatorUserId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Insight.dbo.Groups”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="Groups">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Heat" />
+            <PropertyRef Name="Topics" />
+            <PropertyRef Name="Members" />
+            <PropertyRef Name="Favorites" />
+            <PropertyRef Name="OwnerUserId" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="128" />
+          <Property Name="Icon" Type="varchar" MaxLength="64" />
+          <Property Name="Picture" Type="varchar" MaxLength="64" />
+          <Property Name="Heat" Type="int" Nullable="false" />
+          <Property Name="Topics" Type="int" Nullable="false" />
+          <Property Name="Members" Type="int" Nullable="false" />
+          <Property Name="Favorites" Type="int" Nullable="false" />
+          <Property Name="OwnerUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ManageUserId" Type="uniqueidentifier" />
         </EntityType>
         <!--生成过程中发现错误:
 警告 6002: 表/视图“Insight.dbo.MemberInfo”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
@@ -4736,6 +4758,28 @@
             </CollectionType>
           </ReturnType>
         </Function>
+        <Function Name="GetGroups" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="uniqueidentifier" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+                <Property Name="Name" Type="nvarchar" MaxLength="32" Nullable="false" />
+                <Property Name="Description" Type="nvarchar" MaxLength="128" />
+                <Property Name="Icon" Type="varchar" MaxLength="64" />
+                <Property Name="Picture" Type="varchar" MaxLength="64" />
+                <Property Name="Heat" Type="int" Nullable="false" />
+                <Property Name="Topics" Type="int" Nullable="false" />
+                <Property Name="Members" Type="int" Nullable="false" />
+                <Property Name="Favorites" Type="int" Nullable="false" />
+                <Property Name="OwnerUserId" Type="uniqueidentifier" Nullable="false" />
+                <Property Name="ManageUserId" Type="uniqueidentifier" />
+                <Property Name="IsJoin" Type="bit" />
+                <Property Name="IsCare" Type="bit" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
         <Function Name="GetSpeech" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="SpeechId" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="UserId" Type="uniqueidentifier" Mode="In" />
@@ -4907,6 +4951,21 @@
     [Dictionary].[CreatorDeptId] AS [CreatorDeptId], 
     [Dictionary].[CreatorUserId] AS [CreatorUserId]
     FROM [dbo].[Dictionary] AS [Dictionary]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Groups" EntityType="Self.Groups" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Groups].[ID] AS [ID], 
+    [Groups].[Name] AS [Name], 
+    [Groups].[Description] AS [Description], 
+    [Groups].[Icon] AS [Icon], 
+    [Groups].[Picture] AS [Picture], 
+    [Groups].[Heat] AS [Heat], 
+    [Groups].[Topics] AS [Topics], 
+    [Groups].[Members] AS [Members], 
+    [Groups].[Favorites] AS [Favorites], 
+    [Groups].[OwnerUserId] AS [OwnerUserId], 
+    [Groups].[ManageUserId] AS [ManageUserId]
+    FROM [dbo].[Groups] AS [Groups]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="MemberInfo" EntityType="Self.MemberInfo" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -7116,6 +7175,10 @@
             <End Role="SDT_Topic" EntitySet="SDT_Topic" />
             <End Role="SDT_Speech" EntitySet="SDT_Speech" />
           </AssociationSet>
+          <EntitySet Name="Groups" EntityType="WSModel.Groups" />
+          <FunctionImport Name="GetGroups" IsComposable="true" ReturnType="Collection(WSModel.Group)">
+            <Parameter Name="UserId" Mode="In" Type="Guid" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="ABS_Advance_Detail">
           <Key>
@@ -11494,8 +11557,6 @@
           <Property Name="Icon" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="Picture" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="Heat" Type="Int32" Nullable="false" />
-          <Property Name="Topics" Type="Int32" Nullable="false" />
-          <Property Name="Members" Type="Int32" Nullable="false" />
           <Property Name="OwnerUserId" Type="Guid" Nullable="false" />
           <Property Name="ManageUserId" Type="Guid" />
           <Property Name="Validity" Type="Boolean" Nullable="false" />
@@ -12296,6 +12357,43 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Groups">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Heat" />
+            <PropertyRef Name="Topics" />
+            <PropertyRef Name="Members" />
+            <PropertyRef Name="Favorites" />
+            <PropertyRef Name="OwnerUserId" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Icon" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Picture" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Heat" Type="Int32" Nullable="false" />
+          <Property Name="Topics" Type="Int32" Nullable="false" />
+          <Property Name="Members" Type="Int32" Nullable="false" />
+          <Property Name="Favorites" Type="Int32" Nullable="false" />
+          <Property Name="OwnerUserId" Type="Guid" Nullable="false" />
+          <Property Name="ManageUserId" Type="Guid" />
+        </EntityType>
+        <ComplexType Name="Group">
+          <Property Type="Guid" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="32" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Icon" Nullable="true" MaxLength="64" />
+          <Property Type="String" Name="Picture" Nullable="true" MaxLength="64" />
+          <Property Type="Int32" Name="Heat" Nullable="false" />
+          <Property Type="Int32" Name="Topics" Nullable="false" />
+          <Property Type="Int32" Name="Members" Nullable="false" />
+          <Property Type="Int32" Name="Favorites" Nullable="false" />
+          <Property Type="Guid" Name="OwnerUserId" Nullable="false" />
+          <Property Type="Guid" Name="ManageUserId" Nullable="true" />
+          <Property Type="Boolean" Name="IsJoin" />
+          <Property Type="Boolean" Name="IsCare" Nullable="false" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -13663,8 +13761,6 @@
                 <ScalarProperty Name="Validity" ColumnName="Validity" />
                 <ScalarProperty Name="ManageUserId" ColumnName="ManageUserId" />
                 <ScalarProperty Name="OwnerUserId" ColumnName="OwnerUserId" />
-                <ScalarProperty Name="Members" ColumnName="Members" />
-                <ScalarProperty Name="Topics" ColumnName="Topics" />
                 <ScalarProperty Name="Heat" ColumnName="Heat" />
                 <ScalarProperty Name="Picture" ColumnName="Picture" />
                 <ScalarProperty Name="Icon" ColumnName="Icon" />
@@ -13944,6 +14040,42 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Groups">
+            <EntityTypeMapping TypeName="WSModel.Groups">
+              <MappingFragment StoreEntitySet="Groups">
+                <ScalarProperty Name="ManageUserId" ColumnName="ManageUserId" />
+                <ScalarProperty Name="OwnerUserId" ColumnName="OwnerUserId" />
+                <ScalarProperty Name="Favorites" ColumnName="Favorites" />
+                <ScalarProperty Name="Members" ColumnName="Members" />
+                <ScalarProperty Name="Topics" ColumnName="Topics" />
+                <ScalarProperty Name="Heat" ColumnName="Heat" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetGroups" FunctionName="WSModel.Store.GetGroups">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WSModel.Group">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="Heat" ColumnName="Heat" />
+                <ScalarProperty Name="Topics" ColumnName="Topics" />
+                <ScalarProperty Name="Members" ColumnName="Members" />
+                <ScalarProperty Name="Favorites" ColumnName="Favorites" />
+                <ScalarProperty Name="OwnerUserId" ColumnName="OwnerUserId" />
+                <ScalarProperty Name="ManageUserId" ColumnName="ManageUserId" />
+                <ScalarProperty Name="IsJoin" ColumnName="IsJoin" />
+                <ScalarProperty Name="IsCare" ColumnName="IsCare" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
