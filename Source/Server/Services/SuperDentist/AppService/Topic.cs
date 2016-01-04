@@ -2,6 +2,7 @@
 using System.Linq;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
+using Insight.WS.Server.Common.Service;
 using static Insight.WS.Server.Common.General;
 using static Insight.WS.Server.Common.SqlHelper;
 using static Insight.WS.Server.Common.Util;
@@ -121,6 +122,9 @@ namespace Insight.WS.Service.SuperDentist
                 var topic = context.SDT_Topic.SingleOrDefault(t => t.ID == tid);
                 if (topic == null) return result.NotFound();
 
+                var us = GetAuthorization<Session>();
+                if (us.UserId != topic.CreatorUserId) result.Forbidden();
+
                 topic.Validity = false;
                 return context.SaveChanges() > 0 ? result : result.DataBaseError();
             }
@@ -140,6 +144,9 @@ namespace Insight.WS.Service.SuperDentist
             {
                 var data = context.SDT_Topic.SingleOrDefault(t => t.ID == topic.ID);
                 if (data == null) return result.NotFound();
+
+                var us = GetAuthorization<Session>();
+                if (us.UserId != data.CreatorUserId) result.Forbidden();
 
                 data.Title = topic.Title;
                 data.Description = topic.Description;
@@ -244,6 +251,9 @@ namespace Insight.WS.Service.SuperDentist
                 var speech = context.SDT_Speech.SingleOrDefault(s => s.ID == sid);
                 if (speech == null) return result.NotFound();
 
+                var us = GetAuthorization<Session>();
+                if (us.UserId != speech.CreatorUserId) result.Forbidden();
+
                 speech.Validity = false;
                 return context.SaveChanges() > 0 ? result : result.DataBaseError();
             }
@@ -263,6 +273,9 @@ namespace Insight.WS.Service.SuperDentist
             {
                 var data = context.SDT_Speech.SingleOrDefault(t => t.ID == speech.ID);
                 if (data == null) return result.NotFound();
+
+                var us = GetAuthorization<Session>();
+                if (us.UserId != data.CreatorUserId) result.Forbidden();
 
                 data.Content = speech.Content;
                 data.CaseId = speech.CaseId;
@@ -383,6 +396,9 @@ namespace Insight.WS.Service.SuperDentist
                 var comment = context.SDT_Comment.SingleOrDefault(s => s.ID == cid);
                 if (comment == null) return result.NotFound();
 
+                var us = GetAuthorization<Session>();
+                if (us.UserId != comment.CreatorUserId) result.Forbidden();
+
                 comment.Validity = false;
                 return context.SaveChanges() > 0 ? result : result.DataBaseError();
             }
@@ -402,6 +418,9 @@ namespace Insight.WS.Service.SuperDentist
             {
                 var data = context.SDT_Comment.SingleOrDefault(s => s.ID == comment.ID);
                 if (data == null) return result.NotFound();
+
+                var us = GetAuthorization<Session>();
+                if (us.UserId != data.CreatorUserId) result.Forbidden();
 
                 data.Content = comment.Content;
                 return context.SaveChanges() > 0 ? result : result.DataBaseError();

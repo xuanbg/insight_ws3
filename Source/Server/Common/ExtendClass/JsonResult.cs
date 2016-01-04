@@ -112,15 +112,28 @@
         }
 
         /// <summary>
-        /// 返回用户被禁止登录（403）的错误信息
+        /// 返回用户被禁止登录（402）的错误信息
         /// </summary>
         /// <returns>JsonResult</returns>
         public JsonResult Disabled()
         {
             Successful = false;
-            Code = "403";
+            Code = "402";
             Name = "AccountIsDisabled";
             Message = "当前用户被禁止登录";
+            return this;
+        }
+
+        /// <summary>
+        /// 返回用户未取得授权（403）的错误信息
+        /// </summary>
+        /// <returns>JsonResult</returns>
+        public JsonResult Forbidden()
+        {
+            Successful = false;
+            Code = "403";
+            Name = "Forbidden";
+            Message = "当前用户未取得授权";
             return this;
         }
 

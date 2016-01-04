@@ -2,6 +2,7 @@
 using System.Linq;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
+using Insight.WS.Server.Common.Service;
 using static Insight.WS.Server.Common.General;
 using static Insight.WS.Server.Common.SqlHelper;
 using static Insight.WS.Server.Common.Util;
@@ -45,6 +46,9 @@ namespace Insight.WS.Service.SuperDentist
             {
                 var data = context.MDG_Member.SingleOrDefault(m => m.MID == member.MID);
                 if (data == null) return result.NotFound();
+
+                var us = GetAuthorization<Session>();
+                if (us.UserId != data.MID) result.Forbidden();
 
                 data.Portrait = member.Portrait;
                 data.Signature = member.Signature;
@@ -136,6 +140,9 @@ namespace Insight.WS.Service.SuperDentist
                 var favorite = context.MDE_Favorites.SingleOrDefault(f => f.ID == fid);
                 if (favorite == null) return result.NotFound();
 
+                var us = GetAuthorization<Session>();
+                if (us.UserId != favorite.CreatorUserId) result.Forbidden();
+
                 context.MDE_Favorites.Remove(favorite);
                 return context.SaveChanges() > 0 ? result : result.DataBaseError();
             }
@@ -149,9 +156,8 @@ namespace Insight.WS.Service.SuperDentist
         /// 获取私信列表
         /// </summary>
         /// <param name="id">通信对象ID</param>
-        /// <param name="mid">会员ID</param>
         /// <returns>JsonResult</returns>
-        public JsonResult GetMessages(string id, string mid)
+        public JsonResult GetMessages(string id)
         {
             var result = Verify();
             if (!result.Successful) return result;
@@ -159,18 +165,18 @@ namespace Insight.WS.Service.SuperDentist
             Guid rid;
             if (!Guid.TryParse(id, out rid)) return result.InvalidGuid();
 
-            Guid uid;
-            if (!Guid.TryParse(mid, out uid)) return result.InvalidGuid();
-
             using (var context = new WSEntities())
             {
-                var messages = context.MDE_Message.Where(m => m.CreatorUserId == uid && m.ReceiveUserId == rid).OrderByDescending(m => m.SendTime).ToList();
-                foreach (var message in messages)
+                var us = GetAuthorization<Session>();
+                var send = context.MDE_Message.Where(m => m.CreatorUserId == us.UserId && m.ReceiveUserId == rid);
+                var recv = context.MDE_Message.Where(m => m.CreatorUserId == rid && m.ReceiveUserId == us.UserId);
+                foreach (var message in recv)
                 {
                     message.HaveRead = true;
                 }
 
-                return context.SaveChanges() > 0 ? result.Success(Serialize(messages)) : result.DataBaseError();
+                var msgs = send.Union(recv).OrderByDescending(m => m.SendTime).ToList();
+                return context.SaveChanges() > 0 ? result.Success(Serialize(msgs)) : result.DataBaseError();
             }
         }
 
@@ -207,6 +213,9 @@ namespace Insight.WS.Service.SuperDentist
                 var message = context.MDE_Message.SingleOrDefault(f => f.ID == mid);
                 if (message == null) return result.NotFound();
 
+                var us = GetAuthorization<Session>();
+                if (us.UserId != message.CreatorUserId && us.UserId != message.ReceiveUserId) result.Forbidden();
+
                 context.MDE_Message.Remove(message);
                 return context.SaveChanges() > 0 ? result : result.DataBaseError();
             }
@@ -229,6 +238,9 @@ namespace Insight.WS.Service.SuperDentist
             {
                 var message = context.MDE_Message.SingleOrDefault(t => t.ID == mid);
                 if (message == null) return result.NotFound();
+
+                var us = GetAuthorization<Session>();
+                if (us.UserId != message.CreatorUserId) result.Forbidden();
 
                 message.SendTime = DateTime.Now;
                 return context.SaveChanges() > 0 ? result : result.DataBaseError();

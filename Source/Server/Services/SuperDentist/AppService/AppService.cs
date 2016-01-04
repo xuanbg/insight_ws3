@@ -133,7 +133,7 @@ namespace Insight.WS.Service.SuperDentist
 
         #endregion
 
-        #region Group 8
+        #region Group
 
         /// <summary>
         /// 获取群组列表
@@ -221,6 +221,9 @@ namespace Insight.WS.Service.SuperDentist
                 var group = context.SDG_Group.SingleOrDefault(g => g.ID == gid);
                 if (group == null) return result.NotFound();
 
+                var us = GetAuthorization<Session>();
+                if (us.UserId != group.ManageUserId && us.UserId != group.OwnerUserId) result.Forbidden();
+
                 group.Validity = false;
                 return context.SaveChanges() > 0 ? result : result.DataBaseError();
             }
@@ -240,6 +243,9 @@ namespace Insight.WS.Service.SuperDentist
             {
                 var data = context.SDG_Group.SingleOrDefault(t => t.ID == group.ID);
                 if (data == null) return result.NotFound();
+
+                var us = GetAuthorization<Session>();
+                if (us.UserId != data.ManageUserId && us.UserId != data.OwnerUserId) result.Forbidden();
 
                 data.Name = group.Name;
                 data.Description = group.Description;
@@ -290,6 +296,10 @@ namespace Insight.WS.Service.SuperDentist
                 var data = context.SDG_GroupMember.SingleOrDefault(r => r.ID == rid);
                 if (data == null) return result.NotFound();
 
+                var group = context.SDG_Group.Single(g => g.ID == data.GroupId);
+                var us = GetAuthorization<Session>();
+                if (us.UserId != group.ManageUserId && us.UserId != group.OwnerUserId) result.Forbidden();
+
                 data.Validity = true;
                 return context.SaveChanges() > 0 ? result : result.DataBaseError();
             }
@@ -312,6 +322,10 @@ namespace Insight.WS.Service.SuperDentist
             {
                 var data = context.SDG_GroupMember.SingleOrDefault(r => r.ID == rid);
                 if (data == null) return result.NotFound();
+
+                var group = context.SDG_Group.Single(g => g.ID == data.GroupId);
+                var us = GetAuthorization<Session>();
+                if (us.UserId != group.ManageUserId && us.UserId != group.OwnerUserId) result.Forbidden();
 
                 context.SDG_GroupMember.Remove(data);
                 return context.SaveChanges() > 0 ? result : result.DataBaseError();

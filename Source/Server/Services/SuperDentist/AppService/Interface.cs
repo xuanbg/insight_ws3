@@ -130,11 +130,10 @@ namespace Insight.WS.Service.SuperDentist
         /// 获取私信列表
         /// </summary>
         /// <param name="id">通信对象ID</param>
-        /// <param name="mid">会员ID</param>
         /// <returns>JsonResult</returns>
-        [WebGet(UriTemplate = "user/messages?id={id}&mid={mid}", ResponseFormat = WebMessageFormat.Json)]
+        [WebGet(UriTemplate = "user/messages?id={id}", ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
-        JsonResult GetMessages(string id, string mid);
+        JsonResult GetMessages(string id);
 
         /// <summary>
         /// 写私信
@@ -242,7 +241,7 @@ namespace Insight.WS.Service.SuperDentist
 
         #endregion
 
-        #region Topic 8
+        #region Topic 9
 
         /// <summary>
         /// 获取话题列表
