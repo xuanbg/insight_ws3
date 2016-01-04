@@ -142,7 +142,7 @@ namespace Insight.WS.Service.SuperDentist
         /// <returns>JsonResult</returns>
         public JsonResult GetGroups(string mid)
         {
-            var result = Verify(Secret);
+            var result = Verify(mid + Secret);
             if (!result.Successful) return result;
 
             var gp = new GuidParse(mid);
@@ -172,11 +172,20 @@ namespace Insight.WS.Service.SuperDentist
         /// <summary>
         /// 搜索群组
         /// </summary>
-        /// <param name="key">关键词</param>
+        /// <param name="keys">关键词</param>
+        /// <param name="mid">会员ID（可选）</param>
         /// <returns>JsonResult</returns>
-        public JsonResult SearchGroups(string key)
+        public JsonResult SearchGroups(string keys, string mid)
         {
-            throw new NotImplementedException();
+            var result = Verify(mid + Secret);
+            if (!result.Successful) return result;
+
+            var gp = new GuidParse(mid);
+            if (!gp.Successful) return result.InvalidGuid();
+
+            var keylist = keys.Split(Convert.ToChar(",")).ToList();
+            var groups = Common.SearchGroup(keylist, gp.Guid);
+            return result.Success(Serialize(groups));
         }
 
         /// <summary>

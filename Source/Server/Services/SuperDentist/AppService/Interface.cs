@@ -179,11 +179,12 @@ namespace Insight.WS.Service.SuperDentist
         /// <summary>
         /// 搜索群组
         /// </summary>
-        /// <param name="key">关键词</param>
+        /// <param name="keys">关键词</param>
+        /// <param name="mid">会员ID（可选）</param>
         /// <returns>JsonResult</returns>
-        [WebGet(UriTemplate = "groups/search?key={key}", ResponseFormat = WebMessageFormat.Json)]
+        [WebGet(UriTemplate = "groups/search?keys={keys}&mid={mid}", ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
-        JsonResult SearchGroups(string key);
+        JsonResult SearchGroups(string keys, string mid);
 
         /// <summary>
         /// 新建群组
@@ -271,13 +272,14 @@ namespace Insight.WS.Service.SuperDentist
         JsonResult GetSimilarTopics(string title);
 
         /// <summary>
-        /// 搜素话题
+        /// 搜索话题
         /// </summary>
-        /// <param name="key">关键词</param>
+        /// <param name="keys">关键词</param>
+        /// <param name="gid">群组ID（可为空）</param>
         /// <returns>JsonResult</returns>
-        [WebGet(UriTemplate = "topics/search?key={key}", ResponseFormat = WebMessageFormat.Json)]
+        [WebGet(UriTemplate = "topics/search?keys={keys}&gid={gid}", ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
-        JsonResult SearchTopics(string key);
+        JsonResult SearchTopics(string keys, string gid);
 
         /// <summary>
         /// 新增话题

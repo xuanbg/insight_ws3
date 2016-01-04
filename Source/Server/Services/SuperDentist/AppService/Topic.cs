@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
@@ -30,9 +29,7 @@ namespace Insight.WS.Service.SuperDentist
 
             using (var context = new WSEntities())
             {
-                var topics = gp.Guid.HasValue
-                    ? context.Topics.Where(m => m.GroupId == gp.Guid).ToList()
-                    : context.Topics.Where(m => !m.Private).ToList();
+                var topics = context.GetTopics(gp.Guid, false).ToList();
                 return result.Success(Serialize(topics.OrderByDescending(t => t.PublishTime)));
             }
         }
@@ -47,20 +44,9 @@ namespace Insight.WS.Service.SuperDentist
             var result = Verify(tags + Secret);
             if (!result.Successful) return result;
 
-            var taglist = tags.Split(Convert.ToChar(","));
-            var topics = new List<SDT_Topic>();
-            using (var context = new WSEntities())
-            {
-                foreach (var tag in taglist)
-                {
-                    var list = context.SDT_Topic.Where(t => t.Tags.Contains(tag));
-                    topics.AddRange(list);
-                }
-                var group = topics.GroupBy(t => t.ID).Select(l => new { ID = l.Key, Count = l.Count() });
-                var order = group.OrderByDescending(l => l.Count).Select(id => id.ID).Take(20);
-                var simtopics = context.Topics.Join(order, t => t.TopicId, o => o, (t, o) => t).ToList();
-                return result.Success(Serialize(simtopics));
-            }
+            var taglist = tags.Split(Convert.ToChar(",")).ToList();
+            var rel = Common.SearchTopic(taglist);
+            return result.Success(Serialize(rel));
         }
 
         /// <summary>
@@ -73,33 +59,33 @@ namespace Insight.WS.Service.SuperDentist
             var result = Verify(title + Secret);
             if (!result.Successful) return result;
 
-            var topics = new List<SDT_Topic>();
             using (var context = new WSEntities())
             {
                 var cate = context.BASE_Category.Single(c => c.Alias == "Tags");
-                var tags = context.MasterData.Where(m => m.CategoryId == cate.ID).Select(m => m.Name);
-                foreach (var tag in tags)
-                {
-                    if (!title.Contains(tag)) continue;
-
-                    var list = context.SDT_Topic.Where(t => t.Tags.Contains(tag));
-                    topics.AddRange(list);
-                }
-                var group = topics.GroupBy(t => t.ID).Select(l => new { ID = l.Key, Count = l.Count() });
-                var order = group.OrderByDescending(l => l.Count).Select(id => id.ID).Take(20);
-                var simtopics = context.Topics.Join(order, t => t.TopicId, o => o, (t, o) => t).ToList();
-                return result.Success(Serialize(simtopics));
+                var tags = context.MasterData.Where(m => m.CategoryId == cate.ID && title.Contains(m.Name)).Select(m => m.Name).ToList();
+                var sim = Common.SearchTopic(tags);
+                return result.Success(Serialize(sim));
             }
         }
 
         /// <summary>
-        /// 搜素话题
+        /// 搜索话题
         /// </summary>
-        /// <param name="key">关键词</param>
+        /// <param name="keys">关键词</param>
+        /// <param name="gid">群组ID（可为空）</param>
         /// <returns>JsonResult</returns>
-        public JsonResult SearchTopics(string key)
+        public JsonResult SearchTopics(string keys, string gid)
         {
-            throw new NotImplementedException();
+            var result = Verify(keys + Secret);
+            if (!result.Successful) return result;
+
+            var gp = new GuidParse(gid);
+            if (!gp.Successful) return result.InvalidGuid();
+
+            var tags = keys.Split(Convert.ToChar(",")).ToList();
+            var rel = Common.SearchTopic(tags, gp.Guid);
+            var sim = Common.SearchTopic(tags, gp.Guid, "title", 10);
+            return result.Success(Serialize(rel.Union(sim).OrderByDescending(t => t.Agrees)));
         }
 
         /// <summary>

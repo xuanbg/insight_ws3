@@ -11,33 +11,17 @@ namespace Insight.WS.Server.Common.ORM
 {
     using System;
     using System.Runtime.Serialization;
-    using System.Collections.Generic;
-    
-    [DataContract(IsReference = true)]
     
     public partial class Topics
     {
-    	[DataMember]
-        public System.Guid ID { get; set; }
-    	[DataMember]
-        public Nullable<System.Guid> GroupId { get; set; }
-    	[DataMember]
-        public System.Guid TopicId { get; set; }
-    	[DataMember]
-        public bool Private { get; set; }
-    	[DataMember]
+        public Nullable<System.Guid> ID { get; set; }
+        public Nullable<bool> Private { get; set; }
         public string Title { get; set; }
-    	[DataMember]
         public Nullable<System.Guid> SpeechId { get; set; }
-    	[DataMember]
         public string Content { get; set; }
-    	[DataMember]
         public Nullable<System.Guid> MemberId { get; set; }
-    	[DataMember]
         public string Portrait { get; set; }
-    	[DataMember]
         public Nullable<int> Agrees { get; set; }
-    	[DataMember]
         public Nullable<System.DateTime> PublishTime { get; set; }
     }
 }

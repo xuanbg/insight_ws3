@@ -22,8 +22,9 @@ namespace Insight.WS.Test.Interface
             //var json = Encoding.UTF8.GetString(buffer);
             //var obj = Deserialize<Session>(json);
             //GetToken();
-            GetSimilarTopics();
-            GetRelateTopics();
+            GetSimilarTopics("大王龋齿");
+            GetRelateTopics("龋齿,测试");
+            SearchTopics("大王,测试,龋齿");
             var mobile = "18600740252";
             //UserSession = Register(GetSmsVerifyCode("1", mobile), mobile);
             //UserSession = ResetPassword(GetSmsVerifyCode("2", mobile), mobile, "123456");
@@ -39,7 +40,7 @@ namespace Insight.WS.Test.Interface
             //AddAttitude(sid, 1);
             //AddComment(sid);
             //AddPraise(cid, 1);
-            //GetTopics();
+            GetTopics();
             //GetTopic(tid);
             //GetSpeechs(tid);
             //GetSpeech(sid);
@@ -48,20 +49,27 @@ namespace Insight.WS.Test.Interface
             //Logout();
         }
 
-        private static void GetSimilarTopics()
+        private static void SearchTopics(string keys)
         {
-            var url = BassAddress + "simtopics";
-            var title = "大王龋齿";
+            var url = BassAddress + "topics/search";
+            var data = $"keys={keys}&gid={null}";
+            var author = Base64(Hash(keys + Secret));
+            var result = HttpRequest(url, "GET", author, data);
+            PutResult(result);
+        }
+
+        private static void GetSimilarTopics(string title)
+        {
+            var url = BassAddress + "topics/similar";
             var data = $"title={title}";
             var author = Base64(Hash(title + Secret));
             var result = HttpRequest(url, "GET", author, data);
             PutResult(result);
         }
 
-        private static void GetRelateTopics()
+        private static void GetRelateTopics(string tags)
         {
-            var url = BassAddress + "reltopics";
-            var tags = "龋齿";
+            var url = BassAddress + "topics/relate";
             var data = $"tags={tags}";
             var author = Base64(Hash(tags + Secret));
             var result = HttpRequest(url, "GET", author, data);

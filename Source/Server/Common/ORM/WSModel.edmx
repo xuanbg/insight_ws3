@@ -1530,27 +1530,6 @@
           <Property Name="Agrees" Type="int" Nullable="false" />
           <Property Name="PublishTime" Type="datetime" />
         </EntityType>
-        <!--生成过程中发现错误:
-警告 6002: 表/视图“Insight.dbo.Topics”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
-        <EntityType Name="Topics">
-          <Key>
-            
-            
-            
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="GroupId" Type="uniqueidentifier" />
-          <Property Name="TopicId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Private" Type="bit" Nullable="false" />
-          <Property Name="Title" Type="nvarchar" MaxLength="64" Nullable="false" />
-          <Property Name="SpeechId" Type="uniqueidentifier" />
-          <Property Name="Content" Type="nvarchar(max)" />
-          <Property Name="MemberId" Type="uniqueidentifier" />
-          <Property Name="Portrait" Type="varchar" MaxLength="64" />
-          <Property Name="Agrees" Type="int" />
-          <Property Name="PublishTime" Type="datetime" />
-        </EntityType>
         <Association Name="FK__ABS_Advan__Accou__3D3402A0">
           <End Role="ABS_Advance" Type="Self.ABS_Advance" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -4775,7 +4754,7 @@
                 <Property Name="OwnerUserId" Type="uniqueidentifier" Nullable="false" />
                 <Property Name="ManageUserId" Type="uniqueidentifier" />
                 <Property Name="IsJoin" Type="bit" />
-                <Property Name="IsCare" Type="bit" />
+                <Property Name="IsCare" Type="bit" Nullable="false" />
               </RowType>
             </CollectionType>
           </ReturnType>
@@ -4822,6 +4801,25 @@
                 <Property Name="PublishTime" Type="datetime" />
                 <Property Name="IsSpeeched" Type="bit" />
                 <Property Name="IsCare" Type="bit" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="GetTopics" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="GroupId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="All" Type="bit" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="ID" Type="uniqueidentifier" />
+                <Property Name="Private" Type="bit" />
+                <Property Name="Title" Type="nvarchar" MaxLength="64" />
+                <Property Name="SpeechId" Type="uniqueidentifier" />
+                <Property Name="Content" Type="nvarchar(max)" />
+                <Property Name="MemberId" Type="uniqueidentifier" />
+                <Property Name="Portrait" Type="nvarchar" MaxLength="64" />
+                <Property Name="Agrees" Type="int" />
+                <Property Name="PublishTime" Type="datetime" />
               </RowType>
             </CollectionType>
           </ReturnType>
@@ -5020,21 +5018,6 @@
     [Speechs].[Agrees] AS [Agrees], 
     [Speechs].[PublishTime] AS [PublishTime]
     FROM [dbo].[Speechs] AS [Speechs]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="Topics" EntityType="Self.Topics" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Topics].[ID] AS [ID], 
-    [Topics].[GroupId] AS [GroupId], 
-    [Topics].[TopicId] AS [TopicId], 
-    [Topics].[Private] AS [Private], 
-    [Topics].[Title] AS [Title], 
-    [Topics].[SpeechId] AS [SpeechId], 
-    [Topics].[Content] AS [Content], 
-    [Topics].[MemberId] AS [MemberId], 
-    [Topics].[Portrait] AS [Portrait], 
-    [Topics].[Agrees] AS [Agrees], 
-    [Topics].[PublishTime] AS [PublishTime]
-    FROM [dbo].[Topics] AS [Topics]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK__ABS_Advan__Accou__3D3402A0" Association="Self.FK__ABS_Advan__Accou__3D3402A0">
             <End Role="ABS_Advance" EntitySet="ABS_Advance" />
@@ -7153,7 +7136,6 @@
             <Parameter Name="UserId" Mode="In" Type="Guid" />
           </FunctionImport>
           <EntitySet Name="Speechs" EntityType="WSModel.Speechs" />
-          <EntitySet Name="Topics" EntityType="WSModel.Topics" />
           <EntitySet Name="SDT_Speech" EntityType="WSModel.SDT_Speech" />
           <AssociationSet Name="FK__SDT_Speec__CaseI__1CC7FE65" Association="WSModel.FK__SDT_Speec__CaseI__1CC7FE65">
             <End Role="SDC_FirstVisit" EntitySet="SDC_FirstVisit" />
@@ -7177,7 +7159,11 @@
           </AssociationSet>
           <EntitySet Name="Groups" EntityType="WSModel.Groups" />
           <FunctionImport Name="GetGroups" IsComposable="true" ReturnType="Collection(WSModel.Group)">
-            <Parameter Name="UserId" Mode="In" Type="Guid" />
+          <Parameter Name="UserId" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="GetTopics" IsComposable="true" ReturnType="Collection(WSModel.Topics)">
+          <Parameter Name="GroupId" Mode="In" Type="Guid" />
+            <Parameter Name="All" Mode="In" Type="Boolean" />
           </FunctionImport>
           </EntityContainer>
         <EntityType Name="ABS_Advance_Detail">
@@ -12255,22 +12241,6 @@
           <Property Name="Agrees" Type="Int32" Nullable="false" />
           <Property Name="PublishTime" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityType Name="Topics">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Guid" Nullable="false" />
-          <Property Name="GroupId" Type="Guid" />
-          <Property Name="TopicId" Type="Guid" Nullable="false" />
-          <Property Name="Private" Type="Boolean" Nullable="false" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Name="SpeechId" Type="Guid" />
-          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="MemberId" Type="Guid" />
-          <Property Name="Portrait" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="Agrees" Type="Int32" />
-          <Property Name="PublishTime" Type="DateTime" Precision="3" />
-        </EntityType>
         <EntityType Name="SDT_Speech">
           <Key>
             <PropertyRef Name="ID" />
@@ -12393,6 +12363,17 @@
           <Property Type="Guid" Name="ManageUserId" Nullable="true" />
           <Property Type="Boolean" Name="IsJoin" />
           <Property Type="Boolean" Name="IsCare" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Topics">
+          <Property Type="Guid" Name="ID" Nullable="true" />
+          <Property Type="Boolean" Name="Private" Nullable="true" />
+          <Property Type="String" Name="Title" Nullable="true" MaxLength="64" />
+          <Property Type="Guid" Name="SpeechId" Nullable="true" />
+          <Property Type="String" Name="Content" Nullable="true" />
+          <Property Type="Guid" Name="MemberId" Nullable="true" />
+          <Property Type="String" Name="Portrait" Nullable="true" MaxLength="64" />
+          <Property Type="Int32" Name="Agrees" Nullable="true" />
+          <Property Type="DateTime" Name="PublishTime" Nullable="true" Precision="23" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -14007,23 +13988,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Topics">
-            <EntityTypeMapping TypeName="WSModel.Topics">
-              <MappingFragment StoreEntitySet="Topics">
-                <ScalarProperty Name="PublishTime" ColumnName="PublishTime" />
-                <ScalarProperty Name="Agrees" ColumnName="Agrees" />
-                <ScalarProperty Name="Portrait" ColumnName="Portrait" />
-                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
-                <ScalarProperty Name="Content" ColumnName="Content" />
-                <ScalarProperty Name="SpeechId" ColumnName="SpeechId" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Private" ColumnName="Private" />
-                <ScalarProperty Name="TopicId" ColumnName="TopicId" />
-                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="SDT_Speech">
             <EntityTypeMapping TypeName="WSModel.SDT_Speech">
               <MappingFragment StoreEntitySet="SDT_Speech">
@@ -14073,6 +14037,21 @@
                 <ScalarProperty Name="ManageUserId" ColumnName="ManageUserId" />
                 <ScalarProperty Name="IsJoin" ColumnName="IsJoin" />
                 <ScalarProperty Name="IsCare" ColumnName="IsCare" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetTopics" FunctionName="WSModel.Store.GetTopics">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WSModel.Topics">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Private" ColumnName="Private" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="SpeechId" ColumnName="SpeechId" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="Portrait" ColumnName="Portrait" />
+                <ScalarProperty Name="Agrees" ColumnName="Agrees" />
+                <ScalarProperty Name="PublishTime" ColumnName="PublishTime" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
