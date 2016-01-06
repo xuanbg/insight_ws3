@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
@@ -93,14 +95,34 @@ namespace Insight.WS.Service.SuperDentist
         /// 新增话题
         /// </summary>
         /// <param name="topic">话题数据对象</param>
+        /// <param name="gid">群组ID（可为空）</param>
         /// <returns>JsonResult</returns>
-        public JsonResult AddTopic(SDT_Topic topic)
+        public JsonResult AddTopic(SDT_Topic topic, string gid)
         {
-            var result = Verify();
+            Session us;
+            var result = Verify(out us);
             if (!result.Successful) return result;
 
-            var cmd = InsertData(topic);
-            var id = SqlScalar(cmd);
+            var gp = new GuidParse(gid);
+            if (!gp.Successful) return result.InvalidGuid();
+
+            object id;
+            topic.CreatorUserId = us.UserId;
+            if (gp.Guid.HasValue)
+            {
+                var forward = new SDT_Forward
+                {
+                    GroupId = (Guid) gp.Guid,
+                    CreatorUserId = topic.CreatorUserId
+                };
+                var cmds = new List<SqlCommand> {InsertData(topic), InsertData(forward)};
+                id = SqlExecute(cmds, 0);
+            }
+            else
+            {
+                var cmd = InsertData(topic);
+                id = SqlScalar(cmd);
+            }
             return id == null ? result.DataBaseError() : result.Success(id.ToString());
         }
 
@@ -111,7 +133,8 @@ namespace Insight.WS.Service.SuperDentist
         /// <returns>JsonResult</returns>
         public JsonResult RemovTopic(string id)
         {
-            var result = Verify();
+            Session us;
+            var result = Verify(out us);
             if (!result.Successful) return result;
 
             Guid tid;
@@ -122,7 +145,6 @@ namespace Insight.WS.Service.SuperDentist
                 var topic = context.SDT_Topic.SingleOrDefault(t => t.ID == tid);
                 if (topic == null) return result.NotFound();
 
-                var us = GetAuthorization<Session>();
                 if (us.UserId != topic.CreatorUserId) result.Forbidden();
 
                 topic.Validity = false;
@@ -137,7 +159,8 @@ namespace Insight.WS.Service.SuperDentist
         /// <returns>JsonResult</returns>
         public JsonResult EditTopic(SDT_Topic topic)
         {
-            var result = Verify();
+            Session us;
+            var result = Verify(out us);
             if (!result.Successful) return result;
 
             using (var context = new WSEntities())
@@ -145,7 +168,6 @@ namespace Insight.WS.Service.SuperDentist
                 var data = context.SDT_Topic.SingleOrDefault(t => t.ID == topic.ID);
                 if (data == null) return result.NotFound();
 
-                var us = GetAuthorization<Session>();
                 if (us.UserId != data.CreatorUserId) result.Forbidden();
 
                 data.Title = topic.Title;
@@ -187,9 +209,11 @@ namespace Insight.WS.Service.SuperDentist
         /// <returns>JsonResult</returns>
         public JsonResult ForwardTopic(SDT_Forward forward)
         {
-            var result = Verify();
+            Session us;
+            var result = Verify(out us);
             if (!result.Successful) return result;
 
+            forward.CreatorUserId = us.UserId;
             var cmd = InsertData(forward);
             return SqlNonQuery(cmd) > 0 ? result : result.DataBaseError();
         }
@@ -225,9 +249,11 @@ namespace Insight.WS.Service.SuperDentist
         /// <returns>JsonResult</returns>
         public JsonResult AddSpeech(SDT_Speech speech)
         {
-            var result = Verify();
+            Session us;
+            var result = Verify(out us);
             if (!result.Successful) return result;
 
+            speech.CreatorUserId = us.UserId;
             var cmd = InsertData(speech);
             var id = SqlScalar(cmd);
             return id == null ? result.DataBaseError() : result.Success(id.ToString());
@@ -240,7 +266,8 @@ namespace Insight.WS.Service.SuperDentist
         /// <returns>JsonResult</returns>
         public JsonResult RemoveSpeech(string id)
         {
-            var result = Verify();
+            Session us;
+            var result = Verify(out us);
             if (!result.Successful) return result;
 
             Guid sid;
@@ -251,7 +278,6 @@ namespace Insight.WS.Service.SuperDentist
                 var speech = context.SDT_Speech.SingleOrDefault(s => s.ID == sid);
                 if (speech == null) return result.NotFound();
 
-                var us = GetAuthorization<Session>();
                 if (us.UserId != speech.CreatorUserId) result.Forbidden();
 
                 speech.Validity = false;
@@ -266,7 +292,8 @@ namespace Insight.WS.Service.SuperDentist
         /// <returns>JsonResult</returns>
         public JsonResult EditSpeech(SDT_Speech speech)
         {
-            var result = Verify();
+            Session us;
+            var result = Verify(out us);
             if (!result.Successful) return result;
 
             using (var context = new WSEntities())
@@ -274,7 +301,6 @@ namespace Insight.WS.Service.SuperDentist
                 var data = context.SDT_Speech.SingleOrDefault(t => t.ID == speech.ID);
                 if (data == null) return result.NotFound();
 
-                var us = GetAuthorization<Session>();
                 if (us.UserId != data.CreatorUserId) result.Forbidden();
 
                 data.Content = speech.Content;
@@ -314,9 +340,11 @@ namespace Insight.WS.Service.SuperDentist
         /// <returns>JsonResult</returns>
         public JsonResult AddAttitude(SDT_Attitude attitude)
         {
-            var result = Verify();
+            Session us;
+            var result = Verify(out us);
             if (!result.Successful) return result;
 
+            attitude.CreatorUserId = us.UserId;
             if (attitude.Type < 3)
             {
                 var t = 3 - attitude.Type;
@@ -370,9 +398,11 @@ namespace Insight.WS.Service.SuperDentist
         /// <returns>JsonResult</returns>
         public JsonResult AddComment(SDT_Comment comment)
         {
-            var result = Verify();
+            Session us;
+            var result = Verify(out us);
             if (!result.Successful) return result;
 
+            comment.CreatorUserId = us.UserId;
             var cmd = InsertData(comment);
             var id = SqlScalar(cmd);
             return id == null ? result.DataBaseError() : result.Success(id.ToString());
@@ -385,7 +415,8 @@ namespace Insight.WS.Service.SuperDentist
         /// <returns>JsonResult</returns>
         public JsonResult RemoveComment(string id)
         {
-            var result = Verify();
+            Session us;
+            var result = Verify(out us);
             if (!result.Successful) return result;
 
             Guid cid;
@@ -396,7 +427,6 @@ namespace Insight.WS.Service.SuperDentist
                 var comment = context.SDT_Comment.SingleOrDefault(s => s.ID == cid);
                 if (comment == null) return result.NotFound();
 
-                var us = GetAuthorization<Session>();
                 if (us.UserId != comment.CreatorUserId) result.Forbidden();
 
                 comment.Validity = false;
@@ -411,7 +441,8 @@ namespace Insight.WS.Service.SuperDentist
         /// <returns>JsonResult</returns>
         public JsonResult EditComment(SDT_Comment comment)
         {
-            var result = Verify();
+            Session us;
+            var result = Verify(out us);
             if (!result.Successful) return result;
 
             using (var context = new WSEntities())
@@ -419,7 +450,6 @@ namespace Insight.WS.Service.SuperDentist
                 var data = context.SDT_Comment.SingleOrDefault(s => s.ID == comment.ID);
                 if (data == null) return result.NotFound();
 
-                var us = GetAuthorization<Session>();
                 if (us.UserId != data.CreatorUserId) result.Forbidden();
 
                 data.Content = comment.Content;
@@ -434,9 +464,11 @@ namespace Insight.WS.Service.SuperDentist
         /// <returns>JsonResult</returns>
         public JsonResult AddPraise(SDT_Praise praise)
         {
-            var result = Verify();
+            Session us;
+            var result = Verify(out us);
             if (!result.Successful) return result;
 
+            praise.CreatorUserId = us.UserId;
             var cmd = InsertData(praise);
             var id = SqlScalar(cmd);
             return id == null ? result.DataBaseError() : result.Success(id.ToString());

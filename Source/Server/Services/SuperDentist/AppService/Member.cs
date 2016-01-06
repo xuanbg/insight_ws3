@@ -39,7 +39,8 @@ namespace Insight.WS.Service.SuperDentist
         /// <returns>JsonResult</returns>
         public JsonResult SetMemberInfo(MDG_Member member)
         {
-            var result = Verify();
+            Session us;
+            var result = Verify(out us);
             if (!result.Successful) return result;
 
             using (var context = new WSEntities())
@@ -47,7 +48,6 @@ namespace Insight.WS.Service.SuperDentist
                 var data = context.MDG_Member.SingleOrDefault(m => m.MID == member.MID);
                 if (data == null) return result.NotFound();
 
-                var us = GetAuthorization<Session>();
                 if (us.UserId != data.MID) result.Forbidden();
 
                 data.Portrait = member.Portrait;
@@ -89,20 +89,17 @@ namespace Insight.WS.Service.SuperDentist
         /// <summary>
         /// 获取收藏列表
         /// </summary>
-        /// <param name="id">会员ID</param>
         /// <param name="type">收藏类型</param>
         /// <returns>JsonResult</returns>
-        public JsonResult GetFavorites(string id, int type)
+        public JsonResult GetFavorites(int type)
         {
-            var result = Verify();
+            Session us;
+            var result = Verify(out us);
             if (!result.Successful) return result;
-
-            Guid uid;
-            if (!Guid.TryParse(id, out uid)) return result.InvalidGuid();
 
             using (var context = new WSEntities())
             {
-                var favorites = context.MDE_Favorites.Where(f => f.CreatorUserId == uid && f.Type == type).ToList();
+                var favorites = context.MDE_Favorites.Where(f => f.CreatorUserId == us.UserId && f.Type == type).ToList();
                 return result.Success(Serialize(favorites));
             }
         }
@@ -114,9 +111,11 @@ namespace Insight.WS.Service.SuperDentist
         /// <returns>JsonResult</returns>
         public JsonResult Favorite(MDE_Favorites favorites)
         {
-            var result = Verify();
+            Session us;
+            var result = Verify(out us);
             if (!result.Successful) return result;
 
+            favorites.CreatorUserId = us.UserId;
             var cmd = InsertData(favorites);
             var id = SqlScalar(cmd);
             return id == null ? result.DataBaseError() : result.Success(id.ToString());
@@ -129,7 +128,8 @@ namespace Insight.WS.Service.SuperDentist
         /// <returns>JsonResult</returns>
         public JsonResult RemoveFavorite(string id)
         {
-            var result = Verify();
+            Session us;
+            var result = Verify(out us);
             if (!result.Successful) return result;
 
             Guid fid;
@@ -140,7 +140,6 @@ namespace Insight.WS.Service.SuperDentist
                 var favorite = context.MDE_Favorites.SingleOrDefault(f => f.ID == fid);
                 if (favorite == null) return result.NotFound();
 
-                var us = GetAuthorization<Session>();
                 if (us.UserId != favorite.CreatorUserId) result.Forbidden();
 
                 context.MDE_Favorites.Remove(favorite);
@@ -159,7 +158,8 @@ namespace Insight.WS.Service.SuperDentist
         /// <returns>JsonResult</returns>
         public JsonResult GetMessages(string id)
         {
-            var result = Verify();
+            Session us;
+            var result = Verify(out us);
             if (!result.Successful) return result;
 
             Guid rid;
@@ -167,7 +167,6 @@ namespace Insight.WS.Service.SuperDentist
 
             using (var context = new WSEntities())
             {
-                var us = GetAuthorization<Session>();
                 var send = context.MDE_Message.Where(m => m.CreatorUserId == us.UserId && m.ReceiveUserId == rid);
                 var recv = context.MDE_Message.Where(m => m.CreatorUserId == rid && m.ReceiveUserId == us.UserId);
                 foreach (var message in recv)
@@ -187,9 +186,11 @@ namespace Insight.WS.Service.SuperDentist
         /// <returns>JsonResult</returns>
         public JsonResult AddMessage(MDE_Message message)
         {
-            var result = Verify();
+            Session us;
+            var result = Verify(out us);
             if (!result.Successful) return result;
 
+            message.CreatorUserId = us.UserId;
             var cmd = InsertData(message);
             var id = SqlScalar(cmd);
             return id == null ? result.DataBaseError() : result.Success(id.ToString());
@@ -202,7 +203,8 @@ namespace Insight.WS.Service.SuperDentist
         /// <returns>JsonResult</returns>
         public JsonResult RemoveMessage(string id)
         {
-            var result = Verify();
+            Session us;
+            var result = Verify(out us);
             if (!result.Successful) return result;
 
             Guid mid;
@@ -213,7 +215,6 @@ namespace Insight.WS.Service.SuperDentist
                 var message = context.MDE_Message.SingleOrDefault(f => f.ID == mid);
                 if (message == null) return result.NotFound();
 
-                var us = GetAuthorization<Session>();
                 if (us.UserId != message.CreatorUserId && us.UserId != message.ReceiveUserId) result.Forbidden();
 
                 context.MDE_Message.Remove(message);
@@ -228,7 +229,8 @@ namespace Insight.WS.Service.SuperDentist
         /// <returns>JsonResult</returns>
         public JsonResult SendMessage(string id)
         {
-            var result = Verify();
+            Session us;
+            var result = Verify(out us);
             if (!result.Successful) return result;
 
             Guid mid;
@@ -239,7 +241,6 @@ namespace Insight.WS.Service.SuperDentist
                 var message = context.MDE_Message.SingleOrDefault(t => t.ID == mid);
                 if (message == null) return result.NotFound();
 
-                var us = GetAuthorization<Session>();
                 if (us.UserId != message.CreatorUserId) result.Forbidden();
 
                 message.SendTime = DateTime.Now;

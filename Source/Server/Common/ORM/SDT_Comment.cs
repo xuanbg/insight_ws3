@@ -13,7 +13,6 @@ namespace Insight.WS.Server.Common.ORM
     using System.Runtime.Serialization;
     using System.Collections.Generic;
     
-    [DataContract(IsReference = true)]
     [KnownType(typeof(SYS_User))]
     [KnownType(typeof(SDT_Praise))]
     [KnownType(typeof(SDT_Speech))]

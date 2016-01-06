@@ -40,13 +40,24 @@ namespace Insight.WS.Server.Common
         /// <returns>JsonResult</returns>
         public static JsonResult Verify()
         {
+            Session obj;
+            return Verify(out obj);
+        }
+
+        /// <summary>
+        /// 通过Session校验是否有权限访问
+        /// </summary>
+        /// <param name="session">用户会话</param>
+        /// <returns></returns>
+        public static JsonResult Verify(out Session session)
+        {
+            session = GetAuthorization<Session>();
             var result = new JsonResult();
-            var obj = GetAuthorization<Session>();
-            if (obj == null) return result.InvalidAuth();
+            if (session == null) return result.InvalidAuth();
 
-            if (obj.Version < CompatibleVersion || obj.Version > UpdateVersion) return result.Incompatible();
+            if (session.Version < CompatibleVersion || session.Version > UpdateVersion) return result.Incompatible();
 
-            var us = Verification(obj);
+            var us = Verification(session);
             switch (us.LoginResult)
             {
                 case LoginResult.Success:

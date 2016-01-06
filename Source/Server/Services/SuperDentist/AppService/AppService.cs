@@ -79,10 +79,10 @@ namespace Insight.WS.Service.SuperDentist
         /// <returns>JsonResult</returns>
         public JsonResult Logout()
         {
-            var result = Verify();
+            Session us;
+            var result = Verify(out us);
             if (!result.Successful) return result;
 
-            var us = GetAuthorization<Session>();
             return SetUserOffline(us, us.LoginName) ? result : result.NotFound();
         }
 
@@ -93,10 +93,10 @@ namespace Insight.WS.Service.SuperDentist
         /// <returns>JsonResult</returns>
         public JsonResult ChangePassword(string password)
         {
-            var result = Verify();
+            Session us;
+            var result = Verify(out us);
             if (!result.Successful) return result;
 
-            var us = GetAuthorization<Session>();
             return UpdateSignature(us, us.UserId, password) ? result : result.NotFound();
         }
 
@@ -195,9 +195,12 @@ namespace Insight.WS.Service.SuperDentist
         /// <returns>JsonResult</returns>
         public JsonResult AddGroup(SDG_Group group)
         {
-            var result = Verify();
+            Session us;
+            var result = Verify(out us);
             if (!result.Successful) return result;
 
+            group.CreatorUserId = us.UserId;
+            group.OwnerUserId = us.UserId;
             var cmd = InsertData(group);
             var id = SqlScalar(cmd);
             return id == null ? result.DataBaseError() : result.Success(id.ToString());
@@ -210,7 +213,8 @@ namespace Insight.WS.Service.SuperDentist
         /// <returns>JsonResult</returns>
         public JsonResult RemoveGroup(string id)
         {
-            var result = Verify();
+            Session us;
+            var result = Verify(out us);
             if (!result.Successful) return result;
 
             Guid gid;
@@ -221,7 +225,6 @@ namespace Insight.WS.Service.SuperDentist
                 var group = context.SDG_Group.SingleOrDefault(g => g.ID == gid);
                 if (group == null) return result.NotFound();
 
-                var us = GetAuthorization<Session>();
                 if (us.UserId != group.ManageUserId && us.UserId != group.OwnerUserId) result.Forbidden();
 
                 group.Validity = false;
@@ -236,7 +239,8 @@ namespace Insight.WS.Service.SuperDentist
         /// <returns>JsonResult</returns>
         public JsonResult EditGroup(SDG_Group group)
         {
-            var result = Verify();
+            Session us;
+            var result = Verify(out us);
             if (!result.Successful) return result;
 
             using (var context = new WSEntities())
@@ -244,15 +248,43 @@ namespace Insight.WS.Service.SuperDentist
                 var data = context.SDG_Group.SingleOrDefault(t => t.ID == group.ID);
                 if (data == null) return result.NotFound();
 
-                var us = GetAuthorization<Session>();
                 if (us.UserId != data.ManageUserId && us.UserId != data.OwnerUserId) result.Forbidden();
 
                 data.Name = group.Name;
                 data.Description = group.Description;
                 data.Icon = group.Icon;
                 data.Picture = group.Picture;
-                data.OwnerUserId = group.OwnerUserId;
                 data.ManageUserId = group.ManageUserId;
+                return context.SaveChanges() > 0 ? result : result.DataBaseError();
+            }
+        }
+
+        /// <summary>
+        /// 转让群主
+        /// </summary>
+        /// <param name="id">群组ID</param>
+        /// <param name="mid">新的群主会员ID</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult Transfer(string id, string mid)
+        {
+            Session us;
+            var result = Verify(out us);
+            if (!result.Successful) return result;
+
+            Guid gid;
+            if (!Guid.TryParse(id, out gid)) return result.InvalidGuid();
+
+            Guid uid;
+            if (!Guid.TryParse(mid, out uid)) return result.InvalidGuid();
+
+            using (var context = new WSEntities())
+            {
+                var data = context.SDG_Group.SingleOrDefault(t => t.ID == gid);
+                if (data == null) return result.NotFound();
+
+                if (us.UserId != data.OwnerUserId) result.Forbidden();
+
+                data.OwnerUserId = uid;
                 return context.SaveChanges() > 0 ? result : result.DataBaseError();
             }
         }
@@ -279,13 +311,14 @@ namespace Insight.WS.Service.SuperDentist
         }
 
         /// <summary>
-        /// 同意加入群组
+        /// 开除群组成员
         /// </summary>
         /// <param name="id">群组成员数据记录ID</param>
         /// <returns>JsonResult</returns>
-        public JsonResult AddMember(string id)
+        public JsonResult RemoveMember(string id)
         {
-            var result = Verify();
+            Session us;
+            var result = Verify(out us);
             if (!result.Successful) return result;
 
             Guid rid;
@@ -297,7 +330,33 @@ namespace Insight.WS.Service.SuperDentist
                 if (data == null) return result.NotFound();
 
                 var group = context.SDG_Group.Single(g => g.ID == data.GroupId);
-                var us = GetAuthorization<Session>();
+                if (us.UserId != group.ManageUserId && us.UserId != group.OwnerUserId) result.Forbidden();
+
+                context.SDG_GroupMember.Remove(data);
+                return context.SaveChanges() > 0 ? result : result.DataBaseError();
+            }
+        }
+
+        /// <summary>
+        /// 同意加入群组
+        /// </summary>
+        /// <param name="id">群组成员数据记录ID</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult AddMember(string id)
+        {
+            Session us;
+            var result = Verify(out us);
+            if (!result.Successful) return result;
+
+            Guid rid;
+            if (!Guid.TryParse(id, out rid)) return result.InvalidGuid();
+
+            using (var context = new WSEntities())
+            {
+                var data = context.SDG_GroupMember.SingleOrDefault(r => r.ID == rid);
+                if (data == null) return result.NotFound();
+
+                var group = context.SDG_Group.Single(g => g.ID == data.GroupId);
                 if (us.UserId != group.ManageUserId && us.UserId != group.OwnerUserId) result.Forbidden();
 
                 data.Validity = true;
@@ -306,29 +365,29 @@ namespace Insight.WS.Service.SuperDentist
         }
 
         /// <summary>
-        /// 开除群组成员
+        /// 获取群组成员列表
         /// </summary>
-        /// <param name="id">群组成员数据记录ID</param>
+        /// <param name="id">群组ID</param>
+        /// <param name="member">是否群组成员</param>
         /// <returns>JsonResult</returns>
-        public JsonResult RemoveMember(string id)
+        public JsonResult GetGroupMembers(string id, bool member)
         {
-            var result = Verify();
+            Session us;
+            var result = Verify(out us);
             if (!result.Successful) return result;
 
-            Guid rid;
-            if (!Guid.TryParse(id, out rid)) return result.InvalidGuid();
+            Guid gid;
+            if (!Guid.TryParse(id, out gid)) return result.InvalidGuid();
 
             using (var context = new WSEntities())
             {
-                var data = context.SDG_GroupMember.SingleOrDefault(r => r.ID == rid);
-                if (data == null) return result.NotFound();
+                var group = context.SDG_Group.SingleOrDefault(g => g.ID == gid);
+                if (group == null) return result.NotFound();
 
-                var group = context.SDG_Group.Single(g => g.ID == data.GroupId);
-                var us = GetAuthorization<Session>();
                 if (us.UserId != group.ManageUserId && us.UserId != group.OwnerUserId) result.Forbidden();
 
-                context.SDG_GroupMember.Remove(data);
-                return context.SaveChanges() > 0 ? result : result.DataBaseError();
+                var list = context.SDG_GroupMember.Where(m => m.Validity == member && m.GroupId == gid && m.MemberId != group.OwnerUserId).ToList();
+                return result.Success(Serialize(list));
             }
         }
 
