@@ -14,6 +14,7 @@ namespace Insight.WS.Log
         {
             CreateHost();
             Host.Open();
+            ReadRule();
         }
 
         protected override void OnStop()

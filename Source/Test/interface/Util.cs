@@ -22,7 +22,7 @@ namespace Insight.WS.Test.Interface
     {
         public const string Secret = "842A381C91CE43A98720825601C22A56";
         public static Session UserSession;
-        private static readonly bool Compres = bool.Parse(GetAppSetting("IsCompres"));
+        public static bool Compres = bool.Parse(GetAppSetting("IsCompres"));
 
         /// <summary>
         /// 生成用于接口验证的Authorization字符串

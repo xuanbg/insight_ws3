@@ -1,13 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Security.Cryptography;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
+using System.ServiceModel.Web;
 using System.Text;
 using Microsoft.Samples.GZipEncoder;
-
+using System.Threading;
 namespace Insight.WS.Log
 {
     public static class Util
@@ -44,6 +48,16 @@ namespace Insight.WS.Log
         /// 运行中的服务主机
         /// </summary>
         public static ServiceHost Host;
+
+        /// <summary>
+        /// 日志规则列表
+        /// </summary>
+        public static List<SYS_Logs_Rules> Rules;
+
+        /// <summary>
+        /// 进程同步基元
+        /// </summary>
+        private static readonly Mutex Mutex = new Mutex();
 
         #endregion
 
@@ -101,11 +115,82 @@ namespace Insight.WS.Log
             return s.Aggregate("", (current, c) => current + c.ToString("X2"));
         }
 
+        /// <summary>
+        /// 在启用Gzip压缩时设置Response参数
+        /// </summary>
+        public static void SetResponseParam()
+        {
+            var response = WebOperationContext.Current.OutgoingResponse;
+            response.Headers[HttpResponseHeader.ContentEncoding] = "gzip";
+            response.ContentType = "application/x-gzip";
+        }
+
+        /// <summary>
+        /// 从数据库加载日志规则到缓存
+        /// </summary>
+        public static void ReadRule()
+        {
+            using (var context = new WSEntities())
+            {
+                Rules = context.SYS_Logs_Rules.ToList();
+            }
+        }
+
+        /// <summary>
+        /// 将日志写入数据库
+        /// </summary>
+        /// <param name="log"></param>
+        public static void WriteToDB(SYS_Logs log)
+        {
+            using (var context = new WSEntities())
+            {
+                context.SYS_Logs.Add(log);
+                context.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// 将日志写入文件
+        /// </summary>
+        /// <param name="log"></param>
+        public static void WriteToFile(SYS_Logs log)
+        {
+            Mutex.WaitOne();
+            var path = $"{GetAppSetting("LogLocal")}\\{GetLevelName(log.Level)}\\";
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            path += $"{DateTime.Today.ToString("yyyy-MM-dd")}.log";
+            var time = log.CreateTime.ToString("O");
+            var text = $"[{log.CreateTime.Kind} {time}] [{log.Code}] [{log.Source}] [{log.Action}] Message:{log.Message}\r\n";
+            var buffer = Encoding.UTF8.GetBytes(text);
+            using (var stream = new FileStream(path, FileMode.Append))
+            {
+                stream.Write(buffer, 0, buffer.Length);
+            }
+            Mutex.ReleaseMutex();
+        }
+
+        /// <summary>
+        /// 获取事件等级名称
+        /// </summary>
+        /// <param name="level"></param>
+        /// <returns></returns>
+        private static string GetLevelName(int level)
+        {
+            var name = (Level) level;
+            return name.ToString();
+        }
+
     }
 
     #endregion
 
-
+    /// <summary>
+    /// WebContentTypeMapper
+    /// </summary>
     public class TypeMapper : WebContentTypeMapper
     {
         public override WebContentFormat GetMessageFormatForContentType(string contentType)
@@ -115,4 +200,18 @@ namespace Insight.WS.Log
 
     }
 
+    /// <summary>
+    /// 日志等级
+    /// </summary>
+    public enum Level
+    {
+        Emergency,
+        Alert,
+        Critical,
+        Error,
+        Warning,
+        Notice,
+        Informational,
+        Debug
+    }
 }

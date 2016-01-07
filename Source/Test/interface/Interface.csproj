@@ -74,6 +74,7 @@
     <Compile Include="Entity\SDT_Speech.cs" />
     <Compile Include="Entity\SDT_Topic.cs" />
     <Compile Include="Entity\Speech.cs" />
+    <Compile Include="Entity\SYS_Logs.cs" />
     <Compile Include="Entity\Topic.cs" />
     <Compile Include="Entity\Topics.cs" />
     <Compile Include="Program.cs" />

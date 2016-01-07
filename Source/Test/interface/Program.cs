@@ -17,7 +17,7 @@ namespace Insight.WS.Test.Interface
         [STAThread]
         static void Main()
         {
-
+            SendLog();
             //var buffer = Convert.FromBase64String("eyJNYWNoaW5lSWQiOiI4MjlGRTcwOTE5MzEwMTVFM0IxNTJFMkNGQ0MxMEQ5QyIsIlVzZXJUeXBlIjotMSwiRGVwdElkIjpudWxsLCJDbGllbnRUeXBlIjoyLCJJRCI6MCwiTG9naW5SZXN1bHQiOjEsIlVzZXJJZCI6IjU5NjdmMGMzLWMwYWEtZTUxMS05NDBkLWU4NGE0ZGNmYTY5MCIsIlVzZXJOYW1lIjoieW9uZyIsIkZhaWx1cmVDb3VudCI6MiwiTG9naW5OYW1lIjoiMTg2MjgwNzA3MzkiLCJFeHRlbnNpb25EYXRhIjp7fSwiT25saW5lU3RhdHVzIjp0cnVlLCJPcGVuSWQiOm51bGwsIlZlcnNpb24iOjEwMDAsIlZhbGlkaXR5Ijp0cnVlLCJCYXNlQWRkcmVzcyI6bnVsbCwiU2lnbmF0dXJlIjoiQkMxMENEMzIyNzhCRkYyRjU0MTkyRTY1NTY0OTZDRDMiLCJEZXB0TmFtZSI6bnVsbCwiTGFzdENvbm5lY3QiOiJcL0RhdGUoMTQ1MTAyMzU2OTc4NilcLyJ9");
             //var json = Encoding.UTF8.GetString(buffer);
             //var obj = Deserialize<Session>(json);
@@ -47,6 +47,26 @@ namespace Insight.WS.Test.Interface
             //GetComments(sid);
             //ChangePassword("111111");
             //Logout();
+        }
+
+        private static void SendLog()
+        {
+            Compres = true;
+            var url = "http://localhost:6514/LogServer/logs";
+            var log = new SYS_Logs
+            {
+                ID = Guid.NewGuid(),
+                Level = Level.Alert,
+                Code = "012001",
+                Source = "客户端",
+                Action = "保存订单",
+                Message = "保存成功",
+                CreateTime = DateTime.Now
+            };
+            var dict = new Dictionary<string, SYS_Logs> { { "log", log } };
+            var data = Serialize(dict);
+            var result = HttpRequest(url, "PUT", null, data);
+            Compres = false;
         }
 
         private static void SearchTopics(string keys)
