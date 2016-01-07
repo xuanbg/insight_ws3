@@ -1,4 +1,4 @@
-﻿namespace Insight.WS.Verify
+﻿namespace Insight.WS.Log
 {
     partial class ProjectInstaller
     {
@@ -39,9 +39,9 @@
             // 
             // serviceInstaller
             // 
-            this.serviceInstaller.Description = "Insight 验证服务";
-            this.serviceInstaller.DisplayName = "Insight 验证服务";
-            this.serviceInstaller.ServiceName = "Insight Verify Service";
+            this.serviceInstaller.Description = "Insight 日志服务";
+            this.serviceInstaller.DisplayName = "Insight 日志服务";
+            this.serviceInstaller.ServiceName = "Insight Log Service";
             this.serviceInstaller.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
             // 
             // ProjectInstaller

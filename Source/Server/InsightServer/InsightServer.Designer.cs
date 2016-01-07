@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             // 
-            // WcfService
+            // InsightServer
             // 
             this.ServiceName = "Insight Workstation 3 Service";
 

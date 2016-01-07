@@ -1,6 +1,6 @@
-﻿namespace Insight.WS.Verify
+﻿namespace Insight.WS.Log
 {
-    partial class VerifyServer
+    partial class LogServer
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -23,16 +23,13 @@
         #region 组件设计器生成的代码
 
         /// <summary> 
-        /// 设计器支持所需的方法 - 不要
+        /// 设计器支持所需的方法 - 不要修改
         /// 使用代码编辑器修改此方法的内容。
         /// </summary>
         private void InitializeComponent()
         {
-            // 
-            // VerifyServer
-            // 
-            this.ServiceName = "Insight Verify Service";
-
+            components = new System.ComponentModel.Container();
+            this.ServiceName = "Insight Log Service";
         }
 
         #endregion

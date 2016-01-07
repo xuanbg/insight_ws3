@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Insight.WS.Verify
+namespace Insight.WS.Log
 {
     [RunInstaller(true)]
     public partial class ProjectInstaller : System.Configuration.Install.Installer
