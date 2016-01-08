@@ -16,8 +16,12 @@ namespace Insight.WS.Log
     {
         public System.Guid ID { get; set; }
         public long SN { get; set; }
-        public string Code { get; set; }
         public bool ToDataBase { get; set; }
+        public string Code { get; set; }
+        public int Level { get; set; }
+        public string Source { get; set; }
+        public string Action { get; set; }
+        public string Message { get; set; }
         public System.Guid CreatorUserId { get; set; }
         public System.DateTime CreateTime { get; set; }
     }

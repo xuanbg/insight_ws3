@@ -10,40 +10,19 @@
 namespace Insight.WS.Test.Interface.Entity
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class SYS_Logs
+    public partial class SYS_Logs_Rules
     {
-        public Guid ID { get; set; }
-
+        public System.Guid ID { get; set; }
         public long SN { get; set; }
-
-        public Level Level { get; set; }
-
+        public bool ToDataBase { get; set; }
         public string Code { get; set; }
-
+        public int Level { get; set; }
         public string Source { get; set; }
-
         public string Action { get; set; }
-
         public string Message { get; set; }
-
-        public Guid? SourceUserId { get; set; }
-
-        public DateTime CreateTime { get; set; }
-    }
-
-    /// <summary>
-    /// 日志等级
-    /// </summary>
-    public enum Level
-    {
-        Emergency,
-        Alert,
-        Critical,
-        Error,
-        Warning,
-        Notice,
-        Informational,
-        Debug
+        public System.Guid CreatorUserId { get; set; }
+        public System.DateTime CreateTime { get; set; }
     }
 }

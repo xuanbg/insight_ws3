@@ -17,15 +17,19 @@ namespace Insight.WS.Test.Interface
         [STAThread]
         static void Main()
         {
-            SendLog();
+            UserSession = Login("Admin", "1");
+            Compres = true;
+            //AddRule();
+            SendLog("600101");
+            Compres = false;
             //var buffer = Convert.FromBase64String("eyJNYWNoaW5lSWQiOiI4MjlGRTcwOTE5MzEwMTVFM0IxNTJFMkNGQ0MxMEQ5QyIsIlVzZXJUeXBlIjotMSwiRGVwdElkIjpudWxsLCJDbGllbnRUeXBlIjoyLCJJRCI6MCwiTG9naW5SZXN1bHQiOjEsIlVzZXJJZCI6IjU5NjdmMGMzLWMwYWEtZTUxMS05NDBkLWU4NGE0ZGNmYTY5MCIsIlVzZXJOYW1lIjoieW9uZyIsIkZhaWx1cmVDb3VudCI6MiwiTG9naW5OYW1lIjoiMTg2MjgwNzA3MzkiLCJFeHRlbnNpb25EYXRhIjp7fSwiT25saW5lU3RhdHVzIjp0cnVlLCJPcGVuSWQiOm51bGwsIlZlcnNpb24iOjEwMDAsIlZhbGlkaXR5Ijp0cnVlLCJCYXNlQWRkcmVzcyI6bnVsbCwiU2lnbmF0dXJlIjoiQkMxMENEMzIyNzhCRkYyRjU0MTkyRTY1NTY0OTZDRDMiLCJEZXB0TmFtZSI6bnVsbCwiTGFzdENvbm5lY3QiOiJcL0RhdGUoMTQ1MTAyMzU2OTc4NilcLyJ9");
             //var json = Encoding.UTF8.GetString(buffer);
             //var obj = Deserialize<Session>(json);
             //GetToken();
-            GetSimilarTopics("大王龋齿");
-            GetRelateTopics("龋齿,测试");
-            SearchTopics("大王,测试,龋齿");
-            var mobile = "18600740252";
+            //GetSimilarTopics("大王龋齿");
+            //GetRelateTopics("龋齿,测试");
+            //SearchTopics("大王,测试,龋齿");
+            //var mobile = "18600740252";
             //UserSession = Register(GetSmsVerifyCode("1", mobile), mobile);
             //UserSession = ResetPassword(GetSmsVerifyCode("2", mobile), mobile, "123456");
             //UserSession = Login(mobile, "123456");
@@ -40,33 +44,50 @@ namespace Insight.WS.Test.Interface
             //AddAttitude(sid, 1);
             //AddComment(sid);
             //AddPraise(cid, 1);
-            GetTopics();
+            //GetTopics();
             //GetTopic(tid);
             //GetSpeechs(tid);
             //GetSpeech(sid);
             //GetComments(sid);
             //ChangePassword("111111");
-            //Logout();
+            Logout();
         }
 
-        private static void SendLog()
+        private static void AddRule()
         {
-            Compres = true;
-            var url = "http://localhost:6514/LogServer/logs";
-            var log = new SYS_Logs
+            var url = "http://localhost:6514/LogServer/rules";
+            var rule = new SYS_Logs_Rules
             {
                 ID = Guid.NewGuid(),
-                Level = Level.Alert,
-                Code = "012001",
-                Source = "客户端",
-                Action = "保存订单",
-                Message = "保存成功",
+                ToDataBase = false,
+                Code = "600102",
+                Level = 6,
+                Source = "日志管理",
+                Action = "修改规则",
+                Message = "成功！",
+                CreatorUserId = UserSession.UserId,
                 CreateTime = DateTime.Now
             };
-            var dict = new Dictionary<string, SYS_Logs> { { "log", log } };
+            var dict = new Dictionary<string, SYS_Logs_Rules> { { "rule", rule } };
             var data = Serialize(dict);
-            var result = HttpRequest(url, "PUT", null, data);
-            Compres = false;
+            var author = Base64(UserSession);
+            var result = HttpRequest(url, "PUT", author, data);
+            PutResult(result);
+        }
+
+        private static void SendLog(string code)
+        {
+            var url = "http://localhost:6514/LogServer/logs";
+            var dict = new Dictionary<string, string>
+            {
+                {"code", code},
+                {"message", null},
+                {"userid", null}
+            };
+            var data = Serialize(dict);
+            var author = Base64(Hash(code + Secret));
+            var result = HttpRequest(url, "PUT", author, data);
+            PutResult(result);
         }
 
         private static void SearchTopics(string keys)
