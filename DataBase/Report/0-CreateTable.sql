@@ -4,9 +4,11 @@ GO
 IF EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'RoleUser'))
 DROP SYNONYM RoleUser
 GO
-
 IF EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'Get_ContactInfo'))
 DROP SYNONYM Get_ContactInfo
+GO
+IF EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'SYS_Organization'))
+DROP SYNONYM SYS_Organization
 GO
 
 IF EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'SYS_Alert_Send') AND OBJECTPROPERTY(id, N'ISUSERTABLE') = 1)
@@ -261,6 +263,10 @@ CREATE TABLE SYS_Alert_Send(
 )
 GO
 
+
+/****** Object:  Synonym SYS_Organization    Script Date: 2016-01-10 9:17:36 ******/
+CREATE SYNONYM dbo.SYS_Organization FOR Insight.dbo.SYS_Organization
+GO
 
 /****** Object:  Synonym RoleUser    Script Date: 2016-01-10 9:17:36 ******/
 CREATE SYNONYM dbo.RoleUser FOR Insight_Base.dbo.RoleUser

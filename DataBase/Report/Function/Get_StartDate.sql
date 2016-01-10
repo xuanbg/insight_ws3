@@ -1,3 +1,6 @@
+USE Insight_Report
+GO
+
 IF EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'Get_StartDate') AND OBJECTPROPERTY(id, N'ISSCALARFUNCTION') = 1)
 DROP FUNCTION Get_StartDate
 GO

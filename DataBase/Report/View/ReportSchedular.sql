@@ -1,3 +1,6 @@
+USE Insight_Report
+GO
+
 IF EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'ReportSchedular') AND OBJECTPROPERTY(id, N'ISVIEW') = 1)
 DROP VIEW ReportSchedular
 GO
