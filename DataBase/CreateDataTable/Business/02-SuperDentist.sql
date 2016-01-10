@@ -93,7 +93,7 @@ CREATE TABLE MDE_Message(
 [Content]          NVARCHAR(MAX) NOT NULL,                                                                                                 --私信内容
 [SendTime]         DATETIME,                                                                                                               --发送时间
 [HaveRead]         BIT DEFAULT 0 NOT NULL,                                                                                                 --是否已读：0、未读；1、已读
-[CreatorUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID) DEFAULT '00000000-0000-0000-0000-000000000000' NOT NULL,           --创建人ID
+[CreatorUserId]    UNIQUEIDENTIFIER NOT NULL,                                                                                              --创建人ID
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )
 GO
@@ -105,7 +105,7 @@ CREATE TABLE MDE_Favorites(
 [SN]               BIGINT IDENTITY(1,1),                                                                                                   --自增序列
 [Type]             INT NOT NULL,                                                                                                           --类型：1、群组；2、话题；3、讨论；4、视频
 [ObjectId]         UNIQUEIDENTIFIER NOT NULL,                                                                                              --收藏对象ID
-[CreatorUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID) NOT NULL,                                                          --创建人ID
+[CreatorUserId]    UNIQUEIDENTIFIER NOT NULL,                                                                                              --创建人ID
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )
 GO
@@ -128,7 +128,7 @@ CREATE TABLE SDC_CaseHistory(
 [Description]      NVARCHAR(128),                                                                                                          --描述
 [UpdateTime]       DATETIME DEFAULT GETDATE() NOT NULL,                                                                                    --最后更新时间
 [Validity]         BIT DEFAULT 1 NOT NULL,                                                                                                 --是否有效：0、无效；1、有效
-[CreatorUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID) NOT NULL,                                                          --创建人ID
+[CreatorUserId]    UNIQUEIDENTIFIER NOT NULL,                                                                                              --创建人ID
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )
 GO
@@ -153,7 +153,7 @@ CREATE TABLE SDC_FirstVisit(
 [Description]      NVARCHAR(128),                                                                                                          --描述
 [DoctorId]         UNIQUEIDENTIFIER FOREIGN KEY REFERENCES MasterData(ID),                                                                 --主诊医生ID
 [NurseId]          UNIQUEIDENTIFIER FOREIGN KEY REFERENCES MasterData(ID),                                                                 --护理人ID
-[CreatorUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID) NOT NULL,                                                          --创建人ID
+[CreatorUserId]    UNIQUEIDENTIFIER NOT NULL,                                                                                              --创建人ID
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )
 GO
@@ -173,7 +173,7 @@ CREATE TABLE SDC_Subsequent(
 [Description]      NVARCHAR(128),                                                                                                          --描述
 [DoctorId]         UNIQUEIDENTIFIER FOREIGN KEY REFERENCES MasterData(ID),                                                                 --主诊医生ID
 [NurseId]          UNIQUEIDENTIFIER FOREIGN KEY REFERENCES MasterData(ID),                                                                 --护理人ID
-[CreatorUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID) NOT NULL,                                                          --创建人ID
+[CreatorUserId]    UNIQUEIDENTIFIER NOT NULL,                                                                                              --创建人ID
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )
 GO
@@ -186,7 +186,7 @@ CREATE TABLE SDC_Summary(
 [CaseId]           UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SDC_FirstVisit(ID),                                                             --病例ID
 [Content]          NVARCHAR(MAX) NOT NULL,                                                                                                 --总结内容
 [KeyWord]          NVARCHAR(64),                                                                                                           --关键词
-[CreatorUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID) NOT NULL,                                                          --创建人ID
+[CreatorUserId]    UNIQUEIDENTIFIER NOT NULL,                                                                                              --创建人ID
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )
 GO
@@ -207,7 +207,7 @@ CREATE TABLE SDG_Group(
 [OwnerUserId]      UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID) NOT NULL,                                                          --群主ID
 [ManageUserId]     UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID),                                                                   --群管理员ID
 [Validity]         BIT DEFAULT 1 NOT NULL,                                                                                                 --是否有效：0、无效；1、有效
-[CreatorUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID) NOT NULL,                                                          --创建人ID
+[CreatorUserId]    UNIQUEIDENTIFIER NOT NULL,                                                                                              --创建人ID
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )
 GO
@@ -239,7 +239,7 @@ CREATE TABLE SDT_Topic(
 [Private]          BIT DEFAULT 0 NOT NULL,                                                                                                 --是否私有：0、公开，访客可读，可转发；1、私有，访客不可读，不可转发
 [Validity]         BIT DEFAULT 1 NOT NULL,                                                                                                 --是否有效：0、无效；1、有效
 [PublishTime]      DATETIME,                                                                                                               --发布时间
-[CreatorUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID) NOT NULL,                                                          --创建人ID
+[CreatorUserId]    UNIQUEIDENTIFIER NOT NULL,                                                                                              --创建人ID
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )
 GO
@@ -251,7 +251,7 @@ CREATE TABLE SDT_Forward(
 [SN]               BIGINT IDENTITY(1,1),                                                                                                   --自增序列
 [TopicId]          UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SDT_Topic(ID) ON DELETE CASCADE NOT NULL,                                       --话题ID
 [GroupId]          UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SDG_Group(ID) ON DELETE CASCADE NOT NULL,                                       --群组ID
-[CreatorUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID) NOT NULL,                                                          --创建人ID
+[CreatorUserId]    UNIQUEIDENTIFIER NOT NULL,                                                                                              --创建人ID
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )
 GO
@@ -267,7 +267,7 @@ CREATE TABLE SDT_Speech(
 [Recommend]        BIT DEFAULT 0 NOT NULL,                                                                                                 --是否推荐发言：0、否；1、是
 [Validity]         BIT DEFAULT 1 NOT NULL,                                                                                                 --是否有效：0、无效；1、有效
 [PublishTime]      DATETIME,                                                                                                               --发布时间
-[CreatorUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID) NOT NULL,                                                          --创建人ID
+[CreatorUserId]    UNIQUEIDENTIFIER NOT NULL,                                                                                              --创建人ID
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )
 GO
@@ -280,7 +280,7 @@ CREATE TABLE SDT_Attitude(
 [SpeechId]         UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SDT_Speech(ID) ON DELETE CASCADE NOT NULL,                                      --发言ID
 [Type]             INT NOT NULL,                                                                                                           --类型：1、赞同；2、反对；3、赞；4、没有帮助
 [Description]      NVARCHAR(128),                                                                                                          --描述
-[CreatorUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID) NOT NULL,                                                          --创建人ID
+[CreatorUserId]    UNIQUEIDENTIFIER NOT NULL,                                                                                              --创建人ID
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )
 GO
@@ -294,7 +294,7 @@ CREATE TABLE SDT_Comment(
 [Content]          NVARCHAR(512) NOT NULL,                                                                                                 --评论内容
 [Validity]         BIT DEFAULT 1 NOT NULL,                                                                                                 --是否有效：0、无效；1、有效
 [PublishTime]      DATETIME,                                                                                                               --发布时间
-[CreatorUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID) NOT NULL,                                                          --创建人ID
+[CreatorUserId]    UNIQUEIDENTIFIER NOT NULL,                                                                                              --创建人ID
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )
 GO
@@ -307,7 +307,7 @@ CREATE TABLE SDT_Praise(
 [CommentId]        UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SDT_Comment(ID) ON DELETE CASCADE NOT NULL,                                     --评论ID
 [Type]             INT NOT NULL,                                                                                                           --类型：1、赞；2、举报
 [Description]      NVARCHAR(128),                                                                                                          --描述
-[CreatorUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID) NOT NULL,                                                          --创建人ID
+[CreatorUserId]    UNIQUEIDENTIFIER NOT NULL,                                                                                              --创建人ID
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )
 GO
@@ -323,7 +323,7 @@ CREATE TABLE SDO_Advertisement(
 [Picture]          VARCHAR(64),                                                                                                            --图片
 [Url]              VARCHAR(64),                                                                                                            --跳转路径
 [Validity]         BIT DEFAULT 1 NOT NULL,                                                                                                 --是否有效：0、无效；1、有效
-[CreatorUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID) NOT NULL,                                                          --创建人ID
+[CreatorUserId]    UNIQUEIDENTIFIER NOT NULL,                                                                                              --创建人ID
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )
 GO
@@ -340,7 +340,7 @@ CREATE TABLE SDO_Recommend(
 [Url]              VARCHAR(64),                                                                                                            --跳转路径
 [Fixed]            BIT DEFAULT 0 NOT NULL,                                                                                                 --是否置顶：0、否；1、是
 [Validity]         BIT DEFAULT 1 NOT NULL,                                                                                                 --是否有效：0、无效；1、有效
-[CreatorUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID) NOT NULL,                                                          --创建人ID
+[CreatorUserId]    UNIQUEIDENTIFIER NOT NULL,                                                                                              --创建人ID
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )
 GO
@@ -355,7 +355,7 @@ CREATE TABLE SDO_Tutorial(
 [Picture]          VARCHAR(64),                                                                                                            --图片
 [Url]              VARCHAR(64),                                                                                                            --视频路径
 [Validity]         BIT DEFAULT 1 NOT NULL,                                                                                                 --是否有效：0、无效；1、有效
-[CreatorUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID) NOT NULL,                                                          --创建人ID
+[CreatorUserId]    UNIQUEIDENTIFIER NOT NULL,                                                                                              --创建人ID
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )
 GO
@@ -369,7 +369,7 @@ CREATE TABLE SDO_TutorialComment(
 [Content]          NVARCHAR(512) NOT NULL,                                                                                                 --评论内容
 [Validity]         BIT DEFAULT 1 NOT NULL,                                                                                                 --是否有效：0、无效；1、有效
 [PublishTime]      DATETIME,                                                                                                               --发布时间
-[CreatorUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID) NOT NULL,                                                          --创建人ID
+[CreatorUserId]    UNIQUEIDENTIFIER NOT NULL,                                                                                              --创建人ID
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )
 GO
@@ -380,7 +380,7 @@ CREATE TABLE SDO_TutorialPraise(
 [ID]               UNIQUEIDENTIFIER CONSTRAINT IX_SDO_TutorialPraise PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
 [SN]               BIGINT IDENTITY(1,1),                                                                                                   --自增序列
 [TutorialId]       UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SDO_Tutorial(ID) ON DELETE CASCADE NOT NULL,                                     --评论ID
-[CreatorUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID) NOT NULL,                                                          --创建人ID
+[CreatorUserId]    UNIQUEIDENTIFIER NOT NULL,                                                                                              --创建人ID
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )
 GO

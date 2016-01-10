@@ -1,3 +1,6 @@
+USE Insight_Base
+GO
+
 
 /*****初始化模块数据*****/
 

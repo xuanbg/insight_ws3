@@ -1,4 +1,7 @@
-﻿IF EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'SYS_RolePerm_DataAbs') AND OBJECTPROPERTY(id, N'ISUSERTABLE') = 1)
+﻿USE Insight_Base
+GO
+
+IF EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'SYS_RolePerm_DataAbs') AND OBJECTPROPERTY(id, N'ISUSERTABLE') = 1)
 DROP TABLE SYS_RolePerm_DataAbs
 GO
 IF EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'SYS_RolePerm_Data') AND OBJECTPROPERTY(id, N'ISUSERTABLE') = 1)
@@ -73,7 +76,7 @@ CREATE TABLE SYS_User(
 [Type]             INT DEFAULT 0 NOT NULL,                                                                                                 --用户类型：-1、外部用户；1、内部用户
 [BuiltIn]          BIT DEFAULT 0 NOT NULL,                                                                                                 --是否预置：0、自定；1、预置
 [Validity]         BIT DEFAULT 1 NOT NULL,                                                                                                 --是否有效：0、无效；1、有效
-[CreatorUserId]    UNIQUEIDENTIFIER,                                                                                                       --创建人ID
+[CreatorUserId]    UNIQUEIDENTIFIER DEFAULT '00000000-0000-0000-0000-000000000000' NOT NULL,                                               --创建人ID
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )
 GO

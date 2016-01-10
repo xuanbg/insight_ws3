@@ -1,3 +1,6 @@
+USE Insight_Base
+GO
+
 IF EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'Get_RoleData') AND OBJECTPROPERTY(id, N'ISPROCEDURE') = 1)
 DROP PROCEDURE Get_RoleData
 GO

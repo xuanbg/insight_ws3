@@ -1,3 +1,6 @@
+USE Insight_Base
+GO
+
 IF EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'Get_RoleAction') AND OBJECTPROPERTY(id, N'ISTABLEFUNCTION') = 1)
 DROP FUNCTION Get_RoleAction
 GO

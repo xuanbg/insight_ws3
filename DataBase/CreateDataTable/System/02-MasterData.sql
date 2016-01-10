@@ -81,8 +81,8 @@ CREATE TABLE BASE_Category(
 [Description]      NVARCHAR(MAX),                                                                                                          --描述
 [BuiltIn]          BIT DEFAULT 0 NOT NULL,                                                                                                 --是否预置：0、自定；1、预置
 [Visible]          BIT DEFAULT 1 NOT NULL,                                                                                                 --是否可见：0、不可见；1、可见
-[CreatorDeptId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_Organization(ID),                                                           --创建部门ID
-[CreatorUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID) DEFAULT '00000000-0000-0000-0000-000000000000' NOT NULL,           --创建人ID
+[CreatorDeptId]    UNIQUEIDENTIFIER,                                                                                                       --创建部门ID
+[CreatorUserId]    UNIQUEIDENTIFIER NOT NULL,                                                                                              --创建人ID
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )
 GO
@@ -113,7 +113,8 @@ CREATE TABLE MasterData_Merger(
 [SN]               BIGINT IDENTITY(1,1),                                                                                                   --自增序列
 [MasterId]         UNIQUEIDENTIFIER FOREIGN KEY REFERENCES MasterData(ID) ON DELETE CASCADE NOT NULL,                                      --主数据ID
 [MergerId]         UNIQUEIDENTIFIER FOREIGN KEY REFERENCES MasterData(ID) NOT NULL,                                                        --被并主数据ID（只允许同类型合并）
-[CreatorUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID) NOT NULL,                                                          --创建人ID
+[CreatorDeptId]    UNIQUEIDENTIFIER,                                                                                                       --创建部门ID
+[CreatorUserId]    UNIQUEIDENTIFIER NOT NULL,                                                                                              --创建人ID
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --合并时间
 )
 GO
@@ -191,8 +192,8 @@ CREATE TABLE MDG_Dictionary(
 [Description]      NVARCHAR(MAX),                                                                                                          --描述
 [BuiltIn]          BIT DEFAULT 0 NOT NULL,                                                                                                 --是否预置：0、自定；1、预置
 [Enable]           BIT DEFAULT 1 NOT NULL,                                                                                                 --是否可用：0、不可用；1、可用
-[CreatorDeptId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_Organization(ID),                                                           --创建部门ID
-[CreatorUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID) DEFAULT '00000000-0000-0000-0000-000000000000' NOT NULL,           --创建人ID
+[CreatorDeptId]    UNIQUEIDENTIFIER,                                                                                                       --创建部门ID
+[CreatorUserId]    UNIQUEIDENTIFIER NOT NULL,                                                                                              --创建人ID
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )
 GO
@@ -214,8 +215,8 @@ CREATE TABLE MDG_Material(
 [StorageType]      UNIQUEIDENTIFIER FOREIGN KEY REFERENCES MDG_Dictionary(MID),                                                            --存储方式ID，字典
 [Description]      NVARCHAR(MAX),                                                                                                          --描述
 [Enable]           BIT DEFAULT 1 NOT NULL,                                                                                                 --是否可用：0、不可用；1、可用
-[CreatorDeptId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_Organization(ID),                                                           --创建部门ID
-[CreatorUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID) DEFAULT '00000000-0000-0000-0000-000000000000' NOT NULL,           --创建人ID
+[CreatorDeptId]    UNIQUEIDENTIFIER,                                                                                                       --创建部门ID
+[CreatorUserId]    UNIQUEIDENTIFIER NOT NULL,                                                                                              --创建人ID
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )
 GO
@@ -232,8 +233,8 @@ CREATE TABLE MDG_Expense(
 [Description]      NVARCHAR(MAX),                                                                                                          --描述
 [BuiltIn]          BIT DEFAULT 0 NOT NULL,                                                                                                 --是否预置：0、自定；1、预置
 [Enable]           BIT DEFAULT 1 NOT NULL,                                                                                                 --是否可用：0、不可用；1、可用
-[CreatorDeptId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_Organization(ID),                                                           --创建部门ID
-[CreatorUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID) DEFAULT '00000000-0000-0000-0000-000000000000' NOT NULL,           --创建人ID
+[CreatorDeptId]    UNIQUEIDENTIFIER,                                                                                                       --创建部门ID
+[CreatorUserId]    UNIQUEIDENTIFIER NOT NULL,                                                                                              --创建人ID
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )
 GO
@@ -266,8 +267,8 @@ CREATE TABLE MDG_Customer(
 [Description]      NVARCHAR(MAX),                                                                                                          --描述
 [Enable]           BIT DEFAULT 1 NOT NULL,                                                                                                 --是否可用：0、不可用；1、可用
 [Visible]          BIT DEFAULT 1 NOT NULL,                                                                                                 --是否可见：0、不可见；1、可见
-[CreatorDeptId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_Organization(ID),                                                           --创建部门ID
-[CreatorUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID) DEFAULT '00000000-0000-0000-0000-000000000000' NOT NULL,           --创建人ID
+[CreatorDeptId]    UNIQUEIDENTIFIER,                                                                                                       --创建部门ID
+[CreatorUserId]    UNIQUEIDENTIFIER NOT NULL,                                                                                              --创建人ID
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )
 GO
@@ -298,8 +299,8 @@ CREATE TABLE MDG_Supplier(
 [Description]      NVARCHAR(MAX),                                                                                                          --描述
 [Enable]           BIT DEFAULT 1 NOT NULL,                                                                                                 --是否可用：0、不可用；1、可用
 [Visible]          BIT DEFAULT 1 NOT NULL,                                                                                                 --是否可见：0、不可见；1、可见
-[CreatorDeptId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_Organization(ID),                                                           --创建部门ID
-[CreatorUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID) DEFAULT '00000000-0000-0000-0000-000000000000' NOT NULL,           --创建人ID
+[CreatorDeptId]    UNIQUEIDENTIFIER,                                                                                                       --创建部门ID
+[CreatorUserId]    UNIQUEIDENTIFIER NOT NULL,                                                                                              --创建人ID
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )
 GO
@@ -323,8 +324,8 @@ CREATE TABLE MDG_Contact(
 [IsMaster]         BIT DEFAULT 0 NOT NULL,                                                                                                 --是否主要联系人：0、否；1、是
 [Enable]           BIT DEFAULT 1 NOT NULL,                                                                                                 --是否可用：0、不可用；1、可用
 [LoginUser]        BIT DEFAULT 0 NOT NULL,                                                                                                 --是否登录用户：0、否；1、是
-[CreatorDeptId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_Organization(ID),                                                           --创建部门ID
-[CreatorUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID) DEFAULT '00000000-0000-0000-0000-000000000000' NOT NULL,           --创建人ID
+[CreatorDeptId]    UNIQUEIDENTIFIER,                                                                                                       --创建部门ID
+[CreatorUserId]    UNIQUEIDENTIFIER NOT NULL,                                                                                              --创建人ID
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )
 GO
@@ -347,8 +348,8 @@ CREATE TABLE MDG_Employee(
 [Description]      NVARCHAR(MAX),                                                                                                          --描述
 [Status]           INT DEFAULT 1 NOT NULL,                                                                                                 --状态：1、正常；2、休假；3、离职
 [LoginUser]        BIT DEFAULT 0 NOT NULL,                                                                                                 --是否登录用户：0、否；1、是
-[CreatorDeptId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_Organization(ID),                                                           --创建部门ID
-[CreatorUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID) DEFAULT '00000000-0000-0000-0000-000000000000' NOT NULL,           --创建人ID
+[CreatorDeptId]    UNIQUEIDENTIFIER,                                                                                                       --创建部门ID
+[CreatorUserId]    UNIQUEIDENTIFIER NOT NULL,                                                                                              --创建人ID
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )
 GO
@@ -409,8 +410,8 @@ CREATE TABLE ImageData(
 [Image]            IMAGE NOT NULL,                                                                                                         --电子影像内容
 [Description]      NVARCHAR(MAX),                                                                                                          --描述
 [Validity]         BIT DEFAULT 0 NOT NULL,                                                                                                 --是否有效：0、无效；1、有效
-[CreatorDeptId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_Organization(ID),                                                           --创建部门ID
-[CreatorUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID) DEFAULT '00000000-0000-0000-0000-000000000000' NOT NULL,           --创建人ID
+[CreatorDeptId]    UNIQUEIDENTIFIER,                                                                                                       --创建部门ID
+[CreatorUserId]    UNIQUEIDENTIFIER NOT NULL,                                                                                              --创建人ID
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL,                                                                                    --创建时间
 )
 CREATE NONCLUSTERED INDEX IX_ID_Code ON ImageData(Code)

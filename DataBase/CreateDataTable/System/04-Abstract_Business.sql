@@ -87,8 +87,8 @@ CREATE TABLE ABS_Clearing_Check(
 [ImageId]          UNIQUEIDENTIFIER FOREIGN KEY REFERENCES ImageData(ID) ON DELETE CASCADE,                                                --电子影像ID
 [Status]           BIT DEFAULT 0 NOT NULL,                                                                                                 --状态：0、未结账；1、已结账
 [Description]      NVARCHAR(MAX),                                                                                                          --描述
-[CreatorDeptId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Sys_Organization(ID) NOT NULL,                                                  --创建部门ID
-[CreatorUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Sys_User(ID) NOT NULL,                                                          --创建人ID
+[CreatorDeptId]    UNIQUEIDENTIFIER,                                                                                                       --创建部门ID
+[CreatorUserId]    UNIQUEIDENTIFIER NOT NULL,                                                                                              --创建人ID
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )
 GO
@@ -108,8 +108,8 @@ CREATE TABLE ABS_Clearing(
 [CheckId]          UNIQUEIDENTIFIER FOREIGN KEY REFERENCES ABS_Clearing_Check(ID),                                                         --结账ID
 [RelationId]       UNIQUEIDENTIFIER,                                                                                                       --关联结算记录ID
 [Validity]         BIT DEFAULT 1 NOT NULL,                                                                                                 --是否有效：0、无效；1、有效
-[CreatorDeptId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Sys_Organization(ID),                                                           --创建部门ID
-[CreatorUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Sys_User(ID) NOT NULL,                                                          --创建人ID
+[CreatorDeptId]    UNIQUEIDENTIFIER,                                                                                                       --创建部门ID
+[CreatorUserId]    UNIQUEIDENTIFIER NOT NULL,                                                                                              --创建人ID
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )
 GO
@@ -192,8 +192,8 @@ CREATE TABLE ABS_Advance(
 [OwnerId]          UNIQUEIDENTIFIER FOREIGN KEY REFERENCES MasterData(ID) NOT NULL,                                                        --所属客户ID
 [Status]           INT DEFAULT 0 NOT NULL,                                                                                                 --状态：0、正常；1、挂失；2、注销
 [Description]      NVARCHAR(MAX),                                                                                                          --描述
-[CreatorDeptId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Sys_Organization(ID) NOT NULL,                                                  --创建部门ID
-[CreatorUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Sys_User(ID) NOT NULL,                                                          --创建人ID
+[CreatorDeptId]    UNIQUEIDENTIFIER,                                                                                                       --创建部门ID
+[CreatorUserId]    UNIQUEIDENTIFIER NOT NULL,                                                                                              --创建人ID
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )
 GO
@@ -237,8 +237,8 @@ CREATE TABLE ABS_Storage_Location(
 [Code]             VARCHAR(32),                                                                                                            --编码
 [Name]             NVARCHAR(64) NOT NULL,                                                                                                  --名称
 [Alias]            NVARCHAR(16),                                                                                                           --别名/简称
-[CreatorDeptId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Sys_Organization(ID),                                                           --创建部门ID
-[CreatorUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Sys_User(ID) NOT NULL,                                                          --创建人ID
+[CreatorDeptId]    UNIQUEIDENTIFIER,                                                                                                       --创建部门ID
+[CreatorUserId]    UNIQUEIDENTIFIER NOT NULL,                                                                                              --创建人ID
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )
 GO
@@ -284,8 +284,8 @@ CREATE TABLE ABS_Delivery(
 [PrintTimes]       INT DEFAULT 0 NOT NULL,                                                                                                 --打印次数
 [Description]      NVARCHAR(MAX),                                                                                                          --描述
 [Validity]         BIT DEFAULT 1 NOT NULL,                                                                                                 --是否有效：0、无效；1、有效
-[CreatorDeptId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Sys_Organization(ID) NOT NULL,                                                  --创建部门ID
-[CreatorUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Sys_User(ID) NOT NULL,                                                          --创建人ID
+[CreatorDeptId]    UNIQUEIDENTIFIER,                                                                                                       --创建部门ID
+[CreatorUserId]    UNIQUEIDENTIFIER NOT NULL,                                                                                              --创建人ID
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )
 GO
@@ -337,8 +337,8 @@ CREATE TABLE ABS_Contract(
 [InvalidDate]      DATETIME,                                                                                                               --失效日期
 [Description]      NVARCHAR(MAX),                                                                                                          --描述
 [Status]           INT DEFAULT 0 NOT NULL,                                                                                                 --状态：0、起草；1、审批中；2、执行中；3、已归档；4、作废
-[CreatorDeptId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Sys_Organization(ID),                                                           --创建部门ID
-[CreatorUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Sys_User(ID) NOT NULL,                                                          --创建人ID
+[CreatorDeptId]    UNIQUEIDENTIFIER,                                                                                                       --创建部门ID
+[CreatorUserId]    UNIQUEIDENTIFIER NOT NULL,                                                                                              --创建人ID
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )
 GO

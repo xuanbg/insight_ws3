@@ -1,3 +1,6 @@
+USE Insight_Base
+GO
+
 IF EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'RoleUser') AND OBJECTPROPERTY(id, N'ISVIEW') = 1)
 DROP VIEW RoleUser
 GO

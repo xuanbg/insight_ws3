@@ -6,10 +6,8 @@ using System.Net;
 using System.Security.Cryptography;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
-using System.ServiceModel.Description;
 using System.ServiceModel.Web;
 using System.Text;
-using Microsoft.Samples.GZipEncoder;
 using System.Threading;
 using System.Web.Script.Serialization;
 using Insight.WS.Log.Service;
@@ -37,36 +35,6 @@ namespace Insight.WS.Log
         private static readonly EndpointAddress Address = new EndpointAddress(GetAppSetting("IvsAddress"));
 
         /// <summary>
-        /// 最大接收消息大小（字节）
-        /// </summary>
-        private const int MaxReceivedMessageSize = 1073741824;
-
-        /// <summary>
-        /// 最大数组长度
-        /// </summary>
-        private const int MaxArrayLength = 67108864;
-
-        /// <summary>
-        /// 最大字符串长度
-        /// </summary>
-        private const int MaxStringContentLength = 67108864;
-
-        /// <summary>
-        /// 发送超时（秒）
-        /// </summary>
-        private const int SendTimeout = 600;
-
-        /// <summary>
-        /// 接收超时（秒）
-        /// </summary>
-        private const int ReceiveTimeout = 600;
-
-        /// <summary>
-        /// 运行中的服务主机
-        /// </summary>
-        public static ServiceHost Host;
-
-        /// <summary>
         /// 日志规则列表
         /// </summary>
         public static List<SYS_Logs_Rules> Rules;
@@ -79,36 +47,6 @@ namespace Insight.WS.Log
         #endregion
 
         #region 静态公共方法
-
-        /// <summary>
-        /// 创建服务主机
-        /// </summary>
-        public static void CreateHost()
-        {
-            var transport = new HttpTransportBindingElement
-            {
-                ManualAddressing = true,
-                MaxReceivedMessageSize = MaxReceivedMessageSize,
-                TransferMode = TransferMode.Streamed
-            };
-            var encoder = new WebMessageEncodingBindingElement
-            {
-                ReaderQuotas = {MaxArrayLength = MaxArrayLength, MaxStringContentLength = MaxStringContentLength},
-                ContentTypeMapper = new TypeMapper()
-            };
-            var gZipEncode = new GZipMessageEncodingBindingElement(encoder);
-            var binding = new CustomBinding
-            {
-                SendTimeout = TimeSpan.FromSeconds(SendTimeout),
-                ReceiveTimeout = TimeSpan.FromSeconds(ReceiveTimeout),
-                Elements = {gZipEncode, transport}
-            };
-
-            var address = new Uri(GetAppSetting("Address"));
-            Host = new ServiceHost(typeof (LogManage), address);
-            var endpoint = Host.AddServiceEndpoint(typeof (Interface), binding, "LogServer");
-            endpoint.Behaviors.Add(new WebHttpBehavior());
-        }
 
         /// <summary>
         /// 读取配置项的值
@@ -182,13 +120,16 @@ namespace Insight.WS.Log
         {
             var woc = WebOperationContext.Current;
             var auth = woc.IncomingRequest.Headers[HttpRequestHeader.Authorization];
+            var response = WebOperationContext.Current.OutgoingResponse;
+            response.Headers[HttpResponseHeader.ContentEncoding] = "gzip";
+            response.ContentType = "application/x-gzip";
+
             if (string.IsNullOrEmpty(auth))
             {
                 woc.OutgoingResponse.StatusCode = HttpStatusCode.Unauthorized;
                 return default(T);
             }
 
-            SetResponseParam();
             try
             {
                 var buffer = Convert.FromBase64String(auth);
@@ -221,16 +162,6 @@ namespace Insight.WS.Log
         private static T Deserialize<T>(string json)
         {
             return new JavaScriptSerializer().Deserialize<T>(json);
-        }
-
-        /// <summary>
-        /// 设置Response参数
-        /// </summary>
-        private static void SetResponseParam()
-        {
-            var response = WebOperationContext.Current.OutgoingResponse;
-            response.Headers[HttpResponseHeader.ContentEncoding] = "gzip";
-            response.ContentType = "application/x-gzip";
         }
 
         /// <summary>

@@ -21,6 +21,87 @@ IF EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'BIZ_Refund_Apply') AN
 DROP TABLE BIZ_Refund_Apply
 GO
 
+IF EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'SYS_Code_Allot') AND OBJECTPROPERTY(id, N'ISUSERTABLE') = 1)
+DROP TABLE SYS_Code_Allot
+GO
+IF EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'SYS_Code_Record') AND OBJECTPROPERTY(id, N'ISUSERTABLE') = 1)
+DROP TABLE SYS_Code_Record
+GO
+IF EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'SYS_Allot_Record') AND OBJECTPROPERTY(id, N'ISUSERTABLE') = 1)
+DROP TABLE SYS_Allot_Record
+GO
+IF EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'SYS_Code_Scheme') AND OBJECTPROPERTY(id, N'ISUSERTABLE') = 1)
+DROP TABLE SYS_Code_Scheme
+GO
+
+
+/*****编码方案*****/
+
+/*****编码方案表*****/
+
+CREATE TABLE SYS_Code_Scheme(
+[ID]               UNIQUEIDENTIFIER CONSTRAINT IX_SYS_Code_Scheme PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
+[SN]               BIGINT IDENTITY(1,1),                                                                                                   --自增序列
+[Name]             NVARCHAR(64) NOT NULL,                                                                                                  --名称
+[CodeFormat]       NVARCHAR(64) NOT NULL,                                                                                                  --编码格式
+[SerialFormat]     NVARCHAR(16),                                                                                                           --流水码关联字符串格式
+[Description]      NVARCHAR(MAX),                                                                                                          --描述
+[Validity]         BIT DEFAULT 1 NOT NULL,                                                                                                 --是否有效：0、无效；1、有效
+[CreatorDeptId]    UNIQUEIDENTIFIER,                                                                                                       --创建部门ID
+[CreatorUserId]    UNIQUEIDENTIFIER NOT NULL,                                                                                              --创建人ID
+[CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
+)
+GO
+
+/*****编码分配记录表*****/
+
+CREATE TABLE SYS_Allot_Record(
+[ID]               UNIQUEIDENTIFIER CONSTRAINT IX_SYS_Allot_Record PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
+[SN]               BIGINT IDENTITY(1,1),                                                                                                   --自增序列
+[SchemeId]         UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_Code_Scheme(ID) ON DELETE CASCADE NOT NULL,                                 --编码方案ID
+[ModuleId]         UNIQUEIDENTIFIER NOT NULL,                                                                                              --模块注册ID
+[OwnerId]          UNIQUEIDENTIFIER NOT NULL,                                                                                              --用户ID
+[StartNumber]      VARCHAR(8),                                                                                                             --编码区段起始值
+[EndNumber]        VARCHAR(8),                                                                                                             --编码区段结束值
+[CreatorDeptId]    UNIQUEIDENTIFIER,                                                                                                       --创建部门ID
+[CreatorUserId]    UNIQUEIDENTIFIER NOT NULL,                                                                                              --创建人ID
+[CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
+)
+
+/*****编码流水记录表*****/
+
+CREATE TABLE SYS_Code_Record(
+[ID]               UNIQUEIDENTIFIER CONSTRAINT IX_SYS_Code_Record PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
+[SN]               BIGINT IDENTITY(1,1),                                                                                                   --自增序列
+[SchemeId]         UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_Code_Scheme(ID) ON DELETE CASCADE NOT NULL,                                 --编码方案ID
+[RelationChar]     NVARCHAR(16),                                                                                                           --关联字符串
+[SerialNumber]     INT NOT NULL,                                                                                                           --流水号
+[BusinessId]       UNIQUEIDENTIFIER,                                                                                                       --业务记录ID
+[CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
+)
+CREATE NONCLUSTERED INDEX IX_SYS_Code_Record_Serial ON SYS_Code_Record(SchemeId, RelationChar) INCLUDE (SerialNumber)
+CREATE NONCLUSTERED INDEX IX_SYS_Code_Record_BusinessId ON SYS_Code_Record(BusinessId)
+GO
+
+/*****编码分配记录表*****/
+
+CREATE TABLE SYS_Code_Allot(
+[ID]               UNIQUEIDENTIFIER CONSTRAINT IX_SYS_Code_Allot PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
+[SN]               BIGINT IDENTITY(1,1),                                                                                                   --自增序列
+[SchemeId]         UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_Code_Scheme(ID) ON DELETE CASCADE NOT NULL,                                 --编码方案ID
+[ModuleId]         UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_Module(ID) ON DELETE CASCADE NOT NULL,                                      --模块注册ID
+[OwnerId]          UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID) NOT NULL,                                                          --用户ID
+[AllotNumber]      VARCHAR(8) NOT NULL,                                                                                                    --分配流水号
+[BusinessId]       UNIQUEIDENTIFIER,                                                                                                       --业务记录ID
+[UpdateTime]       DATETIME,                                                                                                               --使用时间
+[CreatorDeptId]    UNIQUEIDENTIFIER,                                                                                                       --创建部门ID
+[CreatorUserId]    UNIQUEIDENTIFIER NOT NULL,                                                                                              --创建人ID
+[CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
+)
+CREATE NONCLUSTERED INDEX IX_SYS_Code_Allot_Serial ON SYS_Code_Allot(SchemeId, ModuleId, OwnerId) INCLUDE (AllotNumber)
+CREATE NONCLUSTERED INDEX IX_SYS_Code_Allot_BusinessId ON SYS_Code_Allot(BusinessId)
+GO
+
 
 /*****内置业务：退款业务数据表*****/
 
