@@ -71,7 +71,7 @@ namespace Insight.WS.Test.Interface
             var dict = new Dictionary<string, SYS_Logs_Rules> { { "rule", rule } };
             var data = Serialize(dict);
             var author = Base64(UserSession);
-            var result = HttpRequest(url, "PUT", author, data);
+            var result = HttpRequest(url, "POST", author, data);
             PutResult(result);
         }
 
