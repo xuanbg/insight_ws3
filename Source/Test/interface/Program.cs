@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
+using System.Windows.Forms;
 using Insight.WS.Test.Interface.Entity;
 using static Insight.WS.Test.Interface.Util;
 
@@ -17,15 +19,27 @@ namespace Insight.WS.Test.Interface
         [STAThread]
         static void Main()
         {
-            UserSession = Login("Admin", "1");
+            //GetToken();
+            var version = new Version(Application.ProductVersion);
+            var build = $"{version.Major}{version.Minor}{version.Build.ToString("D4").Substring(0,2)}";
+            Util.Version = Convert.ToInt32(build);
+            UserSession = Login("Admin", "123456");
             Compres = true;
+            var t1 = DateTime.Now;
             //AddRule();
-            SendLog("600101");
+            for (var i = 0; i < 10; i++)
+            {
+                var td = new Thread(SendLog);
+                td.Start();
+            }
+            Console.Write($"Time: {DateTime.Now - t1}");
+            Console.ReadLine();
+
+            SendLog();
             Compres = false;
             //var buffer = Convert.FromBase64String("eyJNYWNoaW5lSWQiOiI4MjlGRTcwOTE5MzEwMTVFM0IxNTJFMkNGQ0MxMEQ5QyIsIlVzZXJUeXBlIjotMSwiRGVwdElkIjpudWxsLCJDbGllbnRUeXBlIjoyLCJJRCI6MCwiTG9naW5SZXN1bHQiOjEsIlVzZXJJZCI6IjU5NjdmMGMzLWMwYWEtZTUxMS05NDBkLWU4NGE0ZGNmYTY5MCIsIlVzZXJOYW1lIjoieW9uZyIsIkZhaWx1cmVDb3VudCI6MiwiTG9naW5OYW1lIjoiMTg2MjgwNzA3MzkiLCJFeHRlbnNpb25EYXRhIjp7fSwiT25saW5lU3RhdHVzIjp0cnVlLCJPcGVuSWQiOm51bGwsIlZlcnNpb24iOjEwMDAsIlZhbGlkaXR5Ijp0cnVlLCJCYXNlQWRkcmVzcyI6bnVsbCwiU2lnbmF0dXJlIjoiQkMxMENEMzIyNzhCRkYyRjU0MTkyRTY1NTY0OTZDRDMiLCJEZXB0TmFtZSI6bnVsbCwiTGFzdENvbm5lY3QiOiJcL0RhdGUoMTQ1MTAyMzU2OTc4NilcLyJ9");
             //var json = Encoding.UTF8.GetString(buffer);
             //var obj = Deserialize<Session>(json);
-            //GetToken();
             //GetSimilarTopics("大王龋齿");
             //GetRelateTopics("龋齿,测试");
             //SearchTopics("大王,测试,龋齿");
@@ -50,12 +64,15 @@ namespace Insight.WS.Test.Interface
             //GetSpeech(sid);
             //GetComments(sid);
             //ChangePassword("111111");
+            Console.Write($"Time: {DateTime.Now - t1}");
+            Console.ReadLine();
             Logout();
+
         }
 
         private static void AddRule()
         {
-            var url = "http://localhost:6514/LogServer/rules";
+            var url = "http://localhost:6514/rules";
             var rule = new SYS_Logs_Rules
             {
                 ID = Guid.NewGuid(),
@@ -75,19 +92,24 @@ namespace Insight.WS.Test.Interface
             PutResult(result);
         }
 
-        private static void SendLog(string code)
+        private static void SendLog()
         {
-            var url = "http://localhost:6514/LogServer/logs";
-            var dict = new Dictionary<string, string>
+            var url = "http://localhost:6514/logs";
+            var code = "600102";
+            for (var i = 0; i < 1000; i++)
             {
-                {"code", code},
-                {"message", null},
-                {"userid", null}
-            };
-            var data = Serialize(dict);
-            var author = Base64(Hash(code + Secret));
-            var result = HttpRequest(url, "PUT", author, data);
-            PutResult(result);
+                var dict = new Dictionary<string, string>
+                {
+                    {"code", code},
+                    {"message", $"这是第{i}条日志"},
+                    {"userid", null}
+                };
+                var data = Serialize(dict);
+                var author = Base64(Hash(code + Secret));
+                var result = HttpRequest(url, "POST", author, data);
+
+            }
+            //PutResult(result);
         }
 
         private static void SearchTopics(string keys)

@@ -86,8 +86,6 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Properties\DataSources\Insight.WS.Client.Common.Service.Session.datasource" />
-    <None Include="Properties\DataSources\Insight.WS.Client.Common.Service.SYS_User.datasource" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

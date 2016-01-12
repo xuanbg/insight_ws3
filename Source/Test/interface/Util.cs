@@ -23,6 +23,7 @@ namespace Insight.WS.Test.Interface
         public const string Secret = "842A381C91CE43A98720825601C22A56";
         public static Session UserSession;
         public static bool Compres = bool.Parse(GetAppSetting("IsCompres"));
+        public static int Version;
 
         /// <summary>
         /// 生成用于接口验证的Authorization字符串
@@ -189,6 +190,7 @@ namespace Insight.WS.Test.Interface
         {
             var request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = method;
+            request.Accept = $"application/x-gzip/json; version={Version}";
             request.ContentType = Compres ? "application/x-gzip" : "application/json";
             if (author != null)
             {
