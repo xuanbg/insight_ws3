@@ -22,7 +22,6 @@ namespace Insight.WS.Test.Interface
     {
         public const string Secret = "842A381C91CE43A98720825601C22A56";
         public static Session UserSession;
-        public static bool Compres = bool.Parse(GetAppSetting("IsCompres"));
         public static int Version;
 
         /// <summary>
@@ -160,20 +159,18 @@ namespace Insight.WS.Test.Interface
         /// <param name="method">请求的方法：GET,PUT,POST,DELETE</param>
         /// <param name="author">接口认证数据</param>
         /// <param name="data">接口参数</param>
+        /// <param name="compress">是否压缩传输，默认压缩</param>
         /// <returns>JsonResult</returns>
-        public static JsonResult HttpRequest(string url, string method, string author, string data = "")
+        public static JsonResult HttpRequest(string url, string method, string author, string data = "", bool compress = true)
         {
-            if (method == "GET") url += (data == "" ? "" : "?") + data;
-            var request = GetWebRequest(url, method, author);
+            var request = GetWebRequest(url, method, author, compress);
+            if (method == "GET") return GetResponse(request);
 
-            if (method != "GET")
+            var buffer = compress ? Compress(Encoding.UTF8.GetBytes(data)) : Encoding.UTF8.GetBytes(data);
+            request.ContentLength = buffer.Length;
+            using (var stream = request.GetRequestStream())
             {
-                var buffer = Compres ? Compress(Encoding.UTF8.GetBytes(data)) : Encoding.UTF8.GetBytes(data);
-                request.ContentLength = buffer.Length;
-                using (var stream = request.GetRequestStream())
-                {
-                    stream.Write(buffer, 0, buffer.Length);
-                }
+                stream.Write(buffer, 0, buffer.Length);
             }
 
             return GetResponse(request);
@@ -185,17 +182,15 @@ namespace Insight.WS.Test.Interface
         /// <param name="url">请求的地址</param>
         /// <param name="method">请求的方法：GET,PUT,POST,DELETE</param>
         /// <param name="author">接口认证数据</param>
+        /// <param name="compress">是否压缩传输</param>
         /// <returns>HttpWebRequest</returns>
-        private static HttpWebRequest GetWebRequest(string url, string method, string author)
+        private static HttpWebRequest GetWebRequest(string url, string method, string author, bool compress)
         {
             var request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = method;
             request.Accept = $"application/x-gzip/json; version={Version}";
-            request.ContentType = Compres ? "application/x-gzip" : "application/json";
-            if (author != null)
-            {
-                request.Headers.Add(HttpRequestHeader.Authorization, author);
-            }
+            request.ContentType = compress ? "application/x-gzip" : "application/json";
+            request.Headers.Add(HttpRequestHeader.Authorization, author);
 
             return request;
         }
@@ -286,8 +281,10 @@ namespace Insight.WS.Test.Interface
         /// <returns>string Json字符串</returns>
         public static string Serialize<T>(T obj)
         {
-            return new JavaScriptSerializer().Serialize(obj);
+            var json = new JavaScriptSerializer();
+            return json.Serialize(obj);
         }
+
 
         /// <summary>
         /// 将一个集合序列化为Json字符串
@@ -297,7 +294,8 @@ namespace Insight.WS.Test.Interface
         /// <returns>string Json字符串</returns>
         public static string Serialize<T>(List<T> objs)
         {
-            return new JavaScriptSerializer().Serialize(objs);
+            var json = new JavaScriptSerializer();
+            return json.Serialize(objs);
         }
 
         /// <summary>
