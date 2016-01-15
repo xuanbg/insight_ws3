@@ -52,7 +52,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DateTimeConverter.cs" />
     <Compile Include="Entity\Comments.cs" />
     <Compile Include="Entity\MDE_Favorites.cs" />
     <Compile Include="Entity\MDE_Message.cs" />

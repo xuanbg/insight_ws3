@@ -177,7 +177,7 @@ namespace Insight.WS.Service.SuperDentist
         /// <returns>JsonResult</returns>
         public JsonResult SearchGroups(string keys, string mid)
         {
-            var result = Verify(mid + Secret);
+            var result = Verify(keys + Secret);
             if (!result.Successful) return result;
 
             var gp = new GuidParse(mid);
