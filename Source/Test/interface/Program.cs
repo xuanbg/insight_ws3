@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Threading;
 using System.Windows.Forms;
 using Insight.WS.Test.Interface.Entity;
 using static Insight.WS.Test.Interface.Util;
@@ -24,11 +22,9 @@ namespace Insight.WS.Test.Interface
             Util.Version = Convert.ToInt32(build);
             UserSession = Login("Admin", "123456");
             //UserSession = UserLogin("18600740256", "111111");
-            AddTopic();
-            //GetOrgs();
-
-            Signout();
-            //Logout();
+            SendLog();
+            //Signout();
+            Logout();
         }
 
         private static void GetOrgs()
@@ -64,20 +60,18 @@ namespace Insight.WS.Test.Interface
         private static void SendLog()
         {
             var url = "http://localhost:6514/logs";
-            var code = "600102";
-            for (var i = 0; i < 1000; i++)
+            var code = "700102";
+            var dict = new Dictionary<string, string>
             {
-                var dict = new Dictionary<string, string>
-                {
-                    {"code", code},
-                    {"message", $"这是第{i}条日志"},
-                    {"userid", null}
-                };
-                var data = Serialize(dict);
-                var author = Base64(Hash(code + Secret));
-                var result = HttpRequest(url, "POST", author, data);
-            }
-            //PutResult(result);
+                {"code", code},
+                {"message", "这是日志"},
+                {"source", "测试" },
+                {"action", "写日志" }
+            };
+            var data = Serialize(dict);
+            var author = Base64(Hash(code + Secret));
+            var result = HttpRequest(url, "POST", author, data);
+            PutResult(result);
         }
 
         private static void SearchTopics(string keys)
@@ -382,17 +376,15 @@ namespace Insight.WS.Test.Interface
         /// <returns></returns>
         private static Session Login(string mobile, string password)
         {
-            var url = $"{BaseAddress}user/signin";
+            var url = "http://localhost:6400/users/signin";
             var us = new Session
             {
                 LoginName = mobile,
                 Signature = Hash(mobile.ToUpper() + Hash(password)),
-                Version = 101,
                 MachineId = Hash("MachineId")
             };
-            var dict = new Dictionary<string, Session> { { "session", us } };
-            var data = Serialize(dict);
-            var result = HttpRequest(url, "POST", null, data, false);
+            var author = Base64(us);
+            var result = HttpRequest(url, "PUT", author);
             if (result.Successful)
             {
                 var session = Deserialize<Session>(result.Data);
@@ -406,17 +398,19 @@ namespace Insight.WS.Test.Interface
             return null;
         }
 
-        private static Session UserLogin(string mobile, string password)
+        private static Session SingIn(string mobile, string password)
         {
             var url = $"{BaseAddress}user/signin";
             var us = new Session
             {
                 LoginName = mobile,
                 Signature = Hash(mobile.ToUpper() + Hash(password)),
+                Version = 101,
                 MachineId = Hash("MachineId")
             };
-            var author = Base64(us);
-            var result = HttpRequest(url, "PUT", author, "", false);
+            var dict = new Dictionary<string, Session> { { "session", us } };
+            var data = Serialize(dict);
+            var result = HttpRequest(url, "PUT", null, data, false);
             if (result.Successful)
             {
                 var session = Deserialize<Session>(result.Data);
@@ -435,11 +429,11 @@ namespace Insight.WS.Test.Interface
         /// </summary>
         private static void Logout()
         {
-            var url = "http://localhost:6400/verify/user/signout";
+            var url = "http://localhost:6400/users/signout";
             var author = Base64(UserSession);
             var dict = new Dictionary<string, string> {{ "account", UserSession.LoginName}};
             var data = Serialize(dict);
-            var result = HttpRequest(url, "PUT", author, data, false);
+            var result = HttpRequest(url, "PUT", author, data);
             if (result.Successful)
             {
                 Console.Write($"用户{UserSession.LoginName}注销成功！");
