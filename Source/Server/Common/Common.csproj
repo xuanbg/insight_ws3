@@ -190,24 +190,6 @@
     <Compile Include="ORM\MasterData.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ORM\MasterData_Merger.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\MasterData_Property.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\MDD_Binary.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\MDD_Character.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\MDD_Date.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\MDD_Numeric.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="ORM\MDE_Favorites.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
@@ -459,7 +441,6 @@
     <None Include="ORM\WSModel.edmx.diagram">
       <DependentUpon>WSModel.edmx</DependentUpon>
     </None>
-    <None Include="packages.config" />
     <None Include="Service References\Service\Insight.WS.Server.Common.Service.Session.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

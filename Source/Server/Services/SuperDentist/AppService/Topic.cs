@@ -474,23 +474,6 @@ namespace Insight.WS.Service.SuperDentist
             return id == null ? result.DataBaseError() : result.Success(id.ToString());
         }
 
-        /// <summary>
-        /// 获取话题可用标签
-        /// </summary>
-        /// <returns>JsonResult</returns>
-        public JsonResult GetTopicTags()
-        {
-            var result = Verify(Secret);
-            if (!result.Successful) return result;
-
-            using (var context = new WSEntities())
-            {
-                var cate = context.BASE_Category.Single(c => c.Alias == "Tags");
-                var data = context.MasterData.Where(m => m.CategoryId == cate.ID).ToList();
-                return result.Success(Serialize(data));
-            }
-        }
-
         #endregion
 
     }

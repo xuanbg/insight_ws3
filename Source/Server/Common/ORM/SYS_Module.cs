@@ -15,7 +15,6 @@ namespace Insight.WS.Server.Common.ORM
     
     [DataContract(IsReference = true)]
     [KnownType(typeof(BASE_Category))]
-    [KnownType(typeof(MasterData_Property))]
     [KnownType(typeof(SYS_Allot_Record))]
     [KnownType(typeof(SYS_Code_Allot))]
     [KnownType(typeof(SYS_ModuleGroup))]
@@ -29,7 +28,6 @@ namespace Insight.WS.Server.Common.ORM
         public SYS_Module()
         {
             this.BASE_Category = new HashSet<BASE_Category>();
-            this.MasterData_Property = new HashSet<MasterData_Property>();
             this.SYS_Allot_Record = new HashSet<SYS_Allot_Record>();
             this.SYS_Code_Allot = new HashSet<SYS_Code_Allot>();
             this.SYS_ModuleAction = new HashSet<SYS_ModuleAction>();
@@ -75,8 +73,6 @@ namespace Insight.WS.Server.Common.ORM
     
     	[DataMember]
         public virtual ICollection<BASE_Category> BASE_Category { get; set; }
-    	[DataMember]
-        public virtual ICollection<MasterData_Property> MasterData_Property { get; set; }
     	[DataMember]
         public virtual ICollection<SYS_Allot_Record> SYS_Allot_Record { get; set; }
     	[DataMember]

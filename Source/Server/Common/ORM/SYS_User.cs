@@ -22,7 +22,6 @@ namespace Insight.WS.Server.Common.ORM
     [KnownType(typeof(ABS_Storage_Location))]
     [KnownType(typeof(BASE_Category))]
     [KnownType(typeof(ImageData))]
-    [KnownType(typeof(MasterData_Merger))]
     [KnownType(typeof(MDG_Contact))]
     [KnownType(typeof(MDG_Customer))]
     [KnownType(typeof(MDG_Dictionary))]
@@ -84,7 +83,6 @@ namespace Insight.WS.Server.Common.ORM
             this.ABS_Storage_Location = new HashSet<ABS_Storage_Location>();
             this.BASE_Category = new HashSet<BASE_Category>();
             this.ImageData = new HashSet<ImageData>();
-            this.MasterData_Merger = new HashSet<MasterData_Merger>();
             this.MDG_Contact = new HashSet<MDG_Contact>();
             this.MDG_Customer = new HashSet<MDG_Customer>();
             this.MDG_Dictionary = new HashSet<MDG_Dictionary>();
@@ -185,8 +183,6 @@ namespace Insight.WS.Server.Common.ORM
         public virtual ICollection<BASE_Category> BASE_Category { get; set; }
     	[DataMember]
         public virtual ICollection<ImageData> ImageData { get; set; }
-    	[DataMember]
-        public virtual ICollection<MasterData_Merger> MasterData_Merger { get; set; }
     	[DataMember]
         public virtual ICollection<MDG_Contact> MDG_Contact { get; set; }
     	[DataMember]

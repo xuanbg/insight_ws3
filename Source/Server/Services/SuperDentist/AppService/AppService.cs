@@ -396,6 +396,25 @@ namespace Insight.WS.Service.SuperDentist
         #region setting
 
         /// <summary>
+        /// 获取话题可用标签
+        /// </summary>
+        /// <returns>JsonResult</returns>
+        public JsonResult GetTopicTags()
+        {
+            var result = Verify(Secret);
+            if (!result.Successful) return result;
+
+            using (var context = new WSEntities())
+            {
+                var cate = context.BASE_Category.Single(c => c.Alias == "Tags");
+                var data = (from d in context.MasterData
+                            where d.CategoryId == cate.ID
+                            select new { d.ID, d.Name }).ToList();
+                return result.Success(Serialize(data));
+            }
+        }
+
+        /// <summary>
         /// 获取七牛云文件上传Token
         /// </summary>
         /// <returns>JsonResult</returns>

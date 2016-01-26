@@ -10,34 +10,16 @@
 namespace Insight.WS.Server.Common.ORM
 {
     using System;
-    using System.Data.Entity.Core.Objects;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class WSEntities : DbContext
+    public partial class Entities : DbContext
     {
-    	public WSEntities()
-            : this(false) { }
-    
-        public WSEntities(bool proxyCreationEnabled)
-            : base("name=WSEntities")
+        public Entities()
+            : base("name=Entities")
         {
-    		        this.Configuration.ProxyCreationEnabled = proxyCreationEnabled;
-        }
-    	
-        public WSEntities(string connectionString)
-          : this(connectionString, false) { }
-    	  
-        public WSEntities(string connectionString, bool proxyCreationEnabled)
-            : base(connectionString)
-        {
-    		        this.Configuration.ProxyCreationEnabled = proxyCreationEnabled;
-        }	
-    	
-        public ObjectContext ObjectContext
-        {
-          get { return ((IObjectContextAdapter)this).ObjectContext; }
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -71,16 +53,36 @@ namespace Insight.WS.Server.Common.ORM
         public virtual DbSet<BASE_Category> BASE_Category { get; set; }
         public virtual DbSet<ImageData> ImageData { get; set; }
         public virtual DbSet<MasterData> MasterData { get; set; }
+        public virtual DbSet<MDE_Favorites> MDE_Favorites { get; set; }
+        public virtual DbSet<MDE_Message> MDE_Message { get; set; }
         public virtual DbSet<MDG_Contact> MDG_Contact { get; set; }
         public virtual DbSet<MDG_Customer> MDG_Customer { get; set; }
         public virtual DbSet<MDG_Dictionary> MDG_Dictionary { get; set; }
         public virtual DbSet<MDG_Employee> MDG_Employee { get; set; }
         public virtual DbSet<MDG_Expense> MDG_Expense { get; set; }
         public virtual DbSet<MDG_Material> MDG_Material { get; set; }
+        public virtual DbSet<MDG_Member> MDG_Member { get; set; }
         public virtual DbSet<MDG_Supplier> MDG_Supplier { get; set; }
         public virtual DbSet<MDR_ET> MDR_ET { get; set; }
         public virtual DbSet<MDR_MU> MDR_MU { get; set; }
         public virtual DbSet<MDS_Contact_Info> MDS_Contact_Info { get; set; }
+        public virtual DbSet<SDC_CaseHistory> SDC_CaseHistory { get; set; }
+        public virtual DbSet<SDC_FirstVisit> SDC_FirstVisit { get; set; }
+        public virtual DbSet<SDC_Subsequent> SDC_Subsequent { get; set; }
+        public virtual DbSet<SDC_Summary> SDC_Summary { get; set; }
+        public virtual DbSet<SDG_Group> SDG_Group { get; set; }
+        public virtual DbSet<SDG_GroupMember> SDG_GroupMember { get; set; }
+        public virtual DbSet<SDO_Advertisement> SDO_Advertisement { get; set; }
+        public virtual DbSet<SDO_Recommend> SDO_Recommend { get; set; }
+        public virtual DbSet<SDO_Tutorial> SDO_Tutorial { get; set; }
+        public virtual DbSet<SDO_TutorialComment> SDO_TutorialComment { get; set; }
+        public virtual DbSet<SDO_TutorialPraise> SDO_TutorialPraise { get; set; }
+        public virtual DbSet<SDT_Attitude> SDT_Attitude { get; set; }
+        public virtual DbSet<SDT_Comment> SDT_Comment { get; set; }
+        public virtual DbSet<SDT_Forward> SDT_Forward { get; set; }
+        public virtual DbSet<SDT_Praise> SDT_Praise { get; set; }
+        public virtual DbSet<SDT_Speech> SDT_Speech { get; set; }
+        public virtual DbSet<SDT_Topic> SDT_Topic { get; set; }
         public virtual DbSet<SYS_Alert_Message> SYS_Alert_Message { get; set; }
         public virtual DbSet<SYS_Alert_Rules> SYS_Alert_Rules { get; set; }
         public virtual DbSet<SYS_Alert_Send> SYS_Alert_Send { get; set; }
@@ -90,6 +92,8 @@ namespace Insight.WS.Server.Common.ORM
         public virtual DbSet<SYS_Code_Record> SYS_Code_Record { get; set; }
         public virtual DbSet<SYS_Code_Scheme> SYS_Code_Scheme { get; set; }
         public virtual DbSet<SYS_Interface> SYS_Interface { get; set; }
+        public virtual DbSet<SYS_Logs> SYS_Logs { get; set; }
+        public virtual DbSet<SYS_Logs_Rules> SYS_Logs_Rules { get; set; }
         public virtual DbSet<SYS_Module> SYS_Module { get; set; }
         public virtual DbSet<SYS_ModuleAction> SYS_ModuleAction { get; set; }
         public virtual DbSet<SYS_ModuleGroup> SYS_ModuleGroup { get; set; }
@@ -117,49 +121,12 @@ namespace Insight.WS.Server.Common.ORM
         public virtual DbSet<SYS_UserGroup> SYS_UserGroup { get; set; }
         public virtual DbSet<SYS_UserGroupMember> SYS_UserGroupMember { get; set; }
         public virtual DbSet<Advance> Advance { get; set; }
-        public virtual DbSet<Dictionary> Dictionary { get; set; }
-        public virtual DbSet<ReportSchedular> ReportSchedular { get; set; }
-        public virtual DbSet<ReportTemplet> ReportTemplet { get; set; }
-        public virtual DbSet<MDE_Favorites> MDE_Favorites { get; set; }
-        public virtual DbSet<MDE_Message> MDE_Message { get; set; }
-        public virtual DbSet<MDG_Member> MDG_Member { get; set; }
-        public virtual DbSet<SDC_CaseHistory> SDC_CaseHistory { get; set; }
-        public virtual DbSet<SDC_FirstVisit> SDC_FirstVisit { get; set; }
-        public virtual DbSet<SDC_Subsequent> SDC_Subsequent { get; set; }
-        public virtual DbSet<SDC_Summary> SDC_Summary { get; set; }
-        public virtual DbSet<SDG_Group> SDG_Group { get; set; }
-        public virtual DbSet<SDG_GroupMember> SDG_GroupMember { get; set; }
-        public virtual DbSet<SDO_Advertisement> SDO_Advertisement { get; set; }
-        public virtual DbSet<SDO_Recommend> SDO_Recommend { get; set; }
-        public virtual DbSet<SDT_Attitude> SDT_Attitude { get; set; }
-        public virtual DbSet<SDT_Comment> SDT_Comment { get; set; }
-        public virtual DbSet<SDT_Forward> SDT_Forward { get; set; }
-        public virtual DbSet<SDT_Praise> SDT_Praise { get; set; }
-        public virtual DbSet<SDT_Topic> SDT_Topic { get; set; }
-        public virtual DbSet<SDO_Tutorial> SDO_Tutorial { get; set; }
-        public virtual DbSet<SDO_TutorialComment> SDO_TutorialComment { get; set; }
-        public virtual DbSet<SDO_TutorialPraise> SDO_TutorialPraise { get; set; }
-        public virtual DbSet<MemberInfo> MemberInfo { get; set; }
-        public virtual DbSet<Speechs> Speechs { get; set; }
-        public virtual DbSet<SDT_Speech> SDT_Speech { get; set; }
         public virtual DbSet<Groups> Groups { get; set; }
+        public virtual DbSet<ReportSchedular> ReportSchedular { get; set; }
+        public virtual DbSet<Speechs> Speechs { get; set; }
     
-        [DbFunction("WSEntities", "GetTopic")]
-        public virtual IQueryable<Topic> GetTopic(Nullable<System.Guid> topicId, Nullable<System.Guid> userId)
-        {
-            var topicIdParameter = topicId.HasValue ?
-                new ObjectParameter("TopicId", topicId) :
-                new ObjectParameter("TopicId", typeof(System.Guid));
-    
-            var userIdParameter = userId.HasValue ?
-                new ObjectParameter("UserId", userId) :
-                new ObjectParameter("UserId", typeof(System.Guid));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<Topic>("[WSEntities].[GetTopic](@TopicId, @UserId)", topicIdParameter, userIdParameter);
-        }
-    
-        [DbFunction("WSEntities", "Authority")]
-        public virtual IQueryable<Nullable<System.Guid>> Authority(Nullable<System.Guid> userId, Nullable<System.Guid> deptId, Nullable<System.Guid> actionId)
+        [DbFunction("Entities", "Authority")]
+        public virtual IQueryable<Authority_Result> Authority(Nullable<System.Guid> userId, Nullable<System.Guid> deptId, Nullable<System.Guid> actionId)
         {
             var userIdParameter = userId.HasValue ?
                 new ObjectParameter("UserId", userId) :
@@ -173,11 +140,11 @@ namespace Insight.WS.Server.Common.ORM
                 new ObjectParameter("ActionId", actionId) :
                 new ObjectParameter("ActionId", typeof(System.Guid));
     
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<Nullable<System.Guid>>("[WSEntities].[Authority](@UserId, @DeptId, @ActionId)", userIdParameter, deptIdParameter, actionIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<Authority_Result>("[Entities].[Authority](@UserId, @DeptId, @ActionId)", userIdParameter, deptIdParameter, actionIdParameter);
         }
     
-        [DbFunction("WSEntities", "GetComments")]
-        public virtual IQueryable<Comments> GetComments(Nullable<System.Guid> speechId, Nullable<System.Guid> userId)
+        [DbFunction("Entities", "GetComments")]
+        public virtual IQueryable<GetComments_Result> GetComments(Nullable<System.Guid> speechId, Nullable<System.Guid> userId)
         {
             var speechIdParameter = speechId.HasValue ?
                 new ObjectParameter("SpeechId", speechId) :
@@ -187,34 +154,48 @@ namespace Insight.WS.Server.Common.ORM
                 new ObjectParameter("UserId", userId) :
                 new ObjectParameter("UserId", typeof(System.Guid));
     
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<Comments>("[WSEntities].[GetComments](@SpeechId, @UserId)", speechIdParameter, userIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<GetComments_Result>("[Entities].[GetComments](@SpeechId, @UserId)", speechIdParameter, userIdParameter);
         }
     
-        [DbFunction("WSEntities", "GetSpeech")]
-        public virtual IQueryable<Speech> GetSpeech(Nullable<System.Guid> speechId, Nullable<System.Guid> userId)
-        {
-            var speechIdParameter = speechId.HasValue ?
-                new ObjectParameter("SpeechId", speechId) :
-                new ObjectParameter("SpeechId", typeof(System.Guid));
-    
-            var userIdParameter = userId.HasValue ?
-                new ObjectParameter("UserId", userId) :
-                new ObjectParameter("UserId", typeof(System.Guid));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<Speech>("[WSEntities].[GetSpeech](@SpeechId, @UserId)", speechIdParameter, userIdParameter);
-        }
-    
-        [DbFunction("WSEntities", "GetGroups")]
+        [DbFunction("Entities", "GetGroups")]
         public virtual IQueryable<Group> GetGroups(Nullable<System.Guid> userId)
         {
             var userIdParameter = userId.HasValue ?
                 new ObjectParameter("UserId", userId) :
                 new ObjectParameter("UserId", typeof(System.Guid));
     
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<Group>("[WSEntities].[GetGroups](@UserId)", userIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<Group>("[Entities].[GetGroups](@UserId)", userIdParameter);
         }
     
-        [DbFunction("WSEntities", "GetTopics")]
+        [DbFunction("Entities", "GetSpeech")]
+        public virtual IQueryable<GetSpeech_Result> GetSpeech(Nullable<System.Guid> speechId, Nullable<System.Guid> userId)
+        {
+            var speechIdParameter = speechId.HasValue ?
+                new ObjectParameter("SpeechId", speechId) :
+                new ObjectParameter("SpeechId", typeof(System.Guid));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<GetSpeech_Result>("[Entities].[GetSpeech](@SpeechId, @UserId)", speechIdParameter, userIdParameter);
+        }
+    
+        [DbFunction("Entities", "GetTopic")]
+        public virtual IQueryable<GetTopic_Result> GetTopic(Nullable<System.Guid> topicId, Nullable<System.Guid> userId)
+        {
+            var topicIdParameter = topicId.HasValue ?
+                new ObjectParameter("TopicId", topicId) :
+                new ObjectParameter("TopicId", typeof(System.Guid));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<GetTopic_Result>("[Entities].[GetTopic](@TopicId, @UserId)", topicIdParameter, userIdParameter);
+        }
+    
+        [DbFunction("Entities", "GetTopics")]
         public virtual IQueryable<Topics> GetTopics(Nullable<System.Guid> groupId, Nullable<bool> all)
         {
             var groupIdParameter = groupId.HasValue ?
@@ -225,7 +206,7 @@ namespace Insight.WS.Server.Common.ORM
                 new ObjectParameter("All", all) :
                 new ObjectParameter("All", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<Topics>("[WSEntities].[GetTopics](@GroupId, @All)", groupIdParameter, allParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<Topics>("[Entities].[GetTopics](@GroupId, @All)", groupIdParameter, allParameter);
         }
     }
 }

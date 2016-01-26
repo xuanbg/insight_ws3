@@ -7,22 +7,21 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Insight.WS.Test.Interface.Entity
+namespace Insight.WS.Server.Common.ORM
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class SYS_Logs_Rules
+    public partial class SYS_Logs
     {
         public System.Guid ID { get; set; }
         public long SN { get; set; }
-        public bool ToDataBase { get; set; }
-        public string Code { get; set; }
         public int Level { get; set; }
+        public string Code { get; set; }
         public string Source { get; set; }
         public string Action { get; set; }
         public string Message { get; set; }
-        public System.Guid CreatorUserId { get; set; }
+        public Nullable<System.Guid> SourceUserId { get; set; }
         public System.DateTime CreateTime { get; set; }
     }
 }
