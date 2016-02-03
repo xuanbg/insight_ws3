@@ -51,7 +51,7 @@ namespace Insight.WS.Server
             var path = $"{Application.StartupPath}\\Services\\SuperDentist\\AppService.dll";
             if (!File.Exists(path)) return;
 
-            var endpoints = new List<EndpointSet> { new EndpointSet { Name = "Interface", Path = "AppService" } };
+            var endpoints = new List<EndpointSet> {new EndpointSet {Name = "Interface"}};
             var serv = new Services
             {
                 BaseAddress = GetAppSetting("Address"),

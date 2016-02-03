@@ -58,7 +58,7 @@ namespace Insight.WS.Service.SuperDentist
         /// </summary>
         /// <param name="type">收藏类型</param>
         /// <returns>JsonResult</returns>
-        [WebGet(UriTemplate = "user/favorites?type={type}", ResponseFormat = WebMessageFormat.Json)]
+        [WebGet(UriTemplate = "favorites?type={type}", ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
         JsonResult GetFavorites(int type);
 
@@ -67,7 +67,7 @@ namespace Insight.WS.Service.SuperDentist
         /// </summary>
         /// <param name="favorites">收藏数据对象</param>
         /// <returns>JsonResult</returns>
-        [WebInvoke(Method = "PUT", UriTemplate = "user/favorite", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [WebInvoke(Method = "POST", UriTemplate = "favorites", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         [OperationContract]
         JsonResult Favorite(MDE_Favorites favorites);
 
@@ -76,7 +76,7 @@ namespace Insight.WS.Service.SuperDentist
         /// </summary>
         /// <param name="id">收藏记录ID</param>
         /// <returns>JsonResult</returns>
-        [WebInvoke(Method = "DELETE", UriTemplate = "user/favorite", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [WebInvoke(Method = "DELETE", UriTemplate = "favorites/{id}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         [OperationContract]
         JsonResult RemoveFavorite(string id);
 
@@ -89,7 +89,7 @@ namespace Insight.WS.Service.SuperDentist
         /// </summary>
         /// <param name="id">通信对象ID</param>
         /// <returns>JsonResult</returns>
-        [WebGet(UriTemplate = "user/messages?id={id}", ResponseFormat = WebMessageFormat.Json)]
+        [WebGet(UriTemplate = "messages?id={id}", ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
         JsonResult GetMessages(string id);
 
@@ -98,7 +98,7 @@ namespace Insight.WS.Service.SuperDentist
         /// </summary>
         /// <param name="message">私信数据对象</param>
         /// <returns>JsonResult</returns>
-        [WebInvoke(Method = "PUT", UriTemplate = "user/message", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [WebInvoke(Method = "POST", UriTemplate = "messages", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         [OperationContract]
         JsonResult AddMessage(MDE_Message message);
 
@@ -107,7 +107,7 @@ namespace Insight.WS.Service.SuperDentist
         /// </summary>
         /// <param name="id">私信ID</param>
         /// <returns>JsonResult</returns>
-        [WebInvoke(Method = "DELETE", UriTemplate = "user/message", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [WebInvoke(Method = "DELETE", UriTemplate = "messages/{id}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         [OperationContract]
         JsonResult RemoveMessage(string id);
 
@@ -116,7 +116,7 @@ namespace Insight.WS.Service.SuperDentist
         /// </summary>
         /// <param name="id">私信ID</param>
         /// <returns>JsonResult</returns>
-        [WebInvoke(Method = "POST", UriTemplate = "user/message", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [WebInvoke(Method = "PUT", UriTemplate = "messages/{id}/send", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         [OperationContract]
         JsonResult SendMessage(string id);
 
