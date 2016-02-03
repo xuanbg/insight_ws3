@@ -24,22 +24,25 @@ namespace Insight.WS.Service.SuperDentist
         /// <returns>JsonResult</returns>
         public JsonResult Register(string smsCode, string password)
         {
+            // 验证数据完整性
             var result = new JsonResult();
             var dict = GetAuthorization();
             var session = GetAuthor<Session>(dict["Auth"]);
             var signature = Hash(session.LoginName.ToUpper() + smsCode + password);
             if (signature != session.Signature) return result.InvalidAuth();
 
+            // 验证用户登录名是否已存在
             using (var context = new WSEntities())
             {
-                // 验证用户登录名是否已存在
                 var user = context.MasterData.FirstOrDefault(u => u.Alias == session.LoginName);
                 if (user != null) return result.AccountExists();
             }
 
+            // 验证短信验证码
             result = Common.VerifyCode(session.LoginName, smsCode, 1);
             if (!result.Successful) return result;
 
+            // 保存会员数据
             var masterdata = new MasterData { Name = session.UserName, Alias = session.LoginName };
             var cmds = new List<SqlCommand>
             {
@@ -49,11 +52,12 @@ namespace Insight.WS.Service.SuperDentist
             var id = SqlExecute(cmds, 0);
             if (id == null) return result.DataBaseError();
 
+            // 注册用户
             var obj = new
             {
                 ID = (Guid) id,
                 Name = session.UserName,
-                LoginName = session.LoginName,
+                session.LoginName,
                 Password = password,
                 Type = -1
             };
@@ -65,6 +69,7 @@ namespace Insight.WS.Service.SuperDentist
             result = HttpRequest(url, "POST", auth, data);
             if (!result.Successful) return result.ServiceUnavailable();
 
+            // 获取并返回登录结果
             url = BaseServer + $"users/{session.LoginName}/signin";
             session.Signature = Hash(session.LoginName + password);
             auth = Base64(session);
