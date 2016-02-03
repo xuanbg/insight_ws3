@@ -86,41 +86,30 @@
         }
 
         /// <summary>
-        /// 返回版本不兼容（400）的错误信息
+        /// 返回请求参数错误（400）的错误信息
         /// </summary>
         /// <returns>JsonResult</returns>
-        public JsonResult Incompatible()
+        public JsonResult BadRequest()
         {
             Successful = false;
             Code = "400";
-            Name = "IncompatibleVersions";
-            Message = "客户端版本不兼容";
+            Name = "BadRequest";
+            Message = "请求参数错误";
             return this;
         }
 
         /// <summary>
         /// 返回身份验证失败（401）的错误信息
         /// </summary>
+        /// <param name="data">承载的数据（可选）</param>
         /// <returns>JsonResult</returns>
-        public JsonResult InvalidAuth()
+        public JsonResult InvalidAuth(string data = null)
         {
             Successful = false;
             Code = "401";
             Name = "InvalidAuthenticationInfo";
             Message = "提供的身份验证信息不正确";
-            return this;
-        }
-
-        /// <summary>
-        /// 返回用户被禁止登录（402）的错误信息
-        /// </summary>
-        /// <returns>JsonResult</returns>
-        public JsonResult Disabled()
-        {
-            Successful = false;
-            Code = "402";
-            Name = "AccountIsDisabled";
-            Message = "当前用户被禁止登录";
+            Data = data;
             return this;
         }
 
@@ -251,6 +240,19 @@
             Code = "502";
             Name = "DataAlreadyExists";
             Message = "数据已存在";
+            return this;
+        }
+
+        /// <summary>
+        /// 返回服务不可用（503）的错误信息
+        /// </summary>
+        /// <returns>JsonResult</returns>
+        public JsonResult ServiceUnavailable()
+        {
+            Successful = false;
+            Code = "503";
+            Name = "ServiceUnavailable";
+            Message = "当前服务不可用";
             return this;
         }
 

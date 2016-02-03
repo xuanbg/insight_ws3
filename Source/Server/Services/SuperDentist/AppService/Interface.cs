@@ -2,7 +2,6 @@
 using System.ServiceModel.Web;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
-using Insight.WS.Server.Common.Service;
 
 namespace Insight.WS.Service.SuperDentist
 {
@@ -11,7 +10,7 @@ namespace Insight.WS.Service.SuperDentist
     public interface Interface
     {
 
-        #region User 5
+        #region Member 4
 
         /// <summary>
         /// 用户注册
@@ -19,65 +18,16 @@ namespace Insight.WS.Service.SuperDentist
         /// <param name="smsCode">短信验证码</param>
         /// <param name="password">密码MD5值</param>
         /// <returns>JsonResult</returns>
-        [WebInvoke(Method = "PUT", UriTemplate = "user", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [WebInvoke(Method = "POST", UriTemplate = "members", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         [OperationContract]
         JsonResult Register(string smsCode, string password);
-
-        /// <summary>
-        /// 用户登录
-        /// </summary>
-        /// <param name="session">用户会话</param>
-        /// <returns>JsonResult</returns>
-        [WebInvoke(Method = "POST", UriTemplate = "user/signin", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
-        [OperationContract]
-        JsonResult Login(Session session);
-
-        /// <summary>
-        /// 注销
-        /// </summary>
-        /// <returns>JsonResult</returns>
-        [WebInvoke(Method = "POST", UriTemplate = "user/signout", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
-        [OperationContract]
-        JsonResult Logout();
-
-        /// <summary>
-        /// 修改登录密码
-        /// </summary>
-        /// <param name="password">新登录密码MD5值</param>
-        /// <returns>JsonResult</returns>
-        [WebInvoke(Method = "POST", UriTemplate = "user/change", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
-        [OperationContract]
-        JsonResult ChangePassword(string password);
-
-        /// <summary>
-        /// 重置登录密码
-        /// </summary>
-        /// <param name="smsCode">短信验证码</param>
-        /// <param name="password">密码MD5值</param>
-        /// <returns>JsonResult</returns>
-        [WebInvoke(Method = "POST", UriTemplate = "user/reset", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
-        [OperationContract]
-        JsonResult ResetPassword(string smsCode, string password);
-
-        #endregion
-
-        #region Member 3
-
-        /// <summary>
-        /// 获取会员列表
-        /// </summary>
-        /// <param name="name">昵称</param>
-        /// <returns>JsonResult</returns>
-        [WebGet(UriTemplate = "user/members?name={name}", ResponseFormat = WebMessageFormat.Json)]
-        [OperationContract]
-        JsonResult GetMembers(string name);
 
         /// <summary>
         /// 编辑会员信息
         /// </summary>
         /// <param name="member">会员信息数据对象</param>
         /// <returns>JsonResult</returns>
-        [WebInvoke(Method = "POST", UriTemplate = "user/member", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [WebInvoke(Method = "PUT", UriTemplate = "members", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         [OperationContract]
         JsonResult SetMemberInfo(MDG_Member member);
 
@@ -86,9 +36,18 @@ namespace Insight.WS.Service.SuperDentist
         /// </summary>
         /// <param name="id">会员ID</param>
         /// <returns>JsonResult</returns>
-        [WebGet(UriTemplate = "user/member?id={id}", ResponseFormat = WebMessageFormat.Json)]
+        [WebGet(UriTemplate = "members/{id}", ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
         JsonResult GetMemberInfo(string id);
+
+        /// <summary>
+        /// 获取会员列表
+        /// </summary>
+        /// <param name="name">昵称</param>
+        /// <returns>JsonResult</returns>
+        [WebGet(UriTemplate = "members?name={name}", ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        JsonResult GetMembers(string name);
 
         #endregion
 

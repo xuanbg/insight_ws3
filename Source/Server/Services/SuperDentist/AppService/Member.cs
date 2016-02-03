@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
-using Insight.WS.Server.Common.Service;
 using static Insight.WS.Server.Common.General;
 using static Insight.WS.Server.Common.SqlHelper;
 using static Insight.WS.Server.Common.Util;
@@ -16,20 +17,58 @@ namespace Insight.WS.Service.SuperDentist
         #region Member 3
 
         /// <summary>
-        /// 获取会员列表
+        /// 用户注册
         /// </summary>
-        /// <param name="name">昵称</param>
+        /// <param name="smsCode">短信验证码</param>
+        /// <param name="password">密码MD5值</param>
         /// <returns>JsonResult</returns>
-        public JsonResult GetMembers(string name)
+        public JsonResult Register(string smsCode, string password)
         {
-            var result = Verify();
-            if (!result.Successful) return result;
+            var result = new JsonResult();
+            var dict = GetAuthorization();
+            var session = GetAuthor<Session>(dict["Auth"]);
+            var signature = Hash(session.LoginName.ToUpper() + smsCode + password);
+            if (signature != session.Signature) return result.InvalidAuth();
 
             using (var context = new WSEntities())
             {
-                var members = context.MemberInfo.Where(m => m.Name.Contains(name)).OrderByDescending(m => m.Integral).ToList();
-                return result.Success(Serialize(members));
+                // 验证用户登录名是否已存在
+                var user = context.MasterData.FirstOrDefault(u => u.Alias == session.LoginName);
+                if (user != null) return result.AccountExists();
             }
+
+            result = Common.VerifyCode(session.LoginName, smsCode, 1);
+            if (!result.Successful) return result;
+
+            var masterdata = new MasterData { Name = session.UserName, Alias = session.LoginName };
+            var cmds = new List<SqlCommand>
+            {
+                Server.Common.DataAccess.AddMasterData(masterdata),
+                InsertData(new MDG_Member()),
+            };
+            var id = SqlExecute(cmds, 0);
+            if (id == null) return result.DataBaseError();
+
+            var obj = new
+            {
+                ID = (Guid) id,
+                Name = session.UserName,
+                LoginName = session.LoginName,
+                Password = password,
+                Type = -1
+            };
+            var url = BaseServer + $"users/{obj.LoginName}";
+            session.Signature = Hash(session.LoginName + obj.LoginName + password);
+            var auth = Base64(session);
+            var ddict = new Dictionary<string, object> {{"user", obj}};
+            var data = Serialize(ddict);
+            result = HttpRequest(url, "POST", auth, data);
+            if (!result.Successful) return result.ServiceUnavailable();
+
+            url = BaseServer + $"users/{session.LoginName}/signin";
+            session.Signature = Hash(session.LoginName + password);
+            auth = Base64(session);
+            return HttpRequest(url, "PUT", auth);
         }
 
         /// <summary>
@@ -79,6 +118,23 @@ namespace Insight.WS.Service.SuperDentist
             {
                 var member = context.MemberInfo.SingleOrDefault(m => m.ID == uid);
                 return GetJson(member);
+            }
+        }
+
+        /// <summary>
+        /// 获取会员列表
+        /// </summary>
+        /// <param name="name">昵称</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult GetMembers(string name)
+        {
+            var result = Verify();
+            if (!result.Successful) return result;
+
+            using (var context = new WSEntities())
+            {
+                var members = context.MemberInfo.Where(m => m.Name.Contains(name)).OrderByDescending(m => m.Integral).ToList();
+                return result.Success(Serialize(members));
             }
         }
 

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
+using static Insight.WS.Server.Common.Util;
 
 namespace Insight.WS.Service.SuperDentist
 {
@@ -58,5 +60,19 @@ namespace Insight.WS.Service.SuperDentist
             }
         }
 
+        /// <summary>
+        /// 验证短信验证码
+        /// </summary>
+        /// <param name="mobile">手机号</param>
+        /// <param name="code">验证码</param>
+        /// <param name="type">类型</param>
+        /// <param name="remove">是否验证后删除</param>
+        /// <returns>JsonResult</returns>
+        public static JsonResult VerifyCode(string mobile, string code, int type, bool remove = true)
+        {
+            var url = VerifyServer + $"smscode/compare?mobile={mobile}&code={code}&type={type}&remove={remove}";
+            var auth = Base64(Hash(mobile + Secret));
+            return General.HttpRequest(url, "GET", auth);
+        }
     }
 }

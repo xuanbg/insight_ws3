@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ServiceModel;
-using Insight.WS.Server.Common.Service;
+using Insight.WS.Server.Common;
 
 namespace Insight.WS.Service
 {

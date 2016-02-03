@@ -2,7 +2,6 @@
 using System.Data;
 using System.ServiceModel;
 using Insight.WS.Server.Common;
-using Insight.WS.Server.Common.Service;
 
 namespace Insight.WS.Service
 {
@@ -17,14 +16,6 @@ namespace Insight.WS.Service
         /// <returns>DataTable 可登录部门列表</returns>
         [OperationContract]
         DataTable GetDeptList(string loginName);
-
-        /// <summary>
-        /// 获取用户登录结果
-        /// </summary>
-        /// <param name="us">Session对象实体</param>
-        /// <returns>Session对象实体</returns>
-        [OperationContract]
-        Session UserLogin(Session us);
 
         /// <summary>
         /// 获取客户端文件列表

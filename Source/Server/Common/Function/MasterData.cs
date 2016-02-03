@@ -32,7 +32,8 @@ namespace Insight.WS.Server.Common
         public static SqlCommand AddMasterData(MasterData obj)
         {
             var sql = "insert MasterData (ParentId, CategoryId, Code, Name, Alias, FullName) ";
-            sql += "select @ParentId, @CategoryId, @Code, @Name, @Alias, @FullName select ID From MasterData where SN = SCOPE_IDENTITY()";
+            sql += "select @ParentId, @CategoryId, @Code, @Name, @Alias, @FullName ";
+            sql += "select ID From MasterData where SN = SCOPE_IDENTITY()";
             var parm = new[]
             {
                 new SqlParameter("@ParentId", SqlDbType.UniqueIdentifier) {Value = obj.ParentId},

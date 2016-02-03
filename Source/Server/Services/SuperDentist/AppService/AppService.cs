@@ -5,7 +5,6 @@ using System.Linq;
 using System.ServiceModel;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
-using Insight.WS.Server.Common.Service;
 using Qiniu.RS;
 using static Insight.WS.Server.Common.General;
 using static Insight.WS.Server.Common.SqlHelper;
@@ -23,113 +22,6 @@ namespace Insight.WS.Service.SuperDentist
         private static readonly string AccessKey = GetAppSetting("AccessKey");
         private static readonly string SecretKey = GetAppSetting("SecretKey");
         private static readonly string BucketName = GetAppSetting("Bucket");
-
-        #endregion
-
-        #region user
-
-        /// <summary>
-        /// 用户注册
-        /// </summary>
-        /// <param name="smsCode">短信验证码</param>
-        /// <param name="password">密码MD5值</param>
-        /// <returns>JsonResult</returns>
-        public JsonResult Register(string smsCode, string password)
-        {
-            var result = new JsonResult();
-            var obj = GetAuthorization<Session>();
-            var signature = Hash(obj.LoginName.ToUpper() + smsCode + password);
-            if (signature != obj.Signature) return result.InvalidAuth();
-
-            using (var context = new WSEntities())
-            {
-                // 验证用户登录名是否已存在
-                var user = context.SYS_User.FirstOrDefault(u => u.LoginName == obj.LoginName);
-                if (user != null) return result.AccountExists();
-            }
-
-            if (!VerifyCode(obj.LoginName, smsCode, 1)) return result.SMSCodeError();
-
-            var cmds = new List<SqlCommand>
-            {
-                Server.Common.DataAccess.AddMasterData(new MasterData { Name = obj.UserName, Alias = obj.LoginName }),
-                InsertData(new MDG_Member()),
-                Server.Common.DataAccess.AddUser(new SYS_User {Name = obj.UserName, LoginName = obj.LoginName, Password = password, Type = -1})
-            };
-            if (!SqlExecute(cmds)) return result.DataBaseError();
-
-            obj.Signature = Hash(obj.LoginName.ToUpper() + password);
-            return result.Success(Serialize(obj));
-        }
-
-        /// <summary>
-        /// 用户登录
-        /// </summary>
-        /// <param name="session">用户会话</param>
-        /// <returns>JsonResult</returns>
-        public JsonResult Login(Session session)
-        {
-            var us = UserLogin(session);
-            return new JsonResult().Success(Serialize(us));
-        }
-
-        /// <summary>
-        /// 注销
-        /// </summary>
-        /// <returns>JsonResult</returns>
-        public JsonResult Logout()
-        {
-            Session us;
-            var result = Verify(out us);
-            if (!result.Successful) return result;
-
-            return SetUserOffline(us, us.LoginName) ? result : result.NotFound();
-        }
-
-        /// <summary>
-        /// 修改登录密码
-        /// </summary>
-        /// <param name="password">新登录密码MD5值</param>
-        /// <returns>JsonResult</returns>
-        public JsonResult ChangePassword(string password)
-        {
-            Session us;
-            var result = Verify(out us);
-            if (!result.Successful) return result;
-
-            return UpdateSignature(us, us.UserId, password) ? result : result.NotFound();
-        }
-
-        /// <summary>
-        /// 重置登录密码
-        /// </summary>
-        /// <param name="smsCode">短信验证码</param>
-        /// <param name="password">密码MD5值</param>
-        /// <returns>JsonResult</returns>
-        public JsonResult ResetPassword(string smsCode, string password)
-        {
-            var result = new JsonResult();
-            var obj = GetAuthorization<Session>();
-            var signature = Hash(obj.LoginName.ToUpper() + smsCode + password);
-            if (signature != obj.Signature) return result.InvalidAuth();
-
-            // 验证用户是否存在
-            using (var context = new WSEntities())
-            {
-                var user = context.SYS_User.SingleOrDefault(u => u.LoginName == obj.LoginName);
-                if (user == null) return result.NotFound();
-
-                obj.UserId = user.ID;
-                obj.Signature = Hash(user.LoginName.ToUpper() + user.Password);
-            }
-
-            if (!VerifyCode(obj.LoginName, smsCode, 2)) return result.SMSCodeError();
-
-            if (!UpdateSignature(obj, obj.UserId, password)) return result.DataBaseError();
-
-            obj.Signature = Hash(obj.LoginName.ToUpper() + password);
-            return result.Success(Serialize(obj));
-        }
 
         #endregion
 
@@ -439,7 +331,7 @@ namespace Insight.WS.Service.SuperDentist
         /// <returns>JsonResult</returns>
         public JsonResult GetSmsVerifyCode(string id, int type, string mobile)
         {
-            var result = Verify(Secret);
+            var result = Verify(id + Secret);
             if (!result.Successful) return result;
 
             switch (type)
