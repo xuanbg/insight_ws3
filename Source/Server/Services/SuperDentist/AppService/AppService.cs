@@ -5,7 +5,6 @@ using System.Linq;
 using System.ServiceModel;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
-using Insight.WS.Server.Common.Service;
 using Qiniu.RS;
 using static Insight.WS.Server.Common.General;
 using static Insight.WS.Server.Common.SqlHelper;
@@ -26,114 +25,130 @@ namespace Insight.WS.Service.SuperDentist
 
         #endregion
 
-        #region user
-
-        /// <summary>
-        /// 用户注册
-        /// </summary>
-        /// <param name="smsCode">短信验证码</param>
-        /// <param name="password">密码MD5值</param>
-        /// <returns>JsonResult</returns>
-        public JsonResult Register(string smsCode, string password)
-        {
-            var result = new JsonResult();
-            var obj = GetAuthorization<Session>();
-            var signature = Hash(obj.LoginName.ToUpper() + smsCode + password);
-            if (signature != obj.Signature) return result.InvalidAuth();
-
-            using (var context = new WSEntities())
-            {
-                // 验证用户登录名是否已存在
-                var user = context.SYS_User.FirstOrDefault(u => u.LoginName == obj.LoginName);
-                if (user != null) return result.AccountExists();
-            }
-
-            if (!VerifyCode(obj.LoginName, smsCode, 1)) return result.SMSCodeError();
-
-            var cmds = new List<SqlCommand>
-            {
-                Server.Common.DataAccess.AddMasterData(new MasterData { Name = obj.UserName, Alias = obj.LoginName }),
-                InsertData(new MDG_Member()),
-                Server.Common.DataAccess.AddUser(new SYS_User {Name = obj.UserName, LoginName = obj.LoginName, Password = password, Type = -1})
-            };
-            if (!SqlExecute(cmds)) return result.DataBaseError();
-
-            obj.Signature = Hash(obj.LoginName.ToUpper() + password);
-            return result.Success(Serialize(obj));
-        }
-
-        /// <summary>
-        /// 用户登录
-        /// </summary>
-        /// <param name="session">用户会话</param>
-        /// <returns>JsonResult</returns>
-        public JsonResult Login(Session session)
-        {
-            var us = UserLogin(session);
-            return new JsonResult().Success(Serialize(us));
-        }
-
-        /// <summary>
-        /// 注销
-        /// </summary>
-        /// <returns>JsonResult</returns>
-        public JsonResult Logout()
-        {
-            Session us;
-            var result = Verify(out us);
-            if (!result.Successful) return result;
-
-            return SetUserOffline(us, us.LoginName) ? result : result.NotFound();
-        }
-
-        /// <summary>
-        /// 修改登录密码
-        /// </summary>
-        /// <param name="password">新登录密码MD5值</param>
-        /// <returns>JsonResult</returns>
-        public JsonResult ChangePassword(string password)
-        {
-            Session us;
-            var result = Verify(out us);
-            if (!result.Successful) return result;
-
-            return UpdateSignature(us, us.UserId, password) ? result : result.NotFound();
-        }
-
-        /// <summary>
-        /// 重置登录密码
-        /// </summary>
-        /// <param name="smsCode">短信验证码</param>
-        /// <param name="password">密码MD5值</param>
-        /// <returns>JsonResult</returns>
-        public JsonResult ResetPassword(string smsCode, string password)
-        {
-            var result = new JsonResult();
-            var obj = GetAuthorization<Session>();
-            var signature = Hash(obj.LoginName.ToUpper() + smsCode + password);
-            if (signature != obj.Signature) return result.InvalidAuth();
-
-            // 验证用户是否存在
-            using (var context = new WSEntities())
-            {
-                var user = context.SYS_User.SingleOrDefault(u => u.LoginName == obj.LoginName);
-                if (user == null) return result.NotFound();
-
-                obj.UserId = user.ID;
-                obj.Signature = Hash(user.LoginName.ToUpper() + user.Password);
-            }
-
-            if (!VerifyCode(obj.LoginName, smsCode, 2)) return result.SMSCodeError();
-
-            if (!UpdateSignature(obj, obj.UserId, password)) return result.DataBaseError();
-
-            obj.Signature = Hash(obj.LoginName.ToUpper() + password);
-            return result.Success(Serialize(obj));
-        }
-
-        #endregion
-
         #region Group
+
+        /// <summary>
+        /// 新建群组
+        /// </summary>
+        /// <param name="group">群组数据对象</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult AddGroup(SDG_Group group)
+        {
+            Session us;
+            var result = Verify(out us);
+            if (!result.Successful) return result;
+
+            group.CreatorUserId = us.UserId;
+            group.OwnerUserId = us.UserId;
+            var member = new SDG_GroupMember {MemberId = us.UserId, Validity = true};
+            var cmds = new List<SqlCommand> {InsertData(@group), InsertData(member)};
+            var id = SqlExecute(cmds, 0);
+            return id == null ? result.DataBaseError() : result.Success(id.ToString());
+        }
+
+        /// <summary>
+        /// 删除群组
+        /// </summary>
+        /// <param name="id">群组ID</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult RemoveGroup(string id)
+        {
+            Session us;
+            var result = Verify(out us);
+            if (!result.Successful) return result;
+
+            Guid gid;
+            if (!Guid.TryParse(id, out gid)) return result.InvalidGuid();
+
+            using (var context = new WSEntities())
+            {
+                var group = context.SDG_Group.SingleOrDefault(g => g.ID == gid);
+                if (group == null) return result.NotFound();
+
+                if (us.UserId != group.ManageUserId && us.UserId != group.OwnerUserId) result.Forbidden();
+
+                group.Validity = false;
+                return context.SaveChanges() > 0 ? result : result.DataBaseError();
+            }
+        }
+
+        /// <summary>
+        /// 编辑群组信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="group">群组数据对象</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult EditGroup(string id, SDG_Group @group)
+        {
+            Session us;
+            var result = Verify(out us);
+            if (!result.Successful) return result;
+
+            using (var context = new WSEntities())
+            {
+                var data = context.SDG_Group.SingleOrDefault(t => t.ID == group.ID);
+                if (data == null) return result.NotFound();
+
+                if (us.UserId != data.ManageUserId && us.UserId != data.OwnerUserId) result.Forbidden();
+
+                data.Name = group.Name;
+                data.Description = group.Description;
+                data.Icon = group.Icon;
+                data.Picture = group.Picture;
+                data.ManageUserId = group.ManageUserId;
+                return context.SaveChanges() > 0 ? result : result.DataBaseError();
+            }
+        }
+
+        /// <summary>
+        /// 转让群主
+        /// </summary>
+        /// <param name="id">群组ID</param>
+        /// <param name="mid">新的群主会员ID</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult Transfer(string id, string mid)
+        {
+            Session us;
+            var result = Verify(out us);
+            if (!result.Successful) return result;
+
+            Guid gid;
+            if (!Guid.TryParse(id, out gid)) return result.InvalidGuid();
+
+            Guid uid;
+            if (!Guid.TryParse(mid, out uid)) return result.InvalidGuid();
+
+            using (var context = new WSEntities())
+            {
+                var data = context.SDG_Group.SingleOrDefault(t => t.ID == gid);
+                if (data == null) return result.NotFound();
+
+                if (us.UserId != data.OwnerUserId) result.Forbidden();
+
+                data.OwnerUserId = uid;
+                return context.SaveChanges() > 0 ? result : result.DataBaseError();
+            }
+        }
+
+        /// <summary>
+        /// 获取群组信息
+        /// </summary>
+        /// <param name="id">群组ID</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult GetGroup(string id)
+        {
+            var result = Verify();
+            if (!result.Successful) return result;
+
+            Guid gid;
+            if (!Guid.TryParse(id, out gid)) return result.InvalidGuid();
+
+            using (var context = new WSEntities())
+            {
+                var group = context.SDG_Group.SingleOrDefault(g => g.ID == gid);
+                return group == null ? result.NotFound() : result.Success(Serialize(group));
+            }
+        }
 
         /// <summary>
         /// 获取群组列表
@@ -186,107 +201,6 @@ namespace Insight.WS.Service.SuperDentist
             var keylist = keys.Split(Convert.ToChar(",")).ToList();
             var groups = Common.SearchGroup(keylist, gp.Guid);
             return result.Success(Serialize(groups));
-        }
-
-        /// <summary>
-        /// 新建群组
-        /// </summary>
-        /// <param name="group">群组数据对象</param>
-        /// <returns>JsonResult</returns>
-        public JsonResult AddGroup(SDG_Group group)
-        {
-            Session us;
-            var result = Verify(out us);
-            if (!result.Successful) return result;
-
-            group.CreatorUserId = us.UserId;
-            group.OwnerUserId = us.UserId;
-            var cmd = InsertData(group);
-            var id = SqlScalar(cmd);
-            return id == null ? result.DataBaseError() : result.Success(id.ToString());
-        }
-
-        /// <summary>
-        /// 删除群组
-        /// </summary>
-        /// <param name="id">群组ID</param>
-        /// <returns>JsonResult</returns>
-        public JsonResult RemoveGroup(string id)
-        {
-            Session us;
-            var result = Verify(out us);
-            if (!result.Successful) return result;
-
-            Guid gid;
-            if (!Guid.TryParse(id, out gid)) return result.InvalidGuid();
-
-            using (var context = new WSEntities())
-            {
-                var group = context.SDG_Group.SingleOrDefault(g => g.ID == gid);
-                if (group == null) return result.NotFound();
-
-                if (us.UserId != group.ManageUserId && us.UserId != group.OwnerUserId) result.Forbidden();
-
-                group.Validity = false;
-                return context.SaveChanges() > 0 ? result : result.DataBaseError();
-            }
-        }
-
-        /// <summary>
-        /// 编辑群组信息
-        /// </summary>
-        /// <param name="group">群组数据对象</param>
-        /// <returns>JsonResult</returns>
-        public JsonResult EditGroup(SDG_Group group)
-        {
-            Session us;
-            var result = Verify(out us);
-            if (!result.Successful) return result;
-
-            using (var context = new WSEntities())
-            {
-                var data = context.SDG_Group.SingleOrDefault(t => t.ID == group.ID);
-                if (data == null) return result.NotFound();
-
-                if (us.UserId != data.ManageUserId && us.UserId != data.OwnerUserId) result.Forbidden();
-
-                data.Name = group.Name;
-                data.Description = group.Description;
-                data.Icon = group.Icon;
-                data.Picture = group.Picture;
-                data.ManageUserId = group.ManageUserId;
-                return context.SaveChanges() > 0 ? result : result.DataBaseError();
-            }
-        }
-
-        /// <summary>
-        /// 转让群主
-        /// </summary>
-        /// <param name="id">群组ID</param>
-        /// <param name="mid">新的群主会员ID</param>
-        /// <returns>JsonResult</returns>
-        public JsonResult Transfer(string id, string mid)
-        {
-            Session us;
-            var result = Verify(out us);
-            if (!result.Successful) return result;
-
-            Guid gid;
-            if (!Guid.TryParse(id, out gid)) return result.InvalidGuid();
-
-            Guid uid;
-            if (!Guid.TryParse(mid, out uid)) return result.InvalidGuid();
-
-            using (var context = new WSEntities())
-            {
-                var data = context.SDG_Group.SingleOrDefault(t => t.ID == gid);
-                if (data == null) return result.NotFound();
-
-                if (us.UserId != data.OwnerUserId) result.Forbidden();
-
-                data.OwnerUserId = uid;
-                return context.SaveChanges() > 0 ? result : result.DataBaseError();
-            }
         }
 
         /// <summary>
@@ -368,9 +282,9 @@ namespace Insight.WS.Service.SuperDentist
         /// 获取群组成员列表
         /// </summary>
         /// <param name="id">群组ID</param>
-        /// <param name="member">是否群组成员</param>
+        /// <param name="type"></param>
         /// <returns>JsonResult</returns>
-        public JsonResult GetGroupMembers(string id, bool member)
+        public JsonResult GetGroupMembers(string id, string type)
         {
             Session us;
             var result = Verify(out us);
@@ -379,6 +293,7 @@ namespace Insight.WS.Service.SuperDentist
             Guid gid;
             if (!Guid.TryParse(id, out gid)) return result.InvalidGuid();
 
+            var ismember = type == "1";
             using (var context = new WSEntities())
             {
                 var group = context.SDG_Group.SingleOrDefault(g => g.ID == gid);
@@ -386,7 +301,7 @@ namespace Insight.WS.Service.SuperDentist
 
                 if (us.UserId != group.ManageUserId && us.UserId != group.OwnerUserId) result.Forbidden();
 
-                var list = context.SDG_GroupMember.Where(m => m.Validity == member && m.GroupId == gid && m.MemberId != group.OwnerUserId).ToList();
+                var list = context.SDG_GroupMember.Where(m => m.Validity == ismember && m.GroupId == gid && m.MemberId != group.OwnerUserId).ToList();
                 return result.Success(Serialize(list));
             }
         }
@@ -394,6 +309,25 @@ namespace Insight.WS.Service.SuperDentist
         #endregion
 
         #region setting
+
+        /// <summary>
+        /// 获取话题可用标签
+        /// </summary>
+        /// <returns>JsonResult</returns>
+        public JsonResult GetTopicTags()
+        {
+            var result = Verify(Secret);
+            if (!result.Successful) return result;
+
+            using (var context = new WSEntities())
+            {
+                var cate = context.BASE_Category.Single(c => c.Alias == "Tags");
+                var data = (from d in context.MasterData
+                            where d.CategoryId == cate.ID
+                            select new { d.ID, d.Name }).ToList();
+                return result.Success(Serialize(data));
+            }
+        }
 
         /// <summary>
         /// 获取七牛云文件上传Token
@@ -420,7 +354,7 @@ namespace Insight.WS.Service.SuperDentist
         /// <returns>JsonResult</returns>
         public JsonResult GetSmsVerifyCode(string id, int type, string mobile)
         {
-            var result = Verify(Secret);
+            var result = Verify(id + Secret);
             if (!result.Successful) return result;
 
             switch (type)

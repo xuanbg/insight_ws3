@@ -5,7 +5,6 @@ using System.Data.SqlClient;
 using System.Linq;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
-using Insight.WS.Server.Common.Service;
 using static Insight.WS.Server.Common.General;
 using static Insight.WS.Server.Common.SqlHelper;
 
@@ -129,32 +128,6 @@ namespace Insight.WS.Service
                 new SqlParameter("@ID", SqlDbType.UniqueIdentifier) {Value = id}
             };
             return MakeCommand(sql, parm);
-        }
-
-        /// <summary>
-        /// 插入主数据合并记录
-        /// </summary>
-        /// <param name="us">用户会话对象实体</param>
-        /// <param name="obj">MasterData_Merger对象实体</param>
-        /// <returns>bool 是否成功</returns>
-        public bool AddMerge(Session us, MasterData_Merger obj)
-        {
-            if (!SimpleVerifty(us)) return false;
-
-            var cmds = new List<SqlCommand>
-            {
-                MakeCommand($"update MDG_Customer set [Enable] = 0, Visible = 0 where MID = '{obj.MasterId}'")
-            };
-
-            const string sql = "insert MasterData_Merger (MasterId, MergerId, CreatorUserId) select @MasterId, @MergerId, @CreatorUserId";
-            var parm = new[]
-            {
-                new SqlParameter("@MasterId", SqlDbType.UniqueIdentifier) {Value = obj.MasterId},
-                new SqlParameter("@MergerId", SqlDbType.UniqueIdentifier) {Value = obj.MergerId},
-                new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = us.UserId}
-            };
-            cmds.Add(MakeCommand(sql, parm));
-            return SqlExecute(cmds);
         }
 
         /// <summary>

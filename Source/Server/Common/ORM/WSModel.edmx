@@ -378,71 +378,6 @@
           <Property Name="Alias" Type="nvarchar" MaxLength="32" />
           <Property Name="FullName" Type="nvarchar" MaxLength="64" />
         </EntityType>
-        <EntityType Name="MasterData_Merger">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="SN" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MasterId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="MergerId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="CreatorUserId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="CreateTime" Type="datetime" Nullable="false" />
-        </EntityType>
-        <EntityType Name="MasterData_Property">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="SN" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ModuleId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="CategoryId" Type="uniqueidentifier" />
-          <Property Name="Index" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="64" Nullable="false" />
-          <Property Name="Label" Type="varchar" MaxLength="32" />
-          <Property Name="Parameter" Type="text" />
-          <Property Name="BuiltIn" Type="bit" Nullable="false" />
-        </EntityType>
-        <EntityType Name="MDD_Binary">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="SN" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MasterDataId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="PropertyId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Value" Type="image" />
-        </EntityType>
-        <EntityType Name="MDD_Character">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="SN" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MasterDataId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="PropertyId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Value" Type="nvarchar(max)" />
-        </EntityType>
-        <EntityType Name="MDD_Date">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="SN" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MasterDataId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="PropertyId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Value" Type="datetime" />
-        </EntityType>
-        <EntityType Name="MDD_Numeric">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="SN" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MasterDataId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="PropertyId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Value" Type="decimal" Precision="20" Scale="6" />
-        </EntityType>
         <EntityType Name="MDE_Favorites">
           <Key>
             <PropertyRef Name="ID" />
@@ -2382,20 +2317,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__MasterDat__Categ__08362A7C">
-          <End Role="BASE_Category" Type="Self.BASE_Category" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="MasterData_Property" Type="Self.MasterData_Property" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BASE_Category">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="MasterData_Property">
-              <PropertyRef Name="CategoryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__MasterDat__Categ__7CC477D0">
           <End Role="BASE_Category" Type="Self.BASE_Category" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -2407,160 +2328,6 @@
             </Principal>
             <Dependent Role="MasterData">
               <PropertyRef Name="CategoryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__MasterDat__Creat__027D5126">
-          <End Role="SYS_User" Type="Self.SYS_User" Multiplicity="1" />
-          <End Role="MasterData_Merger" Type="Self.MasterData_Merger" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SYS_User">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="MasterData_Merger">
-              <PropertyRef Name="CreatorUserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__MasterDat__Maste__009508B4">
-          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="MasterData_Merger" Type="Self.MasterData_Merger" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MasterData">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="MasterData_Merger">
-              <PropertyRef Name="MasterId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__MasterDat__Merge__01892CED">
-          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1" />
-          <End Role="MasterData_Merger" Type="Self.MasterData_Merger" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MasterData">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="MasterData_Merger">
-              <PropertyRef Name="MergerId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__MasterDat__Modul__07420643">
-          <End Role="SYS_Module" Type="Self.SYS_Module" Multiplicity="1" />
-          <End Role="MasterData_Property" Type="Self.MasterData_Property" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SYS_Module">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="MasterData_Property">
-              <PropertyRef Name="ModuleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__MDD_Binar__Maste__1C3D2329">
-          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="MDD_Binary" Type="Self.MDD_Binary" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MasterData">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="MDD_Binary">
-              <PropertyRef Name="MasterDataId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__MDD_Binar__Prope__1D314762">
-          <End Role="MasterData_Property" Type="Self.MasterData_Property" Multiplicity="1" />
-          <End Role="MDD_Binary" Type="Self.MDD_Binary" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MasterData_Property">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="MDD_Binary">
-              <PropertyRef Name="PropertyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__MDD_Chara__Maste__0DEF03D2">
-          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="MDD_Character" Type="Self.MDD_Character" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MasterData">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="MDD_Character">
-              <PropertyRef Name="MasterDataId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__MDD_Chara__Prope__0EE3280B">
-          <End Role="MasterData_Property" Type="Self.MasterData_Property" Multiplicity="1" />
-          <End Role="MDD_Character" Type="Self.MDD_Character" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MasterData_Property">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="MDD_Character">
-              <PropertyRef Name="PropertyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__MDD_Date__Master__17786E0C">
-          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="MDD_Date" Type="Self.MDD_Date" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MasterData">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="MDD_Date">
-              <PropertyRef Name="MasterDataId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__MDD_Date__Proper__186C9245">
-          <End Role="MasterData_Property" Type="Self.MasterData_Property" Multiplicity="1" />
-          <End Role="MDD_Date" Type="Self.MDD_Date" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MasterData_Property">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="MDD_Date">
-              <PropertyRef Name="PropertyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__MDD_Numer__Maste__12B3B8EF">
-          <End Role="MasterData" Type="Self.MasterData" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="MDD_Numeric" Type="Self.MDD_Numeric" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MasterData">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="MDD_Numeric">
-              <PropertyRef Name="MasterDataId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__MDD_Numer__Prope__13A7DD28">
-          <End Role="MasterData_Property" Type="Self.MasterData_Property" Multiplicity="1" />
-          <End Role="MDD_Numeric" Type="Self.MDD_Numeric" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MasterData_Property">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="MDD_Numeric">
-              <PropertyRef Name="PropertyId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4851,12 +4618,6 @@
           <EntitySet Name="BASE_Category" EntityType="Self.BASE_Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ImageData" EntityType="Self.ImageData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MasterData" EntityType="Self.MasterData" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="MasterData_Merger" EntityType="Self.MasterData_Merger" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="MasterData_Property" EntityType="Self.MasterData_Property" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="MDD_Binary" EntityType="Self.MDD_Binary" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="MDD_Character" EntityType="Self.MDD_Character" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="MDD_Date" EntityType="Self.MDD_Date" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="MDD_Numeric" EntityType="Self.MDD_Numeric" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MDE_Favorites" EntityType="Self.MDE_Favorites" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MDE_Message" EntityType="Self.MDE_Message" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MDG_Contact" EntityType="Self.MDG_Contact" Schema="dbo" store:Type="Tables" />
@@ -5287,61 +5048,9 @@
             <End Role="MDG_Dictionary" EntitySet="MDG_Dictionary" />
             <End Role="ImageData" EntitySet="ImageData" />
           </AssociationSet>
-          <AssociationSet Name="FK__MasterDat__Categ__08362A7C" Association="Self.FK__MasterDat__Categ__08362A7C">
-            <End Role="BASE_Category" EntitySet="BASE_Category" />
-            <End Role="MasterData_Property" EntitySet="MasterData_Property" />
-          </AssociationSet>
           <AssociationSet Name="FK__MasterDat__Categ__7CC477D0" Association="Self.FK__MasterDat__Categ__7CC477D0">
             <End Role="BASE_Category" EntitySet="BASE_Category" />
             <End Role="MasterData" EntitySet="MasterData" />
-          </AssociationSet>
-          <AssociationSet Name="FK__MasterDat__Creat__027D5126" Association="Self.FK__MasterDat__Creat__027D5126">
-            <End Role="SYS_User" EntitySet="SYS_User" />
-            <End Role="MasterData_Merger" EntitySet="MasterData_Merger" />
-          </AssociationSet>
-          <AssociationSet Name="FK__MasterDat__Maste__009508B4" Association="Self.FK__MasterDat__Maste__009508B4">
-            <End Role="MasterData" EntitySet="MasterData" />
-            <End Role="MasterData_Merger" EntitySet="MasterData_Merger" />
-          </AssociationSet>
-          <AssociationSet Name="FK__MasterDat__Merge__01892CED" Association="Self.FK__MasterDat__Merge__01892CED">
-            <End Role="MasterData" EntitySet="MasterData" />
-            <End Role="MasterData_Merger" EntitySet="MasterData_Merger" />
-          </AssociationSet>
-          <AssociationSet Name="FK__MasterDat__Modul__07420643" Association="Self.FK__MasterDat__Modul__07420643">
-            <End Role="SYS_Module" EntitySet="SYS_Module" />
-            <End Role="MasterData_Property" EntitySet="MasterData_Property" />
-          </AssociationSet>
-          <AssociationSet Name="FK__MDD_Binar__Maste__1C3D2329" Association="Self.FK__MDD_Binar__Maste__1C3D2329">
-            <End Role="MasterData" EntitySet="MasterData" />
-            <End Role="MDD_Binary" EntitySet="MDD_Binary" />
-          </AssociationSet>
-          <AssociationSet Name="FK__MDD_Binar__Prope__1D314762" Association="Self.FK__MDD_Binar__Prope__1D314762">
-            <End Role="MasterData_Property" EntitySet="MasterData_Property" />
-            <End Role="MDD_Binary" EntitySet="MDD_Binary" />
-          </AssociationSet>
-          <AssociationSet Name="FK__MDD_Chara__Maste__0DEF03D2" Association="Self.FK__MDD_Chara__Maste__0DEF03D2">
-            <End Role="MasterData" EntitySet="MasterData" />
-            <End Role="MDD_Character" EntitySet="MDD_Character" />
-          </AssociationSet>
-          <AssociationSet Name="FK__MDD_Chara__Prope__0EE3280B" Association="Self.FK__MDD_Chara__Prope__0EE3280B">
-            <End Role="MasterData_Property" EntitySet="MasterData_Property" />
-            <End Role="MDD_Character" EntitySet="MDD_Character" />
-          </AssociationSet>
-          <AssociationSet Name="FK__MDD_Date__Master__17786E0C" Association="Self.FK__MDD_Date__Master__17786E0C">
-            <End Role="MasterData" EntitySet="MasterData" />
-            <End Role="MDD_Date" EntitySet="MDD_Date" />
-          </AssociationSet>
-          <AssociationSet Name="FK__MDD_Date__Proper__186C9245" Association="Self.FK__MDD_Date__Proper__186C9245">
-            <End Role="MasterData_Property" EntitySet="MasterData_Property" />
-            <End Role="MDD_Date" EntitySet="MDD_Date" />
-          </AssociationSet>
-          <AssociationSet Name="FK__MDD_Numer__Maste__12B3B8EF" Association="Self.FK__MDD_Numer__Maste__12B3B8EF">
-            <End Role="MasterData" EntitySet="MasterData" />
-            <End Role="MDD_Numeric" EntitySet="MDD_Numeric" />
-          </AssociationSet>
-          <AssociationSet Name="FK__MDD_Numer__Prope__13A7DD28" Association="Self.FK__MDD_Numer__Prope__13A7DD28">
-            <End Role="MasterData_Property" EntitySet="MasterData_Property" />
-            <End Role="MDD_Numeric" EntitySet="MDD_Numeric" />
           </AssociationSet>
           <AssociationSet Name="FK__MDE_Favor__Creat__5AFA3B08" Association="Self.FK__MDE_Favor__Creat__5AFA3B08">
             <End Role="SYS_User" EntitySet="SYS_User" />
@@ -6095,12 +5804,6 @@
           <EntitySet Name="BASE_Category" EntityType="WSModel.BASE_Category" />
           <EntitySet Name="ImageData" EntityType="WSModel.ImageData" />
           <EntitySet Name="MasterData" EntityType="WSModel.MasterData" />
-          <EntitySet Name="MasterData_Merger" EntityType="WSModel.MasterData_Merger" />
-          <EntitySet Name="MasterData_Property" EntityType="WSModel.MasterData_Property" />
-          <EntitySet Name="MDD_Binary" EntityType="WSModel.MDD_Binary" />
-          <EntitySet Name="MDD_Character" EntityType="WSModel.MDD_Character" />
-          <EntitySet Name="MDD_Date" EntityType="WSModel.MDD_Date" />
-          <EntitySet Name="MDD_Numeric" EntityType="WSModel.MDD_Numeric" />
           <EntitySet Name="MDG_Contact" EntityType="WSModel.MDG_Contact" />
           <EntitySet Name="MDG_Customer" EntityType="WSModel.MDG_Customer" />
           <EntitySet Name="MDG_Dictionary" EntityType="WSModel.MDG_Dictionary" />
@@ -6370,10 +6073,6 @@
             <End Role="BASE_Category" EntitySet="BASE_Category" />
             <End Role="MasterData" EntitySet="MasterData" />
           </AssociationSet>
-          <AssociationSet Name="FK__MasterDat__Categ__326239C9" Association="WSModel.FK__MasterDat__Categ__326239C9">
-            <End Role="BASE_Category" EntitySet="BASE_Category" />
-            <End Role="MasterData_Property" EntitySet="MasterData_Property" />
-          </AssociationSet>
           <AssociationSet Name="FK__MDG_Custo__Provi__6E7723D0" Association="WSModel.FK__MDG_Custo__Provi__6E7723D0">
             <End Role="BASE_Category" EntitySet="BASE_Category" />
             <End Role="MDG_Customer" EntitySet="MDG_Customer" />
@@ -6413,30 +6112,6 @@
           <AssociationSet Name="FK__ImageData__Secre__3044E72D" Association="WSModel.FK__ImageData__Secre__3044E72D">
             <End Role="MDG_Dictionary" EntitySet="MDG_Dictionary" />
             <End Role="ImageData" EntitySet="ImageData" />
-          </AssociationSet>
-          <AssociationSet Name="FK__MasterDat__Maste__2AC11801" Association="WSModel.FK__MasterDat__Maste__2AC11801">
-            <End Role="MasterData" EntitySet="MasterData" />
-            <End Role="MasterData_Merger" EntitySet="MasterData_Merger" />
-          </AssociationSet>
-          <AssociationSet Name="FK__MasterDat__Merge__2BB53C3A" Association="WSModel.FK__MasterDat__Merge__2BB53C3A">
-            <End Role="MasterData" EntitySet="MasterData" />
-            <End Role="MasterData_Merger" EntitySet="MasterData_Merger" />
-          </AssociationSet>
-          <AssociationSet Name="FK__MDD_Binar__Maste__46693276" Association="WSModel.FK__MDD_Binar__Maste__46693276">
-            <End Role="MasterData" EntitySet="MasterData" />
-            <End Role="MDD_Binary" EntitySet="MDD_Binary" />
-          </AssociationSet>
-          <AssociationSet Name="FK__MDD_Chara__Maste__381B131F" Association="WSModel.FK__MDD_Chara__Maste__381B131F">
-            <End Role="MasterData" EntitySet="MasterData" />
-            <End Role="MDD_Character" EntitySet="MDD_Character" />
-          </AssociationSet>
-          <AssociationSet Name="FK__MDD_Date__Master__41A47D59" Association="WSModel.FK__MDD_Date__Master__41A47D59">
-            <End Role="MasterData" EntitySet="MasterData" />
-            <End Role="MDD_Date" EntitySet="MDD_Date" />
-          </AssociationSet>
-          <AssociationSet Name="FK__MDD_Numer__Maste__3CDFC83C" Association="WSModel.FK__MDD_Numer__Maste__3CDFC83C">
-            <End Role="MasterData" EntitySet="MasterData" />
-            <End Role="MDD_Numeric" EntitySet="MDD_Numeric" />
           </AssociationSet>
           <AssociationSet Name="FK__MDG_Contact__MID__092B1A0C" Association="WSModel.FK__MDG_Contact__MID__092B1A0C">
             <End Role="MasterData" EntitySet="MasterData" />
@@ -6481,30 +6156,6 @@
           <AssociationSet Name="FK__SYS_Alert__Targe__0EAEE938" Association="WSModel.FK__SYS_Alert__Targe__0EAEE938">
             <End Role="MasterData" EntitySet="MasterData" />
             <End Role="SYS_Alert_Send" EntitySet="SYS_Alert_Send" />
-          </AssociationSet>
-          <AssociationSet Name="FK__MasterDat__Creat__2CA96073" Association="WSModel.FK__MasterDat__Creat__2CA96073">
-            <End Role="SYS_User" EntitySet="SYS_User" />
-            <End Role="MasterData_Merger" EntitySet="MasterData_Merger" />
-          </AssociationSet>
-          <AssociationSet Name="FK__MasterDat__Modul__316E1590" Association="WSModel.FK__MasterDat__Modul__316E1590">
-            <End Role="SYS_Module" EntitySet="SYS_Module" />
-            <End Role="MasterData_Property" EntitySet="MasterData_Property" />
-          </AssociationSet>
-          <AssociationSet Name="FK__MDD_Binar__Prope__475D56AF" Association="WSModel.FK__MDD_Binar__Prope__475D56AF">
-            <End Role="MasterData_Property" EntitySet="MasterData_Property" />
-            <End Role="MDD_Binary" EntitySet="MDD_Binary" />
-          </AssociationSet>
-          <AssociationSet Name="FK__MDD_Chara__Prope__390F3758" Association="WSModel.FK__MDD_Chara__Prope__390F3758">
-            <End Role="MasterData_Property" EntitySet="MasterData_Property" />
-            <End Role="MDD_Character" EntitySet="MDD_Character" />
-          </AssociationSet>
-          <AssociationSet Name="FK__MDD_Date__Proper__4298A192" Association="WSModel.FK__MDD_Date__Proper__4298A192">
-            <End Role="MasterData_Property" EntitySet="MasterData_Property" />
-            <End Role="MDD_Date" EntitySet="MDD_Date" />
-          </AssociationSet>
-          <AssociationSet Name="FK__MDD_Numer__Prope__3DD3EC75" Association="WSModel.FK__MDD_Numer__Prope__3DD3EC75">
-            <End Role="MasterData_Property" EntitySet="MasterData_Property" />
-            <End Role="MDD_Numeric" EntitySet="MDD_Numeric" />
           </AssociationSet>
           <AssociationSet Name="FK__MDG_Conta__Creat__0CFBAAF0" Association="WSModel.FK__MDG_Conta__Creat__0CFBAAF0">
             <End Role="SYS_Organization" EntitySet="SYS_Organization" />
@@ -7668,7 +7319,6 @@
           <NavigationProperty Name="SYS_Module" Relationship="WSModel.FK__BASE_Cate__Modul__1C72F8AA" FromRole="BASE_Category" ToRole="SYS_Module" />
           <NavigationProperty Name="ImageData" Relationship="WSModel.FK__ImageData__Categ__2E5C9EBB" FromRole="BASE_Category" ToRole="ImageData" />
           <NavigationProperty Name="MasterData" Relationship="WSModel.FK__MasterDat__Categ__26F0871D" FromRole="BASE_Category" ToRole="MasterData" />
-          <NavigationProperty Name="MasterData_Property" Relationship="WSModel.FK__MasterDat__Categ__326239C9" FromRole="BASE_Category" ToRole="MasterData_Property" />
           <NavigationProperty Name="MDG_Customer" Relationship="WSModel.FK__MDG_Custo__Provi__6E7723D0" FromRole="BASE_Category" ToRole="MDG_Customer" />
           <NavigationProperty Name="MDG_Customer1" Relationship="WSModel.FK__MDG_Custom__City__6F6B4809" FromRole="BASE_Category" ToRole="MDG_Customer" />
           <NavigationProperty Name="MDG_Supplier" Relationship="WSModel.FK__MDG_Suppl__Provi__7EAD8B99" FromRole="BASE_Category" ToRole="MDG_Supplier" />
@@ -7730,12 +7380,6 @@
           <NavigationProperty Name="ABS_Delivery_Item" Relationship="WSModel.FK__ABS_Deliv__Objec__0B8863CA" FromRole="MasterData" ToRole="ABS_Delivery_Item" />
           <NavigationProperty Name="ABS_Storage_Summary" Relationship="WSModel.FK__ABS_Stora__SKUId__78758F56" FromRole="MasterData" ToRole="ABS_Storage_Summary" />
           <NavigationProperty Name="BASE_Category" Relationship="WSModel.FK__MasterDat__Categ__26F0871D" FromRole="MasterData" ToRole="BASE_Category" />
-          <NavigationProperty Name="MasterData_Merger" Relationship="WSModel.FK__MasterDat__Maste__2AC11801" FromRole="MasterData" ToRole="MasterData_Merger" />
-          <NavigationProperty Name="MasterData_Merger1" Relationship="WSModel.FK__MasterDat__Merge__2BB53C3A" FromRole="MasterData" ToRole="MasterData_Merger" />
-          <NavigationProperty Name="MDD_Binary" Relationship="WSModel.FK__MDD_Binar__Maste__46693276" FromRole="MasterData" ToRole="MDD_Binary" />
-          <NavigationProperty Name="MDD_Character" Relationship="WSModel.FK__MDD_Chara__Maste__381B131F" FromRole="MasterData" ToRole="MDD_Character" />
-          <NavigationProperty Name="MDD_Date" Relationship="WSModel.FK__MDD_Date__Master__41A47D59" FromRole="MasterData" ToRole="MDD_Date" />
-          <NavigationProperty Name="MDD_Numeric" Relationship="WSModel.FK__MDD_Numer__Maste__3CDFC83C" FromRole="MasterData" ToRole="MDD_Numeric" />
           <NavigationProperty Name="MDG_Contact" Relationship="WSModel.FK__MDG_Contact__MID__092B1A0C" FromRole="MasterData" ToRole="MDG_Contact" />
           <NavigationProperty Name="MDG_Customer" Relationship="WSModel.FK__MDG_Custome__MID__6AA692EC" FromRole="MasterData" ToRole="MDG_Customer" />
           <NavigationProperty Name="MDG_Dictionary" Relationship="WSModel.FK__MDG_Diction__MID__4A39C35A" FromRole="MasterData" ToRole="MDG_Dictionary" />
@@ -7754,88 +7398,6 @@
           <NavigationProperty Name="SDC_Subsequent" Relationship="WSModel.FK__SDC_Subse__Docto__11165497" FromRole="MasterData" ToRole="SDC_Subsequent" />
           <NavigationProperty Name="SDC_Subsequent1" Relationship="WSModel.FK__SDC_Subse__Nurse__120A78D0" FromRole="MasterData" ToRole="SDC_Subsequent" />
           <NavigationProperty Name="SDG_GroupMember" Relationship="WSModel.FK__SDG_Group__Membe__28EDDE28" FromRole="MasterData" ToRole="SDG_GroupMember" />
-        </EntityType>
-        <EntityType Name="MasterData_Merger">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Guid" Nullable="false" />
-          <Property Name="SN" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MasterId" Type="Guid" Nullable="false" />
-          <Property Name="MergerId" Type="Guid" Nullable="false" />
-          <Property Name="CreatorUserId" Type="Guid" Nullable="false" />
-          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="MasterData" Relationship="WSModel.FK__MasterDat__Maste__2AC11801" FromRole="MasterData_Merger" ToRole="MasterData" />
-          <NavigationProperty Name="MasterData1" Relationship="WSModel.FK__MasterDat__Merge__2BB53C3A" FromRole="MasterData_Merger" ToRole="MasterData" />
-          <NavigationProperty Name="SYS_User" Relationship="WSModel.FK__MasterDat__Creat__2CA96073" FromRole="MasterData_Merger" ToRole="SYS_User" />
-        </EntityType>
-        <EntityType Name="MasterData_Property">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Guid" Nullable="false" />
-          <Property Name="SN" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ModuleId" Type="Guid" Nullable="false" />
-          <Property Name="CategoryId" Type="Guid" />
-          <Property Name="Index" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Name="Label" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-          <Property Name="Parameter" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="BuiltIn" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="BASE_Category" Relationship="WSModel.FK__MasterDat__Categ__326239C9" FromRole="MasterData_Property" ToRole="BASE_Category" />
-          <NavigationProperty Name="SYS_Module" Relationship="WSModel.FK__MasterDat__Modul__316E1590" FromRole="MasterData_Property" ToRole="SYS_Module" />
-          <NavigationProperty Name="MDD_Binary" Relationship="WSModel.FK__MDD_Binar__Prope__475D56AF" FromRole="MasterData_Property" ToRole="MDD_Binary" />
-          <NavigationProperty Name="MDD_Character" Relationship="WSModel.FK__MDD_Chara__Prope__390F3758" FromRole="MasterData_Property" ToRole="MDD_Character" />
-          <NavigationProperty Name="MDD_Date" Relationship="WSModel.FK__MDD_Date__Proper__4298A192" FromRole="MasterData_Property" ToRole="MDD_Date" />
-          <NavigationProperty Name="MDD_Numeric" Relationship="WSModel.FK__MDD_Numer__Prope__3DD3EC75" FromRole="MasterData_Property" ToRole="MDD_Numeric" />
-        </EntityType>
-        <EntityType Name="MDD_Binary">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Guid" Nullable="false" />
-          <Property Name="SN" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MasterDataId" Type="Guid" Nullable="false" />
-          <Property Name="PropertyId" Type="Guid" Nullable="false" />
-          <Property Name="Value" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="MasterData" Relationship="WSModel.FK__MDD_Binar__Maste__46693276" FromRole="MDD_Binary" ToRole="MasterData" />
-          <NavigationProperty Name="MasterData_Property" Relationship="WSModel.FK__MDD_Binar__Prope__475D56AF" FromRole="MDD_Binary" ToRole="MasterData_Property" />
-        </EntityType>
-        <EntityType Name="MDD_Character">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Guid" Nullable="false" />
-          <Property Name="SN" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MasterDataId" Type="Guid" Nullable="false" />
-          <Property Name="PropertyId" Type="Guid" Nullable="false" />
-          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="MasterData" Relationship="WSModel.FK__MDD_Chara__Maste__381B131F" FromRole="MDD_Character" ToRole="MasterData" />
-          <NavigationProperty Name="MasterData_Property" Relationship="WSModel.FK__MDD_Chara__Prope__390F3758" FromRole="MDD_Character" ToRole="MasterData_Property" />
-        </EntityType>
-        <EntityType Name="MDD_Date">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Guid" Nullable="false" />
-          <Property Name="SN" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MasterDataId" Type="Guid" Nullable="false" />
-          <Property Name="PropertyId" Type="Guid" Nullable="false" />
-          <Property Name="Value" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="MasterData" Relationship="WSModel.FK__MDD_Date__Master__41A47D59" FromRole="MDD_Date" ToRole="MasterData" />
-          <NavigationProperty Name="MasterData_Property" Relationship="WSModel.FK__MDD_Date__Proper__4298A192" FromRole="MDD_Date" ToRole="MasterData_Property" />
-        </EntityType>
-        <EntityType Name="MDD_Numeric">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Guid" Nullable="false" />
-          <Property Name="SN" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MasterDataId" Type="Guid" Nullable="false" />
-          <Property Name="PropertyId" Type="Guid" Nullable="false" />
-          <Property Name="Value" Type="Decimal" Precision="20" Scale="6" />
-          <NavigationProperty Name="MasterData" Relationship="WSModel.FK__MDD_Numer__Maste__3CDFC83C" FromRole="MDD_Numeric" ToRole="MasterData" />
-          <NavigationProperty Name="MasterData_Property" Relationship="WSModel.FK__MDD_Numer__Prope__3DD3EC75" FromRole="MDD_Numeric" ToRole="MasterData_Property" />
         </EntityType>
         <EntityType Name="MDG_Contact">
           <Key>
@@ -8278,7 +7840,6 @@
           <Property Name="Validity" Type="Boolean" Nullable="false" />
           <Property Name="Icon" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="BASE_Category" Relationship="WSModel.FK__BASE_Cate__Modul__1C72F8AA" FromRole="SYS_Module" ToRole="BASE_Category" />
-          <NavigationProperty Name="MasterData_Property" Relationship="WSModel.FK__MasterDat__Modul__316E1590" FromRole="SYS_Module" ToRole="MasterData_Property" />
           <NavigationProperty Name="SYS_Allot_Record" Relationship="WSModel.FK__SYS_Allot__Modul__1C08E456" FromRole="SYS_Module" ToRole="SYS_Allot_Record" />
           <NavigationProperty Name="SYS_Code_Allot" Relationship="WSModel.FK__SYS_Code___Modul__2962DF74" FromRole="SYS_Module" ToRole="SYS_Code_Allot" />
           <NavigationProperty Name="SYS_ModuleGroup" Relationship="WSModel.FK__SYS_Modul__Modul__4F3382A1" FromRole="SYS_Module" ToRole="SYS_ModuleGroup" />
@@ -8687,7 +8248,6 @@
           <NavigationProperty Name="ABS_Storage_Location" Relationship="WSModel.FK__ABS_Stora__Creat__72BCB600" FromRole="SYS_User" ToRole="ABS_Storage_Location" />
           <NavigationProperty Name="BASE_Category" Relationship="WSModel.FK__BASE_Cate__Creat__2137ADC7" FromRole="SYS_User" ToRole="BASE_Category" />
           <NavigationProperty Name="ImageData" Relationship="WSModel.FK__ImageData__Creat__332153D8" FromRole="SYS_User" ToRole="ImageData" />
-          <NavigationProperty Name="MasterData_Merger" Relationship="WSModel.FK__MasterDat__Creat__2CA96073" FromRole="SYS_User" ToRole="MasterData_Merger" />
           <NavigationProperty Name="MDG_Contact" Relationship="WSModel.FK__MDG_Conta__Creat__0DEFCF29" FromRole="SYS_User" ToRole="MDG_Contact" />
           <NavigationProperty Name="MDG_Customer" Relationship="WSModel.FK__MDG_Custo__Creat__76184598" FromRole="SYS_User" ToRole="MDG_Customer" />
           <NavigationProperty Name="MDG_Dictionary" Relationship="WSModel.FK__MDG_Dicti__Creat__4EFE7877" FromRole="SYS_User" ToRole="MDG_Dictionary" />
@@ -9481,20 +9041,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__MasterDat__Categ__326239C9">
-          <End Type="WSModel.BASE_Category" Role="BASE_Category" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="WSModel.MasterData_Property" Role="MasterData_Property" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BASE_Category">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="MasterData_Property">
-              <PropertyRef Name="CategoryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__MDG_Custo__Provi__6E7723D0">
           <End Type="WSModel.BASE_Category" Role="BASE_Category" Multiplicity="0..1" />
           <End Type="WSModel.MDG_Customer" Role="MDG_Customer" Multiplicity="*" />
@@ -9618,88 +9164,6 @@
             </Principal>
             <Dependent Role="ImageData">
               <PropertyRef Name="SecrecyDegree" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__MasterDat__Maste__2AC11801">
-          <End Type="WSModel.MasterData" Role="MasterData" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="WSModel.MasterData_Merger" Role="MasterData_Merger" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MasterData">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="MasterData_Merger">
-              <PropertyRef Name="MasterId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__MasterDat__Merge__2BB53C3A">
-          <End Type="WSModel.MasterData" Role="MasterData" Multiplicity="1" />
-          <End Type="WSModel.MasterData_Merger" Role="MasterData_Merger" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MasterData">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="MasterData_Merger">
-              <PropertyRef Name="MergerId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__MDD_Binar__Maste__46693276">
-          <End Type="WSModel.MasterData" Role="MasterData" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="WSModel.MDD_Binary" Role="MDD_Binary" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MasterData">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="MDD_Binary">
-              <PropertyRef Name="MasterDataId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__MDD_Chara__Maste__381B131F">
-          <End Type="WSModel.MasterData" Role="MasterData" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="WSModel.MDD_Character" Role="MDD_Character" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MasterData">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="MDD_Character">
-              <PropertyRef Name="MasterDataId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__MDD_Date__Master__41A47D59">
-          <End Type="WSModel.MasterData" Role="MasterData" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="WSModel.MDD_Date" Role="MDD_Date" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MasterData">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="MDD_Date">
-              <PropertyRef Name="MasterDataId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__MDD_Numer__Maste__3CDFC83C">
-          <End Type="WSModel.MasterData" Role="MasterData" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="WSModel.MDD_Numeric" Role="MDD_Numeric" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MasterData">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="MDD_Numeric">
-              <PropertyRef Name="MasterDataId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -9850,78 +9314,6 @@
             </Principal>
             <Dependent Role="SYS_Alert_Send">
               <PropertyRef Name="TargetId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__MasterDat__Creat__2CA96073">
-          <End Type="WSModel.SYS_User" Role="SYS_User" Multiplicity="1" />
-          <End Type="WSModel.MasterData_Merger" Role="MasterData_Merger" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SYS_User">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="MasterData_Merger">
-              <PropertyRef Name="CreatorUserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__MasterDat__Modul__316E1590">
-          <End Type="WSModel.SYS_Module" Role="SYS_Module" Multiplicity="1" />
-          <End Type="WSModel.MasterData_Property" Role="MasterData_Property" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SYS_Module">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="MasterData_Property">
-              <PropertyRef Name="ModuleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__MDD_Binar__Prope__475D56AF">
-          <End Type="WSModel.MasterData_Property" Role="MasterData_Property" Multiplicity="1" />
-          <End Type="WSModel.MDD_Binary" Role="MDD_Binary" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MasterData_Property">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="MDD_Binary">
-              <PropertyRef Name="PropertyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__MDD_Chara__Prope__390F3758">
-          <End Type="WSModel.MasterData_Property" Role="MasterData_Property" Multiplicity="1" />
-          <End Type="WSModel.MDD_Character" Role="MDD_Character" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MasterData_Property">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="MDD_Character">
-              <PropertyRef Name="PropertyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__MDD_Date__Proper__4298A192">
-          <End Type="WSModel.MasterData_Property" Role="MasterData_Property" Multiplicity="1" />
-          <End Type="WSModel.MDD_Date" Role="MDD_Date" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MasterData_Property">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="MDD_Date">
-              <PropertyRef Name="PropertyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__MDD_Numer__Prope__3DD3EC75">
-          <End Type="WSModel.MasterData_Property" Role="MasterData_Property" Multiplicity="1" />
-          <End Type="WSModel.MDD_Numeric" Role="MDD_Numeric" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MasterData_Property">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="MDD_Numeric">
-              <PropertyRef Name="PropertyId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -12775,77 +12167,6 @@
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
                 <ScalarProperty Name="ParentId" ColumnName="ParentId" />
-                <ScalarProperty Name="SN" ColumnName="SN" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="MasterData_Merger">
-            <EntityTypeMapping TypeName="WSModel.MasterData_Merger">
-              <MappingFragment StoreEntitySet="MasterData_Merger">
-                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-                <ScalarProperty Name="CreatorUserId" ColumnName="CreatorUserId" />
-                <ScalarProperty Name="MergerId" ColumnName="MergerId" />
-                <ScalarProperty Name="MasterId" ColumnName="MasterId" />
-                <ScalarProperty Name="SN" ColumnName="SN" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="MasterData_Property">
-            <EntityTypeMapping TypeName="WSModel.MasterData_Property">
-              <MappingFragment StoreEntitySet="MasterData_Property">
-                <ScalarProperty Name="BuiltIn" ColumnName="BuiltIn" />
-                <ScalarProperty Name="Parameter" ColumnName="Parameter" />
-                <ScalarProperty Name="Label" ColumnName="Label" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Index" ColumnName="Index" />
-                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
-                <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
-                <ScalarProperty Name="SN" ColumnName="SN" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="MDD_Binary">
-            <EntityTypeMapping TypeName="WSModel.MDD_Binary">
-              <MappingFragment StoreEntitySet="MDD_Binary">
-                <ScalarProperty Name="Value" ColumnName="Value" />
-                <ScalarProperty Name="PropertyId" ColumnName="PropertyId" />
-                <ScalarProperty Name="MasterDataId" ColumnName="MasterDataId" />
-                <ScalarProperty Name="SN" ColumnName="SN" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="MDD_Character">
-            <EntityTypeMapping TypeName="WSModel.MDD_Character">
-              <MappingFragment StoreEntitySet="MDD_Character">
-                <ScalarProperty Name="Value" ColumnName="Value" />
-                <ScalarProperty Name="PropertyId" ColumnName="PropertyId" />
-                <ScalarProperty Name="MasterDataId" ColumnName="MasterDataId" />
-                <ScalarProperty Name="SN" ColumnName="SN" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="MDD_Date">
-            <EntityTypeMapping TypeName="WSModel.MDD_Date">
-              <MappingFragment StoreEntitySet="MDD_Date">
-                <ScalarProperty Name="Value" ColumnName="Value" />
-                <ScalarProperty Name="PropertyId" ColumnName="PropertyId" />
-                <ScalarProperty Name="MasterDataId" ColumnName="MasterDataId" />
-                <ScalarProperty Name="SN" ColumnName="SN" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="MDD_Numeric">
-            <EntityTypeMapping TypeName="WSModel.MDD_Numeric">
-              <MappingFragment StoreEntitySet="MDD_Numeric">
-                <ScalarProperty Name="Value" ColumnName="Value" />
-                <ScalarProperty Name="PropertyId" ColumnName="PropertyId" />
-                <ScalarProperty Name="MasterDataId" ColumnName="MasterDataId" />
                 <ScalarProperty Name="SN" ColumnName="SN" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>

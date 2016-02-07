@@ -38,12 +38,6 @@
         <EntityTypeShape EntityType="WSModel.BASE_Category" Width="1.5" PointX="6" PointY="123.625" />
         <EntityTypeShape EntityType="WSModel.ImageData" Width="1.5" PointX="19.75" PointY="131" />
         <EntityTypeShape EntityType="WSModel.MasterData" Width="1.5" PointX="8.25" PointY="120.25" />
-        <EntityTypeShape EntityType="WSModel.MasterData_Merger" Width="1.5" PointX="14.5" PointY="132.875" />
-        <EntityTypeShape EntityType="WSModel.MasterData_Property" Width="1.5" PointX="8.25" PointY="115" />
-        <EntityTypeShape EntityType="WSModel.MDD_Binary" Width="1.5" PointX="16.5" PointY="122.75" />
-        <EntityTypeShape EntityType="WSModel.MDD_Character" Width="1.5" PointX="16.5" PointY="118.75" />
-        <EntityTypeShape EntityType="WSModel.MDD_Date" Width="1.5" PointX="10.5" PointY="119.75" />
-        <EntityTypeShape EntityType="WSModel.MDD_Numeric" Width="1.5" PointX="10.5" PointY="115.75" />
         <EntityTypeShape EntityType="WSModel.MDG_Contact" Width="1.5" PointX="17.5" PointY="135.75" />
         <EntityTypeShape EntityType="WSModel.MDG_Customer" Width="1.5" PointX="13.5" PointY="119.25" />
         <EntityTypeShape EntityType="WSModel.MDG_Dictionary" Width="1.5" PointX="17.5" PointY="125.875" />
@@ -145,7 +139,6 @@
         <AssociationConnector Association="WSModel.FK__BASE_Cate__Modul__1C72F8AA" />
         <AssociationConnector Association="WSModel.FK__ImageData__Categ__2E5C9EBB" />
         <AssociationConnector Association="WSModel.FK__MasterDat__Categ__26F0871D" />
-        <AssociationConnector Association="WSModel.FK__MasterDat__Categ__326239C9" />
         <AssociationConnector Association="WSModel.FK__MDG_Custo__Provi__6E7723D0" />
         <AssociationConnector Association="WSModel.FK__MDG_Custom__City__6F6B4809" />
         <AssociationConnector Association="WSModel.FK__MDG_Suppl__Provi__7EAD8B99" />
@@ -156,12 +149,6 @@
         <AssociationConnector Association="WSModel.FK__ImageData__Creat__322D2F9F" />
         <AssociationConnector Association="WSModel.FK__ImageData__Creat__332153D8" />
         <AssociationConnector Association="WSModel.FK__ImageData__Secre__3044E72D" />
-        <AssociationConnector Association="WSModel.FK__MasterDat__Maste__2AC11801" />
-        <AssociationConnector Association="WSModel.FK__MasterDat__Merge__2BB53C3A" />
-        <AssociationConnector Association="WSModel.FK__MDD_Binar__Maste__46693276" />
-        <AssociationConnector Association="WSModel.FK__MDD_Chara__Maste__381B131F" />
-        <AssociationConnector Association="WSModel.FK__MDD_Date__Master__41A47D59" />
-        <AssociationConnector Association="WSModel.FK__MDD_Numer__Maste__3CDFC83C" />
         <AssociationConnector Association="WSModel.FK__MDG_Contact__MID__092B1A0C" />
         <AssociationConnector Association="WSModel.FK__MDG_Custome__MID__6AA692EC" />
         <AssociationConnector Association="WSModel.FK__MDG_Diction__MID__4A39C35A" />
@@ -173,12 +160,6 @@
         <AssociationConnector Association="WSModel.FK__MDS_Conta__Maste__1F1A5B2B" />
         <AssociationConnector Association="WSModel.FK__SYS_Alert__Targe__04315AC5" />
         <AssociationConnector Association="WSModel.FK__SYS_Alert__Targe__0EAEE938" />
-        <AssociationConnector Association="WSModel.FK__MasterDat__Creat__2CA96073" />
-        <AssociationConnector Association="WSModel.FK__MasterDat__Modul__316E1590" />
-        <AssociationConnector Association="WSModel.FK__MDD_Binar__Prope__475D56AF" />
-        <AssociationConnector Association="WSModel.FK__MDD_Chara__Prope__390F3758" />
-        <AssociationConnector Association="WSModel.FK__MDD_Date__Proper__4298A192" />
-        <AssociationConnector Association="WSModel.FK__MDD_Numer__Prope__3DD3EC75" />
         <AssociationConnector Association="WSModel.FK__MDG_Conta__Creat__0CFBAAF0" />
         <AssociationConnector Association="WSModel.FK__MDG_Conta__Creat__0DEFCF29" />
         <AssociationConnector Association="WSModel.FK__MDG_Custo__Class__7153907B" />

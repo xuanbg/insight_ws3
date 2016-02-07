@@ -1,9 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.ServiceModel;
 using System.ServiceProcess;
-using System.Threading;
+using System.Windows.Forms;
 using System.Timers;
+using Insight.WS.Base;
 using Insight.WS.Server.Common;
+using static Insight.WS.Server.Common.Util;
 using Timer = System.Timers.Timer;
 
 namespace Insight.WS.Server
@@ -16,7 +20,7 @@ namespace Insight.WS.Server
         /// <summary>
         /// 运行中的服务主机
         /// </summary>
-        private List<ServiceHost> Hosts { get; } = new List<ServiceHost>();
+        private static ServiceHost Host;
 
         /// <summary>
         /// 报表任务状态
@@ -30,6 +34,7 @@ namespace Insight.WS.Server
         public InsightServer()
         {
             InitializeComponent();
+            InitSeting();
 
             // 生成报表批处理（1小时）
             var reportBuild = new Timer(3600000);
@@ -43,35 +48,26 @@ namespace Insight.WS.Server
 
         protected override void OnStart(string[] args)
         {
-            // 启动WCF服务主机
-            var comp = bool.Parse(Util.GetAppSetting("IsCompres"));
-            var address = Util.GetAppSetting("Address");
-            var tcpService = new Services
-            {
-                BaseAddress = $"net.tcp://{address}:"
-            };
-            tcpService.InitTcpBinding(comp);
-            Hosts.AddRange(tcpService.StartService("TCP", !comp));
+            var path = $"{Application.StartupPath}\\Services\\SuperDentist\\AppService.dll";
+            if (!File.Exists(path)) return;
 
-            var httpService = new Services
+            var endpoints = new List<EndpointSet> {new EndpointSet {Name = "Interface"}};
+            var serv = new Services
             {
-                BaseAddress = $"http://{address}:"
+                BaseAddress = GetAppSetting("Address"),
+                Port = GetAppSetting("Port"),
+                NameSpace = "Insight.WS.Service.SuperDentist",
+                ServiceType = "AppService",
+                Endpoints = endpoints
             };
-            httpService.InitHttpBinding(comp);
-            Hosts.AddRange(httpService.StartService("HTTP", !comp));
-
-            // 生成自动报表
-            var tdreportThread = new Thread(delegate () { Finish = General.BuildReport(); });
-            tdreportThread.Start();
+            Host = serv.CreateHost(path);
+            Host.Open();
         }
 
         protected override void OnStop()
         {
-            foreach (var host in Hosts)
-            {
-                host.Abort();
-                host.Close();
-            }
+            Host.Abort();
+            Host.Close();
         }
 
         #endregion
@@ -93,5 +89,20 @@ namespace Insight.WS.Server
 
         #endregion
 
+        /// <summary>
+        /// 初始化环境变量
+        /// </summary>
+        public static void InitSeting()
+        {
+            var version = new Version(Application.ProductVersion);
+            var build = $"{version.Major}{version.Minor}{version.Build.ToString("D4").Substring(0, 2)}";
+            CurrentVersion = Convert.ToInt32(build);
+            CompatibleVersion = GetAppSetting("CompatibleVersion");
+            UpdateVersion = GetAppSetting("UpdateVersion");
+
+            BaseServer = GetAppSetting("BaseServer");
+            VerifyServer = GetAppSetting("VerifyServer");
+            LogServer = GetAppSetting("LogServer");
+        }
     }
 }

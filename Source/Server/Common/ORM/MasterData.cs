@@ -24,11 +24,6 @@ namespace Insight.WS.Server.Common.ORM
     [KnownType(typeof(ABS_Delivery_Item))]
     [KnownType(typeof(ABS_Storage_Summary))]
     [KnownType(typeof(BASE_Category))]
-    [KnownType(typeof(MasterData_Merger))]
-    [KnownType(typeof(MDD_Binary))]
-    [KnownType(typeof(MDD_Character))]
-    [KnownType(typeof(MDD_Date))]
-    [KnownType(typeof(MDD_Numeric))]
     [KnownType(typeof(MDG_Contact))]
     [KnownType(typeof(MDG_Customer))]
     [KnownType(typeof(MDG_Dictionary))]
@@ -60,12 +55,6 @@ namespace Insight.WS.Server.Common.ORM
             this.ABS_Delivery = new HashSet<ABS_Delivery>();
             this.ABS_Delivery_Item = new HashSet<ABS_Delivery_Item>();
             this.ABS_Storage_Summary = new HashSet<ABS_Storage_Summary>();
-            this.MasterData_Merger = new HashSet<MasterData_Merger>();
-            this.MasterData_Merger1 = new HashSet<MasterData_Merger>();
-            this.MDD_Binary = new HashSet<MDD_Binary>();
-            this.MDD_Character = new HashSet<MDD_Character>();
-            this.MDD_Date = new HashSet<MDD_Date>();
-            this.MDD_Numeric = new HashSet<MDD_Numeric>();
             this.MDR_MU = new HashSet<MDR_MU>();
             this.MDS_Contact_Info = new HashSet<MDS_Contact_Info>();
             this.SYS_Alert_Target = new HashSet<SYS_Alert_Target>();
@@ -117,18 +106,6 @@ namespace Insight.WS.Server.Common.ORM
         public virtual ICollection<ABS_Storage_Summary> ABS_Storage_Summary { get; set; }
     	[DataMember]
         public virtual BASE_Category BASE_Category { get; set; }
-    	[DataMember]
-        public virtual ICollection<MasterData_Merger> MasterData_Merger { get; set; }
-    	[DataMember]
-        public virtual ICollection<MasterData_Merger> MasterData_Merger1 { get; set; }
-    	[DataMember]
-        public virtual ICollection<MDD_Binary> MDD_Binary { get; set; }
-    	[DataMember]
-        public virtual ICollection<MDD_Character> MDD_Character { get; set; }
-    	[DataMember]
-        public virtual ICollection<MDD_Date> MDD_Date { get; set; }
-    	[DataMember]
-        public virtual ICollection<MDD_Numeric> MDD_Numeric { get; set; }
     	[DataMember]
         public virtual MDG_Contact MDG_Contact { get; set; }
     	[DataMember]

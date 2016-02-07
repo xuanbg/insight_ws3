@@ -162,7 +162,7 @@ GO
 CREATE TABLE ABS_StockCapital(
 [ID]               UNIQUEIDENTIFIER CONSTRAINT IX_ABS_StockCapital PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
 [SN]               BIGINT IDENTITY(1,1),                                                                                                   --自增序列
-[OrgId]            UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Sys_Organization(ID),                                                           --组织机构ID
+[OrgId]            UNIQUEIDENTIFIER,                                                                                                       --组织机构ID
 [Amount]           DECIMAL(20,2) NOT NULL                                                                                                  --金额
 )
 GO
@@ -331,7 +331,7 @@ CREATE TABLE ABS_Contract(
 [ObjectName]       NVARCHAR(64) NOT NULL,                                                                                                  --对方签约人名称
 [AgentId]          UNIQUEIDENTIFIER FOREIGN KEY REFERENCES MasterData(ID),                                                                 --对方代理人ID，客户、供应商、员工
 [AgentName]        NVARCHAR(64),                                                                                                           --对方代理人名称
-[ExecuteDeptId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Sys_Organization(ID),                                                           --己方责任部门ID
+[ExecuteDeptId]    UNIQUEIDENTIFIER,                                                                                                       --己方责任部门ID
 [ExecuteUserId]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES MDG_Employee(MID),                                                              --己方责任人ID，员工
 [EffectiveDate]    DATETIME,                                                                                                               --生效日期
 [InvalidDate]      DATETIME,                                                                                                               --失效日期

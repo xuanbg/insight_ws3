@@ -2,7 +2,6 @@
 using System.ServiceModel.Web;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
-using Insight.WS.Server.Common.Service;
 
 namespace Insight.WS.Service.SuperDentist
 {
@@ -11,7 +10,7 @@ namespace Insight.WS.Service.SuperDentist
     public interface Interface
     {
 
-        #region User 5
+        #region Member 4
 
         /// <summary>
         /// 用户注册
@@ -19,76 +18,37 @@ namespace Insight.WS.Service.SuperDentist
         /// <param name="smsCode">短信验证码</param>
         /// <param name="password">密码MD5值</param>
         /// <returns>JsonResult</returns>
-        [WebInvoke(Method = "PUT", UriTemplate = "user", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [WebInvoke(Method = "POST", UriTemplate = "members", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         [OperationContract]
         JsonResult Register(string smsCode, string password);
 
         /// <summary>
-        /// 用户登录
-        /// </summary>
-        /// <param name="session">用户会话</param>
-        /// <returns>JsonResult</returns>
-        [WebInvoke(Method = "POST", UriTemplate = "user/signin", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
-        [OperationContract]
-        JsonResult Login(Session session);
-
-        /// <summary>
-        /// 注销
-        /// </summary>
-        /// <returns>JsonResult</returns>
-        [WebInvoke(Method = "POST", UriTemplate = "user/signout", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
-        [OperationContract]
-        JsonResult Logout();
-
-        /// <summary>
-        /// 修改登录密码
-        /// </summary>
-        /// <param name="password">新登录密码MD5值</param>
-        /// <returns>JsonResult</returns>
-        [WebInvoke(Method = "POST", UriTemplate = "user/change", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
-        [OperationContract]
-        JsonResult ChangePassword(string password);
-
-        /// <summary>
-        /// 重置登录密码
-        /// </summary>
-        /// <param name="smsCode">短信验证码</param>
-        /// <param name="password">密码MD5值</param>
-        /// <returns>JsonResult</returns>
-        [WebInvoke(Method = "POST", UriTemplate = "user/reset", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
-        [OperationContract]
-        JsonResult ResetPassword(string smsCode, string password);
-
-        #endregion
-
-        #region Member 3
-
-        /// <summary>
-        /// 获取会员列表
-        /// </summary>
-        /// <param name="name">昵称</param>
-        /// <returns>JsonResult</returns>
-        [WebGet(UriTemplate = "user/members?name={name}", ResponseFormat = WebMessageFormat.Json)]
-        [OperationContract]
-        JsonResult GetMembers(string name);
-
-        /// <summary>
         /// 编辑会员信息
         /// </summary>
+        /// <param name="id">用户ID</param>
         /// <param name="member">会员信息数据对象</param>
         /// <returns>JsonResult</returns>
-        [WebInvoke(Method = "POST", UriTemplate = "user/member", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [WebInvoke(Method = "PUT", UriTemplate = "members/{id}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         [OperationContract]
-        JsonResult SetMemberInfo(MDG_Member member);
+        JsonResult SetMemberInfo(string id, MDG_Member member);
 
         /// <summary>
         /// 获取会员信息
         /// </summary>
         /// <param name="id">会员ID</param>
         /// <returns>JsonResult</returns>
-        [WebGet(UriTemplate = "user/member?id={id}", ResponseFormat = WebMessageFormat.Json)]
+        [WebGet(UriTemplate = "members/{id}", ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
         JsonResult GetMemberInfo(string id);
+
+        /// <summary>
+        /// 获取会员列表
+        /// </summary>
+        /// <param name="name">昵称</param>
+        /// <returns>JsonResult</returns>
+        [WebGet(UriTemplate = "members/search?name={name}", ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        JsonResult GetMembers(string name);
 
         #endregion
 
@@ -99,7 +59,7 @@ namespace Insight.WS.Service.SuperDentist
         /// </summary>
         /// <param name="type">收藏类型</param>
         /// <returns>JsonResult</returns>
-        [WebGet(UriTemplate = "user/favorites?type={type}", ResponseFormat = WebMessageFormat.Json)]
+        [WebGet(UriTemplate = "favorites?type={type}", ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
         JsonResult GetFavorites(int type);
 
@@ -108,7 +68,7 @@ namespace Insight.WS.Service.SuperDentist
         /// </summary>
         /// <param name="favorites">收藏数据对象</param>
         /// <returns>JsonResult</returns>
-        [WebInvoke(Method = "PUT", UriTemplate = "user/favorite", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [WebInvoke(Method = "POST", UriTemplate = "favorites", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         [OperationContract]
         JsonResult Favorite(MDE_Favorites favorites);
 
@@ -117,7 +77,7 @@ namespace Insight.WS.Service.SuperDentist
         /// </summary>
         /// <param name="id">收藏记录ID</param>
         /// <returns>JsonResult</returns>
-        [WebInvoke(Method = "DELETE", UriTemplate = "user/favorite", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [WebInvoke(Method = "DELETE", UriTemplate = "favorites/{id}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         [OperationContract]
         JsonResult RemoveFavorite(string id);
 
@@ -130,7 +90,7 @@ namespace Insight.WS.Service.SuperDentist
         /// </summary>
         /// <param name="id">通信对象ID</param>
         /// <returns>JsonResult</returns>
-        [WebGet(UriTemplate = "user/messages?id={id}", ResponseFormat = WebMessageFormat.Json)]
+        [WebGet(UriTemplate = "messages?id={id}", ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
         JsonResult GetMessages(string id);
 
@@ -139,7 +99,7 @@ namespace Insight.WS.Service.SuperDentist
         /// </summary>
         /// <param name="message">私信数据对象</param>
         /// <returns>JsonResult</returns>
-        [WebInvoke(Method = "PUT", UriTemplate = "user/message", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [WebInvoke(Method = "POST", UriTemplate = "messages", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         [OperationContract]
         JsonResult AddMessage(MDE_Message message);
 
@@ -148,7 +108,7 @@ namespace Insight.WS.Service.SuperDentist
         /// </summary>
         /// <param name="id">私信ID</param>
         /// <returns>JsonResult</returns>
-        [WebInvoke(Method = "DELETE", UriTemplate = "user/message", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [WebInvoke(Method = "DELETE", UriTemplate = "messages/{id}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         [OperationContract]
         JsonResult RemoveMessage(string id);
 
@@ -157,13 +117,60 @@ namespace Insight.WS.Service.SuperDentist
         /// </summary>
         /// <param name="id">私信ID</param>
         /// <returns>JsonResult</returns>
-        [WebInvoke(Method = "POST", UriTemplate = "user/message", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [WebInvoke(Method = "PUT", UriTemplate = "messages/{id}/send", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         [OperationContract]
         JsonResult SendMessage(string id);
 
         #endregion
 
-        #region Group 10
+        #region Group 11
+
+        /// <summary>
+        /// 新建群组
+        /// </summary>
+        /// <param name="group">群组数据对象</param>
+        /// <returns>JsonResult</returns>
+        [WebInvoke(Method = "POST", UriTemplate = "groups", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [OperationContract]
+        JsonResult AddGroup(SDG_Group group);
+
+        /// <summary>
+        /// 删除群组
+        /// </summary>
+        /// <param name="id">群组ID</param>
+        /// <returns>JsonResult</returns>
+        [WebInvoke(Method = "DELETE", UriTemplate = "groups/{id}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [OperationContract]
+        JsonResult RemoveGroup(string id);
+
+        /// <summary>
+        /// 编辑群组信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="group">群组数据对象</param>
+        /// <returns>JsonResult</returns>
+        [WebInvoke(Method = "PUT", UriTemplate = "groups/{id}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [OperationContract]
+        JsonResult EditGroup(string id, SDG_Group group);
+
+        /// <summary>
+        /// 转让群主
+        /// </summary>
+        /// <param name="id">群组ID</param>
+        /// <param name="mid">新的群主会员ID</param>
+        /// <returns>JsonResult</returns>
+        [WebInvoke(Method = "PUT", UriTemplate = "groups/{id}/transfer", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [OperationContract]
+        JsonResult Transfer(string id, string mid);
+
+        /// <summary>
+        /// 获取群组信息
+        /// </summary>
+        /// <param name="id">群组ID</param>
+        /// <returns>JsonResult</returns>
+        [WebGet(UriTemplate = "groups/{id}", ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        JsonResult GetGroup(string id);
 
         /// <summary>
         /// 获取群组列表
@@ -185,48 +192,11 @@ namespace Insight.WS.Service.SuperDentist
         JsonResult SearchGroups(string keys, string mid);
 
         /// <summary>
-        /// 新建群组
-        /// </summary>
-        /// <param name="group">群组数据对象</param>
-        /// <returns>JsonResult</returns>
-        [WebInvoke(Method = "PUT", UriTemplate = "group", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
-        [OperationContract]
-        JsonResult AddGroup(SDG_Group group);
-
-        /// <summary>
-        /// 删除群组
-        /// </summary>
-        /// <param name="id">群组ID</param>
-        /// <returns>JsonResult</returns>
-        [WebInvoke(Method = "DELETE", UriTemplate = "group", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
-        [OperationContract]
-        JsonResult RemoveGroup(string id);
-
-        /// <summary>
-        /// 编辑群组信息
-        /// </summary>
-        /// <param name="group">群组数据对象</param>
-        /// <returns>JsonResult</returns>
-        [WebInvoke(Method = "POST", UriTemplate = "group", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
-        [OperationContract]
-        JsonResult EditGroup(SDG_Group group);
-
-        /// <summary>
-        /// 转让群主
-        /// </summary>
-        /// <param name="id">群组ID</param>
-        /// <param name="mid">新的群主会员ID</param>
-        /// <returns>JsonResult</returns>
-        [WebInvoke(Method = "POST", UriTemplate = "group/transfer", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
-        [OperationContract]
-        JsonResult Transfer(string id, string mid);
-
-        /// <summary>
         /// 加入群组
         /// </summary>
         /// <param name="member">群组成员数据对象</param>
         /// <returns>JsonResult</returns>
-        [WebInvoke(Method = "PUT", UriTemplate = "group/member", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [WebInvoke(Method = "POST", UriTemplate = "groups/members", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         [OperationContract]
         JsonResult JoinGroup(SDG_GroupMember member);
 
@@ -235,7 +205,7 @@ namespace Insight.WS.Service.SuperDentist
         /// </summary>
         /// <param name="id">群组成员数据记录ID</param>
         /// <returns>JsonResult</returns>
-        [WebInvoke(Method = "DELETE", UriTemplate = "group/member", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [WebInvoke(Method = "DELETE", UriTemplate = "groups/members/{id}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         [OperationContract]
         JsonResult RemoveMember(string id);
 
@@ -244,7 +214,7 @@ namespace Insight.WS.Service.SuperDentist
         /// </summary>
         /// <param name="id">群组成员数据记录ID</param>
         /// <returns>JsonResult</returns>
-        [WebInvoke(Method = "POST", UriTemplate = "group/member", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [WebInvoke(Method = "PUT", UriTemplate = "groups/members/{id}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         [OperationContract]
         JsonResult AddMember(string id);
 
@@ -252,11 +222,11 @@ namespace Insight.WS.Service.SuperDentist
         /// 获取群组成员列表
         /// </summary>
         /// <param name="id">群组ID</param>
-        /// <param name="member">是否群组成员</param>
+        /// <param name="type">成员类型</param>
         /// <returns>JsonResult</returns>
-        [WebGet(UriTemplate = "group/member?id={id}&member={member}", ResponseFormat = WebMessageFormat.Json)]
+        [WebGet(UriTemplate = "groups/{id}/type={type}", ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
-        JsonResult GetGroupMembers(string id, bool member);
+        JsonResult GetGroupMembers(string id, string type);
 
         #endregion
 

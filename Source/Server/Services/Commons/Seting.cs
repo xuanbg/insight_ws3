@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
-using Insight.WS.Server.Common.Service;
 using static Insight.WS.Server.Common.General;
 using static Insight.WS.Server.Common.SqlHelper;
 

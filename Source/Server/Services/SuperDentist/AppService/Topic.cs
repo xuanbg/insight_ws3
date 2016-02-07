@@ -4,7 +4,6 @@ using System.Data.SqlClient;
 using System.Linq;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
-using Insight.WS.Server.Common.Service;
 using static Insight.WS.Server.Common.General;
 using static Insight.WS.Server.Common.SqlHelper;
 using static Insight.WS.Server.Common.Util;
@@ -472,23 +471,6 @@ namespace Insight.WS.Service.SuperDentist
             var cmd = InsertData(praise);
             var id = SqlScalar(cmd);
             return id == null ? result.DataBaseError() : result.Success(id.ToString());
-        }
-
-        /// <summary>
-        /// 获取话题可用标签
-        /// </summary>
-        /// <returns>JsonResult</returns>
-        public JsonResult GetTopicTags()
-        {
-            var result = Verify(Secret);
-            if (!result.Successful) return result;
-
-            using (var context = new WSEntities())
-            {
-                var cate = context.BASE_Category.Single(c => c.Alias == "Tags");
-                var data = context.MasterData.Where(m => m.CategoryId == cate.ID).ToList();
-                return result.Success(Serialize(data));
-            }
         }
 
         #endregion

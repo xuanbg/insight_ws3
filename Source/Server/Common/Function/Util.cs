@@ -4,12 +4,9 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.IO.Compression;
 using System.Linq;
-using System.Net;
 using System.Reflection;
 using System.Security.Cryptography;
-using System.ServiceModel.Web;
 using System.Text;
 using System.Web.Script.Serialization;
 using System.Xml;
@@ -23,8 +20,40 @@ namespace Insight.WS.Server.Common
 
         #region 静态全局变量
 
+        /// <summary>
+        /// 安全密钥
+        /// </summary>
         public const string Secret = "842A381C91CE43A98720825601C22A56";
-        public static bool Compres = bool.Parse(GetAppSetting("IsCompres"));
+
+        /// <summary>
+        /// 验证服务路径
+        /// </summary>
+        public static string BaseServer;
+
+        /// <summary>
+        /// 验证服务路径
+        /// </summary>
+        public static string VerifyServer;
+
+        /// <summary>
+        /// 日志服务路径
+        /// </summary>
+        public static string LogServer;
+
+        /// <summary>
+        /// 当前程序集版本
+        /// </summary>
+        public static int CurrentVersion;
+
+        /// <summary>
+        /// 接口最后兼容版本
+        /// </summary>
+        public static string CompatibleVersion;
+
+        /// <summary>
+        /// 接口最新版本
+        /// </summary>
+        public static string UpdateVersion;
 
         #endregion
 
@@ -38,7 +67,16 @@ namespace Insight.WS.Server.Common
         /// <returns>string Json字符串</returns>
         public static string Serialize<T>(T obj)
         {
-            return new JavaScriptSerializer().Serialize(obj);
+            try
+            {
+                var json = new JavaScriptSerializer().Serialize(obj);
+                return json;
+            }
+            catch (Exception ex)
+            {
+                LogToEvent(ex.ToString());
+                return null;
+            }
         }
 
         /// <summary>
@@ -116,142 +154,20 @@ namespace Insight.WS.Server.Common
 
         #endregion
 
-        #region HttpRequest
-
-        /// <summary>
-        /// HttpRequest方法
-        /// </summary>
-        /// <typeparam name="T">返回的数据类型</typeparam>
-        /// <param name="url">请求的地址</param>
-        /// <param name="method">请求的方法：GET,PUT,POST,DELETE</param>
-        /// <param name="author">接口认证数据</param>
-        /// <param name="data">接口参数</param>
-        /// <returns>指定类型的数据对象</returns>
-        public static T HttpRequest<T>(string url, string method, string author = "", string data = "")
-        {
-            if (method == "GET") url += (data == "" ? "" : "?") + data;
-            var request = GetWebRequest(url, method, author);
-
-            if (method != "GET")
-            {
-                var buffer = Compres ? Compress(Encoding.UTF8.GetBytes(data)) : Encoding.UTF8.GetBytes(data);
-                request.ContentLength = buffer.Length;
-                using (var stream = request.GetRequestStream())
-                {
-                    stream.Write(buffer, 0, buffer.Length);
-                }
-            }
-
-            return GetResponse<T>(request);
-        }
-
-        /// <summary>
-        /// 获取WebRequest对象
-        /// </summary>
-        /// <param name="url">请求的地址</param>
-        /// <param name="method">请求的方法：GET,PUT,POST,DELETE</param>
-        /// <param name="author">接口认证数据</param>
-        /// <returns>HttpWebRequest</returns>
-        public static HttpWebRequest GetWebRequest(string url, string method, string author)
-        {
-            var request = (HttpWebRequest)WebRequest.Create(url);
-            request.Method = method;
-            request.ContentType = Compres ? "application/x-gzip" : "application/json";
-            if (author != null)
-            {
-                request.Headers.Add(HttpRequestHeader.Authorization, author);
-            }
-
-            return request;
-        }
-
-        /// <summary>
-        /// 获取Request响应数据，并转换为指定的类型
-        /// </summary>
-        /// <typeparam name="T">要转换的类型</typeparam>
-        /// <param name="request">WebRequest对象</param>
-        /// <returns>T 指定类型的对象</returns>
-        public static T GetResponse<T>(WebRequest request)
-        {
-            var response = (HttpWebResponse)request.GetResponse();
-            var responseStream = response.GetResponseStream();
-            if (responseStream == null)
-            {
-                responseStream.Close();
-                return default(T);
-            }
-
-            var encoding = response.Headers[HttpResponseHeader.ContentEncoding];
-            if (encoding != null && encoding.ToLower().Contains("gzip"))
-            {
-                responseStream = new GZipStream(responseStream, CompressionMode.Decompress);
-            }
-
-            using (var reader = new StreamReader(responseStream, Encoding.GetEncoding("utf-8")))
-            {
-                var result = reader.ReadToEnd();
-                responseStream.Close();
-
-                var type = response.Headers[HttpResponseHeader.ContentType];
-                switch (type)
-                {
-                    case "application/json":
-                        return Deserialize<T>(result);
-
-                    case "application/xml":
-                        return Deserialize<T>(result, Encoding.UTF8);
-
-                    default:
-                        return (T) Convert.ChangeType(result, typeof (string));
-                }
-            }
-        }
-
-        /// <summary>
-        /// 获取Authorization承载的数据
-        /// </summary>
-        /// <typeparam name="T">数据类型</typeparam>
-        /// <returns>数据对象</returns>
-        public static T GetAuthorization<T>()
-        {
-            var woc = WebOperationContext.Current;
-            var auth = woc.IncomingRequest.Headers[HttpRequestHeader.Authorization];
-            if (string.IsNullOrEmpty(auth))
-            {
-                woc.OutgoingResponse.StatusCode = HttpStatusCode.Unauthorized;
-                return default(T);
-            }
-
-            SetResponseParam();
-            try
-            {
-                var buffer = Convert.FromBase64String(auth);
-                var json = Encoding.UTF8.GetString(buffer);
-                return Deserialize<T>(json);
-            }
-            catch (Exception ex)
-            {
-                LogToEvent(ex.ToString());
-                woc.OutgoingResponse.StatusCode = HttpStatusCode.Unauthorized;
-                return default(T);
-            }
-        }
-
-        /// <summary>
-        /// 在启用Gzip压缩时设置Response参数
-        /// </summary>
-        public static void SetResponseParam()
-        {
-            if (!Compres) return;
-
-            var response = WebOperationContext.Current.OutgoingResponse;
-            response.Headers[HttpResponseHeader.ContentEncoding] = "gzip";
-            response.ContentType = "application/x-gzip";
-        }
-
-        #endregion
-
         #region 常用静态方法
+
+        /// <summary>
+        /// 将对象转换为Base64编码的字符串
+        /// </summary>
+        /// <typeparam name="T">输入类型</typeparam>
+        /// <param name="obj">用于转换的数据对象</param>
+        /// <returns>string Base64编码的字符串</returns>
+        public static string Base64<T>(T obj)
+        {
+            var json = Serialize(obj);
+            var buff = Encoding.UTF8.GetBytes(json);
+            return Convert.ToBase64String(buff);
+        }
 
         /// <summary>
         /// 读取配置项的值
@@ -287,38 +203,15 @@ namespace Insight.WS.Server.Common
         }
 
         /// <summary>
-        /// GZip压缩
+        /// 构建用于接口返回值的Json对象
         /// </summary>
-        /// <param name="data"></param>
-        /// <returns></returns>
-        public static byte[] Compress(byte[] data)
+        /// <typeparam name="T">传入的对象类型</typeparam>
+        /// <param name="obj">传入的对象</param>
+        /// <returns>JsonResult</returns>
+        public static JsonResult GetJson<T>(T obj)
         {
-            var ms = new MemoryStream();
-            var stream = new GZipStream(ms, CompressionMode.Compress, true);
-            stream.Write(data, 0, data.Length);
-            stream.Close();
-            return ms.ToArray();
-        }
-
-        /// <summary>
-        /// ZIP解压
-        /// </summary>
-        /// <param name="dada"></param>
-        /// <returns></returns>
-        public static byte[] Decompress(byte[] dada)
-        {
-            var ms = new MemoryStream(dada);
-            var stream = new GZipStream(ms, CompressionMode.Decompress);
-            var buffer = new MemoryStream();
-            var block = new byte[1024];
-            while (true)
-            {
-                var read = stream.Read(block, 0, block.Length);
-                if (read <= 0) break;
-                buffer.Write(block, 0, read);
-            }
-            stream.Close();
-            return buffer.ToArray();
+            var result = new JsonResult();
+            return obj == null ? result.NotFound() : result.Success(Serialize(obj));
         }
 
         /// <summary>
@@ -353,6 +246,5 @@ namespace Insight.WS.Server.Common
         }
 
         #endregion
-
     }
 }

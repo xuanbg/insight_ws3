@@ -94,6 +94,7 @@ namespace Insight.WS.Service.SuperDentist
                 new SqlParameter("@OwnerUserId", SqlDbType.UniqueIdentifier) {Value = obj.OwnerUserId},
                 new SqlParameter("@ManageUserId", SqlDbType.UniqueIdentifier) {Value = obj.ManageUserId},
                 new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = obj.CreatorUserId},
+                new SqlParameter("@Write", SqlDbType.Int) {Value = 0}
             };
             return MakeCommand(sql, parm);
         }
@@ -112,7 +113,8 @@ namespace Insight.WS.Service.SuperDentist
             {
                 new SqlParameter("@GroupId", SqlDbType.UniqueIdentifier) {Value = obj.GroupId},
                 new SqlParameter("@MemberId", SqlDbType.UniqueIdentifier) {Value = obj.MemberId},
-            };
+                new SqlParameter("@Read", SqlDbType.Int) {Value = 0}
+           };
             return MakeCommand(sql, parm);
         }
 

@@ -79,7 +79,7 @@
     <Compile Include="ExtendClass\Entities.cs" />
     <Compile Include="ExtendClass\GuidParse.cs" />
     <Compile Include="ExtendClass\JsonResult.cs" />
-    <Compile Include="ExtendClass\Services.cs" />
+    <Compile Include="ExtendClass\Session.cs" />
     <Compile Include="Function\SmsCode.cs" />
     <Compile Include="Function\DataAccess.cs" />
     <Compile Include="Function\Clearing.cs">
@@ -188,24 +188,6 @@
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ORM\MasterData.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\MasterData_Merger.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\MasterData_Property.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\MDD_Binary.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\MDD_Character.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\MDD_Date.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\MDD_Numeric.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ORM\MDE_Favorites.cs">
@@ -442,11 +424,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Function\SqlHelper.cs" />
     <Compile Include="ExtendClass\UpdateFile.cs" />
-    <Compile Include="Service References\Service\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -458,20 +435,6 @@
     </EntityDeploy>
     <None Include="ORM\WSModel.edmx.diagram">
       <DependentUpon>WSModel.edmx</DependentUpon>
-    </None>
-    <None Include="packages.config" />
-    <None Include="Service References\Service\Insight.WS.Server.Common.Service.Session.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\Service\Insight.WS.Verify.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\Service\service.wsdl" />
-    <None Include="Service References\Service\service.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\Service\service1.xsd">
-      <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -485,18 +448,6 @@
       <DependentUpon>WSModel.edmx</DependentUpon>
       <LastGenOutput>WSModel.cs</LastGenOutput>
     </Content>
-    <None Include="Service References\Service\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Service References\Service\configuration.svcinfo" />
-    <None Include="Service References\Service\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Service References\Service\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

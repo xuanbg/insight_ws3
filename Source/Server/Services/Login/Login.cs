@@ -7,7 +7,6 @@ using System.Linq;
 using System.Net;
 using System.Windows.Forms;
 using Insight.WS.Server.Common;
-using Insight.WS.Server.Common.Service;
 using static Insight.WS.Server.Common.SqlHelper;
 
 namespace Insight.WS.Service
@@ -26,20 +25,6 @@ namespace Insight.WS.Service
         {
             var sql = $"select * from dbo.Get_LoginDept('{loginName}')";
             return SqlQuery(MakeCommand(sql));
-        }
-
-        /// <summary>
-        /// 获取用户登录结果
-        /// </summary>
-        /// <param name="obj">Session对象实体</param>
-        /// <returns>Session对象实体</returns>
-        public Session UserLogin(Session obj)
-        {
-            var us = General.UserLogin(obj);
-            if (us != null) return us;
-
-            obj.LoginResult = LoginResult.NotExist;
-            return obj;
         }
 
         /// <summary>

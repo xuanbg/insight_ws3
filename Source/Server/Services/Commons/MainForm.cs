@@ -2,8 +2,8 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
-using Insight.WS.Server.Common.Service;
 using static Insight.WS.Server.Common.General;
 using static Insight.WS.Server.Common.SqlHelper;
 
@@ -107,7 +107,7 @@ namespace Insight.WS.Service
         /// <returns>bool 是否修改成功</returns>
         public bool UpdataPassWord(Session us, string pw)
         {
-            return SimpleVerifty(us) && UpdateSignature(us, us.UserId, pw);
+            return SimpleVerifty(us);
         }
 
         /// <summary>
@@ -120,7 +120,6 @@ namespace Insight.WS.Service
         {
             if (!SimpleVerifty(us)) return false;
 
-            SetUserOffline(us, account);
             return true;
         }
 

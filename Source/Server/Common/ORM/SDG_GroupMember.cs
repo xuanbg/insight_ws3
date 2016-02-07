@@ -15,7 +15,7 @@ namespace Insight.WS.Server.Common.ORM
     
     [KnownType(typeof(MasterData))]
     [KnownType(typeof(SDG_Group))]
-    
+
     public partial class SDG_GroupMember
     {
     	[DataMember]

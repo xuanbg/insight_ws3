@@ -71,12 +71,6 @@ namespace Insight.WS.Server.Common.ORM
         public virtual DbSet<BASE_Category> BASE_Category { get; set; }
         public virtual DbSet<ImageData> ImageData { get; set; }
         public virtual DbSet<MasterData> MasterData { get; set; }
-        public virtual DbSet<MasterData_Merger> MasterData_Merger { get; set; }
-        public virtual DbSet<MasterData_Property> MasterData_Property { get; set; }
-        public virtual DbSet<MDD_Binary> MDD_Binary { get; set; }
-        public virtual DbSet<MDD_Character> MDD_Character { get; set; }
-        public virtual DbSet<MDD_Date> MDD_Date { get; set; }
-        public virtual DbSet<MDD_Numeric> MDD_Numeric { get; set; }
         public virtual DbSet<MDG_Contact> MDG_Contact { get; set; }
         public virtual DbSet<MDG_Customer> MDG_Customer { get; set; }
         public virtual DbSet<MDG_Dictionary> MDG_Dictionary { get; set; }

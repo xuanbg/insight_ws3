@@ -5,7 +5,6 @@ using System.Data.SqlClient;
 using System.Linq;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
-using Insight.WS.Server.Common.Service;
 using static Insight.WS.Server.Common.General;
 using static Insight.WS.Server.Common.SqlHelper;
 
@@ -202,7 +201,7 @@ namespace Insight.WS.Service
                 new SqlParameter("@LoginName", obj.LoginName),
                 new SqlParameter("@Description", obj.Description)
             };
-            return SqlNonQuery(MakeCommand(sql, parm)) > 0 && UpdateUserInfo(us, obj.ID);
+            return SqlNonQuery(MakeCommand(sql, parm)) > 0;
         }
 
         /// <summary>
@@ -218,7 +217,7 @@ namespace Insight.WS.Service
             if (!Verification(us, action)) return false;
 
             var sql = $"update SYS_User set Validity = '{validity}' where ID = '{id}'";
-            return SqlNonQuery(MakeCommand(sql)) > 0 && SetUserStatus(us, id, validity);
+            return SqlNonQuery(MakeCommand(sql)) > 0;
         }
 
         /// <summary>
@@ -232,7 +231,7 @@ namespace Insight.WS.Service
             if (!Verification(us, "26481E60-0917-49B4-BBAA-2265E71E7B3F")) return false;
 
             var pw = Util.Hash("123456");
-            return UpdateSignature(us, id, pw);
+            return true;
         }
 
         #endregion
