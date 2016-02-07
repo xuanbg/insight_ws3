@@ -10,8 +10,8 @@ GO
 IF EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'SDO_Recommend') AND OBJECTPROPERTY(id, N'ISUSERTABLE') = 1)
 DROP TABLE SDO_Recommend
 GO
-IF EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'SDO_Advertisement') AND OBJECTPROPERTY(id, N'ISUSERTABLE') = 1)
-DROP TABLE SDO_Advertisement
+IF EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'SDO_RecImage') AND OBJECTPROPERTY(id, N'ISUSERTABLE') = 1)
+DROP TABLE SDO_RecImage
 GO
 
 IF EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'SDT_Praise') AND OBJECTPROPERTY(id, N'ISUSERTABLE') = 1)
@@ -204,8 +204,8 @@ CREATE TABLE SDG_Group(
 [Icon]             VARCHAR(64),                                                                                                            --群图标
 [Picture]          VARCHAR(64),                                                                                                            --群图片
 [Heat]             INT DEFAULT 0 NOT NULL,                                                                                                 --热度
-[OwnerUserId]      UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID) NOT NULL,                                                          --群主ID
-[ManageUserId]     UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID),                                                                   --群管理员ID
+[OwnerUserId]      UNIQUEIDENTIFIER NOT NULL,                                                                                              --群主ID
+[ManageUserId]     UNIQUEIDENTIFIER,                                                                                                       --群管理员ID
 [Validity]         BIT DEFAULT 1 NOT NULL,                                                                                                 --是否有效：0、无效；1、有效
 [CreatorUserId]    UNIQUEIDENTIFIER NOT NULL,                                                                                              --创建人ID
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
@@ -316,8 +316,8 @@ GO
 
 /*****轮播图表*****/
 
-CREATE TABLE SDO_Advertisement(
-[ID]               UNIQUEIDENTIFIER CONSTRAINT IX_SDO_Advertisement PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
+CREATE TABLE SDO_RecImage(
+[ID]               UNIQUEIDENTIFIER CONSTRAINT IX_SDO_RecImage PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
 [SN]               BIGINT IDENTITY(1,1),                                                                                                   --自增序列
 [Type]             INT NOT NULL,                                                                                                           --类型：1、首页轮播；2、群组轮播
 [Picture]          VARCHAR(64),                                                                                                            --图片

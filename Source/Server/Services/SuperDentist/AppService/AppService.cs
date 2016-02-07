@@ -28,6 +28,129 @@ namespace Insight.WS.Service.SuperDentist
         #region Group
 
         /// <summary>
+        /// 新建群组
+        /// </summary>
+        /// <param name="group">群组数据对象</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult AddGroup(SDG_Group group)
+        {
+            Session us;
+            var result = Verify(out us);
+            if (!result.Successful) return result;
+
+            group.CreatorUserId = us.UserId;
+            group.OwnerUserId = us.UserId;
+            var member = new SDG_GroupMember {MemberId = us.UserId, Validity = true};
+            var cmds = new List<SqlCommand> {InsertData(@group), InsertData(member)};
+            var id = SqlExecute(cmds, 0);
+            return id == null ? result.DataBaseError() : result.Success(id.ToString());
+        }
+
+        /// <summary>
+        /// 删除群组
+        /// </summary>
+        /// <param name="id">群组ID</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult RemoveGroup(string id)
+        {
+            Session us;
+            var result = Verify(out us);
+            if (!result.Successful) return result;
+
+            Guid gid;
+            if (!Guid.TryParse(id, out gid)) return result.InvalidGuid();
+
+            using (var context = new WSEntities())
+            {
+                var group = context.SDG_Group.SingleOrDefault(g => g.ID == gid);
+                if (group == null) return result.NotFound();
+
+                if (us.UserId != group.ManageUserId && us.UserId != group.OwnerUserId) result.Forbidden();
+
+                group.Validity = false;
+                return context.SaveChanges() > 0 ? result : result.DataBaseError();
+            }
+        }
+
+        /// <summary>
+        /// 编辑群组信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="group">群组数据对象</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult EditGroup(string id, SDG_Group @group)
+        {
+            Session us;
+            var result = Verify(out us);
+            if (!result.Successful) return result;
+
+            using (var context = new WSEntities())
+            {
+                var data = context.SDG_Group.SingleOrDefault(t => t.ID == group.ID);
+                if (data == null) return result.NotFound();
+
+                if (us.UserId != data.ManageUserId && us.UserId != data.OwnerUserId) result.Forbidden();
+
+                data.Name = group.Name;
+                data.Description = group.Description;
+                data.Icon = group.Icon;
+                data.Picture = group.Picture;
+                data.ManageUserId = group.ManageUserId;
+                return context.SaveChanges() > 0 ? result : result.DataBaseError();
+            }
+        }
+
+        /// <summary>
+        /// 转让群主
+        /// </summary>
+        /// <param name="id">群组ID</param>
+        /// <param name="mid">新的群主会员ID</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult Transfer(string id, string mid)
+        {
+            Session us;
+            var result = Verify(out us);
+            if (!result.Successful) return result;
+
+            Guid gid;
+            if (!Guid.TryParse(id, out gid)) return result.InvalidGuid();
+
+            Guid uid;
+            if (!Guid.TryParse(mid, out uid)) return result.InvalidGuid();
+
+            using (var context = new WSEntities())
+            {
+                var data = context.SDG_Group.SingleOrDefault(t => t.ID == gid);
+                if (data == null) return result.NotFound();
+
+                if (us.UserId != data.OwnerUserId) result.Forbidden();
+
+                data.OwnerUserId = uid;
+                return context.SaveChanges() > 0 ? result : result.DataBaseError();
+            }
+        }
+
+        /// <summary>
+        /// 获取群组信息
+        /// </summary>
+        /// <param name="id">群组ID</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult GetGroup(string id)
+        {
+            var result = Verify();
+            if (!result.Successful) return result;
+
+            Guid gid;
+            if (!Guid.TryParse(id, out gid)) return result.InvalidGuid();
+
+            using (var context = new WSEntities())
+            {
+                var group = context.SDG_Group.SingleOrDefault(g => g.ID == gid);
+                return group == null ? result.NotFound() : result.Success(Serialize(group));
+            }
+        }
+
+        /// <summary>
         /// 获取群组列表
         /// </summary>
         /// <param name="mid">会员ID（可选）</param>
@@ -78,107 +201,6 @@ namespace Insight.WS.Service.SuperDentist
             var keylist = keys.Split(Convert.ToChar(",")).ToList();
             var groups = Common.SearchGroup(keylist, gp.Guid);
             return result.Success(Serialize(groups));
-        }
-
-        /// <summary>
-        /// 新建群组
-        /// </summary>
-        /// <param name="group">群组数据对象</param>
-        /// <returns>JsonResult</returns>
-        public JsonResult AddGroup(SDG_Group group)
-        {
-            Session us;
-            var result = Verify(out us);
-            if (!result.Successful) return result;
-
-            group.CreatorUserId = us.UserId;
-            group.OwnerUserId = us.UserId;
-            var cmd = InsertData(group);
-            var id = SqlScalar(cmd);
-            return id == null ? result.DataBaseError() : result.Success(id.ToString());
-        }
-
-        /// <summary>
-        /// 删除群组
-        /// </summary>
-        /// <param name="id">群组ID</param>
-        /// <returns>JsonResult</returns>
-        public JsonResult RemoveGroup(string id)
-        {
-            Session us;
-            var result = Verify(out us);
-            if (!result.Successful) return result;
-
-            Guid gid;
-            if (!Guid.TryParse(id, out gid)) return result.InvalidGuid();
-
-            using (var context = new WSEntities())
-            {
-                var group = context.SDG_Group.SingleOrDefault(g => g.ID == gid);
-                if (group == null) return result.NotFound();
-
-                if (us.UserId != group.ManageUserId && us.UserId != group.OwnerUserId) result.Forbidden();
-
-                group.Validity = false;
-                return context.SaveChanges() > 0 ? result : result.DataBaseError();
-            }
-        }
-
-        /// <summary>
-        /// 编辑群组信息
-        /// </summary>
-        /// <param name="group">群组数据对象</param>
-        /// <returns>JsonResult</returns>
-        public JsonResult EditGroup(SDG_Group group)
-        {
-            Session us;
-            var result = Verify(out us);
-            if (!result.Successful) return result;
-
-            using (var context = new WSEntities())
-            {
-                var data = context.SDG_Group.SingleOrDefault(t => t.ID == group.ID);
-                if (data == null) return result.NotFound();
-
-                if (us.UserId != data.ManageUserId && us.UserId != data.OwnerUserId) result.Forbidden();
-
-                data.Name = group.Name;
-                data.Description = group.Description;
-                data.Icon = group.Icon;
-                data.Picture = group.Picture;
-                data.ManageUserId = group.ManageUserId;
-                return context.SaveChanges() > 0 ? result : result.DataBaseError();
-            }
-        }
-
-        /// <summary>
-        /// 转让群主
-        /// </summary>
-        /// <param name="id">群组ID</param>
-        /// <param name="mid">新的群主会员ID</param>
-        /// <returns>JsonResult</returns>
-        public JsonResult Transfer(string id, string mid)
-        {
-            Session us;
-            var result = Verify(out us);
-            if (!result.Successful) return result;
-
-            Guid gid;
-            if (!Guid.TryParse(id, out gid)) return result.InvalidGuid();
-
-            Guid uid;
-            if (!Guid.TryParse(mid, out uid)) return result.InvalidGuid();
-
-            using (var context = new WSEntities())
-            {
-                var data = context.SDG_Group.SingleOrDefault(t => t.ID == gid);
-                if (data == null) return result.NotFound();
-
-                if (us.UserId != data.OwnerUserId) result.Forbidden();
-
-                data.OwnerUserId = uid;
-                return context.SaveChanges() > 0 ? result : result.DataBaseError();
-            }
         }
 
         /// <summary>
@@ -260,9 +282,9 @@ namespace Insight.WS.Service.SuperDentist
         /// 获取群组成员列表
         /// </summary>
         /// <param name="id">群组ID</param>
-        /// <param name="member">是否群组成员</param>
+        /// <param name="type"></param>
         /// <returns>JsonResult</returns>
-        public JsonResult GetGroupMembers(string id, bool member)
+        public JsonResult GetGroupMembers(string id, string type)
         {
             Session us;
             var result = Verify(out us);
@@ -271,6 +293,7 @@ namespace Insight.WS.Service.SuperDentist
             Guid gid;
             if (!Guid.TryParse(id, out gid)) return result.InvalidGuid();
 
+            var ismember = type == "1";
             using (var context = new WSEntities())
             {
                 var group = context.SDG_Group.SingleOrDefault(g => g.ID == gid);
@@ -278,7 +301,7 @@ namespace Insight.WS.Service.SuperDentist
 
                 if (us.UserId != group.ManageUserId && us.UserId != group.OwnerUserId) result.Forbidden();
 
-                var list = context.SDG_GroupMember.Where(m => m.Validity == member && m.GroupId == gid && m.MemberId != group.OwnerUserId).ToList();
+                var list = context.SDG_GroupMember.Where(m => m.Validity == ismember && m.GroupId == gid && m.MemberId != group.OwnerUserId).ToList();
                 return result.Success(Serialize(list));
             }
         }

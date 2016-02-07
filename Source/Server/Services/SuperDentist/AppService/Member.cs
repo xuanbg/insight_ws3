@@ -79,9 +79,10 @@ namespace Insight.WS.Service.SuperDentist
         /// <summary>
         /// 编辑会员信息
         /// </summary>
+        /// <param name="id">用户ID</param>
         /// <param name="member">会员信息数据对象</param>
         /// <returns>JsonResult</returns>
-        public JsonResult SetMemberInfo(MDG_Member member)
+        public JsonResult SetMemberInfo(string id, MDG_Member member)
         {
             Session us;
             var result = Verify(out us);

@@ -67,7 +67,16 @@ namespace Insight.WS.Server.Common
         /// <returns>string Json字符串</returns>
         public static string Serialize<T>(T obj)
         {
-            return new JavaScriptSerializer().Serialize(obj);
+            try
+            {
+                var json = new JavaScriptSerializer().Serialize(obj);
+                return json;
+            }
+            catch (Exception ex)
+            {
+                LogToEvent(ex.ToString());
+                return null;
+            }
         }
 
         /// <summary>
