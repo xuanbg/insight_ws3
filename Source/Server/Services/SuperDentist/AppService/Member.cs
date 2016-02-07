@@ -123,7 +123,7 @@ namespace Insight.WS.Service.SuperDentist
             using (var context = new WSEntities())
             {
                 var member = context.MemberInfo.SingleOrDefault(m => m.ID == uid);
-                return GetJson(member);
+                return member == null ? result.NotFound() : result.Success(Serialize(member));
             }
         }
 
