@@ -28,11 +28,6 @@ namespace Insight.WS.Server.Common
         /// <summary>
         /// 验证服务路径
         /// </summary>
-        public static string BaseServer;
-
-        /// <summary>
-        /// 验证服务路径
-        /// </summary>
         public static string VerifyServer;
 
         /// <summary>
@@ -200,18 +195,6 @@ namespace Insight.WS.Server.Common
         public static void LogToEvent(string msg, EventLogEntryType type = EventLogEntryType.Error, string source = "Insight Workstation 3 Service")
         {
             EventLog.WriteEntry(source, msg, type);
-        }
-
-        /// <summary>
-        /// 构建用于接口返回值的Json对象
-        /// </summary>
-        /// <typeparam name="T">传入的对象类型</typeparam>
-        /// <param name="obj">传入的对象</param>
-        /// <returns>JsonResult</returns>
-        public static JsonResult GetJson<T>(T obj)
-        {
-            var result = new JsonResult();
-            return obj == null ? result.NotFound() : result.Success(Serialize(obj));
         }
 
         /// <summary>

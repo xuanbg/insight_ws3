@@ -13,6 +13,7 @@ namespace Insight.WS.Server.Common.ORM
     using System.Runtime.Serialization;
     using System.Collections.Generic;
     
+    [DataContract(IsReference = true)]
     [KnownType(typeof(MasterData))]
     
     public partial class MDG_Member

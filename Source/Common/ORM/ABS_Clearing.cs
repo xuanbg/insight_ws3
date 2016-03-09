@@ -18,8 +18,6 @@ namespace Insight.WS.Server.Common.ORM
     [KnownType(typeof(ABS_Clearing_Check))]
     [KnownType(typeof(ABS_Clearing_Item))]
     [KnownType(typeof(ABS_Clearing_Attachs))]
-    [KnownType(typeof(SYS_Organization))]
-    [KnownType(typeof(SYS_User))]
     [KnownType(typeof(MasterData))]
     [KnownType(typeof(ABS_Contract_FundPerform))]
     
@@ -72,10 +70,6 @@ namespace Insight.WS.Server.Common.ORM
         public virtual ICollection<ABS_Clearing_Item> ABS_Clearing_Item { get; set; }
     	[DataMember]
         public virtual ICollection<ABS_Clearing_Attachs> ABS_Clearing_Attachs { get; set; }
-    	[DataMember]
-        public virtual SYS_Organization SYS_Organization { get; set; }
-    	[DataMember]
-        public virtual SYS_User SYS_User { get; set; }
     	[DataMember]
         public virtual MasterData MasterData { get; set; }
     	[DataMember]

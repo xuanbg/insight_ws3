@@ -15,16 +15,10 @@ namespace Insight.WS.Server.Common.ORM
     
     [DataContract(IsReference = true)]
     [KnownType(typeof(ABS_Contract_Subjects))]
-    [KnownType(typeof(SYS_Organization))]
-    [KnownType(typeof(SYS_User))]
-    [KnownType(typeof(SYS_Module))]
     [KnownType(typeof(ImageData))]
     [KnownType(typeof(MasterData))]
     [KnownType(typeof(MDG_Customer))]
     [KnownType(typeof(MDG_Supplier))]
-    [KnownType(typeof(SYS_Alert_Rules))]
-    [KnownType(typeof(SYS_Report_Templates))]
-    [KnownType(typeof(SYS_Report_Definition))]
     
     public partial class BASE_Category
     {
@@ -37,9 +31,6 @@ namespace Insight.WS.Server.Common.ORM
             this.MDG_Customer1 = new HashSet<MDG_Customer>();
             this.MDG_Supplier = new HashSet<MDG_Supplier>();
             this.MDG_Supplier1 = new HashSet<MDG_Supplier>();
-            this.SYS_Alert_Rules = new HashSet<SYS_Alert_Rules>();
-            this.SYS_Report_Templates = new HashSet<SYS_Report_Templates>();
-            this.SYS_Report_Definition = new HashSet<SYS_Report_Definition>();
         }
     
     	[DataMember]
@@ -74,12 +65,6 @@ namespace Insight.WS.Server.Common.ORM
     	[DataMember]
         public virtual ICollection<ABS_Contract_Subjects> ABS_Contract_Subjects { get; set; }
     	[DataMember]
-        public virtual SYS_Organization SYS_Organization { get; set; }
-    	[DataMember]
-        public virtual SYS_User SYS_User { get; set; }
-    	[DataMember]
-        public virtual SYS_Module SYS_Module { get; set; }
-    	[DataMember]
         public virtual ICollection<ImageData> ImageData { get; set; }
     	[DataMember]
         public virtual ICollection<MasterData> MasterData { get; set; }
@@ -91,11 +76,5 @@ namespace Insight.WS.Server.Common.ORM
         public virtual ICollection<MDG_Supplier> MDG_Supplier { get; set; }
     	[DataMember]
         public virtual ICollection<MDG_Supplier> MDG_Supplier1 { get; set; }
-    	[DataMember]
-        public virtual ICollection<SYS_Alert_Rules> SYS_Alert_Rules { get; set; }
-    	[DataMember]
-        public virtual ICollection<SYS_Report_Templates> SYS_Report_Templates { get; set; }
-    	[DataMember]
-        public virtual ICollection<SYS_Report_Definition> SYS_Report_Definition { get; set; }
     }
 }

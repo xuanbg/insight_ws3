@@ -15,7 +15,6 @@ namespace Insight.WS.Server.Common.ORM
     
     [DataContract(IsReference = true)]
     [KnownType(typeof(ABS_StockDetail))]
-    [KnownType(typeof(SYS_Organization))]
     
     public partial class ABS_StockCapital
     {
@@ -35,7 +34,5 @@ namespace Insight.WS.Server.Common.ORM
     
     	[DataMember]
         public virtual ICollection<ABS_StockDetail> ABS_StockDetail { get; set; }
-    	[DataMember]
-        public virtual SYS_Organization SYS_Organization { get; set; }
     }
 }

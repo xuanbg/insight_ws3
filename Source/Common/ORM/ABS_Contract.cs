@@ -18,8 +18,6 @@ namespace Insight.WS.Server.Common.ORM
     [KnownType(typeof(ABS_Contract_Subjects))]
     [KnownType(typeof(ABS_Contract_Attachs))]
     [KnownType(typeof(ABS_Contract_FundPlan))]
-    [KnownType(typeof(SYS_Organization))]
-    [KnownType(typeof(SYS_User))]
     [KnownType(typeof(MDG_Employee))]
     
     public partial class ABS_Contract
@@ -76,12 +74,6 @@ namespace Insight.WS.Server.Common.ORM
         public virtual ICollection<ABS_Contract_Attachs> ABS_Contract_Attachs { get; set; }
     	[DataMember]
         public virtual ICollection<ABS_Contract_FundPlan> ABS_Contract_FundPlan { get; set; }
-    	[DataMember]
-        public virtual SYS_Organization SYS_Organization { get; set; }
-    	[DataMember]
-        public virtual SYS_User SYS_User { get; set; }
-    	[DataMember]
-        public virtual SYS_Organization SYS_Organization1 { get; set; }
     	[DataMember]
         public virtual MDG_Employee MDG_Employee { get; set; }
     	[DataMember]

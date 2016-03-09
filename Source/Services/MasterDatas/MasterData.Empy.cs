@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using Insight.WS.Server.Common;
+using Insight.WS.Server.Common.Entity;
 using Insight.WS.Server.Common.ORM;
 using static Insight.WS.Server.Common.General;
 using static Insight.WS.Server.Common.SqlHelper;
@@ -72,22 +73,6 @@ namespace Insight.WS.Service
         }
 
         /// <summary>
-        /// 获取员工职位关系对象实体
-        /// </summary>
-        /// <param name="us">用户会话</param>
-        /// <param name="id">员工ID</param>
-        /// <returns>MDR_ET 职位关系对象实体</returns>
-        public MDR_ET GetEmployeeTitle(Session us, Guid id)
-        {
-            if (!SimpleVerifty(us)) return null;
-
-            using (var context = new WSEntities())
-            {
-                return context.MDR_ET.SingleOrDefault(d => d.EmployeeId == id);
-            }
-        }
-
-        /// <summary>
         /// 添加员工
         /// </summary>
         /// <param name="us">用户会话</param>
@@ -96,7 +81,7 @@ namespace Insight.WS.Service
         /// <param name="r">MDR_ET对象实体</param>
         /// <param name="cdt">联系方式列表</param>
         /// <returns>bool 是否成功</returns>
-        public bool AddEmployee(Session us, MasterData m, MDG_Employee d, MDR_ET r, DataTable cdt)
+        public bool AddEmployee(Session us, MasterData m, MDG_Employee d, DataTable cdt)
         {
             if (!Verification(us, "DC02AD99-674E-4A56-ACDF-2CC0BCA49B57")) return false;
 
@@ -124,16 +109,6 @@ namespace Insight.WS.Service
                 new SqlParameter("@Read", SqlDbType.Int) {Value = 0}
             };
             cmds.Add(MakeCommand(sql, parm));
-
-            sql = "insert MDR_ET (EmployeeId, TitleId) select @EmployeeId, @TitleId";
-            parm = new[]
-            {
-                new SqlParameter("@EmployeeId", SqlDbType.UniqueIdentifier) {Value = r.EmployeeId},
-                new SqlParameter("@TitleId", SqlDbType.UniqueIdentifier) {Value = r.TitleId},
-                new SqlParameter("@Read", SqlDbType.Int) {Value = 0}
-            };
-            cmds.Add(MakeCommand(sql, parm));
-
             cmds.AddRange(DataAccess.InsertContactInfo(Guid.Empty, cdt));
             return SqlExecute(cmds);
         }
@@ -148,7 +123,7 @@ namespace Insight.WS.Service
         /// <param name="cdl">联系方式删除列表</param>
         /// <param name="cdt">联系方式列表</param>
         /// <returns>bool 是否成功</returns>
-        public bool UpdateEmployee(Session us, MasterData m, MDG_Employee d, MDR_ET r, List<object> cdl, DataTable cdt)
+        public bool UpdateEmployee(Session us, MasterData m, MDG_Employee d, List<object> cdl, DataTable cdt)
         {
             if (!Verification(us, "965562BE-C87E-4869-B94A-97240B24477A")) return false;
 
@@ -173,8 +148,6 @@ namespace Insight.WS.Service
                 new SqlParameter("@MID", SqlDbType.UniqueIdentifier) {Value = d.MID}
             };
             cmds.Add(MakeCommand(sql, parm));
-            cmds.Add(MakeCommand($"update MDR_ET set TitleId = '{r.TitleId}' where ID = '{r.ID}'"));
-
             cmds.AddRange(DataAccess.DeleteContactInfo(cdl));
             cmds.AddRange(DataAccess.InsertContactInfo(m.ID, cdt));
             return SqlExecute(cmds);

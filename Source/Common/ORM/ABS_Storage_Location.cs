@@ -16,8 +16,6 @@ namespace Insight.WS.Server.Common.ORM
     [DataContract(IsReference = true)]
     [KnownType(typeof(ABS_Delivery))]
     [KnownType(typeof(ABS_Storage_Detail))]
-    [KnownType(typeof(SYS_Organization))]
-    [KnownType(typeof(SYS_User))]
     [KnownType(typeof(MDG_Dictionary))]
     
     public partial class ABS_Storage_Location
@@ -57,10 +55,6 @@ namespace Insight.WS.Server.Common.ORM
         public virtual ICollection<ABS_Delivery> ABS_Delivery { get; set; }
     	[DataMember]
         public virtual ICollection<ABS_Storage_Detail> ABS_Storage_Detail { get; set; }
-    	[DataMember]
-        public virtual SYS_Organization SYS_Organization { get; set; }
-    	[DataMember]
-        public virtual SYS_User SYS_User { get; set; }
     	[DataMember]
         public virtual MDG_Dictionary MDG_Dictionary { get; set; }
     }

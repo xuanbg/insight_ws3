@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using Insight.WS.Server.Common;
+using Insight.WS.Server.Common.Entity;
 using Insight.WS.Server.Common.ORM;
 using static Insight.WS.Server.Common.General;
 using static Insight.WS.Server.Common.SqlHelper;
@@ -13,65 +14,6 @@ namespace Insight.WS.Service
 
     public partial class Commons : ICommons
     {
-
-        #region 报表接口
-
-        /// <summary>
-        /// 获取全部可用的报表模板
-        /// </summary>
-        /// <param name="us">Session对象实体</param>
-        /// <param name="type">模板类型</param>
-        /// <param name="withOutTree">是否不带分类</param>
-        /// <returns>DataTable 可用报表模板列表</returns>
-        public DataTable GetReportTemplet(Session us, string type, bool withOutTree)
-        {
-            if (!SimpleVerifty(us)) return null;
-
-            var sql = "with List as(Select D.ID, max(P.Permission) as Permission from ReportTemplet D ";
-            sql += "join Get_PermData('AD0BD296-46F5-46B3-85B9-00B6941343E7', @UserId, @DeptId) P on P.OrgId = isnull(D.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = D.CreatorUserId ";
-            sql += $"where D.Alias = '{type}' {(withOutTree ? "and D.IsData = 1 " : "")}group by D.ID) ";
-            sql += "select D.*, case when D.IsData = 0 then 0 else L.Permission end as Permission from ReportTemplet D join List L on L.ID = D.ID order by D.[Index]";
-            var parm = new[]
-            {
-                new SqlParameter("@UserId", SqlDbType.UniqueIdentifier) {Value = us.UserId},
-                new SqlParameter("@DeptId", SqlDbType.UniqueIdentifier) {Value = us.DeptId}
-            };
-            return SqlQuery(MakeCommand(sql, parm));
-        }
-
-        /// <summary>
-        /// 获取打印或预览内容
-        /// </summary>
-        /// <param name="us">Session对象实体</param>
-        /// <param name="oid">数据对象ID</param>
-        /// <param name="tid">模板ID</param>
-        /// <param name="obj">电子影像对象实体</param>
-        /// <returns>ImageData 电子影像对象实体</returns>
-        public ImageData BuildImageData(Session us, Guid oid, Guid tid, ImageData obj)
-        {
-            if (!SimpleVerifty(us)) return null;
-
-            var img = BuildImage(oid, tid, us.DeptName, us.UserName, us.DeptId, us.UserId, obj);
-            if (obj != null)
-            {
-                var id = (Guid)DataAccess.SaveImage(img);
-                img.ID = id;
-
-                if (obj.ImageType == 1 || obj.ImageType == 3)
-                {
-                    const string sql = "insert ABS_Clearing_Attachs (ClearingId, ImageId) select @ClearingId, @ImageId";
-                    var parm = new[]
-                    {
-                        new SqlParameter("ClearingId", SqlDbType.UniqueIdentifier) {Value = oid},
-                        new SqlParameter("ImageId", SqlDbType.UniqueIdentifier) {Value = id}
-                    };
-                    SqlQuery(MakeCommand(sql, parm));
-                }
-            }
-            return img;
-        }
-
-        #endregion
 
         #region 电子影像公共方法
 

@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="9cf27559fc704ac58e993c2ab56b5771" Name="Diagram1" ZoomLevel="97">
+      <Diagram DiagramId="9cf27559fc704ac58e993c2ab56b5771" Name="Diagram1" ZoomLevel="62">
         <EntityTypeShape EntityType="WSModel.ABS_Advance" Width="1.5" PointX="3" PointY="132" IsExpanded="true" />
         <EntityTypeShape EntityType="WSModel.ABS_Advance_Detail" Width="1.5" PointX="19.5" PointY="121.625" />
         <EntityTypeShape EntityType="WSModel.ABS_Advance_Record" Width="1.5" PointX="28.75" PointY="123.875" />
@@ -45,55 +45,14 @@
         <EntityTypeShape EntityType="WSModel.MDG_Expense" Width="1.5" PointX="27.75" PointY="128.375" />
         <EntityTypeShape EntityType="WSModel.MDG_Material" Width="1.5" PointX="33" PointY="127.875" />
         <EntityTypeShape EntityType="WSModel.MDG_Supplier" Width="1.5" PointX="27.75" PointY="133.5" />
-        <EntityTypeShape EntityType="WSModel.MDR_ET" Width="1.5" PointX="33" PointY="124.875" />
         <EntityTypeShape EntityType="WSModel.MDR_MU" Width="1.5" PointX="11.5" PointY="132.875" />
         <EntityTypeShape EntityType="WSModel.MDS_Contact_Info" Width="1.5" PointX="19.75" PointY="118.25" />
-        <EntityTypeShape EntityType="WSModel.SYS_Alert_Message" Width="1.5" PointX="41.25" PointY="128.75" />
-        <EntityTypeShape EntityType="WSModel.SYS_Alert_Rules" Width="1.5" PointX="39" PointY="124.375" />
-        <EntityTypeShape EntityType="WSModel.SYS_Alert_Send" Width="1.5" PointX="43.5" PointY="124.125" />
-        <EntityTypeShape EntityType="WSModel.SYS_Alert_Target" Width="1.5" PointX="41.25" PointY="123.75" />
-        <EntityTypeShape EntityType="WSModel.SYS_Allot_Record" Width="1.5" PointX="36" PointY="131.875" />
-        <EntityTypeShape EntityType="WSModel.SYS_Code_Allot" Width="1.5" PointX="38.25" PointY="134.5" />
-        <EntityTypeShape EntityType="WSModel.SYS_Code_Record" Width="1.5" PointX="38.25" PointY="120.5" />
-        <EntityTypeShape EntityType="WSModel.SYS_Code_Scheme" Width="1.5" PointX="36" PointY="126.875" />
         <EntityTypeShape EntityType="WSModel.SYS_Interface" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="WSModel.SYS_Module" Width="1.5" PointX="3.75" PointY="120" />
-        <EntityTypeShape EntityType="WSModel.SYS_ModuleAction" Width="1.5" PointX="3" PointY="153.875" />
-        <EntityTypeShape EntityType="WSModel.SYS_ModuleGroup" Width="1.5" PointX="1.5" PointY="121.75" />
-        <EntityTypeShape EntityType="WSModel.SYS_ModuleParam" Width="1.5" PointX="33" PointY="139.125" />
-        <EntityTypeShape EntityType="WSModel.SYS_Organization" Width="1.5" PointX="30.75" PointY="127.375" />
-        <EntityTypeShape EntityType="WSModel.SYS_OrgMember" Width="1.5" PointX="39" PointY="139.375" />
-        <EntityTypeShape EntityType="WSModel.SYS_OrgMerger" Width="1.5" PointX="41" PointY="134.375" />
-        <EntityTypeShape EntityType="WSModel.SYS_Report_Definition" Width="1.5" PointX="43.25" PointY="132.375" />
-        <EntityTypeShape EntityType="WSModel.SYS_Report_Entity" Width="1.5" PointX="48.5" PointY="131.875" />
-        <EntityTypeShape EntityType="WSModel.SYS_Report_Instances" Width="1.5" PointX="45.5" PointY="129.5" />
-        <EntityTypeShape EntityType="WSModel.SYS_Report_IU" Width="1.5" PointX="47.75" PointY="134.875" />
-        <EntityTypeShape EntityType="WSModel.SYS_Report_Member" Width="1.5" PointX="50.75" PointY="154.75" />
-        <EntityTypeShape EntityType="WSModel.SYS_Report_Period" Width="1.5" PointX="45.5" PointY="137" />
-        <EntityTypeShape EntityType="WSModel.SYS_Report_Rules" Width="1.5" PointX="33" PointY="133.875" />
-        <EntityTypeShape EntityType="WSModel.SYS_Report_Schedular" Width="1.5" PointX="45.5" PointY="133.875" />
-        <EntityTypeShape EntityType="WSModel.SYS_Report_Templates" Width="1.5" PointX="39" PointY="130.125" />
-        <EntityTypeShape EntityType="WSModel.SYS_Role" Width="1.5" PointX="3" PointY="175.75" />
-        <EntityTypeShape EntityType="WSModel.SYS_Role_Title" Width="1.5" PointX="36" PointY="149.25" />
-        <EntityTypeShape EntityType="WSModel.SYS_Role_User" Width="1.5" PointX="8.25" PointY="151.375" />
-        <EntityTypeShape EntityType="WSModel.SYS_Role_UserGroup" Width="1.5" PointX="8.25" PointY="155.375" />
-        <EntityTypeShape EntityType="WSModel.SYS_RolePerm_Action" Width="1.5" PointX="5.25" PointY="154.25" />
-        <EntityTypeShape EntityType="WSModel.SYS_RolePerm_Data" Width="1.5" PointX="8.25" PointY="147.125" />
-        <EntityTypeShape EntityType="WSModel.SYS_RolePerm_DataAbs" Width="1.5" PointX="33" PointY="152" />
-        <EntityTypeShape EntityType="WSModel.SYS_User" Width="1.5" PointX="0.75" PointY="127.625" />
-        <EntityTypeShape EntityType="WSModel.SYS_UserGroup" Width="1.5" PointX="3" PointY="172" />
-        <EntityTypeShape EntityType="WSModel.SYS_UserGroupMember" Width="1.5" PointX="5.25" PointY="150" />
         <AssociationConnector Association="WSModel.FK__ABS_Advan__CardT__5DC1991A" />
-        <AssociationConnector Association="WSModel.FK__ABS_Advan__Creat__609E05C5" />
-        <AssociationConnector Association="WSModel.FK__ABS_Advan__Creat__619229FE" />
         <AssociationConnector Association="WSModel.FK__ABS_Advan__Owner__5EB5BD53" />
         <AssociationConnector Association="WSModel.FK__ABS_Advan__Objec__674B0354" />
-        <AssociationConnector Association="WSModel.FK__ABS_Clear__Creat__3E48EDC1" />
-        <AssociationConnector Association="WSModel.FK__ABS_Clear__Creat__3F3D11FA" />
         <AssociationConnector Association="WSModel.FK__ABS_Clear__Objec__3A785CDD" />
         <AssociationConnector Association="WSModel.FK__ABS_Clear__Image__50679DFC" />
-        <AssociationConnector Association="WSModel.FK__ABS_Clear__Creat__34BF8387" />
-        <AssociationConnector Association="WSModel.FK__ABS_Clear__Creat__35B3A7C0" />
         <AssociationConnector Association="WSModel.FK__ABS_Clear__Image__32D73B15" />
         <AssociationConnector Association="WSModel.FK__ABS_Clear__Objec__44F5EB50" />
         <AssociationConnector Association="WSModel.FK__ABS_Clear__Curre__4AAEC4A6" />
@@ -103,9 +62,6 @@
         <AssociationConnector Association="WSModel.FK__ABS_Contr__Contr__1E9B383E" />
         <AssociationConnector Association="WSModel.FK__ABS_Contr__Contr__24541194" />
         <AssociationConnector Association="WSModel.FK__ABS_Contr__Contr__2918C6B1" />
-        <AssociationConnector Association="WSModel.FK__ABS_Contr__Creat__18E25EE8" />
-        <AssociationConnector Association="WSModel.FK__ABS_Contr__Creat__19D68321" />
-        <AssociationConnector Association="WSModel.FK__ABS_Contr__Execu__1605F23D" />
         <AssociationConnector Association="WSModel.FK__ABS_Contr__Execu__16FA1676" />
         <AssociationConnector Association="WSModel.FK__ABS_Contr__Objec__141DA9CB" />
         <AssociationConnector Association="WSModel.FK__ABS_Contr__Image__254835CD" />
@@ -116,8 +72,6 @@
         <AssociationConnector Association="WSModel.FK__ABS_Contr__Subje__357E9D96" />
         <AssociationConnector Association="WSModel.FK__ABS_Contr__Categ__1F8F5C77" />
         <AssociationConnector Association="WSModel.FK__ABS_Contr__Objec__208380B0" />
-        <AssociationConnector Association="WSModel.FK__ABS_Deliv__Creat__04DB663B" />
-        <AssociationConnector Association="WSModel.FK__ABS_Deliv__Creat__05CF8A74" />
         <AssociationConnector Association="WSModel.FK__ABS_Deliv__Deliv__0A943F91" />
         <AssociationConnector Association="WSModel.FK__ABS_Deliv__Deliv__0F58F4AE" />
         <AssociationConnector Association="WSModel.FK__ABS_Deliv__Locat__010AD557" />
@@ -125,29 +79,18 @@
         <AssociationConnector Association="WSModel.FK__ABS_Deliv__Image__104D18E7" />
         <AssociationConnector Association="WSModel.FK__ABS_Deliv__Objec__0B8863CA" />
         <AssociationConnector Association="WSModel.FK__ABS_Stock__Capit__5808BFC4" />
-        <AssociationConnector Association="WSModel.FK__ABS_Stock__OrgId__54382EE0" />
         <AssociationConnector Association="WSModel.FK__ABS_Stock__Accou__59F10836" />
         <AssociationConnector Association="WSModel.FK__ABS_Stora__Locat__7D3A4473" />
         <AssociationConnector Association="WSModel.FK__ABS_Stora__Summa__7C46203A" />
-        <AssociationConnector Association="WSModel.FK__ABS_Stora__Creat__71C891C7" />
-        <AssociationConnector Association="WSModel.FK__ABS_Stora__Creat__72BCB600" />
         <AssociationConnector Association="WSModel.FK__ABS_Stora__Stora__70D46D8E" />
         <AssociationConnector Association="WSModel.FK__ABS_Stora__Goods__77816B1D" />
         <AssociationConnector Association="WSModel.FK__ABS_Stora__SKUId__78758F56" />
-        <AssociationConnector Association="WSModel.FK__BASE_Cate__Creat__2043898E" />
-        <AssociationConnector Association="WSModel.FK__BASE_Cate__Creat__2137ADC7" />
-        <AssociationConnector Association="WSModel.FK__BASE_Cate__Modul__1C72F8AA" />
         <AssociationConnector Association="WSModel.FK__ImageData__Categ__2E5C9EBB" />
         <AssociationConnector Association="WSModel.FK__MasterDat__Categ__26F0871D" />
         <AssociationConnector Association="WSModel.FK__MDG_Custo__Provi__6E7723D0" />
         <AssociationConnector Association="WSModel.FK__MDG_Custom__City__6F6B4809" />
         <AssociationConnector Association="WSModel.FK__MDG_Suppl__Provi__7EAD8B99" />
         <AssociationConnector Association="WSModel.FK__MDG_Suppli__City__7FA1AFD2" />
-        <AssociationConnector Association="WSModel.FK__SYS_Alert__Categ__78BFA819" />
-        <AssociationConnector Association="WSModel.FK__SYS_Repor__Categ__47284C85" />
-        <AssociationConnector Association="WSModel.FK__SYS_Repor__Categ__4EC96E4D" />
-        <AssociationConnector Association="WSModel.FK__ImageData__Creat__322D2F9F" />
-        <AssociationConnector Association="WSModel.FK__ImageData__Creat__332153D8" />
         <AssociationConnector Association="WSModel.FK__ImageData__Secre__3044E72D" />
         <AssociationConnector Association="WSModel.FK__MDG_Contact__MID__092B1A0C" />
         <AssociationConnector Association="WSModel.FK__MDG_Custome__MID__6AA692EC" />
@@ -158,20 +101,12 @@
         <AssociationConnector Association="WSModel.FK__MDG_Supplie__MID__7ADCFAB5" />
         <AssociationConnector Association="WSModel.FK__MDR_MU__MasterDa__2997E99E" />
         <AssociationConnector Association="WSModel.FK__MDS_Conta__Maste__1F1A5B2B" />
-        <AssociationConnector Association="WSModel.FK__SYS_Alert__Targe__04315AC5" />
-        <AssociationConnector Association="WSModel.FK__SYS_Alert__Targe__0EAEE938" />
-        <AssociationConnector Association="WSModel.FK__MDG_Conta__Creat__0CFBAAF0" />
-        <AssociationConnector Association="WSModel.FK__MDG_Conta__Creat__0DEFCF29" />
         <AssociationConnector Association="WSModel.FK__MDG_Custo__Class__7153907B" />
-        <AssociationConnector Association="WSModel.FK__MDG_Custo__Creat__7524215F" />
-        <AssociationConnector Association="WSModel.FK__MDG_Custo__Creat__76184598" />
         <AssociationConnector Association="WSModel.FK__MDG_Custo__Distr__705F6C42" />
         <AssociationConnector Association="WSModel.FK__MDG_Custo__Enter__6B9AB725" />
         <AssociationConnector Association="WSModel.FK__MDG_Custo__Indus__6C8EDB5E" />
         <AssociationConnector Association="WSModel.FK__MDG_Custo__State__6D82FF97" />
         <AssociationConnector Association="WSModel.FK__MDG_Custo__Statu__7247B4B4" />
-        <AssociationConnector Association="WSModel.FK__MDG_Dicti__Creat__4E0A543E" />
-        <AssociationConnector Association="WSModel.FK__MDG_Dicti__Creat__4EFE7877" />
         <AssociationConnector Association="WSModel.FK__MDG_Emplo__WorkT__13A8A87F" />
         <AssociationConnector Association="WSModel.FK__MDG_Expens__Unit__62114CEB" />
         <AssociationConnector Association="WSModel.FK__MDG_Mater__SizeT__569F9A3F" />
@@ -182,93 +117,7 @@
         <AssociationConnector Association="WSModel.FK__MDG_Suppl__Indus__7CC54327" />
         <AssociationConnector Association="WSModel.FK__MDG_Suppl__State__7DB96760" />
         <AssociationConnector Association="WSModel.FK__MDS_Conta__InfoT__200E7F64" />
-        <AssociationConnector Association="WSModel.FK__SYS_Organ__Position" />
-        <AssociationConnector Association="WSModel.FK__MDG_Emplo__Creat__17793963" />
-        <AssociationConnector Association="WSModel.FK__MDG_Emplo__Creat__186D5D9C" />
         <AssociationConnector Association="WSModel.FK__MDG_Emplo__Direc__149CCCB8" />
-        <AssociationConnector Association="WSModel.FK__MDR_ET__Employee__23DF1048" />
-        <AssociationConnector Association="WSModel.FK__MDG_Expen__Creat__64EDB996" />
-        <AssociationConnector Association="WSModel.FK__MDG_Expen__Creat__65E1DDCF" />
-        <AssociationConnector Association="WSModel.FK__MDG_Mater__Creat__5A702B23" />
-        <AssociationConnector Association="WSModel.FK__MDG_Mater__Creat__5B644F5C" />
-        <AssociationConnector Association="WSModel.FK__MDG_Suppl__Creat__037240B6" />
-        <AssociationConnector Association="WSModel.FK__MDG_Suppl__Creat__046664EF" />
-        <AssociationConnector Association="WSModel.FK__MDR_ET__TitleId__24D33481" />
-        <AssociationConnector Association="WSModel.FK__MDR_MU__UserId__2A8C0DD7" />
-        <AssociationConnector Association="WSModel.FK__SYS_Alert__Messa__0DBAC4FF" />
-        <AssociationConnector Association="WSModel.FK__SYS_Alert__RuleI__08F60FE2" />
-        <AssociationConnector Association="WSModel.FK__SYS_Alert__Creat__7C9038FD" />
-        <AssociationConnector Association="WSModel.FK__SYS_Alert__Creat__7D845D36" />
-        <AssociationConnector Association="WSModel.FK__SYS_Alert__RuleI__033D368C" />
-        <AssociationConnector Association="WSModel.FK__SYS_Allot__Creat__1DF12CC8" />
-        <AssociationConnector Association="WSModel.FK__SYS_Allot__Creat__1EE55101" />
-        <AssociationConnector Association="WSModel.FK__SYS_Allot__Modul__1C08E456" />
-        <AssociationConnector Association="WSModel.FK__SYS_Allot__Owner__1CFD088F" />
-        <AssociationConnector Association="WSModel.FK__SYS_Allot__Schem__1B14C01D" />
-        <AssociationConnector Association="WSModel.FK__SYS_Code___Creat__2B4B27E6" />
-        <AssociationConnector Association="WSModel.FK__SYS_Code___Creat__2C3F4C1F" />
-        <AssociationConnector Association="WSModel.FK__SYS_Code___Modul__2962DF74" />
-        <AssociationConnector Association="WSModel.FK__SYS_Code___Owner__2A5703AD" />
-        <AssociationConnector Association="WSModel.FK__SYS_Code___Schem__286EBB3B" />
-        <AssociationConnector Association="WSModel.FK__SYS_Code___Schem__23AA061E" />
-        <AssociationConnector Association="WSModel.FK__SYS_Code___Creat__1467C28E" />
-        <AssociationConnector Association="WSModel.FK__SYS_Code___Creat__155BE6C7" />
-        <AssociationConnector Association="WSModel.FK__SYS_Modul__Modul__4F3382A1" />
-        <AssociationConnector Association="WSModel.FK__SYS_Modul__Modul__55E08030" />
-        <AssociationConnector Association="WSModel.FK__SYS_Modul__Modul__5AA5354D" />
-        <AssociationConnector Association="WSModel.FK__SYS_RoleP__Modul__086BFFFD" />
-        <AssociationConnector Association="WSModel.FK__SYS_RoleP__Modul__11F56A37" />
-        <AssociationConnector Association="WSModel.FK__SYS_RoleP__Actio__7FD6B9FC" />
-        <AssociationConnector Association="WSModel.FK__SYS_Modul__OrgId__5B995986" />
-        <AssociationConnector Association="WSModel.FK__SYS_Modul__UserI__5C8D7DBF" />
-        <AssociationConnector Association="WSModel.FK__SYS_Organ__Creat__375BF910" />
-        <AssociationConnector Association="WSModel.FK__SYS_Organ__Paren__3573B09E" />
-        <AssociationConnector Association="WSModel.FK__SYS_OrgMe__Merge__45AA1867" />
-        <AssociationConnector Association="WSModel.FK__SYS_OrgMe__OrgId__3D14D266" />
-        <AssociationConnector Association="WSModel.FK__SYS_OrgMe__OrgId__44B5F42E" />
-        <AssociationConnector Association="WSModel.FK__SYS_Repor__Creat__407B4EF6" />
-        <AssociationConnector Association="WSModel.FK__SYS_Repor__Creat__481C70BE" />
-        <AssociationConnector Association="WSModel.FK__SYS_Repor__Creat__548247A3" />
-        <AssociationConnector Association="WSModel.FK__SYS_Repor__OrgId__60E81E88" />
-        <AssociationConnector Association="WSModel.FK__SYS_Role___OrgId__78359834" />
-        <AssociationConnector Association="WSModel.FK__SYS_RoleP__OrgId__12E98E70" />
-        <AssociationConnector Association="WSModel.FK__SYS_OrgMe__Creat__3EFD1AD8" />
-        <AssociationConnector Association="WSModel.FK__SYS_OrgMe__UserI__3E08F69F" />
-        <AssociationConnector Association="WSModel.FK__SYS_OrgMe__Creat__469E3CA0" />
-        <AssociationConnector Association="WSModel.FK__SYS_Repor__Creat__55766BDC" />
-        <AssociationConnector Association="WSModel.FK__SYS_Repor__Repor__5B2F4532" />
-        <AssociationConnector Association="WSModel.FK__SYS_Repor__Repor__5FF3FA4F" />
-        <AssociationConnector Association="WSModel.FK__SYS_Repor__Repor__697D6489" />
-        <AssociationConnector Association="WSModel.FK__SYS_Repor__Repor__6E4219A6" />
-        <AssociationConnector Association="WSModel.FK__SYS_Repor__Templ__4FBD9286" />
-        <AssociationConnector Association="WSModel.FK__SYS_Repor__Entit__64B8AF6C" />
-        <AssociationConnector Association="WSModel.FK__SYS_Repor__Creat__6F363DDF" />
-        <AssociationConnector Association="WSModel.FK__SYS_Repor__Insta__73FAF2FC" />
-        <AssociationConnector Association="WSModel.FK__SYS_Repor__UserI__74EF1735" />
-        <AssociationConnector Association="WSModel.FK__SYS_Repor__RoleI__65ACD3A5" />
-        <AssociationConnector Association="WSModel.FK__SYS_Repor__RuleI__5C23696B" />
-        <AssociationConnector Association="WSModel.FK__SYS_Repor__Creat__416F732F" />
-        <AssociationConnector Association="WSModel.FK__SYS_Repor__RuleI__6A7188C2" />
-        <AssociationConnector Association="WSModel.FK__SYS_Repor__Creat__491094F7" />
-        <AssociationConnector Association="WSModel.FK__SYS_Role___RoleI__67FF306B" />
-        <AssociationConnector Association="WSModel.FK__SYS_Role___RoleI__6FA05233" />
-        <AssociationConnector Association="WSModel.FK__SYS_Role___RoleI__774173FB" />
-        <AssociationConnector Association="WSModel.FK__SYS_Role__Creato__62465715" />
-        <AssociationConnector Association="WSModel.FK__SYS_RoleP__RoleI__0777DBC4" />
-        <AssociationConnector Association="WSModel.FK__SYS_RoleP__RoleI__110145FE" />
-        <AssociationConnector Association="WSModel.FK__SYS_RoleP__RoleI__7EE295C3" />
-        <AssociationConnector Association="WSModel.FK__SYS_Role___Creat__7929BC6D" />
-        <AssociationConnector Association="WSModel.FK__SYS_Role___Creat__69E778DD" />
-        <AssociationConnector Association="WSModel.FK__SYS_Role___UserI__68F354A4" />
-        <AssociationConnector Association="WSModel.FK__SYS_Role___Creat__71889AA5" />
-        <AssociationConnector Association="WSModel.FK__SYS_Role___Group__7094766C" />
-        <AssociationConnector Association="WSModel.FK__SYS_RoleP__Creat__01BF026E" />
-        <AssociationConnector Association="WSModel.FK__SYS_RoleP__Creat__0B486CA8" />
-        <AssociationConnector Association="WSModel.FK__SYS_RoleP__UserI__13DDB2A9" />
-        <AssociationConnector Association="WSModel.FK__SYS_UserG__Creat__2819B580" />
-        <AssociationConnector Association="WSModel.FK__SYS_UserG__Creat__2FBAD748" />
-        <AssociationConnector Association="WSModel.FK__SYS_UserG__UserI__2EC6B30F" />
-        <AssociationConnector Association="WSModel.FK__SYS_UserG__Group__2DD28ED6" />
         <EntityTypeShape EntityType="WSModel.Advance" Width="1.5" PointX="0.75" PointY="3.75" />
         <EntityTypeShape EntityType="WSModel.Dictionary" Width="1.5" PointX="2.75" PointY="3.75" />
         <EntityTypeShape EntityType="WSModel.ReportSchedular" Width="1.5" PointX="6.75" PointY="3.75" />
@@ -284,8 +133,6 @@
         <EntityTypeShape EntityType="WSModel.SDC_Summary" Width="1.5" PointX="13.75" PointY="128.875" />
         <EntityTypeShape EntityType="WSModel.SDG_Group" Width="1.5" PointX="3" PointY="162.125" />
         <EntityTypeShape EntityType="WSModel.SDG_GroupMember" Width="1.5" PointX="13.5" PointY="146.375" />
-        <EntityTypeShape EntityType="WSModel.SDO_Advertisement" Width="1.5" PointX="3" PointY="142.125" />
-        <EntityTypeShape EntityType="WSModel.SDO_Recommend" Width="1.5" PointX="3" PointY="158.25" />
         <EntityTypeShape EntityType="WSModel.SDT_Attitude" Width="1.5" PointX="35.25" PointY="136.75" />
         <EntityTypeShape EntityType="WSModel.SDT_Comment" Width="1.5" PointX="30.25" PointY="138.5" />
         <EntityTypeShape EntityType="WSModel.SDT_Forward" Width="1.5" PointX="18" PointY="146.875" />
@@ -298,47 +145,26 @@
         <AssociationConnector Association="WSModel.FK__SDC_Subse__Docto__11165497" />
         <AssociationConnector Association="WSModel.FK__SDC_Subse__Nurse__120A78D0" />
         <AssociationConnector Association="WSModel.FK__SDG_Group__Membe__28EDDE28" />
-        <AssociationConnector Association="WSModel.FK__MDE_Favor__Creat__7C1B37B1" />
-        <AssociationConnector Association="WSModel.FK__MDE_Messa__Creat__76625E5B" />
-        <AssociationConnector Association="WSModel.FK__SDC_CaseH__Creat__03BC5979" />
         <AssociationConnector Association="WSModel.FK__SDC_First__CaseH__08810E96" />
-        <AssociationConnector Association="WSModel.FK__SDC_First__Creat__0B5D7B41" />
         <AssociationConnector Association="WSModel.FK__SDC_Subse__CaseI__1022305E" />
         <AssociationConnector Association="WSModel.FK__SDC_Summa__CaseI__17C35226" />
         <AssociationConnector Association="WSModel.FK__SDT_Topic__CaseI__2EA6B77E" />
-        <AssociationConnector Association="WSModel.FK__SDC_Subse__Creat__12FE9D09" />
-        <AssociationConnector Association="WSModel.FK__SDC_Summa__Creat__18B7765F" />
-        <AssociationConnector Association="WSModel.FK__SDG_Group__Creat__233504D2" />
         <AssociationConnector Association="WSModel.FK__SDG_Group__Group__27F9B9EF" />
-        <AssociationConnector Association="WSModel.FK__SDG_Group__Manag__214CBC60" />
-        <AssociationConnector Association="WSModel.FK__SDG_Group__Owner__20589827" />
         <AssociationConnector Association="WSModel.FK__SDT_Forwa__Group__373BFD7F" />
-        <AssociationConnector Association="WSModel.FK__SDO_Adver__Creat__55C0849F" />
-        <AssociationConnector Association="WSModel.FK__SDO_Recom__Creat__5C6D822E" />
-        <AssociationConnector Association="WSModel.FK__SDT_Attit__Creat__4495F89D" />
-        <AssociationConnector Association="WSModel.FK__SDT_Comme__Creat__4A4ED1F3" />
         <AssociationConnector Association="WSModel.FK__SDT_Prais__Comme__4F138710" />
-        <AssociationConnector Association="WSModel.FK__SDT_Forwa__Creat__383021B8" />
         <AssociationConnector Association="WSModel.FK__SDT_Forwa__Topic__3647D946" />
-        <AssociationConnector Association="WSModel.FK__SDT_Prais__Creat__5007AB49" />
-        <AssociationConnector Association="WSModel.FK__SDT_Topic__Creat__31832429" />
         <EntityTypeShape EntityType="WSModel.SDO_Tutorial" Width="1.5" PointX="3" PointY="111.625" />
         <EntityTypeShape EntityType="WSModel.SDO_TutorialComment" Width="1.5" PointX="5.25" PointY="115.875" />
-        <EntityTypeShape EntityType="WSModel.SDO_TutorialPraise" Width="1.5" PointX="13.25" PointY="116.125" />
-        <AssociationConnector Association="WSModel.FK__SDO_Tutor__Creat__53041385" />
         <AssociationConnector Association="WSModel.FK__SDO_Tutor__Tutor__57C8C8A2" />
-        <AssociationConnector Association="WSModel.FK__SDO_Tutor__Tutor__5D81A1F8" />
-        <AssociationConnector Association="WSModel.FK__SDO_Tutor__Creat__58BCECDB" />
-        <AssociationConnector Association="WSModel.FK__SDO_Tutor__Creat__5E75C631" />
         <EntityTypeShape EntityType="WSModel.MemberInfo" Width="1.5" PointX="0.75" PointY="7.75" />
         <EntityTypeShape EntityType="WSModel.Speechs" Width="1.5" PointX="2.75" PointY="7.75" />
         <EntityTypeShape EntityType="WSModel.SDT_Speech" Width="1.5" PointX="25" PointY="130.5" />
         <AssociationConnector Association="WSModel.FK__SDT_Speec__CaseI__1CC7FE65" />
         <AssociationConnector Association="WSModel.FK__SDT_Attit__Speec__2469202D" />
         <AssociationConnector Association="WSModel.FK__SDT_Comme__Speec__2A21F983" />
-        <AssociationConnector Association="WSModel.FK__SDT_Speec__Creat__1FA46B10" />
         <AssociationConnector Association="WSModel.FK__SDT_Speec__Topic__1BD3DA2C" />
         <EntityTypeShape EntityType="WSModel.Groups" Width="1.5" PointX="4.75" PointY="7.75" />
+        <EntityTypeShape EntityType="WSModel.SDO_RecImage" Width="1.5" PointX="7.375" PointY="7.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

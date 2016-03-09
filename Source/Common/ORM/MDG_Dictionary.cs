@@ -23,8 +23,6 @@ namespace Insight.WS.Server.Common.ORM
     [KnownType(typeof(ImageData))]
     [KnownType(typeof(MasterData))]
     [KnownType(typeof(MDG_Customer))]
-    [KnownType(typeof(SYS_Organization))]
-    [KnownType(typeof(SYS_User))]
     [KnownType(typeof(MDG_Employee))]
     [KnownType(typeof(MDG_Expense))]
     [KnownType(typeof(MDG_Material))]
@@ -59,7 +57,6 @@ namespace Insight.WS.Server.Common.ORM
             this.MDG_Supplier2 = new HashSet<MDG_Supplier>();
             this.MDG_Supplier3 = new HashSet<MDG_Supplier>();
             this.MDS_Contact_Info = new HashSet<MDS_Contact_Info>();
-            this.SYS_Organization1 = new HashSet<SYS_Organization>();
         }
     
     	[DataMember]
@@ -114,10 +111,6 @@ namespace Insight.WS.Server.Common.ORM
     	[DataMember]
         public virtual ICollection<MDG_Customer> MDG_Customer5 { get; set; }
     	[DataMember]
-        public virtual SYS_Organization SYS_Organization { get; set; }
-    	[DataMember]
-        public virtual SYS_User SYS_User { get; set; }
-    	[DataMember]
         public virtual ICollection<MDG_Employee> MDG_Employee { get; set; }
     	[DataMember]
         public virtual ICollection<MDG_Expense> MDG_Expense { get; set; }
@@ -137,7 +130,5 @@ namespace Insight.WS.Server.Common.ORM
         public virtual ICollection<MDG_Supplier> MDG_Supplier3 { get; set; }
     	[DataMember]
         public virtual ICollection<MDS_Contact_Info> MDS_Contact_Info { get; set; }
-    	[DataMember]
-        public virtual ICollection<SYS_Organization> SYS_Organization1 { get; set; }
     }
 }

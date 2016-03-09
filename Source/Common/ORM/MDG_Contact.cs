@@ -15,8 +15,6 @@ namespace Insight.WS.Server.Common.ORM
     
     [DataContract(IsReference = true)]
     [KnownType(typeof(MasterData))]
-    [KnownType(typeof(SYS_Organization))]
-    [KnownType(typeof(SYS_User))]
     
     public partial class MDG_Contact
     {
@@ -59,9 +57,5 @@ namespace Insight.WS.Server.Common.ORM
     
     	[DataMember]
         public virtual MasterData MasterData { get; set; }
-    	[DataMember]
-        public virtual SYS_Organization SYS_Organization { get; set; }
-    	[DataMember]
-        public virtual SYS_User SYS_User { get; set; }
     }
 }

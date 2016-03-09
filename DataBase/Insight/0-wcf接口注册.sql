@@ -6,24 +6,19 @@ GO
 CREATE TABLE SYS_Interface(
 [ID]               UNIQUEIDENTIFIER CONSTRAINT IX_SYS_Interface PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
 [SN]               BIGINT IDENTITY(1,1),                                                                               --自增序列
-[Binding]          VARCHAR(32) NOT NULL,                                                                               --绑定类型
-[Port]             VARCHAR(32) NOT NULL,                                                                               --服务端口号
-[Name]             VARCHAR(32) NOT NULL,                                                                               --模块名称
+[Port]             VARCHAR(8) NOT NULL,                                                                                --服务端口号
+[NameSpace]        VARCHAR(128) NOT NULL,                                                                              --模块名称
 [Class]            VARCHAR(64) NOT NULL,                                                                               --实现类命名空间
 [Interface]        VARCHAR(64) NOT NULL,                                                                               --接口类命名空间
-[Location]         NVARCHAR(MAX),                                                                                      --文件相对路径
+[ServiceFile]      NVARCHAR(MAX),                                                                                      --文件路径
 )
 GO
 
-insert SYS_Interface (Binding, Port, Name, Class, Interface, Location)
-select 'TCP', '6210', 'Login', 'Insight.WS.Service.Login', 'Insight.WS.Service.ILogin', 'Services' union all
-select 'TCP', '6210', 'Commons', 'Insight.WS.Service.Commons', 'Insight.WS.Service.ICommons', 'Services' union all
-select 'TCP', '6210', 'Base', 'Insight.WS.Service.Base', 'Insight.WS.Service.IBase', 'Services' union all
-select 'TCP', '6210', 'Report', 'Insight.WS.Service.Report', 'Insight.WS.Service.IReport', 'Services' union all
-select 'TCP', '6210', 'MasterDatas', 'Insight.WS.Service.MasterDatas', 'Insight.WS.Service.IMasterDatas', 'Services' union all
+insert SYS_Interface (Port, NameSpace, Class, Interface, ServiceFile)
+select '6210', 'Insight.WS.Service', 'Commons', 'ICommons', 'Commons.dll' union all
+select '6210', 'Insight.WS.Service', 'Report', 'IReport', 'Report.dll' union all
+select '6210', 'Insight.WS.Service', 'MasterDatas', 'IMasterDatas', 'MasterDatas.dll' union all
 
-select 'TCP', '6210', 'CRM', 'Insight.WS.Service.Business.CRM', 'Insight.WS.Service.Business.ICRM', 'Services\Business' union all
-select 'TCP', '6210', 'SCM', 'Insight.WS.Service.Business.SCM', 'Insight.WS.Service.Business.ISCM', 'Services\Business' union all
-select 'TCP', '6210', 'Settlement', 'Insight.WS.Service.Business.Settlement', 'Insight.WS.Service.Business.ISettlement', 'Services\Business' union all
-
-select 'HTTP', '6280', 'AppService', 'Insight.WS.Service.SuperDentist.AppService', 'Insight.WS.Service.SuperDentist.Interface', 'Services\SuperDentist'
+select '6210', 'Insight.WS.Service.Business', 'CRM', 'ICRM', 'Business\CRM.dll' union all
+select '6210', 'Insight.WS.Service.Business', 'SCM', 'ISCM', 'Business\SCM.dll' union all
+select '6210', 'Insight.WS.Service.Business', 'Settlement', 'ISettlement', 'Business\Settlement.dll'

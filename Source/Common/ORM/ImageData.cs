@@ -19,8 +19,6 @@ namespace Insight.WS.Server.Common.ORM
     [KnownType(typeof(ABS_Contract_Attachs))]
     [KnownType(typeof(ABS_Delivery_Attachs))]
     [KnownType(typeof(BASE_Category))]
-    [KnownType(typeof(SYS_Organization))]
-    [KnownType(typeof(SYS_User))]
     [KnownType(typeof(MDG_Dictionary))]
     
     public partial class ImageData
@@ -78,10 +76,6 @@ namespace Insight.WS.Server.Common.ORM
         public virtual ICollection<ABS_Delivery_Attachs> ABS_Delivery_Attachs { get; set; }
     	[DataMember]
         public virtual BASE_Category BASE_Category { get; set; }
-    	[DataMember]
-        public virtual SYS_Organization SYS_Organization { get; set; }
-    	[DataMember]
-        public virtual SYS_User SYS_User { get; set; }
     	[DataMember]
         public virtual MDG_Dictionary MDG_Dictionary { get; set; }
     }

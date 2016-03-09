@@ -15,7 +15,6 @@ namespace Insight.WS.Server.Common.ORM
     
     [DataContract(IsReference = true)]
     [KnownType(typeof(SDO_Tutorial))]
-    [KnownType(typeof(SYS_User))]
     
     public partial class SDO_TutorialComment
     {
@@ -38,7 +37,5 @@ namespace Insight.WS.Server.Common.ORM
     
     	[DataMember]
         public virtual SDO_Tutorial SDO_Tutorial { get; set; }
-    	[DataMember]
-        public virtual SYS_User SYS_User { get; set; }
     }
 }

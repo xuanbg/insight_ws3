@@ -24,53 +24,6 @@ namespace Insight.WS.Server.Common
         }
 
         /// <summary>
-        /// 根据ID获取报表定义对象实体
-        /// </summary>
-        /// <param name="id">报表ID</param>
-        /// <returns>SYS_Report_Definition 报表定义对象实体</returns>
-        public static SYS_Report_Definition GetDefinition(Guid id)
-        {
-            using (var context = new WSEntities())
-            {
-                return context.SYS_Report_Definition.SingleOrDefault(e => e.ID == id);
-            }
-        }
-
-        /// <summary>
-        /// 根据ID获取模板对象实体
-        /// </summary>
-        /// <param name="id">模板ID</param>
-        /// <returns>SYS_Report_Templates 模板对象实体</returns>
-        public static SYS_Report_Templates GetTemplate(Guid id)
-        {
-            using (var context = new WSEntities())
-            {
-                return context.SYS_Report_Templates.SingleOrDefault(t => t.ID == id);
-            }
-        }
-
-        /// <summary>
-        /// 保存报表实例
-        /// </summary>
-        /// <param name="objs">报表实例对象实体</param>
-        /// <param name="time"></param>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public static void SaveInstances(IEnumerable<SYS_Report_Instances> objs, DateTime? time, Guid id)
-        {
-            const string sql = "insert SYS_Report_Instances(ReportId, Name, Content, CreatorUserId) select @ReportId, @Name, @Content, @CreatorUserId";
-            var cmds = objs.Select(obj => new[]
-            {
-                new SqlParameter("@ReportId", SqlDbType.UniqueIdentifier) {Value = obj.ReportId}, 
-                new SqlParameter("@Name", obj.Name), 
-                new SqlParameter("@Content", obj.Content), 
-                new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = obj.CreatorUserId}
-            }).Select(parm => MakeCommand(sql, parm)).ToList();
-            cmds.Add(MakeCommand(string.Format("update SYS_Report_Schedular set BuildTime = '{0}' where ID = '{1}' and BuildTime < '{0}'", time, id)));
-            SqlExecute(cmds);
-        }
-
-        /// <summary>
         /// 保存电子影像
         /// </summary>
         /// <param name="obj">电子影像对象实体</param>

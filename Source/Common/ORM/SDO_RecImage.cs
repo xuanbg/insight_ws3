@@ -14,25 +14,24 @@ namespace Insight.WS.Server.Common.ORM
     using System.Collections.Generic;
     
     [DataContract(IsReference = true)]
-    [KnownType(typeof(SYS_Report_Definition))]
-    [KnownType(typeof(SYS_Report_Rules))]
     
-    public partial class SYS_Report_Schedular
+    public partial class SDO_RecImage
     {
     	[DataMember]
         public System.Guid ID { get; set; }
     	[DataMember]
         public long SN { get; set; }
     	[DataMember]
-        public System.Guid ReportId { get; set; }
+        public int Type { get; set; }
     	[DataMember]
-        public System.Guid RuleId { get; set; }
+        public string Picture { get; set; }
     	[DataMember]
-        public Nullable<System.DateTime> BuildTime { get; set; }
-    
+        public string Url { get; set; }
     	[DataMember]
-        public virtual SYS_Report_Definition SYS_Report_Definition { get; set; }
+        public bool Validity { get; set; }
     	[DataMember]
-        public virtual SYS_Report_Rules SYS_Report_Rules { get; set; }
+        public System.Guid CreatorUserId { get; set; }
+    	[DataMember]
+        public System.DateTime CreateTime { get; set; }
     }
 }

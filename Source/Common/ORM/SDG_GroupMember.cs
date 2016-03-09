@@ -13,9 +13,10 @@ namespace Insight.WS.Server.Common.ORM
     using System.Runtime.Serialization;
     using System.Collections.Generic;
     
+    [DataContract(IsReference = true)]
     [KnownType(typeof(MasterData))]
     [KnownType(typeof(SDG_Group))]
-
+    
     public partial class SDG_GroupMember
     {
     	[DataMember]

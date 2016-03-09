@@ -13,10 +13,10 @@ namespace Insight.WS.Server.Common.ORM
     using System.Runtime.Serialization;
     using System.Collections.Generic;
     
+    [DataContract(IsReference = true)]
     [KnownType(typeof(SDC_FirstVisit))]
     [KnownType(typeof(SDT_Attitude))]
     [KnownType(typeof(SDT_Comment))]
-    [KnownType(typeof(SYS_User))]
     [KnownType(typeof(SDT_Topic))]
     
     public partial class SDT_Speech
@@ -54,8 +54,6 @@ namespace Insight.WS.Server.Common.ORM
         public virtual ICollection<SDT_Attitude> SDT_Attitude { get; set; }
     	[DataMember]
         public virtual ICollection<SDT_Comment> SDT_Comment { get; set; }
-    	[DataMember]
-        public virtual SYS_User SYS_User { get; set; }
     	[DataMember]
         public virtual SDT_Topic SDT_Topic { get; set; }
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.ServiceModel;
 using Insight.WS.Server.Common;
+using Insight.WS.Server.Common.Entity;
 using Insight.WS.Server.Common.ORM;
 
 namespace Insight.WS.Service
@@ -38,15 +39,6 @@ namespace Insight.WS.Service
         MDG_Employee GetEmployee(Session us, Guid id);
 
         /// <summary>
-        /// 获取员工职位关系对象实体
-        /// </summary>
-        /// <param name="us">用户会话</param>
-        /// <param name="id">员工ID</param>
-        /// <returns>MDR_ET 职位关系对象实体</returns>
-        [OperationContract]
-        MDR_ET GetEmployeeTitle(Session us, Guid id);
-
-        /// <summary>
         /// 添加员工
         /// </summary>
         /// <param name="us">用户会话</param>
@@ -56,7 +48,7 @@ namespace Insight.WS.Service
         /// <param name="cdt">联系方式列表</param>
         /// <returns>bool 是否成功</returns>
         [OperationContract]
-        bool AddEmployee(Session us, MasterData m, MDG_Employee d, MDR_ET r, DataTable cdt);
+        bool AddEmployee(Session us, MasterData m, MDG_Employee d, DataTable cdt);
 
         /// <summary>
         /// 更新员工和联系方式
@@ -69,7 +61,7 @@ namespace Insight.WS.Service
         /// <param name="cdt">联系方式列表</param>
         /// <returns>bool 是否成功</returns>
         [OperationContract]
-        bool UpdateEmployee(Session us, MasterData m, MDG_Employee d, MDR_ET r, List<object> cdl, DataTable cdt);
+        bool UpdateEmployee(Session us, MasterData m, MDG_Employee d, List<object> cdl, DataTable cdt);
 
         /// <summary>
         /// 更新员工状态

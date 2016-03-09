@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using Insight.WS.Server.Common;
+using Insight.WS.Server.Common.Entity;
 using Insight.WS.Server.Common.ORM;
 using static Insight.WS.Server.Common.General;
 using static Insight.WS.Server.Common.SqlHelper;
@@ -284,13 +285,13 @@ namespace Insight.WS.Service.Business
                 CreatorUserId = us.UserId
             };
 
-            var img = BuildImage(Guid.Empty, tid, us.DeptName, us.UserName, us.DeptId, us.UserId, obj);
-            var id = DataAccess.SaveImage(img);
+            //var img = BuildImage(Guid.Empty, tid, us.DeptName, us.UserName, us.DeptId, us.UserId, obj);
+            //var id = DataAccess.SaveImage(img);
             var sql = "insert ABS_Clearing_Check (CheckTime, ImageId, CreatorDeptId, CreatorUserId) select getdate(), @ImageId, @CreatorDeptId, @CreatorUserId ";
             sql += "select ID from ABS_Clearing_Check where SN = scope_identity()";
             var parm = new[]
             {
-                new SqlParameter("@ImageId", SqlDbType.UniqueIdentifier) {Value = id},
+                new SqlParameter("@ImageId", SqlDbType.UniqueIdentifier) {Value = ""},
                 new SqlParameter("@CreatorDeptId", SqlDbType.UniqueIdentifier) {Value = us.DeptId},
                 new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = us.UserId},
                 new SqlParameter("@Write", SqlDbType.Int) {Value = 0}

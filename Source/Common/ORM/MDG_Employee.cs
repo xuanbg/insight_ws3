@@ -17,10 +17,7 @@ namespace Insight.WS.Server.Common.ORM
     [KnownType(typeof(ABS_Contract))]
     [KnownType(typeof(MasterData))]
     [KnownType(typeof(MDG_Dictionary))]
-    [KnownType(typeof(SYS_Organization))]
-    [KnownType(typeof(SYS_User))]
     [KnownType(typeof(MDG_Employee))]
-    [KnownType(typeof(MDR_ET))]
     
     public partial class MDG_Employee
     {
@@ -28,7 +25,6 @@ namespace Insight.WS.Server.Common.ORM
         {
             this.ABS_Contract = new HashSet<ABS_Contract>();
             this.MDG_Employee1 = new HashSet<MDG_Employee>();
-            this.MDR_ET = new HashSet<MDR_ET>();
         }
     
     	[DataMember]
@@ -75,14 +71,8 @@ namespace Insight.WS.Server.Common.ORM
     	[DataMember]
         public virtual MDG_Dictionary MDG_Dictionary { get; set; }
     	[DataMember]
-        public virtual SYS_Organization SYS_Organization { get; set; }
-    	[DataMember]
-        public virtual SYS_User SYS_User { get; set; }
-    	[DataMember]
         public virtual ICollection<MDG_Employee> MDG_Employee1 { get; set; }
     	[DataMember]
         public virtual MDG_Employee MDG_Employee2 { get; set; }
-    	[DataMember]
-        public virtual ICollection<MDR_ET> MDR_ET { get; set; }
     }
 }

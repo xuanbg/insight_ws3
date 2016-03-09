@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.ServiceModel;
 using Insight.WS.Server.Common;
+using Insight.WS.Server.Common.Entity;
 using Insight.WS.Server.Common.ORM;
 
 namespace Insight.WS.Service
@@ -10,31 +11,6 @@ namespace Insight.WS.Service
     [ServiceContract]
     public partial interface ICommons
     {
-
-        #region 报表接口
-
-        /// <summary>
-        /// 获取全部可用的报表模板
-        /// </summary>
-        /// <param name="us">Session对象实体</param>
-        /// <param name="type">模板类型</param>
-        /// <param name="withOutTree">是否不带分类</param>
-        /// <returns>DataTable 可用报表模板列表</returns>
-        [OperationContract]
-        DataTable GetReportTemplet(Session us, string type, bool withOutTree);
-
-        /// <summary>
-        /// 获取打印或预览内容
-        /// </summary>
-        /// <param name="us">Session对象实体</param>
-        /// <param name="oid">数据对象ID</param>
-        /// <param name="tid">模板ID</param>
-        /// <param name="obj">电子影像对象实体</param>
-        /// <returns>ImageData 电子影像对象实体</returns>
-        [OperationContract]
-        ImageData BuildImageData(Session us, Guid oid, Guid tid, ImageData obj);
-
-        #endregion
 
         #region 电子影像公共方法
 

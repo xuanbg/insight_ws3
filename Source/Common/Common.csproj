@@ -40,22 +40,11 @@
     </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.dll</HintPath>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
-    <Reference Include="FastReport, Version=1.8.46.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Debug\Client\Components\FastReport.dll</HintPath>
-    </Reference>
-    <Reference Include="GZipEncoder, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Release\GZipEncoder.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -76,10 +65,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExtendClass\Entities.cs" />
-    <Compile Include="ExtendClass\GuidParse.cs" />
-    <Compile Include="ExtendClass\JsonResult.cs" />
-    <Compile Include="ExtendClass\Session.cs" />
+    <Compile Include="Entity\Entities.cs" />
+    <Compile Include="Entity\GuidParse.cs" />
+    <Compile Include="Entity\JsonResult.cs" />
+    <Compile Include="Entity\Session.cs" />
     <Compile Include="Function\SmsCode.cs" />
     <Compile Include="Function\DataAccess.cs" />
     <Compile Include="Function\Clearing.cs">
@@ -220,9 +209,6 @@
     <Compile Include="ORM\MDG_Supplier.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ORM\MDR_ET.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="ORM\MDR_MU.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
@@ -256,19 +242,13 @@
     <Compile Include="ORM\SDG_GroupMember.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ORM\SDO_Advertisement.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SDO_Recommend.cs">
+    <Compile Include="ORM\SDO_RecImage.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ORM\SDO_Tutorial.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ORM\SDO_TutorialComment.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SDO_TutorialPraise.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ORM\SDT_Attitude.cs">
@@ -295,109 +275,7 @@
     <Compile Include="ORM\Speechs.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ORM\SYS_Alert_Message.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SYS_Alert_Rules.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SYS_Alert_Send.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SYS_Alert_Target.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SYS_Allot_Record.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SYS_Code_Allot.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SYS_Code_Record.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SYS_Code_Scheme.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="ORM\SYS_Interface.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SYS_Module.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SYS_ModuleAction.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SYS_ModuleGroup.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SYS_ModuleParam.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SYS_Organization.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SYS_OrgMember.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SYS_OrgMerger.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SYS_Report_Definition.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SYS_Report_Entity.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SYS_Report_Instances.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SYS_Report_IU.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SYS_Report_Member.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SYS_Report_Period.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SYS_Report_Rules.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SYS_Report_Schedular.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SYS_Report_Templates.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SYS_Role.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SYS_RolePerm_Action.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SYS_RolePerm_Data.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SYS_RolePerm_DataAbs.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SYS_Role_Title.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SYS_Role_User.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SYS_Role_UserGroup.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SYS_User.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SYS_UserGroup.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SYS_UserGroupMember.cs">
       <DependentUpon>WSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ORM\Topic.cs">
@@ -423,7 +301,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Function\SqlHelper.cs" />
-    <Compile Include="ExtendClass\UpdateFile.cs" />
+    <Compile Include="Entity\UpdateFile.cs" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -433,6 +311,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>WSModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="App.Config" />
     <None Include="ORM\WSModel.edmx.diagram">
       <DependentUpon>WSModel.edmx</DependentUpon>
     </None>

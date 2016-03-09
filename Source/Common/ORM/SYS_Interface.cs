@@ -22,16 +22,14 @@ namespace Insight.WS.Server.Common.ORM
     	[DataMember]
         public long SN { get; set; }
     	[DataMember]
-        public string Binding { get; set; }
-    	[DataMember]
         public string Port { get; set; }
-    	[DataMember]
-        public string Name { get; set; }
     	[DataMember]
         public string Class { get; set; }
     	[DataMember]
         public string Interface { get; set; }
     	[DataMember]
-        public string Location { get; set; }
+        public string NameSpace { get; set; }
+    	[DataMember]
+        public string ServiceFile { get; set; }
     }
 }

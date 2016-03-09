@@ -78,44 +78,9 @@ namespace Insight.WS.Server.Common.ORM
         public virtual DbSet<MDG_Expense> MDG_Expense { get; set; }
         public virtual DbSet<MDG_Material> MDG_Material { get; set; }
         public virtual DbSet<MDG_Supplier> MDG_Supplier { get; set; }
-        public virtual DbSet<MDR_ET> MDR_ET { get; set; }
         public virtual DbSet<MDR_MU> MDR_MU { get; set; }
         public virtual DbSet<MDS_Contact_Info> MDS_Contact_Info { get; set; }
-        public virtual DbSet<SYS_Alert_Message> SYS_Alert_Message { get; set; }
-        public virtual DbSet<SYS_Alert_Rules> SYS_Alert_Rules { get; set; }
-        public virtual DbSet<SYS_Alert_Send> SYS_Alert_Send { get; set; }
-        public virtual DbSet<SYS_Alert_Target> SYS_Alert_Target { get; set; }
-        public virtual DbSet<SYS_Allot_Record> SYS_Allot_Record { get; set; }
-        public virtual DbSet<SYS_Code_Allot> SYS_Code_Allot { get; set; }
-        public virtual DbSet<SYS_Code_Record> SYS_Code_Record { get; set; }
-        public virtual DbSet<SYS_Code_Scheme> SYS_Code_Scheme { get; set; }
         public virtual DbSet<SYS_Interface> SYS_Interface { get; set; }
-        public virtual DbSet<SYS_Module> SYS_Module { get; set; }
-        public virtual DbSet<SYS_ModuleAction> SYS_ModuleAction { get; set; }
-        public virtual DbSet<SYS_ModuleGroup> SYS_ModuleGroup { get; set; }
-        public virtual DbSet<SYS_ModuleParam> SYS_ModuleParam { get; set; }
-        public virtual DbSet<SYS_Organization> SYS_Organization { get; set; }
-        public virtual DbSet<SYS_OrgMember> SYS_OrgMember { get; set; }
-        public virtual DbSet<SYS_OrgMerger> SYS_OrgMerger { get; set; }
-        public virtual DbSet<SYS_Report_Definition> SYS_Report_Definition { get; set; }
-        public virtual DbSet<SYS_Report_Entity> SYS_Report_Entity { get; set; }
-        public virtual DbSet<SYS_Report_Instances> SYS_Report_Instances { get; set; }
-        public virtual DbSet<SYS_Report_IU> SYS_Report_IU { get; set; }
-        public virtual DbSet<SYS_Report_Member> SYS_Report_Member { get; set; }
-        public virtual DbSet<SYS_Report_Period> SYS_Report_Period { get; set; }
-        public virtual DbSet<SYS_Report_Rules> SYS_Report_Rules { get; set; }
-        public virtual DbSet<SYS_Report_Schedular> SYS_Report_Schedular { get; set; }
-        public virtual DbSet<SYS_Report_Templates> SYS_Report_Templates { get; set; }
-        public virtual DbSet<SYS_Role> SYS_Role { get; set; }
-        public virtual DbSet<SYS_Role_Title> SYS_Role_Title { get; set; }
-        public virtual DbSet<SYS_Role_User> SYS_Role_User { get; set; }
-        public virtual DbSet<SYS_Role_UserGroup> SYS_Role_UserGroup { get; set; }
-        public virtual DbSet<SYS_RolePerm_Action> SYS_RolePerm_Action { get; set; }
-        public virtual DbSet<SYS_RolePerm_Data> SYS_RolePerm_Data { get; set; }
-        public virtual DbSet<SYS_RolePerm_DataAbs> SYS_RolePerm_DataAbs { get; set; }
-        public virtual DbSet<SYS_User> SYS_User { get; set; }
-        public virtual DbSet<SYS_UserGroup> SYS_UserGroup { get; set; }
-        public virtual DbSet<SYS_UserGroupMember> SYS_UserGroupMember { get; set; }
         public virtual DbSet<Advance> Advance { get; set; }
         public virtual DbSet<Dictionary> Dictionary { get; set; }
         public virtual DbSet<ReportSchedular> ReportSchedular { get; set; }
@@ -129,8 +94,6 @@ namespace Insight.WS.Server.Common.ORM
         public virtual DbSet<SDC_Summary> SDC_Summary { get; set; }
         public virtual DbSet<SDG_Group> SDG_Group { get; set; }
         public virtual DbSet<SDG_GroupMember> SDG_GroupMember { get; set; }
-        public virtual DbSet<SDO_Advertisement> SDO_Advertisement { get; set; }
-        public virtual DbSet<SDO_Recommend> SDO_Recommend { get; set; }
         public virtual DbSet<SDT_Attitude> SDT_Attitude { get; set; }
         public virtual DbSet<SDT_Comment> SDT_Comment { get; set; }
         public virtual DbSet<SDT_Forward> SDT_Forward { get; set; }
@@ -138,11 +101,11 @@ namespace Insight.WS.Server.Common.ORM
         public virtual DbSet<SDT_Topic> SDT_Topic { get; set; }
         public virtual DbSet<SDO_Tutorial> SDO_Tutorial { get; set; }
         public virtual DbSet<SDO_TutorialComment> SDO_TutorialComment { get; set; }
-        public virtual DbSet<SDO_TutorialPraise> SDO_TutorialPraise { get; set; }
         public virtual DbSet<MemberInfo> MemberInfo { get; set; }
         public virtual DbSet<Speechs> Speechs { get; set; }
         public virtual DbSet<SDT_Speech> SDT_Speech { get; set; }
         public virtual DbSet<Groups> Groups { get; set; }
+        public virtual DbSet<SDO_RecImage> SDO_RecImage { get; set; }
     
         [DbFunction("WSEntities", "GetTopic")]
         public virtual IQueryable<Topic> GetTopic(Nullable<System.Guid> topicId, Nullable<System.Guid> userId)

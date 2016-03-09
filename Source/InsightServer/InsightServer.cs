@@ -1,24 +1,31 @@
-﻿using System.ServiceProcess;
+﻿using System;
+using System.Collections.Generic;
+using System.ServiceProcess;
 using System.Threading;
 using System.Timers;
+using System.Windows.Forms;
 using Insight.WS.Server.Common;
+using Insight.WS.Server.Common.ORM;
+using Insight.WS.Service;
 using Timer = System.Timers.Timer;
+using static Insight.WS.Server.Common.Util;
 
 namespace Insight.WS.Server
 {
     public partial class InsightServer : ServiceBase
     {
 
+        /// <summary>
+        /// 运行中的服务主机
+        /// </summary>
+        private static Services Services;
+
         #region 构造函数
 
         public InsightServer()
         {
             InitializeComponent();
-
-            // 生成报表批处理（1小时）
-            var reportBuild = new Timer(3600000);
-            reportBuild.Elapsed += OnReportBuildTimedEvent;
-            reportBuild.Enabled = true;
+            InitSeting();
         }
 
         #endregion
@@ -28,30 +35,59 @@ namespace Insight.WS.Server
         protected override void OnStart(string[] args)
         {
             // 启动WCF服务主机
-
-
-            // 生成自动报表
-            var tdreportThread = new Thread(delegate () { General.BuildReport(); });
-            tdreportThread.Start();
+            Services = new Services();
+            var services = DataAccess.GetServiceList();
+            foreach (var serv in services)
+            {
+                var info = BuildService(serv);
+                Services.CreateHost(info);
+            }
+            Services.StartService();
         }
 
         protected override void OnStop()
         {
-
+            Services.StopService();
         }
 
         #endregion
 
-        #region 定时触发事件
+        #region 私有方法
 
         /// <summary>
-        /// 自动报表生成任务
+        /// 初始化环境变量
         /// </summary>
-        /// <param name="source"></param>
-        /// <param name="e"></param>
-        private void OnReportBuildTimedEvent(object source, ElapsedEventArgs e)
+        private static void InitSeting()
         {
-            General.BuildReport();
+            var version = new Version(Application.ProductVersion);
+            var build = $"{version.Major}{version.Minor}{version.Build.ToString("D4").Substring(0, 2)}";
+            CurrentVersion = Convert.ToInt32(build);
+            CompatibleVersion = GetAppSetting("CompatibleVersion");
+            UpdateVersion = GetAppSetting("UpdateVersion");
+
+            LogServer = GetAppSetting("LogServer");
+            VerifyServer = GetAppSetting("VerifyServer");
+        }
+
+        /// <summary>
+        /// 初始化基础服务主机
+        /// </summary>
+        /// <returns></returns>
+        private static ServiceInfo BuildService(SYS_Interface info)
+        {
+            var endpoints = new List<EndpointSet>
+            {
+                new EndpointSet {Interface = info.Interface},
+            };
+            return new ServiceInfo
+            {
+                BaseAddress = GetAppSetting("Address"),
+                Port = info.Port,
+                ServiceFile = info.ServiceFile,
+                NameSpace = info.NameSpace,
+                ComplyType = info.Class,
+                Endpoints = endpoints
+            };
         }
 
         #endregion

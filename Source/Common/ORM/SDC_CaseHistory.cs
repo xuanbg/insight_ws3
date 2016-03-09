@@ -14,7 +14,6 @@ namespace Insight.WS.Server.Common.ORM
     using System.Collections.Generic;
     
     [DataContract(IsReference = true)]
-    [KnownType(typeof(SYS_User))]
     [KnownType(typeof(SDC_FirstVisit))]
     
     public partial class SDC_CaseHistory
@@ -53,8 +52,6 @@ namespace Insight.WS.Server.Common.ORM
     	[DataMember]
         public System.DateTime CreateTime { get; set; }
     
-    	[DataMember]
-        public virtual SYS_User SYS_User { get; set; }
     	[DataMember]
         public virtual ICollection<SDC_FirstVisit> SDC_FirstVisit { get; set; }
     }

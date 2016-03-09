@@ -16,7 +16,6 @@ namespace Insight.WS.Server.Common.ORM
     [DataContract(IsReference = true)]
     [KnownType(typeof(MasterData))]
     [KnownType(typeof(SDC_CaseHistory))]
-    [KnownType(typeof(SYS_User))]
     [KnownType(typeof(SDC_Subsequent))]
     [KnownType(typeof(SDC_Summary))]
     [KnownType(typeof(SDT_Topic))]
@@ -77,8 +76,6 @@ namespace Insight.WS.Server.Common.ORM
         public virtual MasterData MasterData1 { get; set; }
     	[DataMember]
         public virtual SDC_CaseHistory SDC_CaseHistory { get; set; }
-    	[DataMember]
-        public virtual SYS_User SYS_User { get; set; }
     	[DataMember]
         public virtual ICollection<SDC_Subsequent> SDC_Subsequent { get; set; }
     	[DataMember]

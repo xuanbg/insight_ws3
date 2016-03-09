@@ -17,8 +17,6 @@ namespace Insight.WS.Server.Common.ORM
     [KnownType(typeof(BASE_Category))]
     [KnownType(typeof(MasterData))]
     [KnownType(typeof(MDG_Dictionary))]
-    [KnownType(typeof(SYS_Organization))]
-    [KnownType(typeof(SYS_User))]
     
     public partial class MDG_Supplier
     {
@@ -87,9 +85,5 @@ namespace Insight.WS.Server.Common.ORM
         public virtual MDG_Dictionary MDG_Dictionary2 { get; set; }
     	[DataMember]
         public virtual MDG_Dictionary MDG_Dictionary3 { get; set; }
-    	[DataMember]
-        public virtual SYS_Organization SYS_Organization { get; set; }
-    	[DataMember]
-        public virtual SYS_User SYS_User { get; set; }
     }
 }

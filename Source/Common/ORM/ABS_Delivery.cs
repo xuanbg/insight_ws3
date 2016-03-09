@@ -14,8 +14,6 @@ namespace Insight.WS.Server.Common.ORM
     using System.Collections.Generic;
     
     [DataContract(IsReference = true)]
-    [KnownType(typeof(SYS_Organization))]
-    [KnownType(typeof(SYS_User))]
     [KnownType(typeof(ABS_Delivery_Item))]
     [KnownType(typeof(ABS_Delivery_Attachs))]
     [KnownType(typeof(ABS_Storage_Location))]
@@ -54,16 +52,12 @@ namespace Insight.WS.Server.Common.ORM
     	[DataMember]
         public bool Validity { get; set; }
     	[DataMember]
-        public System.Guid CreatorDeptId { get; set; }
+        public Nullable<System.Guid> CreatorDeptId { get; set; }
     	[DataMember]
         public System.Guid CreatorUserId { get; set; }
     	[DataMember]
         public System.DateTime CreateTime { get; set; }
     
-    	[DataMember]
-        public virtual SYS_Organization SYS_Organization { get; set; }
-    	[DataMember]
-        public virtual SYS_User SYS_User { get; set; }
     	[DataMember]
         public virtual ICollection<ABS_Delivery_Item> ABS_Delivery_Item { get; set; }
     	[DataMember]

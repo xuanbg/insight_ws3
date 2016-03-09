@@ -33,8 +33,6 @@ namespace Insight.WS.Server.Common.ORM
     [KnownType(typeof(MDG_Supplier))]
     [KnownType(typeof(MDR_MU))]
     [KnownType(typeof(MDS_Contact_Info))]
-    [KnownType(typeof(SYS_Alert_Target))]
-    [KnownType(typeof(SYS_Alert_Send))]
     [KnownType(typeof(MDE_Message))]
     [KnownType(typeof(MDG_Member))]
     [KnownType(typeof(SDC_FirstVisit))]
@@ -57,8 +55,6 @@ namespace Insight.WS.Server.Common.ORM
             this.ABS_Storage_Summary = new HashSet<ABS_Storage_Summary>();
             this.MDR_MU = new HashSet<MDR_MU>();
             this.MDS_Contact_Info = new HashSet<MDS_Contact_Info>();
-            this.SYS_Alert_Target = new HashSet<SYS_Alert_Target>();
-            this.SYS_Alert_Send = new HashSet<SYS_Alert_Send>();
             this.MDE_Message = new HashSet<MDE_Message>();
             this.SDC_FirstVisit = new HashSet<SDC_FirstVisit>();
             this.SDC_FirstVisit1 = new HashSet<SDC_FirstVisit>();
@@ -124,10 +120,6 @@ namespace Insight.WS.Server.Common.ORM
         public virtual ICollection<MDR_MU> MDR_MU { get; set; }
     	[DataMember]
         public virtual ICollection<MDS_Contact_Info> MDS_Contact_Info { get; set; }
-    	[DataMember]
-        public virtual ICollection<SYS_Alert_Target> SYS_Alert_Target { get; set; }
-    	[DataMember]
-        public virtual ICollection<SYS_Alert_Send> SYS_Alert_Send { get; set; }
     	[DataMember]
         public virtual ICollection<MDE_Message> MDE_Message { get; set; }
     	[DataMember]

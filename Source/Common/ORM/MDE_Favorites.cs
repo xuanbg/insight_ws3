@@ -13,7 +13,7 @@ namespace Insight.WS.Server.Common.ORM
     using System.Runtime.Serialization;
     using System.Collections.Generic;
     
-    [KnownType(typeof(SYS_User))]
+    [DataContract(IsReference = true)]
     
     public partial class MDE_Favorites
     {
@@ -29,8 +29,5 @@ namespace Insight.WS.Server.Common.ORM
         public System.Guid CreatorUserId { get; set; }
     	[DataMember]
         public System.DateTime CreateTime { get; set; }
-    
-    	[DataMember]
-        public virtual SYS_User SYS_User { get; set; }
     }
 }

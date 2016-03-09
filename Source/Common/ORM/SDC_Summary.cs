@@ -15,7 +15,6 @@ namespace Insight.WS.Server.Common.ORM
     
     [DataContract(IsReference = true)]
     [KnownType(typeof(SDC_FirstVisit))]
-    [KnownType(typeof(SYS_User))]
     
     public partial class SDC_Summary
     {
@@ -36,7 +35,5 @@ namespace Insight.WS.Server.Common.ORM
     
     	[DataMember]
         public virtual SDC_FirstVisit SDC_FirstVisit { get; set; }
-    	[DataMember]
-        public virtual SYS_User SYS_User { get; set; }
     }
 }

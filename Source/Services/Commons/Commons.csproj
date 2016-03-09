@@ -63,26 +63,14 @@
     <Compile Include="ICategorys.cs">
       <DependentUpon>ICommons.cs</DependentUpon>
     </Compile>
-    <Compile Include="ISeting.cs">
-      <DependentUpon>ICommons.cs</DependentUpon>
-    </Compile>
     <Compile Include="IMasterData.cs">
-      <DependentUpon>ICommons.cs</DependentUpon>
-    </Compile>
-    <Compile Include="IMainForm.cs">
       <DependentUpon>ICommons.cs</DependentUpon>
     </Compile>
     <Compile Include="Commons.cs" />
     <Compile Include="Categorys.cs">
       <DependentUpon>Commons.cs</DependentUpon>
     </Compile>
-    <Compile Include="Seting.cs">
-      <DependentUpon>Commons.cs</DependentUpon>
-    </Compile>
     <Compile Include="MasterData.cs">
-      <DependentUpon>Commons.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MainForm.cs">
       <DependentUpon>Commons.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

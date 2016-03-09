@@ -16,8 +16,6 @@ namespace Insight.WS.Server.Common.ORM
     [DataContract(IsReference = true)]
     [KnownType(typeof(ABS_Advance_Detail))]
     [KnownType(typeof(MDG_Dictionary))]
-    [KnownType(typeof(SYS_Organization))]
-    [KnownType(typeof(SYS_User))]
     [KnownType(typeof(MasterData))]
     
     public partial class ABS_Advance
@@ -42,7 +40,7 @@ namespace Insight.WS.Server.Common.ORM
     	[DataMember]
         public string Description { get; set; }
     	[DataMember]
-        public System.Guid CreatorDeptId { get; set; }
+        public Nullable<System.Guid> CreatorDeptId { get; set; }
     	[DataMember]
         public System.Guid CreatorUserId { get; set; }
     	[DataMember]
@@ -52,10 +50,6 @@ namespace Insight.WS.Server.Common.ORM
         public virtual ICollection<ABS_Advance_Detail> ABS_Advance_Detail { get; set; }
     	[DataMember]
         public virtual MDG_Dictionary MDG_Dictionary { get; set; }
-    	[DataMember]
-        public virtual SYS_Organization SYS_Organization { get; set; }
-    	[DataMember]
-        public virtual SYS_User SYS_User { get; set; }
     	[DataMember]
         public virtual MasterData MasterData { get; set; }
     }
