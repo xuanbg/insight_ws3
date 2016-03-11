@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
+using System.Net;
 using Insight.WS.Server.Common;
-using Insight.WS.Server.Common.Entity;
 using Insight.WS.Server.Common.ORM;
 using static Insight.WS.Server.Common.General;
-using static Insight.WS.Server.Common.SqlHelper;
 
 namespace Insight.WS.Service
 {
@@ -15,237 +12,204 @@ namespace Insight.WS.Service
     public partial class Commons : ICommons
     {
 
-        #region 电子影像公共方法
-
-        /// <summary>
-        /// 根据ID获取电子影像对象实体
-        /// </summary>
-        /// <param name="us">用户会话对象实体</param>
-        /// <param name="id">电子影像ID</param>
-        /// <returns>ImageData 电子影像对象实体</returns>
-        public ImageData GetImageData(Session us, Guid id)
-        {
-            if (!SimpleVerifty(us)) return null;
-
-            using (var context = new WSEntities())
-            {
-                return context.ImageData.SingleOrDefault(i => i.ID == id);
-            }
-        }
+        #region ImageData
 
         /// <summary>
         /// 单独上传附件到数据库
         /// </summary>
-        /// <param name="us">用户会话</param>
-        /// <param name="bid">业务记录ID</param>
         /// <param name="objs">ImageData对象集合</param>
         /// <param name="tab">业务附件表名称</param>
         /// <param name="col">>业务附件表主记录字段</param>
-        /// <returns>bool 是否成功</returns>
-        public bool SaveImages(Session us, Guid bid, List<ImageData> objs, string tab, string col)
+        /// <param name="bid">业务记录ID</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult AddImages(List<ImageData> objs, string tab, string col, Guid bid)
         {
-            if (!SimpleVerifty(us)) return false;
+            var verify = Verify();
+            if (!verify.Successful) return verify;
 
-            var cmds = DataAccess.AddImageDatas(objs, tab, col, bid);
-            return SqlExecute(cmds);
+            return InsertData(objs, tab, col, bid) ? verify.Success() : verify.DataBaseError();
         }
 
         /// <summary>
         /// 根据ID删除电子影像数据
         /// </summary>
-        /// <param name="us">用户会话对象实体</param>
         /// <param name="id">电子影像ID</param>
-        /// <returns>bool 是否成功</returns>
-        public bool DelImageData(Session us, Guid id)
+        /// <returns>JsonResult</returns>
+        public JsonResult RemoveImage(string id)
         {
-            if (!SimpleVerifty(us)) return false;
+            var verify = Verify();
+            if (!verify.Successful) return verify;
 
-            var sql = $"delete ImageData where ID = '{id}'";
-            return SqlNonQuery(MakeCommand(sql)) > 0;
+            Guid iid;
+            if (!Guid.TryParse(id, out iid)) return verify.InvalidGuid();
+
+            var result = DeleteImage(iid);
+            if (result == null) return verify.NotFound();
+
+            return result.Value ? verify : verify.DataBaseError();
+        }
+
+        /// <summary>
+        /// 根据ID获取电子影像对象实体
+        /// </summary>
+        /// <param name="id">电子影像ID</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult GetImageData(string id)
+        {
+            var verify = Verify();
+            if (!verify.Successful) return verify;
+
+            Guid iid;
+            if (!Guid.TryParse(id, out iid)) return verify.InvalidGuid();
+
+            var result = ReadImage(iid);
+            return result == null ? verify.NotFound() : verify.Success(result);
         }
 
         #endregion
 
-        #region 验证接口
+        #region Categorys
 
         /// <summary>
-        /// 验证内容是否已存在
+        /// 新增分类数据
         /// </summary>
-        /// <param name="us">用户会话对象实体</param>
-        /// <param name="tab">数据表名称</param>
-        /// <param name="col">数据列名称</param>
-        /// <param name="str">验证内容</param>
-        /// <returns>bool 内容是否存在</returns>
-        public bool NameIsExist(Session us, string tab, string col, string str)
+        /// <param name="obj">BASE_Category 对象实体</param>
+        /// <param name="index">变更前的Index值</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult AddCategory(BASE_Category obj, int index)
         {
-            if (!SimpleVerifty(us)) return false;
+            var verify = Verify();
+            if (!verify.Successful) return verify;
 
-            var sql = $"select count(*) from {tab} where {col} = '{str}'";
-            return (int)SqlScalar(MakeCommand(sql)) > 0;
+            var result = InsertData(obj, index);
+            return result ? verify : verify.DataBaseError();
         }
 
         /// <summary>
-        /// 验证指定分类下内容是否已存在
+        /// 删除分类
         /// </summary>
-        /// <param name="us">用户会话对象实体</param>
-        /// <param name="pid">分类ID</param>
-        /// <param name="tab">数据表名称</param>
-        /// <param name="col">数据列名称</param>
-        /// <param name="str">验证内容</param>
-        /// <param name="isParent"></param>
-        /// <returns>bool 内容是否存在</returns>
-        public bool NameIsExisting(Session us, Guid? pid, string tab, string col, string str, bool isParent)
+        /// <param name="id">分类ID</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult RemoveCategory(string id)
         {
-            if (!SimpleVerifty(us)) return false;
+            var verify = Verify();
+            if (!verify.Successful) return verify;
 
-            var p = isParent ? "ParentId" : "CategoryId";
-            var pn = pid.HasValue ? $"= '{pid}'" : "is null";
-            var sql = $"select count(*) from {tab} where {col} = '{str}' and {p} {pn}";
-            return (int)SqlScalar(MakeCommand(sql)) > 0;
+            Guid cid;
+            if (!Guid.TryParse(id, out cid)) return verify.InvalidGuid();
+
+            var result = DeleteCategory(cid);
+            if (result == null) return verify.NotFound();
+
+            return result.Value ? verify : verify.DataBaseError();
+        }
+
+        /// <summary>
+        /// 编辑分类数据
+        /// </summary>
+        /// <param name="obj">BASE_Category 对象实体</param>
+        /// <param name="index">变更前的Index值</param>
+        /// <param name="oldParentId">变更前的父分类ID</param>
+        /// <param name="oldIndex">原Index值</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult UpdateCategory(BASE_Category obj, int index, Guid? oldParentId, int oldIndex)
+        {
+            var verify = Verify();
+            if (!verify.Successful) return verify;
+
+            var result = UpdateData(obj, index, oldParentId, oldIndex);
+            return result ? verify : verify.NotUpdate();
+        }
+
+        /// <summary>
+        /// 根据ID获取BASE_Category对象实体
+        /// </summary>
+        /// <param name="id">分类ID</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult GetCategory(string id)
+        {
+            var verify = Verify();
+            if (!verify.Successful) return verify;
+
+            Guid cid;
+            if (!Guid.TryParse(id, out cid)) return verify.InvalidGuid();
+
+            var result = ReadCategory(cid);
+            return result == null ? verify.NotFound() : verify.Success(result);
+        }
+
+        /// <summary>
+        /// 获取分类列表
+        /// </summary>
+        /// <param name="mid">模块ID</param>
+        /// <param name="getAll">是否忽略Visible属性</param>
+        /// <param name="hasAlias">是否显示别名</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult GetCategorys(string mid, bool getAll, bool hasAlias)
+        {
+            var verify = Verify();
+            if (!verify.Successful) return verify;
+
+            var result = ReadCategorys(mid, getAll, getAll);
+            return result.Rows.Count > 0 ? verify.Success(result) : verify.NoContent();
         }
 
         /// <summary>
         /// 获取节点或分类下对象数量
         /// </summary>
-        /// <param name="us">用户会话对象实体</param>
         /// <param name="id">分类或节点ID</param>
-        /// <param name="tab">表名称（默认MasterData）</param>
         /// <param name="type">类型（默认分类，可选节点）</param>
-        /// <returns>int 对象数量</returns>
-        public int GetObjectCount(Session us, Guid? id, string type, string tab)
+        /// <param name="table">表名称（默认MasterData）</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult GetObjectCount(string id, string type, string table)
         {
-            if (!SimpleVerifty(us)) return -1;
+            var verify = Verify();
+            if (!verify.Successful) return verify;
 
-            var sql = $"select count(ID) from {tab} where {type} {(id.HasValue ? "= @ID" : "is null")}";
-            var parm = new[] {new SqlParameter("@ID", SqlDbType.UniqueIdentifier) {Value = id}};
-            return (int)SqlScalar(MakeCommand(sql, parm));
+            var parse = new GuidParse(id);
+            if (!parse.Successful) return verify.InvalidGuid();
+
+            var result = GetCounts(parse.Guid, type, table);
+            return verify.Success(result);
         }
 
         #endregion
 
         #region 其它接口
 
-        public UpdateFile a()
+        /// <summary>
+        /// 获取服务端文件列表
+        /// </summary>
+        /// <returns>JsonResult</returns>
+        public JsonResult GetServerList()
         {
-            return new UpdateFile();
-        }
-
-        public Advance b()
-        {
-            return new Advance();
+            var verify = Verify(Util.Secret);
+            return verify.Successful ? verify.Success(Util.FileList) : verify;
         }
 
         /// <summary>
-        /// 获取组织机构列表
+        /// 根据更新信息获取更新文件
         /// </summary>
-        /// <param name="us">用户会话对象实体</param>
-        /// <returns>DataTable 组织机构列表</returns>
-        public DataTable GetOrgTree(Session us)
+        /// <param name="id">更新文件ID</param>
+        /// <returns>JsonResult</returns>
+        public JsonResult GetFile(string id)
         {
-            if (!SimpleVerifty(us)) return null;
+            var verify = Verify(Util.Secret);
+            if (!verify.Successful) return verify;
 
-            const string sql = "select ID, ParentId, NodeType, [Index], 名称 as Name from Organization";
-            return SqlQuery(MakeCommand(sql));
-        }
+            Guid fid;
+            if (!Guid.TryParse(id, out fid)) return verify.InvalidGuid();
 
-        /// <summary>
-        /// 获取编码方案列表
-        /// </summary>
-        /// <param name="us">用户会话对象实体</param>
-        /// <returns>DataTable 编码方案列表</returns>
-        public DataTable GetCodeSchemes(Session us)
-        {
-            if (!SimpleVerifty(us)) return null;
+            var file = Util.FileList.SingleOrDefault(f => f.ID == fid);
+            if (file == null) return verify.NotFound();
 
-            var sql = "with List as(Select D.ID, max(P.Permission) as Permission from SYS_Code_Scheme D ";
-            sql += "join Get_PermData('1E976784-E58C-47C7-AEC5-D92B7B32F122', @UserId, @DeptId) P on P.OrgId = isnull(D.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = D.CreatorUserId group by D.ID) ";
-            sql += "select D.ID, D.Name from SYS_Code_Scheme D join List L on L.ID = D.ID where D.Validity = 1";
-            var parm = new[]
+            var webRes = WebRequest.Create(file.FullPath).GetResponse();
+            using (var stream = webRes.GetResponseStream())
             {
-                new SqlParameter("@UserId", SqlDbType.UniqueIdentifier) {Value = us.UserId},
-                new SqlParameter("@DeptId", SqlDbType.UniqueIdentifier) {Value = us.DeptId}
-            };
-            return SqlQuery(MakeCommand(sql, parm));
-        }
-
-        /// <summary>
-        /// 根据类型获取全部主数据
-        /// </summary>
-        /// <param name="us">用户会话对象实体</param>
-        /// <param name="type">主数据类型码</param>
-        /// <returns>DataTable 全部主数据</returns>
-        public DataTable GetMasterDatas(Session us, int type)
-        {
-            if (!SimpleVerifty(us)) return null;
-
-            var sql = "";
-            if ((type & 8) == 8) sql += "union select M.ID, M.Name, M.Alias from MasterData M join MDG_Customer C on C.MID = M.ID ";
-            if ((type & 4) == 4) sql += "union select M.ID, M.Name, M.Alias from MasterData M join MDG_Supplier S on S.MID = M.ID ";
-            if ((type & 2) == 2) sql += "union select M.ID, M.Name, M.Alias from MasterData M join MDG_Employee E on E.MID = M.ID ";
-            if ((type & 1) == 1) sql += "union select M.ID, M.Name, M.Alias from MasterData M join MDG_Contact O on O.MID = M.ID ";
-            return SqlQuery(MakeCommand(sql.Substring(6)));
-        }
-
-        /// <summary>
-        /// 获取全部可用收支项目
-        /// </summary>
-        /// <param name="us">用户会话对象实体</param>
-        /// <returns>DataTable 收支项目</returns>
-        public DataTable GetExpense(Session us)
-        {
-            if (!SimpleVerifty(us)) return null;
-
-            var sql = "with List as(Select D.MID, max(P.Permission) as Permission from MDG_Expense D ";
-            sql += "join Get_PermData('993D148D-C062-4850-8D3E-FD4F12814F99', @UserId, @DeptId) P on P.OrgId = isnull(D.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = D.CreatorUserId group by D.MID) ";
-            sql += "select ID, ParentId, cast(0 as bit) as IsData, cast(0 as bit) as BuiltIn, [Index], Name, Alias, null as Unit, null as Price from BASE_Category where ModuleId = '993D148D-C062-4850-8D3E-FD4F12814F99' union all ";
-            sql += "select M.ID, M.CategoryId, cast(1 as bit) as IsData, E.BuiltIn, E.[Index], M.Name, M.Alias, E.Unit, E.Price from MasterData M join MDG_Expense E on E.MID = M.ID join List L on L.MID = M.ID where E.Enable = 1";
-            var parm = new[]
-            {
-                new SqlParameter("@UserId", SqlDbType.UniqueIdentifier) {Value = us.UserId},
-                new SqlParameter("@DeptId", SqlDbType.UniqueIdentifier) {Value = us.DeptId}
-            };
-            return SqlQuery(MakeCommand(sql, parm));
-        }
-
-        /// <summary>
-        /// 获取所有物资列表
-        /// </summary>
-        /// <param name="us">用户会话对象实体</param>
-        /// <returns>DataTable 物资列表</returns>
-        public DataTable GetMaterials(Session us)
-        {
-            if (!SimpleVerifty(us)) return null;
-
-            var sql = "with List as(Select D.MID, max(P.Permission) as Permission from MDG_Material D ";
-            sql += "join Get_PermData('993D148D-C062-4850-8D3E-FD4F12814F99', @UserId, @DeptId) P on P.OrgId = isnull(D.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = D.CreatorUserId group by D.MID) ";
-            sql += "select M.ID, E.[Index], M.Name, E.BarCode, E.Unit from MasterData M join MDG_Material E on E.MID = M.ID join List L on L.MID = M.ID where E.Enable = 1";
-            var parm = new[]
-            {
-                new SqlParameter("@UserId", SqlDbType.UniqueIdentifier) {Value = us.UserId},
-                new SqlParameter("@DeptId", SqlDbType.UniqueIdentifier) {Value = us.DeptId}
-            };
-            return SqlQuery(MakeCommand(sql, parm));
-        }
-
-        /// <summary>
-        /// 获取授权的仓库列表
-        /// </summary>
-        /// <param name="us">用户会话对象实体</param>
-        /// <returns>DataTable 仓库列表</returns>
-        public DataTable GetStore(Session us)
-        {
-            if (!SimpleVerifty(us)) return null;
-
-            var sql = "with List as(select C.ID, max(P.Permission) as Permission from ABS_Storage_Location C ";
-            sql += "join Get_PermData('D83D9B83-AA49-4A1D-91E8-727B248AA6F1', @UserId, @DeptId) P on P.OrgId = isnull(C.CreatorDeptId, '00000000-0000-0000-0000-000000000000') or P.UserId = C.CreatorUserId group by C.ID) ";
-            sql += "select C.ID, C.Name from ABS_Storage_Location C join List L on L.ID = C.ID where C.NodeType = 2";
-            var parm = new[]
-            {
-                new SqlParameter("@UserId", SqlDbType.UniqueIdentifier) {Value = us.UserId},
-                new SqlParameter("@DeptId", SqlDbType.UniqueIdentifier) {Value = us.DeptId}
-            };
-
-            return SqlQuery(MakeCommand(sql, parm));
+                var buff = new byte[webRes.ContentLength];
+                stream.Read(buff, 0, buff.Length);
+                return verify.Success(buff);
+            }
         }
 
         #endregion

@@ -26,6 +26,16 @@ namespace Insight.WS.Server.Common
         /// <summary>
         /// 通过Session校验是否有权限访问
         /// </summary>
+        /// <returns></returns>
+        public static JsonResult Verify()
+        {
+            Session session;
+            return Verify(out session);
+        }
+
+        /// <summary>
+        /// 通过Session校验是否有权限访问
+        /// </summary>
         /// <param name="session">用户会话</param>
         /// <returns></returns>
         public static JsonResult Verify(out Session session)
@@ -52,61 +62,6 @@ namespace Insight.WS.Server.Common
         #endregion  
 
         #region 常用方法
-
-        /// <summary>
-        /// 获取Http请求头部承载的验证信息
-        /// </summary>
-        /// <returns>string Http请求头部承载的验证字符串</returns>
-        public static Dictionary<string, string> GetAuthorization()
-        {
-            var context = WebOperationContext.Current;
-            if (context == null) return null;
-
-            var headers = context.IncomingRequest.Headers;
-            var response = context.OutgoingResponse;
-            if (!CompareVersion(headers))
-            {
-                response.StatusCode = HttpStatusCode.NotAcceptable;
-                return null;
-            }
-
-            var auth = headers[HttpRequestHeader.Authorization];
-            if (string.IsNullOrEmpty(auth))
-            {
-                response.StatusCode = HttpStatusCode.Unauthorized;
-                return null;
-            }
-
-            var accept = headers[HttpRequestHeader.Accept];
-            var val = accept.Split(Convert.ToChar(";"));
-            return new Dictionary<string, string>
-            {
-                {"Auth", auth},
-                {"Version", val[1].Substring(9)},
-                {"Client", val[2].Substring(8)}
-            };
-        }
-
-        /// <summary>
-        /// 获取Authorization承载的数据
-        /// </summary>
-        /// <param name="auth">验证信息</param>
-        /// <typeparam name="T">数据类型</typeparam>
-        /// <returns>数据对象</returns>
-        public static T GetAuthor<T>(string auth)
-        {
-            try
-            {
-                var buffer = Convert.FromBase64String(auth);
-                var json = Encoding.UTF8.GetString(buffer);
-                return Deserialize<T>(json);
-            }
-            catch (Exception ex)
-            {
-                LogToLogServer("508001", ex.ToString());
-                return default(T);
-            }
-        }
 
         /// <summary>
         /// HttpRequest方法
@@ -225,6 +180,61 @@ namespace Insight.WS.Server.Common
             {
                 LogToEvent(ex.ToString());
                 return new JsonResult().BadRequest();
+            }
+        }
+
+        /// <summary>
+        /// 获取Http请求头部承载的验证信息
+        /// </summary>
+        /// <returns>string Http请求头部承载的验证字符串</returns>
+        private static Dictionary<string, string> GetAuthorization()
+        {
+            var context = WebOperationContext.Current;
+            if (context == null) return null;
+
+            var headers = context.IncomingRequest.Headers;
+            var response = context.OutgoingResponse;
+            if (!CompareVersion(headers))
+            {
+                response.StatusCode = HttpStatusCode.NotAcceptable;
+                return null;
+            }
+
+            var auth = headers[HttpRequestHeader.Authorization];
+            if (string.IsNullOrEmpty(auth))
+            {
+                response.StatusCode = HttpStatusCode.Unauthorized;
+                return null;
+            }
+
+            var accept = headers[HttpRequestHeader.Accept];
+            var val = accept.Split(Convert.ToChar(";"));
+            return new Dictionary<string, string>
+            {
+                {"Auth", auth},
+                {"Version", val[1].Substring(9)},
+                {"Client", val[2].Substring(8)}
+            };
+        }
+
+        /// <summary>
+        /// 获取Authorization承载的数据
+        /// </summary>
+        /// <param name="auth">验证信息</param>
+        /// <typeparam name="T">数据类型</typeparam>
+        /// <returns>数据对象</returns>
+        private static T GetAuthor<T>(string auth)
+        {
+            try
+            {
+                var buffer = Convert.FromBase64String(auth);
+                var json = Encoding.UTF8.GetString(buffer);
+                return Deserialize<T>(json);
+            }
+            catch (Exception ex)
+            {
+                LogToLogServer("508001", ex.ToString());
+                return default(T);
             }
         }
 

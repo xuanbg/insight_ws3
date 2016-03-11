@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Text;
 using Insight.WS.Server.Common.ORM;
 using static Insight.WS.Server.Common.SqlHelper;
@@ -72,39 +71,6 @@ namespace Insight.WS.Server.Common
             sql.AppendFormat("and [Index] {0} {1} ", (oldIndex < newIndex ? ">" : "<"), oldIndex);
             sql.AppendFormat("and [Index] {0} {1}", (oldIndex < newIndex ? "<=" : ">="), newIndex);
             return sql.ToString();
-        }
-
-        /// <summary>
-        /// 构造保存ImageData的SqlCommand集合
-        /// </summary>
-        /// <param name="imgs">ImageData对象集合</param>
-        /// <param name="tab">附件表名称</param>
-        /// <param name="col">附件表业务主记录ID字段名称</param>
-        /// <param name="bid">业务主记录ID</param>
-        /// <returns>SqlCommand List SqlCommand集合</returns>
-        public static IEnumerable<SqlCommand> AddImageDatas(IEnumerable<ImageData> imgs, string tab, string col, Guid bid)
-        {
-            var sql = "insert ImageData (CategoryId, ImageType, Code, Name, Expand, SecrecyDegree, Pages, Size, Path, Image, Description, CreatorDeptId, CreatorUserId) ";
-            sql += "select @CategoryId, @ImageType, @Code, @Name, @Expand, @SecrecyDegree, @Pages, @Size, @Path, @Image, @Description, @CreatorDeptId, @CreatorUserId select @ID = ID from ImageData where SN = SCOPE_IDENTITY() ";
-            sql += $"insert {tab} ({col}, ImageId) select '{bid}', @ID";
-            return imgs.Select(img => new[]
-            {
-                new SqlParameter("@CategoryId", SqlDbType.UniqueIdentifier) {Value = img.CategoryId},
-                new SqlParameter("@ImageType", img.ImageType), 
-                new SqlParameter("@Code", img.Code), 
-                new SqlParameter("@Name", img.Name), 
-                new SqlParameter("@Expand", img.Expand), 
-                new SqlParameter("@SecrecyDegree", SqlDbType.UniqueIdentifier) {Value = img.SecrecyDegree},
-                new SqlParameter("@Pages", img.Pages), 
-                new SqlParameter("@Size", img.Size), 
-                new SqlParameter("@Path", img.Path), 
-                new SqlParameter("@Image", SqlDbType.Image) {Value = img.Image}, 
-                new SqlParameter("@Description", img.Description), 
-                new SqlParameter("@Validity", img.Validity), 
-                new SqlParameter("@CreatorDeptId", SqlDbType.UniqueIdentifier) {Value = img.CreatorDeptId},
-                new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = img.CreatorUserId}, 
-                new SqlParameter("@Id", SqlDbType.UniqueIdentifier) {Value = bid}
-            }).Select(parm => MakeCommand(sql, parm)).ToList();
         }
 
         #endregion

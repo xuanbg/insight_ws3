@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
 using System.ServiceProcess;
-using System.Threading;
 using System.Timers;
 using System.Windows.Forms;
 using Insight.WS.Server.Common;
-using Insight.WS.Server.Common.ORM;
 using Insight.WS.Service;
 using Timer = System.Timers.Timer;
 using static Insight.WS.Server.Common.Util;
@@ -20,12 +21,22 @@ namespace Insight.WS.Server
         /// </summary>
         private static Services Services;
 
+        /// <summary>
+        /// 服务根路径
+        /// </summary>
+        private static readonly string RootPath = Application.StartupPath;
+
         #region 构造函数
 
         public InsightServer()
         {
             InitializeComponent();
             InitSeting();
+
+            // 每小时更新一次服务器文件列表
+            var updateinfo = new Timer(3600000);
+            updateinfo.Elapsed += UpdateFileList;
+            updateinfo.Enabled = true;
         }
 
         #endregion
@@ -37,10 +48,19 @@ namespace Insight.WS.Server
             // 启动WCF服务主机
             Services = new Services();
             var services = DataAccess.GetServiceList();
-            foreach (var serv in services)
+            foreach (var info in services)
             {
-                var info = BuildService(serv);
-                Services.CreateHost(info);
+                var service = new ServiceInfo
+                {
+                    BaseAddress = GetAppSetting("Address"),
+                    Port = info.Port ?? GetAppSetting("Port"),
+                    Path = info.Path,
+                    NameSpace = info.NameSpace,
+                    Interface = info.Interface,
+                    ComplyType = info.Service,
+                    ServiceFile = info.ServiceFile,
+                };
+                Services.CreateHost(service);
             }
             Services.StartService();
         }
@@ -57,37 +77,55 @@ namespace Insight.WS.Server
         /// <summary>
         /// 初始化环境变量
         /// </summary>
-        private static void InitSeting()
+        private void InitSeting()
         {
             var version = new Version(Application.ProductVersion);
             var build = $"{version.Major}{version.Minor}{version.Build.ToString("D4").Substring(0, 2)}";
             CurrentVersion = Convert.ToInt32(build);
             CompatibleVersion = GetAppSetting("CompatibleVersion");
             UpdateVersion = GetAppSetting("UpdateVersion");
+            UpdateFileList(null, null);
 
             LogServer = GetAppSetting("LogServer");
             VerifyServer = GetAppSetting("VerifyServer");
         }
 
         /// <summary>
-        /// 初始化基础服务主机
+        /// 获取客户端文件列表
         /// </summary>
-        /// <returns></returns>
-        private static ServiceInfo BuildService(SYS_Interface info)
+        /// <param name="dir">客户端文件路径</param>
+        /// <param name="list">文件列表</param>
+        /// <returns>FileAttribute List 文件列表</returns>
+        private void GetLocalList(string dir, List<UpdateFile> list)
         {
-            var endpoints = new List<EndpointSet>
+            var dirInfo = new DirectoryInfo(dir);
+            list.AddRange(from file in dirInfo.GetFiles()
+                          where ".dll.exe.frl".IndexOf(file.Extension, StringComparison.Ordinal) >= 0
+                          select new UpdateFile
+                          {
+                              Name = file.Name,
+                              Path = file.DirectoryName.Replace(RootPath, ""),
+                              FullPath = file.FullName,
+                              Version = FileVersionInfo.GetVersionInfo(file.FullName).FileVersion
+                          });
+
+            var dirs = Directory.GetDirectories(dir);
+            foreach (var path in dirs)
             {
-                new EndpointSet {Interface = info.Interface},
-            };
-            return new ServiceInfo
-            {
-                BaseAddress = GetAppSetting("Address"),
-                Port = info.Port,
-                ServiceFile = info.ServiceFile,
-                NameSpace = info.NameSpace,
-                ComplyType = info.Class,
-                Endpoints = endpoints
-            };
+                GetLocalList(path, list);
+            }
+        }
+
+        /// <summary>
+        /// 更新服务器文件列表
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="e"></param>
+        private void UpdateFileList(object source, ElapsedEventArgs e)
+        {
+            var list = new List<UpdateFile>();
+            GetLocalList(RootPath, list);
+            FileList = list;
         }
 
         #endregion

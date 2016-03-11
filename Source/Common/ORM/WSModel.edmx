@@ -827,11 +827,12 @@
           </Key>
           <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="SN" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Port" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="Port" Type="varchar" MaxLength="8" />
+          <Property Name="Path" Type="varchar" MaxLength="16" />
           <Property Name="NameSpace" Type="varchar" MaxLength="128" Nullable="false" />
-          <Property Name="Class" Type="varchar" MaxLength="64" Nullable="false" />
           <Property Name="Interface" Type="varchar" MaxLength="64" Nullable="false" />
-          <Property Name="ServiceFile" Type="nvarchar(max)" />
+          <Property Name="Service" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ServiceFile" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <!--生成过程中发现错误:
 警告 6002: 表/视图“Insight.dbo.Advance”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
@@ -4235,11 +4236,12 @@
           </Key>
           <Property Name="ID" Type="Guid" Nullable="false" />
           <Property Name="SN" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Port" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
-          <Property Name="Class" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Port" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
           <Property Name="Interface" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="NameSpace" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
-          <Property Name="ServiceFile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ServiceFile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Path" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="Service" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK__ABS_Advan__CardT__5DC1991A">
           <End Type="WSModel.MDG_Dictionary" Role="MDG_Dictionary" Multiplicity="0..1" />
@@ -6493,11 +6495,12 @@
           <EntitySetMapping Name="SYS_Interface">
             <EntityTypeMapping TypeName="WSModel.SYS_Interface">
               <MappingFragment StoreEntitySet="SYS_Interface">
+                <ScalarProperty Name="Service" ColumnName="Service" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
                 <ScalarProperty Name="ServiceFile" ColumnName="ServiceFile" />
                 <ScalarProperty Name="NameSpace" ColumnName="NameSpace" />
                 <ScalarProperty Name="Port" ColumnName="Port" />
                 <ScalarProperty Name="Interface" ColumnName="Interface" />
-                <ScalarProperty Name="Class" ColumnName="Class" />
                 <ScalarProperty Name="SN" ColumnName="SN" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>

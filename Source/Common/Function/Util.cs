@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
 using System.Drawing;
@@ -49,6 +50,11 @@ namespace Insight.WS.Server.Common
         /// 接口最新版本
         /// </summary>
         public static string UpdateVersion;
+
+        /// <summary>
+        /// 服务端文件信息列表
+        /// </summary>
+        public static List<UpdateFile> FileList = new List<UpdateFile>();
 
         #endregion
 

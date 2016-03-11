@@ -1,146 +1,134 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.ServiceModel;
+using System.ServiceModel.Web;
 using Insight.WS.Server.Common;
-using Insight.WS.Server.Common.Entity;
 using Insight.WS.Server.Common.ORM;
 
 namespace Insight.WS.Service
 {
     [ServiceContract]
-    public partial interface ICommons
+    public interface ICommons
     {
 
-        #region 电子影像公共方法
-
-        /// <summary>
-        /// 根据ID获取单据快照
-        /// </summary>
-        /// <param name="us">用户会话对象实体</param>
-        /// <param name="id">单据快照ID</param>
-        /// <returns>ImageData 电子影像对象实体</returns>
-        [OperationContract]
-        ImageData GetImageData(Session us, Guid id);
+        #region ImageData
 
         /// <summary>
         /// 单独上传附件到数据库
         /// </summary>
-        /// <param name="us">用户会话</param>
-        /// <param name="bid">业务记录ID</param>
         /// <param name="objs">ImageData对象集合</param>
         /// <param name="tab">业务附件表名称</param>
         /// <param name="col">>业务附件表主记录字段</param>
-        /// <returns>bool 是否成功</returns>
+        /// <param name="bid">业务记录ID</param>
+        /// <returns>JsonResult</returns>
+        [WebInvoke(Method = "POST", UriTemplate = "images", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         [OperationContract]
-        bool SaveImages(Session us, Guid bid, List<ImageData> objs, string tab, string col);
+        JsonResult AddImages(List<ImageData> objs, string tab, string col, Guid bid);
 
         /// <summary>
         /// 根据ID删除电子影像数据
         /// </summary>
-        /// <param name="us">用户会话对象实体</param>
         /// <param name="id">电子影像ID</param>
-        /// <returns>bool 是否成功</returns>
+        /// <returns>JsonResult</returns>
+        [WebInvoke(Method = "DELETE", UriTemplate = "images/{id}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         [OperationContract]
-        bool DelImageData(Session us, Guid id);
+        JsonResult RemoveImage(string id);
+
+        /// <summary>
+        /// 根据ID获取单据快照
+        /// </summary>
+        /// <param name="id">单据快照ID</param>
+        /// <returns>JsonResult</returns>
+        [WebGet(UriTemplate = "images/{id}", ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        JsonResult GetImageData(string id);
 
         #endregion
 
-        #region 验证接口
+        #region Categorys
 
         /// <summary>
-        /// 验证内容是否已存在
+        /// 新增分类数据
         /// </summary>
-        /// <param name="us">用户会话对象实体</param>
-        /// <param name="tab">数据表名称</param>
-        /// <param name="col">数据列名称</param>
-        /// <param name="str">验证内容</param>
-        /// <returns>bool 内容是否存在</returns>
+        /// <param name="obj">BASE_Category 对象实体</param>
+        /// <param name="index">变更前的Index值</param>
+        /// <returns>JsonResult</returns>
+        [WebInvoke(Method = "POST", UriTemplate = "categorys", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         [OperationContract]
-        bool NameIsExist(Session us, string tab, string col, string str);
+        JsonResult AddCategory(BASE_Category obj, int index);
 
         /// <summary>
-        /// 验证指定分类下内容是否已存在
+        /// 删除分类
         /// </summary>
-        /// <param name="us">用户会话对象实体</param>
-        /// <param name="pid">分类ID</param>
-        /// <param name="tab">数据表名称</param>
-        /// <param name="col">数据列名称</param>
-        /// <param name="str">验证内容</param>
-        /// <param name="isParent"></param>
-        /// <returns>bool 内容是否存在</returns>
+        /// <param name="id">分类ID</param>
+        /// <returns>JsonResult</returns>
+        [WebInvoke(Method = "DELETE", UriTemplate = "categorys/{id}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         [OperationContract]
-        bool NameIsExisting(Session us, Guid? pid, string tab, string col, string str, bool isParent);
+        JsonResult RemoveCategory(string id);
+
+        /// <summary>
+        /// 编辑分类数据
+        /// </summary>
+        /// <param name="obj">BASE_Category 对象实体</param>
+        /// <param name="index">变更前的Index值</param>
+        /// <param name="oldParentId">变更前的父分类ID</param>
+        /// <param name="oldIndex">原Index值</param>
+        /// <returns>JsonResult</returns>
+        [WebInvoke(Method = "PUT", UriTemplate = "categorys/{id}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [OperationContract]
+        JsonResult UpdateCategory(BASE_Category obj, int index, Guid? oldParentId, int oldIndex);
+
+        /// <summary>
+        /// 根据ID获取BASE_Category对象实体
+        /// </summary>
+        /// <param name="id">分类ID</param>
+        /// <returns>JsonResult</returns>
+        [WebGet(UriTemplate = "categorys/{id}", ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        JsonResult GetCategory(string id);
+
+        /// <summary>
+        /// 获取分类列表
+        /// </summary>
+        /// <param name="mid">模块ID</param>
+        /// <param name="getAll">是否忽略Visible属性</param>
+        /// <param name="hasAlias">是否显示别名</param>
+        /// <returns>JsonResult</returns>
+        [WebGet(UriTemplate = "categorys", ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        JsonResult GetCategorys(string mid, bool getAll, bool hasAlias);
 
         /// <summary>
         /// 获取节点或分类下对象数量
         /// </summary>
-        /// <param name="us">用户会话对象实体</param>
         /// <param name="id">分类或节点ID</param>
-        /// <param name="tab">表名称（默认MasterData）</param>
         /// <param name="type">类型（默认分类，可选节点）</param>
-        /// <returns>int 对象数量</returns>
+        /// <param name="table">表名称（默认MasterData）</param>
+        /// <returns>JsonResult</returns>
+        [WebGet(UriTemplate = "categorys/{id}/counts?type={type}&table={table}", ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
-        int GetObjectCount(Session us, Guid? id, string type, string tab);
+        JsonResult GetObjectCount(string id, string type, string table);
 
         #endregion
 
         #region 其它接口
 
+        /// <summary>
+        /// 获取服务端文件列表
+        /// </summary>
+        /// <returns>JsonResult</returns>
+        [WebGet(UriTemplate = "files", ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
-        UpdateFile a();
-
-        [OperationContract]
-        Advance b();
+        JsonResult GetServerList();
 
         /// <summary>
-        /// 获取组织机构列表
+        /// 根据更新信息获取更新文件
         /// </summary>
-        /// <param name="us">用户会话对象实体</param>
-        /// <returns>DataTable 组织机构列表</returns>
+        /// <param name="id">更新文件ID</param>
+        /// <returns>JsonResult</returns>
         [OperationContract]
-        DataTable GetOrgTree(Session us);
-
-        /// <summary>
-        /// 获取编码方案列表
-        /// </summary>
-        /// <param name="us">用户会话对象实体</param>
-        /// <returns>DataTable 编码方案列表</returns>
-        [OperationContract]
-        DataTable GetCodeSchemes(Session us);
-
-        /// <summary>
-        /// 根据类型获取全部主数据
-        /// </summary>
-        /// <param name="us">用户会话对象实体</param>
-        /// <param name="type">主数据类型码</param>
-        /// <returns>DataTable 全部主数据</returns>
-        [OperationContract]
-        DataTable GetMasterDatas(Session us, int type);
-
-        /// <summary>
-        /// 获取全部可用收支项目
-        /// </summary>
-        /// <param name="us">用户会话对象实体</param>
-        /// <returns>DataTable 收支项目</returns>
-        [OperationContract]
-        DataTable GetExpense(Session us);
-
-        /// <summary>
-        /// 获取所有物资列表
-        /// </summary>
-        /// <param name="us">用户会话对象实体</param>
-        /// <returns>DataTable 物资列表</returns>
-        [OperationContract]
-        DataTable GetMaterials(Session us);
-
-        /// <summary>
-        /// 获取授权的仓库列表
-        /// </summary>
-        /// <param name="us">用户会话对象实体</param>
-        /// <returns>DataTable 仓库列表</returns>
-        [OperationContract]
-        DataTable GetStore(Session us);
+        [WebGet(UriTemplate = "files/{id}", ResponseFormat = WebMessageFormat.Json)]
+        JsonResult GetFile(string id);
 
         #endregion
 

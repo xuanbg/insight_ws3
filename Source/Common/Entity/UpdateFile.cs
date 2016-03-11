@@ -1,8 +1,12 @@
 ﻿
+using System;
+
 namespace Insight.WS.Server.Common
 {
     public class UpdateFile
     {
+        public Guid ID { get; set; }
+
         public string Name { get; set; }
 
         public string Path { get; set; }
@@ -10,8 +14,6 @@ namespace Insight.WS.Server.Common
         public string FullPath { get; set; }
 
         public string Version { get; set; }
-
-        public byte[] FileBytes { get; set; }
 
     }
 }

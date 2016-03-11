@@ -58,30 +58,31 @@
         }
 
         /// <summary>
-        /// 返回用户多地登录（202）的错误信息
+        /// 返回接口调用成功（200）的成功信息
         /// </summary>
+        /// <param name="data">承载的数据（可选）</param>
         /// <returns>JsonResult</returns>
-        public JsonResult Multiple()
+        public JsonResult Success(object data)
         {
             Successful = true;
-            Code = "202";
-            Name = "MultipleLogin";
-            Message = "用户已在其他设备登录";
+            Code = "200";
+            Name = "OK";
+            Message = "接口调用成功";
+            Data = Util.Serialize(data);
             return this;
         }
 
         /// <summary>
-        /// 返回接口调用成功，但Session过期（300）的成功信息
+        /// 返回无可用内容（204）的成功信息
         /// </summary>
-        /// <param name="data">承载的数据（可选）</param>
         /// <returns>JsonResult</returns>
-        public JsonResult Expired(string data = null)
+        public JsonResult NoContent()
         {
             Successful = true;
-            Code = "300";
-            Name = "SessionExpired";
-            Message = "Session过期，请更新Session";
-            Data = data;
+            Code = "204";
+            Name = "NoContent";
+            Message = "无可用内容";
+            Data = "";
             return this;
         }
 
@@ -162,19 +163,6 @@
             Code = "407";
             Name = "DataNotUpdate";
             Message = "未更新任何数据";
-            return this;
-        }
-
-        /// <summary>
-        /// 返回用户已存在（409）的错误信息
-        /// </summary>
-        /// <returns>JsonResult</returns>
-        public JsonResult AccountExists()
-        {
-            Successful = false;
-            Code = "409";
-            Name = "AccountAlreadyExists";
-            Message = "用户已存在";
             return this;
         }
 
