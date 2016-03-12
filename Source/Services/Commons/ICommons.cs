@@ -144,7 +144,7 @@ namespace Insight.WS.Service
         /// <returns>JsonResult</returns>
         [OperationContract]
         [WebGet(UriTemplate = "files/{id}", ResponseFormat = WebMessageFormat.Json)]
-        byte[] GetFile(string id);
+        JsonResult GetFile(string id);
 
         #endregion
 

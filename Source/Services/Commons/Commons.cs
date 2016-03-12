@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Net;
 using System.ServiceModel.Web;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
@@ -226,21 +226,17 @@ namespace Insight.WS.Service
         /// </summary>
         /// <param name="id">更新文件ID</param>
         /// <returns>JsonResult</returns>
-        public byte[] GetFile(string id)
+        public JsonResult GetFile(string id)
         {
             var verify = Verify(id + Util.Secret);
-            if (!verify.Successful) return null;
+            if (!verify.Successful) return verify;
 
             var file = Util.FileList.SingleOrDefault(f => f.ID == id);
-            if (file == null) return null;
+            if (file == null) return verify.NotFound();
 
-            var webRes = WebRequest.Create(file.FullPath).GetResponse();
-            using (var stream = webRes.GetResponseStream())
-            {
-                var buff = new byte[webRes.ContentLength];
-                stream.Read(buff, 0, buff.Length);
-                return buff;
-            }
+            var bytes = File.ReadAllBytes(file.FullPath);
+            var str = Convert.ToBase64String(Util.Compress(bytes));
+            return verify.Success(str);
         }
 
         #endregion

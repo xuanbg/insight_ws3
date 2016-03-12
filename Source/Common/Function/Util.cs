@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography;
@@ -151,6 +152,45 @@ namespace Insight.WS.Server.Common
             {
                 serializer.Serialize(writer, obj);
             }
+        }
+
+        #endregion
+
+        #region Compress/Decompress
+
+        /// <summary>
+        /// GZip压缩
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static byte[] Compress(byte[] data)
+        {
+            var ms = new MemoryStream();
+            var stream = new GZipStream(ms, CompressionMode.Compress, true);
+            stream.Write(data, 0, data.Length);
+            stream.Close();
+            return ms.ToArray();
+        }
+
+        /// <summary>
+        /// ZIP解压
+        /// </summary>
+        /// <param name="dada"></param>
+        /// <returns></returns>
+        public static byte[] Decompress(byte[] dada)
+        {
+            var ms = new MemoryStream(dada);
+            var stream = new GZipStream(ms, CompressionMode.Decompress);
+            var buffer = new MemoryStream();
+            var block = new byte[1024];
+            while (true)
+            {
+                var read = stream.Read(block, 0, block.Length);
+                if (read <= 0) break;
+                buffer.Write(block, 0, read);
+            }
+            stream.Close();
+            return buffer.ToArray();
         }
 
         #endregion
