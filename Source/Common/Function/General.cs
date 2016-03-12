@@ -40,7 +40,7 @@ namespace Insight.WS.Server.Common
         /// <returns></returns>
         public static JsonResult Verify(out Session session)
         {
-            var url = VerifyServer + "verify";
+            var url = BaseServer + "verify";
             var dict = GetAuthorization();
             var auth = dict["Auth"];
             session = GetAuthor<Session>(auth);

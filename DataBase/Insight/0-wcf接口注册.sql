@@ -19,8 +19,8 @@ CREATE TABLE SYS_Interface(
 GO
 
 insert SYS_Interface (Port, Path, NameSpace, Interface, Service, ServiceFile)
-select NULL, NULL, 'Insight.WS.Service', 'ICommons', 'Commons', 'Commons.dll' union all
-select NULL, 'masterdata', 'Insight.WS.Service', 'IMasterDatas', 'MasterDatas', 'MasterDatas.dll' union all
-select NULL, 'crm', 'Insight.WS.Service.Business', 'ICRM', 'CRM', 'Business\CRM.dll' union all
-select NULL, 'scm', 'Insight.WS.Service.Business', 'ISCM', 'SCM', 'Business\SCM.dll' union all
-select NULL, 'settle', 'Insight.WS.Service.Business', 'ISettlement', 'Settlement', 'Business\Settlement.dll'
+select NULL, NULL, 'Insight.WS.Service', 'ICommons', 'Commons', 'Services\Commons.dll' union all
+select NULL, 'masterdata', 'Insight.WS.Service', 'IMasterDatas', 'MasterDatas', 'Services\MasterDatas.dll' union all
+select NULL, 'crm', 'Insight.WS.Service.Business', 'ICRM', 'CRM', 'Services\CRM.dll' union all
+select NULL, 'scm', 'Insight.WS.Service.Business', 'ISCM', 'SCM', 'Services\SCM.dll' union all
+select NULL, 'settle', 'Insight.WS.Service.Business', 'ISettlement', 'Settlement', 'Services\Settlement.dll'

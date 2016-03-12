@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Text;
 using Insight.WS.Server.Common.ORM;
 using static Insight.WS.Server.Common.SqlHelper;
@@ -21,7 +22,7 @@ namespace Insight.WS.Server.Common
         {
             using (var context = new WSEntities())
             {
-                return context.SYS_Interface;
+                return context.SYS_Interface.ToList();
             }
         }
 

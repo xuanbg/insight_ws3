@@ -69,6 +69,7 @@ namespace Insight.WS.Service
         /// <summary>
         /// 编辑分类数据
         /// </summary>
+        /// <param name="id">分类ID</param>
         /// <param name="obj">BASE_Category 对象实体</param>
         /// <param name="index">变更前的Index值</param>
         /// <param name="oldParentId">变更前的父分类ID</param>
@@ -76,7 +77,7 @@ namespace Insight.WS.Service
         /// <returns>JsonResult</returns>
         [WebInvoke(Method = "PUT", UriTemplate = "categorys/{id}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         [OperationContract]
-        JsonResult UpdateCategory(BASE_Category obj, int index, Guid? oldParentId, int oldIndex);
+        JsonResult UpdateCategory(string id, BASE_Category obj, int index, Guid? oldParentId, int oldIndex);
 
         /// <summary>
         /// 根据ID获取BASE_Category对象实体
@@ -91,12 +92,12 @@ namespace Insight.WS.Service
         /// 获取分类列表
         /// </summary>
         /// <param name="mid">模块ID</param>
-        /// <param name="getAll">是否忽略Visible属性</param>
-        /// <param name="hasAlias">是否显示别名</param>
+        /// <param name="getall">是否忽略Visible属性</param>
+        /// <param name="hasalias">是否显示别名</param>
         /// <returns>JsonResult</returns>
-        [WebGet(UriTemplate = "categorys", ResponseFormat = WebMessageFormat.Json)]
+        [WebGet(UriTemplate = "categorys?mid={mid}&getall={getall}&hasalias={hasalias}", ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
-        JsonResult GetCategorys(string mid, bool getAll, bool hasAlias);
+        JsonResult GetCategorys(string mid, bool getall, bool hasalias);
 
         /// <summary>
         /// 获取节点或分类下对象数量
@@ -114,12 +115,27 @@ namespace Insight.WS.Service
         #region 其它接口
 
         /// <summary>
+        /// 为跨域请求设置响应头信息
+        /// </summary>
+        [WebInvoke(Method = "OPTIONS", UriTemplate = "*", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [OperationContract]
+        void ResponseOptions();
+
+        /// <summary>
         /// 获取服务端文件列表
+        /// </summary>
+        /// <returns>JsonResult</returns>
+        [WebGet(UriTemplate = "servers", ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        JsonResult GetServers();
+
+        /// <summary>
+        /// 获取服务配置
         /// </summary>
         /// <returns>JsonResult</returns>
         [WebGet(UriTemplate = "files", ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
-        JsonResult GetServerList();
+        JsonResult GetFiles();
 
         /// <summary>
         /// 根据更新信息获取更新文件
@@ -128,7 +144,7 @@ namespace Insight.WS.Service
         /// <returns>JsonResult</returns>
         [OperationContract]
         [WebGet(UriTemplate = "files/{id}", ResponseFormat = WebMessageFormat.Json)]
-        JsonResult GetFile(string id);
+        byte[] GetFile(string id);
 
         #endregion
 

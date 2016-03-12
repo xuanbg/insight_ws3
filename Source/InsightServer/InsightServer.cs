@@ -24,7 +24,7 @@ namespace Insight.WS.Server
         /// <summary>
         /// 服务根路径
         /// </summary>
-        private static readonly string RootPath = Application.StartupPath;
+        private static readonly string RootPath = Application.StartupPath + "\\Client";
 
         #region 构造函数
 
@@ -87,7 +87,7 @@ namespace Insight.WS.Server
             UpdateFileList(null, null);
 
             LogServer = GetAppSetting("LogServer");
-            VerifyServer = GetAppSetting("VerifyServer");
+            BaseServer = GetAppSetting("BaseServer");
         }
 
         /// <summary>
@@ -103,6 +103,7 @@ namespace Insight.WS.Server
                           where ".dll.exe.frl".IndexOf(file.Extension, StringComparison.Ordinal) >= 0
                           select new UpdateFile
                           {
+                              ID = Hash(file.FullName),
                               Name = file.Name,
                               Path = file.DirectoryName.Replace(RootPath, ""),
                               FullPath = file.FullName,

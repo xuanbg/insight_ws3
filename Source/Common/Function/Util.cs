@@ -27,9 +27,9 @@ namespace Insight.WS.Server.Common
         public const string Secret = "842A381C91CE43A98720825601C22A56";
 
         /// <summary>
-        /// 验证服务路径
+        /// 基础服务路径
         /// </summary>
-        public static string VerifyServer;
+        public static string BaseServer;
 
         /// <summary>
         /// 日志服务路径

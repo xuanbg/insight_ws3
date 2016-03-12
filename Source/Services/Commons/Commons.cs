@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.ServiceModel.Web;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.ORM;
 using static Insight.WS.Server.Common.General;
@@ -107,12 +108,13 @@ namespace Insight.WS.Service
         /// <summary>
         /// 编辑分类数据
         /// </summary>
+        /// <param name="id">分类ID</param>
         /// <param name="obj">BASE_Category 对象实体</param>
         /// <param name="index">变更前的Index值</param>
         /// <param name="oldParentId">变更前的父分类ID</param>
         /// <param name="oldIndex">原Index值</param>
         /// <returns>JsonResult</returns>
-        public JsonResult UpdateCategory(BASE_Category obj, int index, Guid? oldParentId, int oldIndex)
+        public JsonResult UpdateCategory(string id, BASE_Category obj, int index, Guid? oldParentId, int oldIndex)
         {
             var verify = Verify();
             if (!verify.Successful) return verify;
@@ -142,15 +144,15 @@ namespace Insight.WS.Service
         /// 获取分类列表
         /// </summary>
         /// <param name="mid">模块ID</param>
-        /// <param name="getAll">是否忽略Visible属性</param>
-        /// <param name="hasAlias">是否显示别名</param>
+        /// <param name="getall">是否忽略Visible属性</param>
+        /// <param name="hasalias">是否显示别名</param>
         /// <returns>JsonResult</returns>
-        public JsonResult GetCategorys(string mid, bool getAll, bool hasAlias)
+        public JsonResult GetCategorys(string mid, bool getall, bool hasalias)
         {
             var verify = Verify();
             if (!verify.Successful) return verify;
 
-            var result = ReadCategorys(mid, getAll, getAll);
+            var result = ReadCategorys(mid, getall, getall);
             return result.Rows.Count > 0 ? verify.Success(result) : verify.NoContent();
         }
 
@@ -178,10 +180,42 @@ namespace Insight.WS.Service
         #region 其它接口
 
         /// <summary>
+        /// 为跨域请求设置响应头信息
+        /// </summary>
+        public void ResponseOptions()
+        {
+            var context = WebOperationContext.Current;
+            if (context == null) return;
+
+            var response = context.OutgoingResponse;
+            response.Headers.Add("Access-Control-Allow-Credentials", "true");
+            response.Headers.Add("Access-Control-Allow-Headers", "Accept, Content-Type, Authorization");
+            response.Headers.Add("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, OPTIONS");
+            response.Headers.Add("Access-Control-Allow-Origin", "*");
+        }
+
+        /// <summary>
+        /// 获取服务配置
+        /// </summary>
+        /// <returns>JsonResult</returns>
+        public JsonResult GetServers()
+        {
+            var verify = Verify(Util.Secret);
+            if (!verify.Successful) return verify;
+
+            var servers = new Dictionary<string, string>
+            {
+                {"BaseServer", Util.BaseServer},
+                {"LogServer", Util.LogServer}
+            };
+            return verify.Success(servers);
+        }
+
+        /// <summary>
         /// 获取服务端文件列表
         /// </summary>
         /// <returns>JsonResult</returns>
-        public JsonResult GetServerList()
+        public JsonResult GetFiles()
         {
             var verify = Verify(Util.Secret);
             return verify.Successful ? verify.Success(Util.FileList) : verify;
@@ -192,23 +226,20 @@ namespace Insight.WS.Service
         /// </summary>
         /// <param name="id">更新文件ID</param>
         /// <returns>JsonResult</returns>
-        public JsonResult GetFile(string id)
+        public byte[] GetFile(string id)
         {
-            var verify = Verify(Util.Secret);
-            if (!verify.Successful) return verify;
+            var verify = Verify(id + Util.Secret);
+            if (!verify.Successful) return null;
 
-            Guid fid;
-            if (!Guid.TryParse(id, out fid)) return verify.InvalidGuid();
-
-            var file = Util.FileList.SingleOrDefault(f => f.ID == fid);
-            if (file == null) return verify.NotFound();
+            var file = Util.FileList.SingleOrDefault(f => f.ID == id);
+            if (file == null) return null;
 
             var webRes = WebRequest.Create(file.FullPath).GetResponse();
             using (var stream = webRes.GetResponseStream())
             {
                 var buff = new byte[webRes.ContentLength];
                 stream.Read(buff, 0, buff.Length);
-                return verify.Success(buff);
+                return buff;
             }
         }
 

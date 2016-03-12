@@ -51,7 +51,7 @@ namespace Insight.WS.Server.Common
         /// <returns>JsonResult</returns>
         private static JsonResult GetCode(string mobile, int type, int time)
         {
-            var url = VerifyServer + $"smscode?mobile={mobile}&type={type}&time={time}";
+            var url = BaseServer + $"smscode?mobile={mobile}&type={type}&time={time}";
             var auth = Base64(Hash(mobile + Secret));
             return General.HttpRequest(url, "GET", auth);
         }
