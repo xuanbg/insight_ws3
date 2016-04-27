@@ -122,7 +122,7 @@ namespace Insight.WS.Service
         void ResponseOptions();
 
         /// <summary>
-        /// 获取服务端文件列表
+        /// 获取服务配置
         /// </summary>
         /// <returns>JsonResult</returns>
         [WebGet(UriTemplate = "servers", ResponseFormat = WebMessageFormat.Json)]
@@ -130,7 +130,7 @@ namespace Insight.WS.Service
         JsonResult GetServers();
 
         /// <summary>
-        /// 获取服务配置
+        /// 获取服务端文件列表
         /// </summary>
         /// <returns>JsonResult</returns>
         [WebGet(UriTemplate = "files", ResponseFormat = WebMessageFormat.Json)]

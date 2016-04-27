@@ -38,21 +38,6 @@ namespace Insight.WS.Server.Common
         public static string LogServer;
 
         /// <summary>
-        /// 当前程序集版本
-        /// </summary>
-        public static int CurrentVersion;
-
-        /// <summary>
-        /// 接口最后兼容版本
-        /// </summary>
-        public static string CompatibleVersion;
-
-        /// <summary>
-        /// 接口最新版本
-        /// </summary>
-        public static string UpdateVersion;
-
-        /// <summary>
         /// 服务端文件信息列表
         /// </summary>
         public static List<UpdateFile> FileList = new List<UpdateFile>();

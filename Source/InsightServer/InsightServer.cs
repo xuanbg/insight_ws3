@@ -7,7 +7,6 @@ using System.ServiceProcess;
 using System.Timers;
 using System.Windows.Forms;
 using Insight.WS.Server.Common;
-using Insight.WS.Service;
 using Timer = System.Timers.Timer;
 using static Insight.WS.Server.Common.Util;
 
@@ -79,13 +78,7 @@ namespace Insight.WS.Server
         /// </summary>
         private void InitSeting()
         {
-            var version = new Version(Application.ProductVersion);
-            var build = $"{version.Major}{version.Minor}{version.Build.ToString("D4").Substring(0, 2)}";
-            CurrentVersion = Convert.ToInt32(build);
-            CompatibleVersion = GetAppSetting("CompatibleVersion");
-            UpdateVersion = GetAppSetting("UpdateVersion");
             UpdateFileList(null, null);
-
             LogServer = GetAppSetting("LogServer");
             BaseServer = GetAppSetting("BaseServer");
         }
