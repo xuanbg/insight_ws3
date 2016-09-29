@@ -6,8 +6,9 @@ using System.Linq;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.Entity;
 using Insight.WS.Server.Common.ORM;
+using Insight.WS.Server.Common.Utils;
 using static Insight.WS.Server.Common.General;
-using static Insight.WS.Server.Common.SqlHelper;
+using static Insight.WS.Server.Common.Utils.SqlHelper;
 
 namespace Insight.WS.Service.Business
 {
@@ -110,7 +111,7 @@ namespace Insight.WS.Service.Business
         {
             if (!SimpleVerifty(us)) return null;
 
-            using (var context = new WSEntities())
+            using (var context = new Entities())
             {
                 return context.Advance.Where(a => a.OwnerId == id).ToList();
             }
@@ -126,7 +127,7 @@ namespace Insight.WS.Service.Business
         {
             if (!SimpleVerifty(us)) return null;
 
-            using (var context = new WSEntities())
+            using (var context = new Entities())
             {
                 return context.ABS_Clearing.SingleOrDefault(c => c.ID == cid);
             }
@@ -249,7 +250,7 @@ namespace Insight.WS.Service.Business
             var irs = idt.Select("项目 = '预付款' and 金额 < 0");
             if (irs.Length > 0)
             {
-                using (var context = new WSEntities())
+                using (var context = new Entities())
                 {
                     advs = context.Advance.Where(a => a.OwnerId == obj.ObjectId).ToList();
                 }

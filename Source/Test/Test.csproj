@@ -33,9 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Service">
-      <HintPath>..\packages\Service.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -55,6 +52,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Utils\Utils\Utils.csproj">
+      <Project>{0c3f2f08-6816-49fd-bb13-8526e43accc6}</Project>
+      <Name>Utils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Utils\WCF\WCF.csproj">
+      <Project>{4bb72af9-eadb-418a-9764-18dc29be749d}</Project>
+      <Name>WCF</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{132CE7B2-A22C-430E-947C-DB629960AE7A}</Project>
       <Name>Common</Name>

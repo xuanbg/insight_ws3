@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Insight.WS.Server.Common;
-using Insight.WS.Service;
-using static Insight.WS.Server.Common.Util;
+﻿using Insight.WCF;
+using Insight.WS.Server.Common.Utils;
+using Insight.WCF.Entity;
+using static Insight.Utils.Common.Util;
 
 namespace Test
 {
@@ -22,12 +18,13 @@ namespace Test
                 var service = new ServiceInfo
                 {
                     BaseAddress = GetAppSetting("Address"),
-                    Port = info.Port ?? GetAppSetting("Port"),
+                    Port = info.Port,
                     Path = info.Path,
+                    Version = info.Version,
                     NameSpace = info.NameSpace,
                     Interface = info.Interface,
                     ComplyType = info.Service,
-                    ServiceFile = info.ServiceFile,
+                    ServiceFile = info.ServiceFile
                 };
                 Services.CreateHost(service);
             }

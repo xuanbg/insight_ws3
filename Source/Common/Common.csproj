@@ -40,17 +40,18 @@
     </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.dll</HintPath>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.SqlServer.dll</HintPath>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -65,267 +66,442 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entity\Entities.cs" />
-    <Compile Include="Entity\GuidParse.cs" />
+    <Compile Include="Entity\ABS_Advance.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\ABS_Advance_Detail.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\ABS_Advance_Record.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\ABS_Clearing.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\ABS_Clearing_Attachs.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\ABS_Clearing_Check.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\ABS_Clearing_Item.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\ABS_Clearing_Pay.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\ABS_Contract.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\ABS_Contract_Attachs.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\ABS_Contract_FundPerform.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\ABS_Contract_FundPlan.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\ABS_Contract_GoodsPerform.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\ABS_Contract_GoodsPlan.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\ABS_Contract_Subjects.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\ABS_Delivery.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\ABS_Delivery_Attachs.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\ABS_Delivery_Item.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\ABS_StockCapital.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\ABS_StockDetail.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\ABS_Storage_Detail.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\ABS_Storage_Location.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\ABS_Storage_Summary.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Advance.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\AllotRecord.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\ApplyInfo.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\BASE_Category.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\BIZ_CodeContrast.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\BIZ_Order.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\BIZ_Pay_Record.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\BIZ_Snapshot.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\BIZ_StagePlan.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\BIZ_TitleImage.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\CheckList.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Citys.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Contact.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\ContactInfo.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Countys.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Customer.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\CustomerInfo.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Dictionary.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Employee.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\FundForPerform.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\ImageData.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\JsonResult.cs" />
-    <Compile Include="Entity\Session.cs" />
-    <Compile Include="Function\SmsCode.cs" />
-    <Compile Include="Function\DataAccess.cs" />
-    <Compile Include="Function\Clearing.cs">
-      <DependentUpon>DataAccess.cs</DependentUpon>
+    <Compile Include="Entity\MasterData.cs">
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Function\Contract.cs">
-      <DependentUpon>DataAccess.cs</DependentUpon>
+    <Compile Include="Entity\MDE_Member_Address.cs">
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Function\General.cs" />
-    <Compile Include="Function\Report.cs">
-      <DependentUpon>DataAccess.cs</DependentUpon>
+    <Compile Include="Entity\MDE_Member_Card.cs">
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Function\MasterData.cs">
-      <DependentUpon>DataAccess.cs</DependentUpon>
+    <Compile Include="Entity\MDE_Member_Feedback.cs">
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Function\TypeFactory.cs" />
-    <Compile Include="Function\Util.cs" />
-    <Compile Include="ORM\ABS_Advance.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
+    <Compile Include="Entity\MDE_Member_OrderApply.cs">
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="ORM\ABS_Advance_Detail.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
+    <Compile Include="Entity\MDE_Member_Withdrawal.cs">
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="ORM\ABS_Advance_Record.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
+    <Compile Include="Entity\MDG_Contact.cs">
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="ORM\ABS_Clearing.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
+    <Compile Include="Entity\MDG_Customer.cs">
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="ORM\ABS_Clearing_Attachs.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
+    <Compile Include="Entity\MDG_Dictionary.cs">
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="ORM\ABS_Clearing_Check.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
+    <Compile Include="Entity\MDG_Employee.cs">
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="ORM\ABS_Clearing_Item.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
+    <Compile Include="Entity\MDG_Expense.cs">
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="ORM\ABS_Clearing_Pay.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
+    <Compile Include="Entity\MDG_Material.cs">
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="ORM\ABS_Contract.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
+    <Compile Include="Entity\MDG_Supplier.cs">
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="ORM\ABS_Contract_Attachs.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
+    <Compile Include="Entity\MDR_MU.cs">
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="ORM\ABS_Contract_FundPerform.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
+    <Compile Include="Entity\MDS_Contact_Info.cs">
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="ORM\ABS_Contract_FundPlan.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\ABS_Contract_GoodsPerform.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\ABS_Contract_GoodsPlan.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\ABS_Contract_Subjects.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\ABS_Delivery.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\ABS_Delivery_Attachs.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\ABS_Delivery_Item.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\ABS_StockCapital.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\ABS_StockDetail.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\ABS_Storage_Detail.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\ABS_Storage_Location.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\ABS_Storage_Summary.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\Advance.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\BASE_Category.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\Comments.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\Dictionary.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\Group.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\Groups.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\ImageData.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\MasterData.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\MDE_Favorites.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\MDE_Message.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\MDG_Contact.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\MDG_Customer.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\MDG_Dictionary.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\MDG_Employee.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\MDG_Expense.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\MDG_Material.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\MDG_Member.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\MDG_Supplier.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\MDR_MU.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\MDS_Contact_Info.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\MemberInfo.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\ReportSchedular.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\ReportTemplet.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SDC_CaseHistory.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SDC_FirstVisit.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SDC_Subsequent.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SDC_Summary.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SDG_Group.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SDG_GroupMember.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SDO_RecImage.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SDO_Tutorial.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SDO_TutorialComment.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SDT_Attitude.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SDT_Comment.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SDT_Forward.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SDT_Praise.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SDT_Speech.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SDT_Topic.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\Speech.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\Speechs.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\SYS_Interface.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\Topic.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\Topics.cs">
-      <DependentUpon>WSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM\WSModel.Context.cs">
+    <Compile Include="Entity\Model.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>WSModel.Context.tt</DependentUpon>
+      <DependentUpon>Model.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="ORM\WSModel.cs">
+    <Compile Include="Entity\Model.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>WSModel.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="ORM\WSModel.Designer.cs">
+    <Compile Include="Entity\Model.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>WSModel.edmx</DependentUpon>
+      <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Entity\OrderInfo.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\OrdersList.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Organization.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\ProductExtend.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Products.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\ProductType_Extend.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Product_Img.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Product_Library_Img.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\ReportSchedular.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\ReportTemplet.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\RoleActionPermit.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\RoleDataPermit.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\RoleMember.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\RoleModulePermit.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\RoleUser.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\SerialRecord.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\StageInfo.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\States.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\SubjectInfo.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Supplier.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\SupplierInfo.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\SYS_Alert_Message.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\SYS_Alert_Rules.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\SYS_Alert_Send.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\SYS_Alert_Target.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\SYS_Allot_Record.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\SYS_Code_Allot.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\SYS_Code_Record.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\SYS_Code_Scheme.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\SYS_Interface.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\SYS_Module.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\SYS_ModuleAction.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\SYS_ModuleGroup.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\SYS_ModuleParam.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\SYS_Organization.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\SYS_OrgMember.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\SYS_OrgMerger.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\SYS_Report_Definition.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\SYS_Report_Entity.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\SYS_Report_Instances.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\SYS_Report_IU.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\SYS_Report_Member.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\SYS_Report_Period.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\SYS_Report_Rules.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\SYS_Report_Schedular.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\SYS_Report_Templates.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\SYS_Role.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\SYS_RolePerm_Action.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\SYS_RolePerm_Data.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\SYS_RolePerm_DataAbs.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\SYS_Role_Title.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\SYS_Role_User.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\SYS_Role_UserGroup.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\SYS_User.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\SYS_UserGroup.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\SYS_UserGroupMember.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\SYS_WeiXin_Config.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\TitleMember.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\T_ORDERAPPLYS.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\T_ORDERS.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\T_PREPARE_DOC.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\T_REFUNDMENTS.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\WithdrawalList.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\WitOrderList.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\Clearing.cs">
+      <DependentUpon>DataAccess.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\Contract.cs">
+      <DependentUpon>DataAccess.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\DataAccess.cs" />
+    <Compile Include="Utils\MasterData.cs">
+      <DependentUpon>DataAccess.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\Parameters.cs" />
+    <Compile Include="Utils\Report.cs">
+      <DependentUpon>DataAccess.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\SmsCode.cs" />
+    <Compile Include="Utils\TypeFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Function\SqlHelper.cs" />
     <Compile Include="Entity\UpdateFile.cs" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="ORM\WSModel.edmx">
+    <None Include="app.config" />
+    <EntityDeploy Include="Entity\Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>WSModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>Model.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="ORM\WSModel.edmx.diagram">
-      <DependentUpon>WSModel.edmx</DependentUpon>
+    <None Include="Entity\Model.edmx.diagram">
+      <DependentUpon>Model.edmx</DependentUpon>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ORM\WSModel.Context.tt">
+    <Content Include="Entity\Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>WSModel.edmx</DependentUpon>
-      <LastGenOutput>WSModel.Context.cs</LastGenOutput>
+      <LastGenOutput>Model.Context.cs</LastGenOutput>
+      <DependentUpon>Model.edmx</DependentUpon>
     </Content>
-    <Content Include="ORM\WSModel.tt">
+    <Content Include="Entity\Model.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>WSModel.edmx</DependentUpon>
-      <LastGenOutput>WSModel.cs</LastGenOutput>
+      <DependentUpon>Model.edmx</DependentUpon>
+      <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Utils\Utils\Utils.csproj">
+      <Project>{0c3f2f08-6816-49fd-bb13-8526e43accc6}</Project>
+      <Name>Utils</Name>
+      <Private>False</Private>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

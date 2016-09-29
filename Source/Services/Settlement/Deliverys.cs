@@ -6,7 +6,7 @@ using System.Linq;
 using Insight.WS.Server.Common.Entity;
 using Insight.WS.Server.Common.ORM;
 using static Insight.WS.Server.Common.General;
-using static Insight.WS.Server.Common.SqlHelper;
+using static Insight.WS.Server.Common.Utils.SqlHelper;
 
 namespace Insight.WS.Service.Business
 {
@@ -137,7 +137,7 @@ namespace Insight.WS.Service.Business
         {
             if (!SimpleVerifty(us)) return null;
 
-            using (var context = new WSEntities())
+            using (var context = new Entities())
             {
                 return context.ABS_Delivery.SingleOrDefault(c => c.ID == cid);
             }

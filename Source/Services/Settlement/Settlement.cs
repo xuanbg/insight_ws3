@@ -6,7 +6,8 @@ using System.Linq;
 using Insight.WS.Server.Common;
 using Insight.WS.Server.Common.Entity;
 using Insight.WS.Server.Common.ORM;
-using static Insight.WS.Server.Common.SqlHelper;
+using Insight.WS.Server.Common.Utils;
+using static Insight.WS.Server.Common.Utils.SqlHelper;
 
 namespace Insight.WS.Service.Business
 {
@@ -202,7 +203,7 @@ namespace Insight.WS.Service.Business
             string sql;
             ABS_Advance obj;
             SqlParameter[] parm;
-            using (var context = new WSEntities())
+            using (var context = new Entities())
             {
                 obj = context.ABS_Advance.SingleOrDefault(a => a.OwnerId == cid);
             }
@@ -278,7 +279,7 @@ namespace Insight.WS.Service.Business
         /// <returns>Advance 通用预付款明细记录</returns>
         private Advance GetAdvance(Guid id)
         {
-            using (var context = new WSEntities())
+            using (var context = new Entities())
             {
                 return context.Advance.SingleOrDefault(a => a.OwnerId == id && a.Type == 0 && a.ObjectId == null && a.ValidDate == null);
             }

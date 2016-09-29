@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using Insight.WS.Server.Common;
-using Insight.WS.Server.Common.ORM;
-using static Insight.WS.Server.Common.SqlHelper;
+using Insight.Utils.Common;
+using Insight.WS.Server.Common.Entity;
+using Insight.WS.Server.Common.Utils;
 
 namespace Insight.WS.Service
 {
@@ -24,6 +24,7 @@ namespace Insight.WS.Service
         /// <returns>是否保存成功</returns>
         public static bool InsertData(IEnumerable<ImageData> imgs, string tab, string col, Guid bid)
         {
+            var helper = new SqlHelper(Parameters.Database);
             var sql = "insert ImageData (CategoryId, ImageType, Code, Name, Expand, SecrecyDegree, Pages, Size, Path, Image, Description, CreatorDeptId, CreatorUserId) ";
             sql += "select @CategoryId, @ImageType, @Code, @Name, @Expand, @SecrecyDegree, @Pages, @Size, @Path, @Image, @Description, @CreatorDeptId, @CreatorUserId select @ID = ID from ImageData where SN = SCOPE_IDENTITY() ";
             sql += $"insert {tab} ({col}, ImageId) select '{bid}', @ID";
@@ -44,8 +45,8 @@ namespace Insight.WS.Service
                 new SqlParameter("@CreatorDeptId", SqlDbType.UniqueIdentifier) {Value = img.CreatorDeptId},
                 new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = img.CreatorUserId},
                 new SqlParameter("@Id", SqlDbType.UniqueIdentifier) {Value = bid}
-            }).Select(parm => MakeCommand(sql, parm));
-            return SqlExecute(cmds);
+            }).Select(parm => helper.MakeCommand(sql, parm));
+            return helper.SqlExecute(cmds);
         }
 
         /// <summary>
@@ -55,7 +56,7 @@ namespace Insight.WS.Service
         /// <returns>bool 是否成功</returns>
         private bool? DeleteImage(Guid id)
         {
-            using (var context = new WSEntities())
+            using (var context = new Entities())
             {
                 var image = context.ImageData.SingleOrDefault(i => i.ID == id);
                 if (image == null) return null;
@@ -72,7 +73,7 @@ namespace Insight.WS.Service
         /// <returns>ImageData</returns>
         private ImageData ReadImage(Guid id)
         {
-            using (var context = new WSEntities())
+            using (var context = new Entities())
             {
                 return context.ImageData.SingleOrDefault(i => i.ID == id);
             }
@@ -90,6 +91,7 @@ namespace Insight.WS.Service
         /// <returns>bool 是否成功</returns>
         private bool InsertData(BASE_Category obj, int index)
         {
+            var helper = new SqlHelper(Parameters.Database);
             var cmds = new List<SqlCommand>();
             var sql = "insert BASE_Category (ParentId, ModuleId, [Index], Code, Name, Alias, Description, CreatorDeptId, CreatorUserId) ";
             sql += "select @ParentId, @ModuleId, @Index, @Code, @Name, @Alias, @Description, @CreatorDeptId, @CreatorUserId;";
@@ -106,9 +108,9 @@ namespace Insight.WS.Service
                 new SqlParameter("@CreatorDeptId", SqlDbType.UniqueIdentifier) {Value = obj.CreatorDeptId},
                 new SqlParameter("@CreatorUserId", SqlDbType.UniqueIdentifier) {Value = obj.CreatorUserId}
             };
-            cmds.Add(MakeCommand(DataAccess.ChangeIndex("BASE_Category", index, obj.Index, obj.ParentId, false, obj.ModuleId)));
-            cmds.Add(MakeCommand(sql, parm));
-            return SqlExecute(cmds);
+            cmds.Add(helper.MakeCommand(DataAccess.ChangeIndex("BASE_Category", index, obj.Index, obj.ParentId, false, obj.ModuleId)));
+            cmds.Add(helper.MakeCommand(sql, parm));
+            return helper.SqlExecute(cmds);
         }
 
         /// <summary>
@@ -118,11 +120,12 @@ namespace Insight.WS.Service
         /// <returns>bool 是否成功</returns>
         private bool? DeleteCategory(Guid id)
         {
+            var helper = new SqlHelper(Parameters.Database);
             var cmds = new List<SqlCommand>();
             var obj = ReadCategory(id);
-            cmds.Add(MakeCommand($"delete BASE_Category where ID = '{id}'"));
-            cmds.Add(MakeCommand(DataAccess.ChangeIndex("BASE_Category", obj.Index, 99999, obj.ParentId, false, obj.ModuleId)));
-            return SqlExecute(cmds);
+            cmds.Add(helper.MakeCommand($"delete BASE_Category where ID = '{id}'"));
+            cmds.Add(helper.MakeCommand(DataAccess.ChangeIndex("BASE_Category", obj.Index, 99999, obj.ParentId, false, obj.ModuleId)));
+            return helper.SqlExecute(cmds);
         }
 
         /// <summary>
@@ -135,6 +138,7 @@ namespace Insight.WS.Service
         /// <returns>bool 是否成功</returns>
         private bool UpdateData(BASE_Category obj, int index, Guid? oldParentId, int oldIndex)
         {
+            var helper = new SqlHelper(Parameters.Database);
             var cmds = new List<SqlCommand>();
             var sql = "update BASE_Category set ParentId = @ParentId, [Index] = @Index, Code = @Code, Name = @Name, Alias = @Alias, Description = @Description where ID = @ID";
             var parm = new[]
@@ -147,13 +151,13 @@ namespace Insight.WS.Service
                 new SqlParameter("@Description", obj.Description),
                 new SqlParameter("@ID", SqlDbType.UniqueIdentifier) {Value = obj.ID}
             };
-            cmds.Add(MakeCommand(DataAccess.ChangeIndex("BASE_Category", index, obj.Index, obj.ParentId, false, obj.ModuleId)));
-            cmds.Add(MakeCommand(sql, parm));
+            cmds.Add(helper.MakeCommand(DataAccess.ChangeIndex("BASE_Category", index, obj.Index, obj.ParentId, false, obj.ModuleId)));
+            cmds.Add(helper.MakeCommand(sql, parm));
             if (obj.ParentId != oldParentId)
             {
-                cmds.Add(MakeCommand(DataAccess.ChangeIndex("BASE_Category", oldIndex, 9999, oldParentId, false, obj.ModuleId)));
+                cmds.Add(helper.MakeCommand(DataAccess.ChangeIndex("BASE_Category", oldIndex, 9999, oldParentId, false, obj.ModuleId)));
             }
-            return SqlExecute(cmds);
+            return helper.SqlExecute(cmds);
         }
 
         /// <summary>
@@ -163,7 +167,7 @@ namespace Insight.WS.Service
         /// <returns>BASE_Category</returns>
         private BASE_Category ReadCategory(Guid id)
         {
-            using (var context = new WSEntities())
+            using (var context = new Entities())
             {
                 return context.BASE_Category.SingleOrDefault(c => c.ID == id);
             }
@@ -175,9 +179,10 @@ namespace Insight.WS.Service
         /// <returns></returns>
         private DataTable ReadCategorys(string mid, bool getAll, bool hasAlias)
         {
+            var helper = new SqlHelper(Parameters.Database);
             var str = hasAlias ? "case when Alias is null then '' else '(' + Alias + ')' end" : "''";
             var sql = $"select ID, ParentId, [Index], Name + {str} as Name, Alias, Code, BuiltIn, Visible from BASE_Category where ModuleId = '{mid}'{(getAll ? "" : " and Visible = 1")} order by [Index]";
-            return SqlQuery(MakeCommand(sql));
+            return helper.SqlQuery(sql);
         }
 
         /// <summary>
@@ -189,9 +194,10 @@ namespace Insight.WS.Service
         /// <returns></returns>
         private int GetCounts(Guid? id, string type, string table)
         {
+            var helper = new SqlHelper(Parameters.Database);
             var sql = $"select count(ID) from {table} where {type} {(id.HasValue ? "= @ID" : "is null")}";
             var parm = new[] { new SqlParameter("@ID", SqlDbType.UniqueIdentifier) { Value = id } };
-            return (int)SqlScalar(MakeCommand(sql, parm));
+            return (int) helper.SqlScalar(sql, parm);
         }
 
         #endregion

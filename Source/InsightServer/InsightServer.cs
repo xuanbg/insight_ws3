@@ -6,9 +6,11 @@ using System.Linq;
 using System.ServiceProcess;
 using System.Timers;
 using System.Windows.Forms;
-using Insight.WS.Server.Common;
-using Timer = System.Timers.Timer;
-using static Insight.WS.Server.Common.Util;
+using Insight.WCF;
+using Insight.WCF.Entity;
+using Insight.WS.Server.Common.Entity;
+using Insight.WS.Server.Common.Utils;
+using static Insight.Utils.Common.Util;
 
 namespace Insight.WS.Server
 {
@@ -33,7 +35,7 @@ namespace Insight.WS.Server
             InitSeting();
 
             // 每小时更新一次服务器文件列表
-            var updateinfo = new Timer(3600000);
+            var updateinfo = new System.Timers.Timer(3600000);
             updateinfo.Elapsed += UpdateFileList;
             updateinfo.Enabled = true;
         }
@@ -46,20 +48,24 @@ namespace Insight.WS.Server
         {
             // 启动WCF服务主机
             Services = new Services();
-            var services = DataAccess.GetServiceList();
-            foreach (var info in services)
+            using (var context = new Entities())
             {
-                var service = new ServiceInfo
+                var list = context.SYS_Interface.ToList();
+                foreach (var info in list)
                 {
-                    BaseAddress = GetAppSetting("Address"),
-                    Port = info.Port ?? GetAppSetting("Port"),
-                    Path = info.Path,
-                    NameSpace = info.NameSpace,
-                    Interface = info.Interface,
-                    ComplyType = info.Service,
-                    ServiceFile = info.ServiceFile,
-                };
-                Services.CreateHost(service);
+                    var service = new ServiceInfo
+                    {
+                        BaseAddress = GetAppSetting("Address"),
+                        Port = info.Port,
+                        Path = info.Path,
+                        Version = info.Version,
+                        NameSpace = info.NameSpace,
+                        Interface = info.Interface,
+                        ComplyType = info.Service,
+                        ServiceFile = info.ServiceFile
+                    };
+                    Services.CreateHost(service);
+                }
             }
             Services.StartService();
         }
@@ -79,8 +85,7 @@ namespace Insight.WS.Server
         private void InitSeting()
         {
             UpdateFileList(null, null);
-            LogServer = GetAppSetting("LogServer");
-            BaseServer = GetAppSetting("BaseServer");
+            Parameters.BaseServer = GetAppSetting("BaseServer");
         }
 
         /// <summary>
@@ -119,7 +124,7 @@ namespace Insight.WS.Server
         {
             var list = new List<UpdateFile>();
             GetLocalList(RootPath, list);
-            FileList = list;
+            Parameters.FileList = list;
         }
 
         #endregion
