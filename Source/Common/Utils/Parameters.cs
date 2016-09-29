@@ -9,7 +9,7 @@ namespace Insight.WS.Server.Common.Utils
         public static string BaseServer;
 
         // 验证接口URL
-        public static string VerifyUrl = $"{BaseServer}/security/v1.0/tokens/verify";
+        public static string VerifyUrl;
 
         // 数据库连接字符串
         public static string Database = new Entities().Database.Connection.ConnectionString;

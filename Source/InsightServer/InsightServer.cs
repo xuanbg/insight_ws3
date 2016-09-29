@@ -86,6 +86,7 @@ namespace Insight.WS.Server
         {
             UpdateFileList(null, null);
             Parameters.BaseServer = GetAppSetting("BaseServer");
+            Parameters.VerifyUrl = $"{Parameters.BaseServer}/security/v1.0/tokens/verify";
         }
 
         /// <summary>
