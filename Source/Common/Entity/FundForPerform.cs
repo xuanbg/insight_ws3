@@ -14,7 +14,7 @@ namespace Insight.WS.Server.Common.Entity
     
     public partial class FundForPerform
     {
-        public Nullable<System.Guid> ID { get; set; }
+        public System.Guid ID { get; set; }
         public System.Guid PlanId { get; set; }
         public System.Guid ObjectId { get; set; }
         public Nullable<bool> Selected { get; set; }

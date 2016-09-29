@@ -1,4 +1,4 @@
-use Insight
+use Insight_WS
 go
 
 IF EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'SYS_Interface') AND OBJECTPROPERTY(id, N'ISUSERTABLE') = 1)

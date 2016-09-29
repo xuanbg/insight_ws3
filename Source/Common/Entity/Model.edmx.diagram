@@ -51,46 +51,10 @@
         <EntityTypeShape EntityType="Model.MDG_Supplier" Width="1.5" PointX="16.5" PointY="88.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.MDR_MU" Width="1.5" PointX="5.25" PointY="122.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.MDS_Contact_Info" Width="1.5" PointX="7.5" PointY="90" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.SYS_Alert_Message" Width="1.5" PointX="5.25" PointY="86" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.SYS_Alert_Rules" Width="1.5" PointX="3" PointY="86.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.SYS_Alert_Send" Width="1.5" PointX="7.5" PointY="85.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.SYS_Alert_Target" Width="1.5" PointX="5.25" PointY="89.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.SYS_Allot_Record" Width="1.5" PointX="5.25" PointY="32.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.SYS_Code_Allot" Width="1.5" PointX="8.25" PointY="32.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.SYS_Code_Record" Width="1.5" PointX="7.5" PointY="45.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.SYS_Code_Scheme" Width="1.5" PointX="5.25" PointY="37.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.SYS_Interface" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.SYS_Module" Width="1.5" PointX="3" PointY="17.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.SYS_ModuleAction" Width="1.5" PointX="6" PointY="49.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.SYS_ModuleGroup" Width="1.5" PointX="0.75" PointY="19" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.SYS_ModuleParam" Width="1.5" PointX="5.25" PointY="27.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.SYS_Organization" Width="1.5" PointX="3" PointY="38.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.SYS_OrgMember" Width="1.5" PointX="8.25" PointY="37.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.SYS_OrgMerger" Width="1.5" PointX="8.25" PointY="27.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.SYS_Report_Definition" Width="1.5" PointX="8.25" PointY="80.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.SYS_Report_Entity" Width="1.5" PointX="10.5" PointY="79.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.SYS_Report_Instances" Width="1.5" PointX="10.5" PointY="75.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.SYS_Report_IU" Width="1.5" PointX="12.75" PointY="75.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.SYS_Report_Member" Width="1.5" PointX="12.75" PointY="79.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.SYS_Report_Period" Width="1.5" PointX="15.5" PointY="76.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.SYS_Report_Rules" Width="1.5" PointX="13.25" PointY="71.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.SYS_Report_Schedular" Width="1.5" PointX="18.5" PointY="81.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.SYS_Report_Templates" Width="1.5" PointX="3" PointY="99.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.SYS_Role" Width="1.5" PointX="3" PointY="44.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.SYS_Role_Title" Width="1.5" PointX="11.25" PointY="36" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.SYS_Role_User" Width="1.5" PointX="11.25" PointY="32" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.SYS_Role_UserGroup" Width="1.5" PointX="5.25" PointY="41.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.SYS_RolePerm_Action" Width="1.5" PointX="8.25" PointY="41.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.SYS_RolePerm_Data" Width="1.5" PointX="11.25" PointY="27.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.SYS_RolePerm_DataAbs" Width="1.5" PointX="11.25" PointY="39.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.SYS_User" Width="1.5" PointX="0.75" PointY="24.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.SYS_UserGroup" Width="1.5" PointX="3" PointY="49.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.SYS_UserGroupMember" Width="1.5" PointX="11.25" PointY="43.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.SYS_WeiXin_Config" Width="1.5" PointX="4.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Advance" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.AllotRecord" Width="1.5" PointX="6.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.ApplyInfo" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.CheckList" Width="1.5" PointX="8.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Citys" Width="1.5" PointX="0.75" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Contact" Width="1.5" PointX="6.75" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.ContactInfo" Width="1.5" PointX="8.75" PointY="9.75" IsExpanded="true" />
@@ -102,32 +66,12 @@
         <EntityTypeShape EntityType="Model.FundForPerform" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.OrderInfo" Width="1.5" PointX="12.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.OrdersList" Width="1.5" PointX="12.75" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Organization" Width="1.5" PointX="14.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Product_Img" Width="1.5" PointX="14.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Product_Library_Img" Width="1.5" PointX="4.75" PointY="14.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.ProductExtend" Width="1.5" PointX="6.75" PointY="14.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Products" Width="1.5" PointX="14.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.ProductType_Extend" Width="1.5" PointX="12.75" PointY="14.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.ReportSchedular" Width="1.5" PointX="14.75" PointY="14.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.ReportTemplet" Width="1.5" PointX="16.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.RoleActionPermit" Width="1.5" PointX="16.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.RoleDataPermit" Width="1.5" PointX="16.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.RoleMember" Width="1.5" PointX="16.75" PointY="12.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.RoleModulePermit" Width="1.5" PointX="16.75" PointY="16.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.RoleUser" Width="1.5" PointX="8.75" PointY="17.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.SerialRecord" Width="1.5" PointX="18.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.StageInfo" Width="1.5" PointX="18.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.States" Width="1.5" PointX="5.75" PointY="18.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.SubjectInfo" Width="1.5" PointX="18.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Supplier" Width="1.5" PointX="18.75" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.SupplierInfo" Width="1.5" PointX="10.75" PointY="18.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.T_ORDERAPPLYS" Width="1.5" PointX="12.75" PointY="18.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.T_ORDERS" Width="1.5" PointX="18.75" PointY="13.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.T_PREPARE_DOC" Width="1.5" PointX="20.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.T_REFUNDMENTS" Width="1.5" PointX="20.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.TitleMember" Width="1.5" PointX="20.75" PointY="13.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.WithdrawalList" Width="1.5" PointX="14.75" PointY="20.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.WitOrderList" Width="1.5" PointX="20.75" PointY="16.75" IsExpanded="true" />
         <AssociationConnector Association="Model.FK__ABS_Advan__Accou__0C31A3E9" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK__ABS_Advan__CardT__0584A65A" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK__ABS_Advan__Owner__0678CA93" ManuallyRouted="false" />
@@ -185,9 +129,6 @@
         <AssociationConnector Association="Model.FK__MDG_Custom__City__09946309" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK__MDG_Suppl__Provi__18D6A699" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK__MDG_Suppli__City__19CACAD2" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_Alert__Categ__12E8C319" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_Repor__Categ__61516785" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_Repor__Categ__68F2894D" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK__BIZ_Order__Addre__3EBD23B6" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK__ImageData__Secre__4A6E022D" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK__MDE_Membe__Membe__0F7824E8" ManuallyRouted="false" />
@@ -223,69 +164,7 @@
         <AssociationConnector Association="Model.FK__MDG_Suppl__State__17E28260" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK__MDS_Conta__InfoT__3A379A64" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK__MDG_Emplo__Direc__2EC5E7B8" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_Alert__Messa__27E3DFFF" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_Alert__RuleI__231F2AE2" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_Alert__RuleI__1D66518C" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_Allot__Creat__381A47C8" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_Allot__Creat__61A73897" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_Allot__Modul__3631FF56" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_Allot__Owner__5FBEF025" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_Allot__Schem__353DDB1D" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_Code___Creat__457442E6" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_Code___Creat__6F0133B5" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_Code___Modul__438BFA74" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_Code___Owner__6D18EB43" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_Code___Schem__4297D63B" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_Code___Schem__3DD3211E" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_Code___Creat__2E90DD8E" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_Code___Creat__581DCE5D" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_Modul__Modul__695C9DA1" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_Modul__Modul__70099B30" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_Modul__Modul__74CE504D" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_RoleP__Modul__22951AFD" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_RoleP__Modul__2C1E8537" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_RoleP__Actio__19FFD4FC" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_Modul__OrgId__75C27486" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_Modul__UserI__1A209BE4" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_Organ__Creat__74EF1735" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_Organ__Paren__4F9CCB9E" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_OrgMe__Merge__5FD33367" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_OrgMe__OrgId__573DED66" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_OrgMe__OrgId__5EDF0F2E" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_Role___OrgId__125EB334" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_RoleP__OrgId__2D12A970" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_OrgMe__Creat__7C9038FD" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_OrgMe__UserI__7B9C14C4" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_OrgMe__Creat__04315AC5" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_Repor__Repor__03A67F89" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_Repor__Repor__75586032" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_Repor__Repor__7A1D154F" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_Repor__Repor__7BFB3C20" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_Repor__Templ__69E6AD86" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_Repor__Entit__7EE1CA6C" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_Repor__Insta__01B41576" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_Repor__RuleI__764C846B" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_Repor__RuleI__049AA3C2" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_Role___RoleI__02284B6B" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_Role___RoleI__09C96D33" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_Role___RoleI__116A8EFB" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_Role__Creato__1FD9753A" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_RoleP__RoleI__190BB0C3" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_RoleP__RoleI__21A0F6C4" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_RoleP__RoleI__2B2A60FE" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_Role___Creat__36BCDA92" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_Role___Creat__277A9702" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_Role___UserI__268672C9" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_Role___Creat__2F1BB8CA" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_Role___Group__0ABD916C" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_RoleP__Creat__3F522093" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_RoleP__Creat__48DB8ACD" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_RoleP__UserI__5170D0CE" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_UserG__Creat__65ACD3A5" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_UserG__Creat__6D4DF56D" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_UserG__UserI__6C59D134" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK__SYS_UserG__Group__47FBA9D6" ManuallyRouted="false" />
-      </Diagram>
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

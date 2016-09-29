@@ -71,46 +71,10 @@ namespace Insight.WS.Server.Common.Entity
         public virtual DbSet<MDG_Supplier> MDG_Supplier { get; set; }
         public virtual DbSet<MDR_MU> MDR_MU { get; set; }
         public virtual DbSet<MDS_Contact_Info> MDS_Contact_Info { get; set; }
-        public virtual DbSet<SYS_Alert_Message> SYS_Alert_Message { get; set; }
-        public virtual DbSet<SYS_Alert_Rules> SYS_Alert_Rules { get; set; }
-        public virtual DbSet<SYS_Alert_Send> SYS_Alert_Send { get; set; }
-        public virtual DbSet<SYS_Alert_Target> SYS_Alert_Target { get; set; }
-        public virtual DbSet<SYS_Allot_Record> SYS_Allot_Record { get; set; }
-        public virtual DbSet<SYS_Code_Allot> SYS_Code_Allot { get; set; }
-        public virtual DbSet<SYS_Code_Record> SYS_Code_Record { get; set; }
-        public virtual DbSet<SYS_Code_Scheme> SYS_Code_Scheme { get; set; }
         public virtual DbSet<SYS_Interface> SYS_Interface { get; set; }
-        public virtual DbSet<SYS_Module> SYS_Module { get; set; }
-        public virtual DbSet<SYS_ModuleAction> SYS_ModuleAction { get; set; }
-        public virtual DbSet<SYS_ModuleGroup> SYS_ModuleGroup { get; set; }
-        public virtual DbSet<SYS_ModuleParam> SYS_ModuleParam { get; set; }
-        public virtual DbSet<SYS_Organization> SYS_Organization { get; set; }
-        public virtual DbSet<SYS_OrgMember> SYS_OrgMember { get; set; }
-        public virtual DbSet<SYS_OrgMerger> SYS_OrgMerger { get; set; }
-        public virtual DbSet<SYS_Report_Definition> SYS_Report_Definition { get; set; }
-        public virtual DbSet<SYS_Report_Entity> SYS_Report_Entity { get; set; }
-        public virtual DbSet<SYS_Report_Instances> SYS_Report_Instances { get; set; }
-        public virtual DbSet<SYS_Report_IU> SYS_Report_IU { get; set; }
-        public virtual DbSet<SYS_Report_Member> SYS_Report_Member { get; set; }
-        public virtual DbSet<SYS_Report_Period> SYS_Report_Period { get; set; }
-        public virtual DbSet<SYS_Report_Rules> SYS_Report_Rules { get; set; }
-        public virtual DbSet<SYS_Report_Schedular> SYS_Report_Schedular { get; set; }
-        public virtual DbSet<SYS_Report_Templates> SYS_Report_Templates { get; set; }
-        public virtual DbSet<SYS_Role> SYS_Role { get; set; }
-        public virtual DbSet<SYS_Role_Title> SYS_Role_Title { get; set; }
-        public virtual DbSet<SYS_Role_User> SYS_Role_User { get; set; }
-        public virtual DbSet<SYS_Role_UserGroup> SYS_Role_UserGroup { get; set; }
-        public virtual DbSet<SYS_RolePerm_Action> SYS_RolePerm_Action { get; set; }
-        public virtual DbSet<SYS_RolePerm_Data> SYS_RolePerm_Data { get; set; }
-        public virtual DbSet<SYS_RolePerm_DataAbs> SYS_RolePerm_DataAbs { get; set; }
-        public virtual DbSet<SYS_User> SYS_User { get; set; }
-        public virtual DbSet<SYS_UserGroup> SYS_UserGroup { get; set; }
-        public virtual DbSet<SYS_UserGroupMember> SYS_UserGroupMember { get; set; }
-        public virtual DbSet<SYS_WeiXin_Config> SYS_WeiXin_Config { get; set; }
         public virtual DbSet<Advance> Advance { get; set; }
         public virtual DbSet<AllotRecord> AllotRecord { get; set; }
         public virtual DbSet<ApplyInfo> ApplyInfo { get; set; }
-        public virtual DbSet<CheckList> CheckList { get; set; }
         public virtual DbSet<Citys> Citys { get; set; }
         public virtual DbSet<Contact> Contact { get; set; }
         public virtual DbSet<ContactInfo> ContactInfo { get; set; }
@@ -122,31 +86,11 @@ namespace Insight.WS.Server.Common.Entity
         public virtual DbSet<FundForPerform> FundForPerform { get; set; }
         public virtual DbSet<OrderInfo> OrderInfo { get; set; }
         public virtual DbSet<OrdersList> OrdersList { get; set; }
-        public virtual DbSet<Organization> Organization { get; set; }
-        public virtual DbSet<Product_Img> Product_Img { get; set; }
-        public virtual DbSet<Product_Library_Img> Product_Library_Img { get; set; }
-        public virtual DbSet<ProductExtend> ProductExtend { get; set; }
-        public virtual DbSet<Products> Products { get; set; }
-        public virtual DbSet<ProductType_Extend> ProductType_Extend { get; set; }
-        public virtual DbSet<ReportSchedular> ReportSchedular { get; set; }
-        public virtual DbSet<ReportTemplet> ReportTemplet { get; set; }
-        public virtual DbSet<RoleActionPermit> RoleActionPermit { get; set; }
-        public virtual DbSet<RoleDataPermit> RoleDataPermit { get; set; }
-        public virtual DbSet<RoleMember> RoleMember { get; set; }
-        public virtual DbSet<RoleModulePermit> RoleModulePermit { get; set; }
-        public virtual DbSet<RoleUser> RoleUser { get; set; }
-        public virtual DbSet<SerialRecord> SerialRecord { get; set; }
         public virtual DbSet<StageInfo> StageInfo { get; set; }
         public virtual DbSet<States> States { get; set; }
         public virtual DbSet<SubjectInfo> SubjectInfo { get; set; }
         public virtual DbSet<Supplier> Supplier { get; set; }
         public virtual DbSet<SupplierInfo> SupplierInfo { get; set; }
-        public virtual DbSet<T_ORDERAPPLYS> T_ORDERAPPLYS { get; set; }
-        public virtual DbSet<T_ORDERS> T_ORDERS { get; set; }
-        public virtual DbSet<T_PREPARE_DOC> T_PREPARE_DOC { get; set; }
-        public virtual DbSet<T_REFUNDMENTS> T_REFUNDMENTS { get; set; }
         public virtual DbSet<TitleMember> TitleMember { get; set; }
-        public virtual DbSet<WithdrawalList> WithdrawalList { get; set; }
-        public virtual DbSet<WitOrderList> WitOrderList { get; set; }
     }
 }

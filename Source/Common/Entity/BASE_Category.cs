@@ -26,9 +26,6 @@ namespace Insight.WS.Server.Common.Entity
             this.MDG_Customer1 = new HashSet<MDG_Customer>();
             this.MDG_Supplier = new HashSet<MDG_Supplier>();
             this.MDG_Supplier1 = new HashSet<MDG_Supplier>();
-            this.SYS_Alert_Rules = new HashSet<SYS_Alert_Rules>();
-            this.SYS_Report_Templates = new HashSet<SYS_Report_Templates>();
-            this.SYS_Report_Definition = new HashSet<SYS_Report_Definition>();
         }
     
         public System.Guid ID { get; set; }
@@ -64,11 +61,5 @@ namespace Insight.WS.Server.Common.Entity
         public virtual ICollection<MDG_Supplier> MDG_Supplier { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MDG_Supplier> MDG_Supplier1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SYS_Alert_Rules> SYS_Alert_Rules { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SYS_Report_Templates> SYS_Report_Templates { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SYS_Report_Definition> SYS_Report_Definition { get; set; }
     }
 }
