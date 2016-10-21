@@ -62,7 +62,7 @@ namespace Insight.WS.Server.Common.Utils
         private static Result GetCode(string auth, string mobile, int type, int time)
         {
             var url = $"{Parameters.BaseServer}/smscode?mobile={mobile}&type={type}&time={time}";
-            return new HttpRequest(url, "GET", auth).Result;
+            return new HttpClient(url).Request(auth);
         }
 
     }
