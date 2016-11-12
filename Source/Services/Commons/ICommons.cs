@@ -138,6 +138,16 @@ namespace Insight.WS.Service
         [WebGet(UriTemplate = "files/{id}", ResponseFormat = WebMessageFormat.Json)]
         Result GetFile(string id);
 
+        /// <summary>
+        /// 导入Excel
+        /// </summary>
+        /// <param name="path">文件路径</param>
+        /// <param name="type">数据类型</param>
+        /// <returns>Result</returns>
+        [WebInvoke(Method = "POST", UriTemplate = "files", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [OperationContract]
+        Result ImportExcel(string path, string type);
+
         #endregion
 
     }

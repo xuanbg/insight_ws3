@@ -7,7 +7,6 @@ using System.ServiceProcess;
 using System.Timers;
 using System.Windows.Forms;
 using Insight.WCF;
-using Insight.WCF.Entity;
 using Insight.WS.Server.Common.Entity;
 using Insight.WS.Server.Common.Utils;
 using static Insight.Utils.Common.Util;
@@ -20,7 +19,7 @@ namespace Insight.WS.Server
         /// <summary>
         /// 运行中的服务主机
         /// </summary>
-        private static Services Services;
+        private static Service Services;
 
         /// <summary>
         /// 服务根路径
@@ -47,13 +46,13 @@ namespace Insight.WS.Server
         protected override void OnStart(string[] args)
         {
             // 启动WCF服务主机
-            Services = new Services();
+            Services = new Service();
             using (var context = new Entities())
             {
                 var list = context.SYS_Interface.ToList();
                 foreach (var info in list)
                 {
-                    var service = new ServiceInfo
+                    var service = new Service.Info
                     {
                         BaseAddress = GetAppSetting("Address"),
                         Port = info.Port,

@@ -281,6 +281,29 @@ namespace Insight.WS.Service
             return result;
         }
 
+        /// <summary>
+        /// 导入Excel
+        /// </summary>
+        /// <param name="path">文件路径</param>
+        /// <param name="type">数据类型</param>
+        /// <returns>Result</returns>
+        public Result ImportExcel(string path, string type)
+        {
+            var verify = new Verify(Parameters.VerifyUrl);
+            var result = verify.Result;
+            if (!result.Successful) return result;
+
+            var dir = System.Windows.Forms.Application.StartupPath;
+            switch (type)
+            {
+                case "Logistics":
+                    return new NpoiHelper<Logistics>().Import(dir + path);
+
+                default:
+                    return result;
+            }
+        }
+
         #endregion
 
     }

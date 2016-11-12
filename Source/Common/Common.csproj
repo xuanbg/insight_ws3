@@ -196,6 +196,7 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\JsonResult.cs" />
+    <Compile Include="Entity\Logistics.cs" />
     <Compile Include="Entity\MasterData.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
