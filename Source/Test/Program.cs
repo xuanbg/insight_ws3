@@ -1,21 +1,20 @@
 ﻿using Insight.WCF;
 using Insight.WS.Server.Common.Utils;
-using Insight.WCF.Entity;
 using static Insight.Utils.Common.Util;
 
 namespace Test
 {
     class Program
     {
-        private static Services Services;
+        private static Service Services;
 
         static void Main(string[] args)
         {
-            Services = new Services();
+            Services = new Service();
             var services = DataAccess.GetServiceList();
             foreach (var info in services)
             {
-                var service = new ServiceInfo
+                var service = new Service.Info
                 {
                     BaseAddress = GetAppSetting("Address"),
                     Port = info.Port,
