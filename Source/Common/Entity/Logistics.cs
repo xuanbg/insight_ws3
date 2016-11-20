@@ -16,5 +16,8 @@ namespace Insight.WS.Server.Common.Entity
 
         [Alias("发货时间")]
         public DateTime DeliveryTime { get; set; }
+
+        [Alias("数量")]
+        public decimal Count { get; set; }
     }
 }
