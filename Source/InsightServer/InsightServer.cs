@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.ServiceProcess;
 using System.Timers;
 using System.Windows.Forms;
+using Insight.Utils.Entity;
 using Insight.WCF;
 using Insight.WS.Server.Common.Entity;
 using Insight.WS.Server.Common.Utils;
@@ -89,41 +87,14 @@ namespace Insight.WS.Server
         }
 
         /// <summary>
-        /// 获取客户端文件列表
-        /// </summary>
-        /// <param name="dir">客户端文件路径</param>
-        /// <param name="list">文件列表</param>
-        /// <returns>FileAttribute List 文件列表</returns>
-        private void GetLocalList(string dir, List<UpdateFile> list)
-        {
-            var dirInfo = new DirectoryInfo(dir);
-            list.AddRange(from file in dirInfo.GetFiles()
-                          where ".dll.exe.frl".IndexOf(file.Extension, StringComparison.Ordinal) >= 0
-                          select new UpdateFile
-                          {
-                              ID = Hash(file.FullName),
-                              Name = file.Name,
-                              Path = file.DirectoryName.Replace(RootPath, ""),
-                              FullPath = file.FullName,
-                              Version = FileVersionInfo.GetVersionInfo(file.FullName).FileVersion
-                          });
-
-            var dirs = Directory.GetDirectories(dir);
-            foreach (var path in dirs)
-            {
-                GetLocalList(path, list);
-            }
-        }
-
-        /// <summary>
         /// 更新服务器文件列表
         /// </summary>
         /// <param name="source"></param>
         /// <param name="e"></param>
         private void UpdateFileList(object source, ElapsedEventArgs e)
         {
-            var list = new List<UpdateFile>();
-            GetLocalList(RootPath, list);
+            var list = new List<FileInfo>();
+            GetLocalFiles(list, RootPath, ".dll|.exe|.frl");
             Parameters.FileList = list;
         }
 

@@ -1,12 +1,16 @@
-﻿using Insight.WCF;
+﻿using System.Collections.Generic;
+using Insight.Utils.Entity;
+using Insight.WCF;
 using Insight.WS.Server.Common.Utils;
 using static Insight.Utils.Common.Util;
+using System.Windows.Forms;
 
 namespace Test
 {
     class Program
     {
         private static Service Services;
+        private static readonly string RootPath = Application.StartupPath + "\\Client";
 
         static void Main(string[] args)
         {
@@ -28,6 +32,9 @@ namespace Test
                 Services.CreateHost(service);
             }
             Services.StartService();
+
+            var list = new List<FileInfo>();
+            GetLocalFiles(list, RootPath, ".dll|.exe|.frl");
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Insight.Utils.Entity;
 using Insight.WS.Server.Common.Entity;
 
 namespace Insight.WS.Server.Common.Utils
@@ -15,6 +16,6 @@ namespace Insight.WS.Server.Common.Utils
         public static string Database = new Entities().Database.Connection.ConnectionString;
 
         // 客户端文件列表
-        public static List<UpdateFile> FileList;
+        public static List<FileInfo> FileList;
     }
 }
