@@ -244,6 +244,15 @@ namespace Insight.WS.Service
         }
 
         /// <summary>
+        /// 测试连通性
+        /// </summary>
+        /// <returns>Result</returns>
+        public Result Test()
+        {
+            return new Verify(Parameters.VerifyUrl).Result;
+        }
+
+        /// <summary>
         /// 获取服务端文件列表
         /// </summary>
         /// <returns>Result</returns>

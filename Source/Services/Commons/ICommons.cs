@@ -122,6 +122,14 @@ namespace Insight.WS.Service
         void ResponseOptions();
 
         /// <summary>
+        /// 测试连通性
+        /// </summary>
+        /// <returns>Result</returns>
+        [WebGet(UriTemplate = "test", ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        Result Test();
+
+        /// <summary>
         /// 获取服务端文件列表
         /// </summary>
         /// <returns>Result</returns>
