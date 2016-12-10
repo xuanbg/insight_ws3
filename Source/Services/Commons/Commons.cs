@@ -249,7 +249,9 @@ namespace Insight.WS.Service
         /// <returns>Result</returns>
         public Result Test()
         {
-            return new Verify(Parameters.VerifyUrl).Result;
+            var result = new Result();
+            result.Success();
+            return result;
         }
 
         /// <summary>
