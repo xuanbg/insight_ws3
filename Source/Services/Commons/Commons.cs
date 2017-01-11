@@ -213,13 +213,9 @@ namespace Insight.WS.Service
             if (!result.Successful) return result;
 
             var parse = new GuidParse(id);
-            if (!parse.Successful)
-            {
-                result.InvalidGuid();
-                return result;
-            }
+            if (!parse.Result.Successful) return parse.Result;
 
-            var obj = GetCounts(parse.Result, type, table);
+            var obj = GetCounts(parse.Value, type, table);
             result.Success(obj);
             return result;
         }
