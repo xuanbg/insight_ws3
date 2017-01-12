@@ -1,9 +1,4 @@
-﻿IF EXISTS (SELECT * FROM sys.foreign_keys WHERE name = 'FK__SYS_Organ__Position')
-ALTER TABLE SYS_Organization DROP CONSTRAINT FK__SYS_Organ__Position
-GO
-
-IF EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'ImageData') AND OBJECTPROPERTY(id, N'ISUSERTABLE') = 1)
-DROP TABLE ImageData
+﻿USE Insight_WS
 GO
 
 IF EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'MDR_MU') AND OBJECTPROPERTY(id, N'ISUSERTABLE') = 1)
@@ -73,7 +68,7 @@ CREATE TABLE BASE_Category(
 [ID]               UNIQUEIDENTIFIER CONSTRAINT IX_BASE_Category PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
 [SN]               BIGINT IDENTITY(1,1),                                                                                                   --自增序列
 [ParentId]         UNIQUEIDENTIFIER,                                                                                                       --父分类ID
-[ModuleId]         UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_Module(ID) ON DELETE CASCADE NOT NULL,                                      --模块注册ID
+[ModuleId]         UNIQUEIDENTIFIER NOT NULL,                                                                                              --模块注册ID
 [Index]            INT DEFAULT 0 NOT NULL,                                                                                                 --序号
 [Code]             VARCHAR(32),                                                                                                            --编码
 [Name]             NVARCHAR(64) NOT NULL,                                                                                                  --名称
@@ -125,7 +120,7 @@ GO
 CREATE TABLE MasterData_Property(
 [ID]               UNIQUEIDENTIFIER CONSTRAINT IX_MasterData_Property PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
 [SN]               BIGINT IDENTITY(1,1),                                                                                                   --自增序列
-[ModuleId]         UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_Module(ID) NOT NULL,                                                        --模块注册ID
+[ModuleId]         UNIQUEIDENTIFIER NOT NULL,                                                                                              --模块注册ID
 [CategoryId]       UNIQUEIDENTIFIER FOREIGN KEY REFERENCES BASE_Category(ID) ON DELETE CASCADE,                                            --分类ID
 [Index]            INT DEFAULT 0 NOT NULL,                                                                                                 --序号
 [Name]             NVARCHAR(64) NOT NULL,                                                                                                  --名称
@@ -197,8 +192,7 @@ CREATE TABLE MDG_Dictionary(
 [CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL                                                                                     --创建时间
 )
 GO
-ALTER TABLE SYS_Organization  WITH CHECK ADD CONSTRAINT FK__SYS_Organ__Position FOREIGN KEY(PositionId) REFERENCES MDG_Dictionary (MID)
-GO
+
 
 
 /*****通用主数据：物资（SPU）表*****/
@@ -373,7 +367,7 @@ CREATE TABLE MDR_ET(
 [ID]               UNIQUEIDENTIFIER CONSTRAINT IX_MDR_ET PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
 [SN]               BIGINT IDENTITY(1,1),                                                                                                   --自增序列
 [EmployeeId]       UNIQUEIDENTIFIER FOREIGN KEY REFERENCES MDG_Employee(MID) ON DELETE CASCADE NOT NULL,                                   --员工ID
-[TitleId]          UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_Organization(ID) ON DELETE CASCADE NOT NULL                                 --职位ID
+[TitleId]          UNIQUEIDENTIFIER NOT NULL                                                                                               --职位ID
 )
 GO
 
@@ -384,175 +378,8 @@ CREATE TABLE MDR_MU(
 [SN]               BIGINT IDENTITY(1,1),                                                                                                   --自增序列
 [IsMaster]         BIT DEFAULT 0 NOT NULL,                                                                                                 --是否主要负责人：0、否；1、是
 [MasterDataId]     UNIQUEIDENTIFIER FOREIGN KEY REFERENCES MasterData(ID) ON DELETE CASCADE NOT NULL,                                      --主数据ID
-[UserId]           UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SYS_User(ID) ON DELETE CASCADE NOT NULL,                                        --用户ID
+[UserId]           UNIQUEIDENTIFIER NOT NULL,                                                                                              --用户ID
 [EffectiveDate]    DATETIME NOT NULL,                                                                                                      --生效日期
 [FailureDate]      DATETIME                                                                                                                --失效日期
 )
-GO
-
-
-/*****电子影像数据表*****/
-
-/*****电子影像表*****/
-
-CREATE TABLE ImageData(
-[ID]               UNIQUEIDENTIFIER CONSTRAINT IX_ImageData PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
-[SN]               BIGINT IDENTITY(1,1),                                                                                                   --自增序列
-[CategoryId]       UNIQUEIDENTIFIER FOREIGN KEY REFERENCES BASE_Category(ID) ON DELETE CASCADE,                                            --分类ID
-[ImageType]        INT DEFAULT 0 NOT NULL,                                                                                                 --类型：0、附件；1、收据；2、发票；3、付款单；4、报销单；5、入库单；6、出库单
-[Code]             VARCHAR(32),                                                                                                            --编码，可索引
-[Name]             NVARCHAR(64) NOT NULL,                                                                                                  --名称
-[Expand]           VARCHAR(8),                                                                                                             --扩展名
-[SecrecyDegree]    UNIQUEIDENTIFIER FOREIGN KEY REFERENCES MDG_Dictionary(MID),                                                            --涉密等级，字典
-[Pages]            INT,                                                                                                                    --页数
-[Size]             BIGINT,                                                                                                                 --文件字节数
-[Path]             NVARCHAR(MAX),                                                                                                          --存放路径
-[Image]            IMAGE NOT NULL,                                                                                                         --电子影像内容
-[Description]      NVARCHAR(MAX),                                                                                                          --描述
-[Validity]         BIT DEFAULT 0 NOT NULL,                                                                                                 --是否有效：0、无效；1、有效
-[CreatorDeptId]    UNIQUEIDENTIFIER,                                                                                                       --创建部门ID
-[CreatorUserId]    UNIQUEIDENTIFIER NOT NULL,                                                                                              --创建人ID
-[CreateTime]       DATETIME DEFAULT GETDATE() NOT NULL,                                                                                    --创建时间
-)
-CREATE NONCLUSTERED INDEX IX_ID_Code ON ImageData(Code)
-GO
-
-
-/*****触发器：插入联系人后自动添加用户*****/
-
-CREATE TRIGGER MDG_Contact_Insert ON MDG_Contact AFTER INSERT AS
-
-BEGIN
-SET NOCOUNT ON
-
-INSERT SYS_User (ID, Name, LoginName, Description, Type, CreatorUserId)
-  select MD.ID, MD.Name, MD.Alias, MD.FullName, 2, TI.CreatorUserId
-  from Inserted TI
-  join MasterData MD on MD.ID = TI.MID
-    and TI.LoginUser = 1
-
-END
-GO
-
-/*****触发器：更新联系人后自动添加用户*****/
-
-CREATE TRIGGER MDG_Contact_Update ON MDG_Contact AFTER UPDATE AS
-
-BEGIN
-SET NOCOUNT ON
-
-INSERT SYS_User (ID, Name, LoginName, Description, Type, CreatorUserId)
-  select MD.ID, MD.Name, MD.Alias, MD.FullName, 2, TI.CreatorUserId
-  from Inserted TI
-  join MasterData MD on MD.ID = TI.MID
-    and TI.LoginUser = 1
-  left join SYS_User U on U.ID = TI.MID
-  where U.ID is null
-
-UPDATE U set U.Name = MD.Name, U.LoginName = MD.Alias, U.Description = MD.FullName
-  from Inserted TI
-  join MasterData MD on MD.ID = TI.MID
-    and TI.LoginUser = 1
-  left join SYS_User U on U.ID = TI.MID
-  where U.ID is not null
-
-END
-GO
-
-/*****触发器：插入员工后自动添加用户*****/
-
-CREATE TRIGGER MDG_Employee_Insert ON MDG_Employee AFTER INSERT AS
-
-BEGIN
-SET NOCOUNT ON
-
-INSERT SYS_User (ID, Name, LoginName, Description, Type, CreatorUserId)
-  select MID, MD.Name, MD.Alias, md.FullName, 1, TI.CreatorUserId
-  from Inserted TI
-  join MasterData MD on MD.ID = TI.MID
-    and TI.LoginUser = 1
-
-END
-
-GO
-
-/*****触发器：更新员工后自动添加用户*****/
-
-CREATE TRIGGER MDG_Employee_Update ON MDG_Employee AFTER UPDATE AS
-
-BEGIN
-SET NOCOUNT ON
-
-UPDATE U set U.Name = MD.Name, U.LoginName = MD.Alias, U.Description = MD.FullName
-  from Inserted TI
-  join MasterData MD on MD.ID = TI.MID
-    and TI.LoginUser = 1
-  left join SYS_User U on U.ID = TI.MID
-  where U.ID is not null
-
-INSERT SYS_User (ID, Name, LoginName, Description, Type, CreatorUserId)
-  select MID, MD.Name, MD.Alias, md.FullName, 1, TI.CreatorUserId
-  from Inserted TI
-  join MasterData MD on MD.ID = TI.MID
-    and TI.LoginUser = 1
-  left join SYS_User U on U.ID = TI.MID
-  where U.ID is null
-
-INSERT SYS_OrgMember(OrgId, UserId, CreatorUserId)
-  select R.TitleId, R.EmployeeId, TI.CreatorUserId
-  from MDR_ET R
-  join Inserted TI on TI.MID = R.EmployeeId
-    and TI.LoginUser = 1
-  left join SYS_OrgMember M on M.OrgId = R.TitleId
-    and M.UserId = R.EmployeeId
-  where M.ID is null
-
-END
-
-GO
-
-/*****触发器：插入员工职位关系后自动添加用户职位关系*****/
-
-CREATE TRIGGER MDR_ET_Insert ON MDR_ET AFTER INSERT AS
-
-BEGIN
-SET NOCOUNT ON
-
-INSERT SYS_OrgMember(OrgId, UserId, CreatorUserId)
-  select TI.TitleId, U.ID, U.CreatorUserId
-  from Inserted TI
-  join SYS_User U on U.ID = TI.EmployeeId
-
-END
-GO
-
-/*****触发器：更新员工职位关系后自动添加用户职位关系*****/
-
-CREATE TRIGGER MDR_ET_Update ON MDR_ET AFTER UPDATE AS
-
-BEGIN
-SET NOCOUNT ON
-
-UPDATE M set OrgId = TI.TitleId
-  from Inserted TI
-  left join SYS_OrgMember M on M.UserID = TI.EmployeeId
-    and M.OrgId = TI.TitleId
-  where M.ID is not null
-
-END
-GO
-
-/*****触发器：删除员工职位关系后自动删除用户职位关系*****/
-
-CREATE TRIGGER MDR_ET_Delete ON MDR_ET AFTER DELETE AS
-
-BEGIN
-SET NOCOUNT ON
-
-DELETE M
-  from Inserted TI
-  join SYS_OrgMember M on M.UserId = TI.EmployeeId
-    and M.OrgId = TI.TitleId
-
-END
 GO

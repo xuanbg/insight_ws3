@@ -84,7 +84,7 @@ CREATE TABLE ABS_Clearing_Check(
 [SN]               BIGINT IDENTITY(1,1),                                                                                                   --自增序列
 [ReceiptCode]      VARCHAR(32),                                                                                                            --票据编号
 [CheckTime]        DATETIME,                                                                                                               --结账时间
-[ImageId]          UNIQUEIDENTIFIER FOREIGN KEY REFERENCES ImageData(ID) ON DELETE CASCADE,                                                --电子影像ID
+[ImageId]          UNIQUEIDENTIFIER,                                                                                                       --电子影像ID
 [Status]           BIT DEFAULT 0 NOT NULL,                                                                                                 --状态：0、未结账；1、已结账
 [Description]      NVARCHAR(MAX),                                                                                                          --描述
 [CreatorDeptId]    UNIQUEIDENTIFIER,                                                                                                       --创建部门ID
@@ -150,7 +150,7 @@ CREATE TABLE ABS_Clearing_Attachs(
 [ID]               UNIQUEIDENTIFIER CONSTRAINT IX_ABS_Clearing_Attachs PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
 [SN]               BIGINT IDENTITY(1,1),                                                                                                   --自增序列
 [ClearingId]       UNIQUEIDENTIFIER FOREIGN KEY REFERENCES ABS_Clearing(ID) ON DELETE CASCADE NOT NULL,                                    --结算记录ID
-[ImageId]          UNIQUEIDENTIFIER FOREIGN KEY REFERENCES ImageData(ID) ON DELETE CASCADE NOT NULL                                        --电子影像ID
+[ImageId]          UNIQUEIDENTIFIER NOT NULL                                                                                               --电子影像ID
 )
 GO
 
@@ -312,7 +312,7 @@ CREATE TABLE ABS_Delivery_Attachs(
 [ID]               UNIQUEIDENTIFIER CONSTRAINT IX_ABS_Delivery_Attachs PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
 [SN]               BIGINT IDENTITY(1,1),                                                                                                   --自增序列
 [DeliveryId]       UNIQUEIDENTIFIER FOREIGN KEY REFERENCES ABS_Delivery(ID) ON DELETE CASCADE NOT NULL,                                    --结算记录ID
-[ImageId]          UNIQUEIDENTIFIER FOREIGN KEY REFERENCES ImageData(ID) ON DELETE CASCADE NOT NULL                                        --电子影像ID
+[ImageId]          UNIQUEIDENTIFIER NOT NULL                                                                                               --电子影像ID
 )
 GO
 
@@ -370,7 +370,7 @@ CREATE TABLE ABS_Contract_Attachs(
 [ID]               UNIQUEIDENTIFIER CONSTRAINT IX_ABS_Contract_Attachs PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
 [SN]               BIGINT IDENTITY(1,1),                                                                                                   --自增序列
 [ContractId]       UNIQUEIDENTIFIER FOREIGN KEY REFERENCES ABS_Contract(ID) ON DELETE CASCADE NOT NULL,                                    --契约ID
-[ImageId]          UNIQUEIDENTIFIER FOREIGN KEY REFERENCES ImageData(ID) ON DELETE CASCADE NOT NULL                                        --电子影像ID
+[ImageId]          UNIQUEIDENTIFIER NOT NULL                                                                                               --电子影像ID
 )
 GO
 
