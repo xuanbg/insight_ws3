@@ -16,7 +16,7 @@ namespace Insight.WS.Server.Common.Utils
             var verify = new Verify(Parameters.VerifyUrl);
             if (!verify.Result.Successful) return verify.Result;
 
-            var result = GetCode(verify.Token, mobile, 1, 30);
+            var result = GetCode(verify.AccessToken, mobile, 1, 30);
             if (!result.Successful) return result;
 
             var code = result.Data;
@@ -39,7 +39,7 @@ namespace Insight.WS.Server.Common.Utils
             var verify = new Verify(Parameters.VerifyUrl);
             if (!verify.Result.Successful) return verify.Result;
 
-            var result = GetCode(verify.Token, mobile, 1, 5);
+            var result = GetCode(verify.AccessToken, mobile, 1, 5);
             if (!result.Successful) return result;
 
             var code = result.Data;
