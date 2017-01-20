@@ -27,13 +27,9 @@ namespace Insight.WS.Service
         /// <returns>Result</returns>
         public Result AddImages(List<ImageData> objs, string tab, string col, Guid bid)
         {
-            var verify = new Verify(Parameters.VerifyUrl);
-            var result = verify.Result;
-            if (!result.Successful) return result;
+            if (!Verify()) return _Result;
 
-            if (!InsertData(objs, tab, col, bid)) result.DataBaseError();
-
-            return result;
+            return InsertData(objs, tab, col, bid) ? _Result : _Result.DataBaseError();
         }
 
         /// <summary>
@@ -43,23 +39,15 @@ namespace Insight.WS.Service
         /// <returns>Result</returns>
         public Result RemoveImage(string id)
         {
-            var verify = new Verify(Parameters.VerifyUrl);
-            var result = verify.Result;
-            if (!result.Successful) return result;
+            if (!Verify()) return _Result;
 
-            Guid iid;
-            if (!Guid.TryParse(id, out iid))
-            {
-                result.InvalidGuid();
-                return result;
-            }
+            var parse = new GuidParse(id);
+            if (!parse.Result.Successful) return parse.Result;
 
-            var obj = DeleteImage(iid);
-            if (!obj.HasValue) result.NotFound();
+            var obj = DeleteImage(parse.Value);
+            if (!obj.HasValue)return _Result.NotFound();
 
-            if (!obj.Value) result.DataBaseError();
-
-            return result;
+            return obj.Value ? _Result : _Result.DataBaseError();
         }
 
         /// <summary>
@@ -69,22 +57,14 @@ namespace Insight.WS.Service
         /// <returns>Result</returns>
         public Result GetImageData(string id)
         {
-            var verify = new Verify(Parameters.VerifyUrl);
-            var result = verify.Result;
-            if (!result.Successful) return result;
+            if (!Verify()) return _Result;
 
-            Guid iid;
-            if (!Guid.TryParse(id, out iid))
-            {
-                result.InvalidGuid();
-                return result;
-            }
+            var parse = new GuidParse(id);
+            if (!parse.Result.Successful) return parse.Result;
 
-            var obj = ReadImage(iid);
-            if (obj == null) result.NotFound();
-            else result.Success(obj);
+            var obj = ReadImage(parse.Value);
+            return obj == null ? _Result.NotFound() : _Result.Success(obj);
 
-            return result;
         }
 
         #endregion
@@ -245,9 +225,7 @@ namespace Insight.WS.Service
         /// <returns>Result</returns>
         public Result Test()
         {
-            var result = new Result();
-            result.Success();
-            return result;
+            return _Result.Success();
         }
 
         /// <summary>
@@ -256,12 +234,7 @@ namespace Insight.WS.Service
         /// <returns>Result</returns>
         public Result GetFiles()
         {
-            var verify = new Verify(Parameters.VerifyUrl);
-            var result = verify.Result;
-            if (!result.Successful) return result;
-
-            result.Success(Parameters.FileList);
-            return result;
+            return Verify() ? _Result.Success(Parameters.FileList) : _Result;
         }
 
         /// <summary>
@@ -271,21 +244,14 @@ namespace Insight.WS.Service
         /// <returns>Result</returns>
         public Result GetFile(string id)
         {
-            var verify = new Verify(Parameters.VerifyUrl);
-            var result = verify.Result;
-            if (!result.Successful) return result;
+            if (!Verify()) return _Result;
 
             var file = Parameters.FileList.SingleOrDefault(f => f.ID == id);
-            if (file == null)
-            {
-                result.NotFound();
-                return result;
-            }
+            if (file == null) return _Result.NotFound();
 
             var bytes = File.ReadAllBytes(file.FullPath);
             var str = Convert.ToBase64String(Util.Compress(bytes));
-            result.Success(str);
-            return result;
+            return _Result.Success(str);
         }
 
         /// <summary>
@@ -296,9 +262,7 @@ namespace Insight.WS.Service
         /// <returns>Result</returns>
         public Result ImportExcel(string path, string type)
         {
-            var verify = new Verify(Parameters.VerifyUrl);
-            var result = verify.Result;
-            if (!result.Successful) return result;
+            if (!Verify()) return _Result;
 
             var dir = System.Windows.Forms.Application.StartupPath;
             switch (type)
@@ -307,12 +271,32 @@ namespace Insight.WS.Service
                     return new NpoiHelper<Logistics>().Import(dir + path);
 
                 default:
-                    return result;
+                    return _Result;
             }
         }
 
         #endregion
 
+        private Result _Result = new Result();
+        private string _UserName;
+        private Guid _UserId;
+        private Guid? _DeptId;
+
+        /// <summary>
+        /// 身份验证方法
+        /// </summary>
+        /// <param name="action">操作权限代码，默认为空，即不进行鉴权</param>
+        /// <returns>bool 身份是否通过验证</returns>
+        private bool Verify(string action = null)
+        {
+            var verify = new Verify(Parameters.VerifyUrl, action);
+            _UserName = verify.Token.UserName;
+            _UserId = verify.Token.UserId;
+            _DeptId = verify.Token.DeptId;
+            _Result = verify.Result;
+
+            return _Result.Successful;
+        }
     }
 }
 

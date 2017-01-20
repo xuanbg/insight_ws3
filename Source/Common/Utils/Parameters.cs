@@ -9,7 +9,7 @@ namespace Insight.WS.Server.Common.Utils
 {
     public static class Parameters
     {
-        private static List<FileInfo> _FileList;
+        private static readonly List<FileInfo> _FileList = new List<FileInfo>();
         private static DateTime _ReadTime;
 
         // 当前连接基础应用服务器

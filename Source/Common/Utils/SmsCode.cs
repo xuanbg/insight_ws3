@@ -1,4 +1,5 @@
 ﻿using Insight.Utils.Client;
+using Insight.Utils.Common;
 using Insight.Utils.Entity;
 using Insight.Utils.Server;
 
