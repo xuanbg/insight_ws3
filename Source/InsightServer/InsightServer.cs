@@ -1,7 +1,6 @@
 ﻿using System.ServiceProcess;
+using Insight.Utils.Common;
 using Insight.WCF;
-using Insight.WS.Server.Common.Utils;
-using static Insight.Utils.Common.Util;
 
 namespace Insight.WS.Server
 {
@@ -21,21 +20,7 @@ namespace Insight.WS.Server
         protected override void OnStart(string[] args)
         {
             _Services = new Service();
-            foreach (var info in Parameters.Services)
-            {
-                var service = new Service.Info
-                {
-                    BaseAddress = GetAppSetting("Address"),
-                    Port = info.Port,
-                    Path = info.Path,
-                    Version = info.Version,
-                    NameSpace = info.NameSpace,
-                    Interface = info.Interface,
-                    ComplyType = info.Service,
-                    ServiceFile = info.ServiceFile
-                };
-                _Services.CreateHost(service);
-            }
+            _Services.CreateHosts(Util.GetAppSetting("Address"));
             _Services.StartService();
         }
 

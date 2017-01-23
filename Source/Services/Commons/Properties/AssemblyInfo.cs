@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("公共服务模块")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Insight Software Ltd.")]
-[assembly: AssemblyProduct("Insight Workstation 3")]
+[assembly: AssemblyProduct("WCF Service")]
 [assembly: AssemblyCopyright("Copyright © 2014 Insight Software Ltd.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -31,5 +31,5 @@ using System.Runtime.InteropServices;
 // 您可以指定所有值，也可以按照如下所示通过使用“*”来使用
 //“生成号”和“修订号”的默认值:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("3.0.*")]
+[assembly: AssemblyVersion("1.0.*")]
 //[assembly: AssemblyFileVersion("14.1.0622.12")]
