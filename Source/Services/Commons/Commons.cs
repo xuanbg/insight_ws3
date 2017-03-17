@@ -42,7 +42,7 @@ namespace Insight.WS.Service
             if (!Verify()) return _Result;
 
             var parse = new GuidParse(id);
-            if (!parse.Result.Successful) return parse.Result;
+            if (!parse.Result.successful) return parse.Result;
 
             var obj = DeleteImage(parse.Value);
             if (!obj.HasValue)return _Result.NotFound();
@@ -60,7 +60,7 @@ namespace Insight.WS.Service
             if (!Verify()) return _Result;
 
             var parse = new GuidParse(id);
-            if (!parse.Result.Successful) return parse.Result;
+            if (!parse.Result.successful) return parse.Result;
 
             var obj = ReadImage(parse.Value);
             return obj == null ? _Result.NotFound() : _Result.Success(obj);
@@ -81,7 +81,7 @@ namespace Insight.WS.Service
         {
             var verify = new Verify(Parameters.VerifyUrl);
             var result = verify.Result;
-            if (!result.Successful) return result;
+            if (!result.successful) return result;
 
             if (!InsertData(category, index)) result.DataBaseError();
 
@@ -97,7 +97,7 @@ namespace Insight.WS.Service
         {
             var verify = new Verify(Parameters.VerifyUrl);
             var result = verify.Result;
-            if (!result.Successful) return result;
+            if (!result.successful) return result;
 
             Guid cid;
             if (!Guid.TryParse(id, out cid))
@@ -127,7 +127,7 @@ namespace Insight.WS.Service
         {
             var verify = new Verify(Parameters.VerifyUrl);
             var result = verify.Result;
-            if (!result.Successful) return result;
+            if (!result.successful) return result;
 
             if (!UpdateData(obj, index, oldParentId, oldIndex)) result.NotUpdate();
 
@@ -143,7 +143,7 @@ namespace Insight.WS.Service
         {
             var verify = new Verify(Parameters.VerifyUrl);
             var result = verify.Result;
-            if (!result.Successful) return result;
+            if (!result.successful) return result;
 
             Guid cid;
             if (!Guid.TryParse(id, out cid))
@@ -170,7 +170,7 @@ namespace Insight.WS.Service
         {
             var verify = new Verify(Parameters.VerifyUrl);
             var result = verify.Result;
-            if (!result.Successful) return result;
+            if (!result.successful) return result;
 
             var obj = ReadCategorys(mid, getall, getall);
             if (obj.Rows.Count > 0) result.Success(result);
@@ -190,10 +190,10 @@ namespace Insight.WS.Service
         {
             var verify = new Verify(Parameters.VerifyUrl);
             var result = verify.Result;
-            if (!result.Successful) return result;
+            if (!result.successful) return result;
 
             var parse = new GuidParse(id);
-            if (!parse.Result.Successful) return parse.Result;
+            if (!parse.Result.successful) return parse.Result;
 
             var obj = GetCounts(parse.Value, type, table);
             result.Success(obj);
@@ -290,12 +290,12 @@ namespace Insight.WS.Service
         private bool Verify(string action = null)
         {
             var verify = new Verify(Parameters.VerifyUrl, action);
-            _UserName = verify.Token.UserName;
-            _UserId = verify.Token.UserId;
-            _DeptId = verify.Token.DeptId;
+            _UserName = verify.Token.userName;
+            _UserId = verify.Token.userId;
+            _DeptId = verify.Token.deptId;
             _Result = verify.Result;
 
-            return _Result.Successful;
+            return _Result.successful;
         }
     }
 }

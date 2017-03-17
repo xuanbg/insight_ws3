@@ -15,12 +15,12 @@ namespace Insight.WS.Server.Common.Utils
         public static Result GetRegisterCode(string mobile)
         {
             var verify = new Verify(Parameters.VerifyUrl);
-            if (!verify.Result.Successful) return verify.Result;
+            if (!verify.Result.successful) return verify.Result;
 
             var result = GetCode(verify.AccessToken, mobile, 1, 30);
-            if (!result.Successful) return result;
+            if (!result.successful) return result;
 
-            var code = result.Data;
+            var code = result.data;
             var message = $"您的验证码是：{code}，此验证码仅用于注册，请在30分钟内使用！";
 
             // 发送短信
@@ -38,12 +38,12 @@ namespace Insight.WS.Server.Common.Utils
         public static Result GetResetPasswordCode(string mobile)
         {
             var verify = new Verify(Parameters.VerifyUrl);
-            if (!verify.Result.Successful) return verify.Result;
+            if (!verify.Result.successful) return verify.Result;
 
             var result = GetCode(verify.AccessToken, mobile, 1, 5);
-            if (!result.Successful) return result;
+            if (!result.successful) return result;
 
-            var code = result.Data;
+            var code = result.data;
             var message = $"您的验证码是：{code}，此验证码仅用于重置登录密码，请在5分钟内使用！";
 
             // 发送短信
