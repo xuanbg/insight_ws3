@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using Insight.Utils.Common;
-using Insight.Utils.Entity;
 using Insight.WS.Server.Common.Entity;
+using FileInfo = Insight.Utils.Entity.FileInfo;
 
 namespace Insight.WS.Server.Common.Utils
 {
@@ -31,7 +32,8 @@ namespace Insight.WS.Server.Common.Utils
                 if (span.TotalMinutes < 30 && _FileList != null) return _FileList;
 
                 _ReadTime = DateTime.Now;
-                Util.GetLocalFiles(_FileList, $"{Environment.CurrentDirectory}\\Client", ".dll|.exe|.frl");
+                var dirInfo = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
+                Util.GetLocalFiles(_FileList, $"{dirInfo.FullName}Client", ".dll|.exe|.frl");
                 return _FileList;
             }
         }
