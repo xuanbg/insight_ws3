@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.ServiceModel.Web;
 using Insight.Utils.Common;
 using Insight.Utils.Entity;
 using Insight.WS.Server.Common.Entity;
