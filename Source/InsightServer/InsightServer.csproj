@@ -70,11 +70,11 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Utils\Utils\Utils.csproj">
+    <ProjectReference Include="..\..\..\Utility\Utils\Utils.csproj">
       <Project>{0c3f2f08-6816-49fd-bb13-8526e43accc6}</Project>
       <Name>Utils</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Utils\WCF\WCF.csproj">
+    <ProjectReference Include="..\..\..\Utility\WCF\WCF.csproj">
       <Project>{4BB72AF9-EADB-418A-9764-18DC29BE749D}</Project>
       <Name>WCF</Name>
     </ProjectReference>

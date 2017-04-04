@@ -1,17 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{132CE7B2-A22C-430E-947C-DB629960AE7A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{F7054E2C-5940-4025-AAAB-528AE30DFD49}"
-	ProjectSection(SolutionItems) = preProject
-		Common\Utils\Clearing.cs = Common\Utils\Clearing.cs
-		Common\Utils\Contract.cs = Common\Utils\Contract.cs
-		Common\Utils\MasterData.cs = Common\Utils\MasterData.cs
-		Common\Utils\Report.cs = Common\Utils\Report.cs
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRM", "Services\CRM\CRM.csproj", "{15B3E0D2-6217-493A-A690-158C497F5318}"
 EndProject
@@ -25,9 +19,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Settlement", "Services\Sett
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsightServer", "InsightServer\InsightServer.csproj", "{02699996-8EC6-46C8-BF31-5F6DF880EE1B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCF", "..\..\Utils\WCF\WCF.csproj", "{4BB72AF9-EADB-418A-9764-18DC29BE749D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCF", "..\..\Utility\WCF\WCF.csproj", "{4BB72AF9-EADB-418A-9764-18DC29BE749D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "..\..\Utils\Utils\Utils.csproj", "{0C3F2F08-6816-49FD-BB13-8526E43ACCC6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "..\..\Utility\Utils\Utils.csproj", "{0C3F2F08-6816-49FD-BB13-8526E43ACCC6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

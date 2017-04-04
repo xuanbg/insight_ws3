@@ -300,7 +300,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Utils\Utils\Utils.csproj">
+    <ProjectReference Include="..\..\..\Utility\Utils\Utils.csproj">
       <Project>{0c3f2f08-6816-49fd-bb13-8526e43accc6}</Project>
       <Name>Utils</Name>
       <Private>True</Private>
