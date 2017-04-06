@@ -9,7 +9,7 @@ namespace Insight.WS.Server.Common.Utils
 {
     public static class Parameters
     {
-        private static readonly List<FileInfo> _FileList = new List<FileInfo>();
+        private static List<FileInfo> _FileList;
         private static DateTime _ReadTime;
 
         // 当前连接基础应用服务器
@@ -32,8 +32,10 @@ namespace Insight.WS.Server.Common.Utils
                 if (span.TotalMinutes < 30 && _FileList != null) return _FileList;
 
                 _ReadTime = DateTime.Now;
+                _FileList = new List<FileInfo>();
                 var dirInfo = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
                 Util.GetLocalFiles(_FileList, $"{dirInfo.FullName}Client", ".dll|.exe|.frl");
+
                 return _FileList;
             }
         }
