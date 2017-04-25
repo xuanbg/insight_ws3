@@ -268,7 +268,7 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Utils\DataAccess.cs" />
-    <Compile Include="Utils\Parameters.cs" />
+    <Compile Include="Utils\Params.cs" />
     <Compile Include="Utils\SmsCode.cs" />
     <Compile Include="Utils\TypeFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -300,6 +300,14 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Utility\Npoi\Npoi.csproj">
+      <Project>{72775862-4b64-4916-821c-85e7b3f5af94}</Project>
+      <Name>Npoi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Utility\Server\Server.csproj">
+      <Project>{230c3e9f-83b2-4641-9c07-135e1962f424}</Project>
+      <Name>Server</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Utility\Utils\Utils.csproj">
       <Project>{0c3f2f08-6816-49fd-bb13-8526e43accc6}</Project>
       <Name>Utils</Name>

@@ -24,7 +24,7 @@ namespace Insight.WS.Service
         /// <returns>是否保存成功</returns>
         public static bool InsertData(IEnumerable<ImageData> imgs, string tab, string col, Guid bid)
         {
-            var helper = new SqlHelper(Parameters.Database);
+            var helper = new SqlHelper(Params.Database);
             var sql = "insert ImageData (CategoryId, ImageType, Code, Name, Expand, SecrecyDegree, Pages, Size, Path, Image, Description, CreatorDeptId, CreatorUserId) ";
             sql += "select @CategoryId, @ImageType, @Code, @Name, @Expand, @SecrecyDegree, @Pages, @Size, @Path, @Image, @Description, @CreatorDeptId, @CreatorUserId select @ID = ID from ImageData where SN = SCOPE_IDENTITY() ";
             sql += $"insert {tab} ({col}, ImageId) select '{bid}', @ID";
@@ -91,7 +91,7 @@ namespace Insight.WS.Service
         /// <returns>bool 是否成功</returns>
         private bool InsertData(BASE_Category obj, int index)
         {
-            var helper = new SqlHelper(Parameters.Database);
+            var helper = new SqlHelper(Params.Database);
             var cmds = new List<SqlCommand>();
             var sql = "insert BASE_Category (ParentId, ModuleId, [Index], Code, Name, Alias, Description, CreatorDeptId, CreatorUserId) ";
             sql += "select @ParentId, @ModuleId, @Index, @Code, @Name, @Alias, @Description, @CreatorDeptId, @CreatorUserId;";
@@ -120,7 +120,7 @@ namespace Insight.WS.Service
         /// <returns>bool 是否成功</returns>
         private bool? DeleteCategory(Guid id)
         {
-            var helper = new SqlHelper(Parameters.Database);
+            var helper = new SqlHelper(Params.Database);
             var cmds = new List<SqlCommand>();
             var obj = ReadCategory(id);
             cmds.Add(helper.MakeCommand($"delete BASE_Category where ID = '{id}'"));
@@ -138,7 +138,7 @@ namespace Insight.WS.Service
         /// <returns>bool 是否成功</returns>
         private bool UpdateData(BASE_Category obj, int index, Guid? oldParentId, int oldIndex)
         {
-            var helper = new SqlHelper(Parameters.Database);
+            var helper = new SqlHelper(Params.Database);
             var cmds = new List<SqlCommand>();
             var sql = "update BASE_Category set ParentId = @ParentId, [Index] = @Index, Code = @Code, Name = @Name, Alias = @Alias, Description = @Description where ID = @ID";
             var parm = new[]
@@ -179,7 +179,7 @@ namespace Insight.WS.Service
         /// <returns></returns>
         private DataTable ReadCategorys(string mid, bool getAll, bool hasAlias)
         {
-            var helper = new SqlHelper(Parameters.Database);
+            var helper = new SqlHelper(Params.Database);
             var str = hasAlias ? "case when Alias is null then '' else '(' + Alias + ')' end" : "''";
             var sql = $"select ID, ParentId, [Index], Name + {str} as Name, Alias, Code, BuiltIn, Visible from BASE_Category where ModuleId = '{mid}'{(getAll ? "" : " and Visible = 1")} order by [Index]";
             return helper.SqlQuery(sql);
@@ -194,7 +194,7 @@ namespace Insight.WS.Service
         /// <returns></returns>
         private int GetCounts(Guid? id, string type, string table)
         {
-            var helper = new SqlHelper(Parameters.Database);
+            var helper = new SqlHelper(Params.Database);
             var sql = $"select count(ID) from {table} where {type} {(id.HasValue ? "= @ID" : "is null")}";
             var parm = new[] { new SqlParameter("@ID", SqlDbType.UniqueIdentifier) { Value = id } };
             return (int) helper.SqlScalar(sql, parm);

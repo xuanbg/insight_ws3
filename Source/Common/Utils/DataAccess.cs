@@ -38,7 +38,7 @@ namespace Insight.WS.Server.Common.Utils
         /// <returns>string 业务编码</returns>
         public static string GetSerialCode(Guid sid, Guid bid, Guid? mid, Guid? did, Guid uid, string str = null)
         {
-            var helper = new SqlHelper(Parameters.Database);
+            var helper = new SqlHelper(Params.Database);
             const string sql = "exec Get_Code @SchemeId, @DeptId, @UserId, @BusinessId, @ModuleId, @Char, @Code";
             var parm = new[]
             {

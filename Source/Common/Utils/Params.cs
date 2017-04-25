@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.IO;
 using Insight.Utils.Common;
+using Insight.Utils.Server;
 using Insight.WS.Server.Common.Entity;
 using FileInfo = Insight.Utils.Entity.FileInfo;
 
 namespace Insight.WS.Server.Common.Utils
 {
-    public static class Parameters
+    public static class Params
     {
         private static List<FileInfo> _FileList;
         private static DateTime _ReadTime;
@@ -20,6 +21,9 @@ namespace Insight.WS.Server.Common.Utils
 
         // 数据库连接字符串
         public static string Database = new Entities().Database.Connection.ConnectionString;
+
+        // 访问管理
+        public static CallManage CallManage = new CallManage();
 
         /// <summary>
         /// 客户端文件列表

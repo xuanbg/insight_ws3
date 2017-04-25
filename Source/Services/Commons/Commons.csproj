@@ -70,6 +70,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Utility\Npoi\Npoi.csproj">
+      <Project>{72775862-4b64-4916-821c-85e7b3f5af94}</Project>
+      <Name>Npoi</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Utility\Server\Server.csproj">
+      <Project>{230c3e9f-83b2-4641-9c07-135e1962f424}</Project>
+      <Name>Server</Name>
+      <Private>False</Private>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\Utility\Utils\Utils.csproj">
       <Project>{0C3F2F08-6816-49FD-BB13-8526E43ACCC6}</Project>
       <Name>Utils</Name>
