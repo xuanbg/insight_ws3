@@ -23,7 +23,7 @@ namespace Insight.WS.Server.Common.Utils
         public static string Database = new Entities().Database.Connection.ConnectionString;
 
         // 访问管理
-        public static CallManage CallManage = new CallManage();
+        public static CallManage CallManage = new CallManage(Util.GetAppSetting("Redis"));
 
         /// <summary>
         /// 客户端文件列表
