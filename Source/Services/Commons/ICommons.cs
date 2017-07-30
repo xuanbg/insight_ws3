@@ -1,0 +1,162 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ServiceModel;
+using System.ServiceModel.Web;
+using Insight.Utils.Entity;
+using Insight.WS.Server.Common.Entity;
+
+namespace Insight.WS.Service
+{
+    [ServiceContract]
+    public interface ICommons
+    {
+
+        #region ImageData
+
+        /// <summary>
+        /// 单独上传附件到数据库
+        /// </summary>
+        /// <param name="objs">ImageData对象集合</param>
+        /// <param name="tab">业务附件表名称</param>
+        /// <param name="col">>业务附件表主记录字段</param>
+        /// <param name="bid">业务记录ID</param>
+        /// <returns>Result</returns>
+        [WebInvoke(Method = "POST", UriTemplate = "images", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [OperationContract]
+        Result<object> AddImages(List<ImageData> objs, string tab, string col, Guid bid);
+
+        /// <summary>
+        /// 根据ID删除电子影像数据
+        /// </summary>
+        /// <param name="id">电子影像ID</param>
+        /// <returns>Result</returns>
+        [WebInvoke(Method = "DELETE", UriTemplate = "images/{id}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [OperationContract]
+        Result<object> RemoveImage(string id);
+
+        /// <summary>
+        /// 根据ID获取单据快照
+        /// </summary>
+        /// <param name="id">单据快照ID</param>
+        /// <returns>Result</returns>
+        [WebGet(UriTemplate = "images/{id}", ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        Result<object> GetImageData(string id);
+
+        #endregion
+
+        #region Categorys
+
+        /// <summary>
+        /// 新增分类数据
+        /// </summary>
+        /// <param name="category">BASE_Category 对象实体</param>
+        /// <param name="index">变更前的Index值</param>
+        /// <returns>Result</returns>
+        [WebInvoke(Method = "POST", UriTemplate = "categorys", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [OperationContract]
+        Result<object> AddCategory(BASE_Category category, int index);
+
+        /// <summary>
+        /// 删除分类
+        /// </summary>
+        /// <param name="id">分类ID</param>
+        /// <returns>Result</returns>
+        [WebInvoke(Method = "DELETE", UriTemplate = "categorys/{id}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [OperationContract]
+        Result<object> RemoveCategory(string id);
+
+        /// <summary>
+        /// 编辑分类数据
+        /// </summary>
+        /// <param name="id">分类ID</param>
+        /// <param name="obj">BASE_Category 对象实体</param>
+        /// <param name="index">变更前的Index值</param>
+        /// <param name="oldParentId">变更前的父分类ID</param>
+        /// <param name="oldIndex">原Index值</param>
+        /// <returns>Result</returns>
+        [WebInvoke(Method = "PUT", UriTemplate = "categorys/{id}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [OperationContract]
+        Result<object> UpdateCategory(string id, BASE_Category obj, int index, Guid? oldParentId, int oldIndex);
+
+        /// <summary>
+        /// 根据ID获取BASE_Category对象实体
+        /// </summary>
+        /// <param name="id">分类ID</param>
+        /// <returns>Result</returns>
+        [WebGet(UriTemplate = "categorys/{id}", ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        Result<object> GetCategory(string id);
+
+        /// <summary>
+        /// 获取分类列表
+        /// </summary>
+        /// <param name="mid">模块ID</param>
+        /// <param name="getall">是否忽略Visible属性</param>
+        /// <param name="hasalias">是否显示别名</param>
+        /// <returns>Result</returns>
+        [WebGet(UriTemplate = "categorys?mid={mid}&getall={getall}&hasalias={hasalias}", ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        Result<object> GetCategorys(string mid, bool getall, bool hasalias);
+
+        /// <summary>
+        /// 获取节点或分类下对象数量
+        /// </summary>
+        /// <param name="id">分类或节点ID</param>
+        /// <param name="type">类型（默认分类，可选节点）</param>
+        /// <param name="table">表名称（默认MasterData）</param>
+        /// <returns>Result</returns>
+        [WebGet(UriTemplate = "categorys/{id}/counts?type={type}&table={table}", ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        Result<object> GetObjectCount(string id, string type, string table);
+
+        #endregion
+
+        #region 其它接口
+
+        /// <summary>
+        /// 为跨域请求设置响应头信息
+        /// </summary>
+        [WebInvoke(Method = "OPTIONS", UriTemplate = "*", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [OperationContract]
+        void ResponseOptions();
+
+        /// <summary>
+        /// 测试连通性
+        /// </summary>
+        /// <returns>Result</returns>
+        [WebGet(UriTemplate = "test", ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        Result<object> Test();
+
+        /// <summary>
+        /// 获取服务端文件列表
+        /// </summary>
+        /// <returns>Result</returns>
+        [WebGet(UriTemplate = "files", ResponseFormat = WebMessageFormat.Json)]
+        [OperationContract]
+        Result<object> GetFiles();
+
+        /// <summary>
+        /// 根据更新信息获取更新文件
+        /// </summary>
+        /// <param name="id">更新文件ID</param>
+        /// <returns>Result</returns>
+        [OperationContract]
+        [WebGet(UriTemplate = "files/{id}", ResponseFormat = WebMessageFormat.Json)]
+        Result<object> GetFile(string id);
+
+        /// <summary>
+        /// 导入Excel
+        /// </summary>
+        /// <param name="path">文件路径</param>
+        /// <param name="type">数据类型</param>
+        /// <returns>Result</returns>
+        [WebInvoke(Method = "POST", UriTemplate = "files", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        [OperationContract]
+        Result<object> ImportExcel(string path, string type);
+
+        #endregion
+
+    }
+}
