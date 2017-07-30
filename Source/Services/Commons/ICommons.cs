@@ -23,7 +23,7 @@ namespace Insight.WS.Service
         /// <returns>Result</returns>
         [WebInvoke(Method = "POST", UriTemplate = "images", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         [OperationContract]
-        Result AddImages(List<ImageData> objs, string tab, string col, Guid bid);
+        Result<object> AddImages(List<ImageData> objs, string tab, string col, Guid bid);
 
         /// <summary>
         /// 根据ID删除电子影像数据
@@ -32,7 +32,7 @@ namespace Insight.WS.Service
         /// <returns>Result</returns>
         [WebInvoke(Method = "DELETE", UriTemplate = "images/{id}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         [OperationContract]
-        Result RemoveImage(string id);
+        Result<object> RemoveImage(string id);
 
         /// <summary>
         /// 根据ID获取单据快照
@@ -41,7 +41,7 @@ namespace Insight.WS.Service
         /// <returns>Result</returns>
         [WebGet(UriTemplate = "images/{id}", ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
-        Result GetImageData(string id);
+        Result<object> GetImageData(string id);
 
         #endregion
 
@@ -55,7 +55,7 @@ namespace Insight.WS.Service
         /// <returns>Result</returns>
         [WebInvoke(Method = "POST", UriTemplate = "categorys", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         [OperationContract]
-        Result AddCategory(BASE_Category category, int index);
+        Result<object> AddCategory(BASE_Category category, int index);
 
         /// <summary>
         /// 删除分类
@@ -64,7 +64,7 @@ namespace Insight.WS.Service
         /// <returns>Result</returns>
         [WebInvoke(Method = "DELETE", UriTemplate = "categorys/{id}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         [OperationContract]
-        Result RemoveCategory(string id);
+        Result<object> RemoveCategory(string id);
 
         /// <summary>
         /// 编辑分类数据
@@ -77,7 +77,7 @@ namespace Insight.WS.Service
         /// <returns>Result</returns>
         [WebInvoke(Method = "PUT", UriTemplate = "categorys/{id}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         [OperationContract]
-        Result UpdateCategory(string id, BASE_Category obj, int index, Guid? oldParentId, int oldIndex);
+        Result<object> UpdateCategory(string id, BASE_Category obj, int index, Guid? oldParentId, int oldIndex);
 
         /// <summary>
         /// 根据ID获取BASE_Category对象实体
@@ -86,7 +86,7 @@ namespace Insight.WS.Service
         /// <returns>Result</returns>
         [WebGet(UriTemplate = "categorys/{id}", ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
-        Result GetCategory(string id);
+        Result<object> GetCategory(string id);
 
         /// <summary>
         /// 获取分类列表
@@ -97,7 +97,7 @@ namespace Insight.WS.Service
         /// <returns>Result</returns>
         [WebGet(UriTemplate = "categorys?mid={mid}&getall={getall}&hasalias={hasalias}", ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
-        Result GetCategorys(string mid, bool getall, bool hasalias);
+        Result<object> GetCategorys(string mid, bool getall, bool hasalias);
 
         /// <summary>
         /// 获取节点或分类下对象数量
@@ -108,7 +108,7 @@ namespace Insight.WS.Service
         /// <returns>Result</returns>
         [WebGet(UriTemplate = "categorys/{id}/counts?type={type}&table={table}", ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
-        Result GetObjectCount(string id, string type, string table);
+        Result<object> GetObjectCount(string id, string type, string table);
 
         #endregion
 
@@ -127,7 +127,7 @@ namespace Insight.WS.Service
         /// <returns>Result</returns>
         [WebGet(UriTemplate = "test", ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
-        Result Test();
+        Result<object> Test();
 
         /// <summary>
         /// 获取服务端文件列表
@@ -135,7 +135,7 @@ namespace Insight.WS.Service
         /// <returns>Result</returns>
         [WebGet(UriTemplate = "files", ResponseFormat = WebMessageFormat.Json)]
         [OperationContract]
-        Result GetFiles();
+        Result<object> GetFiles();
 
         /// <summary>
         /// 根据更新信息获取更新文件
@@ -144,7 +144,7 @@ namespace Insight.WS.Service
         /// <returns>Result</returns>
         [OperationContract]
         [WebGet(UriTemplate = "files/{id}", ResponseFormat = WebMessageFormat.Json)]
-        Result GetFile(string id);
+        Result<object> GetFile(string id);
 
         /// <summary>
         /// 导入Excel
@@ -154,7 +154,7 @@ namespace Insight.WS.Service
         /// <returns>Result</returns>
         [WebInvoke(Method = "POST", UriTemplate = "files", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         [OperationContract]
-        Result ImportExcel(string path, string type);
+        Result<object> ImportExcel(string path, string type);
 
         #endregion
 

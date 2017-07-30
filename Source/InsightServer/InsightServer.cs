@@ -20,7 +20,7 @@ namespace Insight.WS.Server
         protected override void OnStart(string[] args)
         {
             _Services = new Service();
-            _Services.CreateHosts(Util.GetAppSetting("Address"));
+            _Services.CreateHosts(Util.GetAppSetting("Address"), "*");
             _Services.StartService();
         }
 
